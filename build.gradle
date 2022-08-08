@@ -1,0 +1,53 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.ibini'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//스프링 시큐리티 라이브러리
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.security:spring-security-test'
+
+	//jsp 라이브러리 추가
+	implementation 'javax.servlet:jstl'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+	//오라클 라이브러리 (11g edition - gradle, maven 라이센스 문제 공식 지원 불가)
+	implementation fileTree(dir: '/src/main/webapp/WEB-INF/lib', include: ['*.jar'])
+
+	//마이바티스 라이브러리
+	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0"
+
+	//파일업로드 라이브러리
+	implementation 'commons-io:commons-io:2.8.0'
+
+	//이미지 썸네일 라이브러리
+	implementation 'org.imgscalr:imgscalr-lib:4.2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
