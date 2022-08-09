@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ibini.my_books.platform.repository.PlatformMapper">
+
+    <resultMap id="platformMap" type="com.ibini.my_books.platform.domain.PlatformDomain">
+        <result property="platformId" column="platform_id" />
+        <result property="account" column="account" />
+        <result property="platformName" column="platform_name" />
+        <result property="platformBgColor" column="platform_bg_color" />
+        <result property="platformFontColor" column="platform_font_color" />
+    </resultMap>
+
+<!--    저장 -->
+    <insert id="savePlatform">
+        INSERT INTO prj_platform
+        (platform_id, account, platform_name, platform_bg_color, platform_font_color )
+        VALUES
+        (seq_prj_platform.nextval, #{account}, #{platformName}, #{platformBgColor}, #{platformFontColor})
+    </insert>
+    
+<!--    삭제-->
+    <delete id="deletePlatform">
+        DELETE FROM prj_platform
+        WHERE platform_id = #{platform_id}
+    </delete>
+
+<!--    수정-->
+    <update id="ModifyPlatform">
+        UPDATE prj_platform
+            SET platform_name = #{platformName},
+            platform_bg_color = #{platformBgColor},
+            platform_font_color = #{platformFontColor}
+        WHERE platform_id = #{platformId}
+    </update>
+
+<!-- 하나만 찾기-->
+
+    <select id="findOnePlatform" resultMap="platformMap">
+        SELECT * FROM prj_platform
+        WHERE platform_id = #{platform_id}
+    </select>
+
+<!--    전체 조회 -->
+    <select id="findAllPlatform" resultMap="platformMap">
+        SELECT * FROM prj_platform
+        WHERE account = #{account}
+    </select>
+
+</mapper>
