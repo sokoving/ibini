@@ -40,9 +40,8 @@ public class PlatformService {
     }
 
     // 수정
-    public boolean modifyPlatform(int platformId){
-        PlatformDomain platform = platformMapper.findOnePlatform(platformId);
-        boolean mflag = platformMapper.ModifyPlatform(platform);
+    public boolean modifyPlatform(PlatformDomain platformDomain){
+        boolean mflag = platformMapper.modifyPlatform(platformDomain);
         return mflag;
     }
 

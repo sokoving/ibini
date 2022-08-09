@@ -27,7 +27,7 @@
     </delete>
 
 <!--    수정-->
-    <update id="ModifyPlatform">
+    <update id="modifyPlatform">
         UPDATE prj_platform
             SET platform_name = #{platformName},
             platform_bg_color = #{platformBgColor},

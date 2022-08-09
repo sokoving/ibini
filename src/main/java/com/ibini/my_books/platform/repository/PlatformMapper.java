@@ -16,7 +16,7 @@ public interface PlatformMapper {
     boolean deletePlatform(int platform_id);
 
     // 수정 -> TEST 완료
-    boolean ModifyPlatform(PlatformDomain platformDomain);
+    boolean modifyPlatform(PlatformDomain platformDomain);
     
     // 하나 찾기 --> TEST 완료
     PlatformDomain findOnePlatform(int platform_id);

@@ -57,7 +57,7 @@ class PlatformMapperTest {
     @Test
     @DisplayName("선택한 플랫폼의 값을 수정할 수 있어야한다")
     void modifyTest(){
-        int platformId = 1;
+        int platformId = 7;
         PlatformDomain onePlatform = platformMapper.findOnePlatform(platformId);
         onePlatform.setPlatformId(onePlatform.getPlatformId());
         onePlatform.setPlatformName("레진코믹스");
@@ -65,7 +65,7 @@ class PlatformMapperTest {
         onePlatform.setPlatformFontColor("#121212");
 
         System.out.println("onePlatform = " + onePlatform);
-        boolean b = platformMapper.ModifyPlatform(onePlatform);
+        boolean b = platformMapper.modifyPlatform(onePlatform);
 
         assertTrue(b);
     }
