@@ -14,9 +14,7 @@ public class PostMarkService {
     private final PostMarkMapper postMarkMapper;
     
     // 마크 저장 요청 중간 처리
-    public boolean save(PostMark postMark) {
-        return postMarkMapper.save(postMark);
-    }
+    public boolean save(PostMark postMark) { return postMarkMapper.save(postMark); }
 
     // 마크 수정 요청 중간 처리
     public boolean modify(PostMark postMark) {
