@@ -111,6 +111,7 @@ CREATE TABLE prj_post_img
     post_no             NUMBER(10)      NOT NULL,
     user_id               VARCHAR2(50)   NOT NULL,
     original_file_name    VARCHAR2(50)     NULL,
+    reg_date DATE DEFAULT SYSDATE,
     thumbnail             VARCHAR2(150)   DEFAULT 'false',
      PRIMARY KEY (file_name)
 );

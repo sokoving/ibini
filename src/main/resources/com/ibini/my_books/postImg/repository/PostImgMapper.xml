@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibini.my_books.postImg.repository.PostImgMapper">
+
+<!--    <resultMap id="postImgMap" type="com.ibini.my_books.postImg.domain.PostImg">-->
+<!--        <result property="fileName" column="file_name" />-->
+<!--        <result property="postNo" column="post_no" />-->
+<!--        <result property="originalFileName" column="original_file_name" />-->
+<!--        <result property="regDate" column="reg_date" />-->
+<!--    </resultMap>-->
+
+    <insert id="addFile">
+        INSERT INTO prj_post_img
+            (file_name, post_no, user_id, original_file_name, thumbnail)
+        VALUES
+            (#{fileName}, #{postNo}, #{userId}, #{originalFileName}, #{thumbnail})
+    </insert>
+
+    <select id="findFileNames" resultType="string">
+        SELECT file_name
+        FROM file_name
+        WHERE postNo = #{postNo}
+    </select>
+
+</mapper>
