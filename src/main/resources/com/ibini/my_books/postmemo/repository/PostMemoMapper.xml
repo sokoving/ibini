@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibini.my_books.postmemo.repository.PostMemoMapper">
+
+    <resultMap id="memoMap" type="com.ibini.my_books.postmemo.domain.PostMemo">
+        <result property="memoNo" column="memo_no" />
+        <result property="postNo" column="post_no" />
+        <result property="regDate" column="reg_date" />
+        <result property="modDate" column="mod_date" />
+    </resultMap>
+
+    <!-- 메모 저장 -->
+    <insert id="save">
+        INSERT INTO prj_post_memo
+        (memo_no, post_no, content)
+        VALUES
+        (seq_prj_post_memo.nextval, #{postNo}, #{content})
+    </insert>
+
+    <!-- 메모 수정 -->
+    <update id="modify">
+        UPDATE prj_post_memo
+        SET content = #{content}
+        WHERE memo_no = #{memoNo}
+    </update>
+
+    <!-- 메모 삭제 -->
+    <delete id="remove">
+        DELETE FROM prj_post_memo
+        WHERE memo_no = #{memoNo}
+    </delete>
+
+    <!-- 메모 전체 삭제 -->
+    <delete id="removeAll">
+        DELETE FROM prj_post_memo
+        WHERE post_no = #{postNo}
+    </delete>
+
+    <!-- 메모 전체 조회 기능 -->
+    <select id="findAll" resultMap="memoMap">
+        SELECT
+        *
+        FROM prj_post_memo
+        WHERE post_no = #{postNo}
+        ORDER BY mod_date DESC  <!-- 페이징 처리 추후 추가 예정 -->
+    </select>
+
+    <!-- 메모 개별 조회 기능 -->
+    <select id="findOne" resultMap="memoMap">
+        SELECT
+        *
+        FROM prj_post_memo
+        WHERE memo_no = #{memoNo}
+    </select>
+
+    <!-- 전체 메모 수 조회 -->
+    <select id="getPostMemoCount" resultType="int">
+        SELECT COUNT(*)
+        FROM prj_post_memo
+        WHERE post_no = #{postNo}
+    </select>
+
+</mapper>
