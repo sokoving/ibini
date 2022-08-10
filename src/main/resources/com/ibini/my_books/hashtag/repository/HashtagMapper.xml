@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ibini.my_books.hashtag.repository.HashtagMapper">
+
+    <resultMap id="hashtagMap" type="com.ibini.my_books.hashtag.domain.HashtagDomain">
+        <result property="tagNo" column="tag_no" />
+        <result property="postNo" column="post_no" />
+        <result property="tagName" column="tag_name" />
+        <result property="account" column="account" />
+    </resultMap>
+
+    <!--    저장 -->
+    <insert id="saveHashtag">
+        INSERT INTO prj_hashtag
+        (tag_no, post_no, tag_name, account )
+        VALUES
+        (seq_prj_hashtag.nextval, #{postNo}, #{tagName}, #{account})
+    </insert>
+
+    <!--    삭제-->
+    <delete id="deleteHashtag">
+        DELETE FROM prj_hashtag
+        WHERE tag_no = #{tagNo}
+    </delete>
+
+    <!--    수정-->
+    <update id="modifyHashtag">
+        UPDATE prj_hashtag
+        SET tag_name = #{tagName}
+        WHERE tag_no = #{tagNo}
+    </update>
+
+    <!-- 게시글로 하나 조회하기??? -->
+<!--    게시글 정보 + 계정정보??? 이거 테이블 변경되면 수정해야 할수도-->
+
+    <select id="findOneHasgtag" resultMap="hashtagMap">
+        SELECT * FROM prj_hashtag
+        WHERE post_no = #{post_no}
+    </select>
+
+    <!--    전체 조회 (계정정보)-->
+    <select id="findAllPlatform" resultMap="platformMap">
+        SELECT * FROM prj_hashtag
+        WHERE account = #{account}
+    </select>
+
+
+
+</mapper>
