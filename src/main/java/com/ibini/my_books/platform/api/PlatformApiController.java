@@ -1,4 +1,4 @@
-package com.ibini.my_books.platform.Controller;
+package com.ibini.my_books.platform.api;
 
 import com.ibini.my_books.platform.domain.PlatformDomain;
 import com.ibini.my_books.platform.service.PlatformService;
@@ -12,7 +12,7 @@ import java.util.List;
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/platform/c1")
-public class PlatformController {
+public class PlatformApiController {
 
     private final PlatformService platformService;
 
@@ -22,6 +22,7 @@ public class PlatformController {
         log.info("PlatformController - GET! account -{}", account);
         List<PlatformDomain> domainList = platformService.findAllPlatform(account);
         log.info("domainList - {}", domainList);
+
         return domainList;
     }
 
@@ -52,8 +53,11 @@ public class PlatformController {
     
     // 삭제
     @DeleteMapping("/{platformId}")
-    public void delete(){
+    public String delete(@PathVariable int platformId){
+        log.info("PlatformController delete! - platformId {} ", platformId);
 
+        boolean deletePlatform = platformService.deletePlatform(platformId);
+        return deletePlatform ? "del-success" : "del-fail";
     }
     
     // 등록 - 비동기?

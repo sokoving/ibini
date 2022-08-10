@@ -1,4 +1,4 @@
-package com.ibini.my_books.platform.Controller;
+package com.ibini.my_books.platform.api;
 
 import com.ibini.my_books.platform.domain.PlatformDomain;
 import com.ibini.my_books.platform.service.PlatformService;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class PlatformControllerTest {
+class PlatformApiControllerTest {
 
     @Autowired
     PlatformService platformService;
