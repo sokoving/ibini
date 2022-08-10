@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/post")
+@RequestMapping("/post/detail")
 public class PostNoteController {
 
     private final PostMarkService postMarkService;
