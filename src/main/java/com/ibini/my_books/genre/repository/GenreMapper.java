@@ -15,29 +15,29 @@ public interface GenreMapper {
     boolean save(Genre genre);
 
     /**
-     * 개별 계정(account)에 속한 장르 리스트 리턴
-     * @param - String account
-     * @return - List<Genre>
+      * 개별 계정(account)에 속한 장르 리스트 리턴
+      * @return 장르를 리스트에 담아 리턴
      */
+
     List<Genre> findAllGenre(String account);
 
     /**
      * 장르 아이디(genreId)로 장르 리턴
-     * @param - int genreId
+     * @param - 찾을 장르의 genreId
      * @return - Genre
      */
     Genre fineOneGenreByGenreId(int genreId);
 
     /**
      * 장르 아이디(genreId)로 장르 삭제
-     * @param - int genreId
+     * @param - 삭제할 장르의 genreId
      * @return - boolean
      */
     boolean remove(int genreId);
 
     /**
-     * 장르 아이디(genreId)로 장르 삭제
-     * @param - int genreId
+     * 장르 아이디(genreId)로 장르 수정
+     * @param - 수정할 Genre 객체
      * @return - boolean
      */
     boolean modify(Genre genre);
