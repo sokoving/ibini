@@ -15,6 +15,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model, HttpSession session) {
         log.info("welcome page open!");
+        log.info("hi");
 
         return "index";
     }
