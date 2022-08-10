@@ -51,15 +51,30 @@
     </div>
 
     <script>
+// 버블링걸어야됌 그리고 e.target으로 클릭한애 찾아야함
+        const $uploadedList = $('.uploaded-list');
+        const $imgSizing = $('img-sizing');
 
-        const $imgSizing = $('.img-sizing');
-
-        console.log($imgSizing);
-
-        $imgSizing.on("click", e => {
-            
-        }) 
-
+        // console.log($uploadedList); /parent는 제이쿼리문법
+        // function을 써야만 this를 쓸수잇다 / childnode는 안정확함 children써야됌
+        $uploadedList.on("click", function(e) {
+            // console.log(e); //61
+            // console.log(e.target); //62
+            // console.log(e.target.children); //63
+            // console.log(e.target.parentNode); // 64
+            // console.log(e.target.parentNode.children[0]); // 65
+            // console.log(e.target.parentNode.children.length); // 66
+            // 칠드런을 반복문을 돌린다 children
+            if (e.target.children.length===0) {
+                for (let index = 0; index < e.target.parentNode.children.length; index++) {
+                    e.target.parentNode.children[index].style.border = 'none';
+                    // console.log('스타일제거');
+                }
+                // e.target.parentNode.childNodes.style.border = '1px transparent solid';
+                e.target.style.border = '1px blue solid';            
+                // console.log('클릭함');
+            }
+        })
 
 
         // start JQuery 
@@ -105,16 +120,16 @@
             // Open 이벤트
             const $OpenBox = $('.fileOpen');
 
-            console.log($OpenBox);
+            // console.log($OpenBox);
 
             // Open 열기 이벤트
             $OpenBox.on("change", e => {
                 // e.preventDefault(); // 기본기능방지
 
-                console.log($OpenBox); //
+                // console.log($OpenBox); 
 
                 const files = $OpenBox[0].files;
-                console.log(files);
+                // console.log(files);
 
                 // 2. 읽은 파일 데이터를 input[type-file]태그에 저장 / 59줄
                 const $fileInput = $('#ajax-file');
@@ -140,7 +155,7 @@
                 }
                 fetch('/ajax-upload', reqInfo) // UploadController 57줄
                     .then(res => {
-                        console.log(res.status);
+                        // console.log(res.status); 200이 옴
                         return res.json();
                     })
                     .then(fileNames => { // 컨트롤러에서 파일보냄 res.json()가 fileNames
@@ -151,6 +166,12 @@
             });
 
         })
+
+        // (function () {
+
+            
+
+        // })();
 
         </script>
 </body>

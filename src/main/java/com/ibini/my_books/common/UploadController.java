@@ -1,6 +1,9 @@
 package com.ibini.my_books.common;
 
+import com.ibini.my_books.postImg.repository.PostImgMapper;
+import com.ibini.my_books.postImg.service.PostImgService;
 import com.ibini.my_books.util.FileUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -21,10 +24,13 @@ import java.util.List;
 
 @Controller
 @Log4j2
+@RequiredArgsConstructor
 public class UploadController {
 
     // 업로드 파일 저장 경로
     private static final String UPLOAD_PATH = "E:\\sl_test\\upload";
+    private final PostImgMapper postImgMapper;
+
 
     // upload-form.jsp로 포워딩 요청
 
@@ -46,6 +52,7 @@ public class UploadController {
             log.info("file-size: {}KB", (double) file.getSize() / 1024);
             log.info("file-type: {}", file.getContentType());
             System.out.println("=============================================");
+
 
 
 //            FileUtils.uploadFile(file, UPLOAD_PATH); / 파일올리기안하기
