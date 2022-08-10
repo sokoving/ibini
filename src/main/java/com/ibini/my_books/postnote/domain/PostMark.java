@@ -1,4 +1,4 @@
-package com.ibini.my_books.postmark.domain;
+package com.ibini.my_books.postnote.domain;
 
 import lombok.*;
 

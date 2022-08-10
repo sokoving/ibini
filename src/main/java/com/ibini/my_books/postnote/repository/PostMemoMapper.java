@@ -1,6 +1,6 @@
-package com.ibini.my_books.postmemo.repository;
+package com.ibini.my_books.postnote.repository;
 
-import com.ibini.my_books.postmemo.domain.PostMemo;
+import com.ibini.my_books.postnote.domain.PostMemo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

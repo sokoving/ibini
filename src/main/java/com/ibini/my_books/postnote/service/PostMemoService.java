@@ -1,7 +1,7 @@
-package com.ibini.my_books.postmemo.service;
+package com.ibini.my_books.postnote.service;
 
-import com.ibini.my_books.postmemo.domain.PostMemo;
-import com.ibini.my_books.postmemo.repository.PostMemoMapper;
+import com.ibini.my_books.postnote.domain.PostMemo;
+import com.ibini.my_books.postnote.repository.PostMemoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

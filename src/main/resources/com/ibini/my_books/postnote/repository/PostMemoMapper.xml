@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ibini.my_books.postmemo.repository.PostMemoMapper">
+<mapper namespace="com.ibini.my_books.postnote.repository.PostMemoMapper">
 
-    <resultMap id="memoMap" type="com.ibini.my_books.postmemo.domain.PostMemo">
+    <resultMap id="memoMap" type="com.ibini.my_books.postnote.domain.PostMemo">
         <result property="memoNo" column="memo_no" />
         <result property="postNo" column="post_no" />
         <result property="regDate" column="reg_date" />

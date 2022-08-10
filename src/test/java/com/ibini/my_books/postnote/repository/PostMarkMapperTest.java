@@ -1,6 +1,7 @@
-package com.ibini.my_books.postmark.repository;
+package com.ibini.my_books.postnote.repository;
 
-import com.ibini.my_books.postmark.domain.PostMark;
+import com.ibini.my_books.postnote.domain.PostMark;
+import com.ibini.my_books.postnote.repository.PostMarkMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class PostMarkMapperTest {
 
-    @Autowired PostMarkMapper postMarkMapper;
+    @Autowired
+    PostMarkMapper postMarkMapper;
 
     @Test
     @DisplayName("마크 정보가 DB에 저장되어야 한다.")

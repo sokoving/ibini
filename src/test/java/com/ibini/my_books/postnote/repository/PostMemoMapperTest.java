@@ -1,6 +1,7 @@
-package com.ibini.my_books.postmemo.repository;
+package com.ibini.my_books.postnote.repository;
 
-import com.ibini.my_books.postmemo.domain.PostMemo;
+import com.ibini.my_books.postnote.domain.PostMemo;
+import com.ibini.my_books.postnote.repository.PostMemoMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class PostMemoMapperTest {
 
-    @Autowired PostMemoMapper postMemoMapper;
+    @Autowired
+    PostMemoMapper postMemoMapper;
 
     @Test
     @DisplayName("메모 정보가 DB에 저장되어야 한다.")

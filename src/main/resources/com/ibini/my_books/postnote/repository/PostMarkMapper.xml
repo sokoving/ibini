@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ibini.my_books.postmark.repository.PostMarkMapper">
+<mapper namespace="com.ibini.my_books.postnote.repository.PostMarkMapper">
     
-    <resultMap id="markMap" type="com.ibini.my_books.postmark.domain.PostMark">
+    <resultMap id="markMap" type="com.ibini.my_books.postnote.domain.PostMark">
         <result property="markNo" column="mark_no" />
         <result property="postNo" column="post_no" />
         <result property="episodeNo" column="episode_no" />
@@ -44,7 +44,7 @@
     <!-- 마크 전체 조회 기능 -->
     <select id="findAll" resultMap="markMap">
         SELECT
-            *
+        *
         FROM prj_post_mark
         WHERE post_no = #{postNo}
         ORDER BY episode_no DESC    <!-- 페이징 처리 추후 추가 예정 -->
