@@ -13,7 +13,7 @@ DROP TABLE prj_category;
 CREATE TABLE tbl_post
 (
     post_no         NUMBER(10)        NOT NULL,
-    user_id          VARCHAR2(50)     NOT NULL,
+    account          VARCHAR2(50)     NOT NULL,
     genre_id       NUMBER(3)         NULL,
     ca_id            NUMBER(3)          DEFAULT 0,
     platform_id      NUMBER(3)          DEFAULT 0,
@@ -35,17 +35,19 @@ CREATE SEQUENCE seq_tbl_post;
 
 CREATE TABLE tbl_member
 (
-    user_id         VARCHAR2(50)             NOT NULL,
+    account         VARCHAR2(50)             NOT NULL,
     password       VARCHAR2(150)          NOT NULL,
     user_name      VARCHAR2(20)          NOT NULL,
-    user_email        VARCHAR2(100)        NOT NULL,
+    email        VARCHAR2(100)        NOT NULL,
     post_amount    NUMBER(3)                  NULL,
     sort                  VARCHAR2(50)            NULL,
-    authority             VARCHAR2(20)  DEFAULT 'COMMON' ,
+    auth           VARCHAR2(20)  DEFAULT 'COMMON' ,
     join_date             DATE DEFAULT SYSDATE ,
     last_login            DATE DEFAULT SYSDATE ,
     email_verification    VARCHAR2(20)          DEFAULT 'false',
-     PRIMARY KEY (user_id)
+    session_id            VARCHAR2(200) DEFAULT 'none',
+    limit_time             DATE,
+     PRIMARY KEY (account)
 );
 DROP SEQUENCE seq_tbl_member;
 CREATE SEQUENCE seq_tbl_member;
@@ -53,7 +55,7 @@ CREATE SEQUENCE seq_tbl_member;
 CREATE TABLE prj_genre
 (
     genre_id      NUMBER(3)        NOT NULL,
-    user_id       VARCHAR2(50)     NOT NULL,
+    account       VARCHAR2(50)     NOT NULL,
     genre_name    VARCHAR2(100)    NOT NULL,
      PRIMARY KEY (genre_id)
 );
@@ -69,7 +71,7 @@ CREATE TABLE prj_category(
 CREATE TABLE prj_platform
 (
     platform_id                  NUMBER(3)             NOT NULL,
-    user_id                      VARCHAR2(50)    NOT NULL,
+    account                      VARCHAR2(50)    NOT NULL,
     platform_name                VARCHAR2(50)    NOT NULL,
     platform_bg_color    VARCHAR2(50)    DEFAULT '#6c757d',
     platform_font_color          VARCHAR2(50) DEFAULT '#fff',
@@ -109,8 +111,9 @@ CREATE TABLE prj_post_img
 (
     file_name             VARCHAR2(150)     NOT NULL,
     post_no             NUMBER(10)      NOT NULL,
-    user_id               VARCHAR2(50)   NOT NULL,
+    account               VARCHAR2(50)   NOT NULL,
     original_file_name    VARCHAR2(50)     NULL,
+    reg_date DATE          DEFAULT SYSDATE,
     thumbnail             VARCHAR2(150)   DEFAULT 'false',
      PRIMARY KEY (file_name)
 );
@@ -120,7 +123,7 @@ CREATE TABLE prj_hashtag
     tag_no      NUMBER(10)       NOT NULL,
     post_no     NUMBER(10)       NOT NULL,
     tag_name    VARCHAR2(100)    NOT NULL,
-    user_id     VARCHAR2(50)     NOT NULL,
+    account     VARCHAR2(50)     NOT NULL,
      PRIMARY KEY (tag_no)
 );
 DROP SEQUENCE seq_prj_hashtag;
@@ -128,7 +131,7 @@ CREATE SEQUENCE seq_prj_hashtag;
 
 CREATE TABLE login_list(
     login_num NUMBER(10)
-    , user_id VARCHAR2(50)
+    , account VARCHAR2(50)
     , login_log DATE DEFAULT SYSDATE,
      PRIMARY KEY (login_num)
 );

@@ -1,5 +1,5 @@
 -- insert 후 커밋 필수!!!
-INSERT INTO tbl_member(user_id,password,user_name,user_email) VALUES('ibini', '1234', '이비니', 'ibini@ibini.com'  );
+INSERT INTO tbl_member(account,password,user_name,email) VALUES('ibini', '1234', '이비니', 'ibini@ibini.com'  );
 
 insert into prj_category VALUES (0, '미분류');
 insert into prj_category VALUES (1, '웹소설');
@@ -8,12 +8,12 @@ insert into prj_category VALUES (3, 'e-book');
 insert into prj_category VALUES (4, '도서');
 insert into prj_category VALUES (5, '만화책');
 
-insert into prj_platform (platform_id, user_id, platform_name) VALUES (0, 'ibini', '미분류');
-insert into prj_platform (platform_id, user_id, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '카카오페이지');
-insert into prj_platform (platform_id, user_id, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '네이버시리즈');
-insert into prj_platform (platform_id, user_id, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '리디북스');
-insert into prj_platform (platform_id, user_id, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '다음웹툰');
-insert into prj_platform (platform_id, user_id, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '네이버웹툰');
+insert into prj_platform (platform_id, account, platform_name) VALUES (0, 'ibini', '미분류');
+insert into prj_platform (platform_id, account, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '카카오페이지');
+insert into prj_platform (platform_id, account, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '네이버시리즈');
+insert into prj_platform (platform_id, account, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '리디북스');
+insert into prj_platform (platform_id, account, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '다음웹툰');
+insert into prj_platform (platform_id, account, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '네이버웹툰');
 
 insert into prj_genre VALUES (0, 'ibini', '미분류');
 insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '판타지');
