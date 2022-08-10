@@ -21,10 +21,10 @@ class PlatformMapperTest {
     @DisplayName("플랫폼 이름이 추가되야 한다")
     void savePlatformTest(){
         PlatformDomain pd = new PlatformDomain();
-        pd.setPlatformName("레진코믹스");
+        pd.setPlatformName("봄툰");
         pd.setAccount("ibini");
-        pd.setPlatformBgColor("");
-        pd.setPlatformFontColor("");
+//        pd.setPlatformBgColor("");
+//        pd.setPlatformFontColor("");
 //        pd.setPlatformBgColor("#ed1c24");
 //        pd.setPlatformFontColor("#121212");
 
@@ -61,8 +61,8 @@ class PlatformMapperTest {
         PlatformDomain onePlatform = platformMapper.findOnePlatform(platformId);
         onePlatform.setPlatformId(onePlatform.getPlatformId());
         onePlatform.setPlatformName("레진코믹스");
-        onePlatform.setPlatformBgColor("#ed1c24");
-        onePlatform.setPlatformFontColor("#121212");
+//        onePlatform.setPlatformBgColor("#ed1c24");
+//        onePlatform.setPlatformFontColor("#121212");
 
         System.out.println("onePlatform = " + onePlatform);
         boolean b = platformMapper.modifyPlatform(onePlatform);

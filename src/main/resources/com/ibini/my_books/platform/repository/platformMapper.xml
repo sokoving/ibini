@@ -15,9 +15,9 @@
 <!--    저장 -->
     <insert id="savePlatform">
         INSERT INTO prj_platform
-        (platform_id, account, platform_name, platform_bg_color, platform_font_color )
+        (platform_id, account, platform_name )
         VALUES
-        (seq_prj_platform.nextval, #{account}, #{platformName}, #{platformBgColor}, #{platformFontColor})
+        (seq_prj_platform.nextval, #{account}, #{platformName})
     </insert>
     
 <!--    삭제-->
@@ -46,6 +46,9 @@
     <select id="findAllPlatform" resultMap="platformMap">
         SELECT * FROM prj_platform
         WHERE account = #{account}
+        ORDER BY platform_id
     </select>
+
+
 
 </mapper>
