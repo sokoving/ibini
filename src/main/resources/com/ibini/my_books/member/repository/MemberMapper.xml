@@ -52,15 +52,23 @@
 
     </select>
 
-    <!--  패스워드 일치 확인   -->
-    <select id="pwCheck" resultType="String">
-        SELECT password FROM tbl_member WHERE account = #{account}
-    </select>
+<!--    &lt;!&ndash;  패스워드 일치 확인   &ndash;&gt;-->
+<!--    <select id="pwCheck" resultType="String">-->
+<!--        SELECT password FROM tbl_member WHERE account = #{account}-->
+<!--    </select>-->
 
     <!--  회원 이메일 수정 기능   -->
     <update id="updateEmail">
         UPDATE tbl_member
         SET email = #{email}
+        WHERE account = #{account}
+
+    </update>
+
+    <!--  회원 닉네임 수정 기능   -->
+    <update id="updateName">
+        UPDATE tbl_member
+        SET user_name = #{userName}
         WHERE account = #{account}
 
     </update>
@@ -72,6 +80,12 @@
         WHERE account = #{account}
 
     </update>
+
+<!--  회원 탈퇴  -->
+    <delete id="memberDelete">
+        DELETE FROM tbl_member
+        WHERE account = #{account}
+    </delete>
 
 <!--    &lt;!&ndash;  자동 로그인 정보 추가  &ndash;&gt;-->
 <!--    <update id="saveAutoLoginValue">-->

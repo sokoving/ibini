@@ -22,13 +22,16 @@ public interface MemberMapper {
     //회원정보 조회 기능
     Member findUser(String account);
 
+    // 닉네임 수정 기능 (회원정보 수정)
+    boolean updateName(String account, String userName);
+
     // 비밀번호 수정 기능 (회원정보 수정)
     boolean updatePw(String account, String password);
 
     // 이메일 수정 기능 (회원정보 수정)
     boolean updateEmail(String account, String email);
 
-//    // 회원탈퇴 기능
-//    boolean remove(String account);
+    // 회원탈퇴 기능
+    boolean memberDelete(String account,String password);
 
 }

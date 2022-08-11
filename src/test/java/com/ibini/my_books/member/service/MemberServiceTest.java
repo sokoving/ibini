@@ -55,5 +55,31 @@ class MemberServiceTest {
 
     }
 
+    @Test
+    @DisplayName("회원의 패스워드가 암호화되어 수정되어야 한다.")
+    void updatePwTest(){
+        String account = "wldus";
+        String password = "wldus!@#";
 
+        boolean flag = service.updatePw(account, password);
+
+        Member member = service.getMember(account);
+
+        System.out.println(member.getPassword());
+
+        assertTrue(flag);
+
+    }
+
+    @Test
+    @DisplayName("가입된 회원의 정보가 삭제 되어야 한다.")
+    void deleteMemberTest(){
+        String account = "wldus";
+        String password = "$2a$10$Anr8kInQpqkrHo1pS4vih.mpwZakB4DO0TlXyOCTS3tspNu/gNf9O";
+
+        boolean flag = service.memberDelete(account, password);
+
+        assertTrue(flag);
+
+    }
 }

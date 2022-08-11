@@ -56,7 +56,7 @@
                                             <td style="text-align: left">
                                                 <p><strong>닉네임 : ${loginUser.userName}</strong>&nbsp;&nbsp;&nbsp;<span
                                                         id="nameChk"></span></p>
-                                                        <div>닉네임 수정하기</div>
+                                                        
                                             </td>
                                         </tr>
 
@@ -84,7 +84,14 @@
 
                                         <tr>
                                             <td style="width: 100%; text-align: center; colspan: 2;">
-                                                <input type="button" value="회원정보수정" class="btn form-control tooltipstered"
+                                                <input type="button" value="닉네임 수정" class="btn form-control tooltipstered"
+                                                    id="nickmodify-btn"
+                                                    style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 100%; text-align: center; colspan: 2;">
+                                                <input type="button" value="비밀번호 수정" class="btn form-control tooltipstered"
                                                     id="modify-btn"
                                                     style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
                                             </td>
@@ -92,7 +99,7 @@
                                         <tr>
                                             <td style="width: 100%; text-align: center; colspan: 2;">
                                                 <input type="button" value="회원 탈퇴" class="btn form-control tooltipstered"
-                                                    id="signout-btn"
+                                                    id="joinOut-btn"
                                                     style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
                                             </td>
                                         </tr>
@@ -104,13 +111,36 @@
                 </div>
             </div>
             <script>
+                
+                const $nickModifyBtn = document.getElementById('nickmodify-btn');
+                console.log($nickModifyBtn);
+
                 const $modifyBtn = document.getElementById('modify-btn');
                 console.log($modifyBtn);
-                const $signoutBtn = document.getElementById('signout-btn');
-                console.log($signoutBtn);
+
+                const $joinOutBtn = document.getElementById('joinOut-btn');
+                console.log($joinOutBtn);
+
+                $nickModifyBtn.onclick = e => {
+                    location.href = '/member/modifyNick-check';
+                }
 
                 $modifyBtn.onclick = e => {
-                    location.href = '/member/modify-check';
+                    location.href = '/member/modifyPw-check';
+                }
+
+                $joinOutBtn.onclick = e => {
+                    location.href = '/member/join-out';
+                }
+
+                const msg = '${msg}';
+                console.log(msg);
+                if(msg==='modify-success'){
+                    alert('비밀번호 변경 성공!');
+                }
+
+                if(msg === 'nickModify-success'){
+                    alert('닉네임 수정 성공!')
                 }
             </script>
 
