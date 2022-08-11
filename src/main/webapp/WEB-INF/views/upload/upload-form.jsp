@@ -3,9 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title></title>
 
 <!-- jquery -->
@@ -30,7 +28,26 @@
             justify-content: center;
             align-items: center;
             font-size: 1.5em;
-        }
+    }
+    .uploaded-list {
+        /* 없으면 이미지가 밑으로 1자 */
+        display: flex;
+    }
+    .img-all {
+        /* 없으면 x표시랑 이미지랑 안겹침 */
+        display: flex; 
+        width: 100px;
+        height: 100px;
+        z-index: 1;
+        position:relative;
+    }
+    .btn-close {
+        /* x표시 이미지위로 */
+        position: absolute;
+        z-index: 1;
+        left: 75px;
+        opacity: 1;
+    }
 </style>
 
 </head>
@@ -59,21 +76,22 @@
     <script>
     // 버블링걸어야됌 그리고 e.target으로 클릭한애 찾아야함
         const $uploadedList = $('.uploaded-list');
-        const $imgSizing = $('img-sizing');
+        // const $imgSizing = $('img-sizing');
 
-        // console.log($uploadedList); /parent는 제이쿼리문법
+        console.log($uploadedList); //parent는 제이쿼리문법
         // function을 써야만 this를 쓸수잇다 / childnode는 안정확함 children써야됌
         $uploadedList.on("click", function(e) {
-            // console.log(e); //61
-            // console.log(e.target); //62
-            // console.log(e.target.children); //63
-            // console.log(e.target.parentNode); // 64
-            // console.log(e.target.parentNode.children[0]); // 65
-            // console.log(e.target.parentNode.children.length); // 66
+            // console.log(e); //84
+            // console.log(e.target); //85
+            // console.log(e.target.parentNode); // 86
+            // console.log(e.target.parentNode.children); // 87
+            // console.log(e.target.parentNode.children.length); // 88
+            // console.log(e.target.parentNode.parentNode.childNodes.length); // 89
+            // console.log(e.target.parentNode.parentNode.children[0].children[0]); // 95
             // 칠드런을 반복문을 돌린다 children
             if (e.target.children.length===0) {
-                for (let index = 0; index < e.target.parentNode.children.length; index++) {
-                    e.target.parentNode.children[index].style.border = 'none';
+                for (let index = 0; index < e.target.parentNode.parentNode.childNodes.length-1; index++) {
+                    e.target.parentNode.parentNode.children[index].children[0].style.border = "none";
                     // console.log('스타일제거');
                 }
                 // e.target.parentNode.childNodes.style.border = '1px transparent solid';
@@ -100,12 +118,54 @@
 
                 // 확장자 추출후 이미지인지까지 확인
                 if (isImageFile(originFileName)) { // 파일의 이미지라면 이미지를 바로보여줌
+                    // div 만들기
+                    const $div = document.createElement('div');
+                    $div.classList.add('img-all');
+
                     const $img = document.createElement('img');
                     $img.classList.add('img-sizing');
                     $img.setAttribute('src', '/loadFile?fileName=' + fileName); // 풀경로 컨트롤러
                     $img.setAttribute('alt', originFileName); // 풀경로에서 원본파일이름만뽑음
-                    $('.uploaded-list').append($img);
+
+                    // $('.uploaded-list').append($img);
+                    // $('.img-all').append('<button type="button" class="btn-close" aria-label="Close"></button>');
+
+                    // $('.img-all').append($img);
+
+                    const $btn = document.createElement('button');
+                    $btn.classList.add('btn-close');
+                    $btn.setAttribute('aria-label', 'Close');
+
+                    $div.appendChild($img);
+                    $div.appendChild($btn);
+                    document.querySelector('.uploaded-list').appendChild($div);
+
+
                 }
+                // 삭제버튼
+                const $imgAll = $('.img-all');
+                const $imgAll2 = document.getElementsByClassName('.img-all')
+
+                // console.log($imgAll);
+
+                    $imgAll.on("click", function(e) {
+                        console.log($imgAll2); //151
+                        console.log(e.target); //152
+                        // console.log(e);
+                        console.log($imgAll2[0]); //154
+                        console.log($imgAll2[0].children); //155
+
+                        console.log(e.target.parentNode); //157
+                        console.log(e.target.parentNode.parentNode); //158
+                        $imgAll2.removeChild($imgAll2[0].children);
+                        // e.target.parentNode.parentNode.removeChild(e.target.parentNode.parentNode.children);
+                        // $imgAll.removeChild(e.target.parentNode); //155
+
+                    
+                    })
+
+                    
+
             }
 
             // 선택한 파일
