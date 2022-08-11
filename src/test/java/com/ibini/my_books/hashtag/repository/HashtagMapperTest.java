@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class HashtagMapperTest {
@@ -45,7 +43,7 @@ class HashtagMapperTest {
     @Test
     @DisplayName("선택한 하나의 해시태그를 찾을 수 있어야한다")
     void findOneHashTest(){
-        int tagNo = 8;
+        int tagNo = 9;
         HashtagDomain onePost = hashtagMapper.findOneTag(tagNo);
         System.out.println(onePost);
     }
@@ -62,6 +60,12 @@ class HashtagMapperTest {
 
         assertTrue(b);
 
+    }
+    
+    @Test
+    @DisplayName("계정에 저장된 모든 해시태그를 조회해야 한다")
+    void findAllT(){
+        hashtagMapper.findAllHashTag("ibini").forEach(System.out::println);
     }
 
 }
