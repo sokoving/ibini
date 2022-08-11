@@ -5,7 +5,9 @@ import com.ibini.my_books.postnote.repository.PostMemoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +36,13 @@ public class PostMemoService {
     }
 
     // 메모 전체 조회 요청 중간 처리 // 페이징 처리 추후 추가 예정
-    public List<PostMemo> findAll(Long postNo) {
-        return postMemoMapper.findAll(postNo);
+    public Map<String, Object> findAll(Long postNo) {
+
+        Map<String, Object> memoMap = new HashMap<>();
+        memoMap.put("memoList", postMemoMapper.findAll(postNo));
+        memoMap.put("memoCnt", postMemoMapper.getPostMemoCount(postNo));
+
+        return memoMap;
     }
 
     // 메모 개별 조회 요청 중간 처리

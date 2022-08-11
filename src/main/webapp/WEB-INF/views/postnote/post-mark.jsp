@@ -31,25 +31,50 @@
 
     <style>
         body {
-            width: 80%;
-            margin: 10vh auto;
+            width: 60%;
+            margin: 30vh auto;
+
         }
 
         .form-control:focus {
-            border-color: rgb(4, 97, 50);
-            box-shadow: 0px 1px 1px rgba(4, 97, 50, 0.075) inset, 0px 0px 8px rgba(4, 97, 50, 0.5);
+            border-color: rgb(255, 202, 61);
+            box-shadow: 0px 1px 1px rgba(4, 97, 50, 0.075) inset, 0px 0px 8px rgba(255, 202, 61, 0.5);
         }
 
-
+/* 
         .list-group-item:focus {
-            border-color: rgb(4, 97, 50) !important;
-            background: rgb(4, 97, 50) !important;
-        }
+            border-color: rgb(255, 202, 61) !important;
+            background: rgb(255, 202, 61) !important;
+        } */
 
         .list-group-item.active {
-            border-color: rgb(4, 97, 50) !important;
-            background: rgb(4, 97, 50) !important;
+            border-color: rgb(255, 202, 61) !important;
+            background: rgb(255, 202, 61) !important;
+            color: #000;
         }
+
+        .btn {
+            background: rgb(255, 202, 61);
+        }
+
+        .btn:focus {
+            box-shadow: 0 0 0 0.25rem rgb(255 202 61 / 25%);
+        }
+
+        #memoBtn {
+            width: 15%;
+        }
+
+        /* textarea {
+            resize: none;
+        } */
+
+
+        .card-body, .memoBox {
+            padding: 0;
+        }
+
+        
     </style>
 
 </head>
@@ -71,22 +96,45 @@
             </div>
             <div class="">
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active m-3" id="list-home" role="tabpanel"
-                        aria-labelledby="list-home-list">
+                    <div class="tab-pane fade show active m-3" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <div class="d-flex justify-content-end">
-                            <button type="button" id="markBtn" class="btn btn-dark btn-lg mb-3">등록</button>
+                            <button type="button" id="markBtn" class="btn btn-lg mb-3">등록</button>
                         </div>
                         <!-- <button type="button" id="markBtn" class="btn btn-dark mb-3">등록</button> -->
                         <textarea id="" class="form-control" rows="5" placeholder="새로운 글을 입력해 주세요."></textarea>
                     </div>
-                    <div class="tab-pane fade m-3" id="list-profile" role="tabpanel"
-                        aria-labelledby="list-profile-list">
-                        <textarea id="memoText" class="form-control" rows="5" placeholder="새로운 글을 입력해 주세요."></textarea>
-                        <button type="button" id="memoBtn" class="btn btn-dark mt-3">등록</button>
+                    <div class="tab-pane fade m-3" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                        <div class="card col mb-3">
+                            <div class="card-body memoBox">
+                                <!-- <input type="text" style="float: left;" placeholder="숫자를 입력해주세요"> -->
+                                <button type="button" id="memoBtn" class="btn" style="float: right;">등록</button>
+                                <textarea id="memoText" class="form-control" rows="5" placeholder="새로운 글을 입력해 주세요."></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- memo card List -->
+                        <!-- <div class="d-flex row"> -->
+                            <div id="memoContent" class="card col m-3">
+                              <div class="card-body">
+                                <span class="badge bg-dark">1 page</span>
+                                <textarea class="form-control" rows="5">내용</textarea>
+                              </div>                              
+                            </div>
+                            <div class="card col">
+                                <div class="card-body">
+                                  <span class="badge bg-dark">1 page</span>
+                                  <textarea class="form-control" rows="5">내용</textarea>
+                                </div>                              
+                            </div>
+                          <!-- </div> -->
+                        <!-- end card -->
                     </div>
+                    
+                    
                 </div>
             </div>
         </div>
+
 
 
     <script>
@@ -94,49 +142,17 @@
     // 메모 요청 URL
     const URL = '/post/detail/memo';
 
+    const postNo = 3;
+
     
-    // // 메모 등록 이벤트 핸들러 등록 함수
-    // function createMemoClickEvent() {
+    // 메모 등록 이벤트 핸들러 등록 함수
+    function createMemoClickEvent() {
         
-    //     document.getElementById('memoBtn').onclick = createMemo;
-    // }
+        document.getElementById('memoBtn').onclick = createMemo;
+    }
 
-    // // 메모 등록 처리 핸들러 함수
-    // function createMemo(e) {
-
-    //     const $memoText = document.getElementById('memoText');
-
-    //     fetch(URL, {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //             body: JSON.stringify({
-    //                 "postNo": 3,
-    //                 "content": $memoText.textContent
-    //             })
-    //         }) 
-    //         .then(response => response.text())
-    //         .then(message => {
-    //             if (message === 'insert-success') {
-    //                 alert('메모 등록 성공');
-    //                 $memoText.textContent = '';
-    //             } else {
-    //                 alert('메모 등록 실패');
-    //             }
-    //         })
-
-    // }
-
-    // // 메인 실행
-    // (function() {
-
-    //     createMemoClickEvent();
-      
-    // })();
-            
-
-    document.getElementById('memoBtn').onclick = e => {
+    // 메모 등록 처리 핸들러 함수
+    function createMemo(e) {
 
         const $memoText = document.getElementById('memoText');
 
@@ -159,8 +175,102 @@
                     alert('메모 등록 실패');
                 }
             })
-            .catch((error) => console.log("error:", error));
     }
+
+
+    // 메모 목록 DOM을 생성하는 함수
+    // function makeMemoDOM({memoList, memoCnt}) { // destructuring
+
+    //     let tag = '';
+
+    //     if (memoList === null || memoList.length === 0 ) { // post에 메모가 하나도 없을 때
+        
+    //         tag += "<div id='memoContent' class='card col'>메모가 엄슴</div>"
+                    
+    //     } else {
+
+    //         for (let memo of memoList) {
+    //             tag +=  '<div id="memoContent" class="card col">' +
+    //                     '    <div class="card-body">' +
+    //                     '       <span class="badge bg-dark">1 page</span>' +
+    //                     '       <textarea class="form-control" rows="5">내용</textarea>' +
+    //                     '    </div>' +                         
+    //                     '</div>';
+    //         }
+    //     }
+
+
+
+
+
+
+
+
+
+
+
+
+    //     // 댓글 목록에 생성된 DOM 추가
+    //     document.getElementById('replyData').innerHTML = tag;
+
+    //     // 댓글 수 배치
+    //     document.getElementById('replyCnt').textContent = replyCnt;
+    //     // document.getElementById('replyCnt').textContent = maker.totalCount;
+
+    // }
+
+
+    // 메모 목록 보여주는 함수
+    function showMemoList() {
+
+        fetch(URL + '?postNo=' + postNo)
+            .then(response => response.json())
+            .then(memoMap => {
+                makeMemoDOM(memoMap);
+            })    
+    }
+
+    // 메인 실행
+    (function() {
+
+        createMemoClickEvent();
+      
+    })();
+
+
+
+
+
+
+
+
+            
+    // 메모 등록 함수
+    // document.getElementById('memoBtn').onclick = e => {
+
+    //     const $memoText = document.getElementById('memoText');
+
+    //     fetch(URL, {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify({
+    //                 "postNo": 3,
+    //                 "content": $memoText.value
+    //             })
+    //         }) 
+    //         .then(response => response.text())
+    //         .then(message => {
+    //             if (message === 'insert-success') {
+    //                 alert('메모 등록 성공');
+    //                 $memoText.value = '';
+    //             } else {
+    //                 alert('메모 등록 실패');
+    //             }
+    //         })
+    //         .catch((error) => console.log("error:", error));
+    // }
             
 
     </script>

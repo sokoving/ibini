@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class Test {
 
-    @GetMapping("/post")
+    @GetMapping("/post/detail")
     public String home() {
 
 

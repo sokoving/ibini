@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Log4j2
@@ -106,12 +107,13 @@ public class PostNoteController {
     }
 
     // 메모 전체 목록
-    @GetMapping("/memo/{postNo}")
-    public ResponseEntity<List<PostMemo>> viewMemoList(@PathVariable Long postNo) {
-        log.info("/mark/{} GET!", postNo);
+    @GetMapping("/memo")
+    public ResponseEntity< Map<String, Object>> viewMemoList(Long postNo) {
+        log.info("/memo GET!");
 
-        List<PostMemo> postMemoList = postMemoService.findAll(postNo);
+        Map<String, Object> memoMap = postMemoService.findAll(postNo);
 
-        return new ResponseEntity<>(postMemoList, HttpStatus.OK);
+        return new ResponseEntity<>(memoMap, HttpStatus.OK);
     }
 }
+
