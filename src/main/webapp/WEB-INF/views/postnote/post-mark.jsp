@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> -->
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -54,7 +54,7 @@
         }
 
         .btn {
-            background: rgb(255, 202, 61);
+            background: #ffca3d;
         }
 
         .btn:focus {
@@ -62,7 +62,8 @@
         }
 
         #memoBtn {
-            width: 15%;
+            /* width: 15%; */
+            padding: 10px 20px ;
         }
 
         /* textarea {
@@ -72,6 +73,12 @@
 
         .card-body, .memoBox {
             padding: 0;
+        }
+
+        .accordion-button,.accordion-button:not(.collapsed) {
+            color: #000;
+            background-color: #ffca3d;
+            box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
         }
 
         
@@ -103,7 +110,7 @@
                         <!-- <button type="button" id="markBtn" class="btn btn-dark mb-3">등록</button> -->
                         <textarea id="" class="form-control" rows="5" placeholder="새로운 글을 입력해 주세요."></textarea>
                     </div>
-                    <div class="tab-pane fade m-3" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                    <div class="tab-pane fade mb-5" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                         <div class="card col mb-3">
                             <div class="card-body memoBox">
                                 <!-- <input type="text" style="float: left;" placeholder="숫자를 입력해주세요"> -->
@@ -114,7 +121,7 @@
                         
                         <!-- memo card List -->
                         <!-- <div class="d-flex row"> -->
-                            <div id="memoContent" class="card col m-3">
+                            <!-- <div id="memoContent" class="card col m-3">
                               <div class="card-body">
                                 <span class="badge bg-dark">1 page</span>
                                 <textarea class="form-control" rows="5">내용</textarea>
@@ -125,15 +132,58 @@
                                   <span class="badge bg-dark">1 page</span>
                                   <textarea class="form-control" rows="5">내용</textarea>
                                 </div>                              
-                            </div>
+                            </div> -->
                           <!-- </div> -->
                         <!-- end card -->
+
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  MEMO LIST
+                                </button>
+                              </h2>
+                            
+                              <div id="collapseOne" class="card col accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="card-body accordion-body">
+                                    <span class="badge bg-dark">1 page</span>
+                                    <textarea class="form-control" rows="5">내용</textarea>
+                                </div>
+                              </div>
+                            </div>
+                        </div>  
                     </div>
                     
                     
                 </div>
             </div>
         </div>
+
+
+
+
+        <!-- <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  MEMO LIST
+                </button>
+              </h2>
+            
+              <div id="collapseOne" class="card col accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="card-body accordion-body">
+                    <span class="badge bg-dark">1 page</span>
+                    <textarea class="form-control" rows="5">내용</textarea>
+                </div>
+              </div>
+            </div>
+        </div>   -->
+
+              <!-- <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">, until the collapse plugin adds s the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div> -->
+            
 
 
 
