@@ -24,7 +24,7 @@
     </div>
     <div class="text-input">
         # 플랫폼을 추가하세요 : <input type="text" id="platformInput">
-        <button>저장</button>
+        <button id="platformBtn">저장</button>
     </div>
     <div class="select">
         <select name="platform" id="platformselect">
@@ -37,37 +37,61 @@
     <script>
 
         const account = "ibini";
-        const url = "http://localhost:8383/platform/c1";
+        const url = "http://localhost:8383/platform/c1?account=" + account;
 
         // 1. 저장하기!
+            // 1. 버튼 클릭시 핸들러 작동
+            // 2. 핸들러 함수로 value값 가져오기
+            // 3. 전송할데이터 배열
+            // 4. 요청 정보 객체
+            // 5. fetch 전송하기
         // 2. 돔 만들기
         // 3. 저장한 리스트 화면에 랜더링
         // 4.
 
-        function makePlatformDom(domainList) {
-            const $platformselect = document.getElementById('platformselect');
-            domainList.forEach(req => {
-                // 옵션 생성하기
-                var option = document.createElement("option");
-                // 옵션 생성 후 value 설정
-
-                // test contest 생성
-            });
-        }
-
-
-        fetch( url + '?account=' + account)
-        .then(res => res.json())
-        .then(domainList => {
-            console.log(domainList);
-            alert('hi');
-        });
+        
 
         function savePlatformClickEvent(){
-            document.getElementById('platformInput').onclick = savePlatformHandler
+            document.getElementById('platformBtn').onclick = savePlatformHandler
         }
 
-        function savePlatformHandler()
+        //플랫폼 저장 핸들러
+        function savePlatformHandler(e){
+            // 입력창
+            const $platformInput = document.getElementById("platformInput");
+
+            alert($platformInput.value);
+            // [수정] 서버로 전송할 데이터 -> account 로그인 정보 넘겨주는거 받는걸로수정!
+            const platformData = {
+                "platformName": $platformInput.value, 
+                "account" : account
+            }
+            console.log(platformData);
+
+            // POST 요청정보 객체
+            const reqInfo = {
+                method : "POST"
+                , headers : {
+                    'content-type' : 'application/json'
+                }
+                , body : JSON.stringify(platformData)
+
+            };
+            console.log(reqInfo);
+
+            fetch(url, reqInfo)
+                .then(res => res.text())
+                .then(msg=>{
+                    if(msg==="insert-success"){
+                        alert('등록 성공');
+                        // 비워주기
+                        $platformInput.value = '';
+                    } else {
+                        alert('저장 실패');
+                    }
+                })
+
+        }
 
         savePlatformClickEvent();
 
