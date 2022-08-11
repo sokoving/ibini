@@ -22,23 +22,29 @@
         height: 25px;
         margin: 5px;
     }
+    .fileDrop {
+            width: 200px;
+            height: 200px;
+            border: 1px dashed gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+        }
 </style>
 
 </head>
 <body>
 
     <!-- 파일 업로드를 위한 form -->
+    <!-- 첨부파일 / 드래그 영역 -->
+    <div class = "fileDrop">
+        <span>DROP HERE!!</span>
+    </div>
     <!-- 폼이 제출하고 있는 형식 명시 : enctype="multipart/form-data" -->
     <form action="/upload" method="post" enctype="multipart/form-data">
         <input class="fileOpen" type="file" name="files" multiple>
-        
-        <!-- <div class="mb-3">
-            <input name="img" class="fileAddress" name="files"
-                placeholder="이미지 링크 주소">
-        </div> -->
-
         <button class="submit" type="submit">업로드</button>
-        
     </form>
 
     <div class="uploadDiv"> 
@@ -51,7 +57,7 @@
     </div>
 
     <script>
-// 버블링걸어야됌 그리고 e.target으로 클릭한애 찾아야함
+    // 버블링걸어야됌 그리고 e.target으로 클릭한애 찾아야함
         const $uploadedList = $('.uploaded-list');
         const $imgSizing = $('img-sizing');
 
@@ -112,10 +118,6 @@
                 }       
             }
 
-            // // fileAddress 이벤트
-            // const $fileAddress = $('.fileAddress');
-
-            // console.log($fileAddress);
             
             // Open 이벤트
             const $OpenBox = $('.fileOpen');
@@ -165,6 +167,72 @@
                     });
             });
 
+            // drag & drop 이벤트
+            const $dropBox = $('.fileDrop');
+
+            // drag 진입 이벤트
+            $dropBox.on('dragover dragenter', e => {
+                e.preventDefault(); // 기본기능방지
+                $dropBox
+                    .css('border-color', 'red')
+                    .css('background', 'lightgray');
+            });
+
+            // drag 탈출 이벤트
+            $dropBox.on('dragleave', e => {
+                e.preventDefault();
+                $dropBox
+                    .css('border-color', 'gray')
+                    .css('background', 'transparent');
+            });
+
+            // drop 이벤트
+            $dropBox.on('drop', e => {
+                e.preventDefault(); // 이게있어야 안에넣엇을때 탭이안넘어감
+                // console.log('드롭 이벤트 작동!');
+
+                // 드롭된 파일 정보를 서버로 전송
+
+                // 1. 드롭된 파일 데이터 읽기
+                console.log(e);
+
+                const files = e.originalEvent.dataTransfer.files;
+                console.log('drop file data: ', files);
+
+                // 2. 읽은 파일 데이터를 input[type-file]태그에 저장 / 59줄
+                const $fileInput = $('#ajax-file');
+                $fileInput.prop('files', files); // input에 파일정보를 담는다 /form태그라생각
+
+                // console.log($fileInput);
+
+                // 3. 파일 데이터를 비동기 전송하기 위해서는 FormData객체가 필요
+                const formData = new FormData();
+
+                // 4. 전송할 파일들을 전부 FormData안에 포장
+                for (let file of $fileInput[0].files) {
+                    formData.append('files', file); //controller 76줄에 감
+                }
+
+                // 5. 비동기 요청 전송
+                const reqInfo = {
+                    method: 'POST',
+                    body: formData
+                    // headers: { / form-data는 기본값이라서 굳이안써도됌
+                    //     'content-type': 'multipart/form-data'
+                    // }
+                }
+                fetch('/ajax-upload', reqInfo)
+                    .then(res => {
+                        // console.log(res.status);
+                        return res.json();
+                    })
+                    .then(fileNames => { // 컨트롤러에서 파일보냄 res.json()가 fileNames
+                        console.log(fileNames);
+
+                        showFileData(fileNames);
+                    });
+            });
+
         })
 
         // (function () {
@@ -173,6 +241,6 @@
 
         // })();
 
-        </script>
+    </script>
 </body>
 </html>
