@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibini.my_books.genre.repository.GenreMapper">
+
+    <resultMap id="genreMap" type="com.ibini.my_books.genre.domain.Genre">
+        <result property="genreId" column="genre_id"/>
+        <result property="genreName" column="genre_name"/>
+    </resultMap>
+
+    <insert id="save">
+        insert into prj_genre
+            (genre_id, account, genre_name)
+        VALUES
+            (seq_prj_genre.nextval, #{account}, #{genreName})
+    </insert>
+
+    <select id="findAllGenre" resultMap="genreMap">
+        SELECT
+            genre_id, account, genre_name
+        FROM prj_genre
+        WHERE account = #{account}
+    </select>
+
+    <select id="fineOneGenreByGenreId" resultMap="genreMap">
+        SELECT
+            genre_id, account, genre_name
+        FROM prj_genre
+        WHERE genre_Id = #{genreId}
+    </select>
+
+    <delete id="remove">
+        DELETE FROM prj_genre
+        WHERE genre_Id = #{genreId}
+    </delete>
+
+    <update id="modify">
+        UPDATE prj_genre
+        SET genre_name = #{genreName}
+        WHERE genre_Id = #{genreId}
+    </update>
+
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM prj_genre
+        WHERE account = #{account}
+    </select>
+
+
+</mapper>
