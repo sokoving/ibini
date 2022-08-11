@@ -8,6 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>platform</title>
 </head>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.slim.js"
+        integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
+        crossorigin="anonymous"></script>
+
 <body>
 
     <!-- 1. 사용자가 플랫폼을 선택하기 -->
@@ -35,6 +40,15 @@
 
 
     <script>
+        // jQuery
+        $(document).ready(function(){
+            alert("start")
+
+
+        });
+
+
+
 
         const account = "ibini";
         // 나중에 꼭 수정해주기
@@ -89,7 +103,7 @@
                 alert('hi');
                 console.log(domainList);
                 makePlatformDom(domainList);
-                
+
             });
 
         }
