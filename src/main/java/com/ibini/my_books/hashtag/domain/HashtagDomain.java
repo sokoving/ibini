@@ -9,5 +9,5 @@ public class HashtagDomain {
     private int tagNo;
     private int postNo;
     private String tagName;
-    private String userId;
+    private String account;
 }

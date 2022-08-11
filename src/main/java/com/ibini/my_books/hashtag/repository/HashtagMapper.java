@@ -16,8 +16,11 @@ public interface HashtagMapper {
     boolean deleteHashtag(int tagNo);
 
     // 하나조회
-    HashtagDomain findOneHasgtag(int tagNo);
+//    HashtagDomain findOneHasgtag(int postNo, int tagNo);
+
+    // 하나의 게시글에 달린 여러가지 태그
+    HashtagDomain findOneTag(int tagNo);
 
     // 전체조회 -> account? postNo?
-    List<HashtagDomain> findAllHashTag(int postNo);
+    List<HashtagDomain> findAllHashTag(String account);
 }
