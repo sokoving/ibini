@@ -6,12 +6,14 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- RESET CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+<!-- css -->
+<link rel="stylesheet" href="/css/platform.css"/>
 <title>platform</title>
 </head>
-<script
-        src="https://code.jquery.com/jquery-3.6.0.slim.js"
-        integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
-        crossorigin="anonymous"></script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
 <body>
 
@@ -22,33 +24,30 @@
     <!-- 5. 목록(마이페이지)에서 수정버튼 누르면 수정삭제하기 -->
     <!-- 6. 수정할때 색깔 선택은 컬러 api 활용하기 -->
 
+    <div class="select-container">
+        <div class="select">
+            <h3>플랫폼을 선택하세요!</h3>
+            <select name="platform" id="platformselect">
+                <option value="#">플랫폼을 선택하세요</option>
+            </select>
+        </div>
+        <div class="radio-list">
+            <label>플랫폼 추가를 원하시나요?</label>
+            <input type="radio" class="radioBtn" name="check" value="platformInputX"> X
+            <input type="radio" class="radioBtn" name="checked" value="platformInputO"> O
+        </div>
+        <div class="text-input" name="platformAdd">
+            <label><p># 플랫폼을 추가하세요 : </p></label>
+            <input type="text" id="platformInput">
+            <button id="platformBtn">저장</button>
+        </div>   
+    </div>
+    
 
-    <div class="radio-list">
-        <input type="radio" name="check" value="platformInputX"> X
-        <input type="radio" name="check" value="platformInputX"> O
-    </div>
-    <div class="text-input">
-        # 플랫폼을 추가하세요 : <input type="text" id="platformInput">
-        <button id="platformBtn">저장</button>
-    </div>
-    <div class="select">
-        <select name="platform" id="platformselect">
-            <option value="#">플랫폼을 선택하세요</option>
-        </select>
-    </div>
 
 
 
     <script>
-        // jQuery
-        $(document).ready(function(){
-            alert("start")
-
-
-        });
-
-
-
 
         const account = "ibini";
         // 나중에 꼭 수정해주기
@@ -100,7 +99,6 @@
             fetch(url)
             .then(res => res.json())
             .then(domainList => {
-                alert('hi');
                 console.log(domainList);
                 makePlatformDom(domainList);
 
@@ -121,7 +119,7 @@
             // 입력창
             const $platformInput = document.getElementById("platformInput");
 
-            alert($platformInput.value);
+            console.log($platformInput.value);
             // [수정] 서버로 전송할 데이터 -> account 로그인 정보 넘겨주는거 받는걸로수정!
             const platformData = {
                 "platformName": $platformInput.value, 
@@ -144,18 +142,40 @@
                 .then(res => res.text())
                 .then(msg=>{
                     if(msg==="insert-success"){
-                        alert('등록 성공');
+                        alert('새로운 플랫폼이 등록 완료되었습니다.');
                         // 비워주기
                         $platformInput.value = '';
+                        // select 해주기
                         showdomainList();
                     } else {
-                        alert('저장 실패');
+                        alert('새로운 플랫폼 저장을 실패했습니다.');
                     }
                 })
 
         }
 
+        // 처음부터 화면에 보여주기
+        showdomainList();
         savePlatformClickEvent();
+        
+
+        // jQuery
+        // $(document).ready(function(){
+
+        //     $('.text-input').hide();
+        //     // alert("start")
+        //     $('.radioBtn').click(function(){
+        //         alert("hihihi")
+
+        //         if($("input[name='checked']:checked")){
+        //             $('.text-input').show();
+        //             console.log($("input[name='checked']:checked").val());
+        //             // alert($("input[name='checked']:checked").val());    
+        //         }
+                
+
+        //     });
+        // }); // jquery end
 
 
     </script>

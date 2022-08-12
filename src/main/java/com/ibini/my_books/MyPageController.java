@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/post")
-public class platfromTestController {
+@RequestMapping("/myPage")
+public class MyPageController {
 
-    @GetMapping("/write")
-    public String getTest(){
+    // http://localhost:8383/myPage/platform
+    @GetMapping("/platform")
+    public String showMyPage(){
 
-        return "hj-test";
+        return "mypage-platform";
+
     }
+
+
 }
