@@ -38,5 +38,6 @@
 - (08.09 - 여운) tbl_post 제약조건 변경
 - (08.09 - 성빈) prj_post_img 테이블, reg_date DATE DEFAULT SYSDATE 컬럼 추가
 - (08.09 - 현정) prj_category 테이블 삭제, CategoryUtil에서 값 불러오게 변경
-- (08.09 - 재영) member 테이블 컬럼 추가, create table tbl_member sql문 수정
+- (08.09 - 재영) member 테이블 컬럼(session_id, limit_time
+  ) 추가, create table tbl_member sql문 수정
 - (08.08 - 여운) 프로젝트 파일 깃에 올림

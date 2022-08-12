@@ -1,7 +1,7 @@
 ALTER TABLE tbl_post
-ADD CONSTRAINT fk_member_user_id
-FOREIGN KEY (user_id)
-REFERENCES tbl_member(user_id);
+ADD CONSTRAINT fk_member_account
+FOREIGN KEY (account)
+REFERENCES tbl_member(account);
 
 ALTER TABLE tbl_post
 ADD CONSTRAINT fk_genre_id
@@ -40,17 +40,19 @@ REFERENCES tbl_post(post_no);
 
 ALTER TABLE prj_genre
 ADD CONSTRAINT fk_genre
-FOREIGN KEY (user_id)
-REFERENCES tbl_member(user_id);
+FOREIGN KEY (account)
+REFERENCES tbl_member(account);
 
 ALTER TABLE prj_platform
 ADD CONSTRAINT fk_platform
-FOREIGN KEY (user_id)
-REFERENCES tbl_member(user_id);
+FOREIGN KEY (account)
+REFERENCES tbl_member(account);
 
 ALTER TABLE login_list
 ADD CONSTRAINT fk_login_list
-FOREIGN KEY (user_id)
-REFERENCES tbl_member(user_id);
+FOREIGN KEY (account)
+REFERENCES tbl_member(account);
+
+
 
 commit;

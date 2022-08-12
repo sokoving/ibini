@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 속성에는 사용할 인터페이스의 풀 패키지 경로 + 인터페이스 이름 -->
+<mapper namespace="com.ibini.my_books.member.repository.MemberMapper">
+
+    <resultMap id="MemberMap" type="com.ibini.my_books.member.domain.Member">
+        <result column="user_name" property="userName"/>
+        <result column="post_amount" property="postAmount"/>
+        <result column="join_date" property="joinDate"/>
+        <result column="last_login" property="lastLogin"/>
+        <result column="email_verification" property="emailVerification"/>
+        <result column="session_id" property="sessionId"/>
+        <result column="limit_time" property="limitTime"/>
+    </resultMap>
+
+    <!--    회원 가입 기능   -->
+    <insert id="register">
+
+        INSERT INTO tbl_member
+        (account, password, user_name, email)
+        VALUES
+        (#{account}, #{password}, #{userName}, #{email})
+
+    </insert>
+
+    <!--    중복 체크 기능(아이디와 이메일을 동시에 처리 = 동적 sql)   -->
+    <select id="isDuplicate" resultType="int">
+
+        SELECT COUNT(*)
+        FROM tbl_member
+
+        <if test="type=='account'" >
+            WHERE account = #{value}
+        </if>
+        <if test="type=='email'">
+            WHERE email = #{value}
+        </if>
+        <!--        결과가 1이면 중복, 0이면 회원가입 가능 -->
+
+    </select>
+
+
+    <!--    회원조회 기능   -->
+    <select id="findUser" resultMap="MemberMap">
+
+        SELECT *
+        FROM tbl_member
+        WHERE account = #{account}
+
+    </select>
+
+<!--    &lt;!&ndash;  패스워드 일치 확인   &ndash;&gt;-->
+<!--    <select id="pwCheck" resultType="String">-->
+<!--        SELECT password FROM tbl_member WHERE account = #{account}-->
+<!--    </select>-->
+
+    <!--  회원 이메일 수정 기능   -->
+    <update id="updateEmail">
+        UPDATE tbl_member
+        SET email = #{email}
+        WHERE account = #{account}
+
+    </update>
+
+    <!--  회원 닉네임 수정 기능   -->
+    <update id="updateName">
+        UPDATE tbl_member
+        SET user_name = #{userName}
+        WHERE account = #{account}
+
+    </update>
+
+<!--  회원 비밀번호 수정 기능   -->
+    <update id="updatePw">
+        UPDATE tbl_member
+        SET password = #{password}
+        WHERE account = #{account}
+
+    </update>
+
+<!--  회원 탈퇴  -->
+    <delete id="memberDelete">
+        DELETE FROM tbl_member
+        WHERE account = #{account}
+    </delete>
+
+    <!--  자동 로그인 정보 추가  -->
+    <update id="saveAutoLoginValue">
+
+        UPDATE tbl_member
+        SET session_id = #{sessionId}, limit_time = #{limitTime}
+        WHERE account = #{account}
+
+    </update>
+
+    <!--  세션 아이디로 회원정보조회  -->
+    <select id="findMemberBysessionId" resultMap="MemberMap">
+
+        SELECT * FROM tbl_member
+        WHERE session_id = #{sessionId}
+
+    </select>
+
+</mapper>

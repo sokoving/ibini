@@ -39,24 +39,11 @@
 
         <body>
 
-            <h1> Welcome~ This is ibini's index page!! </h1>
-
-            <c:if test="${loginUser == null}">
-                <div class="login-menu"><a href="/member/sign-in">sign-in</a></div>
-                <div class="login-menu"><a href="/member/sign-up">sign-up</a></div>
-            </c:if>
+            <h1> My Page </h1>
 
             <c:if test="${loginUser != null}">
-                <div class="login-menu"><a href="/member/my-page">My page</a></div>
-                <div class="login-menu"><a href="/member/sign-out">sign-out</a></div>
+                <div class="login-menu"><a href="/member/my-info">내 정보</a></div>
             </c:if>
-
-            <script>
-                const msg = '${msg}';
-                if(msg === 'success') {
-                    alert('회원탈퇴가 정상적으로 처리 되었습니다. 이용해주셔서 감사합니다.');
-                }
-            </script>
 
         </body>
 
