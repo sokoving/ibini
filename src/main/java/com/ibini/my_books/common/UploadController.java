@@ -66,7 +66,7 @@ public class UploadController {
     @ResponseBody // files로 넘어옴  ResponseEntity를하는이유 헤더정보를담을수잇음 못담아도해야함
     public ResponseEntity<List<String>> ajaxUpload(List<MultipartFile> files) {
 
-        log.info("/ajax0upload POST! = {}", files.get(0).getOriginalFilename());
+        log.info("/ajax-upload POST! = {}", files.get(0).getOriginalFilename());
 
         // 클라이언트에게 전송할 파일경로 리스트
         List<String> fileNames = new ArrayList<>();

@@ -55,23 +55,29 @@
 
     <!-- 파일 업로드를 위한 form -->
     <!-- 첨부파일 / 드래그 영역 -->
-    <div class = "fileDrop">
-        <span>DROP HERE!!</span>
-    </div>
-    <!-- 폼이 제출하고 있는 형식 명시 : enctype="multipart/form-data" -->
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input class="fileOpen" type="file" name="files" multiple>
-        <button class="submit" type="submit">업로드</button>
-    </form>
+    <form id="write-form" action="/post_img/write" method="post" autocomplete="off" enctype="multipart/form-data">
 
-    <div class="uploadDiv"> 
-        <input type="file" name="files" id="ajax-file" style="display:none;">
-    </div>
+        <div class="form-group">
+            <div class = "fileDrop">
+                <span>DROP HERE!!</span>
+            </div>
+
+            <!-- 폼이 제출하고 있는 형식 명시 : enctype="multipart/form-data" -->
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input class="fileOpen" type="file" name="files" multiple>
+                <button class="submit" type="submit">업로드</button>
+            </form>
+
+            <div class="uploadDiv"> 
+                <input type="file" name="files" id="ajax-file" style="display:none;">
+            </div>
     
-    <!-- 업로드된 이미지의 썸네일을 보여주는 영역 -->
-    <div class="uploaded-list">
+            <!-- 업로드된 이미지의 썸네일을 보여주는 영역 -->
+            <div class="uploaded-list">
             
-    </div>
+            </div>
+        </div>
+    </form>
 
     <script>
     // 버블링걸어야됌 그리고 e.target으로 클릭한애 찾아야함
@@ -81,13 +87,7 @@
         console.log($uploadedList); //parent는 제이쿼리문법
         // function을 써야만 this를 쓸수잇다 / childnode는 안정확함 children써야됌
         $uploadedList.on("click", function(e) {
-            // console.log(e); //84
-            // console.log(e.target); //85
-            // console.log(e.target.parentNode); // 86
-            // console.log(e.target.parentNode.children); // 87
-            // console.log(e.target.parentNode.children.length); // 88
-            // console.log(e.target.parentNode.parentNode.childNodes.length); // 89
-            // console.log(e.target.parentNode.parentNode.children[0].children[0]); // 95
+            
             // 칠드런을 반복문을 돌린다 children
             if (e.target.children.length===0) {
                 for (let index = 0; index < e.target.parentNode.parentNode.childNodes.length-1; index++) {
@@ -99,6 +99,9 @@
                 // console.log('클릭함');
             }
         })
+
+        // const $form = document.getElementById('write-form');
+        // $form.submit();
 
 
         // start JQuery 
@@ -112,9 +115,17 @@
 
             // 파일의 확장자에 따른 렌더링 처리
             function checkExtType(fileName) {
-                    
+
                 // 원본 파일 명 추출
                 let originFileName = fileName.substring(fileName.indexOf("_" + 1));
+
+                // hidden input을 만들어서 변환파일명을 서버로 넘김
+                const $hiddenInput = document.createElement('input');
+                $hiddenInput.setAttribute('type', 'hidden');
+                $hiddenInput.setAttribute('name', 'fileNames');
+                $hiddenInput.setAttribute('value', fileName); // 변해야돼기떄문에 ''붙이면안됌
+
+                $('#write-form').append($hiddenInput);
 
                 // 확장자 추출후 이미지인지까지 확인
                 if (isImageFile(originFileName)) { // 파일의 이미지라면 이미지를 바로보여줌
