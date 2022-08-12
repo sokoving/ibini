@@ -60,5 +60,4 @@ public class PostController {
         return "redirect: /post/write";
     }
 
-<<<<<<< HEAD
 }
