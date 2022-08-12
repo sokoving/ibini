@@ -1,11 +1,8 @@
-package com.ibini.my_books.member.Controller;
+package com.ibini.my_books.member.controller;
 
 import com.ibini.my_books.member.domain.KakaoUserInfoDTO;
 import com.ibini.my_books.member.domain.Member;
-import com.ibini.my_books.member.domain.OauthValue;
-import com.ibini.my_books.member.domain.SNSLogin;
 import com.ibini.my_books.member.service.KakaoService;
-import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,6 @@
-package com.ibini.my_books.member.Controller;
+package com.ibini.my_books.member.controller;
 
 import com.ibini.my_books.member.domain.Member;
-import com.ibini.my_books.member.domain.OauthValue;
 import com.ibini.my_books.member.domain.SNSLogin;
 import com.ibini.my_books.member.dto.LoginDTO;
 import com.ibini.my_books.member.service.KakaoService;
