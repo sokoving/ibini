@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/post")
+//@RequestMapping("/post")
 public class PlatfromTestController {
 
-    @GetMapping("/write")
-    public String getTest(){
-
-        return "hj-test";
-    }
+//    @GetMapping("/write")
+//    public String getTest(){
+//
+//        return "hj-test";
+//    }
 }
