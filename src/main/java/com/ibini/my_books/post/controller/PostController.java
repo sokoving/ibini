@@ -41,7 +41,7 @@ public class PostController {
         boolean flag = postService.saveService(post);
         log.info("save flag : {}", flag);
 
-        return "redirect: /post/write";
+        return "redirect:/post/write";
     }
 
 }
