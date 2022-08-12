@@ -79,9 +79,9 @@
                 <div id="post-input-section">
                     <h2> 새 포스트 등록하기</h2>
                     <form id="post-reg-form" action="/post/write" method="post">
-                        <input type="hidden" name="account" value="inibi" readonly>
+                        <input type="hidden" name="account" value="ibini" readonly>
                         <label>
-                            <span>플랫폼</span><input type="number" name="platformId" id="">
+                            <span>플랫폼</span><input type="number" name="platformId" id="" placeholder="0:미분류, 1:카카오페이지, 2:네이버시리즈, 3:리디북스, 4:다음웹툰, 5:네이버웹툰">
                         </label>
                         <div>
                             <label>
@@ -130,12 +130,15 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-            jQueryTest("post-reg.html");
+            // jQueryTagTest("h1", "태그 잡기 테스트");
 
             // 포스트 입력 폼 제출 이벤트
             const $regBtn = $('#post-reg-btn');
-            console.log("$regBtn : " + $regBtn);
-            
+            // jQueryTagTest($regBtn, "태그 잡기 테스트");
+            $regBtn.click(e => {
+                $('#post-reg-form').submit();
+            })
+
             
 
 

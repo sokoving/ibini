@@ -68,80 +68,138 @@
 
 
             <div id="inner-reg-section">
-                <div id="thumb-section">
-                    <div id="thumb-img"></div>
-                    <!-- 썸네일 이미지 뜨는 박스 -->
+                <h2> 새 포스트 등록하기</h2>
+
+                <div id="thumb-form-wrap">
+                        <div id="thumb-img">
+                            <img src="" alt="">
+                        </div>
+                        <!-- 썸네일 이미지 뜨는 박스 -->
+
+
+                    <div id="form-wrap">
+                        <form id="post-reg-form" action="/post/write" method="post">
+
+                            <input type="hidden" name="account" value="inibi" readonly>
+                            <input type="hidden" name="epId" id="" value="1">
+
+
+                            <div class="full-wrap">
+                                <label class="full-label">
+                                    <span class="full-span">카테고리</span>
+                                    <div class="full-input">
+                                        <input type="number" name="caId" id=""
+                                            placeholder="0:미분류 1:웹소설 2:웹툰 3:e-book 4:도서 5:만화책 ">
+                                    </div>
+                                </label>
+                            </div>
+
+
+                            <div class="half-wrap">
+                                <label class="half-label">
+                                    <span class="half-span">플랫폼</span>
+                                    <div class="half-input">
+                                        <input type="number" name="platformId" id=""
+                                            placeholder="0:미분류 1:카카오페이지 2:네이버시리즈 3:리디북스 4:다음웹툰 5:네이버웹툰">
+                                    </div>
+                                </label>
+                                <label class="half-label">
+                                    <span class="half-span">장르</span>
+                                    <div class="half-input">
+                                        <input type="number" name="genreId" id=""
+                                            placeholder="0:미분류 1:판타지 2:로맨스 3:무협 4:아포칼립스 6:공포">
+                                    </div>
+                                </label>
+                            </div>
+
+
+                            <div class="full-wrap">
+                                <label class="full-label">
+                                    <span class="full-span">책제목</span>
+                                    <div class="full-input">
+                                        <input type="text" name="postTitle" id="">
+
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="full-wrap">
+                                <label class="full-label">
+                                    <span class="full-span">작가</span>
+                                    <div class="full-input">
+                                        <input type="text" name="postWriter" id="">
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="full-wrap">
+                                <label class="full-label">
+                                    <span class="full-span">회차 구분</span>
+                                    <div class="full-input">
+                                        
+                                    </div>
+                                </label>
+                            </div>
+
+
+
+
+                            <div class="half-wrap">
+                                <label class="half-label">
+                                    <span class="half-span">현재 회차</span>
+                                    <div class="half-input">
+                                        <input type="text" name="curEp" id="">
+                                    </div>
+                                </label>
+                                <label class="half-label">
+                                    <span class="half-span">총 회차</span>
+                                    <div class="half-input">
+                                        <input type="text" name="totalEp" id="">
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="half-wrap">
+                                <label class="half-label">
+                                    <span class="half-span">연재 상태</span>
+                                    <div class="half-input">
+                                        <input type="number" name="publishStatus" id="">
+                                    </div>
+                                </label>
+                                <label class="half-label">
+                                    <span class="half-span">연재 주기</span>
+                                    <div class="half-input">
+                                        <input type="text" name="publishCycle" id="">
+                                    </div>
+                                </label>
+                            </div>
+                            <label>
+                                <span>별점</span><input type="starRate" name="starRate" id="">
+                            </label>
+                            <div id="post-reg-btn">등록</div>
+                        </form>
+                    </div> <!-- // end form-wrap -->
                 </div>
-
-
-                <div id="post-input-section">
-                    <h2> 새 포스트 등록하기</h2>
-                    <form id="post-reg-form" action="/post/write" method="post">
-                        <input type="hidden" name="account" value="inibi" readonly>
-                        <label>
-                            <span>플랫폼</span><input type="number" name="platformId" id="">
-                        </label>
-                        <div>
-                            <label>
-                                <span>카테고리</span><input type="number" name="caId" id="">
-                            </label>
-                            <label>
-                                <span>장르</span><input type="number" name="genreId" id="">
-                            </label>
-                        </div>
-                        <label>
-                            <span>책 제목</span><input type="text" name="postTitle" id="">
-                        </label>
-                        <label>
-                            <span>작가</span><input type="text" name="postWriter" id="">
-                        </label>
-                        <label>
-                            <span>회차 구분</span><input type="number" name="epId" id="">
-                        </label>
-                        <div>
-                            <label>
-                                <span>현재 회차</span><input type="text" name="curEp" id="">
-                            </label>
-                            <label>
-                                <span>총 회차</span><input type="text" name="totalEp" id="">
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <span>연재 상태</span><input type="number" name="publishStatus" id="">
-                            </label>
-                            <label>
-                                <span>연재 주기</span><input type="text" name="publishCycle" id="">
-                            </label>
-                        </div>
-                        <label>
-                            <span>별점</span><input type="starRate" name="starRate" id="">
-                        </label>
-                        <div id="post-reg-btn">등록</div>
-                    </form>
-                </div> <!-- // end post-input-section -->
-
-
             </div> <!-- // end inner-section -->
 
         </section> <!-- // end reg-section -->
-
-
-
 
 
     </div> <!-- end wrap -->
 
 
 
-
-
-
     <script>
         // start jQuery
         $(document).ready(function () {
-            // jQueryTest("post-reg.html");
+            // jQueryTagTest("h1", "태그 잡기 테스트");
 
+            // 포스트 입력 폼 제출 이벤트
+            const $regBtn = $('#post-reg-btn');
+            // jQueryTagTest($regBtn, "태그 잡기 테스트");
+            $regBtn.click(e => {
+                $('#post-reg-form').submit();
+            })
 
 
 

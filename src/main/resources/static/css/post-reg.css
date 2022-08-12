@@ -49,74 +49,18 @@ header .inner-nav div {
 
 
 /* reg-section style*/
-section #inner-reg-section {
-    margin-top: 100px;
-    border: 1px solid #adb5bd;
-    border-radius: 0.2rem;
 
-    width: 90%;
-    margin: 100px auto;
-    padding: 20px;
-
-    display: flex;
-    justify-content: start;
-    align-items: stretch;
-}
 
 /* reg-section - thumb section*/
-section #thumb-section {
-    border: 1px solid #adb5bd;
-    border-radius: 0.2rem;
-    width: 300px;
-    padding: 10px;
-    margin-right: 20px;
-    box-sizing: border-box;
 
-    display: flex;
-    justify-content: center;
-    align-content: stretch;
 
-}
-
-section #thumb-section #thumb-img {
-    width: 100%;
-
-    background-color: #ffc107;
-}
 
 /* reg-section - post input section*/
-section #post-reg-form {
-    display: flex;
-    flex-direction: column;
-}
 
-section #post-reg-form label {
-    margin-bottom: 5px;
-    border: 1px solid #adb5bd;
-    border-radius: 0.2rem;
-    overflow: hidden;
-    width: 100%;
-}
 
-section #post-reg-form div {
-    display: flex;
-}
 
-section #post-reg-form span {
-    background-color: #adb5bd;
-    padding: 4px 5px;
-    width: 20%;
-}
 
-section #post-reg-form input {
-    border: none;
-}
+/* border: 1px solid #adb5bd;
+border-radius: 0.2rem; */
 
-section #post-reg-btn{
-    background-color: #ffc107;
-    width: 100%;
-    border-radius: 0.2rem;
-    padding: 5px;
-    cursor: pointer;
-    padding-left: 250px;
-}
+    /* background-color: #ffc107; */

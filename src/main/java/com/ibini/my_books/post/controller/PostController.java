@@ -57,7 +57,7 @@ public class PostController {
 
         log.info("save flag : {}", postFlag);
 
-        return "redirect: /post/write";
+        return "redirect:/post/write";
     }
 
 }
