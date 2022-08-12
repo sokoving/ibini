@@ -1,0 +1,66 @@
+/* reset */
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+button,
+input {
+    background-color: inherit;
+}
+
+/* common style */
+.hide {
+    display: none;
+}
+
+body {
+    /* background-color: bisque; */
+    color: inherit;
+    font-size: 18px;
+    font-family: 'NanumSquareRound', sans-serif;
+}
+
+#wrap {
+    /* background-color: ; */
+
+    width: 1000px;
+    margin: 0 auto;
+
+}
+
+
+/* header style */
+header .inner-header {
+    /* background-color: yellow; */
+    padding: 10px;
+    border-bottom: 5px double #ffc107;
+}
+
+header .inner-nav {
+    display: flex;
+    justify-content: end;
+}
+
+header .inner-nav div {
+    margin-left: 10px;
+}
+
+
+/* reg-section style*/
+
+
+/* reg-section - thumb section*/
+
+
+
+/* reg-section - post input section*/
+
+
+
+
+/* border: 1px solid #adb5bd;
+border-radius: 0.2rem; */
+
+    /* background-color: #ffc107; */

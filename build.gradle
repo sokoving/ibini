@@ -44,7 +44,7 @@ dependencies {
 	//파일업로드 라이브러리
 	implementation 'commons-io:commons-io:2.8.0'
 
-	//이미지 썸네일 라이브러리
+	//이미지 썸네일 라이브러리 // 이미지 작게해줌
 	implementation 'org.imgscalr:imgscalr-lib:4.2'
 
 	//gson (JSON 파싱 라이브러리)

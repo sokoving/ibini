@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ibini.my_books.hashtag.repository.HashtagMapper">
+
+    <resultMap id="hashtagMap" type="com.ibini.my_books.hashtag.domain.HashtagDomain">
+        <result property="tagNo" column="tag_no" />
+        <result property="postNo" column="post_no" />
+        <result property="tagName" column="tag_name" />
+        <result property="account" column="account" />
+    </resultMap>
+
+    <!--    저장 -->
+    <insert id="saveHashtag">
+        INSERT INTO prj_hashtag
+        (tag_no, post_no, tag_name, account )
+        VALUES
+        (seq_prj_hashtag.nextval, #{postNo}, #{tagName}, #{account})
+    </insert>
+
+    <!--    삭제-->
+    <delete id="deleteHashtag">
+        DELETE FROM prj_hashtag
+        WHERE tag_no = #{tagNo}
+    </delete>
+
+    <!--    수정-->
+    <update id="modifyHashtag">
+        UPDATE prj_hashtag
+        SET tag_name = #{tagName}
+        WHERE tag_no = #{tagNo}
+    </update>
+
+
+<!--    태그 조회 -->
+    <select id="findOneTag" resultMap="hashtagMap">
+        SELECT * FROM prj_hashtag
+        WHERE tag_no = #{tagNo}
+    </select>
+
+    <!--    해시태그 전체 조회 (계정정보)-->
+    <select id="findAllHashTag" resultMap="hashtagMap">
+        SELECT * FROM prj_hashtag
+        WHERE account = #{account}
+    </select>
+
+
+<!--    백업용 -->
+
+    <!-- 게시글로 하나에 달린 태그 조회하기??? -->
+<!--    <select id="findOneHashtag" resultMap="hashtagMap">-->
+<!--        SELECT * FROM prj_hashtag-->
+<!--        WHERE post_no = #{postNo}-->
+<!--        AND tag_no = #{tagNo}-->
+<!--    </select>-->
+
+
+
+</mapper>

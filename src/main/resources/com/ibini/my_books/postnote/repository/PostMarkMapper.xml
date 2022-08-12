@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibini.my_books.postnote.repository.PostMarkMapper">
+    
+    <resultMap id="markMap" type="com.ibini.my_books.postnote.domain.PostMark">
+        <result property="markNo" column="mark_no" />
+        <result property="postNo" column="post_no" />
+        <result property="episodeNo" column="episode_no" />
+        <result property="regDate" column="reg_date" />
+        <result property="modDate" column="mod_date" />
+    </resultMap>
+
+    <!-- 마크 저장 -->
+    <insert id="save">
+        INSERT INTO prj_post_mark
+        (mark_no, post_no, episode_no, content)
+        VALUES
+        (seq_prj_post_mark.nextval, #{postNo}, #{episodeNo}, #{content})
+    </insert>
+
+    <!-- 마크 수정 -->
+    <update id="modify">
+        UPDATE prj_post_mark
+        SET episode_no = #{episodeNo},
+            content = #{content}
+        WHERE mark_no = #{markNo}
+    </update>
+
+    <!-- 마크 삭제 -->
+    <delete id="remove">
+        DELETE FROM prj_post_mark
+        WHERE mark_no = #{markNo}
+    </delete>
+
+    <!-- 마크 전체 삭제 -->
+    <delete id="removeAll">
+        DELETE FROM prj_post_mark
+        WHERE post_no = #{postNo}
+    </delete>
+
+    <!-- 마크 전체 조회 기능 -->
+    <select id="findAll" resultMap="markMap">
+        SELECT
+        *
+        FROM prj_post_mark
+        WHERE post_no = #{postNo}
+        ORDER BY episode_no DESC    <!-- 페이징 처리 추후 추가 예정 -->
+    </select>
+
+    <!-- 마크 개별 조회 기능 -->
+    <select id="findOne" resultMap="markMap">
+        SELECT
+            *
+        FROM prj_post_mark
+        WHERE mark_no = #{markNo}
+    </select>
+
+    <!-- 전체 마크 수 조회 -->
+    <select id="getPostMarkCount" resultType="int">
+        SELECT COUNT(*)
+        FROM prj_post_mark
+        WHERE post_no = #{postNo}
+    </select>
+
+</mapper>
