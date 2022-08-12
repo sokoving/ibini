@@ -132,7 +132,7 @@
                     }
 
                     const warningMsg = '${message}';
-
+                    console.log(warningMsg);
                     if(warningMsg == 'no-login'){
                         alert('로그인 후 사용할 수 있습니다.')
                     }

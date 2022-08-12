@@ -9,6 +9,7 @@ import org.springframework.boot.convert.DataSizeUnit;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,7 +50,8 @@ class MemberServiceTest {
         loginDTO.setPassword(foundMember.getPassword());
 
         HttpSession session = null;
-        LoginFlag flag = service.login(loginDTO,session);
+        HttpServletResponse response = null;
+        LoginFlag flag = service.login(loginDTO,session, response);
 
         System.out.println(flag);
 

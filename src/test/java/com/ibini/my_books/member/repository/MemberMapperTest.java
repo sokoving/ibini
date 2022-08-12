@@ -1,7 +1,6 @@
 package com.ibini.my_books.member.repository;
 
 import com.ibini.my_books.member.domain.Member;
-import com.ibini.my_books.member.dto.ModifyDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

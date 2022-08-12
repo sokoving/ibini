@@ -2,12 +2,10 @@ package com.ibini.my_books.member.Controller;
 
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.LoginDTO;
-import com.ibini.my_books.member.dto.ModifyDTO;
 import com.ibini.my_books.member.service.LoginFlag;
 import com.ibini.my_books.member.service.MemberService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import static com.ibini.my_books.member.service.LoginFlag.*;
-import static com.ibini.my_books.util.LoginUtil.*;
 
 @Controller
 @Log4j2
@@ -55,20 +53,24 @@ public class MemberController {
 
     //로그인 화면을 열어주는 요청처리
     @GetMapping("/sign-in")
-    public void signIn() {
+    public void signIn(@ModelAttribute("message") String message,HttpServletRequest request) {
         log.info("/member/sign-in GET - forwarding to sign-in.jsp");
+
+        String referer = request.getHeader("Referer");
+        log.info("referer : {}", referer);
+        request.getSession().setAttribute("redirectURI",referer);
     }
 
 
     //로그인 요청 처리
     @PostMapping("/sign-in")
     public String signIn(LoginDTO inputData, RedirectAttributes ra,
-                         HttpSession session) {
+                         HttpSession session, HttpServletResponse response) {
         log.info("/member/sign-in POST - {}", inputData);
         log.info("session timeout{}", session.getMaxInactiveInterval());
 
         // 로그인 서비스 호출
-        LoginFlag flag = memberService.login(inputData, session);
+        LoginFlag flag = memberService.login(inputData, session, response);
 
         if (flag == SUCCESS) {
             log.info("login success!");
@@ -79,7 +81,13 @@ public class MemberController {
     }
 
     @GetMapping("/sign-out")
-    public String signOut(HttpSession session) {
+    public String signOut(HttpServletRequest request,HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        //만약 자동 로그인 상태라면 해제한다. = 쿠키가 있다면
+        if (LoginUtil.hasAutoLoginCookie(request)){
+            memberService.autoLogout(LoginUtil.getCurrentMemberAccount(session),request,response);
+        }
+
         //로그인한 사람에게만 적용
         if (session.getAttribute("loginUser") != null) {
             //1.세션에 정보를 삭제한다.

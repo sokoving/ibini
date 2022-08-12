@@ -1,17 +1,18 @@
 package com.ibini.my_books.member.service;
 
 import com.ibini.my_books.member.domain.Member;
+import com.ibini.my_books.member.dto.AutoLoginDTO;
 import com.ibini.my_books.member.dto.LoginDTO;
-import com.ibini.my_books.member.dto.ModifyDTO;
 import com.ibini.my_books.member.repository.MemberMapper;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -57,7 +58,8 @@ public class MemberService {
     }
 
     //로그인 처리
-    public LoginFlag login(LoginDTO inputData, HttpSession session) {
+    public LoginFlag login(LoginDTO inputData, HttpSession session
+    ,HttpServletResponse response) {
         //0.회원가입 여부 확인
         Member foundMember = memberMapper.findUser(inputData.getAccount());
 
@@ -73,6 +75,13 @@ public class MemberService {
                 session.setAttribute("loginUser", foundMember);
                 //세션 타임아웃 설정
                 session.setMaxInactiveInterval(60 * 60); // 1시간 설정
+
+                //자동 로그인 처리
+                if(inputData.isAutoLogin()){
+                    log.info("checked auto login user!!");
+                    keepLogin(foundMember.getAccount(),session,response);
+                }
+
                 return SUCCESS;
             } else {
                 //비번 틀림
@@ -82,6 +91,37 @@ public class MemberService {
             //아이디 없음
             return NO_ACC;
         }
+    }
+
+    private void keepLogin(String account, HttpSession session, HttpServletResponse response) {
+        //1. 자동로그인 쿠키 생성 - 쿠키의 값으로 현재 세션의 아이디를 저장
+        String sessionId = session.getId();
+        Cookie c = new Cookie(LOGIN_COOKIE, sessionId);
+
+        //2. 쿠키 설정(수명,사용 경로)
+        int limitTime = 60*60*24*90;
+        c.setMaxAge(limitTime);
+        c.setPath("/");
+
+        //3. 로컬에 쿠키 전송
+        response.addCookie(c);
+
+        //4.DB에 쿠키값과 수명 저장
+        AutoLoginDTO dto = new AutoLoginDTO();
+        dto.setSessionId(sessionId);
+
+        //자동로그인 유지시간(초)를 날짜로 변환 (db에는 날짜형식으로 들어가야함.)
+        long nowTime = System.currentTimeMillis();
+        Date limitDate = new Date(nowTime +((long)limitTime*1000));
+        // 밀리초에 1000을 곱해서 초로 바꾸고
+        // 오늘로부터 90일 후의 시간을 구해서 limitTime에 초기화
+        dto.setLimitTime(limitDate);
+
+        dto.setAccount(account);
+
+        memberMapper.saveAutoLoginValue(dto);
+
+
     }
 
     // 비밀번호 일치 확인
@@ -121,6 +161,24 @@ public class MemberService {
         return memberMapper.memberDelete(account, password);
     }
 
+    public void autoLogout(String account, HttpServletRequest request,HttpServletResponse response) {
+        //1. 자동로그인 쿠키를 불러온 뒤 수명을 0초로 세팅해서 클라이언트에게 돌려보낸다.
+        Cookie c = getAutoLoginCookie(request);
+        if (c != null) {
+            c.setMaxAge(0);
+            response.addCookie(c);
+        }
+        //2.데이터베이스처리
+        AutoLoginDTO dto = new AutoLoginDTO();
+        dto.setSessionId("none");
+        dto.setLimitTime(new Date());
+        dto.setAccount(account);
+        memberMapper.saveAutoLoginValue(dto);
+    }
+
+
+    }
+
 
 //
 //    // 회원정보 이메일 수정 기능
@@ -132,4 +190,4 @@ public class MemberService {
 //    }
 
 
-}
+

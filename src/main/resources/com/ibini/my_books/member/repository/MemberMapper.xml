@@ -87,21 +87,21 @@
         WHERE account = #{account}
     </delete>
 
-<!--    &lt;!&ndash;  자동 로그인 정보 추가  &ndash;&gt;-->
-<!--    <update id="saveAutoLoginValue">-->
+    <!--  자동 로그인 정보 추가  -->
+    <update id="saveAutoLoginValue">
 
-<!--        UPDATE tbl_member-->
-<!--        SET session_id = #{sessionId}, limit_time = #{limitTime}-->
-<!--        WHERE account = #{account}-->
+        UPDATE tbl_member
+        SET session_id = #{sessionId}, limit_time = #{limitTime}
+        WHERE account = #{account}
 
-<!--    </update>-->
+    </update>
 
-<!--    &lt;!&ndash;  세션 아이디로 회원정보조회  &ndash;&gt;-->
-<!--    <select id="findMemberBySessionId" resultMap="MemberMap">-->
+    <!--  세션 아이디로 회원정보조회  -->
+    <select id="findMemberBysessionId" resultMap="MemberMap">
 
-<!--        SELECT * FROM tbl_member-->
-<!--        WHERE session_id = #{sessionId}-->
+        SELECT * FROM tbl_member
+        WHERE session_id = #{sessionId}
 
-<!--    </select>-->
+    </select>
 
 </mapper>
