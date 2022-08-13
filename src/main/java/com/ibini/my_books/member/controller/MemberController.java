@@ -58,15 +58,15 @@ public class MemberController {
 
     //로그인 화면을 열어주는 요청처리
     @GetMapping("/sign-in")
-    public void signIn(@ModelAttribute("message") String message,HttpServletRequest request,Model model) {
+    public void signIn(@ModelAttribute("message") String message, HttpServletRequest request, Model model) {
         log.info("/member/sign-in GET - forwarding to sign-in.jsp");
 
         String referer = request.getHeader("Referer");
         log.info("referer : {}", referer);
-        request.getSession().setAttribute("redirectURI",referer);
+        request.getSession().setAttribute("redirectURI", referer);
 
         model.addAttribute("kakaoAppKey", KAKAO_APP_KEY);
-        model.addAttribute("kakaoRedirect",KAKAO_REDIRECT_URI);
+        model.addAttribute("kakaoRedirect", KAKAO_REDIRECT_URI);
     }
 
 
@@ -89,23 +89,27 @@ public class MemberController {
     }
 
     @GetMapping("/sign-out")
-    public String signOut(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public String signOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         //만약 자동 로그인 상태라면 해제한다. = 쿠키가 있다면
-        if (LoginUtil.hasAutoLoginCookie(request)){
-            memberService.autoLogout(LoginUtil.getCurrentMemberAccount(session),request,response);
+        if (LoginUtil.hasAutoLoginCookie(request)) {
+            memberService.autoLogout(LoginUtil.getCurrentMemberAccount(session), request, response);
         }
-
+        log.info("session : {}", session);
         //sns로그인 상태라면 해당 sns 로그아웃처리를 진행
         SNSLogin from = (SNSLogin) session.getAttribute(LOGIN_FROM);
-        switch (from){
-            case KAKAO:
-                kakaoService.logout((String) session.getAttribute("accessToken"));
-                break;
-            case NAVER:
-                break;
-            case GOOGLE:
-                break;
+        log.info("from:{}", from);
+
+        if (from != null) {
+            switch (from) {
+                case KAKAO:
+                    kakaoService.logout((String) session.getAttribute("accessToken"));
+                    break;
+                case NAVER:
+                    break;
+                case GOOGLE:
+                    break;
+            }
         }
 
         //로그인한 사람에게만 적용

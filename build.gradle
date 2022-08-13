@@ -49,6 +49,9 @@ dependencies {
 
 	//gson (JSON 파싱 라이브러리)
 	implementation 'com.google.code.gson:gson:2.8.5'
+
+	// jsp 수정 내역 화면에 바로 보여주기
+	implementation 'org.springframework.boot:spring-boot-devtools'
 }
 
 tasks.named('test') {
