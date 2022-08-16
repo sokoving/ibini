@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 public class HashtagDomain {
     private int tagNo;
-    private int postNo;
+    private Long postNo;
     private String tagName;
     private String account;
 }

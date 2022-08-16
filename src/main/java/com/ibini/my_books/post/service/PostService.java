@@ -36,6 +36,15 @@ public class PostService {
         return postMapper.findOnePost(postNo);
     }
 
+    public PostWithName fineOnePostWithName(Long postNo){
+        log.info("Post Service : fineOnePostWithName call");
+        PostWithName p = postMapper.fineOnePostWithName(postNo);
+        p.setCaEpName();
+        log.info("p.caName - {}, p.epName -{}", p.getCaName(), p.getEpName());
+
+        return p;
+    }
+
     public boolean removeService(Long postNo){
         log.info("Post Service : removeService call - {}", postNo);
         return postMapper.remove(postNo);

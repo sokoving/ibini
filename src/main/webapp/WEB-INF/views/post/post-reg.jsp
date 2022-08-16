@@ -23,7 +23,7 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
     <!-- custom css -->
-    <link rel="stylesheet" href="/css/post-reg.css">
+    <link rel="stylesheet" href="/css/common.css">
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -31,7 +31,7 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
 
     <!-- custom js -->
-    <script src="/js/post-reg.js" defer></script>
+    <script src="/js/common.js" defer></script>
 
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>

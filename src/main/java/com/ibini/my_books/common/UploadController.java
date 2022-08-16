@@ -1,7 +1,6 @@
 package com.ibini.my_books.common;
 
 import com.ibini.my_books.postImg.repository.PostImgMapper;
-import com.ibini.my_books.postImg.service.PostImgService;
 import com.ibini.my_books.util.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

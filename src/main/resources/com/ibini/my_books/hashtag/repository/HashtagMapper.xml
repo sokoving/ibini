@@ -5,10 +5,10 @@
 <mapper namespace="com.ibini.my_books.hashtag.repository.HashtagMapper">
 
     <resultMap id="hashtagMap" type="com.ibini.my_books.hashtag.domain.HashtagDomain">
-        <result property="tagNo" column="tag_no" />
-        <result property="postNo" column="post_no" />
-        <result property="tagName" column="tag_name" />
-        <result property="account" column="account" />
+        <result property="tagNo" column="tag_no"/>
+        <result property="postNo" column="post_no"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="account" column="account"/>
     </resultMap>
 
     <!--    저장 -->
@@ -33,7 +33,7 @@
     </update>
 
 
-<!--    태그 조회 -->
+    <!--    태그 조회 -->
     <select id="findOneTag" resultMap="hashtagMap">
         SELECT * FROM prj_hashtag
         WHERE tag_no = #{tagNo}
@@ -46,15 +46,19 @@
     </select>
 
 
-<!--    백업용 -->
+    <!--    백업용 -->
 
     <!-- 게시글로 하나에 달린 태그 조회하기??? -->
-<!--    <select id="findOneHashtag" resultMap="hashtagMap">-->
-<!--        SELECT * FROM prj_hashtag-->
-<!--        WHERE post_no = #{postNo}-->
-<!--        AND tag_no = #{tagNo}-->
-<!--    </select>-->
+    <select id="findOneHashtag" resultMap="hashtagMap">
+        SELECT * FROM prj_hashtag
+        WHERE post_no = #{postNo}
+        AND tag_no = #{tagNo}
+    </select>
 
-
+    <!-- 한 포스트에 달린 해시태그 전체 조회  -->
+    <select id="findAllHashTagByPostNo" resultMap="hashtagMap">
+        SELECT * FROM prj_hashtag
+        WHERE post_no = #{postNo}
+    </select>
 
 </mapper>
