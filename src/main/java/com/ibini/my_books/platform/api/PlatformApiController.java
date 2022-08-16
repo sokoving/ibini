@@ -52,8 +52,10 @@ public class PlatformApiController {
     }
     
     // 삭제
-    @DeleteMapping("/{platformId}")
-    public String delete(@PathVariable int platformId){
+    @DeleteMapping("/{account}/{platformId}")
+    public String delete(@PathVariable String account,
+            @PathVariable int platformId){
+        log.info("PlatformController delete! - platform account {} ", account);
         log.info("PlatformController delete! - platformId {} ", platformId);
 
         boolean deletePlatform = platformService.deletePlatform(platformId);

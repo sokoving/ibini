@@ -1,8 +1,8 @@
 .myPage-wrap {
-    background: rgb(27, 103, 78);
+    background: #fff;
 }
 .myPage-wrap .platform-wrap #selectSetting{
-    background: rgb(212, 172, 172);
+    background: #fffaee;
     display: flex;
     flex-wrap: wrap;
 }
@@ -12,19 +12,21 @@
     display: flex;
     justify-content: space-between;
     height: 40px;
-    padding: 10px;
-    height: 60px;
-    border-bottom: 1px solid rgb(215, 36, 116);
+    margin: 10px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 2;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .platformNo{
-    background: rgb(53, 196, 215);
+    background: #cacaca;
     width: 10%;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .platformName{
-    background: rgb(111, 128, 130);
-    width: 20%;
+    background: #fff;
+    width: 30%;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .bgColor{
@@ -38,5 +40,5 @@
 
 .myPage-wrap .platform-wrap #selectSetting #selList .modiNdel{
     background: rgb(171, 116, 168);
-    width: 30%;
+    width: 20%;
 }

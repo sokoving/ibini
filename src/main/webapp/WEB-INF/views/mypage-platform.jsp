@@ -19,82 +19,82 @@
 
 <title>MyPage</title>
 </head>
+
 <body>
 
-    <div class="myPage-wrap">
-        <h1>MyPage</h1>
-        <button type="button" class="btn btn-info">Info</button>
-        <div class="platform-wrap">
-            <h2>platform Setting</h2>
-            <div id="selectSetting">
-                <!-- dom 생성해서 넣어주기 -->
-                <div id="selList">
-                    <div class="platformNo">
-                        <span>platformNo</span>
+        <div class="myPage-wrap">
+            <h1>MyPage</h1>
+            <div class="platform-wrap">
+                <h2>platform Setting</h2>
+                <div id="selectSetting">
+                    <!-- dom 생성해서 넣어주기 -->
+                    <div id="selList">
+                        <div class="platformNo" id="platformNo">
+                            <span>platformNo</span>
+                        </div>
+                        <div class="platformName">
+                            <span>platformName</span>
+                        </div>
+                        <div class="bgColor" style="background-color: #ed1c24;">
+                            <span>배경색상</span>
+                        </div>
+                        <div class="fontColor" style="background-color: #1de041;">
+                            <span>글자색상</span>
+                        </div>
+                        <div class="modiNdel">
+
+                            <button class="platModi">수정</button>
+                            <button class="plat-del">삭제</button>
+                        </div>
                     </div>
-                    <div class="platformName">
-                        <span>platformName</span>
-                    </div>
-                    <div class="bgColor" style="background-color: #ed1c24;">
-                        <span>배경색상</span>
-                    </div>
-                    <div class="fontColor" style="background-color: #1de041;">
-                        <span>글자색상</span>
-                    </div>
-                    <div class="modiNdel">
-                        
-                        <button class="platModi">수정</button>
-                        <button class="plat-del">삭제</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="platModi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">플랫폼 수정하기</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h1>플랫폼 수정하기</h1>
+                            <div id="modiName">
+                                <h2>플랫폼 이름 수정 하기</h2>
+                            </div>
+                            <div id="modiBg">
+                                <h2>플랫폼 뱃지 배경색 수정</h2>
+                            </div>
+                            <div id="modiFont">
+                                <h2>플랫폼 뱃지 글자색 수정</h2>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="platModi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h1>모달 오픈!!</h1>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#platModi">
-    모달버튼
-</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#platModi">
+            모달버튼
+        </button>
 
 
 
-
-</div>
-
-
-
-
-
-
-
-
-
-<script>
+    <script>
     
         const account = "ibini";
-        // 나중에 꼭 수정해주기
+        // 나중에 꼭 account 수정해주기
         const url = "http://localhost:8383/platform/c1?account=" + account;
-
+        // 수정 삭제용 url
+        const URL = "http://localhost:8383/platform/c1/" + account;
 
         // 도메인 리스트 불러오기
         function showdomainList() {
@@ -132,8 +132,8 @@
                 // var option = document.createElement("option");
                 // tag 더해주기
                 tag += `<div id="selList">
-                            <div class="platformNo">
-                                <span>` + platformId + `</span>
+                            <div class="platformNo">`
+                                + platformId + `
                             </div>
                             <div class="platformName">
                                 <span>` + platformName + `</span>
@@ -141,14 +141,14 @@
                             <div class="bgColor" style="background-color: ` + platformBgColor + `;">
                                 <span>배경색상</span>
                             </div>
-                            <div class="fontColor" style="background-color: ` + platformFontColor + `;">
+                            <div class="fontColor" id="fontColor" style="background-color: ` + platformFontColor + `;">
                                 <span>글자색상</span>
                             </div>
-                            <div class="modiNdel">
+                            <div class="modiAndDel">
                                 <button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#platModi">
-                                수정모달
-                            </button>
-                                <button class="plat-del">삭제</button>
+                                    수정모달
+                                </button>
+                                <button class="plat-del" id="delBtn">삭제</button>
                             </div>
                         </div>`;
 
@@ -158,24 +158,81 @@
 
         }
 
-
+        // 플랫폼 돔 생성
         showdomainList();
-        // modalBtnEvent();
+        openModifyModalAndRemoveEvent();
 
-        // function modalBtnEvent() {
-        //     const modalBtn = document.getElementById('modalBtn');
+        //플랫폼 수정 삭제 이벤트
+        function openModifyModalAndRemoveEvent() {
+            const $SelectSetting = document.getElementById('selectSetting');
 
-        //     modalBtn.onclick = e =>{
-        //         console.log('모달 클릭');
-        //     }
-        // }
-        
-        // modal btn event
-        // let $modalBtn = document.getElementById('platModi');
-        // modalBtn.onclick = e => {
-        //     console.log('수정 모달!');
-        // }
+            $SelectSetting.addEventListener('click', function(e){
+                // alert('selectSetting');
+                console.log(e.target);
+                platformModAndDelHandler(e);
+            });
+        }
+
+
+        // 플랫폼 삭제 처리
+        function processRemove(no) {
+            console.log(no)
+            if (!confirm('선택하신 플랫폼을 삭제하시겠습니까?')) return;
+
+            fetch(URL + '/' + no, {
+                method: 'DELETE'
+            })
+                .then(res => res.text())
+                .then(msg => {
+                    if (msg === 'del-success') {
+                        alert('삭제 성공!');
+                        // 목록 새로불러오기
+                        showdomainList();
+                    } else {
+                        alert('삭제 실패!!');
+                    }
+                });
+        }
+
+        // 수정 화면 modal에 보여주기
+        function processModifyShow(e, no) {
+            console.log('processmodiShow no: ', no)
+            const platformName = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
+            console.log('platformName : ', platformName);
+            const platfomrBgColor = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.nextElementSibling.style.backgroundColor;
+            console.log('platfomrBgColor: ', platfomrBgColor);
+            const platformFontColor = e.target.parentElement.parentElement.lastElementChild.previousElementSibling.style.backgroundColor
+            console.log('platformFontColor : ', platformFontColor)
+
+
+
+
+        }
+
+        // 플랫폼 수정/삭제 핸들러
+        function platformModAndDelHandler(e) {
+
+            const no = e.target.parentElement.parentElement.firstElementChild.textContent;
+            // const noo = e.target.parentElement;
+
+            console.log('no:', no);
+            // console.log('noo', noo);
+
+            e.preventDefault();
+
+            // console.log('수정버튼 클릭함!! before');
+            if (e.target.matches('#modalBtn')) {
+                console.log('modalBtn');
+                processModifyShow(e, no);
+            } else if (e.target.matches('#delBtn')) {
+                processRemove(no);
+                console.log('delBtn');
+            }
+        }
+
+
     </script>
+
 </body>
-</html
+</html>
 
