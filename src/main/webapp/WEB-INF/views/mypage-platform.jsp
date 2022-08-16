@@ -15,7 +15,8 @@
 <!-- bootstrap cdn -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
+<%-- color api --%>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 
 <title>MyPage</title>
 </head>
@@ -26,6 +27,7 @@
             <h1>MyPage</h1>
             <div class="platform-wrap">
                 <h2>platform Setting</h2>
+
                 <div id="selectSetting">
                     <!-- dom 생성해서 넣어주기 -->
                     <div id="selList">
@@ -60,14 +62,19 @@
                         </div>
                         <div class="modal-body">
                             <h1>플랫폼 수정하기</h1>
+                            <h2>Color api</h2>
+                            <div id="picker"></div>
                             <div id="modiName">
-                                <h2>플랫폼 이름 수정 하기</h2>
+                                <h2>플랫폼 이름 수정</h2>
+                                <input type="text" id="modiNameInput">
                             </div>
                             <div id="modiBg">
                                 <h2>플랫폼 뱃지 배경색 수정</h2>
+                                <input type="text" id="modiBgInput">
                             </div>
                             <div id="modiFont">
                                 <h2>플랫폼 뱃지 글자색 수정</h2>
+                                <input type="text" id="modiFontInput">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -89,6 +96,20 @@
 
 
     <script>
+
+        const modiBgInput = document.getElementById('modiBgInput');
+        modiBgInput.addEventListener('click', function (e){
+            var colorPicker = new iro.ColorPicker("#picker", {
+                // Set the size of the color picker
+                width: 320,
+                // Set the initial color to pure red
+                color: "#f00"
+            });
+        })
+
+        // var rgb = colorPicker.color.rgb;
+        // console.log(rgb); // hex = "#ff0000"
+
     
         const account = "ibini";
         // 나중에 꼭 account 수정해주기
@@ -197,13 +218,22 @@
         // 수정 화면 modal에 보여주기
         function processModifyShow(e, no) {
             console.log('processmodiShow no: ', no)
-            const platformName = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
+
+            const platformName = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.innerText;
             console.log('platformName : ', platformName);
             const platfomrBgColor = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.nextElementSibling.style.backgroundColor;
             console.log('platfomrBgColor: ', platfomrBgColor);
             const platformFontColor = e.target.parentElement.parentElement.lastElementChild.previousElementSibling.style.backgroundColor
             console.log('platformFontColor : ', platformFontColor)
 
+            document.getElementById('modiNameInput').value = platformName;
+            // 색상 수정할때 컬러 api 사용하기
+            document.getElementById('modiBgInput').value = platfomrBgColor;
+            document.getElementById('modiFontInput').value = platformFontColor;
+
+            // 번호 달아주기
+            const $modal = document.querySelector('.modal');
+            $modal.dataset.no = no;
 
 
 
