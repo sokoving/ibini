@@ -15,18 +15,18 @@ input {
     display: none;
 }
 
-body {
-    /* background-color: bisque; */
-    color: inherit;
-    font-size: 18px;
-    font-family: 'NanumSquareRound', sans-serif;
-}
+/* body {
+    background-color: bisque;
+} */
 
 #wrap {
     /* background-color: ; */
 
+    font-size: 18px;
     width: 1000px;
     margin: 0 auto;
+    color: inherit;
+    font-family: 'NanumSquareRound', sans-serif;
 
 }
 

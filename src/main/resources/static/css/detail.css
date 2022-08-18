@@ -1,0 +1,91 @@
+section #inner-section {
+    width: 90%;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25rem;
+    margin: 100px auto 0;
+    padding: 10px;
+}
+
+
+/* 이미지, 포스트 정보 영역 */
+section #img-post-wrap {
+    border: 1px solid #ffca3d;
+    border-radius: 0.25rem;
+    display: flex;
+}
+
+/* 이미지 영역 */
+section #img-box{
+    background-color: #ffca3d;
+    width: 30%;
+    
+    display: flex;
+    flex-flow: column wrap;
+    
+}
+section #img-box .post-img{
+    overflow: hidden;
+    width: 100%;
+}
+
+/* 썸네일 이미지 */
+section #thumb-img{
+
+}
+
+section #img-box-wrap{}
+
+
+
+/* 포스트 정보 영역 */
+section #post-box{
+    width: 70%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+    /* 플랫폼, 카테고리 배지 */
+section #plat-ca-wrap .pc-span {
+    background-color: #888;
+    border-radius: 0.25rem;
+    line-height: 1.8;
+    padding: 0.35em;
+    margin: 10px 0;
+    font-weight: 700;
+    color: #fff;
+}
+
+    /* 별점 */
+section #star-rate {
+    margin-top: 50px;
+}
+
+    /* 책 제목 */
+section #post-title {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+    /* 작가 이름 */
+section #post-writer {
+    color: #787878;
+}
+
+    /* 회차 구분 및 읽기 진행도 */
+section #ep-wrap {
+    color: #787878;
+    margin-bottom: 40px;
+}
+
+    /* 해시태그 영역 */
+section #hash-wrap{
+    /* margin: 10px 0; */
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+section #hash-wrap .hash-span {
+    border: 1px dotted #888;
+    border-radius: 0.25rem;
+    padding: 0 0.5em;
+    margin: 0 5px 5px 0;
+}
