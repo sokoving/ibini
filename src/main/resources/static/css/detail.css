@@ -3,89 +3,143 @@ section #inner-section {
     border: 1px solid #adb5bd;
     border-radius: 0.25rem;
     margin: 100px auto 0;
-    padding: 10px;
+    padding: 30px;
+    box-sizing: border-box;
 }
 
 
 /* 이미지, 포스트 정보 영역 */
 section #img-post-wrap {
-    border: 1px solid #ffca3d;
+    /* border: 1px solid #ffca3d; */
     border-radius: 0.25rem;
     display: flex;
 }
 
+
+
 /* 이미지 영역 */
-section #img-box{
-    background-color: #ffca3d;
-    width: 30%;
-    
+section #img-wrap {
+    /* background-color: #ffca3d; */
+
     display: flex;
-    flex-flow: column wrap;
-    
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-basis: 285px;
+    flex-shrink: 0;
 }
-section #img-box .post-img{
+
+section #img-wrap .post-img {
     overflow: hidden;
     width: 100%;
+    border-radius: 0.25rem;
 }
 
 /* 썸네일 이미지 */
-section #thumb-img{
+section #thumb-img {
+    border: 1px solid #ffca3d;
+    border-radius: 0.25rem;
+    width: 200px;
+    overflow: hidden;
+    cursor: pointer;
 
+    order: 2;
 }
 
-section #img-box-wrap{}
+/* 첨부 이미지, 방향키 목록 */
+section #img-arr-wrap {
+    border-radius: 0.25rem;
+    overflow: hidden;
+
+    order: 1;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+/* 첨부 목록 방향 아이콘 */
+section #img-arr-wrap .slick-arrow {
+    border-radius: 0.25rem;
+    text-align: center;
+    color: #000;
+    cursor: pointer;
+}
+section #img-arr-wrap .slick-arrow:hover{
+    background-color: #ffca3d;
+}
+
+/* 첨부 이미지 */
+section .img-box-wrap {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+section .img-box-wrap .img-box {
+    width: 70px;
+    height: 59px;
+    overflow: hidden;
+    border: 1px solid #ffca3d;
+    border-radius: 0.25rem;
+    margin: 3px 0;
+    cursor: pointer;
+}
+
 
 
 
 /* 포스트 정보 영역 */
-section #post-box{
-    width: 70%;
-    padding: 0 20px;
+section #post-box {
+    padding-left: 20px;
     box-sizing: border-box;
+    flex-grow: 1;
+
 }
-    /* 플랫폼, 카테고리 배지 */
-section #plat-ca-wrap .pc-span {
+
+/* 별점, 플랫폼, 카테고리 */
+section #star-plat-ca-wrap {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+
+section #star-plat-ca-wrap .pc-span {
     background-color: #888;
     border-radius: 0.25rem;
-    line-height: 1.8;
     padding: 0.35em;
-    margin: 10px 0;
+    margin-left: 10px;
     font-weight: 700;
     color: #fff;
 }
 
-    /* 별점 */
-section #star-rate {
-    margin-top: 50px;
-}
-
-    /* 책 제목 */
+/* 책 제목 */
 section #post-title {
     font-size: 1.5em;
     font-weight: 700;
 }
 
-    /* 작가 이름 */
+/* 작가 이름 */
 section #post-writer {
     color: #787878;
 }
 
-    /* 회차 구분 및 읽기 진행도 */
+/* 회차 구분 및 읽기 진행도 */
 section #ep-wrap {
     color: #787878;
-    margin-bottom: 40px;
 }
 
-    /* 해시태그 영역 */
-section #hash-wrap{
-    /* margin: 10px 0; */
+/* 해시태그 영역 */
+section #hash-wrap {
     display: flex;
     flex-wrap: wrap;
-    margin: 10px 0;
+    margin: 20px 0 0;
 }
+
 section #hash-wrap .hash-span {
     border: 1px dotted #888;
     border-radius: 0.25rem;
     padding: 0 0.5em;
     margin: 0 5px 5px 0;
+    color: #555;
 }

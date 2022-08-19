@@ -8,6 +8,7 @@ a {
 button,
 input {
     background-color: inherit;
+    border: none;
 }
 
 /* common style */

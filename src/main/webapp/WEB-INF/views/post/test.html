@@ -82,52 +82,55 @@
                 <!-- 이미지, 포스트 정보 영역 -->
                 <div id="img-post-wrap">
                     <!-- 이미지 영역 -->
-                    <div id="img-box">
+                    <div id="img-wrap">
 
                         <!-- 썸네일 이미지 -->
                         <div id="thumb-img">
-                            <!-- <img class="post-img"
-                                src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="썸네일 이미지"> -->
+                            <img class="post-img"
+                                src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="썸네일 이미지">
                         </div>
 
                         <!-- 첨부 이미지 목록 -->
-                        <div id="img-box-wrap">
-                            <div class="img-box">
-                                <!-- <img class="post-img"
-                                    src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt=""> -->
+                        <div id="img-arr-wrap">
+                            <button type="button" data-role="none" class="slick-prev slick-arrow" aria-label="Previous"
+                                role="button">
+                                <i class="fas fa-angle-up"></i>
+                            </button>
+
+                            <!-- 슬릭 이미지 목록 -->
+                            <div class="img-box-wrap">
+                                <div class="img-box">
+                                    <img class="post-img"
+                                        src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
+                                </div>
+                                <div class="img-box">
+                                    <img class="post-img"
+                                        src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
+                                </div>
+                                <div class="img-box">
+                                    <img class="post-img"
+                                        src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
+                                </div>
                             </div>
-                            <div class="img-box">
-                                <!-- <img class="post-img"
-                                    src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt=""> -->
-                            </div>
-                            <div class="img-box">
-                                <!-- <img class="post-img"
-                                    src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt=""> -->
-                            </div>
-                            <div class="img-box">
-                                <!-- <img class="post-img"
-                                    src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt=""> -->
-                            </div>
-                            <div class="img-box">
-                                <!-- <img class="post-img"
-                                    src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt=""> -->
-                            </div>
+
+                            <button type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next"
+                                role="button" style="display: block;">
+                                <i class="fas fa-angle-down"></i>
+                            </button>
                         </div>
 
                     </div>
 
                     <!-- 포스트 정보 영역 -->
                     <div id="post-box">
-                        <!-- 플랫폼, 카테고리 -->
-                        <div id="plat-ca-wrap">
+                        <!-- 별점, 플랫폼, 카테고리 -->
+                        <div id="star-plat-ca-wrap">
+                            <span class="star-span">⭐⭐⭐</span>
                             <sapn class="pc-span pl-span">카카오 페이지</sapn>
                             <span class="pc-span ca-span">웹소설</span>
                         </div>
 
-                        <!-- 별점 -->
-                        <div id="star-rate">
-                            <span class="star-span">⭐⭐⭐</span>
-                        </div>
+
 
                         <!-- 책 제목 -->
                         <div id="post-title">
@@ -163,6 +166,7 @@
                             <span class="hash-span">#태그_그게거거거거</span>
                             <span class="hash-span">#태그_태그_태그</span>
                             <span class="hash-span">#태그_뾰잉뾰이이이잉</span>
+
                         </div> <!-- // end hash-wrap -->
 
                     </div>
@@ -194,8 +198,6 @@
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
-
-
 
 
 
