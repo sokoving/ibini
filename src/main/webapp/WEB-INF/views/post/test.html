@@ -150,10 +150,10 @@
                                 <span class="writer-span">윤정한</span>
                             </div>
 
-                            
+
                             <div id="publish-status">
                                 <table class="middle-table">
-                                    
+
                                     <!-- 연재 상태 -->
                                     <tr>
                                         <td class="first-td">카카오페이지</th>
@@ -172,56 +172,100 @@
                                         <td class="last-td tot-ep">500p</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><i class="fas fa-toggle-off" title="바로 수정하기"></i></td>
+                                        <td colspan="2"><i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i></td>
                                         <!-- <i class="fas fa-toggle-on"></i> -->
                                     </tr>
                                 </table>
-                                
+
                             </div>
                         </div> <!-- // end post-middle -->
 
                         <!-- bottom : 날짜, 수정삭제목록 버튼-->
                         <div id="post-bottom">
                             <div class="date-wrap">
-                                <span>2022.02.02</span>
-                                -
-                                <span>2022.08.08</span>
+                                <span>등록일 2022.02.02</span>
+                                |
+                                <span>수정일 2022.08.08</span>
                             </div>
                             <div class="post-btn-wrap">
-                                <button title="수정하기"><i class="far fa-edit"></i></button>
-                                <button title="삭제하기"><i class="far fa-trash-alt"></i></button>
-                                <button title="목록으로"><i class="far fa-list-alt"></i></button>
+                                <button class="post-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
+                                <button class="post-btn" title="삭제하기"><i class="far fa-trash-alt"></i></button>
+                                <button class="post-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
                             </div>
                         </div> <!-- // end post-bottom -->
 
                     </div> <!-- // end post-box -->
                 </div><!-- // end img-post-wrap -->
 
+                <!-- 리모컨, 해시태그, 관련 링크 영역-->
+                <div id="remote-etc-wrap">
+                    <!-- 사이드 리모컨 영역 -->
+                    <div id="remote-controller">
+                        <div id="inner-remote">
+                            리모컨
+                            <div id="go-to-controller">
+                                <!-- <select>
+                                <option value="">최상단</option>
+                                <option value="">해시태그</option>
+                                <option value="">관련 포스트</option>
+                                <option value="">포스트 노트</option>
+                                <option value="">최하단</option>
+                                <option value="">포스트 목록</option>
+                                <option value="">마이페이지</option>
+                            </select> -->
+                                <button>이동</button>
+                            </div>
+
+                            <div id="search-controller">
+                                <!-- <input type="text" name="" id=""> -->
+                                <button>검색</button>
+                            </div>
+                        </div> <!-- // end inner-remote -->
+                    </div> <!-- // end remote-conroller -->
+
+                    <div id="etc-wrap">
+
+                        <!-- 해시태그 영역 -->
+                        <div id="hash-wrap">
+                            
+                            <div class="h3-wrap">
+                                <h3>해시태그</h3>
+                                <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                                            <!-- <i class="fas fa-toggle-on"></i> -->
+                            </div>
+
+                            <div id="tag-container">
+                                <span class="hash-span">태그1</span>
+                                <span class="hash-span">태그태그태그</span>
+                                <span class="hash-span">태그_테스트</span>
+                                <span class="hash-span">태그2</span>
+                                <span class="hash-span">태그_3</span>
+                                <span class="hash-span">태그태그</span>
+                                <span class="hash-span">태그_중</span>
+                                <span class="hash-span">태그</span>
+                                <span class="hash-span">태그_태그_태그</span>
+                                <span class="hash-span">태그_뾰잉뾰이이이잉</span>
+                                <span class="hash-span tag-plus"><i class="far fa-plus-square"></i></span>
+                            </div>
+                        </div> <!-- // end hash-wrap -->
+
+                        <!-- 연관 포스트 영역 -->
+                        <div id="link-post-wrap">
+                            <div class="h3-wrap">
+                                <h3>연관 포스트</h3>
+                                <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                            <!-- <i class="fas fa-toggle-on"></i> -->
+                            </div>
 
 
-                <!-- 해시태그 영역 -->
-                <div id="hash-wrap">
-                    <h3>해시태그</h3>
-                    <div id="tag-container">
-                        <span class="hash-span">#태그1</span>
-                        <span class="hash-span">#태그태그태그</span>
-                        <span class="hash-span">#태그_테스트</span>
-                        <span class="hash-span">#태그2</span>
-                        <span class="hash-span">#태그_3</span>
-                        <span class="hash-span">#태그태그</span>
-                        <span class="hash-span">#태그_읽는중</span>
-                        <span class="hash-span">#태그_그게거거거거</span>
-                        <span class="hash-span">#태그_태그_태그</span>
-                        <span class="hash-span">#태그_뾰잉뾰이이이잉</span>
-                    </div>
-                </div> <!-- // end hash-wrap -->
+                        </div> <!-- // end post-link-wrap -->
+                    </div><!-- // end etc-wrap -->
 
 
+                </div> <!-- // end remote-etc-wrap -->
 
+                <!-- 포스트 노트 영역 -->
 
-
-                <!-- 연관 포스트 영역 -->
-                <div id="post-link-wrap"></div> <!-- // end post-link-wrap -->
 
             </div> <!-- // end inner-section -->
         </section> <!-- // end section -->
