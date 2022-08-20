@@ -13,7 +13,7 @@ public class PublishStatusUtil {
     static {
         publishStatusMap = new HashMap<>();
         publishStatusMap.put(0, "미분류");
-        publishStatusMap.put(1, "연재중");
+        publishStatusMap.put(1, "연재");
         publishStatusMap.put(2, "휴재");
         publishStatusMap.put(3, "완결");
     }

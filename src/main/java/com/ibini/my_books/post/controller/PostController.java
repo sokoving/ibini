@@ -47,16 +47,9 @@ public class PostController {
     public String postDetail(@PathVariable Long postNo, Model model) {
         log.info("PostController /post/detail/{}  GET 요청!!", postNo);
 
-        PostWithName post = postService.fineOnePostWithName(postNo);
-        log.info("return data - {}", post);
-        List<HashtagDomain> tagList = hashTagService.findAllByPostNo(postNo);
-        log.info("return tag list - {}", tagList);
-        List<PostImg> postImgList = imgService.getPostImgList(postNo);
-        log.info("return img List - {}", postImgList);
-
-        model.addAttribute("p", post);
-        model.addAttribute("tagList", tagList);
-        model.addAttribute("imgList", postImgList);
+        model.addAttribute("p", postService.fineOnePostWithName(postNo)); //  PostWithName
+        model.addAttribute("tagList", hashTagService.findAllByPostNo(postNo)); // List<HashtagDomain>
+        model.addAttribute("imgList", imgService.getPostImgList(postNo));  // List<PostImg>
 
         return "post/post-detail";
     }

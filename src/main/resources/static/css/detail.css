@@ -7,47 +7,56 @@ section #inner-section {
     box-sizing: border-box;
 }
 
+h2, h3{
+    font-family: 'NanumBarunGothicBold';
+}
 
-/* 이미지, 포스트 정보 영역 */
+
+/*----------이미지, 포스트 정보 영역----------*/
 section #img-post-wrap {
     /* border: 1px solid #ffca3d; */
     border-radius: 0.25rem;
     display: flex;
+    margin-bottom: 50px;
 }
 
 
 
-/* 이미지 영역 */
-section #img-wrap {
+/* ----- 이미지 영역 ----- */
+#img-post-wrap #img-wrap {
     /* background-color: #ffca3d; */
-
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    flex-basis: 285px;
+    flex-basis: 295px;
     flex-shrink: 0;
 }
 
-section #img-wrap .post-img {
+#img-wrap .post-img {
     overflow: hidden;
     width: 100%;
+    border: 1px solid #ffca3d;
     border-radius: 0.25rem;
 }
 
 /* 썸네일 이미지 */
-section #thumb-img {
-    border: 1px solid #ffca3d;
+#img-wrap #thumb-img {
     border-radius: 0.25rem;
-    width: 200px;
+    width: 210px;
+    height: 292px;
     overflow: hidden;
     cursor: pointer;
 
     order: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* 첨부 이미지, 방향키 목록 */
-section #img-arr-wrap {
+#img-wrap #img-arr-wrap {
     border-radius: 0.25rem;
     overflow: hidden;
 
@@ -59,84 +68,128 @@ section #img-arr-wrap {
 }
 
 /* 첨부 목록 방향 아이콘 */
-section #img-arr-wrap .slick-arrow {
+#img-wrap #img-arr-wrap .slick-arrow {
     border-radius: 0.25rem;
     text-align: center;
     color: #000;
     cursor: pointer;
 }
-section #img-arr-wrap .slick-arrow:hover{
+
+#img-wrap #img-arr-wrap .slick-arrow:hover {
     background-color: #ffca3d;
 }
 
 /* 첨부 이미지 */
-section .img-box-wrap {
+#img-wrap .img-box-wrap {
     display: flex;
     flex-flow: column nowrap;
 }
 
-section .img-box-wrap .img-box {
+#img-wrap .img-box-wrap .img-box {
     width: 70px;
-    height: 59px;
+    height: 60px;
     overflow: hidden;
-    border: 1px solid #ffca3d;
+    
     border-radius: 0.25rem;
     margin: 3px 0;
     cursor: pointer;
 }
+#img-wrap .img-box-wrap .img-box.img-half-down{
+    height: 30px;
+}
 
 
 
-
-/* 포스트 정보 영역 */
-section #post-box {
-    padding-left: 20px;
+/* ----- 포스트 정보 영역 ----- */
+#img-post-wrap #post-box {
+    padding-left: 10px;
     box-sizing: border-box;
     flex-grow: 1;
 
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 }
 
-/* 별점, 플랫폼, 카테고리 */
-section #star-plat-ca-wrap {
+/* #post-top : 별점, 장르, 카테고리 */
+#post-box #post-top {
     display: flex;
     justify-content: end;
     align-items: center;
 }
 
 
-section #star-plat-ca-wrap .pc-span {
-    background-color: #888;
-    border-radius: 0.25rem;
-    padding: 0.35em;
-    margin-left: 10px;
-    font-weight: 700;
+#post-box #post-top .top-span {
+    background-color: #adb5bd;
     color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.15em 0.5em;
+    margin-left: 5px;
+    font-weight: 700;
 }
 
-/* 책 제목 */
-section #post-title {
+/* #post-middle : 제목, 작가, 연재 상태, 페이지*/
+#post-box #post-middle{
+    color: #787878;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+}
+#post-middle #post-title {
     font-size: 1.5em;
     font-weight: 700;
 }
 
+/* 책 제목 */
+#post-middle #post-title h2{
+    margin-top: 20px;
+    margin-bottom: 0;
+    color: #555;
+}
 /* 작가 이름 */
-section #post-writer {
-    color: #787878;
+/* #post-middle #post-writer {
+}  */
+
+
+/* 연재 상태, 현재, 전체 페이지 테이블 */
+#post-middle .middle-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+#post-middle .middle-table td{
+    width: 500px;
+    padding: 0 10px;
+}
+#post-middle .middle-table .first-td{
+    border-right: 1px solid #adb5bd;
+    text-align: right;
+}
+#post-middle .middle-table .last-td{
+    text-align: left;
+}
+#post-middle .middle-table .empty-tr td{
+    color: #fff;
+    line-height: 10px;
+}
+/* #post-bottom : 날짜, 버튼*/
+#post-box #post-bottom{
+    display: flex;
+    justify-content: space-between;
 }
 
-/* 회차 구분 및 읽기 진행도 */
-section #ep-wrap {
-    color: #787878;
-}
 
-/* 해시태그 영역 */
-section #hash-wrap {
+
+
+/* ----- 해시태그 영역 -----  */
+#hash-wrap #tag-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 20px 0 0;
 }
 
-section #hash-wrap .hash-span {
+#tag-container .hash-span {
     border: 1px dotted #888;
     border-radius: 0.25rem;
     padding: 0 0.5em;
