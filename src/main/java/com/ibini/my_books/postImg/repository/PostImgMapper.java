@@ -16,4 +16,7 @@ public interface PostImgMapper {
 
     // 게시물 번호로 게시글 작성자의 계정명과 권한 가져오기
 //    ValidateMemberDTO findMemberByBoardNo(Long boardNo);
+
+    // 게시물 번호로 PostImg 객체 리스트 전부 조회
+    List<PostImg> findFiles(Long postNo);
 }

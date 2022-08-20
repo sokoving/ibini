@@ -5,12 +5,12 @@
 
 <mapper namespace="com.ibini.my_books.postImg.repository.PostImgMapper">
 
-<!--    <resultMap id="postImgMap" type="com.ibini.my_books.postImg.domain.PostImg">-->
-<!--        <result property="fileName" column="file_name" />-->
-<!--        <result property="postNo" column="post_no" />-->
-<!--        <result property="originalFileName" column="original_file_name" />-->
-<!--        <result property="regDate" column="reg_date" />-->
-<!--    </resultMap>-->
+    <resultMap id="postImgMap" type="com.ibini.my_books.postImg.domain.PostImg">
+        <result property="fileName" column="file_name" />
+        <result property="postNo" column="post_no" />
+        <result property="originalFileName" column="original_file_name" />
+        <result property="regDate" column="reg_date" />
+    </resultMap>
 
     <insert id="addFile">
         INSERT INTO prj_post_img
@@ -26,5 +26,14 @@
         FROM prj_post_img
         WHERE post_no = #{postNo}
     </select>
+
+    <select id="findFiles" resultMap="postImgMap">
+        select
+            file_name, post_no, original_file_name, thumbnail
+        FROM prj_post_img
+        WHERE post_no = #{postNo}
+    </select>
+
+
 
 </mapper>

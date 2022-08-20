@@ -1,6 +1,7 @@
 package com.ibini.my_books.post.controller;
 
 
+import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.domain.PostWithName;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -42,14 +44,19 @@ public class PostController {
 
     //    포스트 상세 조회 요청  get   /post/detail
     @GetMapping("/detail/{postNo}")
-    public String postDetail(@PathVariable Long postNo, Model model){
+    public String postDetail(@PathVariable Long postNo, Model model) {
         log.info("PostController /post/detail/{}  GET 요청!!", postNo);
 
         PostWithName post = postService.fineOnePostWithName(postNo);
         log.info("return data - {}", post);
+        List<HashtagDomain> tagList = hashTagService.findAllByPostNo(postNo);
+        log.info("return tag list - {}", tagList);
+        List<PostImg> postImgList = imgService.getPostImgList(postNo);
+        log.info("return img List - {}", postImgList);
 
         model.addAttribute("p", post);
-        model.addAttribute("tagList", hashTagService.findAllByPostNo(postNo));
+        model.addAttribute("tagList", tagList);
+        model.addAttribute("imgList", postImgList);
 
         return "post/post-detail";
     }
@@ -57,7 +64,7 @@ public class PostController {
 
     //    포스트 등록 폼 요청   get    /post/write
     @GetMapping("/write")
-    public String postWriteForm(){
+    public String postWriteForm() {
         log.info("PostController /post/write  GET 요청!!");
 //        return "/upload/upload-form";
         return "post/post-reg";
@@ -66,7 +73,7 @@ public class PostController {
 
     //    포스트 등록 요청      post   /post/write
     @PostMapping("/write")
-    public String postWrite(Post post, PostImg postImg){
+    public String postWrite(Post post, PostImg postImg) {
         log.info("PostController /post/write POST 요청!! - {}", post);
 
         // tbl_post 저장
