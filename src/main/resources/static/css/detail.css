@@ -244,14 +244,11 @@ section #remote-etc-wrap{
 #remote-etc-wrap .h3-wrap h3{
     margin: 0;
 }
-
-
 #remote-etc-wrap .h3-wrap .modi-hotkey{
     margin-left: 10px;
     font-size: 1.5em;
     color: #999;
 }
-
 #remote-etc-wrap .h3-wrap .modi-hotkey:hover{
     transform: scale(1.2);
 }
@@ -276,4 +273,36 @@ section #remote-etc-wrap{
     padding: 0.15em 0.3em;
     font-size: 1.3em;
     color: #787878;
+}
+
+#tag-container .tag-plus:hover{
+    transform: scale(1.2);
+}
+
+
+/* 연관 포스트 */
+#link-post-wrap #link-container {
+    padding: 10px 0 0;
+    
+}
+#link-container .link-a{
+    display: flex;
+    justify-content: space-between;
+
+    border: 1px dotted #888;
+    border-radius: 0.25rem;
+    margin-top: 10px;
+    color: #555;
+}
+#link-container .link-a span{
+    margin-left: 5px;
+    
+}
+#link-container .link-a .link-ca{
+    margin-right: 5px;
+    border-right: 1px solid #555;
+}
+#link-container .link-a .link-title{
+    font-weight: 700;    
+    font-size: 1.2em;
 }
