@@ -1,4 +1,13 @@
+@font-face {
+    font-family: 'PyeongChangPeace-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
 .myPage-wrap {
+    font-family: 'PyeongChangPeace-Light', sans-serif;
     background: #fff;
 }
 .myPage-wrap .platform-wrap #selectSetting{
@@ -11,34 +20,68 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    height: 40px;
+    height: 45px;
     margin: 10px;
-    border: 1px solid #000000;
+    /*border: 1px solid #000000;*/
+    background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    line-height: 2;
+    line-height: 2.7;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .platformNo{
     background: #cacaca;
-    width: 10%;
+    /*border-radius: 20px;*/
+    width: 7%;
+    text-align: center;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .platformName{
     background: #fff;
-    width: 30%;
+    width: 33%;
+    padding: 0 10px;
+}
+
+.myPage-wrap .platform-wrap #selectSetting #selList .platformName span{
+    color: #004986;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .bgColor{
     width: 20%;
+    display: flex;
+    justify-content: space-evenly;
 }
+
+.myPage-wrap .platform-wrap #selectSetting #selList .bgColor .bgColorBox{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin: auto;
+    border: 1px solid #e1e0e0;
+}
+
+
+
 
 .myPage-wrap .platform-wrap #selectSetting #selList .fontColor{
     width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.myPage-wrap .platform-wrap #selectSetting #selList .fontColor .fontColorBox{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin: auto;
+    border: 1px solid #e1e0e0;
 }
 
 
-.myPage-wrap .platform-wrap #selectSetting #selList .modiNdel{
-    background: rgb(171, 116, 168);
+.myPage-wrap .platform-wrap #selectSetting #selList .modiAndDel{
+    /*background: rgb(171, 116, 168);*/
+    padding: 0 15px;
     width: 20%;
 }

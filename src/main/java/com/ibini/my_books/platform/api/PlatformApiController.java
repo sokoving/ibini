@@ -30,14 +30,14 @@ public class PlatformApiController {
     // 수정 - **수정사항이 디비로 안넘어감 -> 해결
     /*
         수정 patload
-            {
+        {
                 "account" : "ibini",
-                "platformName" : "naverWebtoon",
+                "platformName" : "kakaoPage2",
                 "platformBgColor" : "#00d564",
-                "platformFontColor" : "#fff"
-            }
+                "platformFontColor" : "#eee"
+        }
      */
-    @PutMapping("{account}/{platformId}")
+    @PutMapping("/{account}/{platformId}")
     public String modify(@PathVariable int platformId
             ,@RequestBody PlatformDomain platformDomain){
 

@@ -39,9 +39,11 @@
                             <span>platformName</span>
                         </div>
                         <div class="bgColor" style="background-color: #ed1c24;">
+                            <div class="bgColorBox" style="background-color: #ed1c24;"></div>
                             <span>배경색상</span>
                         </div>
                         <div class="fontColor" style="background-color: #1de041;">
+                            <div class="fontColorBox" style="background-color: #1de041;"></div>
                             <span>글자색상</span>
                         </div>
                         <div class="modiNdel">
@@ -92,9 +94,9 @@
 
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#platModi">
-            모달버튼
-        </button>
+<%--        <button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#platModi">--%>
+<%--            모달버튼--%>
+<%--        </button>--%>
 
 
 
@@ -213,17 +215,18 @@
                             <div class="platformName">
                                 <span>` + platformName + `</span>
                             </div>
-                            <div class="bgColor" style="background-color: ` + platformBgColor + `;">
-                                <span>배경색상</span>
+                            <div class="bgColor">
+                                <div class="bgColorBox" style="background-color: ` + platformBgColor + `;"></div><span>배경색상</span>
                             </div>
-                            <div class="fontColor" id="fontColor" style="background-color: ` + platformFontColor + `;">
-                                <span>글자색상</span>
+                            <div class="fontColor" id="fontColor">
+                                <div class="fontColorBox" style="background-color: ` + platformFontColor + `;"></div><span>글자색상</span>
                             </div>
                             <div class="modiAndDel">
                                 <button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#platModi">
-                                    수정모달
+                                    수정
                                 </button>
-                                <button class="plat-del" id="delBtn">삭제</button>
+                                <button type="button" id="delBtn" class="btn btn-danger">삭제</button>
+<!--                                <button class="plat-del" id="delBtn">삭제</button>-->
                             </div>
                         </div>`;
 
@@ -275,9 +278,9 @@
 
             const platformName = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.innerText;
             console.log('platformName : ', platformName);
-            const platfomrBgColor = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.nextElementSibling.style.backgroundColor;
+            const platfomrBgColor = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.style.backgroundColor;
             console.log('platfomrBgColor: ', platfomrBgColor);
-            const platformFontColor = e.target.parentElement.parentElement.lastElementChild.previousElementSibling.style.backgroundColor
+            const platformFontColor = e.target.parentElement.parentElement.lastElementChild.previousElementSibling.firstElementChild.style.backgroundColor;
             console.log('platformFontColor : ', platformFontColor)
 
             document.getElementById('modiNameInput').value = platformName;
@@ -327,11 +330,11 @@
                     };
                     console.log(reqInfo);
 
-                console.log(modiURL + '/' + no)
+                console.log(modiURL + '/' + no);
                     fetch(modiURL + '/' + no)
                         .then(res => res.text())
                         .then(msg => {
-                            if (msg === 'mod-success') {
+                            if (msg === 'modi-success') {
                                 alert('수정 성공!!');
                                 $modal.modal('hide'); // 모달창 닫기
                                 showdomainList(); //새로불러오기
