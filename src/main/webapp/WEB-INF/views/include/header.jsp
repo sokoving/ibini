@@ -4,7 +4,7 @@
 <!-- header -->
 <header>
     <div id="inner-header">
-        <h1><img src="/main/resources/static/img/ibini_logo_4.png" alt=""></h1>
+        <h1><img src="/img/ibini_logo_4.png" alt=""></h1>
 
         <a href="#" class="menu-open">
             <span class="user-name">이비니 님</span>

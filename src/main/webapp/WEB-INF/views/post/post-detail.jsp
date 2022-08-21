@@ -4,48 +4,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <%@ include file="../include/static-head.jsp" %>
 
-    <title>ibini books</title>
-
-    <!-- reset css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-
-    <!-- fontawesome css: https://fontawesome.com -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
-    <!-- linear icons -->
-    <!-- https://linearicons.com/free#cdn -->
-    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-
-    <!-- naver font -->
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
-
-    <!-- bootstrap css -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- custom css -->
-    <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/detail.css">
-
-
-    <!-- jquery -->
-    <script src="/js/jquery-3.3.1.min.js"></script>
-
-
-    <!-- libraries -->
-    <!-- slick js -->
-    <!-- <script src="/js/slick-1.8.1.min.js" defer></script> -->
-
-    <!-- bootstrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
-
-    <!-- custom js -->
-    <script src="/js/common.js" defer></script>
     <script src="/js/detail.js" defer></script>
-
 
 </head>
 
@@ -53,20 +16,7 @@
 
 
     <div id="wrap">
-        <header>
-            <div class="inner-header">
-
-                <h1><img src="/img/ibini_logo_4.png" alt=""></h1>
-
-                <nav>
-                    <div class="inner-nav">
-                        <div> <a href="#">로그아웃</a> </div>
-                        <div><a href="#">마이페이지</a></div>
-                    </div>
-                </nav>
-
-            </div> <!-- end inner-header -->
-        </header> <!-- end header -->
+        <%@ include file="../include/header.jsp" %>
 
 
         <section>
@@ -105,6 +55,10 @@
                                     <img class="post-img"
                                         src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
                                 </div>
+                                <div class="img-box img-half-down">
+                                    <img class="post-img"
+                                        src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
+                                </div>
                             </div>
 
                             <button type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next"
@@ -113,63 +67,186 @@
                             </button>
                         </div>
 
-                    </div>
-
+                    </div> <!-- // end img-wrap -->
 
                     <!-- 포스트 정보 영역 -->
                     <div id="post-box">
-                        <!-- 별점, 플랫폼, 카테고리 -->
-                        <div id="spg-wrap">
-                            <span class="spg-span">⭐⭐⭐</span>
-                            <sapn class="spg-span pl-span">카카오 페이지</sapn>
-                            <span class="spg-span ca-span">웹소설</span>
-                        </div>
 
-                        <!-- 책 제목 -->
-                        <div id="post-title">
-                            <span class="title-span">
-                                ${p.postTitle}
-                            </span>
-                        </div>
+                        <!-- top : 별점, 장르, 카테고리 -->
+                        <div id="post-top">
+                            <span class="top-span">⭐⭐⭐</span>
+                            <span class="top-span">아이돌물</span>
+                            <span class="top-span">웹소설</span>
+                        </div> <!-- // end post-top -->
 
-                        <!-- 작가 이름 -->
-                        <div id="post-writer">
-                            <span class="writer-span">
-                                ${p.postWriter}
-                            </span>
-                        </div>
+                        <!-- middle : 제목, 작가, 연재 정보 -->
+                        <div id="post-middle">
 
-                        <!-- 회차 구분 및 읽기 진행도 -->
-                        <div id="ep-wrap">
-                            <span class="ep-span cur-ep">${p.curEp}</span><span class="ep-span ep-id">${p.epName}</span>
-                            (총 <span class="ep-span total-ep">${p.totalEp}</span><span
-                                class="ep-span ep-id">${p.epName}</span>)
-                        </div>
+                            <!-- 책 제목 -->
+                            <div id="post-title">
+                                <h2 class="title-span">신기방기 뿡뿡방기</h2>
+                            </div>
+
+                            <!-- 작가 이름 -->
+                            <div id="post-writer">
+                                <span class="writer-span">윤정한</span>
+                            </div>
+
+
+                            <div id="publish-status">
+                                <table class="middle-table">
+
+                                    <!-- 연재 상태 -->
+                                    <tr>
+                                        <td class="first-td">카카오페이지</td>
+                                        <td class="last-td">월, 금 10시</td>
+                                    </tr>
+                                    <tr class="empty-tr">
+                                        <td colspan="2">-</td>
+                                    </tr>
+                                    <!-- 현재, 전체 페이지 -->
+                                    <tr>
+                                        <td class="first-td cur-ep">현재 페이지</td>
+                                        <td class="last-td tot-ep">전체 페이지</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="first-td cur-ep">300p</td>
+                                        <td class="last-td tot-ep">500p</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                                        </td>
+                                        <!-- <i class="fas fa-toggle-on"></i> -->
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div> <!-- // end post-middle -->
+
+                        <!-- bottom : 날짜, 수정삭제목록 버튼-->
+                        <div id="post-bottom">
+                            <div class="date-wrap">
+                                <span>등록일 2022.02.02</span>
+                                |
+                                <span>수정일 2022.08.08</span>
+                            </div>
+                            <div class="post-btn-wrap">
+                                <button class="post-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
+                                <button class="post-btn" title="삭제하기"><i class="far fa-trash-alt"></i></button>
+                                <button class="post-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
+                            </div>
+                        </div> <!-- // end post-bottom -->
+
+                    </div> <!-- // end post-box -->
+                </div><!-- // end img-post-wrap -->
+
+                <!-- 리모컨, 해시태그, 관련 링크 영역-->
+                <div id="remote-etc-wrap">
+                    <!-- 사이드 리모컨 영역 -->
+                    <div id="remote-controller">
+                        <div id="inner-remote">
+                            리모컨
+                            <div id="go-to-controller">
+                                <!-- <select>
+                                <option value="">최상단</option>
+                                <option value="">해시태그</option>
+                                <option value="">관련 포스트</option>
+                                <option value="">포스트 노트</option>
+                                <option value="">최하단</option>
+                                <option value="">포스트 목록</option>
+                                <option value="">마이페이지</option>
+                            </select> -->
+                                <button>이동</button>
+                            </div>
+
+                            <div id="search-controller">
+                                <!-- <input type="text" name="" id=""> -->
+                                <button>검색</button>
+                            </div>
+                        </div> <!-- // end inner-remote -->
+                    </div> <!-- // end remote-conroller -->
+
+                    <div id="etc-wrap">
 
                         <!-- 해시태그 영역 -->
                         <div id="hash-wrap">
-                            <c:forEach var="t" items="#{tagList}">
-                                <span class="hash-span" data-tage-no="${t.tagNo}">${t.tagName}</span>
-                            </c:forEach>
 
+                            <div class="h3-wrap">
+                                <h3>해시태그</h3>
+                                <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                                <!-- <i class="fas fa-toggle-on"></i> -->
+                            </div>
+
+                            <div id="tag-container">
+                                <span class="hash-span">태그1</span>
+                                <span class="hash-span">태그태그태그</span>
+                                <span class="hash-span">태그_테스트</span>
+                                <span class="hash-span">태그2</span>
+                                <span class="hash-span">태그_3</span>
+                                <span class="hash-span">태그태그</span>
+                                <span class="hash-span">태그_중</span>
+                                <span class="hash-span">태그</span>
+                                <span class="hash-span">태그_태그_태그</span>
+                                <span class="hash-span">태그_뾰잉뾰이이이잉</span>
+                                <span class="hash-span tag-plus" style="display: none;"><i
+                                        class="far fa-plus-square"></i></span>
+                            </div>
                         </div> <!-- // end hash-wrap -->
 
-                    </div>
-                </div> <!-- // end img-post-wrap -->
+                        <!-- 연관 포스트 영역 -->
+                        <div id="link-post-wrap">
+                            <div class="h3-wrap">
+                                <h3>연관 포스트</h3>
+                                <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                                <!-- <i class="fas fa-toggle-on"></i> -->
+                            </div>
+
+                            <div>
+                                <ul id="link-container">
+                                    <li>
+                                        <a class="link-a" href="#" title="신기방기1">
+                                            <div class="link-ca">웹소설</div>
+
+                                            <div class="link-post-info">
+                                                <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
+                                                <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금 10시</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="link-post-date">
+                                                <span class="link-percent">100%</span>
+                                                <span class="link-date">2022.05.05</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="link-a" href="#" title="신기방기1">
+                                            <div class="link-ca">웹소설</div>
+
+                                            <div class="link-post-info">
+                                                <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
+                                                <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금 10시</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="link-post-date">
+                                                <span class="link-percent">100%</span>
+                                                <span class="link-date">2022.05.05</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
 
 
+                        </div> <!-- // end post-link-wrap -->
+                    </div><!-- // end etc-wrap -->
 
 
-                <!-- 버튼 영역 -->
-                <div id="btn-wrap">
+                </div> <!-- // end remote-etc-wrap -->
 
-                </div> <!-- // end btn-wrap -->
+                <!-- 포스트 노트 영역 -->
 
-
-                <!-- 연관 포스트 영역 -->
-                <div id="post-link-wrap">
-
-                </div> <!-- // end post-link-wrap -->
 
             </div> <!-- // end inner-section -->
         </section> <!-- // end section -->
