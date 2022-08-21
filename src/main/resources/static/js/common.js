@@ -17,7 +17,7 @@ $(document).ready(function(){
        const $gnb = $('.gnb')
 
        $menu.click(e => {
-         console.log(e.target);
+        //  console.log(e.target);
          $gnb.toggleClass('on')
        })
 

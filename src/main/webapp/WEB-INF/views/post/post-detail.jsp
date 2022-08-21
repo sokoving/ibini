@@ -4,11 +4,9 @@
 <html lang="en">
 
 <head>
-    
+
     <%@ include file="../include/static-head.jsp" %>
 
-    <link rel="stylesheet" href="/css/detail.css">
-    <script src="/js/detail.js" defer></script>
 
 </head>
 
@@ -74,9 +72,11 @@
 
                         <!-- top : 별점, 장르, 카테고리 -->
                         <div id="post-top">
-                            <span class="top-span">⭐⭐⭐</span>
-                            <span class="top-span">아이돌물</span>
-                            <span class="top-span">웹소설</span>
+                            <span class="top-span star-span"></span>
+                            <c:if test="${p.genreId != 0}">
+                                <span class="top-span genre-span">${p.genreName}</span>
+                            </c:if>
+                            <span class="top-span">${p.caName}</span>
                         </div> <!-- // end post-top -->
 
                         <!-- middle : 제목, 작가, 연재 정보 -->
@@ -254,13 +254,15 @@
 
     </div> <!-- end wrap -->
 
-
-
+    <script src="/js/detail.js"></script>
     <script>
         // start jQuery
         $(document).ready(function () {
-            // jQueryTagTest("태그 잡기 테스트", $('h1'));
+            jQueryTagTest("장르테스트", $('.genre-span'));
 
+            // 별 찍기
+            let star = '${p.starRate}';
+            starRate(star);
 
 
         });
