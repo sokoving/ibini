@@ -320,7 +320,6 @@
                         },
                         body: JSON.stringify({
                             account : account,
-                            platformId : no,
                             platformName: modiNameInput.value,
                             platformBgColor: modiBgInput.value,
                             platformFontColor: modiFontInput.value
@@ -328,7 +327,7 @@
                     };
                     console.log(reqInfo);
 
-
+                console.log(modiURL + '/' + no)
                     fetch(modiURL + '/' + no)
                         .then(res => res.text())
                         .then(msg => {
