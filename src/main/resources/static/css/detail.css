@@ -30,6 +30,7 @@ section #img-post-wrap {
     align-items: flex-start;
     flex-basis: 295px;
     flex-shrink: 0;
+    margin-top: 40px;
 }
 
 #img-wrap .post-img {
@@ -142,7 +143,7 @@ section #img-post-wrap {
 
 /* 책 제목 */
 #post-middle #post-title h2{
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 0;
     color: #000;
 }
@@ -211,7 +212,7 @@ section #remote-etc-wrap{
     flex-basis: 70px;
     flex-shrink: 0;
     padding-top: 50px;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
 
 }
 #remote-controller #inner-remote{
@@ -220,7 +221,7 @@ section #remote-etc-wrap{
     justify-content: center;
     align-items: center;
 
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
 
 
 }
@@ -243,10 +244,11 @@ section #remote-etc-wrap{
 }
 #remote-etc-wrap .h3-wrap h3{
     margin: 0;
+    font-size: 1.3em;
 }
 #remote-etc-wrap .h3-wrap .modi-hotkey{
     margin-left: 10px;
-    font-size: 1.5em;
+    font-size: 1.4em;
     color: #999;
 }
 #remote-etc-wrap .h3-wrap .modi-hotkey:hover{
@@ -265,6 +267,11 @@ section #remote-etc-wrap{
     padding: 0.15em 0.5em;
     margin: 0 5px 5px 0;
     color: #555;
+    cursor: pointer;
+}
+#tag-container .hash-span:hover{
+    transform: scale(1.01);
+    background-color: #ffca3d;
 }
 #tag-container .tag-plus{
     display: flex;
@@ -282,27 +289,62 @@ section #remote-etc-wrap{
 
 /* 연관 포스트 */
 #link-post-wrap #link-container {
-    padding: 10px 0 0;
-    
+    padding: 10px 0 0 0;
 }
+
 #link-container .link-a{
     display: flex;
+    flex-flow: nowrap;
     justify-content: space-between;
+    align-items: stretch;
 
     border: 1px dotted #888;
     border-radius: 0.25rem;
     margin-top: 10px;
+}
+#link-container .link-a:hover{
+    transform: scale(1.01);
+    background-color: #ffca3d;
+}
+#link-container .link-ca{
+    flex-basis: 80px;
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: #ffca3d;
+    font-weight: 700;
     color: #555;
 }
-#link-container .link-a span{
-    margin-left: 5px;
+#link-container .link-post-info{
+    padding: 5px 10px;
+    flex-grow: 1;
+}
+#link-container .link-title{
+    font-family: 'NanumBarunGothicBold';
+    color: #555;
+}
+#link-container .link-writer{
+    font-size: 0.8em;
+    color: #787878;
+}
+
+#link-container .link-post-date{
+    flex-basis: 100px;
+    flex-shrink: 0;
     
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
 }
-#link-container .link-a .link-ca{
-    margin-right: 5px;
-    border-right: 1px solid #555;
+#link-container .link-percent{
+    color: #000;
+    font-weight: 700;
 }
-#link-container .link-a .link-title{
-    font-weight: 700;    
-    font-size: 1.2em;
+#link-container .link-date{
+    font-size: 0.8em;
+    color: #787878;
 }
