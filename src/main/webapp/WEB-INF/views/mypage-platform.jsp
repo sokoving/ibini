@@ -64,6 +64,7 @@
                             <h1>플랫폼 수정하기</h1>
                             <h2>Color api</h2>
                             <div id="picker"></div>
+                            <div id="eventRemoveBtn"></div>
                             <div id="modiName">
                                 <h2>플랫폼 이름 수정</h2>
                                 <input type="text" id="modiNameInput">
@@ -75,11 +76,12 @@
                             <div id="modiFont">
                                 <h2>플랫폼 뱃지 글자색 수정</h2>
                                 <input type="text" id="modiFontInput">
+
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" id="modiBtn" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -97,25 +99,76 @@
 
     <script>
 
-        const modiBgInput = document.getElementById('modiBgInput');
-        modiBgInput.addEventListener('click', function (e){
-            var colorPicker = new iro.ColorPicker("#picker", {
-                // Set the size of the color picker
-                width: 320,
-                // Set the initial color to pure red
-                color: "#f00"
-            });
-        })
 
-        // var rgb = colorPicker.color.rgb;
-        // console.log(rgb); // hex = "#ff0000"
 
+        // function modiColorInputHandler(){
+        //     if (클릭한인풋이배경색상일때){
+        //         // 컬러선택해주기
+        //         // 완료버튼 클릭해서 이벤트 해제해주기
+        //     } else if (클릭한인풋이폰트일때){
+        //
+        //     }
+        // }
+
+        // 배경 색상 선택 input 수정
+        function modiBgInput() {
+            const modiBgInput = document.getElementById('modiBgInput');
+            modiBgInput.addEventListener('click', function (e) {
+                var colorPicker = new iro.ColorPicker("#picker", {
+                    // Set the size of the color picker
+                    width: 270,
+                    // Set the initial color to pure red
+                    color: "#f00"
+                });
+                // document.getElementById('eventRemoveBtn');
+
+                // btn 위치 잡아서 클릭이벤트 활성화될ㄸㅐ 추가해주기
+                const eventRemoveBtn = document.querySelector('#eventRemoveBtn');
+                tag = `<button type="button" id="removeFontEvent">완료</button>`;
+
+
+                var rgbString = colorPicker.color.rgbString;
+
+                // listen to a color picker's color:change event
+                // color:change callbacks receive the current color
+                colorPicker.on('color:change', function (color) {
+                    // log the current color as a HEX string
+                    console.log(color.rgbString);
+                    document.getElementById('modiBgInput').value = color.rgbString;
+                });
+
+            })
+        }
+
+        // 글자 색상 input 수정
+        function modiFontInput() {
+            const modiFontInput = document.getElementById('modiFontInput');
+            modiFontInput.addEventListener('click', function (e) {
+                var colorPicker = new iro.ColorPicker("#picker", {
+                    // Set the size of the color picker
+                    width: 270,
+                    // Set the initial color to pure red
+                    color: "#f00"
+                });
+
+                var rgbString = colorPicker.color.rgbString;
+
+                // listen to a color picker's color:change event
+                // color:change callbacks receive the current color
+                colorPicker.on('color:change', function (color) {
+                    // log the current color as a HEX string
+                    console.log(color.rgbString);
+                    document.getElementById('modiFontInput').value = color.rgbString;
+                });
+
+            })
+        }
     
         const account = "ibini";
         // 나중에 꼭 account 수정해주기
         const url = "http://localhost:8383/platform/c1?account=" + account;
         // 수정 삭제용 url
-        const URL = "http://localhost:8383/platform/c1/" + account;
+        const modiURL = "http://localhost:8383/platform/c1/" + account;
 
         // 도메인 리스트 불러오기
         function showdomainList() {
@@ -179,9 +232,9 @@
 
         }
 
-        // 플랫폼 돔 생성
-        showdomainList();
-        openModifyModalAndRemoveEvent();
+
+
+
 
         //플랫폼 수정 삭제 이벤트
         function openModifyModalAndRemoveEvent() {
@@ -200,7 +253,7 @@
             console.log(no)
             if (!confirm('선택하신 플랫폼을 삭제하시겠습니까?')) return;
 
-            fetch(URL + '/' + no, {
+            fetch(modiURL + '/' + no, {
                 method: 'DELETE'
             })
                 .then(res => res.text())
@@ -217,7 +270,7 @@
 
         // 수정 화면 modal에 보여주기
         function processModifyShow(e, no) {
-            console.log('processmodiShow no: ', no)
+            console.log('processmodiShow no:', no)
 
             const platformName = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.innerText;
             console.log('platformName : ', platformName);
@@ -234,10 +287,60 @@
             // 번호 달아주기
             const $modal = document.querySelector('.modal');
             $modal.dataset.no = no;
+            console.log('no: ', no);
 
 
 
         }
+
+
+
+        // 플팻폼 수정 비동기 처리 이벤트
+        function platformModifyEvent() {
+            const $modal = ('#platModi');
+            console.log('platformModifyEvent')
+
+            const modiBtn = document.getElementById('modiBtn');
+            modiBtn.onclick = e => {
+                let modiNameInput = document.getElementById('modiNameInput');
+                let modiBgInput = document.getElementById('modiBgInput');
+                let modiFontInput = document.getElementById('modiFontInput');
+
+                console.log('modalInput : ',modiNameInput.value);
+                // data-no에 \n 상태로 들어감??
+                const no = e.target.closest('.modal');
+                console.log('ModifyEvent no :', no);
+                // console.log('no.value: ', no.value);
+
+                    const reqInfo = {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            platformId : no,
+                            platformName: modiNameInput.value,
+                            platformBgColor: modiBgInput.value,
+                            platformFontColor: modiFontInput.value
+                        })
+                    };
+                    console.log(reqInfo);
+
+
+                    fetch(modiURL + '/' + no)
+                        .then(res => res.text())
+                        .then(msg => {
+                            if (msg === 'mod-success') {
+                                alert('수정 성공!!');
+                                $modal.modal('hide'); // 모달창 닫기
+                                showdomainList(); //새로불러오기
+                            } else {
+                                alert('수정 실패!!');
+                            }
+                        });
+            };
+        }
+
 
         // 플랫폼 수정/삭제 핸들러
         function platformModAndDelHandler(e) {
@@ -259,6 +362,17 @@
                 console.log('delBtn');
             }
         }
+
+        (function (){
+            // 플랫폼 돔 생성
+            showdomainList();
+            openModifyModalAndRemoveEvent();
+            platformModifyEvent();
+            // 컬러 선택 함수
+            modiBgInput();
+            modiFontInput();
+
+        })();
 
 
     </script>

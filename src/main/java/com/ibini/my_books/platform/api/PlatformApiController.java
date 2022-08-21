@@ -37,7 +37,7 @@ public class PlatformApiController {
                 "platformFontColor" : "#fff"
             }
      */
-    @PutMapping("/{platformId}")
+    @PutMapping("{account}/{platformId}")
     public String modify(@PathVariable int platformId
             ,@RequestBody PlatformDomain platformDomain){
 
