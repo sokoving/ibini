@@ -17,7 +17,8 @@
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <%-- color api --%>
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-
+<%--  jquery --%>
+ <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <title>MyPage</title>
 </head>
 
@@ -308,7 +309,7 @@
 
                 console.log('modalInput : ',modiNameInput.value);
                 // data-no에 \n 상태로 들어감??
-                const no = e.target.closest('.modal');
+                const no = e.target.closest('.modal').dataset.no;
                 console.log('ModifyEvent no :', no);
                 // console.log('no.value: ', no.value);
 
@@ -318,6 +319,7 @@
                             'content-type': 'application/json'
                         },
                         body: JSON.stringify({
+                            account : account,
                             platformId : no,
                             platformName: modiNameInput.value,
                             platformBgColor: modiBgInput.value,
@@ -344,8 +346,8 @@
 
         // 플랫폼 수정/삭제 핸들러
         function platformModAndDelHandler(e) {
-
-            const no = e.target.parentElement.parentElement.firstElementChild.textContent;
+            //textcontent를 innerText로 바꿈
+            const no = e.target.parentElement.parentElement.firstElementChild.innerText;
             // const noo = e.target.parentElement;
 
             console.log('no:', no);
@@ -359,7 +361,7 @@
                 processModifyShow(e, no);
             } else if (e.target.matches('#delBtn')) {
                 processRemove(no);
-                console.log('delBtn');
+                console.log('delBtn: ', no);
             }
         }
 
