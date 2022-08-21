@@ -42,6 +42,7 @@ section #img-post-wrap {
 
 /* 썸네일 이미지 */
 #img-wrap #thumb-img {
+    background-color: #ffca3d;
     border-radius: 0.25rem;
     width: 210px;
     height: 292px;

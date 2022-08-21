@@ -1,8 +1,10 @@
 package com.ibini.my_books.post.service;
 
 import com.ibini.my_books.post.domain.Post;
-import com.ibini.my_books.post.domain.PostWithName;
+import com.ibini.my_books.post.dto.FormattingDateDTO;
+import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.repository.PostMapper;
+import com.ibini.my_books.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -41,7 +43,6 @@ public class PostService {
         PostWithName p = postMapper.fineOnePostWithName(postNo);
         p.setCaEpName();
         log.info("p.caName - {}, p.epName -{}", p.getCaName(), p.getEpName());
-
         return p;
     }
 
@@ -58,6 +59,14 @@ public class PostService {
     public int getTotalCount(){
         log.info("Post Service : getTotalCountService call");
         return postMapper.getTotalCount();
+    }
+
+//    post date를 포맷팅해서 리턴
+    public FormattingDateDTO convertDate(Post post){
+        FormattingDateDTO fd = new FormattingDateDTO();
+        fd.setPostRegDate(CommonUtil.changeDate(post.getRegDate()));
+        fd.setPostUpdateDate(CommonUtil.changeDate(post.getUpdateDate()));
+        return  fd;
     }
 
 }

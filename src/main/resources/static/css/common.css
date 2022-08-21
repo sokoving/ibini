@@ -38,6 +38,7 @@ header{
 }
 header #inner-header {
     /* background-color: yellow; */
+    margin-top: 30px;
     padding: 10px;
     border-bottom: 5px double #ffca3d;
 

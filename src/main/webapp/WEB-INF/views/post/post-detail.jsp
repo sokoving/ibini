@@ -84,12 +84,12 @@
 
                             <!-- 책 제목 -->
                             <div id="post-title">
-                                <h2 class="title-span">신기방기 뿡뿡방기</h2>
+                                <h2 class="title-span">${p.postTitle}</h2>
                             </div>
 
                             <!-- 작가 이름 -->
                             <div id="post-writer">
-                                <span class="writer-span">윤정한</span>
+                                <span class="writer-span">${p.postWriter}</span>
                             </div>
 
 
@@ -98,21 +98,37 @@
 
                                     <!-- 연재 상태 -->
                                     <tr>
-                                        <td class="first-td">카카오페이지</td>
-                                        <td class="last-td">월, 금 10시</td>
+
+                                        <td class="first-td">
+                                            <c:if test="${p.platformId != 0}">
+                                                ${p.platformName}
+                                            </c:if>
+                                        </td>
+                                        <td class="last-td">
+                                            <c:choose>
+                                                <c:when test="${p.publishStatus == 1}">
+                                                    ${p.publishCycle}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${p.publishStatusName}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
                                     </tr>
                                     <tr class="empty-tr">
                                         <td colspan="2">-</td>
                                     </tr>
+
                                     <!-- 현재, 전체 페이지 -->
                                     <tr>
-                                        <td class="first-td cur-ep">현재 페이지</td>
-                                        <td class="last-td tot-ep">전체 페이지</td>
+                                        <td class="first-td cur-ep">현재 ${p.epName}</td>
+                                        <td class="last-td tot-ep">전체 ${p.epName}</td>
                                     </tr>
                                     <tr>
-                                        <td class="first-td cur-ep">300p</td>
-                                        <td class="last-td tot-ep">500p</td>
+                                        <td class="first-td cur-ep">${p.curEp}${p.epName2}</td>
+                                        <td class="last-td tot-ep">${p.totalEp}${p.epName2}</td>
                                     </tr>
+
                                     <tr>
                                         <td colspan="2"><i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
                                         </td>
@@ -126,9 +142,9 @@
                         <!-- bottom : 날짜, 수정삭제목록 버튼-->
                         <div id="post-bottom">
                             <div class="date-wrap">
-                                <span>등록일 2022.02.02</span>
+                                <span class="reg-date-span">등록일 ${date.postRegDate}</span>
                                 |
-                                <span>수정일 2022.08.08</span>
+                                <span class="up-date-span">수정일 ${date.postUpdateDate}</span>
                             </div>
                             <div class="post-btn-wrap">
                                 <button class="post-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
@@ -178,18 +194,12 @@
                             </div>
 
                             <div id="tag-container">
-                                <span class="hash-span">태그1</span>
-                                <span class="hash-span">태그태그태그</span>
-                                <span class="hash-span">태그_테스트</span>
-                                <span class="hash-span">태그2</span>
-                                <span class="hash-span">태그_3</span>
-                                <span class="hash-span">태그태그</span>
-                                <span class="hash-span">태그_중</span>
-                                <span class="hash-span">태그</span>
-                                <span class="hash-span">태그_태그_태그</span>
-                                <span class="hash-span">태그_뾰잉뾰이이이잉</span>
-                                <span class="hash-span tag-plus" style="display: none;"><i
-                                        class="far fa-plus-square"></i></span>
+                                <c:forEach var="t" items="${tagList}">
+                                    <span class="hash-span" data-tag-no="${t.tagNo}">${t.tagName}</span>
+                                </c:forEach>
+                                <span class="hash-span tag-plus" style="display: none;">
+                                    <i class="far fa-plus-square"></i>
+                                </span>
                             </div>
                         </div> <!-- // end hash-wrap -->
 
@@ -258,10 +268,10 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-            jQueryTagTest("장르테스트", $('.genre-span'));
+            // jQueryTagTest("장르테스트", $('.genre-span'));
 
             // 별 찍기
-            let star = '${p.starRate}';
+            const star = '${p.starRate}';
             starRate(star);
 
 

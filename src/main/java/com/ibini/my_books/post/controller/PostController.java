@@ -1,15 +1,11 @@
 package com.ibini.my_books.post.controller;
 
 
-import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
-import com.ibini.my_books.post.domain.PostWithName;
 import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.postImg.domain.PostImg;
 import com.ibini.my_books.postImg.service.PostImgService;
-import com.ibini.my_books.util.CategoryUtil;
-import com.ibini.my_books.util.EpIdUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -18,9 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @Log4j2
@@ -50,6 +43,7 @@ public class PostController {
         model.addAttribute("p", postService.fineOnePostWithName(postNo)); //  PostWithName
         model.addAttribute("tagList", hashTagService.findAllByPostNo(postNo)); // List<HashtagDomain>
         model.addAttribute("imgList", imgService.getPostImgList(postNo));  // List<PostImg>
+        model.addAttribute("date", postService.convertDate(postService.findOnePostService(postNo)));
 
         return "post/post-detail";
     }
