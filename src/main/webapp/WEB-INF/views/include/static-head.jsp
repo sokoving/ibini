@@ -22,24 +22,15 @@
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
 
-
-<!-- slick css || https://kenwheeler.github.io/slick/  -->
-<link rel="stylesheet" href="/css/slick-1.8.1.css">
-
 <!-- bootstrap css -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- custom css -->
 <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/detail.css">
+<link rel="stylesheet" href="/css/post-detail.css">
 
 <!-- jquery -->
 <script src="/js/jquery-3.3.1.min.js"></script>
-
-
-<!-- libraries -->
-<!-- slick js -->
-<script src="/js/slick-1.8.1.min.js" defer></script>
 
 <!-- bootstrap js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>

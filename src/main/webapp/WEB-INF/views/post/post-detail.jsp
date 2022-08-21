@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -18,7 +18,7 @@
 
 
         <section>
-            <div id="inner-section">
+            <div class="inner-section">
 
 
                 <!-- 이미지, 포스트 정보 영역 -->
@@ -147,9 +147,9 @@
                                 <span class="up-date-span">수정일 ${date.postUpdateDate}</span>
                             </div>
                             <div class="post-btn-wrap">
-                                <button class="post-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="post-btn" title="삭제하기"><i class="far fa-trash-alt"></i></button>
-                                <button class="post-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
+                                <button class="post-btn post-modi-btn fas fa-pencil-alt" title="수정하기"></button>
+                                <button class="post-btn post-del-btn far fa-trash-alt" title="삭제하기"></button>
+                                <button class="post-btn post-list-btn far fa-list-alt" title="목록으로"></button>
                             </div>
                         </div> <!-- // end post-bottom -->
 
@@ -264,11 +264,22 @@
 
     </div> <!-- end wrap -->
 
-    <script src="/js/detail.js"></script>
+    <script src="/js/post-detail.js"></script>
     <script>
         // start jQuery
         $(document).ready(function () {
-            // jQueryTagTest("장르테스트", $('.genre-span'));
+            jQueryTagTest("테스트", $('.post-btn-wrap'));
+            const postNo = '${p.postNo}';
+            console.log("postNo : " + postNo);
+
+            // 수정, 삭제, 목록 버튼 클릭 이벤트
+            $('.post-btn-wrap').click(e => {
+            console.log(e.target);
+            clickPostBtn(e.target, postNo);
+        })
+
+
+
 
             // 별 찍기
             const star = '${p.starRate}';

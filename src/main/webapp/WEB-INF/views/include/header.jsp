@@ -13,7 +13,7 @@
 
     </div> <!-- // end inner-header -->
 
-    <nav class="gnb on">
+    <nav class="gnb">
         <a href="#" class="menu-close"><span class="far fa-window-close"></span></a>
         <ul>
             <li><a href="#">메뉴1</a></li>

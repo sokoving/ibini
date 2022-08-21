@@ -29,7 +29,7 @@ ul{
     display: none !important;
 }
 
-/* header style */
+/* 헤더 */
 header{
     position: absolute;
     width: inherit;
@@ -60,7 +60,7 @@ header.on {
     transition: .4s;
 }
 
-/* header gnb stryle */
+/* 헤더 메뉴 */
 header .gnb {
     font-family: 'NanumBarunGothicBold';
     background-color: #ffca3d;
@@ -88,4 +88,15 @@ header .gnb .menu-close{
 
 header .gnb li{
     margin: 10px 30px;
+}
+
+
+/* 섹션 틀 */
+section .inner-section {
+    width: 90%;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25rem;
+    margin: 250px auto 0;
+    padding: 30px;
+    box-sizing: border-box;
 }
