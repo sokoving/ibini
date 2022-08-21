@@ -2,7 +2,7 @@ section #inner-section {
     width: 90%;
     border: 1px solid #adb5bd;
     border-radius: 0.25rem;
-    margin: 100px auto 0;
+    margin: 250px auto 0;
     padding: 30px;
     box-sizing: border-box;
 }
@@ -120,10 +120,11 @@ section #img-post-wrap {
 
 
 #post-box #post-top .top-span {
-    background-color: #adb5bd;
-    color: #fff;
-    border-radius: 0.5rem;
-    padding: 0.35em 0.7em;
+    /* background-color: #adb5bd; */
+    /* color: #fff; */
+    border-radius: 50em;
+    border: 1px dotted #555;
+    padding: 0.2em 0.7em;
     margin-left: 5px;
     font-weight: 700;
 }

@@ -24,20 +24,17 @@
 
 
 <!-- slick css || https://kenwheeler.github.io/slick/  -->
-<link rel="stylesheet" href="/main/resources/static/css/slick-1.8.1.css">
+<link rel="stylesheet" href="/css/slick-1.8.1.css">
 
 <!-- bootstrap css -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- custom css -->
 <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/detail.css">
-
-
+<!-- <link rel="stylesheet" href="/css/detail.css"> -->
 
 <!-- jquery -->
 <script src="/js/jquery-3.3.1.min.js"></script>
-
 
 
 <!-- libraries -->
@@ -49,4 +46,4 @@
 
 <!-- custom js -->
 <script src="/js/common.js" defer></script>
-<script src="/js/detail.js" defer></script>
+<!-- <script src="/js/detail.js" defer></script> -->
