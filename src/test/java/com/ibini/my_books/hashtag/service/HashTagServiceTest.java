@@ -33,7 +33,7 @@ class HashTagServiceTest {
     @DisplayName("해시태그 분해하기")
     void splitHashTag() {
         HashtagDomain hashtagDomain = new HashtagDomain();
-        hashtagDomain.setPostNo(220811003);
+        hashtagDomain.setPostNo(1L);
         hashtagDomain.setAccount("ibini");
         hashtagDomain.setTagName("#로맨스 #판타지 #서양배경 #성장물");
 
@@ -59,7 +59,7 @@ class HashTagServiceTest {
     void savehashtag(){
         HashtagDomain hd = new HashtagDomain();
         hd.setAccount("ibini");
-        hd.setPostNo(220811005);
+        hd.setPostNo(1L);
         hd.setTagName("#삼각로맨스 #신분차이 #남장/여장물 #왕족귀족");
         hashTagService.saveHashTag(hd);
 

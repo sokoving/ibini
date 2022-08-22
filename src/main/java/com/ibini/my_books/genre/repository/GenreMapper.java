@@ -1,8 +1,6 @@
 package com.ibini.my_books.genre.repository;
 
 import com.ibini.my_books.genre.domain.Genre;
-import com.ibini.my_books.post.domain.Post;
-import com.ibini.my_books.post.domain.PostWithName;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -23,28 +21,28 @@ public interface GenreMapper {
 
     /**
      * 장르 아이디(genreId)로 장르 리턴
-     * @param - 찾을 장르의 genreId
+     * @param genreId : 찾을 장르의 int 타입 genreId
      * @return - Genre
      */
     Genre fineOneGenreByGenreId(int genreId);
 
     /**
      * 장르 아이디(genreId)로 장르 삭제
-     * @param - 삭제할 장르의 genreId
+     * @param genreId - 삭제할 장르의 int 타입 genreId
      * @return - boolean
      */
     boolean remove(int genreId);
 
     /**
      * 장르 아이디(genreId)로 장르 수정
-     * @param - 수정할 Genre 객체
+     * @param genre - 수정할 Genre 객체
      * @return - boolean
      */
     boolean modify(Genre genre);
 
     /**
      * 개별 계정(account)에 속한 장르의 수 리턴
-     * @param - String account
+     * @param account - String 타입의 계정명
      * @return - int
      */
     int getTotalCount(String account);

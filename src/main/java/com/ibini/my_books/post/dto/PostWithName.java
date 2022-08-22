@@ -1,5 +1,8 @@
-package com.ibini.my_books.post.domain;
+package com.ibini.my_books.post.dto;
 
+import com.ibini.my_books.util.CategoryUtil;
+import com.ibini.my_books.util.EpIdUtil;
+import com.ibini.my_books.util.PublishStatusUtil;
 import lombok.*;
 
 import java.util.Date;
@@ -37,14 +40,33 @@ public class PostWithName {
     private Date updateDate;       // 수정일자    DATE               DEFAULT SYSDATE ,
     private int starRate;          // 별점   NUMBER(1)          NULL,
 
+    private String caName;      // 카테고리 이름
+    private String publishStatusName;    // 연재상태명
+    private String epName;      // 회차 구분명(ex. 페이지)
+    private String epName2;   // 회차 구분명 (ex. p)
 
     //  prj_genre
     private String genreName;
-
 
     // prj_platform
     private String platformName;
     private String platformBgColor;
     private String platformFontColor;
+
+//    객체 넣어주면 caName, epName 세팅해주는 메서드
+    public void setCaEpName(){
+        String caName = CategoryUtil.CATEGORY_MAP.get(this.caId);
+        this.setCaName(caName);
+
+        String epName = EpIdUtil.EP_ID_MAP.get(this.epId);
+        this.setEpName(epName);
+        String epName2 = EpIdUtil.EP_NAME_MAP.get(epName);
+        this.setEpName2(epName2);
+
+        String puName = PublishStatusUtil.PUBLISH_STATUS_MAP.get(this.publishStatus);
+        this.setPublishStatusName(puName);
+
+    }
+
 
 }

@@ -18,8 +18,8 @@
 
 </head>
 
-<body>
-  <%@ include file="../include/header.jsp" %>
+
+        <body>
 
   <h1 id="title"> ibiniBooks Welcome</h1>
 
@@ -30,7 +30,7 @@
     <li><a href="/member/sign-in">sign-in</a></li>
     <li> <a href="/member/sign-up">sign-up</a></li>
     </c:if>
-  
+
     <c:if test="${loginUser != null}">
     <li> <a href="/member/my-page">My Page</a>   </li>
     <li><a href="member/sign-out">sign-out</a></li>
