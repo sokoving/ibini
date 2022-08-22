@@ -1,0 +1,96 @@
+section.post-reg-section{
+    border: none;
+    padding: 100px 50px;
+    margin-top: 0;
+
+    background-color: black;
+}
+
+section .inner-section{
+    background-color: #eeedeb;
+    border-radius: 1em;
+    padding: 80px;
+    /* box-sizing: border-box; */
+}
+
+/* 공통 */
+.reg-span{
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+.white-box{
+    background: #fff;
+    border-radius: 0.35em;
+    font-size: 1.2em;
+    width: 100%;
+    margin-bottom: 1em;
+    padding: 0.3em 1em;
+}
+
+.span-wrap{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+}
+.explain-span{
+    font-style: italic;
+    /* text-decoration: underline; */
+}
+
+.division-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+.division-wrap .select-box{
+    flex: 1 1 40%
+}
+.division-wrap .new-box{
+    flex: 1 1 40%
+}
+.division-wrap .btn-box
+
+
+/* #reg-1 : 이미지, 제목, 작가 */
+#reg-1 {
+    display: flex;
+}
+/* 이미지 */
+#reg-1 .img-wrap{
+    flex-basis: 220px;
+    flex-shrink: 0;
+
+    position: relative;
+    
+}
+#reg-1 .img-box{
+    width: 200px;
+    height: 260px;
+    background-color: #ffca3d;
+    border-radius: 0.5em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.5em;
+    text-align: center;
+
+    position: absolute;
+    top: -80px;
+    left: -10px;
+}
+
+/* 제목, 작가 */
+#reg-1 .tw-wrap{
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+}
+
+/* 플랫폼, 장르 */
+#reg-2 {
+    padding-left: 70px;
+}
+#reg-2 
+
+

@@ -16,11 +16,13 @@ public class EpIdUtil {
         EP_ID_MAP.put(0, "회차");
         EP_ID_MAP.put(1, "페이지");
         EP_ID_MAP.put(2, "권수");
+        EP_ID_MAP.put(3, "퍼센트");
 
         EP_NAME_MAP = new HashMap<>();
         EP_NAME_MAP.put("회차", "회");
         EP_NAME_MAP.put("페이지", "p");
         EP_NAME_MAP.put("권수", "권");
+        EP_NAME_MAP.put("퍼센트", "%");
     }
 
 }
