@@ -41,6 +41,14 @@
 
     <style>
 
+        input{
+            border: 1px solid #000;
+        }
+        #post-reg-form #post-reg-btn {
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+
 
     </style>
 
@@ -50,20 +58,6 @@
 
 
     <div id="wrap">
-        <header>
-            <div class="inner-header">
-
-                <h1><img src="/img/ibini_logo_4.png" alt=""></h1>
-
-                <nav>
-                    <div class="inner-nav">
-                        <div> <a href="#">로그아웃</a> </div>
-                        <div><a href="#">마이페이지</a></div>
-                    </div>
-                </nav>
-
-            </div> <!-- end inner-header -->
-        </header> <!-- end header -->
 
 
         <section id="reg-section">
@@ -81,6 +75,7 @@
                     <form id="post-reg-form" action="/post/write" method="post">
                         <input type="hidden" name="account" value="ibini" readonly>
                         <label>
+                            
                             <span>플랫폼</span><input type="number" name="platformId" id="" placeholder="0:미분류, 1:카카오페이지, 2:네이버시리즈, 3:리디북스, 4:다음웹툰, 5:네이버웹툰">
                         </label>
                         <div>
