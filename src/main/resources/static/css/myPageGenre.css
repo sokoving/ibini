@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'PyeongChangPeace-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.myPage-wrap{
+    font-family: 'PyeongChangPeace-Light', sans-serif;
+    background: #fff;
+}
+
+.myPage-wrap .genre-wrap .genreSetting{
+    background: #fffaee;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+
+.myPage-wrap .genre-wrap .genreSetting #genList{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+    margin: 10px;
+    /*border: 1px solid #000000;*/
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 2.7;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}

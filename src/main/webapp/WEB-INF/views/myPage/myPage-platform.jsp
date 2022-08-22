@@ -265,7 +265,7 @@
                                     수정
                                 </button>
                                 <button type="button" id="delBtn" class="btn btn-danger">삭제</button>
-<!--                                <button class="plat-del" id="delBtn">삭제</button>-->
+
                             </div>
                         </div>`;
 
