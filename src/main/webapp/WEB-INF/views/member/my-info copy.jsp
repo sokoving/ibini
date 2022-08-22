@@ -6,15 +6,7 @@
         <head>
 
 
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title></title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-                crossorigin="anonymous">
-            <!-- jquery -->
-            <script src="/js/jquery-3.3.1.min.js"></script>
+            <%@ include file="../include/static-head.jsp" %>
 
             <style>
                 .container {
@@ -32,11 +24,7 @@
         </head>
 
         <body>
-
-
-
-
-
+        <%@ include file="../include/header.jsp" %>
             <div class="container">
                 <div class="row">
                     <div class="offset-md-2 col-md-4">

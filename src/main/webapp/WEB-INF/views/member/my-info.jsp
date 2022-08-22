@@ -4,34 +4,15 @@
         <html lang="ko">
 
         <head>
+            <%@ include file="../include/static-head.jsp" %>
 
-
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title></title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-                crossorigin="anonymous">
-            <!-- jquery -->
-            <script src="/js/jquery-3.3.1.min.js"></script>
-
-            <style>
-                .container {
-                    margin: 200px auto 200px;
-                }
-
-            </style>
         </head>
 
         <body>
-
-
-
-
-
-            <div class="container">
-                <div class="row">
+        <div id="wrap">
+           <%@ include file="../include/header.jsp" %>
+            <section>
+                <div>
                     <div>
                         <div>
                             <div>
@@ -107,6 +88,7 @@
                         </div>
                     </div>
                 </div>
+            </section>
             </div>
             <script>
                 const date = '${loginUser.prettierDate}';

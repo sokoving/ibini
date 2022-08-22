@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 	<head>
+	<%@ include file="../include/static-head.jsp" %>
 		<!-- 합쳐지고 최소화된 최신 CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<!-- 부가적인 테마 -->
@@ -33,6 +34,8 @@
 		})
 	</script>
 	<body>
+	<div id="wrap">
+	<%@ include file="../include/header.jsp" %>
 		<section id="container">
 			<form action="/member/join-out" method="post">
 				<div class="form-group has-feedback">
@@ -55,6 +58,7 @@
 				</c:if>
 			</div>
 		</section>
+		</div>
 		
 	</body>
 	

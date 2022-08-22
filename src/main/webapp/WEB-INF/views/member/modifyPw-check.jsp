@@ -5,38 +5,19 @@
         <html lang="ko">
 
         <head>
+         <%@ include file="../include/static-head.jsp" %>
 
-
-
-
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title></title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-                crossorigin="anonymous">
-            <!-- jquery -->
-            <script src="/js/jquery-3.3.1.min.js"></script>
-
-                <style>
-                    .wrap {
-                        margin: 200px auto;
-                    }
-                </style>
         </head>
 
         <body>
-
-
-
-
-
-
+        <div id="wrap">
+        <%@ include file="../include/header.jsp" %>
+         <section>
                 <div>
                     <div>
                         <div>
                             <div>
+
                                 <div>
                                     <h2><span>MyBooks</span> 비밀번호를 수정하시려면 기존 비밀번호를 입력해주세요.</h2>
                                 </div>
@@ -99,13 +80,15 @@
                                             </tr>                                            
                                            
                                             
-                                        </table>
-                                    </form>
-                                </div>
+                                           </table>
+                                      </form>
+                                  </div>
+                               </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                       </div>
+                  </div>
+                  </section>
+               </div>
 
                 <script>
 
