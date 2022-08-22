@@ -1,5 +1,6 @@
 package com.ibini.my_books.postImg.service;
 
+import com.ibini.my_books.postImg.domain.PostImg;
 import com.ibini.my_books.postImg.repository.PostImgMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,5 +20,12 @@ public class PostImgService {
         return repository.findFileNames(postNo);
 
     }
+
+    public List<PostImg> getPostImgList(Long postNo){
+        return repository.findFiles(postNo);
+    }
+
+//    썸네일 리스트 조회
+public List<PostImg> getThumbs(){return repository.findThumbs();}
 
 }

@@ -23,7 +23,7 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
     <!-- custom css -->
-    <link rel="stylesheet" href="/css/post-reg.css">
+    <link rel="stylesheet" href="/css/common.css">
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -31,7 +31,7 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
 
     <!-- custom js -->
-    <script src="/js/post-reg.js" defer></script>
+    <script src="/js/common.js" defer></script>
 
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
@@ -40,6 +40,14 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <style>
+
+        input{
+            border: 1px solid #000;
+        }
+        #post-reg-form #post-reg-btn {
+            border: 1px solid #000;
+            cursor: pointer;
+        }
 
 
     </style>
@@ -50,20 +58,6 @@
 
 
     <div id="wrap">
-        <header>
-            <div class="inner-header">
-
-                <h1><img src="/img/ibini_logo_4.png" alt=""></h1>
-
-                <nav>
-                    <div class="inner-nav">
-                        <div> <a href="#">로그아웃</a> </div>
-                        <div><a href="#">마이페이지</a></div>
-                    </div>
-                </nav>
-
-            </div> <!-- end inner-header -->
-        </header> <!-- end header -->
 
 
         <section id="reg-section">
@@ -81,6 +75,7 @@
                     <form id="post-reg-form" action="/post/write" method="post">
                         <input type="hidden" name="account" value="ibini" readonly>
                         <label>
+                            
                             <span>플랫폼</span><input type="number" name="platformId" id="" placeholder="0:미분류, 1:카카오페이지, 2:네이버시리즈, 3:리디북스, 4:다음웹툰, 5:네이버웹툰">
                         </label>
                         <div>

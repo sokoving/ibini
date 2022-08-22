@@ -27,3 +27,34 @@ select * from tbl_member;
 select * from prj_category;
 select * from prj_platform;
 select * from prj_genre;
+
+
+
+--이미지
+set DEFINE off;
+insert into PRJ_POST_IMG
+(FILE_NAME, POST_NO, ACCOUNT, ORIGINAL_FILE_NAME, THUMBNAIL)
+VALUES
+('https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large', 1, 'ibini', 'aaaaa', 'true')
+;
+insert into PRJ_POST_IMG
+(FILE_NAME, POST_NO, ACCOUNT, ORIGINAL_FILE_NAME)
+VALUES
+('https://twitter.com/pledis_17/status/1104727597496164352/photo/1', 1, 'ibini', 'aaaaa')
+;
+insert into PRJ_POST_IMG
+(FILE_NAME, POST_NO, ACCOUNT, ORIGINAL_FILE_NAME)
+VALUES
+('https://twitter.com/pledis_17/status/1104727597496164352/photo/2', 1, 'ibini', 'ccccc')
+;
+insert into PRJ_POST_IMG
+(FILE_NAME, POST_NO, ACCOUNT, ORIGINAL_FILE_NAME)
+VALUES
+('https://twitter.com/pledis_17/status/1104727597496164352/photo/3', 1, 'ibini', 'eeeee')
+;
+insert into PRJ_POST_IMG
+(FILE_NAME, POST_NO, ACCOUNT, ORIGINAL_FILE_NAME)
+VALUES
+('https://twitter.com/pledis_17/status/965079451775131653/photo/2', 1, 'ibini', 'fffff')
+;
+commit;

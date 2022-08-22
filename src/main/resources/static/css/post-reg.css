@@ -1,66 +1,161 @@
-/* reset */
-a {
-    color: inherit !important;
-    text-decoration: none !important;
-    cursor: pointer;
+section.post-reg-section{
+    border: none;
+    padding: 100px 50px;
+    margin-top: 0;
+
+    /* background-color: black; */
 }
 
-button,
-input {
-    background-color: inherit;
+section .inner-section{
+    background-color: #eeedeb;
+    border-radius: 1em;
+    padding: 80px;
+    /* box-sizing: border-box; */
 }
 
-/* common style */
-.hide {
-    display: none;
+/* 공통 */
+.reg-span{
+    font-weight: 700;
+    margin-bottom: 0.5em;
 }
+.white-box{
+    background: #fff;
+    border-radius: 0.35em;
+    font-size: 1.2em;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 1em;
+    padding-left: 1em;
 
-body {
-    /* background-color: bisque; */
-    color: inherit;
-    font-size: 18px;
-    font-family: 'NanumSquareRound', sans-serif;
-}
-
-#wrap {
-    /* background-color: ; */
-
-    width: 1000px;
-    margin: 0 auto;
-
-}
-
-
-/* header style */
-header .inner-header {
-    /* background-color: yellow; */
-    padding: 10px;
-    border-bottom: 5px double #ffc107;
-}
-
-header .inner-nav {
     display: flex;
-    justify-content: end;
+    justify-content: center;
+    align-items: center;
+
+}
+.white-box.icon-box{
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
-header .inner-nav div {
+.span-wrap{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.explain-span{
+    font-size: 0.8em;
+    font-style: italic;
+    /* text-decoration: underline; */
+    margin-right: 15px;
+}
+
+.division-wrap{
+    display: flex;
+}
+.division-wrap .divided-select{
+    flex: 1 1 46%;
+}
+.division-wrap .divided-input{
+    flex: 1 1 46%;
+    font-size: 0.8em;
     margin-left: 10px;
 }
+.division-wrap .divided-btn{
+    flex: 1 1 8%;
+}
+.divided-btn .icon-box{
+    /* border: 1px dotted #787878; */
+    box-shadow: 1px 1px 1px #787878;
+}
 
 
-/* reg-section style*/
+/* #reg-1 : 이미지, 제목, 작가 */
+#reg-1 {
+    display: flex;
+}
+/* 이미지 */
+#reg-1 .img-wrap{
+    flex-basis: 219px;
+    flex-shrink: 0;
 
+    position: relative;
+    
+}
+#reg-1 .img-box{
+    width: 200px;
+    height: 255px;
+    background-color: #ffca3d;
+    border-radius: 0.5em;
 
-/* reg-section - thumb section*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    font-size: 1.5em;
+    text-align: center;
 
+    position: absolute;
+    top: -80px;
+    left: -10px;
+}
 
-/* reg-section - post input section*/
+/* 제목, 작가 */
+#reg-1 .tw-wrap{
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+}
 
+/* 플랫폼, 장르 */
+#reg-2 {
+    padding-left: 70px;
+}
 
+/* 연재 상태, 연재 요일 */
+#reg-3 {
+    padding: 0 80px 0 70px;
+}
 
+/* 회차 구분, 현재 회차, 현재 페이지 */
+#reg-4 {
+    padding: 0 70px;
+    text-align: center;
+}
+#reg-4 .epId-wrap .white-box{
+    padding: 0;
+}
+#reg-4 .epId-wrap{
+    display: flex;
+}
+#reg-4 .ep-item{
+    margin-right: 10px;
+    font-weight: 700;
+}
+#reg-4 .ep-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+#reg-4 .ep-input-wrap{
+    margin-right: 10px;
+}
 
-/* border: 1px solid #adb5bd;
-border-radius: 0.2rem; */
+/* 등록 버튼 */
+#reg-btn{
+    display: flex;
+    justify-content: center;
+}
+#reg-btn .white-box{
+    margin-top: 30px;
+    width: 20%;
+    padding: 1.2em 0 1.2em 0;
+    font-size: 1.2em;
+    font-family: 'NanumBarunGothicBold';
+    background-color: #ffca3d;
+    border: 1px dotted #787878;
+    box-shadow: 1px 1px 1px #787878;
 
-    /* background-color: #ffc107; */
+}
+

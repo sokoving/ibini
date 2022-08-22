@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ibini books</title>
+
+    <!-- reset css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+
+    <!-- fontawesome css: https://fontawesome.com -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
+    <!-- linear icons -->
+    <!-- https://linearicons.com/free#cdn -->
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+    <!-- naver font -->
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+
+
+
+    <!-- slick css || https://kenwheeler.github.io/slick/  -->
+    <link rel="stylesheet" href="/main/resources/static/css/slick-1.8.1.css">
+
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="/main/resources/static/css/common.css">
+    <link rel="stylesheet" href="/main/resources/static/css/post-reg.css">
+
+
+    <!-- jquery -->
+    <script src="/main/resources/static/js/jquery-3.3.1.min.js"></script>
+
+
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+
+    <!-- custom js -->
+    <script src="/main/resources/static/js/common.js" defer></script>
+    <script src="/main/resources/static/js/post-reg.js" defer></script>
+
+
+</head>
+
+<body>
+
+
+    <div id="wrap">
+
+
+        <!-- 새 포스트 등록 섹션 -->
+        <section class="post-reg-section">
+            <div class="inner-section">
+                <!-- 히든 -->
+                <!-- <input type="text" name="caId" value=""> -->
+
+
+                <!-- 이미지, 제목, 작가 -->
+                <div id="reg-1">
+                    <!-- 이미지 -->
+                    <div class="img-wrap">
+                        <div class="img-box">
+                            클릭으로 <br> 이미지 추가하기
+                        </div>
+                    </div>
+
+                    <!-- 제목, 작가 -->
+                    <div class="tw-wrap">
+                        <span class="reg-span">책 제목</span>
+                        <input class="white-box title-input" type="text">
+                        <span class="reg-span">작가</span>
+                        <input class="white-box writer-input" type="text">
+                    </div>
+                </div> <!-- // end reg-1 -->
+
+                <!-- 플랫폼, 장르 -->
+                <div id="reg-2">
+                    <div class="plge-wrap">
+                        <div class="span-wrap">
+                            <span class="reg-span">플랫폼</span>
+                            <span class="explain-span">새 이름을 입력하고 버튼을 누르면 플랫폼이 추가됩니다 ↓</span>
+                        </div>
+
+                        <div class="division-wrap">
+                            <div class="divided-select">
+                                <div class="white-box ">SELECT</div>
+                            </div>
+                            <div class="divided-input">
+                                <input class="white-box" type="text" placeholder="새 플랫폼을 추가해 보세요">
+                            </div>
+                            <div class="divided-btn">
+                                <div class="white-box icon-box ">
+                                    <span class="fas fa-plus-square"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span-wrap">
+                            <span class="reg-span">장르</span>
+                            <span class="explain-span">새 이름을 입력하고 버튼을 누르면 장르가 추가됩니다 ↓</span>
+                        </div>
+
+                        <div class="division-wrap">
+                            <div class="divided-select">
+                                <div class="white-box ">SELECT</div>
+                            </div>
+                            <div class="divided-input">
+                                <input class="white-box" type="text" placeholder="새 장르를 추가해 보세요">
+                            </div>
+                            <div class="divided-btn">
+                                <div class="white-box icon-box ">
+                                    <span class="fas fa-plus-square"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- // end reg-2 -->
+
+
+                <!-- 연재 상태, 연재 요일 -->
+                <div id="reg-3">
+                    <span class="reg-span">연재 상태</span>
+                    <input class="white-box" type="text">
+                    <span class="reg-span">연재 요일</span>
+                    <input class="white-box" type="text">
+                </div> <!-- // end reg-3 -->
+
+                <!-- 회차 구분, 현재 회차, 현재 페이지 -->
+                <div id="reg-4">
+                    <span class="reg-span">회차 구분</span>
+                    <div class="epId-wrap">
+                        <div class="white-box ep-item">화</div>
+                        <div class="white-box ep-item">페이지(p)</div>
+                        <div class="white-box ep-item">권수</div>
+                        <div class="white-box ep-item">퍼센트(%)</div>
+                    </div>
+                    <div class="ep-wrap">
+                        <div class="ep-input-wrap">
+                            <span class="reg-span">현재 회차</span> <!-- 회차는 ${p.epName}으로-->
+                            <input class="white-box" type="text">
+                        </div>
+                        <div class="ep-input-wrap">
+                            <span class="reg-span">전체 회차</span> <!-- 회차는 ${p.epName}으로-->
+                            <input class="white-box" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reg-btn">
+                    <button class="white-box">등록</button>
+                </div>
+
+
+
+
+
+            </div> <!-- // end inner-section -->
+        </section> <!-- // end section -->
+
+    </div> <!-- end wrap -->
+
+
+
+    <script>
+        // start jQuery
+        $(document).ready(function () {
+            jQueryTagTest("태그 잡기 테스트", $('h1'));
+
+
+
+
+        });
+        // end jQuery
+    </script>
+
+
+</body>
+
+</html>

@@ -1,8 +1,7 @@
 package com.ibini.my_books.post.repository;
 
 import com.ibini.my_books.post.domain.Post;
-import com.ibini.my_books.post.domain.PostWithName;
-import com.sun.security.jgss.GSSUtil;
+import com.ibini.my_books.post.dto.PostWithName;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

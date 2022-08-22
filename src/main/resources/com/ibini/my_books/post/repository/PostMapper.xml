@@ -22,7 +22,7 @@
         <result property="starRate" column="star_rate"/>
     </resultMap>
 
-    <resultMap id="postWithNameMap" type="com.ibini.my_books.post.domain.PostWithName">
+    <resultMap id="postWithNameMap" type="com.ibini.my_books.post.dto.PostWithName">
         <result property="postNo" column="post_no"/>
         <result property="genreId" column="genre_id"/>
         <result property="caId" column="ca_id"/>
