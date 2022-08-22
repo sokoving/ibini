@@ -4,6 +4,8 @@
         <html lang="ko">
 
         <head>
+
+
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,32 +21,28 @@
                     margin: 200px auto 200px;
                 }
 
-                .c-red {
-                    color: red;
-                }
-
-                .c-blue {
-                    color: blue;
-                }
             </style>
         </head>
 
         <body>
 
 
+
+
+
             <div class="container">
                 <div class="row">
-                    <div class="offset-md-2 col-md-4">
-                        <div class="card" style="width:200%;">
-                            <div class="card-header text-white" style="background: #343A40;">
-                                <h2><span style="color: gray;">MyBooks</span>${loginUser.userName}님 반갑습니다.</h2>
+                    <div>
+                        <div>
+                            <div>
+                                <h2><span>MyBooks</span>${loginUser.userName}님 반갑습니다.</h2>
                             </div>
-                            <div class="card-body">
+                            <div>
 
 
-                                    <table style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
+                                    <table>
                                         <tr>
-                                            <td style="text-align: left">
+                                            <td>
                                                 <p><strong>아이디 : ${loginUser.account}</strong>&nbsp;&nbsp;&nbsp;
                                                     <span id="idChk"></span>
                                                 </p>
@@ -53,7 +51,7 @@
     
 
                                         <tr>
-                                            <td style="text-align: left">
+                                            <td>
                                                 <p><strong>닉네임 : ${loginUser.userName}</strong>&nbsp;&nbsp;&nbsp;<span
                                                         id="nameChk"></span></p>
                                                         
@@ -61,7 +59,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td style="text-align: left">
+                                            <td>
                                                 <p><strong>email: ${loginUser.email}</strong>&nbsp;&nbsp;&nbsp;<span
                                                         id="nameChk"></span></p>
                                             </td>
@@ -69,7 +67,7 @@
 
 
                                         <tr>
-                                            <td style="text-align: left">
+                                            <td>
                                                 <p><strong id="join-date">가입일자 : ${loginUser.prettierDate} </strong>&nbsp;&nbsp;&nbsp;<span
                                                         id="pwChk"></span></p>
                                             </td>
@@ -77,30 +75,30 @@
 
 
                                         <tr>
-                                            <td style="padding-top: 10px; text-align: center">
+                                            <td>
                                                 <p><strong>저희 서비스를 이용해주셔서 감사합니다.</strong></p>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td style="width: 100%; text-align: center; colspan: 2;">
-                                                <input type="button" value="닉네임 수정" class="btn form-control tooltipstered"
+                                            <td>
+                                                <input type="button" value="닉네임 수정"
                                                     id="nickmodify-btn"
-                                                    style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
+                                                   >
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 100%; text-align: center; colspan: 2;">
-                                                <input type="button" value="비밀번호 수정" class="btn form-control tooltipstered"
+                                            <td>
+                                                <input type="button" value="비밀번호 수정"
                                                     id="modify-btn"
-                                                    style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
+                                                   >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 100%; text-align: center; colspan: 2;">
-                                                <input type="button" value="회원 탈퇴" class="btn form-control tooltipstered"
+                                                <input type="button" value="회원 탈퇴" 
                                                     id="joinOut-btn"
-                                                    style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
+                                                    >
                                             </td>
                                         </tr>
 
@@ -111,6 +109,8 @@
                 </div>
             </div>
             <script>
+                const date = '${loginUser.prettierDate}';
+                console.log(date);
                 
                 const $nickModifyBtn = document.getElementById('nickmodify-btn');
                 console.log($nickModifyBtn);
@@ -143,6 +143,8 @@
                     alert('닉네임 수정 성공!')
                 }
             </script>
+
+
 
            
 

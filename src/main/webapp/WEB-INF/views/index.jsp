@@ -1,63 +1,59 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!DOCTYPE html>
-        <html lang="ko">
+<!DOCTYPE html>
+<html class="html">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title></title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-                crossorigin="anonymous">
-            <!-- reset css -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-            <style>
-                h1 {
-                    font-size: 50px;
-                    margin: 0 auto 0;
-                    margin: 50px auto 0px;
-                    /* background: gray; */
-                    width: 80%;
-                    text-align: center;
-                }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+  <meta name="keywords" content="Yulian Brito, Yulian, Brito, Frontend Developer, Sign Up Sign In 1" />
+  <meta name="author" content="Yulian Brito" />
+  <title>Sign Up / Sign In 1</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
 
-                .login-menu {
-                    width: 200px;
-                    height: 200px;
-                    margin: 100px auto;
-                }
-
-                a {
-                    font-size: 50px;
-                    background: yellow;
-                }
-            </style>
-        </head>
+  <style>
 
 
-        <body>
+  </style>
 
-            <h1> Welcome~ This is ibini's index page!! </h1>
 
-            <c:if test="${loginUser == null}">
-                <div class="login-menu"><a href="/member/sign-in">sign-in</a></div>
-                <div class="login-menu"><a href="/member/sign-up">sign-up</a></div>
-            </c:if>
+</head>
 
-            <c:if test="${loginUser != null}">
-                <div class="login-menu"><a href="/member/my-page">My page</a></div>
-                <div class="login-menu"><a href="/member/sign-out">sign-out</a></div>
-            </c:if>
+<body>
+  <%@ include file="../include/header.jsp" %>
 
-            <script>
-                const msg = '${msg}';
-                if(msg === 'success') {
-                    alert('회원탈퇴가 정상적으로 처리 되었습니다. 이용해주셔서 감사합니다.');
-                }
-            </script>
+  <h1 id="title"> ibiniBooks Welcome</h1>
 
-        </body>
+  <div> </div>
 
-        </html>
+  <ul>
+    <c:if test="${loginUser == null}"></c:if>
+    <li><a href="/member/sign-in">sign-in</a></li>
+    <li> <a href="/member/sign-up">sign-up</a></li>
+    </c:if>
+  
+    <c:if test="${loginUser != null}">
+    <li> <a href="/member/my-page">My Page</a>   </li>
+    <li><a href="member/sign-out">sign-out</a></li>
+    </c:if>
+  </ul>
+
+  <!-- <c:if test="${loginUser == null}">
+    <h2> <a href="/member/sign-in">sign-in</a> </h2>
+    <h2> <a href="/member/sign-up">sign-up</a> </h2>
+  </c:if>
+
+
+  <c:if test="${loginUser != null}">
+    <h2> <a href="/member/my-page">My Page</a> </h2>
+    <h2> <a href="member/sign-out">sign-out</a> </h2>
+  </c:if> -->
+
+
+
+</body>
+
+<script>
+
+</script>
+
+</html>

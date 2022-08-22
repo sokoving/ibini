@@ -4,6 +4,7 @@
         <html lang="ko">
 
         <head>
+
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,22 +34,20 @@
 
 
             <div class="container">
-                <div class="row">
-                    <div class="offset-md-2 col-md-4">
-                        <div class="card" style="width:200%;">
-                            <div class="card-header text-white" style="background: #343A40;">
-                                <h2><span style="color: gray;">MVC</span> 회원 가입</h2>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <h2><span>MyBooks</span> 회원 가입</h2>
                             </div>
-                            <div class="card-body">
+
+                            <div>
+                                <form action="/member/sign-up" name="signup" id="signUpForm" method="post">
 
 
-                                <form action="/member/sign-up" name="signup" id="signUpForm" method="post"
-                                    style="margin-bottom: 0;">
-
-
-                                    <table style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
+                                    <table>
                                         <tr>
-                                            <td style="text-align: left">
+                                            <td>
                                                 <p><strong>아이디를 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;
                                                     <span id="idChk"></span>
                                                 </p>
@@ -56,9 +55,8 @@
                                         </tr>
                                         <tr>
                                             <td><input type="text" name="account" id="user_id"
-                                                    class="form-control tooltipstered" maxlength="14"
-                                                    required="required" aria-required="true"
-                                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
+                                                    maxlength="14"
+                                                    required="required" aria-required="true"                                                   
                                                     placeholder="숫자와 영어로 4-14자">
                                             </td>
 
@@ -72,9 +70,8 @@
                                         </tr>
                                         <tr>
                                             <td><input type="password" size="17" maxlength="20" id="password"
-                                                    name="password" class="form-control tooltipstered" maxlength="20"
-                                                    required="required" aria-required="true"
-                                                    style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
+                                                    name="password" maxlength="20"
+                                                    required="required" aria-required="true"                                                    
                                                     placeholder="영문과 특수문자를 포함한 최소 8자"></td>
                                         </tr>
                                         <tr>
@@ -85,9 +82,8 @@
                                         </tr>
                                         <tr>
                                             <td><input type="password" size="17" maxlength="20" id="password_check"
-                                                    name="pw_check" class="form-control tooltipstered" maxlength="20"
-                                                    required="required" aria-required="true"
-                                                    style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
+                                                    name="pw_check" maxlength="20"
+                                                    required="required" aria-required="true"                                                    
                                                     placeholder="비밀번호가 일치해야합니다."></td>
                                         </tr>
 
@@ -99,9 +95,8 @@
                                         </tr>
                                         <tr>
                                             <td><input type="text" name="userName" id="user_name"
-                                                    class="form-control tooltipstered" maxlength="6" required="required"
-                                                    aria-required="true"
-                                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
+                                                    maxlength="6" required="required"
+                                                    aria-required="true"                                                   
                                                     placeholder="한글로 최대 6자"></td>
                                         </tr>
 
@@ -114,9 +109,8 @@
                                         </tr>
                                         <tr>
                                             <td><input type="email" name="email" id="user_email"
-                                                    class="form-control tooltipstered" required="required"
-                                                    aria-required="true"
-                                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
+                                                    required="required"
+                                                    aria-required="true"                                                    
                                                     placeholder="ex) abc@mvc.com"></td>
                                         </tr>
 
@@ -128,9 +122,7 @@
                                         </tr>
                                         <tr>
                                             <td style="width: 100%; text-align: center; colspan: 2;">
-                                                <input type="button" value="회원가입" class="btn form-control tooltipstered"
-                                                    id="signup-btn"
-                                                    style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
+                                                <input type="button" value="회원가입" id="signup-btn">
                                             </td>
                                         </tr>
 
@@ -323,7 +315,6 @@
 
                 });
             </script>
-
 
 
 

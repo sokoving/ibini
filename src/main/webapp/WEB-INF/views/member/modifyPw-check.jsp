@@ -5,6 +5,10 @@
         <html lang="ko">
 
         <head>
+
+
+
+
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,22 +29,26 @@
         <body>
 
 
-                <div class="container wrap">
-                    <div class="row">
-                        <div class="offset-md-2 col-md-4">
-                            <div class="card" style="width:200%;">
-                                <div class="card-header text-white" style="background: #343A40;">
-                                    <h2><span style="color: gray;">MyBooks</span> 비밀번호를 수정하시려면 기존 비밀번호를 입력해주세요.</h2>
+
+
+
+
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <h2><span>MyBooks</span> 비밀번호를 수정하시려면 기존 비밀번호를 입력해주세요.</h2>
                                 </div>
-                                <div class="card-body">
+                                <div>
 
                                     <form action="/member/modifyPw-check" name="pWmodifyForm" method="post" id="pWmodifyForm"
-                                        style="margin-bottom: 0;">
-                                        <table style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
+                                        >
+                                        <table >
 
                                             <input type="hidden" name="account" id="originPw" value="${loginUser.account}" >
                                             
-                                                    <td style="text-align: left">
+                                                    <td>
                                                     <p><strong>현재 비밀번호를 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span
                                                             id="pwCheck"></span></p>
                                                 </td>
@@ -49,7 +57,7 @@
                                                 <td><input type="password" size="17" maxlength="20" id="signInPw"
                                                         name="originPassword" class="form-control tooltipstered"
                                                         maxlength="20" required="required" aria-required="true"
-                                                        style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
+                                                        
                                                         placeholder="최소 8자"></td>
                                             </tr>
 
@@ -63,7 +71,7 @@
                                                 <td><input type="password" size="17" maxlength="20" id="password"
                                                         name="password" class="form-control tooltipstered" maxlength="20"
                                                         required="required" aria-required="true"
-                                                        style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
+                                                        
                                                         placeholder="영문과 특수문자를 포함한 최소 8자"></td>
                                             </tr>
                                             <tr>
@@ -76,7 +84,7 @@
                                                 <td><input type="password" size="17" maxlength="20" id="password_check"
                                                         name="pw_check" class="form-control tooltipstered" maxlength="20"
                                                         required="required" aria-required="true"
-                                                        style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
+                                                        
                                                         placeholder="비밀번호가 일치해야합니다."></td>
                                             </tr>
     
@@ -86,7 +94,7 @@
                                                 <td style="width: 100%; text-align: center; colspan: 2;"><input
                                                         type="submit" value="비밀번호 확인" class="btn form-control tooltipstered"
                                                         id="pWmodify-btn"
-                                                        style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">
+                                                        >
                                                 </td>
                                             </tr>                                            
                                            
@@ -186,6 +194,8 @@
                 });
                    
                 </script>
+
+
 
 
         </body>

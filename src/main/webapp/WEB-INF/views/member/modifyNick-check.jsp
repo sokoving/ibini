@@ -15,95 +15,103 @@
             <!-- jquery -->
             <script src="/js/jquery-3.3.1.min.js"></script>
 
-                <style>
-                    .wrap {
-                        margin: 200px auto;
-                    }
-                </style>
+            <style>
+                .wrap {
+                    margin: 200px auto;
+                }
+
+                .c-red {
+                    color: red;
+                }
+
+                .c-blue {
+                    color: blue;
+                }
+            </style>
         </head>
 
         <body>
 
 
-                <div class="container wrap">
-                    <div class="row">
-                        <div class="offset-md-2 col-md-4">
-                            <div class="card" style="width:200%;">
-                                <div class="card-header text-white" style="background: #343A40;">
-                                    <h2><span style="color: gray;">MyBooks</span> 비밀번호를 수정하시려면 기존 비밀번호를 입력해주세요.</h2>
-                                </div>
-                                <div class="card-body">
+            <div class="container wrap">
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <h2><span>MyBooks</span> 닉네임 수정 </h2>
+                            </div>
+                            <div class="card-body">
 
-                                    <form action="/member/modifyNick-check" name="nickModifyForm" method="post" id="nickModifyForm"
-                                        style="margin-bottom: 0;">
-                                        <table style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
+                                <form action="/member/modifyNick-check" name="nickModifyForm" method="post"
+                                    id="nickModifyForm">
+                                    <table>
 
-                                            <input type="hidden" name="account" value="${loginUser.account}">                             
+                                        <input type="hidden" name="account" value="${loginUser.account}">
 
 
-                                            <tr>
-                                                <td style="text-align: left">
-                                                    <p><strong>수정하실 닉네임을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span
-                                                            id="nameChk"></span></p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" size="17" maxlength="20" id="user_name"
-                                                        name="userName" class="form-control tooltipstered" maxlength="20"
-                                                        required="required" aria-required="true"
-                                                        style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
-                                                        placeholder="한글로 최대 6자"></td>
-                                            </tr>
-                                          
+                                        <tr>
+                                            <td>
+                                                <p><strong>수정하실 닉네임을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span
+                                                        id="nameChk"></span></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" size="17" maxlength="20" id="user_name"
+                                                    name="userName"maxlength="20"
+                                                    required="required" aria-required="true"
+                                                    
+                                                    placeholder="한글로 최대 6자"></td>
+                                        </tr>
 
-                                             
-                                            <tr>
-                                                <td style="width: 100%; text-align: center; colspan: 2;"><input
-                                                        type="submit" value="비밀번호 확인" class="btn form-control tooltipstered"
-                                                        id="Nickmodify-btn"
-                                                        style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">
-                                                </td>
-                                            </tr>                                            
-                                           
-                                            
-                                        </table>
-                                    </form>
-                                </div>
+
+
+                                        <tr>
+                                            <td><input
+                                                    type="submit" value="닉네임 변경 하기"
+                                                    id="Nickmodify-btn"
+                                                   >
+                                            </td>
+                                        </tr>
+
+
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <script>
+            <script>
 
-                    console.log('${loginUser.account}');
-                   
-                    const msg = '${msg}';
-                    console.log(msg);
-                    if (msg === 'discord') {
-                        alert('현재 비밀번호가 일치하지 않습니다. 확인후 재입력해주세요.');
-                    } 
-                    
-                    if(msg === 'modify-fail'){
-                        alert('비밀번호 수정에 실패 했습니다.')
-                    }   
-                    
-                    if(msg === 'nickModify-fail'){
-                        alert('닉네임 변경에 실패하였습니다.')
-                    }  
+                console.log('${loginUser.account}');
 
-                </script>
+                const msg = '${msg}';
+                console.log(msg);
+                if (msg === 'discord') {
+                    alert('현재 비밀번호가 일치하지 않습니다. 확인후 재입력해주세요.');
+                }
 
-                <script>
-                    // 수정 닉네임 검증 - jquery
+                if (msg === 'modify-fail') {
+                    alert('비밀번호 수정에 실패 했습니다.')
+                }
+
+                if (msg === 'nickModify-fail') {
+                    alert('닉네임 변경에 실패하였습니다.')
+                }
+
+            </script>
+
+            <script>
+                // 수정 닉네임 검증 - jquery
                 $(document).ready(function () {
                     //입력값 정규 표현식
                     const getName = RegExp(/^[가-힣]+$/); // 한글로 써야 한다. 유니코드 시작과 끝 가 - 힣
 
                     const checkArr = [false];
 
-                        //이름 입력값 검증.
-                        $('#user_name').on('keyup', function () {
+                    //이름 입력값 검증.
+                    $('#user_name').on('keyup', function () {
                         //이름값 공백 확인
                         if ($("#user_name").val() === "") {
                             $('#user_name').css('border-color', 'red');
@@ -139,8 +147,8 @@
 
 
 
-                 });
-                </script>
+                });
+            </script>
 
 
         </body>
