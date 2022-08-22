@@ -27,6 +27,7 @@ public class ListController {
         log.info("ListController /list  GET 요청!!");
 
         model.addAttribute("p", postService.finaAllPostWithNameService()); //  List<PostWithName>!
+        model.addAttribute("thumbs", imgService.getThumbs()); // List<PostImg>
 //        model.addAttribute("tagList", hashTagService.find); // List<HashtagDomain>
 //        model.addAttribute("imgList", imgService.getPostImgList(postNo));  // List<PostImg>
 //        model.addAttribute("date", postService.convertDate(postService.findOnePostService(postNo)));

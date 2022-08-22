@@ -25,4 +25,7 @@ public class PostImgService {
         return repository.findFiles(postNo);
     }
 
+//    썸네일 리스트 조회
+public List<PostImg> getThumbs(){return repository.findThumbs();}
+
 }

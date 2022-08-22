@@ -54,5 +54,13 @@ class PostImgMapperTest {
             System.out.println(postImg);
         }
     }
+    @Test
+    @DisplayName("썸네일이 true인 postImg 객체 리스트를 조회한다")
+    void findThumbsTest(){
+        List<PostImg> thumbs = mapper.findThumbs();
+        for (PostImg thumb : thumbs) {
+            System.out.println(thumb);
+        }
+    }
 
 }

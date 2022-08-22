@@ -34,6 +34,11 @@
         WHERE post_no = #{postNo}
     </select>
 
+    <select id="findThumbs" resultMap="postImgMap">
+        select * from PRJ_POST_IMG
+        where THUMBNAIL='true'
+    </select>
+
 
 
 </mapper>
