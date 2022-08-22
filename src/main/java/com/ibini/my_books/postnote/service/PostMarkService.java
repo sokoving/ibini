@@ -5,7 +5,9 @@ import com.ibini.my_books.postnote.repository.PostMarkMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -32,8 +34,13 @@ public class PostMarkService {
     }
 
     // 마크 전체 조회 요청 중간 처리 // 페이징 처리 추후 추가 예정
-    public List<PostMark> findAll(Long postNo) {
-        return postMarkMapper.findAll(postNo);
+    public Map<String, Object> findAll(Long postNo) {
+
+        Map<String, Object> markMap = new HashMap<>();
+        markMap.put("markList", postMarkMapper.findAll(postNo));
+        markMap.put("markCnt", postMarkMapper.getPostMarkCount(postNo));
+
+        return markMap;
     }
 
     // 마크 개별 조회 요청 중간 처리

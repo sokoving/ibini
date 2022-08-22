@@ -24,8 +24,7 @@
     <!-- 마크 수정 -->
     <update id="modify">
         UPDATE prj_post_mark
-        SET episode_no = #{episodeNo},
-            content = #{content}
+        SET content = #{content}
         WHERE mark_no = #{markNo}
     </update>
 
