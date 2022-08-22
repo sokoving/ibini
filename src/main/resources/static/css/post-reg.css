@@ -52,25 +52,6 @@ section .inner-section{
     margin-right: 15px;
 }
 
-.division-wrap{
-    display: flex;
-}
-.division-wrap .divided-select{
-    flex: 1 1 46%;
-}
-.division-wrap .divided-input{
-    flex: 1 1 46%;
-    font-size: 0.8em;
-    margin-left: 10px;
-}
-.division-wrap .divided-btn{
-    flex: 1 1 8%;
-}
-.divided-btn .icon-box{
-    /* border: 1px dotted #787878; */
-    box-shadow: 1px 1px 1px #787878;
-}
-
 
 /* #reg-1 : 이미지, 제목, 작가 */
 #reg-1 {
@@ -109,19 +90,42 @@ section .inner-section{
     flex-grow: 1;
 }
 
-/* 플랫폼, 장르 */
+/* #reg-2 플랫폼, 장르 */
 #reg-2 {
     padding-left: 70px;
+    margin-top: 50px;
 }
 
-/* 연재 상태, 연재 요일 */
+.select-add-wrap{
+    display: flex;
+}
+.select-add-wrap .divided-select{
+    flex: 1 1 46%;
+}
+.select-add-wrap .divided-input{
+    flex: 1 1 46%;
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+.select-add-wrap .divided-btn{
+    flex: 1 1 8%;
+}
+.divided-btn .icon-box{
+    /* border: 1px dotted #787878; */
+    box-shadow: 1px 1px 1px #787878;
+}
+
+
+/* #reg-3 연재 상태, 연재 요일 */
 #reg-3 {
     padding: 0 80px 0 70px;
+    margin-top: 50px;
 }
 
-/* 회차 구분, 현재 회차, 현재 페이지 */
+/* #reg-4 회차 구분, 현재 회차, 현재 페이지 */
 #reg-4 {
     padding: 0 70px;
+    margin-top: 70px;
     text-align: center;
 }
 #reg-4 .epId-wrap .white-box{
@@ -140,6 +144,16 @@ section .inner-section{
 }
 #reg-4 .ep-input-wrap{
     margin-right: 10px;
+}
+
+/* #reg-5 해시태그 */
+#reg-5 {
+    margin-top: 50px;
+}
+
+/* #reg-6 이미지 첨부 */
+#reg-6 {
+    margin-top: 50px;
 }
 
 /* 등록 버튼 */
