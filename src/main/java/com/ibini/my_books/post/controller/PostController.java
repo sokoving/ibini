@@ -32,32 +32,32 @@ public class PostController {
      */
 
     //    포스트 등록 폼 요청   get    /post/write
-    @GetMapping("/write")
-    public String postWriteForm(){
-        log.info("PostController /post/write  GET 요청!!");
-//        return "/upload/upload-form";
-        return "post/post-reg";
-    }
-
-
-    //    포스트 등록 요청      post   /post/write
-    @PostMapping("/write")
-    public String postWrite(Post post, PostImg postImg){
-        log.info("PostController /post/write POST 요청!! - {}", post);
-
-        // tbl_post 저장
-        boolean postFlag = postService.saveService(post);
-
-        // prj_post_img 저장
-
-//        imgService.add(postImgList);
-
-
-
-
-        log.info("save flag : {}", postFlag);
-
-        return "redirect:/post/write";
-    }
+//    @GetMapping("/write")
+//    public String postWriteForm(){
+//        log.info("PostController /post/write  GET 요청!!");
+////        return "/upload/upload-form";
+//        return "post/post-reg";
+//    }
+//
+//
+//    //    포스트 등록 요청      post   /post/write
+//    @PostMapping("/write")
+//    public String postWrite(Post post, PostImg postImg){
+//        log.info("PostController /post/write POST 요청!! - {}", post);
+//
+//        // tbl_post 저장
+//        boolean postFlag = postService.saveService(post);
+//
+//        // prj_post_img 저장
+//
+////        imgService.add(postImgList);
+//
+//
+//
+//
+//        log.info("save flag : {}", postFlag);
+//
+//        return "redirect:/post/write";
+//    }
 
 }

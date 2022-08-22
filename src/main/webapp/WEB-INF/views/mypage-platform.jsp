@@ -65,7 +65,6 @@
                         </div>
                         <div class="modal-body">
                             <h1>플랫폼 수정하기</h1>
-                            <h2>Color api</h2>
                             <div id="picker"></div>
                             <div id="modiName">
                                 <h2>플랫폼 이름 수정</h2>
@@ -100,7 +99,12 @@
 
 
     <script>
-
+        
+        const account = "ibini";
+        // 나중에 꼭 account 수정해주기
+        const url = "http://localhost:8383/platform/c1?account=" + account;
+        // 수정 삭제용 url
+        const modiURL = "http://localhost:8383/platform/c1/" + account;
 
 
         // 배경 클릭 이벤트
@@ -188,11 +192,6 @@
             
         }
     
-        const account = "ibini";
-        // 나중에 꼭 account 수정해주기
-        const url = "http://localhost:8383/platform/c1?account=" + account;
-        // 수정 삭제용 url
-        const modiURL = "http://localhost:8383/platform/c1/" + account;
 
         // 도메인 리스트 불러오기
         function showdomainList() {
@@ -322,7 +321,7 @@
 
         // 플팻폼 수정 비동기 처리 이벤트
         function platformModifyEvent() {
-            const $modal = ('#platModi');
+            const modal = document.getElementById('platModi');
             console.log('platformModifyEvent')
 
             const modiBtn = document.getElementById('modiBtn');
@@ -359,7 +358,8 @@
                         .then(msg => {
                             if (msg === 'modi-success') {
                                 alert('수정 성공!!');
-                                $modal.modal('hide'); // 모달창 닫기
+                                // jquery로 닫자,,,,
+                                modal.style.display = "none"; // 모달창 닫기?
                                 showdomainList(); //새로불러오기
                             } else {
                                 alert('수정 실패!!');
@@ -389,6 +389,9 @@
                 console.log('delBtn: ', no);
             }
         }
+
+
+        // 함수 실행부
 
         (function (){
             // 플랫폼 돔 생성

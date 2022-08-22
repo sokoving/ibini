@@ -32,7 +32,7 @@
 
 /* 플랫폼 번호 */
 .myPage-wrap .platform-wrap #selectSetting #selList .platformNo{
-    background: #cacaca;
+    background: #eeedeb;
     /*border-radius: 20px;*/
     width: 7%;
     text-align: center;
@@ -43,11 +43,11 @@
 .myPage-wrap .platform-wrap #selectSetting #selList .platformName{
     background: #fff;
     width: 33%;
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .platformName span{
-    color: #004986;
+    color: #000000;
 }
 
 
@@ -90,7 +90,7 @@
 /* 플랫폼 버튼 */
 .myPage-wrap .platform-wrap #selectSetting #selList .modiAndDel{
     /*background: rgb(171, 116, 168);*/
-    padding: 0 15px;
+    padding-left: 30px;
     width: 20%;
 }
 
