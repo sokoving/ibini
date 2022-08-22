@@ -14,6 +14,7 @@ public class MyPageController {
 
     // http://localhost:8383/myPage/platform
     // account 정보 추가하기
+    // http://localhost:8383/myPage/{account}/platform
 
     @GetMapping("")
     public String showMyPage(){
