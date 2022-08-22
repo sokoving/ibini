@@ -13,11 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
 
     // http://localhost:8383/myPage/platform
-    @GetMapping("/platform")
+    // account 정보 추가하기
+
+    @GetMapping("")
     public String showMyPage(){
+        return "myPage/myPage";
+    }
+    @GetMapping("/platform")
+    public String showPlatform(){
 
-        return "mypage-platform";
+        return "myPage/myPage-platform";
+    }
 
+    @GetMapping("/genre")
+    public String showGenre(){
+        return "myPage/myPage-genre";
     }
 
 

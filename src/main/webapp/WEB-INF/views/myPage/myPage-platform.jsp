@@ -9,20 +9,39 @@
 
 <!-- RESET CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+
 <!-- css -->
 <link rel="stylesheet" href="/css/myPagePlatform.css"/>
+<link rel="stylesheet" href="/css/myPageSetting.css" />
 
 <!-- bootstrap cdn -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 <%-- color api --%>
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
 <%--  jquery --%>
  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <title>MyPage</title>
 </head>
 
 <body>
+
+        
+    <!-- sideBar menu -->
+
+    <div class="sidenav">
+        <h2>MY PAGE</h2>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <h2>Setting</h2>
+        <a href="http://localhost:8383/myPage/platform">Platform</a>
+        <a href="http://localhost:8383/myPage/genre">Genre</a>
+    </div>
+
+
 
         <div class="myPage-wrap">
             <h1>MyPage</h1>
