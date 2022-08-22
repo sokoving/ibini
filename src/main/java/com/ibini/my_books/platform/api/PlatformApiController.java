@@ -38,9 +38,12 @@ public class PlatformApiController {
         }
      */
     @PutMapping("/{account}/{platformId}")
-    public String modify(@PathVariable int platformId
+    public String modify(
+            @PathVariable String account
+            , @PathVariable int platformId
             ,@RequestBody PlatformDomain platformDomain){
 
+        log.info("/platform/c1/{}/{} PUT!", account, platformId);
         platformDomain.setPlatformId(platformId);
         log.info("platformId- {}", platformId);
 

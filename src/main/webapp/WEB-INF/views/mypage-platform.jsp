@@ -67,18 +67,17 @@
                             <h1>플랫폼 수정하기</h1>
                             <h2>Color api</h2>
                             <div id="picker"></div>
-                            <div id="eventRemoveBtn"></div>
                             <div id="modiName">
                                 <h2>플랫폼 이름 수정</h2>
                                 <input type="text" id="modiNameInput">
                             </div>
                             <div id="modiBg">
                                 <h2>플랫폼 뱃지 배경색 수정</h2>
-                                <input type="text" id="modiBgInput">
+                                <input type="text" id="modiBgInput"><div id="eventRemoveBtn"></div>
                             </div>
                             <div id="modiFont">
                                 <h2>플랫폼 뱃지 글자색 수정</h2>
-                                <input type="text" id="modiFontInput">
+                                <input type="text" id="modiFontInput"><div id="eventRemoveBtnFont"></div>
 
                             </div>
                         </div>
@@ -104,55 +103,49 @@
 
 
 
-        // function modiColorInputHandler(){
-        //     if (클릭한인풋이배경색상일때){
-        //         // 컬러선택해주기
-        //         // 완료버튼 클릭해서 이벤트 해제해주기
-        //     } else if (클릭한인풋이폰트일때){
-        //
-        //     }
-        // }
+        // 배경 클릭 이벤트
+        function modiBgInputClick(e) {
 
-        // 배경 색상 선택 input 수정
-        function modiBgInput() {
-            const modiBgInput = document.getElementById('modiBgInput');
-            modiBgInput.addEventListener('click', function (e) {
-                var colorPicker = new iro.ColorPicker("#picker", {
-                    // Set the size of the color picker
-                    width: 270,
-                    // Set the initial color to pure red
-                    color: "#f00"
-                });
-                // document.getElementById('eventRemoveBtn');
+            var colorPicker = new iro.ColorPicker("#picker", {
+                // Set the size of the color picker
+                width: 270,
+                // Set the initial color to pure red
+                color: "#f00"
+            });
+            // document.getElementById('eventRemoveBtn');
 
-                // btn 위치 잡아서 클릭이벤트 활성화될ㄸㅐ 추가해주기
-                const eventRemoveBtn = document.querySelector('#eventRemoveBtn');
-                tag = `<button type="button" id="removeFontEvent">완료</button>`;
+            // btn 위치 잡아서 클릭이벤트 활성화될ㄸㅐ 추가해주기
 
+            var rgbString = colorPicker.color.rgbString;
 
-                var rgbString = colorPicker.color.rgbString;
+            // listen to a color picker's color:change event
+            // color:change callbacks receive the current color
+            colorPicker.on('color:change', function (color) {
+                // log the current color as a HEX string
+                console.log(color.rgbString);
+                document.getElementById('modiBgInput').value = color.rgbString;
+            });
 
-                // listen to a color picker's color:change event
-                // color:change callbacks receive the current color
-                colorPicker.on('color:change', function (color) {
-                    // log the current color as a HEX string
-                    console.log(color.rgbString);
-                    document.getElementById('modiBgInput').value = color.rgbString;
-                });
-
-            })
         }
 
-        // 글자 색상 input 수정
-        function modiFontInput() {
-            const modiFontInput = document.getElementById('modiFontInput');
-            modiFontInput.addEventListener('click', function (e) {
+        
+        // 폰트 클릭이벤트
+        function modiFontInputEvent(e) {
+                
+
                 var colorPicker = new iro.ColorPicker("#picker", {
                     // Set the size of the color picker
                     width: 270,
                     // Set the initial color to pure red
                     color: "#f00"
                 });
+
+                // btn 위치 잡아서 클릭이벤트 활성화될ㄸㅐ 추가해주기
+                // const eventRemoveBtn = document.querySelector('#eventRemoveBtnFont');
+                // tag = `<button type="button" class="btn btn-primary" id="removeFontEvent">수정완료</button>`;
+                
+                // document.getElementById('removeFontEvent').innerHTML = tag;
+
 
                 var rgbString = colorPicker.color.rgbString;
 
@@ -164,7 +157,35 @@
                     document.getElementById('modiFontInput').value = color.rgbString;
                 });
 
+
+        }
+
+
+        // 배경 색상 선택 input 수정
+        function modiBgInput() {
+            const modiBgInput = document.getElementById('modiBgInput');
+            modiBgInput.addEventListener('click', modiBgInputClick );
+            
+                
+            // 중복이벤트 제거
+            modiBgInput.addEventListener('click', function(e){
+                modiBgInput.removeEventListener('click', modiBgInputClick);
             })
+
+            
+        }
+
+        // 글자 색상 input 수정
+        function modiFontInput() {
+            const modiFontInput = document.getElementById('modiFontInput');
+            modiFontInput.addEventListener('click', modiFontInputEvent );
+            
+            
+            // 중복이벤트 제거
+            modiFontInput.addEventListener('click', function(e){
+                modiFontInput.removeEventListener('click', modiFontInputEvent);
+            })
+            
         }
     
         const account = "ibini";
@@ -316,22 +337,24 @@
                 console.log('ModifyEvent no :', no);
                 // console.log('no.value: ', no.value);
 
+                const objj = {
+                                 account : account,
+                                 platformName: modiNameInput.value,
+                                 platformBgColor: modiBgInput.value,
+                                 platformFontColor: modiFontInput.value
+                             };
+
                     const reqInfo = {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json'
                         },
-                        body: JSON.stringify({
-                            account : account,
-                            platformName: modiNameInput.value,
-                            platformBgColor: modiBgInput.value,
-                            platformFontColor: modiFontInput.value
-                        })
+                        body: JSON.stringify(objj)
                     };
-                    console.log(reqInfo);
+                    console.log(objj);
 
                 console.log(modiURL + '/' + no);
-                    fetch(modiURL + '/' + no)
+                    fetch(modiURL + '/' + no, reqInfo)
                         .then(res => res.text())
                         .then(msg => {
                             if (msg === 'modi-success') {
