@@ -31,7 +31,6 @@ public class PostNoteController {
 
         return flag ? new ResponseEntity<>("insert-success", HttpStatus.OK)
                 : new ResponseEntity<>("insert-fail", HttpStatus.INTERNAL_SERVER_ERROR);
-        // BAD_REQUEST : 400, INTERNAL_SERVER_ERROR : 500
     }
 
     // 마크 수정
