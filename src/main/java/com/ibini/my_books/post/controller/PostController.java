@@ -1,6 +1,7 @@
 package com.ibini.my_books.post.controller;
 
 
+import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.service.PostService;
@@ -47,19 +48,18 @@ public class PostController {
 
     //    포스트 등록 요청      post   /post/write
     @PostMapping("/write")
-    public String postWrite(Post post, PostImg postImg) {
-        log.info("PostController /post/write POST 요청!! - {}", post);
+    public String postWrite(Post post, HashtagDomain tag) {
+        log.info("PostController /post/write POST 요청!! - post: {}", post);
+        log.info("PostController /post/write POST 요청!! - hashtag: {}", tag);
 
         // tbl_post 저장
         boolean postFlag = postService.saveService(post);
-
-        // prj_post_img 저장
-
-//        imgService.add(postImgList);
-
         log.info("save flag : {}", postFlag);
 
-        return "redirect:/list";
+        // PRJ_HASHTAG 저장
+        hashTagService.saveHashTag(tag);
+
+        return "list";
     }
 
 //    포스트 수정 폼 요청   get    /post/modify

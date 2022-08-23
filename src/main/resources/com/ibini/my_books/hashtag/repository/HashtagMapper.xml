@@ -16,7 +16,7 @@
         INSERT INTO prj_hashtag
         (tag_no, post_no, tag_name, account )
         VALUES
-        (seq_prj_hashtag.nextval, #{postNo}, #{tagName}, #{account})
+        (seq_prj_hashtag.nextval, seq_tbl_post.currval, #{tagName}, #{account})
     </insert>
 
     <!--    삭제-->

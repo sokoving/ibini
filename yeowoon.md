@@ -10,16 +10,16 @@ post-btn-wrap
     // tbl_post
     private Long postNo;            //  포스트 번호   NUMBER(10)  NOT NULL,
     private String account;         // 유저아이디    VARCHAR2(50)  NOT NULL,
-    private int genreId;           // 장르아이디    NUMBER(3) NULL,
+    - private int genreId;           // 장르아이디    NUMBER(3) NULL,
     - private int caId;             // 카테고리아이디   NUMBER(3)  DEFAULT 0,
-    private int platformId;       // 연재플랫폼아이디   NUMBER(3)  DEFAULT 0,
+    - private int platformId;       // 연재플랫폼아이디   NUMBER(3)  DEFAULT 0,
     - private String postTitle;     // 책제목    VARCHAR2(100) NOT NULL,
-    private String postWriter;    // 작가    VARCHAR2(100) NOT NULL,
-    private int publishStatus;    // 연재상태   NUMBER(1) DEFAULT 0,
-    private String publishCycle;  // 연재주기   VARCHAR2(100) NULL,
-    private int epId;             // 회차아이디   NUMBER(1) NULL,
-    private int curEp;            // 현재 회차    NUMBER(5) DEFAULT 0,
-    private int totalEp;           // 총회차   NUMBER(5) DEFAULT 0,
+    - private String postWriter;    // 작가    VARCHAR2(100) NOT NULL,
+    - private int publishStatus;    // 연재상태   NUMBER(1) DEFAULT 0,
+    - private String publishCycle;  // 연재주기   VARCHAR2(100) NULL,
+    - private int epId;             // 회차아이디   NUMBER(1) NULL,
+    - private int curEp;            // 현재 회차    NUMBER(5) DEFAULT 0,
+    - private int totalEp;           // 총회차   NUMBER(5) DEFAULT 0,
     private Date regDate;          // 등록일자   DATE  DEFAULT SYSDATE,
     private Date updateDate;       // 수정일자    DATE               DEFAULT SYSDATE ,
     private int starRate;          // 별점   NUMBER(1)          NULL,
@@ -45,7 +45,7 @@ post-btn-wrap
 ("tagList", hashTagService.findAllByPostNo(postNo)); // List<HashtagDomain>
 private int tagNo;  // 태그 번호
 private Long postNo;    // 태그가 속해 있는 포스트 번호
-private String tagName;     // 태그 내용
+- private String tagName;     // 태그 내용
 private String account;     // 태그를 저장한 계정 이름
 
 
