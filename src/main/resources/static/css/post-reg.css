@@ -142,7 +142,7 @@ section .inner-section{
     font-size: 1em;
     font-weight: 700;
 }
-.radi-item.checked {
+.radio-item.checked {
     background-color: #ffca3d;
 }
 
@@ -154,7 +154,7 @@ section .inner-section{
     margin-right: 10px;
 }
 .ep-radio{
-    /* display: none; */
+    display: none;
 }
 
 /* #reg-5 해시태그 */

@@ -44,12 +44,12 @@
         <div class="submit-wrapper">
             <div name="mark">
                 <div class="episode-no">
-                    <label for="episode-no-input">회차
-                        <input type="text" name="episodeNo" id="episode-no-input" value="">
+                    <label for="episode-no">회차
+                        <input type="number" id="episode-no" name="episodeNo">
                     </label>
                 </div>
                 <div class="text-area">
-                    <textarea id="mark-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup(this)" spellcheck="false"></textarea>
+                    <textarea id="mark-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup(this)" onkeydown="textArea_onkeyup(this)" spellcheck="false"></textarea>
                 </div>
                 <div class="flex submit-area">
                     <div class="info">
@@ -62,7 +62,7 @@
             </div>
             <div class="hidden" name="memo">
                 <div class="text-area">
-                    <textarea id="memo-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup(this)" spellcheck="false"></textarea>
+                    <textarea id="memo-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup(this)" onkeydown="textArea_onkeyup(this)" spellcheck="false"></textarea>
                 </div>
                 <div class="flex submit-area">
                     <div class="info">
@@ -229,7 +229,7 @@
                 
             } else {
 
-                const $episodeNo = document.getElementById('episode-no-input');
+                const $episodeNo = document.getElementById('episode-no');
                 const $markContent = document.getElementById('mark-content');
 
                 fetch(markURL, {
@@ -282,9 +282,11 @@
 
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
+                console.log($memoContent.innerHTML);
+                console.log($memoContent.getAttribute('data-initvalue'));
 
                 // 취소 클릭 시, 원래 데이터로 원복
-                $memoContent.innerHTML = $memoContent.getAttribute('data-initvalue');
+                $memoContent.value = $memoContent.getAttribute('data-initvalue');
 
                 // 버튼 모드 switching
                 toggleMemoMode($memoContent);
@@ -293,8 +295,8 @@
                 const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
 
                 // 취소 클릭 시, 원래 데이터로 원복
-                $markContent.innerHTML = $markContent.getAttribute('data-initvalue');
-
+                $markContent.value = $markContent.getAttribute('data-initvalue');
+                
                 // 버튼 모드 switching
                 toggleMarkMode($markContent);
             }
@@ -325,6 +327,8 @@
                             alert('메모 수정!');
                             toggleMemoMode($memoContent);
 
+                            $memoContent.setAttribute('data-initvalue', $memoContent.value);
+
                         } else {
                             alert('메모 수정 실패!');
                         }
@@ -333,7 +337,6 @@
             } else {
                 const markNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-mark-no');
                 const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
-                // const $modDate = $eventTag.parentElement.parentElement.firstChild.querySelector('span');
 
                 fetch(markURL + '/' + markNo, {
                         method: "PUT",
@@ -342,7 +345,7 @@
                         },
                         body: JSON.stringify({
                             "markNo": markNo,
-                            "content": $markContent.value,
+                            "content": $markContent.value
                         })
                     })
                     .then(response => response.text())
@@ -350,6 +353,8 @@
                         if (message === 'modify-success') {
                             alert('마크 수정!');
                             toggleMarkMode($markContent);
+
+                            $markContent.setAttribute('data-initvalue', $markContent.value);
 
                         } else {
                             alert('마크 수정 실패!');
@@ -435,7 +440,6 @@
             const $contents = [...document.querySelector('#postnote .content-wrapper').children];
             $contents.forEach($content => $content.classList.toggle('hidden'));
         }
-
 
         /*======================================================================
             마크, 메모 리스트 영역

@@ -14,9 +14,9 @@ body {
     height: 100vh;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
-    /* font-family: 'Nanum Gothic', sans-serif; */
-    font-family: 'Nanum Pen Script', cursive;
-    letter-spacing: 0.3em;
+    font-family: 'Nanum Gothic', sans-serif;
+    /* font-family: 'Nanum Pen Script', cursive; */
+    /* letter-spacing: 0.3em; */
     line-height: 1.5em;
 
     overflow-x: hidden;
@@ -145,7 +145,7 @@ textarea {
     margin: 0.5em 0.5em 0.1em;
 }
 #postnote .submit-wrapper .episode-no input {
-    width: 40%;
+    width: 60%;
     text-align: center;
 }
 
