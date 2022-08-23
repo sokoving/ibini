@@ -14,8 +14,8 @@ body {
     height: 100vh;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
-    font-family: 'Nanum Gothic', sans-serif;
-    /* font-family: 'Nanum Pen Script', cursive; */
+    /* font-family: 'Nanum Gothic', sans-serif; */
+    font-family: 'Nanum Pen Script', cursive;
     letter-spacing: 0.3em;
     line-height: 1.5em;
 
@@ -151,7 +151,7 @@ textarea {
 
 #postnote .submit-wrapper .submit-area {
     justify-content: left;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.5em;
 }
 #postnote .submit-wrapper .submit-area .info {
     width: 80%;
@@ -236,11 +236,6 @@ textarea {
 #postnote .content-wrapper .content-area i.marking-type3 {
     color: white;
     background-color: green;
-}
-
-/* 아이콘 버튼 설정 */
-.button-area i.fas:hover {
-    transform: scale(1.2);
 }
 
 /* 수정, 삭제 버튼 설정 */
