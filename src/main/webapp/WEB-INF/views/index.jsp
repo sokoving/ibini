@@ -42,6 +42,7 @@
             <h1> Welcome~ This is ibini's index page!! </h1>
 
             <a href="/list">포스트 전체 목록</a> <br>
+            <a href="/post/write">새 포스트 쓰기</a> <br>
 
             <c:if test="${loginUser == null}">
                 <div class="login-menu"><a href="/member/sign-in">sign-in</a></div>

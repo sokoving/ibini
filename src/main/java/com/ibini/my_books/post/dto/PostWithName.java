@@ -16,11 +16,11 @@ import java.util.Date;
 // 조인용 도메인(id와 id에 따른 이름값이 같이 출력된다)
 public class PostWithName {
 
-    /* p: post,    g: genre,   pf: platform
-    p.post_no,    p.account,    p.genre_id,     g.genre_name,
-    p.ca_id,    p.platform_id,  pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
-    p.post_title,    p.post_writer,    p.publish_status,    p.publish_cycle,
-    p.ep_id,    p.cur_ep,    p.total_ep,    p.reg_date,    p.update_date,    p.star_rate
+    /*             p.post_no,    p.account,    p.genre_id,     g.genre_name,
+            p.ca_id,    p.platform_id,  pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
+            p.post_title,    p.post_writer,    p.publish_status,    p.publish_cycle,
+            p.ep_id,    p.cur_ep,    p.total_ep,    p.reg_date,    p.update_date,    p.star_rate
+            ,pi.file_name
      */
 
     // tbl_post
@@ -52,6 +52,10 @@ public class PostWithName {
     private String platformName;
     private String platformBgColor;
     private String platformFontColor;
+
+    // prj_post_img
+    private String fileName;
+
 
 //    객체 넣어주면 caName, epName 세팅해주는 메서드
     public void setCaEpName(){

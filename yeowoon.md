@@ -1,3 +1,7 @@
+# 해야될 것
+post-reg.jsp : 별점, 이미지 업로드, 썸네일 지정, 입력값 검증
+post-list.jps : 
+
 # /post/detail addAttribute 항목들
 ```
 post-btn-wrap
@@ -29,8 +33,6 @@ post-btn-wrap
     private String epName;      // 회차 구분명(ex. 페이지)
     private String epName2;   // 회차 구분명 (ex. p)
 
-
-
     //  prj_genre
     private String genreName;
 
@@ -40,6 +42,8 @@ post-btn-wrap
     private String platformFontColor;
 
 
+    // prj_post_img
+    private String fileName;
 
 
 ("tagList", hashTagService.findAllByPostNo(postNo)); // List<HashtagDomain>

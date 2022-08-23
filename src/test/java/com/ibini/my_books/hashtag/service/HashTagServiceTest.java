@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 class HashTagServiceTest {
@@ -18,9 +19,10 @@ class HashTagServiceTest {
     @Autowired
     HashtagMapper hashtagMapper;
 
+
     @Test
     @DisplayName("해시태그 위지 가져오기")
-    void cutTagTest(){
+    void cutTagTest() {
 
         HashtagDomain oneTag = hashtagMapper.findOneTag(9);
         System.out.println(oneTag);
@@ -43,7 +45,7 @@ class HashTagServiceTest {
         hashTag = hashTag.substring(1);
         String[] hashTags = hashTag.split(" #");
         System.out.println(Arrays.toString(hashTags));
-        
+
         // hashtag[] => DB에 하나씩 넣어주기
         for (String tag : hashTags) {
             System.out.println(tag);
@@ -51,17 +53,25 @@ class HashTagServiceTest {
             hashtagMapper.saveHashtag(hashtagDomain);
             // domain
         }
-        
+
     }
-    
+
     @Test
     @DisplayName("hashtag의 배열을 분리해서 저장할 수 있어야 한다")
-    void savehashtag(){
+    void savehashtag() {
         HashtagDomain hd = new HashtagDomain();
         hd.setAccount("ibini");
         hd.setPostNo(1L);
         hd.setTagName("#삼각로맨스 #신분차이 #남장/여장물 #왕족귀족");
         hashTagService.saveHashTag(hd);
 
+    }
+
+    @Test
+    @DisplayName("해시태그 합치기")
+    void mergeTagTest() {
+        Long postNo = 26L;
+        String s = hashTagService.mergeTag(postNo);
+        System.out.println("s = " + s);
     }
 }

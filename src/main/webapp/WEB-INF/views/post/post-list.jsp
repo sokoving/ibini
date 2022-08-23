@@ -82,10 +82,17 @@
             <div class="inner-section list-sec">
 
 
-                <c:forEach var="t" items="${thumbs}">
-                    <a href="#">
-                        <img src="${t.fileName}" alt="">
-                    </a>
+                <c:forEach var="p" items="${pl}">
+                    제목 : ${p.postTitle}
+                    작가 : ${postWriter}
+                    카테고리 이름 : ${p.caName}
+                    현재 ${p.epName} : ${p.curEp}${p.epName2}
+                    총 ${p.epName} : ${p.totalEp}${p.epName2}
+                    장르 : ${p.genreName}
+                    플랫폼 : ${p.platformName}
+                    썸네일
+                    <img src="${p.fileName}" alt="">
+
                 </c:forEach>
 
             </div> <!-- // end list-sec -->

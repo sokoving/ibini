@@ -26,9 +26,9 @@ public class ListController {
     public String postDetail(Model model) {
         log.info("ListController /list  GET 요청!!");
 
-        model.addAttribute("p", postService.finaAllPostWithNameService()); //  List<PostWithName>!
-        model.addAttribute("thumbs", imgService.getThumbs()); // List<PostImg>
-//        model.addAttribute("tagList", hashTagService.find); // List<HashtagDomain>
+        model.addAttribute("pl", postService.finaAllPostWithNameService()); //  List<PostWithName>
+//        postWithName 필드로 private 태그 맵 넣기
+//        model.addAttribute("tagList", hashTagService.findAllByPostNo()); // List<HashtagDomain>
 //        model.addAttribute("imgList", imgService.getPostImgList(postNo));  // List<PostImg>
 //        model.addAttribute("date", postService.convertDate(postService.findOnePostService(postNo)));
 
