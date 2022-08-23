@@ -23,7 +23,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         //member 인터셉터 설정
         registry.addInterceptor(memberInterceptor)
                 .addPathPatterns("/member/*")
-                .excludePathPatterns("/member/sign-up","/member/sign-in");
+                .excludePathPatterns("/member/sign-up","/member/sign-in","/member/check");
 
         //after 로그인 인터셉터 설정
         registry.addInterceptor(afterLoginInterceptor)

@@ -88,8 +88,10 @@ public class MemberController {
         return "redirect:/member/sign-in";
     }
 
+
+    //로그아웃
     @GetMapping("/sign-out")
-    public String signOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String signOut(HttpServletRequest request, HttpServletResponse response , RedirectAttributes ra) throws Exception {
         HttpSession session = request.getSession();
         //만약 자동 로그인 상태라면 해제한다. = 쿠키가 있다면
         if (LoginUtil.hasAutoLoginCookie(request)) {
@@ -119,6 +121,44 @@ public class MemberController {
 
             //2. 세션을 무효화 한다.
             session.invalidate();
+            return "redirect:/";
+        }
+        return "redirect:/member/sign-in";
+    }
+
+    // 회원탈퇴시 로그아웃 처리
+    @GetMapping("/join-sign-out")
+    public String joinSignOut(HttpServletRequest request, HttpServletResponse response , RedirectAttributes ra) throws Exception {
+        HttpSession session = request.getSession();
+        //만약 자동 로그인 상태라면 해제한다. = 쿠키가 있다면
+        if (LoginUtil.hasAutoLoginCookie(request)) {
+            memberService.autoLogout(LoginUtil.getCurrentMemberAccount(session), request, response);
+        }
+        log.info("session : {}", session);
+        //sns로그인 상태라면 해당 sns 로그아웃처리를 진행
+        SNSLogin from = (SNSLogin) session.getAttribute(LOGIN_FROM);
+        log.info("from:{}", from);
+
+        if (from != null) {
+            switch (from) {
+                case KAKAO:
+                    kakaoService.logout((String) session.getAttribute("accessToken"));
+                    break;
+                case NAVER:
+                    break;
+                case GOOGLE:
+                    break;
+            }
+        }
+
+        //로그인한 사람에게만 적용
+        if (session.getAttribute("loginUser") != null) {
+            //1.세션에 정보를 삭제한다.
+            session.removeAttribute("loginUser");
+
+            //2. 세션을 무효화 한다.
+            session.invalidate();
+            ra.addFlashAttribute("msg","join-out-success");
             return "redirect:/";
         }
         return "redirect:/member/sign-in";
@@ -221,7 +261,8 @@ public class MemberController {
         if (pwCheckFlag) {
             ra.addFlashAttribute("msg", "success");
             memberService.memberDelete(account, password);
-            return "redirect:/";
+
+            return "redirect:/member/join-sign-out";
         }
         ra.addFlashAttribute("msg", "fail");
         return "redirect:/member/join-out";

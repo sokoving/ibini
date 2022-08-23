@@ -63,6 +63,10 @@ public class MemberService {
         //0.회원가입 여부 확인
         Member foundMember = memberMapper.findUser(inputData.getAccount());
 
+        if (foundMember == null) {
+            return NO_ACC;
+        }
+
         //날짜 포맷팅 후 세션으로 회원정보 넘기기
         Date date = foundMember.getJoinDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd a hh:mm");
@@ -125,11 +129,11 @@ public class MemberService {
     }
 
     // 비밀번호 일치 확인
-    public boolean modifyPwCheck(String originPassword, String account) {
+    public boolean modifyPwCheck(String password, String account) {
         Member member = memberMapper.findUser(account);
         String dbPw = member.getPassword();
 
-        if (encoder.matches(originPassword, dbPw)) {
+        if (encoder.matches(password, dbPw)) {
             return true;
         }
         return false;
