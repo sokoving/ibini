@@ -163,13 +163,13 @@
                         <span class="reg-span">연재 상태</span>
                         <div class="radio-wrap">
                             <label class="white-box radio-item">연재
-                                <input class="ep-radio" type="radio" name="publishStatus" value="1"></input>
+                                <input class="ep-radio" type="radio" name="publishStatus" value="1">
                             </label>
                             <label class="white-box radio-item">휴재
-                                <input class="ep-radio" type="radio" name="publishStatus" value="2"></input>
+                                <input class="ep-radio" type="radio" name="publishStatus" value="2">
                             </label>
                             <label class="white-box radio-item">완결
-                                <input class="ep-radio" type="radio" name="publishStatus" value="3"></input>
+                                <input class="ep-radio" type="radio" name="publishStatus" value="3">
                             </label>
                         </div>
 
@@ -184,16 +184,16 @@
 
                         <div class="radio-wrap">
                             <label class="white-box radio-item">회차(화)
-                                <input class="ep-radio" type="radio" name="epId" value="0" checked></input>
+                                <input class="ep-radio" type="radio" name="epId" value="0" checked>
                             </label>
                             <label class="white-box radio-item">페이지(p)
-                                <input class="ep-radio" type="radio" name="epId" value="1"></input>
+                                <input class="ep-radio" type="radio" name="epId" value="1">
                             </label>
                             <label class="white-box radio-item">권수
-                                <input class="ep-radio" type="radio" name="epId" value="2"></input>
+                                <input class="ep-radio" type="radio" name="epId" value="2">
                             </label>
                             <label class="white-box radio-item">퍼센트(%)
-                                <input class="ep-radio" type="radio" name="epId" value="3"></input>
+                                <input class="ep-radio" type="radio" name="epId" value="3">
                             </label>
                         </div>
 
@@ -215,13 +215,11 @@
                     <div id="reg-6">
                         <span class="reg-span">이미지 첨부하기</span>
                         <label>
-                            <div>
                                 <div class="white-box upload-input">
                                     <span class="upload-right">파일 선택</span>
                                     <!-- <span class="upload-left">클릭으로 이미지를 등록해 보세요</span> -->
                                 </div>
                                 <!-- <input class="file-input" type="file"> -->
-                            </div>
                         </label>
                     </div>
 

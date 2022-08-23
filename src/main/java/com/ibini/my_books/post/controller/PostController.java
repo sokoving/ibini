@@ -10,6 +10,7 @@ import com.ibini.my_books.postImg.service.PostImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -47,6 +48,7 @@ public class PostController {
 
 
     //    포스트 등록 요청      post   /post/write
+    @Transactional
     @PostMapping("/write")
     public String postWrite(Post post, HashtagDomain tag) {
         log.info("PostController /post/write POST 요청!! - post: {}", post);
@@ -54,12 +56,13 @@ public class PostController {
 
         // tbl_post 저장
         boolean postFlag = postService.saveService(post);
-        log.info("save flag : {}", postFlag);
+        log.info("post flag : {}", postFlag);
 
         // PRJ_HASHTAG 저장
-        hashTagService.saveHashTag(tag);
+        boolean tagFlag = hashTagService.saveHashTag(tag);
+        log.info("tag flag : {}", tagFlag);
 
-        return "list";
+        return "redirect:/list";
     }
 
 //    포스트 수정 폼 요청   get    /post/modify
