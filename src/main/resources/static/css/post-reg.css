@@ -18,6 +18,10 @@ section .inner-section{
     font-weight: 700;
     margin-bottom: 0.5em;
 }
+.file-input{
+    display: none;
+}
+
 .white-box{
     background: #fff;
     border-radius: 0.35em;
@@ -51,7 +55,6 @@ section .inner-section{
     /* text-decoration: underline; */
     margin-right: 15px;
 }
-
 
 /* #reg-1 : 이미지, 제목, 작가 */
 #reg-1 {
@@ -128,22 +131,30 @@ section .inner-section{
     margin-top: 70px;
     text-align: center;
 }
-#reg-4 .epId-wrap .white-box{
+.radio-wrap .white-box{
     padding: 0;
 }
-#reg-4 .epId-wrap{
+.radio-wrap{
     display: flex;
 }
-#reg-4 .ep-item{
+.radio-item{
     margin-right: 10px;
+    font-size: 1em;
     font-weight: 700;
 }
+.radi-item.checked {
+    background-color: #ffca3d;
+}
+
 #reg-4 .ep-wrap{
     display: flex;
     justify-content: space-between;
 }
 #reg-4 .ep-input-wrap{
     margin-right: 10px;
+}
+.ep-radio{
+    /* display: none; */
 }
 
 /* #reg-5 해시태그 */
@@ -153,8 +164,19 @@ section .inner-section{
 
 /* #reg-6 이미지 첨부 */
 #reg-6 {
+    display: flex;
+    flex-flow: column;
     margin-top: 50px;
 }
+/* #reg-6 .white-box.upload-input{
+    padding: 0;
+    display: flex;
+    justify-content: stretch;
+}
+#reg-6 .upload-right{
+    background-color: #ffca3d;
+    
+} */
 
 /* 등록 버튼 */
 #reg-btn{
