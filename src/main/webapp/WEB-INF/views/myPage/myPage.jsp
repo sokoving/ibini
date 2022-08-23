@@ -18,13 +18,15 @@
 </head>
 <body>
 
-    <!-- sideBar -->
+    <!-- sideBar account 정보 수정-->
     <div class="sidenav">
-        <h2>MY PAGE</h2>
+        <a href="http://localhost:8383/myPage">MY PAGE</a>
+        <a href=""></a>
+        
         <a href="#">About</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>
-        <h2>Setting</h2>
+        <a href="#">Setting</a>
         <a href="http://localhost:8383/myPage/platform">Platform</a>
         <a href="http://localhost:8383/myPage/genre">Genre</a>
     </div>

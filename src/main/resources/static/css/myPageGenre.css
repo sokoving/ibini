@@ -10,7 +10,7 @@
     background: #fff;
 }
 
-.myPage-wrap .genre-wrap .genreSetting{
+.myPage-wrap .genre-wrap #genreSetting{
     background: #fffaee;
     display: flex;
     flex-wrap: wrap;
@@ -18,7 +18,7 @@
 }
 
 
-.myPage-wrap .genre-wrap .genreSetting #genList{
+.myPage-wrap .genre-wrap #genreSetting #genList{
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -30,4 +30,21 @@
     overflow: hidden;
     line-height: 2.7;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .genreId{
+    width: 10%;
+    background: #eeedeb;
+    text-align: center;
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .genreName{
+    width: 70%;
+    background: #fff;
+    padding: 0 20px;
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .modiNdel{
+    width: 20%;
+    padding-left: 30px;
 }

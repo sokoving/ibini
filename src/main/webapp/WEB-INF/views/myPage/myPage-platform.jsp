@@ -29,17 +29,18 @@
 <body>
 
         
-    <!-- sideBar menu -->
-
-    <div class="sidenav">
-        <h2>MY PAGE</h2>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <h2>Setting</h2>
-        <a href="http://localhost:8383/myPage/platform">Platform</a>
-        <a href="http://localhost:8383/myPage/genre">Genre</a>
-    </div>
+        <!-- sideBar account 정보 수정-->
+        <div class="sidenav">
+            <a href="http://localhost:8383/myPage">MY PAGE</a>
+            <a href=""></a>
+            
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Setting</a>
+            <a href="http://localhost:8383/myPage/platform">Platform</a>
+            <a href="http://localhost:8383/myPage/genre">Genre</a>
+        </div>
 
 
 
@@ -306,7 +307,7 @@
                         // 목록 새로불러오기
                         showdomainList();
                     } else {
-                        alert('삭제 실패!!');
+                        alert('삭제 실패!');
                     }
                 });
         }
@@ -378,7 +379,7 @@
                             if (msg === 'modi-success') {
                                 alert('수정 성공!!');
                                 // jquery로 닫자,,,,
-                                modal.style.display = "none"; // 모달창 닫기?
+                                modal.style.display = "none"; // 모달창 닫기? -> 수정하기!
                                 showdomainList(); //새로불러오기
                             } else {
                                 alert('수정 실패!!');
