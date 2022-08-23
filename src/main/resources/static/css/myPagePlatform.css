@@ -8,12 +8,16 @@
 
 .myPage-wrap {
     font-family: 'PyeongChangPeace-Light', sans-serif;
-    background: #fff;
+    background: #fffaee;
+    height: 100vh;
 }
 .myPage-wrap .platform-wrap #selectSetting{
+    
     background: #fffaee;
     display: flex;
     flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList{

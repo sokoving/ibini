@@ -7,13 +7,16 @@
 
 .myPage-wrap{
     font-family: 'PyeongChangPeace-Light', sans-serif;
-    background: #fff;
+    background: #fffaee;
+    height: 100vh;
 }
 
 .myPage-wrap .genre-wrap #genreSetting{
     background: #fffaee;
     display: flex;
     flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
 
 }
 

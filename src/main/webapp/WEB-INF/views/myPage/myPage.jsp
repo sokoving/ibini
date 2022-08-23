@@ -21,8 +21,7 @@
     <!-- sideBar account 정보 수정-->
     <div class="sidenav">
         <a href="http://localhost:8383/myPage">MY PAGE</a>
-        <a href=""></a>
-        
+        <a href="#"></a>
         <a href="#">About</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>

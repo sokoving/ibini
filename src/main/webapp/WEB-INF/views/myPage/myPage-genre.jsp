@@ -147,7 +147,7 @@
             });
         }
 
-        let genreNameBackUp;
+
         function clickeventHandler(e){
 
             e.preventDefault();
@@ -187,6 +187,7 @@
                     console.log('ModifyAndRemoveEvent  modiSaveBtn : ', genreId);
                     // genreModiBtn(e, genreName, genreNameBackUp, genreBtn);
                     // genreModify(genreId);
+                    // 비동기 요청 전송! -> 비동기 요청 담을거
                 
                 } else if(e.target.matches('#modiResetBtn')){
                     genreModiCancelBtn(genreName, genreBtn, genreNameBackUp);
@@ -208,12 +209,12 @@
             const genreNameHTML = genreName.firstChild;
             console.log('genreNameHTML : ', genreNameHTML);
             
-            // // 1. 이전 버튼 + 저장 화면으로 돌아가기
+            // 1. 이전 버튼 + 저장 화면으로 돌아가기
             genreNameHTML.innerHTML = '';
             console.log('genreNameHTML 제거:', genreNameHTML);
             genreNameHTML.innerHTML = genreNameBackUp;
             
-            // // 2. 버튼 되돌리기
+            // 2. 버튼 되돌리기
             const genreBtnHTML = genreBtn; 
             console.log('genreBtnHTML : ', genreBtnHTML);
             genreBtnHTML.innerHTML = '';
@@ -240,7 +241,7 @@
    
             btnTag = `
                         <button type="button" class="btn btn-info" id="modiSaveBtn">저장</button>
-                        <button type="button" class="btn btn-danger" id="modiResetBtn">수정취소</button>
+                        <button type="button" class="btn btn-danger" id="modiResetBtn">취소</button>
                         `;
 
             genreName.innerHTML += tag ; 
