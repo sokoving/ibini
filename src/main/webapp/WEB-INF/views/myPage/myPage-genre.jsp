@@ -186,12 +186,27 @@
                     // const genreId = e.target.parentElement.parentElement.firstElementChild.innerText;
                     console.log('ModifyAndRemoveEvent  modiSaveBtn : ', genreId);
                     // genreModiBtn(e, genreName, genreNameBackUp, genreBtn);
-                    // genreModify(genreId);
+                    genreModify(genreId);
                     // 비동기 요청 전송! -> 비동기 요청 담을거
                 
                 } else if(e.target.matches('#modiResetBtn')){
                     genreModiCancelBtn(genreName, genreBtn, genreNameBackUp);
                 }   
+
+        }
+
+        // 장르수정 비동기 요청전송
+        function genreModify(genreId) {
+            
+            // 요청정보 담기
+            const reqInfo = {
+
+            };
+
+            fetch(delModiURL + '/' + account, reqInfo)
+                .then
+
+
 
         }
 
