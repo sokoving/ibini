@@ -121,7 +121,7 @@
 
     <script>
         
-        const account = "ibini";
+        let account = '${account}';
         // 나중에 꼭 account 수정해주기
         const url = "http://localhost:8383/platform/c1?account=" + account;
         // 수정 삭제용 url
