@@ -39,7 +39,6 @@
 
     <!-- main -->
     <div class="myPage-wrap">
-        <h1>genre jsp</h1>
         <h1>MyPage</h1>
             <div class="genre-wrap">
                 <h2>Genre Setting</h2>
@@ -245,28 +244,19 @@
 
         // 장르 수정 취소
         function genreModiCancelBtn(genreName, genreBtn, genreNameBackUp) {
-            // console.log('ModifyAndRemoveEvent modiResetBtn : ', modiResetBtn);
-            // const genreId = e.target.parentElement.parentElement.firstElementChild.innerText;
-            // console.log(e.target); // 버튼 수정 취소
-            console.log(genreNameBackUp);
-            // genreName = e.target.parentElement.parentElement;
-            console.log('genreName: ', genreName);
-            // genreBtn = e.target.parentElement;
-            console.log('genreBtn: ', genreBtn);
 
             const genreNameHTML = genreName.firstChild;
             console.log('genreNameHTML : ', genreNameHTML);
             
             // 1. 이전 버튼 + 저장 화면으로 돌아가기
             genreNameHTML.innerHTML = '';
-            console.log('genreNameHTML 제거:', genreNameHTML);
             genreNameHTML.innerHTML = genreNameBackUp;
             
             // 2. 버튼 되돌리기
             const genreBtnHTML = genreBtn; 
             console.log('genreBtnHTML : ', genreBtnHTML);
             genreBtnHTML.innerHTML = '';
-            console.log('genreBtnHTML 제거: ', genreBtnHTML);
+
             genreBtnHTML.innerHTML = ` 
                 <button type="button" id="genModi" class="btn btn-primary">수정</button>
                 <button type="button" id="gendel" class="btn btn-danger">삭제</button>
@@ -275,7 +265,8 @@
             showGenreList();
         }
 
-        // 장르 수정화면 랜더링
+
+        // 장르 수정버튼 클릭시 화면 랜더링
         function genreModify(e, genreName, genreNameBackUp, genreBtn) {
             
 

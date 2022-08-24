@@ -9,8 +9,23 @@
 .myPage-wrap {
     font-family: 'PyeongChangPeace-Light', sans-serif;
     background: #fffaee;
-    height: 100vh;
+    height: 500vh;
 }
+
+.myPage-wrap h1{
+    width: 70%;
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 50px;
+}
+
+.myPage-wrap .platform-wrap h2{
+    width: 70%;
+    margin: 0 auto;
+    padding: 0px 30px 70px 30px;
+}
+
+
 .myPage-wrap .platform-wrap #selectSetting{
     
     background: #fffaee;
@@ -98,6 +113,9 @@
     width: 20%;
 }
 
+.myPage-wrap .platform-wrap #selectSetting #selList .modiAndDel #delBtn{
+    margin-left: 10px;
+}
 
 
 

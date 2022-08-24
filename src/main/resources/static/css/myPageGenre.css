@@ -8,8 +8,22 @@
 .myPage-wrap{
     font-family: 'PyeongChangPeace-Light', sans-serif;
     background: #fffaee;
-    height: 100vh;
+    height: 500vh;
 }
+
+.myPage-wrap h1{
+    width: 70%;
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 50px;
+}
+
+.myPage-wrap .genre-wrap h2{
+    width: 70%;
+    margin: 0 auto;
+    padding: 0px 30px 70px 30px;
+}
+
 
 .myPage-wrap .genre-wrap #genreSetting{
     background: #fffaee;
@@ -36,13 +50,13 @@
 }
 
 .myPage-wrap .genre-wrap #genreSetting #genList .genreId{
-    width: 10%;
+    width: 7%;
     background: #eeedeb;
     text-align: center;
 }
 
 .myPage-wrap .genre-wrap #genreSetting #genList .genreName{
-    width: 70%;
+    width: 73%;
     background: #fff;
     padding: 0 20px;
 }
@@ -50,4 +64,9 @@
 .myPage-wrap .genre-wrap #genreSetting #genList .modiNdel{
     width: 20%;
     padding-left: 30px;
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .modiNdel #gendel{
+    margin-left: 10px
+
 }
