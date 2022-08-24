@@ -181,6 +181,8 @@
         // 마크 요청 URL
         const markURL = '/post/detail/test/mark';
         // const episodeNo = 1;
+        const regAccount = '김지연';
+        const modAccount = '김지연';
         
         // 메모 요청 URL
         const memoURL = '/post/detail/test/memo';
@@ -242,7 +244,9 @@
                         body: JSON.stringify({
                             "postNo": postNo,
                             "episodeNo": $episodeNo.value,
-                            "content": $markContent.value
+                            "content": $markContent.value,
+                            "regAccount": regAccount,
+                            "modAccount": modAccount
                         })
                     }) 
                     .then(response => response.text())
@@ -311,7 +315,7 @@
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo'){
 
                 const memoNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-memo-no');
-                const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
+                const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');            
 
                 fetch(memoURL + '/' + memoNo, {
                         method: "PUT",
@@ -339,7 +343,7 @@
             } else {
                 const markNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-mark-no');
                 const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
-
+                
                 fetch(markURL + '/' + markNo, {
                         method: "PUT",
                         headers: {
@@ -604,7 +608,7 @@
             iconArea +=     '<div class="datetime">';
             iconArea +=         '<i class="' + classifyMarkIconType(data.epId) + `">` + data.episodeNo + `</i>`;
             iconArea +=         ' | ';
-            iconArea +=         `<span class="noselect">` + formatDateTime(data.regDateTime) + `</span>`;
+            iconArea +=         `<span class="noselect">` + formatDateTime(data.modDatetime) + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-initMode">';
             iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
