@@ -44,7 +44,7 @@ public class PostImgController {
 //리스트에담아서 서비스에보냄 서비스에서반복문돌려서 맵퍼에다집어넣는다
         for (MultipartFile file: fileList) {
         PostImg postImg = new PostImg();
-            postImg.setPostNo(1);
+            postImg.setPostNo(1L);
             postImg.setFileName(file.getOriginalFilename());
             log.info("file-name: {}", file.getName());
             log.info("file-origin-name: {}", file.getOriginalFilename());

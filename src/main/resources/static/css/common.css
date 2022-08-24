@@ -1,0 +1,102 @@
+/* reset */
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+button,
+input {
+    background-color: inherit;
+    border: none;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+/* common style */
+#wrap {
+    font-size: 18px;
+    width: 1000px;
+    margin: 0 auto;
+    color: inherit;
+    font-family: 'NanumSquareRound', sans-serif;
+}
+
+.hide {
+    display: none !important;
+}
+
+/* 헤더 */
+header{
+    position: absolute;
+    width: inherit;
+    top: 0;
+    z-index: 1000;
+}
+header #inner-header {
+    /* background-color: yellow; */
+    margin-top: 30px;
+    padding: 10px;
+    border-bottom: 5px double #ffca3d;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    position: relative;
+}
+
+header #inner-header .menu-open{
+    font-size: 1.3em;
+    margin-right: 10px;
+}
+
+header.on {
+    background: #222;
+    border-bottom: 1px solid #2c2c2c;
+    transition: .4s;
+}
+
+/* 헤더 메뉴 */
+header .gnb {
+    font-family: 'NanumBarunGothicBold';
+    background-color: #ffca3d;
+    border-radius: 0.25rem;
+    font-size: 1.3em;
+    color: #666;
+    padding: 10px;
+    display: none;
+    /* height: 100vh; */
+
+    position: relative;
+    right: -100%;
+    top: -50px;
+}
+header .gnb.on{
+    display: inline-block;
+}
+header .gnb .menu-close{
+    text-align: right;
+
+    display: flex;
+    justify-content: end;
+
+}
+
+header .gnb li{
+    margin: 10px 30px;
+}
+
+
+/* 섹션 틀 */
+section {
+    width: 90%;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25rem;
+    margin: 250px auto 0;
+    padding: 30px;
+    box-sizing: border-box;
+}

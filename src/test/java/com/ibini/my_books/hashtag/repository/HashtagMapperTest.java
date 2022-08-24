@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -20,7 +23,7 @@ class HashtagMapperTest {
 
         HashtagDomain ht = new HashtagDomain();
         ht.setAccount("ibini");
-        ht.setPostNo(220811001);
+        ht.setPostNo(2L);
         ht.setTagName("서양배경");
 
         boolean b = hashtagMapper.saveHashtag(ht);
@@ -69,5 +72,20 @@ class HashtagMapperTest {
     void findAllT(){
         hashtagMapper.findAllHashTag("ibini").forEach(System.out::println);
     }
+
+    @Test
+    @DisplayName("한 포스트에 등록된 모든 해시태그를 조회해야 한다")
+    void findAllByPostNoT(){
+        Long postNo = 1L;
+
+        List<HashtagDomain> hl = hashtagMapper.findAllHashTagByPostNo(postNo);
+        for (HashtagDomain hashtagDomain : hl) {
+            System.out.println(hashtagDomain);
+        }
+
+        assertEquals(4, hl.size());
+
+    }
+
 
 }

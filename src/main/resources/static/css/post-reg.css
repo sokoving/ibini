@@ -1,66 +1,211 @@
-/* reset */
-a {
-    color: inherit !important;
-    text-decoration: none !important;
-    cursor: pointer;
+section.post-reg-section{
+    border: none;
+    padding: 100px 50px;
+    /* margin-top: 0; */
+    /* background-color: black; */
 }
 
-button,
-input {
-    background-color: inherit;
+section .inner-section{
+    background-color: #eeedeb;
+    border-radius: 1em;
+    padding: 80px;
+    /* box-sizing: border-box; */
 }
 
-/* common style */
-.hide {
+/* 공통 */
+.reg-span{
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+.file-input{
     display: none;
 }
 
-body {
-    /* background-color: bisque; */
-    color: inherit;
-    font-size: 18px;
-    font-family: 'NanumSquareRound', sans-serif;
-}
+.white-box{
+    background: #fff;
+    border-radius: 0.35em;
+    font-size: 1.2em;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 1em;
+    padding-left: 1em;
 
-#wrap {
-    /* background-color: ; */
-
-    width: 1000px;
-    margin: 0 auto;
-
-}
-
-
-/* header style */
-header .inner-header {
-    /* background-color: yellow; */
-    padding: 10px;
-    border-bottom: 5px double #ffc107;
-}
-
-header .inner-nav {
     display: flex;
-    justify-content: end;
+    justify-content: center;
+    align-items: center;
+
+}
+.white-box.icon-box{
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.white-box.icon-box:hover{
+    background-color: #ffca3d;
+    box-shadow: none;
 }
 
-header .inner-nav div {
+.span-wrap{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.explain-span{
+    font-size: 0.8em;
+    font-style: italic;
+    /* text-decoration: underline; */
+    margin-right: 15px;
+}
+
+/* #reg-1 : 이미지, 제목, 작가 */
+#reg-1 {
+    display: flex;
+}
+/* 이미지 */
+#reg-1 .img-wrap{
+    flex-basis: 219px;
+    flex-shrink: 0;
+    
+    position: relative;
+}
+#reg-1 .img-box{
+    width: 200px;
+    height: 255px;
+    background-color: #ffca3d;
+    border-radius: 0.5em;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.5em;
+    text-align: center;
+
+    position: absolute;
+    top: -80px;
+    left: -10px;
+}
+
+/* 제목, 작가 */
+#reg-1 .tw-wrap{
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+}
+
+/* #reg-2 플랫폼, 장르 */
+#reg-2 {
+    padding-left: 70px;
+    margin-top: 50px;
+}
+
+.select-add-wrap{
+    display: flex;
+}
+.select-add-wrap .divided-select{
+    flex: 1 1 46%;
+}
+.select-add-wrap .divided-input{
+    flex: 1 1 46%;
+    font-size: 0.8em;
     margin-left: 10px;
 }
+.select-add-wrap .divided-btn{
+    flex: 1 1 8%;
+}
+.divided-btn .icon-box{
+    /* border: 1px dotted #787878; */
+    box-shadow: 1px 1px 1px #787878;
+}
 
 
-/* reg-section style*/
+/* #reg-3 연재 상태, 연재 요일 */
+#reg-3 {
+    padding: 0 80px 0 70px;
+    margin-top: 50px;
+}
 
 
-/* reg-section - thumb section*/
+/* #reg-4 회차 구분, 현재 회차, 현재 페이지 */
+#reg-4 {
+    padding: 0 70px;
+    margin-top: 70px;
+    text-align: center;
+}
+#reg-4 .span-wrap{
+    display: flex;
+    justify-content: center;
+}
+
+.radio-wrap .white-box{
+    padding: 0;
+}
+.radio-wrap{
+    display: flex;
+}
+.radio-item{
+    margin-right: 10px;
+    font-size: 1em;
+    font-weight: 700;
+}
+.radio-item:hover{
+    background-color: #ffda73;
+}
+
+.radio-item.checked {
+    background-color: #ffca3d;
+}
+
+#reg-4 .ep-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+#reg-4 .ep-input-wrap{
+    margin-right: 10px;
+}
+.ep-radio{
+    display: none;
+}
+
+/* #reg-5 해시태그 */
+#reg-5 {
+    margin-top: 50px;
+}
+
+/* #reg-6 이미지 첨부 */
+#reg-6 {
+    display: flex;
+    flex-flow: column;
+    margin-top: 50px;
+}
+#reg-6 .upload-input{
+    padding: 0;
+    display: flex;
+    justify-content: stretch;
+    cursor: pointer;
+}
+#reg-6 .upload-right{
+    background-color: #ffca3d;
+}
 
 
+/* 등록 버튼 */
+#reg-btn{
+    display: flex;
+    justify-content: center;
+}
+#reg-btn .white-box{
+    margin-top: 30px;
+    width: 20%;
+    padding: 1.2em 0 1.2em 0;
+    font-size: 1.2em;
+    font-family: 'NanumBarunGothicBold';
+    background-color: #ffca3d;
+    border: 1px dotted #787878;
+    box-shadow: 1px 1px 1px #787878;
 
-/* reg-section - post input section*/
+}
 
-
-
-
-/* border: 1px solid #adb5bd;
-border-radius: 0.2rem; */
-
-    /* background-color: #ffc107; */

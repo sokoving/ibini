@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Log4j2
@@ -62,4 +63,31 @@ public class HashTagService {
         boolean b = hashtagMapper.modifyHashtag(hashtagDomain);
         
     }
+
+
+    // 포스트에 달린 해시태그 전부 조회
+    public List<HashtagDomain> findAllByPostNo(Long postNo){
+        log.info("HashTagService findAllByPostNo call ");
+        return hashtagMapper.findAllHashTagByPostNo(postNo);
+    }
+
+    // 포스트에 달린 해시태그를 전부 조회해서 한 줄로 만들기
+    public String mergeTag(Long postNo) {
+        List<HashtagDomain> tagList = findAllByPostNo(postNo);
+        int size = tagList.size();
+
+        // 포스트의 모든 해시태그를 한 줄로 저장힐 변수
+        StringBuilder mergeTag = new StringBuilder();
+
+        for (int i = 0; i < size; i++) {
+            mergeTag.append("#");
+            mergeTag.append(tagList.get(i).getTagName());
+            if (i < size - 1) {
+                mergeTag.append(" ");
+            }
+        }
+        return String.valueOf(mergeTag);
+    }
+
+
 }

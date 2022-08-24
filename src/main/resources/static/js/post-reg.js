@@ -1,9 +1,25 @@
-// -------------- 전역변수, 함수 선언부 ----------- //
-function jQueryTagTest(node, msg) {
-    console.log(msg);
-    console.log(node);
+document.querySelector('.pub-btn-group').onclick = function() {
+    const $radioGroup = document.getElementsByName('publishStatus');    
+    
+    for (let radio of $radioGroup) {
+    
+        if (radio.checked) {
+            radio.parentElement.classList.add('checked');
+        } else {
+            radio.parentElement.classList.remove('checked');
+        }       
+    }    
 }
 
+document.querySelector('.ep-btn-group').onclick = function() {
+    const $radioGroup = document.getElementsByName('epId');
 
-// ------------ 함수 실행부 ------------ //
-// jQueryTest("post-reg.js");
+    for (let radio of $radioGroup) {
+    
+        if (radio.checked) {
+            radio.parentElement.classList.add('checked');
+        } else {
+            radio.parentElement.classList.remove('checked');
+        }       
+    }
+}

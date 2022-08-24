@@ -1,56 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ibini books</title>
+    <%@ include file="../include/static-head.jsp" %>
 
-    <!-- reset css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-
-    <!-- fontawesome css: https://fontawesome.com -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
-    <!-- linear icons -->
-    <!-- https://linearicons.com/free#cdn -->
-    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-
-    <!-- naver font -->
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
-
-
-
-    <!-- slick css || https://kenwheeler.github.io/slick/  -->
-    <link rel="stylesheet" href="/css/slick-1.8.1.css">
-
-    <!-- bootstrap css -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- custom css -->
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/post-reg.css">
-
-
-    <!-- jquery -->
-    <script src="/js/jquery-3.3.1.min.js"></script>
-
-
-    <!-- bootstrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
-
-    <!-- custom js -->
-    <script src="/js/common.js" defer></script>
-    <script src="/js/post-reg.js" defer></script>
 
 </head>
 
 <body>
+
 
     <div id="wrap">
         <%@ include file="../include/header.jsp" %>
@@ -61,9 +22,6 @@
             <div class="inner-section">
                 <form id="write-form" action="/post/write" method="post" autocomplete="off"
                     enctype="multipart/form-data">
-
-                    <!-- 임시 : 계정명(나중에 로그인 적용되면 빼기) -->
-                    <input type="hidden" name="account" id="" value="ibini">
 
                     <!-- 히든 : 카테고리 아이디(웹소설 일단 고정)-->
                     <input type="hidden" name="caId" value="1">
@@ -238,13 +196,15 @@
                         <span class="reg-span">이미지 첨부하기</span>
                         <label>
                             <div class="white-box upload-input">
-                                    <span class="upload-right">파일 선택</span>
-                                    <!-- <span class="upload-left">클릭으로 이미지를 등록해 보세요</span> -->
+                                <div class="upload-right">파일 선택</div>
+                                <span class="upload-left">클릭으로 이미지를 등록해 보세요</span>
                             </div>
-                                <!-- <input class="file-input" type="file"> -->
+                            <input class="file-input" type="file">
+                            <div class="upload-imges">
+
+                            </div>
                         </label>
                     </div>
-
 
 
                     <div id="reg-btn">
@@ -268,14 +228,7 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-            // jQueryTagTest("h1", "태그 잡기 테스트");
-
-            // 포스트 입력 폼 제출 이벤트
-            const $regBtn = $('#post-reg-btn');
-            // jQueryTagTest($regBtn, "태그 잡기 테스트");
-            $regBtn.click(e => {
-                $('#post-reg-form').submit();
-            })
+            jQueryTagTest("태그 잡기 테스트", $('h1'));
 
 
 

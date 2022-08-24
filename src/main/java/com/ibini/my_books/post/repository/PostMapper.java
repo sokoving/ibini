@@ -1,7 +1,7 @@
 package com.ibini.my_books.post.repository;
 
 import com.ibini.my_books.post.domain.Post;
-import com.ibini.my_books.post.domain.PostWithName;
+import com.ibini.my_books.post.dto.PostWithName;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

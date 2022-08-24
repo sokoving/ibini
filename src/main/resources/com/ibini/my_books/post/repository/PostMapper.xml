@@ -22,7 +22,7 @@
         <result property="starRate" column="star_rate"/>
     </resultMap>
 
-    <resultMap id="postWithNameMap" type="com.ibini.my_books.post.domain.PostWithName">
+    <resultMap id="postWithNameMap" type="com.ibini.my_books.post.dto.PostWithName">
         <result property="postNo" column="post_no"/>
         <result property="genreId" column="genre_id"/>
         <result property="caId" column="ca_id"/>
@@ -43,6 +43,8 @@
         <result property="platformName" column="platform_name"/>
         <result property="platformBgColor" column="platform_bg_color"/>
         <result property="platformFontColor" column="platform_font_color"/>
+
+        <result property="thumbImg" column="file_name"/>
     </resultMap>
 
     <insert id="save">
@@ -78,11 +80,19 @@
             p.ca_id,    p.platform_id,  pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
             p.post_title,    p.post_writer,    p.publish_status,    p.publish_cycle,
             p.ep_id,    p.cur_ep,    p.total_ep,    p.reg_date,    p.update_date,    p.star_rate
+            ,pi.file_name
         FROM tbl_post p
+
         LEFT OUTER JOIN prj_genre g
             ON p.genre_id = g.genre_id
+
         LEFT OUTER JOIN prj_platform pf
             ON p.platform_id = pf.platform_id
+
+        LEFT OUTER JOIN prj_post_img pi
+            ON p.post_no= pi.post_no
+            where pi.thumbnail = 'true'
+                or pi.thumbnail is null
     </select>
 
 
@@ -97,16 +107,27 @@
 
     <select id="fineOnePostWithName" resultMap="postWithNameMap">
         SELECT
-            p.post_no,    p.account,    p.genre_id,     g.genre_name,
-            p.ca_id,    p.platform_id,  pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
-            p.post_title,    p.post_writer,    p.publish_status,    p.publish_cycle,
-            p.ep_id,    p.cur_ep,    p.total_ep,    p.reg_date,    p.update_date,    p.star_rate
-        FROM tbl_post p
+                p.post_no,    p.account,    p.genre_id,     g.genre_name,
+                p.ca_id,    p.platform_id,  pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
+                p.post_title,    p.post_writer,    p.publish_status,    p.publish_cycle,
+                p.ep_id,    p.cur_ep,    p.total_ep,    p.reg_date,    p.update_date,    p.star_rate
+                ,pi.file_name
+        FROM (
+                SELECT *
+                FROM tbl_post
+                WHERE post_no = #{postNo}
+            ) p
+
         LEFT OUTER JOIN prj_genre g
             ON p.genre_id = g.genre_id
+
         LEFT OUTER JOIN prj_platform pf
             ON p.platform_id = pf.platform_id
-        WHERE post_no = #{postNo}
+
+        LEFT OUTER JOIN prj_post_img pi
+            ON p.post_no= pi.post_no
+            WHERE pi.thumbnail = 'true'
+                OR pi.thumbnail is null
     </select>
 
     <delete id="remove">

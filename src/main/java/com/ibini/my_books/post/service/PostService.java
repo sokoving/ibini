@@ -1,8 +1,11 @@
 package com.ibini.my_books.post.service;
 
+import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
-import com.ibini.my_books.post.domain.PostWithName;
+import com.ibini.my_books.post.dto.FormattingDateDTO;
+import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.repository.PostMapper;
+import com.ibini.my_books.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import java.util.List;
 public class PostService {
 
     private final PostMapper postMapper;
+    private final HashTagService tagService;
+
 
     public boolean saveService(Post post){
         log.info("Post Service : saveService call - {}", post);
@@ -28,12 +33,28 @@ public class PostService {
 
     public List<PostWithName> finaAllPostWithNameService(){
         log.info("Post Service : finaAllPostWithNameService call");
-        return postMapper.findAllPostWithName();
+
+        List<PostWithName> postWithNameList = postMapper.findAllPostWithName();
+        int size = postWithNameList.size();
+        for (PostWithName postWithName : postWithNameList) {
+            postWithName.setting();
+            postWithName.setOneLineTag(tagService.mergeTag(postWithName.getPostNo()));
+        }
+        return postWithNameList;
     }
 
     public Post findOnePostService(Long postNo){
         log.info("Post Service : findOnePostService call");
         return postMapper.findOnePost(postNo);
+    }
+
+    public PostWithName fineOnePostWithName(Long postNo){
+        log.info("Post Service : fineOnePostWithName call");
+        PostWithName p = postMapper.fineOnePostWithName(postNo);
+        p.setting();
+        p.setOneLineTag(tagService.mergeTag(postNo));
+//        log.info("p.caName - {}, p.epName -{}", p.getCaName(), p.getEpName());
+        return p;
     }
 
     public boolean removeService(Long postNo){
@@ -50,5 +71,6 @@ public class PostService {
         log.info("Post Service : getTotalCountService call");
         return postMapper.getTotalCount();
     }
+
 
 }

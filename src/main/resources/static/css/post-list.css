@@ -1,0 +1,45 @@
+/* 새 글 등록 버튼 */
+.inner-section.reg-sec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-post .reg-btn{
+    border: 1px dotted #555;
+    border-radius: 0 1rem 0 1rem ;
+    padding: 50px 30px;
+    background-color: #e9ecef;
+    color: #555;
+    cursor: pointer;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.new-post .reg-btn:hover{
+    background-color: #ffe08c;
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+.new-post .reg-btn>span{
+    margin-bottom: 10px;
+}
+
+/* 입력 메뉴 */
+.reg-menu{
+     display: none;
+}
+.reg-menu.on{
+    display: block;
+}
+
+
+/* 포스트 리스트 섹션 */
+section .inner-section.list-sec{
+    margin-top: 50px;
+    padding: 0;
+}
+
+.list-sec

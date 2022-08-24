@@ -5,16 +5,16 @@ import java.util.Map;
 
 public class CategoryUtil {
 
-    private static final Map<Integer, String> CATEGORYUTILMAP;
+    public static final Map<Integer, String> CATEGORY_MAP;
 
     static {
-        CATEGORYUTILMAP = new HashMap<>();
-        CATEGORYUTILMAP.put(0, "미분류" );
-        CATEGORYUTILMAP.put(1, "웹소설" );
-        CATEGORYUTILMAP.put(2, "웹툰" );
-        CATEGORYUTILMAP.put(3, "e-book" );
-        CATEGORYUTILMAP.put(4, "도서" );
-        CATEGORYUTILMAP.put(5, "만화책" );
+        CATEGORY_MAP = new HashMap<>();
+        CATEGORY_MAP.put(0, "미분류" );
+        CATEGORY_MAP.put(1, "웹소설" );
+        CATEGORY_MAP.put(2, "웹툰" );
+        CATEGORY_MAP.put(3, "e-book" );
+        CATEGORY_MAP.put(4, "도서" );
+        CATEGORY_MAP.put(5, "만화책" );
 
     }
 }

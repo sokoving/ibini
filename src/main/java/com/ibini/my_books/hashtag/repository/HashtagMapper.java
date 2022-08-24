@@ -23,4 +23,8 @@ public interface HashtagMapper {
 
     // 전체조회 -> account? postNo?
     List<HashtagDomain> findAllHashTag(String account);
+
+    // 한 포스트에 달린 해시태그 전체 조회
+    List<HashtagDomain> findAllHashTagByPostNo(Long postNo);
+
 }
