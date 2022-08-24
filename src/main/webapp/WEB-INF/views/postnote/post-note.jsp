@@ -49,7 +49,7 @@
                     </label>
                 </div>
                 <div class="text-area">
-                    <textarea id="mark-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup(this)" onkeydown="textArea_onkeyup(this)" spellcheck="false"></textarea>
+                    <textarea id="mark-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
                 </div>
                 <div class="flex submit-area">
                     <div class="info">
@@ -62,7 +62,7 @@
             </div>
             <div class="hidden" name="memo">
                 <div class="text-area">
-                    <textarea id="memo-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup(this)" onkeydown="textArea_onkeyup(this)" spellcheck="false"></textarea>
+                    <textarea id="memo-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
                 </div>
                 <div class="flex submit-area">
                     <div class="info">
@@ -178,13 +178,13 @@
         </div>
     </div>
     <script>
-        // 메모 요청 URL
+        // 마크 요청 URL
         const markURL = '/post/detail/test/mark';
         // const episodeNo = 1;
         
         // 메모 요청 URL
         const memoURL = '/post/detail/test/memo';
-        const postNo = 1;
+        const postNo = 1; 
 
         /*======================================================================
             이벤트 영역
@@ -401,8 +401,8 @@
             }
         }
 
-        // textArea onkeyup Event
-        function textArea_onkeyup($eventTag) {
+        // textArea onkeyup onkeydown Event
+        function textArea_onkeyup_down($eventTag) {
             $eventTag.parentElement.parentElement.querySelector('.text-length').textContent = $eventTag.textLength + '/' + $eventTag.getAttribute('maxlength');
         }
 
@@ -443,10 +443,43 @@
             $contents.forEach($content => $content.classList.toggle('hidden'));
         }
 
+        // datetime 포맷 변환 함수
+        function formatDateTime(datetime) {
+            // 문자열 날짜 데이터를 날짜객체로 변환
+            const today = new Date(datetime);
+
+            let year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let day = today.getDate();
+            let hour = today.getHours();
+            let minute = today.getMinutes();
+
+            // 오전, 오후 시간체크
+            let ampm = '';
+            if (hour < 12 && hour >= 0) {
+                ampm = 'AM';
+
+            } else if (hour >= 12 && hour < 24) {
+                ampm = 'PM';
+
+                if (hour !== 12) {
+                    hour -= 12;                    
+                }
+            } 
+
+            // 숫자가 1자리일 경우 2자리로 변환
+            (month < 10) ? month = '0' + month: month;
+            (day < 10) ? day = '0' + day: day;
+            (hour < 10) ? hour = '0' + hour: hour;
+            (minute < 10) ? minute = '0' + minute: minute;
+
+            return year + "." + month + "." + day + " " + ampm + " " + hour + ":" + minute;
+        }
+
         /*======================================================================
             마크, 메모 리스트 영역
         ========================================================================*/
-        // ==================== 메모 영역 ====================
+        // ==================== 메모 영역 ====================   //
 
         // 메모 목록 보여주는 함수
         function showMemoList() {
@@ -489,8 +522,8 @@
         function appendMemoButtonArea(data) {
             let iconArea = '';
             iconArea += '<div class="flex-sb">';
-            iconArea +=     '<div>';
-            iconArea +=         `<span class="noselect">` + data.regDate + `</span>`;
+            iconArea +=     '<div class="datetime">';
+            iconArea +=         `<span class="noselect">` + formatDateTime(data.regDate) + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area memo-initMode">';
             iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
@@ -525,7 +558,7 @@
             $memoContent.toggleAttribute('readonly');
         }
 
-        // ==================== 마크 영역 ====================
+        // ==================== 마크 영역 ==================== //
 
         // 마크 목록 보여주는 함수
         function showMarkList() {
@@ -568,10 +601,10 @@
         function appendMarkIconAndButtonArea(data) {
             let iconArea = '';
             iconArea += '<div class="flex-sb">';
-            iconArea +=     '<div>';
+            iconArea +=     '<div class="datetime">';
             iconArea +=         '<i class="' + classifyMarkIconType(data.epId) + `">` + data.episodeNo + `</i>`;
             iconArea +=         ' | ';
-            iconArea +=         `<span class="noselect">` + data.regDate + `</span>`;
+            iconArea +=         `<span class="noselect">` + formatDateTime(data.regDate) + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-initMode">';
             iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
