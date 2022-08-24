@@ -3,6 +3,7 @@ package com.ibini.my_books.member.controller;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.domain.SNSLogin;
 import com.ibini.my_books.member.dto.LoginDTO;
+import com.ibini.my_books.member.service.EmailServiceImpl;
 import com.ibini.my_books.member.service.KakaoService;
 import com.ibini.my_books.member.service.LoginFlag;
 import com.ibini.my_books.member.service.MemberService;
@@ -31,6 +32,7 @@ import static com.ibini.my_books.util.LoginUtil.LOGIN_FROM;
 public class MemberController {
     private final MemberService memberService;
     private final KakaoService kakaoService;
+    private final EmailServiceImpl emailService;
 
     //회원가입 양식 띄우기
     @GetMapping("/sign-up")
@@ -135,21 +137,6 @@ public class MemberController {
             memberService.autoLogout(LoginUtil.getCurrentMemberAccount(session), request, response);
         }
         log.info("session : {}", session);
-        //sns로그인 상태라면 해당 sns 로그아웃처리를 진행
-        SNSLogin from = (SNSLogin) session.getAttribute(LOGIN_FROM);
-        log.info("from:{}", from);
-
-        if (from != null) {
-            switch (from) {
-                case KAKAO:
-                    kakaoService.logout((String) session.getAttribute("accessToken"));
-                    break;
-                case NAVER:
-                    break;
-                case GOOGLE:
-                    break;
-            }
-        }
 
         //로그인한 사람에게만 적용
         if (session.getAttribute("loginUser") != null) {
@@ -251,7 +238,7 @@ public class MemberController {
         log.info("/member/join-out GET!! /member/join-out.jsp");
     }
 
-    @PostMapping("join-out")
+    @PostMapping("/join-out")
     public String joinOut(String account, String password, RedirectAttributes ra) {
         log.info("/member/join-out POST !! account : {}, password : {}", account, password);
 
@@ -270,6 +257,89 @@ public class MemberController {
 
     }
 
+    //비밀번호 찾기
+    @GetMapping("/findpw")
+    public String fidnpw(){
+        log.info("/member/findpw GET!! ");
+        return "/member/findpw";
+    }
+
+    @PostMapping("/findpw")
+    public String findpw(String account, String email,RedirectAttributes ra,Model model) throws Exception {
+        log.info("/member/findpw POST!! account : {}, email : {}", account,email);
+        //사용자가 입력한 아이디가 존재하는지 여부 확인.
+        boolean flag = memberService.checkSignUpValue("account", account);
+
+        if (!flag){
+            //아이디가 존재 하지 않으면 메시지 전송 후 다시 비밀번호 찾기 페이지로 이동
+            ra.addFlashAttribute("msg","not-find-account");
+            return "redirect:/member/findpw";
+
+        } else {
+            //존재 한다면 회원정보를 찾은 후 입력한 이메일과 일치하는지 확인
+            Member member = memberService.getMember(account);
+            if (email.equals(member.getEmail())){
+
+                // 입력한 이메일과 회원의 이메일이 일치하면 인증코드 발송
+                String code = emailService.sendSimpleMessage(email);
+
+                // 전송한 인증코드 서버에 저장
+                model.addAttribute("code",code);
+                model.addAttribute("account",account);
+                log.info("code : {}",code);
+                return "/member/findpw"; // c:if로 code존재 여부에 따라 보여지는 페이지 설정 다르게 하기.
+
+            } else {
+                ra.addFlashAttribute("msg","email-discord");
+                // 일치하지 않으면 실패 메시지 전송후 다시 비밀번호 찾기 페이지로 이동
+                return "redirect:/member/findpw";
+            }
+
+
+        }
+    }
+
+    //인증코드 일치여부 확인
+    @PostMapping("/checkcode")
+    public String checkcode(String inputcode, String code, String account, Model model){
+        log.info("code:{}, inputcode:{}",code,inputcode);
+        if (inputcode.equals(code)){
+            // 비밀번호 변경 페이지로 이동
+            model.addAttribute("account",account);
+            log.info("account:{}",account);
+            return "/member/change-password";
+        } else
+            //인증코드 검증이 실패하면 인증코드를 들고 인증코드 입력 페이지로 이동
+        model.addAttribute("code",code);
+        log.info("인증코드 검증 실패했습니다. 인증코드 들고 다시 갑니다. code:{}",code);
+        model.addAttribute("msg","discord-code");
+        return "/member/findpw";
+    }
+
+    //인증코드 확인 후 비밀번호 수정
+    @PostMapping("/change-password")
+    public String changPassword(String account, String password, RedirectAttributes ra){
+        log.info("account:{}, password:{}",account,password);
+
+            boolean modifyFlag = memberService.updatePw(account, password);
+
+            //비밀번호 변경 성공 하면 회원정보 출력창으로 이동
+            if (modifyFlag) {
+                log.info("비밀번호 변경 성공!");
+                ra.addFlashAttribute("msg", "modify-success");
+                return "redirect:/member/sign-in";
+
+                //실패하면 수정창으로 보내고, 실패 메시지 전송
+            } else ra.addFlashAttribute("msg", "modify-fail");
+            log.info("비밀번호 변경 실패!");
+            return "redirect:/member/change-check";
+
+        }
+
+
+
+    }
+
 
 //    @PutMapping("modify-email")
 //    @ResponseBody
@@ -283,4 +353,4 @@ public class MemberController {
 //    }
 
 
-}
+

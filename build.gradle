@@ -52,6 +52,9 @@ dependencies {
 
 	// jsp 수정 내역 화면에 바로 보여주기
 	implementation 'org.springframework.boot:spring-boot-devtools'
+
+	//이메일 인증
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {

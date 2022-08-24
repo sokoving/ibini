@@ -16,8 +16,18 @@
         <result column="limit_time" property="limitTime"/>
     </resultMap>
 
-    <!--    회원 가입 기능   -->
+    <!--   일반 회원 가입 기능   -->
     <insert id="register">
+
+        INSERT INTO tbl_member
+        (account, password, user_name, email)
+        VALUES
+        (#{account}, #{password}, #{userName}, #{email})
+
+    </insert>
+
+    <!--    카카오 회원 가입 기능 만드는중   -->
+    <insert id="kakaoRegister">
 
         INSERT INTO tbl_member
         (account, password, user_name, email)

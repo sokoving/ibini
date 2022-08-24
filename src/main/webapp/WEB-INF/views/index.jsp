@@ -22,6 +22,15 @@
       alert('회원탈퇴가 정상적으로 처리 되었습니다.');
     }
 
+    if (msg === 'modify-success') {
+      alert('비밀번호 변경 완료');
+    }
+
+    if (msg === 'modify-fail') {
+      alert('비밀번호 변경 실패');
+    }
+    
+
   </script>
 
 </body>

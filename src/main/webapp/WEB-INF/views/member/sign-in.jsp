@@ -319,8 +319,8 @@
                     <i class="fas fa-user"></i>
                   </div>
                   <div class="div">
-                    <h5>Username</h5>
-                    <input type="text" name="account" id="signInId" class="input" maxlength="10">
+                    <h5>account</h5>
+                    <input type="text" name="account" id="signInId" class="input" maxlength="14">
                   </div>
                 </div>
                 <div class="input-div pass">
@@ -344,7 +344,7 @@
                 </label>
 
                 <!-- 비밀번호 찾기 링크 -->
-                <a href="#" id="forgotPw">Forgot Password?</a>
+                <a href="/member/findpw" id="forgotPw">Forgot Password?</a>
                 </div>
 
                 <!-- 로그인 버튼 -->
