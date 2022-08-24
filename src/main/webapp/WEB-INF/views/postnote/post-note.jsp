@@ -218,8 +218,10 @@
                     .then(message => {
                         if (message === 'insert-success') {
                             alert('메모 등록!');
+
                             $memoContent.value = '';
                             $eventTag.parentElement.parentElement.querySelector('.text-length').textContent = 0 + '/' + document.getElementById('memo-content').getAttribute('maxlength');
+
                             showMemoList();
 
                         } else {
@@ -247,9 +249,11 @@
                     .then(message => {
                         if (message === 'insert-success') {
                             alert('마크 등록!');
+
                             $episodeNo.value = '';
                             $markContent.value = '';
                             $eventTag.parentElement.parentElement.querySelector('.text-length').textContent = 0 + '/' + document.getElementById('mark-content').getAttribute('maxlength');
+
                             showMarkList();
 
                         } else {
@@ -264,13 +268,13 @@
 
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
-
+                
                 // 버튼 모드 switching
                 toggleMemoMode($memoContent);
 
             } else {
                 const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
-
+                
                 // 버튼 모드 switching
                 toggleMarkMode($markContent);
             }
@@ -282,10 +286,8 @@
 
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
-                console.log($memoContent.innerHTML);
-                console.log($memoContent.getAttribute('data-initvalue'));
-
-                // 취소 클릭 시, 원래 데이터로 원복
+                
+                // 취소 버튼 클릭 시, 원래 데이터로 되돌리기
                 $memoContent.value = $memoContent.getAttribute('data-initvalue');
 
                 // 버튼 모드 switching
@@ -294,7 +296,7 @@
             } else {
                 const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
 
-                // 취소 클릭 시, 원래 데이터로 원복
+                // 취소 버튼 클릭 시, 원래 데이터로 되돌리기
                 $markContent.value = $markContent.getAttribute('data-initvalue');
                 
                 // 버튼 모드 switching
@@ -315,7 +317,7 @@
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
-                        },
+                        }, 
                         body: JSON.stringify({
                             "memoNo": memoNo,
                             "content": $memoContent.value
