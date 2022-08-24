@@ -83,15 +83,18 @@
 
 
                 <c:forEach var="p" items="${pl}">
-                    제목 : ${p.postTitle}
-                    작가 : ${postWriter}
-                    카테고리 이름 : ${p.caName}
-                    현재 ${p.epName} : ${p.curEp}${p.epName2}
-                    총 ${p.epName} : ${p.totalEp}${p.epName2}
-                    장르 : ${p.genreName}
-                    플랫폼 : ${p.platformName}
-                    썸네일
-                    <img src="${p.fileName}" alt="">
+                    <a href="/post/detail/${p.postNo}">제목 : ${p.postTitle} </a>
+                    <br>
+                    작가 : ${postWriter} <br>
+                    카테고리 이름 : ${p.caName} <br>
+                    현재 ${p.epName} : ${p.curEp}${p.epName2} <br>
+                    총 ${p.epName} : ${p.totalEp}${p.epName2} <br>
+                    장르 : ${p.genreName} <br>
+                    플랫폼 : ${p.platformName} <br>
+                    등록일 : ${p.shortDate.postRegDate} <br>
+                    수정일 : ${p.shortDate.postUpdateDate} <br>
+                    해시태그 : ${p.oneLineTag} <br>
+                    <img src="${p.thumbImg}" alt="">
 
                 </c:forEach>
 

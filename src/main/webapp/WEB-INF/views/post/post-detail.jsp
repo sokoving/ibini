@@ -17,205 +17,252 @@
         <%@ include file="../include/header.jsp" %>
 
 
-        <!-- 새 포스트 등록 섹션 -->
-        <section class="post-reg-section">
+
+        <section>
             <div class="inner-section">
-                <form id="write-form" action="/post/write" method="post" autocomplete="off"
-                    enctype="multipart/form-data">
 
-                    <!-- 히든 : 카테고리 아이디(웹소설 일단 고정)-->
-                    <input type="hidden" name="caId" value="1">
 
-                    <!-- 이미지, 제목, 작가, 별점-->
-                    <div id="reg-1">
-                        <!-- 이미지 -->
-                        <div class="img-wrap">
-                            <label>
+                <!-- 이미지, 포스트 정보 영역 -->
+                <div id="img-post-wrap">
+                    <!-- 이미지 영역 -->
+                    <div id="img-wrap">
+
+                        <!-- 썸네일 이미지 -->
+                        <div id="thumb-img">
+                            <img class="post-img"
+                                src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="썸네일 이미지">
+                        </div>
+
+                        <!-- 첨부 이미지 목록 -->
+                        <div id="img-arr-wrap">
+                            <button type="button" data-role="none" class="slick-prev slick-arrow" aria-label="Previous"
+                                role="button">
+                                <i class="fas fa-angle-up"></i>
+                            </button>
+
+                            <!-- 슬릭 이미지 목록 -->
+                            <div class="img-box-wrap">
                                 <div class="img-box">
-                                    클릭으로 <br> 이미지 추가하기
-                                    <!-- <input class="file-input" type="file" name="#"> -->
+                                    <img class="post-img"
+                                        src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
                                 </div>
-                            </label>
-                        </div>
-
-                        <!-- 제목, 작가, 별점 -->
-                        <div class="tw-wrap">
-                            <div class="span-wrap">
-                                <span class="reg-span">책 제목</span>
-                                <span class="explain-span">제목을 입력해 주세요</span>
-                            </div>
-                            <input class="white-box title-input" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
-
-                            <div class="span-wrap">
-                                <span class="reg-span">작가</span>
-                                <span class="explain-span">작가를 입력해 주세요</span>
-                            </div>
-                            <input class="white-box writer-input" type="text" name="postWriter"
-                                placeholder="작가를 입력해 주세요">
-
-                            <div class="span-wrap">
-                                <span class="reg-span">별점</span>
-                                <span class="explain-span">1~5 사이의 정수를 입력해 주세요</span>
-                            </div>
-                            <input class="white-box title-input" type="number" name="starRate" placeholder="예시) 5">
-
-
-                        </div>
-                    </div> <!-- // end reg-1 -->
-
-                    <!-- 플랫폼, 장르 -->
-                    <div id="reg-2">
-                        <div class="plge-wrap">
-
-                            <!-- 플랫폼 영역 -->
-                            <div class="span-wrap">
-                                <span class="reg-span">플랫폼</span>
-                                <span class="explain-span">새 이름을 입력하고 버튼을 누르면 플랫폼이 추가됩니다 ↓</span>
-                            </div>
-
-                            <div class="select-add-wrap">
-                                <!-- 플랫폼 선택 -->
-                                <div class="divided-select">
-                                    <select class="white-box" name="platformId">
-                                        <option value="0">플랫폼을 선택하세요</option>
-                                        <option value="1">카카오페이지</option>
-                                        <option value="2">네이버시리즈</option>
-                                        <option value="3">리디북스</option>
-                                        <option value="4">다음웹툰</option>
-                                        <option value="5">네이버웹툰</option>
-                                    </select>
+                                <div class="img-box">
+                                    <img class="post-img"
+                                        src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
                                 </div>
-
-                                <!-- 새 플랫폼 추가 -->
-                                <div class="divided-input">
-                                    <input class="white-box" type="text" placeholder="새 플랫폼을 추가해 보세요">
+                                <div class="img-box">
+                                    <img class="post-img"
+                                        src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
                                 </div>
-                                <div class="divided-btn">
-                                    <div class="white-box icon-box ">
-                                        <span class="fas fa-plus-square"></span>
-                                    </div>
+                                <div class="img-box img-half-down">
+                                    <img class="post-img"
+                                        src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
                                 </div>
-                            </div> <!-- // end (platform) select-add-wrap -->
-
-                            <!-- 장르 영역 -->
-                            <div class="span-wrap">
-                                <span class="reg-span">장르</span>
-                                <span class="explain-span">새 이름을 입력하고 버튼을 누르면 장르가 추가됩니다 ↓</span>
                             </div>
 
-                            <div class="select-add-wrap">
-                                <!-- 장르 선택 -->
-                                <div class="divided-select">
-                                    <select class="white-box" name="genreId" id="">
-                                        <option value="0">장르를 선택하세요</option>
-                                        <option value="1">판타지</option>
-                                        <option value="2">로맨스</option>
-                                        <option value="3">무협</option>
-                                        <option value="4">아포칼립스</option>
-                                        <option value="5">공포</option>
-                                    </select>
-                                </div>
-
-                                <!-- 새 장르 추가 -->
-                                <div class="divided-input">
-                                    <input class="white-box" type="text" placeholder="새 장르를 추가해 보세요">
-                                </div>
-                                <div class="divided-btn">
-                                    <div class="white-box icon-box ">
-                                        <span class="fas fa-plus-square"></span>
-                                    </div>
-                                </div>
-                            </div> <!-- // end (platform) select-add-wrap -->
-                        </div> <!-- // end plge-wrap -->
-                    </div> <!-- // end reg-2 -->
-
-
-                    <!-- 연재 상태, 연재 요일 -->
-                    <div id="reg-3">
-                        <div class="span-wrap">
-                            <span class="reg-span">연재 상태</span>
-                        </div>
-                        <div class="radio-wrap pub-btn-group">
-                            <label class="white-box radio-item checked">연재
-                                <input class="ep-radio" type="radio" name="publishStatus" value="1" checked>
-                            </label>
-                            <label class="white-box radio-item">휴재
-                                <input class="ep-radio" type="radio" name="publishStatus" value="2">
-                            </label>
-                            <label class="white-box radio-item">완결
-                                <input class="ep-radio" type="radio" name="publishStatus" value="3">
-                            </label>
-                        </div>
-                        <div class="span-wrap">
-                            <span class="reg-span">연재 일시</span>
-                        </div>
-                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 금 10시">
-                    </div> <!-- // end reg-3 -->
-
-                    <!-- 회차 구분, 현재 회차, 현재 페이지 -->
-                    <div id="reg-4">
-                        <div class="span-wrap">
-                            <span class="reg-span">회차 구분</span>
+                            <button type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next"
+                                role="button" style="display: block;">
+                                <i class="fas fa-angle-down"></i>
+                            </button>
                         </div>
 
-                        <div class="radio-wrap ep-btn-group">
-                            <label class="white-box radio-item checked">회차(화)
-                                <input class="ep-radio" type="radio" name="epId" value="0" checked>
-                            </label>
-                            <label class="white-box radio-item">페이지(p)
-                                <input class="ep-radio" type="radio" name="epId" value="1">
-                            </label>
-                            <label class="white-box radio-item">권수
-                                <input class="ep-radio" type="radio" name="epId" value="2">
-                            </label>
-                            <label class="white-box radio-item">퍼센트(%)
-                                <input class="ep-radio" type="radio" name="epId" value="3">
-                            </label>
-                        </div>
+                    </div> <!-- // end img-wrap -->
 
-                        <div class="ep-wrap">
-                            <div class="ep-input-wrap">
-                                <span class="reg-span">현재 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="number" name="curEp">
+                    <!-- 포스트 정보 영역 -->
+                    <div id="post-box">
+
+                        <!-- top : 별점, 장르, 카테고리 -->
+                        <div id="post-top">
+                            <span class="top-span star-span"></span>
+                            <span class="top-span">${p.genreName}</span>
+                            <span class="top-span">${p.caName}</span>
+                        </div> <!-- // end post-top -->
+
+                        <!-- middle : 제목, 작가, 연재 정보 -->
+                        <div id="post-middle">
+
+                            <!-- 책 제목 -->
+                            <div id="post-title">
+                                <h2 class="title-span">${p.postTitle}</h2>
                             </div>
-                            <div class="ep-input-wrap">
-                                <span class="reg-span">전체 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="number" name="totalEp">
-                            </div>
-                        </div>
-                    </div>
 
-                    <div id="reg-5">
-                        <div class="span-wrap">
-                            <span class="reg-span">해시태그</span>
-                        </div>
-                        <input class="white-box" type="text" name="tagName" placeholder="예시) #태그1 #태그_2">
-                    </div>
-
-                    <div id="reg-6">
-                        <span class="reg-span">이미지 첨부하기</span>
-                        <label>
-                            <div class="white-box upload-input">
-                                <div class="upload-right">파일 선택</div>
-                                <span class="upload-left">클릭으로 이미지를 등록해 보세요</span>
+                            <!-- 작가 이름 -->
+                            <div id="post-writer">
+                                <span class="writer-span">${p.postWriter}</span>
                             </div>
-                            <input class="file-input" type="file">
-                            <div class="upload-imges">
+
+
+                            <div id="publish-status">
+                                <table class="middle-table">
+
+                                    <!-- 연재 상태 -->
+                                    <tr>
+                                        <td class="first-td">${p.platformName}</td>
+                                        <c:choose>
+
+                                            <c:when test="${empty p.publishCycle}">
+                                                <td class="last-td">-</td>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <c:choose>
+                                                    <c:when test="${p.publishStatus <= 1}">
+                                                        <td class="last-td">${p.publishCycle}</td>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <td class="last-td">${p.publishStatusName}</td>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:otherwise>
+
+                                        </c:choose>
+                                        
+                                    </tr>
+                                    <tr class="empty-tr">
+                                        <td colspan="2">-</td>
+                                    </tr>
+                                    <!-- 현재, 전체 페이지 -->
+                                    <tr>
+                                        <td class="first-td cur-ep">현재 ${p.epName}</td>
+                                        <td class="last-td tot-ep">전체 ${p.epName}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="first-td cur-ep">${p.curEp}${p.epName2}</td>
+                                        <td class="last-td tot-ep">${p.totalEp}${p.epName2}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                                        </td>
+                                        <!-- <i class="fas fa-toggle-on"></i> -->
+                                    </tr>
+                                </table>
 
                             </div>
-                        </label>
-                    </div>
+                        </div> <!-- // end post-middle -->
+
+                        <!-- bottom : 날짜, 수정삭제목록 버튼-->
+                        <div id="post-bottom">
+                            <div class="date-wrap">
+                                <span>등록일 ${p.shortDate.postRegDate}</span>
+                                |
+                                <span>수정일 ${p.shortDate.postUpdateDate}</span>
+                            </div>
+                            <div class="post-btn-wrap">
+                                <button class="post-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
+                                <button class="post-btn" title="삭제하기"><i class="far fa-trash-alt"></i></button>
+                                <button class="post-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
+                            </div>
+                        </div> <!-- // end post-bottom -->
+
+                    </div> <!-- // end post-box -->
+                </div><!-- // end img-post-wrap -->
+
+                <!-- 리모컨, 해시태그, 관련 링크 영역-->
+                <div id="remote-etc-wrap">
+                    <!-- 사이드 리모컨 영역 -->
+                    <div id="remote-controller">
+                        <div id="inner-remote">
+                            리모컨
+                            <div id="go-to-controller">
+                                <!-- <select>
+                                <option value="">최상단</option>
+                                <option value="">해시태그</option>
+                                <option value="">관련 포스트</option>
+                                <option value="">포스트 노트</option>
+                                <option value="">최하단</option>
+                                <option value="">포스트 목록</option>
+                                <option value="">마이페이지</option>
+                            </select> -->
+                                <button>이동</button>
+                            </div>
+
+                            <div id="search-controller">
+                                <!-- <input type="text" name="" id=""> -->
+                                <button>검색</button>
+                            </div>
+                        </div> <!-- // end inner-remote -->
+                    </div> <!-- // end remote-conroller -->
+
+                    <div id="etc-wrap">
+
+                        <!-- 해시태그 영역 -->
+                        <div id="hash-wrap">
+
+                            <div class="h3-wrap">
+                                <h3>해시태그</h3>
+                                <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                                <!-- <i class="fas fa-toggle-on"></i> -->
+                            </div>
+
+                            <div id="tag-container">
+                                <span class="hash-span">태그1</span>
+                                <span class="hash-span">태그태그태그</span>
+                                <span class="hash-span">태그_테스트</span>
+                                <span class="hash-span">태그2</span>
+                                <span class="hash-span">태그_3</span>
+                                <span class="hash-span">태그태그</span>
+                                <span class="hash-span">태그_중</span>
+                                <span class="hash-span">태그</span>
+                                <span class="hash-span">태그_태그_태그</span>
+                                <span class="hash-span">태그_뾰잉뾰이이이잉</span>
+                                <span class="hash-span tag-plus" style="display: none;"><i
+                                        class="far fa-plus-square"></i></span>
+                            </div>
+                        </div> <!-- // end hash-wrap -->
+
+                        <!-- 연관 포스트 영역 -->
+                        <div id="link-post-wrap">
+                            <div class="h3-wrap">
+                                <h3>연관 포스트</h3>
+                                <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                                <!-- <i class="fas fa-toggle-on"></i> -->
+                            </div>
+
+                            <div>
+                                <ul id="link-container">
+                                    <li>
+                                        <a class="link-a" href="#" title="신기방기1">
+                                            <div class="link-ca">웹소설</div>
+
+                                            <div class="link-post-info">
+                                                <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
+                                                <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금 10시</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="link-post-date">
+                                                <span class="link-percent">100%</span>
+                                                <span class="link-date">2022.05.05</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="link-a" href="#" title="신기방기1">
+                                            <div class="link-ca">웹소설</div>
+
+                                            <div class="link-post-info">
+                                                <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
+                                                <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금 10시</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="link-post-date">
+                                                <span class="link-percent">100%</span>
+                                                <span class="link-date">2022.05.05</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
 
 
-                    <div id="reg-btn">
-                        <button class="white-box">등록</button>
-                    </div>
+                        </div> <!-- // end post-link-wrap -->
+                    </div><!-- // end etc-wrap -->
 
 
-                </form> <!-- // end write-form -->
+                </div> <!-- // end remote-etc-wrap -->
 
-
-
+                <!-- 포스트 노트 영역 -->
 
 
             </div> <!-- // end inner-section -->

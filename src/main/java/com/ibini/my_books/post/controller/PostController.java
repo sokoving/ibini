@@ -5,7 +5,6 @@ import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.service.PostService;
-import com.ibini.my_books.postImg.domain.PostImg;
 import com.ibini.my_books.postImg.service.PostImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

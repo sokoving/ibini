@@ -41,6 +41,7 @@ public class PostWithName {
     private String epName2;   // 회차 구분명 (ex. p)
 
     FormattingDateDTO shortDate;    // 포매팅한 날짜 DTO (yyyy.MM.dd)
+                                        //  등록일 - String postRegDate 수정일 - postUpdateDate;
     private String oneLineTag;      // 포스트의 해시태그 한 줄로(PostService에서 세팅할 것)
 
     //  prj_genre
