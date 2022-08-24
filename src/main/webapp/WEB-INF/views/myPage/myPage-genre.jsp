@@ -148,6 +148,7 @@
         }
 
 
+        // 장르 클릭이벤트 핸들러
         function clickeventHandler(e){
 
             e.preventDefault();
@@ -176,7 +177,6 @@
                 if(e.target.matches('#genModi')){
                     // alert('genModi');
                     genreModify(e, genreName, genreNameBackUp, genreBtn);
-                    // genreModiBtn(e, genreName, genreNameBackUp, genreBtn);
 
                 } else if(e.target.matches('#gendel')){
                     // alert('gendel');
@@ -185,8 +185,7 @@
                 } else if(e.target.matches('#modiSaveBtn')){
                     // const genreId = e.target.parentElement.parentElement.firstElementChild.innerText;
                     console.log('ModifyAndRemoveEvent  modiSaveBtn : ', genreId);
-                    // genreModiBtn(e, genreName, genreNameBackUp, genreBtn);
-                    genreModify(genreId);
+                    genreModifySave(genreId);
                     // 비동기 요청 전송! -> 비동기 요청 담을거
                 
                 } else if(e.target.matches('#modiResetBtn')){
@@ -196,15 +195,49 @@
         }
 
         // 장르수정 비동기 요청전송
-        function genreModify(genreId) {
+        function genreModifySave(genreId) {
             
+            // const genreInputValue = genreName.value();
+            // console.log(genreInputValue);
+            const myPageGenreInput = document.getElementById('myPageGenreInput').value;
+
+            console.log('myPageGenreInput : ', myPageGenreInput);
+
             // 요청정보 담기
-            const reqInfo = {
+            const objj = {
+
+                    "genreId": genreId,
+                    "account": account ,
+                    "genreName": myPageGenreInput
 
             };
+            console.log(objj);
+            
 
-            fetch(delModiURL + '/' + account, reqInfo)
-                .then
+            const reqInfo = {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(objj)
+                };
+
+            console.log(reqInfo);
+            
+            console.log(delModiURL + '/' + genreId);
+
+            fetch(delModiURL + '/' + genreId, reqInfo)
+                .then(res => res.text())
+                .then(msg => {
+                    console.log(msg);
+                    if(msg === 'modi-success'){
+                        alert('수정성공!');
+                        showGenreList();
+                    } else {
+                        alert('수정실패');
+                    }
+
+                });
 
 
 
@@ -242,7 +275,7 @@
             showGenreList();
         }
 
-        // 장르 수정
+        // 장르 수정화면 랜더링
         function genreModify(e, genreName, genreNameBackUp, genreBtn) {
             
 
@@ -269,17 +302,6 @@
         
         }
 
-        function genreModiBtn(e, genreNameBackUp, genreBtn){
-
-                console.log('genreBtn : ', e.target);
-                const targetBtn = e.target;
-
-                if(targetBtn.matches('#modiSaveBtn')){
-                    console.log('#modiSaveBtn');
-                    // 1. 비동기 처리
-                    // 2. 버튼 변경 -> showGenreList();
-                }
-        }
 
         // 장르 삭제
         function genreDelete(genreId) {

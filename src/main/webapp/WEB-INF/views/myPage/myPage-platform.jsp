@@ -362,14 +362,14 @@
                                  platformFontColor: modiFontInput.value
                              };
 
-                    const reqInfo = {
-                        method: 'PUT',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify(objj)
-                    };
-                    console.log(objj);
+                const reqInfo = {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(objj)
+                };
+                console.log(objj);
 
                 console.log(modiURL + '/' + no);
                     fetch(modiURL + '/' + no, reqInfo)
