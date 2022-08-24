@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'PyeongChangPeace-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.myPage-wrap{
+    font-family: 'PyeongChangPeace-Light', sans-serif;
+    background: #fffaee;
+    height: 500vh;
+}
+
+.myPage-wrap h1{
+    width: 70%;
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 50px;
+    text-shadow: #e90404 1px 1px 25px;
+}
+
+.myPage-wrap .genre-wrap h2{
+    width: 70%;
+    margin: 0 auto;
+    padding: 0px 30px 70px 30px;
+}
+
+
+.myPage-wrap .genre-wrap #genreSetting{
+    background: #fffaee;
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
+
+}
+
+
+.myPage-wrap .genre-wrap #genreSetting #genList{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+    margin: 10px;
+    /*border: 1px solid #000000;*/
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 2.7;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .genreId{
+    width: 7%;
+    background: #eeedeb;
+    text-align: center;
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .genreName{
+    width: 73%;
+    background: #fff;
+    padding: 0 20px;
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .genreName #myPageGenreInput{
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding-left: 10px;
+    border: 1px solid #a5a197;
+}
+
+
+.myPage-wrap .genre-wrap #genreSetting #genList .modiNdel{
+    width: 20%;
+    padding-left: 30px;
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .modiNdel #gendel{
+    margin-left: 10px;
+
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .modiNdel #modiResetBtn{
+    margin-left: 10px;
+}

@@ -30,17 +30,20 @@ public class PlatformApiController {
     // 수정 - **수정사항이 디비로 안넘어감 -> 해결
     /*
         수정 patload
-            {
+        {
                 "account" : "ibini",
-                "platformName" : "naverWebtoon",
+                "platformName" : "kakaoPage2",
                 "platformBgColor" : "#00d564",
-                "platformFontColor" : "#fff"
-            }
+                "platformFontColor" : "#eee"
+        }
      */
-    @PutMapping("/{platformId}")
-    public String modify(@PathVariable int platformId
+    @PutMapping("/{account}/{platformId}")
+    public String modify(
+            @PathVariable String account
+            , @PathVariable int platformId
             ,@RequestBody PlatformDomain platformDomain){
 
+        log.info("/platform/c1/{}/{} PUT!", account, platformId);
         platformDomain.setPlatformId(platformId);
         log.info("platformId- {}", platformId);
 
@@ -52,8 +55,10 @@ public class PlatformApiController {
     }
     
     // 삭제
-    @DeleteMapping("/{platformId}")
-    public String delete(@PathVariable int platformId){
+    @DeleteMapping("/{account}/{platformId}")
+    public String delete(@PathVariable String account,
+            @PathVariable int platformId){
+        log.info("PlatformController delete! - platform account {} ", account);
         log.info("PlatformController delete! - platformId {} ", platformId);
 
         boolean deletePlatform = platformService.deletePlatform(platformId);

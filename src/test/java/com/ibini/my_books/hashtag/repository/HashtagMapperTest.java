@@ -44,7 +44,8 @@ class HashtagMapperTest {
     @DisplayName("선택한 하나의 해시태그를 찾을 수 있어야한다")
     void findOneHashTest(){
         int tagNo = 9;
-        HashtagDomain onePost = hashtagMapper.findOneTag(tagNo);
+        String account = "ibini";
+        HashtagDomain onePost = hashtagMapper.findOneTag(tagNo, account);
         System.out.println(onePost);
     }
 
@@ -52,7 +53,8 @@ class HashtagMapperTest {
     @DisplayName("선택한 하나의 해시태그를 수정할 수 있어야한다")
     void ModifyHashtagTest(){
         int tagNo = 7;
-        HashtagDomain onePost = hashtagMapper.findOneTag(tagNo);
+        String account = "ibini";
+        HashtagDomain onePost = hashtagMapper.findOneTag(tagNo, account);
         onePost.setTagName("아카데미물");
         System.out.println(onePost);
 

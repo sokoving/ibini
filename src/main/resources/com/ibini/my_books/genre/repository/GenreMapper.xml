@@ -22,6 +22,7 @@
             genre_id, account, genre_name
         FROM prj_genre
         WHERE account = #{account}
+        ORDER BY genre_id
     </select>
 
     <select id="fineOneGenreByGenreId" resultMap="genreMap">

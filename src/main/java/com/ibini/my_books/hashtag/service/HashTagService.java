@@ -51,9 +51,9 @@ public class HashTagService {
     }
     
     // 하나만 조회
-    public void findOneTag(int tagNo){
+    public void findOneTag(int tagNo, String account){
         log.info(" HashTagService findOne - {} ", tagNo);
-        HashtagDomain oneTag = hashtagMapper.findOneTag(tagNo);
+        HashtagDomain oneTag = hashtagMapper.findOneTag(tagNo, account);
     }
 
     // 수정

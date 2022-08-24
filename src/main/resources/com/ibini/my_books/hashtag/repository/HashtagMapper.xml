@@ -37,12 +37,14 @@
     <select id="findOneTag" resultMap="hashtagMap">
         SELECT * FROM prj_hashtag
         WHERE tag_no = #{tagNo}
+        AND account = #{account}
     </select>
 
     <!--    해시태그 전체 조회 (계정정보)-->
     <select id="findAllHashTag" resultMap="hashtagMap">
         SELECT * FROM prj_hashtag
         WHERE account = #{account}
+        ORDER BY tag_no
     </select>
 
 
