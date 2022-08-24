@@ -9,9 +9,11 @@ import java.util.Date;
 @AllArgsConstructor
 public class PostMemo {
 
-    private Long memoNo;    // 메모 번호
-    private Long postNo;    // 포스트 번호
-    private String content; // 내용
-    private Date regDate;   // 작성일자
-    private Date modDate;   // 수정일자
+    private Long memoNo;         // 메모 번호
+    private Long postNo;         // 포스트 번호
+    private String content;      // 내용
+    private Date regDateTime;    // 작성일자
+    private Date modDateTime;    // 수정일자
+    private String regAccount;   // 작성 account
+    private String modAccount;   // 수정 account
 }
