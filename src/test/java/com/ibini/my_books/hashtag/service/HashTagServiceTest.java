@@ -22,7 +22,7 @@ class HashTagServiceTest {
     @DisplayName("해시태그 위지 가져오기")
     void cutTagTest(){
 
-        HashtagDomain oneTag = hashtagMapper.findOneTag(9);
+        HashtagDomain oneTag = hashtagMapper.findOneTag(9, "ibini");
         System.out.println(oneTag);
         String tagName = oneTag.getTagName();
         System.out.println(tagName);
