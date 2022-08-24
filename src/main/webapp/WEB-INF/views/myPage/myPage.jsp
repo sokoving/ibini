@@ -19,15 +19,16 @@
 <body>
 
     <!-- sideBar account 정보 수정-->
+    <!-- account 정보 넘기기 -->
     <div class="sidenav">
-        <a href="http://localhost:8383/myPage">MY PAGE</a>
+        <a href="http://localhost:8383/${account}/myPage">MY PAGE</a>
         <a href="#"></a>
         <a href="#">About</a>
         <a href="#">Services</a>
-        <a href="#">Clients</a>
+        <a href="#">Clients</a>s
         <a href="#">Setting</a>
-        <a href="http://localhost:8383/myPage/platform">Platform</a>
-        <a href="http://localhost:8383/myPage/genre">Genre</a>
+        <a href="http://localhost:8383/myPage/${account}/platform">Platform</a>
+        <a href="http://localhost:8383/myPage/${account}/genre">Genre</a>
     </div>
 
     <div class="myPage-wrap">
