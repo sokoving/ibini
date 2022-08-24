@@ -134,3 +134,26 @@
 #modiBg #eventRemoveBtn{
     padding-left: 10px;
 }
+#modalBody h2{
+    /* background: rgb(255, 177, 177); */
+    padding: 30px 20px 0px;
+}
+#platModi #modiNameInput{
+    margin: 0px 20px 0px;
+    padding: 3px 10px;
+}
+
+#platModi #modiBgInput{
+    margin: 0px 20px 0px;
+    padding: 3px 10px;
+}
+
+#platModi #modiFontInput{
+    margin: 0px 20px 0px;
+    padding: 3px 10px;
+}
+
+/* picker */
+#picker .IroColorPicker{
+    padding: 0 20%;
+}

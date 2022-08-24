@@ -82,7 +82,7 @@
                             <h5 class="modal-title" id="exampleModalLabel">플랫폼 수정하기</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" id="modalBody">
                             <h1>플랫폼 수정하기</h1>
                             <div id="picker"></div>
                             <div id="modiName">
@@ -91,11 +91,11 @@
                             </div>
                             <div id="modiBg">
                                 <h2>플랫폼 뱃지 배경색 수정</h2>
-                                <input type="text" id="modiBgInput"><div id="eventRemoveBtn"></div>
+                                <input type="text" id="modiBgInput" readonly><div id="eventRemoveBtn"></div>
                             </div>
                             <div id="modiFont">
                                 <h2>플랫폼 뱃지 글자색 수정</h2>
-                                <input type="text" id="modiFontInput"><div id="eventRemoveBtnFont"></div>
+                                <input type="text" id="modiFontInput" readonly><div id="eventRemoveBtnFont"></div>
 
                             </div>
                         </div>
@@ -128,6 +128,8 @@
 
         // 배경 클릭 이벤트
         function modiBgInputClick(e) {
+
+            console.log('modiBgInputClick : ', e.target);
 
             var colorPicker = new iro.ColorPicker("#picker", {
                 // Set the size of the color picker
@@ -183,9 +185,64 @@
 
         }
 
+        function color(){
+            console.log('color');
+            const modalBody = document.getElementById('modalBody');
+            const pickerHTML = document.querySelector('#picker');
+            
+            // 존재한다면?
+            const picker = document.querySelector('#picker').children;
+            const IroColorPicker = document.querySelectorAll('.IroColorPicker');
+
+            modalBody.onclick = e => {
+                console.log(e.target);
+
+                if(e.target.matches('#modiBgInput') && picker.length == 0){
+                    
+                    console.log('modiBgInput');
+                    // input클릭시 IroColorPicker 생성
+                    modiBgInputClick(e);
+                    console.log('pickerHTML : ',pickerHTML);
+                    console.log('picker.length(==0) : ' , picker.length);
+
+                } else if(e.target.matches('#modiBgInput') && picker.length >= 1){
+                    console.log('modiBgInput.length>=1');
+                    pickerHTML.innerHTML = ``;
+                    modiBgInputClick(e);
+                    console.log('pickerHTML : ',pickerHTML);
+                    console.log('picker.length(>=1) : ' , picker.length);
+            
+
+                } else if(e.target.matches('#modiFontInput') && picker.length == 0) {
+                    console.log('modiFontInput.length==0');
+                    modiFontInputEvent(e);
+                    console.log('modiFontInput.picker.length(==0) : ' , picker.length);
+                }
+                else if (e.target.matches('#modiFontInput') && picker.length >= 1){
+                    console.log('modiFontInput.length>=1');
+                    pickerHTML.innerHTML = ``;
+                    // ??????
+                    // IroColorPicker.style.display = "none";
+                    modiFontInputEvent(e);
+                    console.log('modiFontInput.picker.length(>=1) : ' , picker.length);
+                
+                }
+
+                //IroColorPicker.style.display = "none";
+
+            }
+
+            platformModifyEvent(pickerHTML);
+        
+        }
+
 
         // 배경 색상 선택 input 수정
         function modiBgInput() {
+            
+            const modalBody = document.getElementById('modalBody');
+            console.log('modalBody: ', modalBody);
+
             const modiBgInput = document.getElementById('modiBgInput');
             modiBgInput.addEventListener('click', modiBgInputClick );
             
@@ -210,8 +267,8 @@
             })
             
         }
-    
 
+    
         // 도메인 리스트 불러오기
         function showdomainList() {
             
@@ -327,7 +384,7 @@
             document.getElementById('modiBgInput').value = platfomrBgColor;
             document.getElementById('modiFontInput').value = platformFontColor;
 
-            // 번호 달아주기
+            // 모달 찾아서 번호 달아주기
             const $modal = document.querySelector('.modal');
             $modal.dataset.no = no;
             console.log('no: ', no);
@@ -339,7 +396,8 @@
 
 
         // 플팻폼 수정 비동기 처리 이벤트
-        function platformModifyEvent() {
+        function platformModifyEvent(pickerHTML) {
+
             const modal = document.getElementById('platModi');
             console.log('platformModifyEvent')
 
@@ -377,8 +435,12 @@
                         .then(msg => {
                             if (msg === 'modi-success') {
                                 alert('수정 성공!!');
-                                // jquery로 닫자,,,,
-                                modal.style.display = "none"; // 모달창 닫기? -> 수정하기!
+                                // jquery로 모달창 닫기?
+                                $(document).ready(function(){
+                                    $('#platModi').modal('hide');
+                                })
+                                // picker 비워주기
+                                pickerHTML.innerHTML = ``;
                                 showdomainList(); //새로불러오기
                             } else {
                                 alert('수정 실패!!');
@@ -418,8 +480,10 @@
             openModifyModalAndRemoveEvent();
             platformModifyEvent();
             // 컬러 선택 함수
-            modiBgInput();
-            modiFontInput();
+            // modiBgInput();
+            // modiFontInput();
+            // colorEventHanlder();
+            color();
 
         })();
 
