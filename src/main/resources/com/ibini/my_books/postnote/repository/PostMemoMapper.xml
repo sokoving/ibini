@@ -8,8 +8,10 @@
     <resultMap id="memoMap" type="com.ibini.my_books.postnote.domain.PostMemo">
         <result property="memoNo" column="memo_no" />
         <result property="postNo" column="post_no" />
-        <result property="regDate" column="reg_date" />
-        <result property="modDate" column="mod_date" />
+        <result property="regDateTime" column="reg_datetime" />
+        <result property="modDateTime" column="mod_datetime" />
+        <result property="regAccount" column="reg_account" />
+        <result property="modAccount" column="mod_account" />
     </resultMap>
 
     <!-- 메모 저장 -->
