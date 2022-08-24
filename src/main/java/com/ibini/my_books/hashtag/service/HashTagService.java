@@ -6,7 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Log4j2
@@ -66,7 +67,7 @@ public class HashTagService {
 
     // 포스트에 달린 해시태그 전부 조회
     public List<HashtagDomain> findAllByPostNo(Long postNo){
-        log.info(" HashTagService findAllByPostNo - {} ", postNo);
+        log.info("HashTagService findAllByPostNo call ");
         return hashtagMapper.findAllHashTagByPostNo(postNo);
     }
 

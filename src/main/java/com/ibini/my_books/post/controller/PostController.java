@@ -113,7 +113,6 @@ public class PostController {
         model.addAttribute("p", postService.fineOnePostWithName(postNo)); //  PostWithName
         model.addAttribute("tagList", hashTagService.findAllByPostNo(postNo)); // List<HashtagDomain>
         model.addAttribute("imgList", imgService.getPostImgList(postNo));  // List<PostImg>
-        model.addAttribute("date", postService.convertDate(postService.findOnePostService(postNo)));
 
         return "post/post-detail";
     }

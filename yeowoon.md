@@ -14,24 +14,27 @@ post-btn-wrap
     // tbl_post
     private Long postNo;            //  포스트 번호   NUMBER(10)  NOT NULL,
     private String account;         // 유저아이디    VARCHAR2(50)  NOT NULL,
-    - private int genreId;           // 장르아이디    NUMBER(3) NULL,
-    - private int caId;             // 카테고리아이디   NUMBER(3)  DEFAULT 0,
-    - private int platformId;       // 연재플랫폼아이디   NUMBER(3)  DEFAULT 0,
-    - private String postTitle;     // 책제목    VARCHAR2(100) NOT NULL,
-    - private String postWriter;    // 작가    VARCHAR2(100) NOT NULL,
-    - private int publishStatus;    // 연재상태   NUMBER(1) DEFAULT 0,
-    - private String publishCycle;  // 연재주기   VARCHAR2(100) NULL,
-    - private int epId;             // 회차아이디   NUMBER(1) NULL,
-    - private int curEp;            // 현재 회차    NUMBER(5) DEFAULT 0,
-    - private int totalEp;           // 총회차   NUMBER(5) DEFAULT 0,
-    private Date regDate;          // 등록일자   DATE  DEFAULT SYSDATE,
-    private Date updateDate;       // 수정일자    DATE               DEFAULT SYSDATE ,
+    private int genreId;           // 장르아이디    NUMBER(3) NULL,
+    private int caId;             // 카테고리아이디   NUMBER(3)  DEFAULT 0,
+    private int platformId;       // 연재플랫폼아이디   NUMBER(3)  DEFAULT 0,
+    private String postTitle;     // 책제목    VARCHAR2(100) NOT NULL,
+    private String postWriter;    // 작가    VARCHAR2(100) NOT NULL,
+    private int publishStatus;    // 연재상태   NUMBER(1) DEFAULT 0,
+    private String publishCycle;  // 연재주기   VARCHAR2(100) NULL,
+    private int epId;             // 회차아이디   NUMBER(1) NULL,
+    private int curEp;            // 현재 회차    NUMBER(5) DEFAULT 0,
+    private int totalEp;           // 총회차   NUMBER(5) DEFAULT 0,
+    private Date regDate;          // 등록일자(KST 표준시)  DATE  DEFAULT SYSDATE,
+    private Date updateDate;       // 수정일자(KST 표준시)    DATE               DEFAULT SYSDATE ,
     private int starRate;          // 별점   NUMBER(1)          NULL,
 
     private String caName;      // 카테고리 이름
     private String publishStatusName;    // 연재상태명
     private String epName;      // 회차 구분명(ex. 페이지)
     private String epName2;   // 회차 구분명 (ex. p)
+
+    FormattingDateDTO shortDate;    //
+    private String oneLineTag;      // 포스트의 해시태그 한 줄로(PostService에서 세팅할 것)
 
     //  prj_genre
     private String genreName;
@@ -41,9 +44,8 @@ post-btn-wrap
     private String platformBgColor;
     private String platformFontColor;
 
-
     // prj_post_img
-    private String fileName;
+    private String thumbImg;        // 썸네일 이미지 경로(표지)
 
 
 ("tagList", hashTagService.findAllByPostNo(postNo)); // List<HashtagDomain>
