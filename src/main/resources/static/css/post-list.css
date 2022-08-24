@@ -1,5 +1,5 @@
-/* 새 글 등록 버튼 */
-.inner-section.reg-sec {
+/* 새 글 등록 영역 */
+.inner-section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,10 +36,9 @@
 }
 
 
-/* 포스트 리스트 섹션 */
-section .inner-section.list-sec{
-    margin-top: 50px;
+/* 포스트 리스트 영역 */
+section.list-sec{
+    margin: 50px auto 0;
     padding: 0;
+    background-color: pink;
 }
-
-.list-sec

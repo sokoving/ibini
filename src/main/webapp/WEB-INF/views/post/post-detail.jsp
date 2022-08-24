@@ -270,12 +270,15 @@
 
     </div> <!-- end wrap -->
 
-
-
+    <script src="/js/post-detail.js"></script>
     <script>
         // start jQuery
         $(document).ready(function () {
-            jQueryTagTest("태그 잡기 테스트", $('h1'));
+            // jQueryTagTest("태그 잡기 테스트", $('h1'));
+
+            const star = '${p.starRate}'
+            console.log(star);
+            starRate(star);
 
 
 
