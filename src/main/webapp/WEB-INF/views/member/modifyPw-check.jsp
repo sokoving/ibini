@@ -157,7 +157,7 @@
 
 
                 <form action="/member/modifyPw-check" name="pWmodifyForm" method="post" id="pWmodifyForm">
-                  <input type="hidden" name="account" id="originPw" value="${loginUser.account}">
+                  <input type="hidden" name="userId" id="originPw" value="${loginUser.userId}">
 
                   <h5>현재 비밀번호를 입력해주세요.</h5>
                   <input type="password" size="17" maxlength="20" id="signInPw" name="originPassword"
@@ -199,7 +199,7 @@
 
       <script>
 
-        console.log('${loginUser.account}');
+        console.log('${loginUser.userId}');
 
 
 

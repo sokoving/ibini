@@ -7,6 +7,7 @@
 <mapper namespace="com.ibini.my_books.member.repository.MemberMapper">
 
     <resultMap id="MemberMap" type="com.ibini.my_books.member.domain.Member">
+        <result column="user_id" property="userId"/>
         <result column="user_name" property="userName"/>
         <result column="post_amount" property="postAmount"/>
         <result column="join_date" property="joinDate"/>
@@ -20,21 +21,19 @@
     <insert id="register">
 
         INSERT INTO tbl_member
-        (account, password, user_name, email)
+        (
+        account, user_id,
+        password, user_name, email
+        )
         VALUES
-        (#{account}, #{password}, #{userName}, #{email})
+        (
+        TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0'),
+        #{userId}, #{password}, #{userName}, #{email}
+        )
 
     </insert>
 
-    <!--    카카오 회원 가입 기능 만드는중   -->
-    <insert id="kakaoRegister">
 
-        INSERT INTO tbl_member
-        (account, password, user_name, email)
-        VALUES
-        (#{account}, #{password}, #{userName}, #{email})
-
-    </insert>
 
     <!--    중복 체크 기능(아이디와 이메일을 동시에 처리 = 동적 sql)   -->
     <select id="isDuplicate" resultType="int">
@@ -42,8 +41,8 @@
         SELECT COUNT(*)
         FROM tbl_member
 
-        <if test="type=='account'" >
-            WHERE account = #{value}
+        <if test="type=='userId'" >
+            WHERE user_id = #{value}
         </if>
         <if test="type=='email'">
             WHERE email = #{value}
@@ -58,7 +57,7 @@
 
         SELECT *
         FROM tbl_member
-        WHERE account = #{account}
+        WHERE user_id = #{userId}
 
     </select>
 
@@ -71,7 +70,7 @@
     <update id="updateEmail">
         UPDATE tbl_member
         SET email = #{email}
-        WHERE account = #{account}
+        WHERE user_id = #{userId}
 
     </update>
 
@@ -79,7 +78,7 @@
     <update id="updateName">
         UPDATE tbl_member
         SET user_name = #{userName}
-        WHERE account = #{account}
+        WHERE user_id = #{userId}
 
     </update>
 
@@ -87,14 +86,14 @@
     <update id="updatePw">
         UPDATE tbl_member
         SET password = #{password}
-        WHERE account = #{account}
+        WHERE user_id = #{userId}
 
     </update>
 
 <!--  회원 탈퇴  -->
     <delete id="memberDelete">
         DELETE FROM tbl_member
-        WHERE account = #{account}
+        WHERE user_id = #{userId}
     </delete>
 
     <!--  자동 로그인 정보 추가  -->
@@ -102,7 +101,7 @@
 
         UPDATE tbl_member
         SET session_id = #{sessionId}, limit_time = #{limitTime}
-        WHERE account = #{account}
+        WHERE user_id = #{userId}
 
     </update>
 

@@ -36,9 +36,10 @@ CREATE SEQUENCE seq_tbl_post;
 CREATE TABLE tbl_member
 (
     account         VARCHAR2(50)             NOT NULL,
+    user_id         VARCHAR2(50)          NOT NULL,
     password       VARCHAR2(150)          NOT NULL,
     user_name      VARCHAR2(20)          NOT NULL,
-    email        VARCHAR2(100)        NOT NULL,
+    email        VARCHAR2(100)        NOT NULL UNIQUE,
     post_amount    NUMBER(3)                  NULL,
     sort                  VARCHAR2(50)            NULL,
     auth           VARCHAR2(20)  DEFAULT 'COMMON' ,
@@ -51,6 +52,7 @@ CREATE TABLE tbl_member
 );
 DROP SEQUENCE seq_tbl_member;
 CREATE SEQUENCE seq_tbl_member;
+TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0')
 
 CREATE TABLE prj_genre
 (

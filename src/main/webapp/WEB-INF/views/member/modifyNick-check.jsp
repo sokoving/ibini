@@ -154,7 +154,7 @@
 
 
                 <form action="/member/modifyNick-check" name="nickModifyForm" method="post" id="nickModifyForm">
-                  <input type="hidden" name="account" value="${loginUser.account}">
+                  <input type="hidden" name="userId" value="${loginUser.userId}">
 
                   <h5>수정하실 닉네임을 입력해주세요.</h5>
                   <input type="text" maxlength="6" id="user_name" name="userName"
@@ -226,7 +226,7 @@
 
 
         });
-        console.log('${loginUser.account}');
+        console.log('${loginUser.userId}');
 
         const msg = '${msg}';
         console.log(msg);

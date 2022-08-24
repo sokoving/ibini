@@ -319,8 +319,8 @@
                     <i class="fas fa-user"></i>
                   </div>
                   <div class="div">
-                    <h5>account</h5>
-                    <input type="text" name="account" id="signInId" class="input" maxlength="14">
+                    <h5>userId</h5>
+                    <input type="text" name="userId" id="signInId" class="input" maxlength="14">
                   </div>
                 </div>
                 <div class="input-div pass">

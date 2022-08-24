@@ -48,8 +48,8 @@ public class MemberService {
     }
 
     // 회원 정보 조회 중간 처리;
-    public Member getMember(String account) {
-        Member foundMember = memberMapper.findUser(account);
+    public Member getMember(String userId) {
+        Member foundMember = memberMapper.findUser(userId);
         //날짜 포맷팅 후 세션으로 회원정보 넘기기
         Date date = foundMember.getJoinDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd a hh:mm");
@@ -61,7 +61,7 @@ public class MemberService {
     public LoginFlag login(LoginDTO inputData, HttpSession session
     ,HttpServletResponse response) {
         //0.회원가입 여부 확인
-        Member foundMember = memberMapper.findUser(inputData.getAccount());
+        Member foundMember = memberMapper.findUser(inputData.getUserId());
 
         if (foundMember == null) {
             return NO_ACC;
@@ -83,7 +83,7 @@ public class MemberService {
                 //자동 로그인 처리
                 if(inputData.isAutoLogin()){
                     log.info("checked auto login user!!");
-                    keepLogin(foundMember.getAccount(),session,response);
+                    keepLogin(foundMember.getUserId(),session,response);
                 }
 
                 return SUCCESS;
@@ -97,7 +97,7 @@ public class MemberService {
         }
     }
 
-    private void keepLogin(String account, HttpSession session, HttpServletResponse response) {
+    private void keepLogin(String userId, HttpSession session, HttpServletResponse response) {
         //1. 자동로그인 쿠키 생성 - 쿠키의 값으로 현재 세션의 아이디를 저장
         String sessionId = session.getId();
         Cookie c = new Cookie(LOGIN_COOKIE, sessionId);
@@ -121,7 +121,7 @@ public class MemberService {
         // 오늘로부터 90일 후의 시간을 구해서 limitTime에 초기화
         dto.setLimitTime(limitDate);
 
-        dto.setAccount(account);
+        dto.setUserId(userId);
 
         memberMapper.saveAutoLoginValue(dto);
 
@@ -129,8 +129,8 @@ public class MemberService {
     }
 
     // 비밀번호 일치 확인
-    public boolean modifyPwCheck(String password, String account) {
-        Member member = memberMapper.findUser(account);
+    public boolean modifyPwCheck(String password, String userId) {
+        Member member = memberMapper.findUser(userId);
         String dbPw = member.getPassword();
 
         if (encoder.matches(password, dbPw)) {
@@ -140,32 +140,32 @@ public class MemberService {
     }
 
     // 회원 정보 닉네임 수정 기능
-    public boolean updateName(String account, String userName) {
-        boolean flag = memberMapper.updateName(account, userName);
+    public boolean updateName(String userId, String userName) {
+        boolean flag = memberMapper.updateName(userId, userName);
         return flag;
     }
 
 
     // 회원정보 비밀번호 수정 기능
-    public boolean updatePw(String account, String password) {//, HttpSession session) {
+    public boolean updatePw(String userId, String password) {//, HttpSession session) {
         //비밀번호 암호화
         String encodePw = encoder.encode(password);
 
 //        //암호화된 비밀번호로 변경 하기
-//        Member m = memberMapper.findUser(account);
+//        Member m = memberMapper.findUser(userId);
 //        m.setPassword(encodePw);
 
         //DB에 변경된 정보 업데이트
-        boolean flag = memberMapper.updatePw(account, encodePw);
+        boolean flag = memberMapper.updatePw(userId, encodePw);
         return flag;
     }
 
     //회원 탈퇴
-    public boolean memberDelete(String account, String password) {
-        return memberMapper.memberDelete(account, password);
+    public boolean memberDelete(String userId, String password) {
+        return memberMapper.memberDelete(userId, password);
     }
 
-    public void autoLogout(String account, HttpServletRequest request,HttpServletResponse response) {
+    public void autoLogout(String userId, HttpServletRequest request,HttpServletResponse response) {
         //1. 자동로그인 쿠키를 불러온 뒤 수명을 0초로 세팅해서 클라이언트에게 돌려보낸다.
         Cookie c = getAutoLoginCookie(request);
         if (c != null) {
@@ -176,7 +176,7 @@ public class MemberService {
         AutoLoginDTO dto = new AutoLoginDTO();
         dto.setSessionId("none");
         dto.setLimitTime(new Date());
-        dto.setAccount(account);
+        dto.setUserId(userId);
         memberMapper.saveAutoLoginValue(dto);
     }
 
@@ -186,10 +186,10 @@ public class MemberService {
 
 //
 //    // 회원정보 이메일 수정 기능
-//    public boolean updateEmail(String account, String email) {
+//    public boolean updateEmail(String userId, String email) {
 //
 //        //DB에 변경된 정보 업데이트
-//        boolean flag = memberMapper.updateEmail(account, email);
+//        boolean flag = memberMapper.updateEmail(userId, email);
 //        return flag;
 //    }
 

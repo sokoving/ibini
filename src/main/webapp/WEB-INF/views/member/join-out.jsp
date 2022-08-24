@@ -163,7 +163,7 @@
 
 
                 <form action="/member/join-out" name="joinoutForm" method="post" id="joinoutForm">
-                  <input type="hidden" name="account" value="${loginUser.account}">
+                  <input type="hidden" name="userId" value="${loginUser.userId}">
 
                   <h5>회원 탈퇴를 하시려면 패스워드를 입력해주세요.</h5>
                   <input type="password" size="17" maxlength="20" id="password" name="password"

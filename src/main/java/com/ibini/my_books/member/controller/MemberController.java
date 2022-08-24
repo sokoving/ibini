@@ -170,14 +170,14 @@ public class MemberController {
     }
 
     @PostMapping("modifyNick-check")
-    public String modifyNickCheck(String account, String userName,
+    public String modifyNickCheck(String userId, String userName,
                                   RedirectAttributes ra, HttpSession session) {
-        log.info("/member/modifyNick-check POST - account : {}, userName : {}", account, userName);
+        log.info("/member/modifyNick-check POST - userId : {}, userName : {}", userId, userName);
 
-        boolean flag = memberService.updateName(account, userName);
+        boolean flag = memberService.updateName(userId, userName);
 
         //세션에 변경된 사용자 정보기록 저장
-        Member foundMember = memberService.getMember(account);
+        Member foundMember = memberService.getMember(userId);
         log.info(foundMember);
         session.setAttribute("loginUser", foundMember);
 
@@ -201,16 +201,16 @@ public class MemberController {
 
     //비밀번호 수정
     @PostMapping("/modifyPw-check")
-    public String modifyCheck(String account, String originPassword, String password, Model model,
+    public String modifyCheck(String userId, String originPassword, String password, Model model,
                               RedirectAttributes ra) {
-        log.info("/member/modify-check POST! originPassword - {}, password - {}, account - {}", originPassword, password, account);
+        log.info("/member/modify-check POST! originPassword - {}, password - {}, userId - {}", originPassword, password, userId);
 
         //기존 비밀번호 입력값과 DB 비밀번호값 일치 여부 확인
-        boolean checkFlag = memberService.modifyPwCheck(originPassword, account);
+        boolean checkFlag = memberService.modifyPwCheck(originPassword, userId);
 
         // 기존 비밀번호가 일치하면 비밀번호 변경 실행
         if (checkFlag) {
-            boolean modifyFlag = memberService.updatePw(account, password);
+            boolean modifyFlag = memberService.updatePw(userId, password);
 
             //비밀번호 변경 성공 하면 회원정보 출력창으로 이동
             if (modifyFlag) {
@@ -239,15 +239,15 @@ public class MemberController {
     }
 
     @PostMapping("/join-out")
-    public String joinOut(String account, String password, RedirectAttributes ra) {
-        log.info("/member/join-out POST !! account : {}, password : {}", account, password);
+    public String joinOut(String userId, String password, RedirectAttributes ra) {
+        log.info("/member/join-out POST !! userId : {}, password : {}", userId, password);
 
         // 입력된 비밀번호와 db 비밀번호 일치 확인
-        boolean pwCheckFlag = memberService.modifyPwCheck(password, account);
+        boolean pwCheckFlag = memberService.modifyPwCheck(password, userId);
 
         if (pwCheckFlag) {
             ra.addFlashAttribute("msg", "success");
-            memberService.memberDelete(account, password);
+            memberService.memberDelete(userId, password);
 
             return "redirect:/member/join-sign-out";
         }
@@ -265,19 +265,19 @@ public class MemberController {
     }
 
     @PostMapping("/findpw")
-    public String findpw(String account, String email,RedirectAttributes ra,Model model) throws Exception {
-        log.info("/member/findpw POST!! account : {}, email : {}", account,email);
+    public String findpw(String userId, String email,RedirectAttributes ra,Model model) throws Exception {
+        log.info("/member/findpw POST!! userId : {}, email : {}", userId,email);
         //사용자가 입력한 아이디가 존재하는지 여부 확인.
-        boolean flag = memberService.checkSignUpValue("account", account);
+        boolean flag = memberService.checkSignUpValue("userId", userId);
 
         if (!flag){
             //아이디가 존재 하지 않으면 메시지 전송 후 다시 비밀번호 찾기 페이지로 이동
-            ra.addFlashAttribute("msg","not-find-account");
+            ra.addFlashAttribute("msg","not-find-userId");
             return "redirect:/member/findpw";
 
         } else {
             //존재 한다면 회원정보를 찾은 후 입력한 이메일과 일치하는지 확인
-            Member member = memberService.getMember(account);
+            Member member = memberService.getMember(userId);
             if (email.equals(member.getEmail())){
 
                 // 입력한 이메일과 회원의 이메일이 일치하면 인증코드 발송
@@ -285,7 +285,7 @@ public class MemberController {
 
                 // 전송한 인증코드 서버에 저장
                 model.addAttribute("code",code);
-                model.addAttribute("account",account);
+                model.addAttribute("userId",userId);
                 log.info("code : {}",code);
                 return "/member/findpw"; // c:if로 code존재 여부에 따라 보여지는 페이지 설정 다르게 하기.
 
@@ -301,12 +301,12 @@ public class MemberController {
 
     //인증코드 일치여부 확인
     @PostMapping("/checkcode")
-    public String checkcode(String inputcode, String code, String account, Model model){
+    public String checkcode(String inputcode, String code, String userId, Model model){
         log.info("code:{}, inputcode:{}",code,inputcode);
         if (inputcode.equals(code)){
             // 비밀번호 변경 페이지로 이동
-            model.addAttribute("account",account);
-            log.info("account:{}",account);
+            model.addAttribute("userId",userId);
+            log.info("userId:{}",userId);
             return "/member/change-password";
         } else
             //인증코드 검증이 실패하면 인증코드를 들고 인증코드 입력 페이지로 이동
@@ -318,10 +318,10 @@ public class MemberController {
 
     //인증코드 확인 후 비밀번호 수정
     @PostMapping("/change-password")
-    public String changPassword(String account, String password, RedirectAttributes ra){
-        log.info("account:{}, password:{}",account,password);
+    public String changPassword(String userId, String password, RedirectAttributes ra){
+        log.info("userId:{}, password:{}",userId,password);
 
-            boolean modifyFlag = memberService.updatePw(account, password);
+            boolean modifyFlag = memberService.updatePw(userId, password);
 
             //비밀번호 변경 성공 하면 회원정보 출력창으로 이동
             if (modifyFlag) {
@@ -343,9 +343,9 @@ public class MemberController {
 
 //    @PutMapping("modify-email")
 //    @ResponseBody
-//    public ResponseEntity<String> modifyEmail(String account, String email){
-//        log.info("/member/modify POST !! - email:{}, account:{} ", email,account);
-//        boolean flag = memberService.updateEmail(account, email);
+//    public ResponseEntity<String> modifyEmail(String userId, String email){
+//        log.info("/member/modify POST !! - email:{}, userId:{} ", email,userId);
+//        boolean flag = memberService.updateEmail(userId, email);
 //
 //        return flag? new ResponseEntity<>("modify-email-success",HttpStatus.OK)
 //                : new ResponseEntity<>("modify-fail",HttpStatus.BAD_REQUEST);

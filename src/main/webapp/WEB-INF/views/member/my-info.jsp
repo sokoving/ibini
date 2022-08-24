@@ -143,8 +143,8 @@
             </div>          
             
             <div id="content">
-            <!-- account -->
-            <h5>account :&nbsp;&nbsp;&nbsp;${loginUser.account}</h5>
+            <!-- userId -->
+            <h5>userId :&nbsp;&nbsp;&nbsp;${loginUser.userId}</h5>
 
               <!-- userName-->
               <h5>nick-name :&nbsp;&nbsp;&nbsp;${loginUser.userName}    

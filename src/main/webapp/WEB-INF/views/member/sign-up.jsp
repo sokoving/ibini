@@ -292,14 +292,14 @@
             <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg -->
             <h2 class="title">회원가입</h2>
 
-            <!-- account -->
+            <!-- userId -->
             <div class="input-div one">
               <div class="i">
-                <i class="fas fa-user"></i>
+                <!-- <i class="fas fa-user"></i> -->
               </div>
               <div class="div">
-                <h5>account</h5>
-                <input type="text" name="account" id="signInId" class="input" maxlength="14" required="required"
+                <h5>userId</h5>
+                <input type="text" name="userId" id="signInId" class="input" maxlength="14" required="required"
                   aria-required="true">
               </div>
             </div>
@@ -308,7 +308,7 @@
             <!-- password -->
             <div class="input-div pass">
               <div class="i">
-                <i class="fas fa-lock"></i>
+                <!-- <i class="fas fa-lock"></i> -->
               </div>
               <div class="div">
                 <h5>Password</h5>
@@ -321,7 +321,7 @@
             <!-- password check-->
             <div class="input-div pass">
               <div class="i">
-                <i class="fas fa-lock"></i>
+                <!-- <i class="fas fa-lock"></i> -->
               </div>
               <div class="div">
                 <h5>Password cehck</h5>
@@ -334,7 +334,7 @@
             <!-- userName-->
             <div class="input-div pass">
               <div class="i">
-                <i class="fas fa-lock"></i>
+                <!-- <i class="fas fa-lock"></i> -->
               </div>
               <div class="div">
                 <h5>userName</h5>
@@ -347,7 +347,7 @@
             <!-- email-->
             <div class="input-div pass">
               <div class="i">
-                <i class="fas fa-lock"></i>
+                <!-- <i class="fas fa-lock"></i> -->
               </div>
               <div class="div">
                 <h5>e-mail</h5>
@@ -406,7 +406,7 @@
             // 아이디 중복 확인 검증
             else {
 
-              fetch('/member/check?type=account&value=' + $idInput.val())
+              fetch('/member/check?type=userId&value=' + $idInput.val())
                 .then(res => 
                 res.text())
                 .then(flag => {
