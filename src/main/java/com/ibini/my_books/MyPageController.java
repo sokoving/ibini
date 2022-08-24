@@ -25,14 +25,14 @@ public class MyPageController {
         return "myPage/myPage";
     }
     @GetMapping("/{account}/platform")
-    public String showPlatform(@PathVariable String account){
-
+    public String showPlatform(@PathVariable String account, Model model){
+        model.addAttribute("account", account);
         return "myPage/myPage-platform";
     }
 
     @GetMapping("/{account}/genre")
-    public String showGenre(@PathVariable String account){
-
+    public String showGenre(@PathVariable String account, Model model){
+        model.addAttribute("account", account);
         return "myPage/myPage-genre";
     }
 

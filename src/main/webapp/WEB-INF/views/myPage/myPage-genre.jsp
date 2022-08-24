@@ -65,7 +65,7 @@
     
 
     <script>
-        const account = "ibini";
+        const account = '${account}';
         const url = "http://localhost:8383/genre/c1?account=" + account;
         const delModiURL = "http://localhost:8383/genre/c1/" + account;
         
