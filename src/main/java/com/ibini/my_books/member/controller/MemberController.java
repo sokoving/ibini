@@ -3,6 +3,7 @@ package com.ibini.my_books.member.controller;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.domain.SNSLogin;
 import com.ibini.my_books.member.dto.LoginDTO;
+import com.ibini.my_books.member.service.EmailServiceImpl;
 import com.ibini.my_books.member.service.KakaoService;
 import com.ibini.my_books.member.service.LoginFlag;
 import com.ibini.my_books.member.service.MemberService;
@@ -31,6 +32,7 @@ import static com.ibini.my_books.util.LoginUtil.LOGIN_FROM;
 public class MemberController {
     private final MemberService memberService;
     private final KakaoService kakaoService;
+    private final EmailServiceImpl emailService;
 
     //회원가입 양식 띄우기
     @GetMapping("/sign-up")
@@ -58,15 +60,15 @@ public class MemberController {
 
     //로그인 화면을 열어주는 요청처리
     @GetMapping("/sign-in")
-    public void signIn(@ModelAttribute("message") String message,HttpServletRequest request,Model model) {
+    public void signIn(@ModelAttribute("message") String message, HttpServletRequest request, Model model) {
         log.info("/member/sign-in GET - forwarding to sign-in.jsp");
 
         String referer = request.getHeader("Referer");
         log.info("referer : {}", referer);
-        request.getSession().setAttribute("redirectURI",referer);
+        request.getSession().setAttribute("redirectURI", referer);
 
         model.addAttribute("kakaoAppKey", KAKAO_APP_KEY);
-        model.addAttribute("kakaoRedirect",KAKAO_REDIRECT_URI);
+        model.addAttribute("kakaoRedirect", KAKAO_REDIRECT_URI);
     }
 
 
@@ -88,24 +90,30 @@ public class MemberController {
         return "redirect:/member/sign-in";
     }
 
+
+    //로그아웃
     @GetMapping("/sign-out")
-    public String signOut(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public String signOut(HttpServletRequest request, HttpServletResponse response , RedirectAttributes ra) throws Exception {
         HttpSession session = request.getSession();
         //만약 자동 로그인 상태라면 해제한다. = 쿠키가 있다면
-        if (LoginUtil.hasAutoLoginCookie(request)){
-            memberService.autoLogout(LoginUtil.getCurrentMemberAccount(session),request,response);
+        if (LoginUtil.hasAutoLoginCookie(request)) {
+            memberService.autoLogout(LoginUtil.getCurrentMemberAccount(session), request, response);
         }
-
+        log.info("session : {}", session);
         //sns로그인 상태라면 해당 sns 로그아웃처리를 진행
         SNSLogin from = (SNSLogin) session.getAttribute(LOGIN_FROM);
-        switch (from){
-            case KAKAO:
-                kakaoService.logout((String) session.getAttribute("accessToken"));
-                break;
-            case NAVER:
-                break;
-            case GOOGLE:
-                break;
+        log.info("from:{}", from);
+
+        if (from != null) {
+            switch (from) {
+                case KAKAO:
+                    kakaoService.logout((String) session.getAttribute("accessToken"));
+                    break;
+                case NAVER:
+                    break;
+                case GOOGLE:
+                    break;
+            }
         }
 
         //로그인한 사람에게만 적용
@@ -115,6 +123,29 @@ public class MemberController {
 
             //2. 세션을 무효화 한다.
             session.invalidate();
+            return "redirect:/";
+        }
+        return "redirect:/member/sign-in";
+    }
+
+    // 회원탈퇴시 로그아웃 처리
+    @GetMapping("/join-sign-out")
+    public String joinSignOut(HttpServletRequest request, HttpServletResponse response , RedirectAttributes ra) throws Exception {
+        HttpSession session = request.getSession();
+        //만약 자동 로그인 상태라면 해제한다. = 쿠키가 있다면
+        if (LoginUtil.hasAutoLoginCookie(request)) {
+            memberService.autoLogout(LoginUtil.getCurrentMemberAccount(session), request, response);
+        }
+        log.info("session : {}", session);
+
+        //로그인한 사람에게만 적용
+        if (session.getAttribute("loginUser") != null) {
+            //1.세션에 정보를 삭제한다.
+            session.removeAttribute("loginUser");
+
+            //2. 세션을 무효화 한다.
+            session.invalidate();
+            ra.addFlashAttribute("msg","join-out-success");
             return "redirect:/";
         }
         return "redirect:/member/sign-in";
@@ -139,14 +170,14 @@ public class MemberController {
     }
 
     @PostMapping("modifyNick-check")
-    public String modifyNickCheck(String account, String userName,
+    public String modifyNickCheck(String userId, String userName,
                                   RedirectAttributes ra, HttpSession session) {
-        log.info("/member/modifyNick-check POST - account : {}, userName : {}", account, userName);
+        log.info("/member/modifyNick-check POST - userId : {}, userName : {}", userId, userName);
 
-        boolean flag = memberService.updateName(account, userName);
+        boolean flag = memberService.updateName(userId, userName);
 
         //세션에 변경된 사용자 정보기록 저장
-        Member foundMember = memberService.getMember(account);
+        Member foundMember = memberService.getMember(userId);
         log.info(foundMember);
         session.setAttribute("loginUser", foundMember);
 
@@ -170,16 +201,16 @@ public class MemberController {
 
     //비밀번호 수정
     @PostMapping("/modifyPw-check")
-    public String modifyCheck(String account, String originPassword, String password, Model model,
+    public String modifyCheck(String userId, String originPassword, String password, Model model,
                               RedirectAttributes ra) {
-        log.info("/member/modify-check POST! originPassword - {}, password - {}, account - {}", originPassword, password, account);
+        log.info("/member/modify-check POST! originPassword - {}, password - {}, userId - {}", originPassword, password, userId);
 
         //기존 비밀번호 입력값과 DB 비밀번호값 일치 여부 확인
-        boolean checkFlag = memberService.modifyPwCheck(originPassword, account);
+        boolean checkFlag = memberService.modifyPwCheck(originPassword, userId);
 
         // 기존 비밀번호가 일치하면 비밀번호 변경 실행
         if (checkFlag) {
-            boolean modifyFlag = memberService.updatePw(account, password);
+            boolean modifyFlag = memberService.updatePw(userId, password);
 
             //비밀번호 변경 성공 하면 회원정보 출력창으로 이동
             if (modifyFlag) {
@@ -207,17 +238,18 @@ public class MemberController {
         log.info("/member/join-out GET!! /member/join-out.jsp");
     }
 
-    @PostMapping("join-out")
-    public String joinOut(String account, String password, RedirectAttributes ra) {
-        log.info("/member/join-out POST !! account : {}, password : {}", account, password);
+    @PostMapping("/join-out")
+    public String joinOut(String userId, String password, RedirectAttributes ra) {
+        log.info("/member/join-out POST !! userId : {}, password : {}", userId, password);
 
         // 입력된 비밀번호와 db 비밀번호 일치 확인
-        boolean pwCheckFlag = memberService.modifyPwCheck(password, account);
+        boolean pwCheckFlag = memberService.modifyPwCheck(password, userId);
 
         if (pwCheckFlag) {
             ra.addFlashAttribute("msg", "success");
-            memberService.memberDelete(account, password);
-            return "redirect:/";
+            memberService.memberDelete(userId, password);
+
+            return "redirect:/member/join-sign-out";
         }
         ra.addFlashAttribute("msg", "fail");
         return "redirect:/member/join-out";
@@ -225,12 +257,95 @@ public class MemberController {
 
     }
 
+    //비밀번호 찾기
+    @GetMapping("/findpw")
+    public String fidnpw(){
+        log.info("/member/findpw GET!! ");
+        return "/member/findpw";
+    }
+
+    @PostMapping("/findpw")
+    public String findpw(String userId, String email,RedirectAttributes ra,Model model) throws Exception {
+        log.info("/member/findpw POST!! userId : {}, email : {}", userId,email);
+        //사용자가 입력한 아이디가 존재하는지 여부 확인.
+        boolean flag = memberService.checkSignUpValue("userId", userId);
+
+        if (!flag){
+            //아이디가 존재 하지 않으면 메시지 전송 후 다시 비밀번호 찾기 페이지로 이동
+            ra.addFlashAttribute("msg","not-find-userId");
+            return "redirect:/member/findpw";
+
+        } else {
+            //존재 한다면 회원정보를 찾은 후 입력한 이메일과 일치하는지 확인
+            Member member = memberService.getMember(userId);
+            if (email.equals(member.getEmail())){
+
+                // 입력한 이메일과 회원의 이메일이 일치하면 인증코드 발송
+                String code = emailService.sendSimpleMessage(email);
+
+                // 전송한 인증코드 서버에 저장
+                model.addAttribute("code",code);
+                model.addAttribute("userId",userId);
+                log.info("code : {}",code);
+                return "/member/findpw"; // c:if로 code존재 여부에 따라 보여지는 페이지 설정 다르게 하기.
+
+            } else {
+                ra.addFlashAttribute("msg","email-discord");
+                // 일치하지 않으면 실패 메시지 전송후 다시 비밀번호 찾기 페이지로 이동
+                return "redirect:/member/findpw";
+            }
+
+
+        }
+    }
+
+    //인증코드 일치여부 확인
+    @PostMapping("/checkcode")
+    public String checkcode(String inputcode, String code, String userId, Model model){
+        log.info("code:{}, inputcode:{}",code,inputcode);
+        if (inputcode.equals(code)){
+            // 비밀번호 변경 페이지로 이동
+            model.addAttribute("userId",userId);
+            log.info("userId:{}",userId);
+            return "/member/change-password";
+        } else
+            //인증코드 검증이 실패하면 인증코드를 들고 인증코드 입력 페이지로 이동
+        model.addAttribute("code",code);
+        log.info("인증코드 검증 실패했습니다. 인증코드 들고 다시 갑니다. code:{}",code);
+        model.addAttribute("msg","discord-code");
+        return "/member/findpw";
+    }
+
+    //인증코드 확인 후 비밀번호 수정
+    @PostMapping("/change-password")
+    public String changPassword(String userId, String password, RedirectAttributes ra){
+        log.info("userId:{}, password:{}",userId,password);
+
+            boolean modifyFlag = memberService.updatePw(userId, password);
+
+            //비밀번호 변경 성공 하면 회원정보 출력창으로 이동
+            if (modifyFlag) {
+                log.info("비밀번호 변경 성공!");
+                ra.addFlashAttribute("msg", "modify-success");
+                return "redirect:/member/sign-in";
+
+                //실패하면 수정창으로 보내고, 실패 메시지 전송
+            } else ra.addFlashAttribute("msg", "modify-fail");
+            log.info("비밀번호 변경 실패!");
+            return "redirect:/member/change-check";
+
+        }
+
+
+
+    }
+
 
 //    @PutMapping("modify-email")
 //    @ResponseBody
-//    public ResponseEntity<String> modifyEmail(String account, String email){
-//        log.info("/member/modify POST !! - email:{}, account:{} ", email,account);
-//        boolean flag = memberService.updateEmail(account, email);
+//    public ResponseEntity<String> modifyEmail(String userId, String email){
+//        log.info("/member/modify POST !! - email:{}, userId:{} ", email,userId);
+//        boolean flag = memberService.updateEmail(userId, email);
 //
 //        return flag? new ResponseEntity<>("modify-email-success",HttpStatus.OK)
 //                : new ResponseEntity<>("modify-fail",HttpStatus.BAD_REQUEST);
@@ -238,4 +353,4 @@ public class MemberController {
 //    }
 
 
-}
+
