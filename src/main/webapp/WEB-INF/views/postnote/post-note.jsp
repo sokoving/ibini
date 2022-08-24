@@ -45,7 +45,7 @@
             <div name="mark">
                 <div class="episode-no">
                     <label for="episode-no">회차
-                        <input type="number" id="episode-no" name="episodeNo">
+                        <input type="number" id="episode-no" name="episodeNo" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                     </label>
                 </div>
                 <div class="text-area">
@@ -468,10 +468,10 @@
             } 
 
             // 숫자가 1자리일 경우 2자리로 변환
-            (month < 10) ? month = '0' + month: month;
-            (day < 10) ? day = '0' + day: day;
-            (hour < 10) ? hour = '0' + hour: hour;
-            (minute < 10) ? minute = '0' + minute: minute;
+            (month < 10) ? month = '0' + month : month;
+            (day < 10) ? day = '0' + day : day;
+            (hour < 10) ? hour = '0' + hour : hour;
+            (minute < 10) ? minute = '0' + minute : minute;
 
             return year + "." + month + "." + day + " " + ampm + " " + hour + ":" + minute;
         }
@@ -523,7 +523,7 @@
             let iconArea = '';
             iconArea += '<div class="flex-sb">';
             iconArea +=     '<div class="datetime">';
-            iconArea +=         `<span class="noselect">` + formatDateTime(data.regDate) + `</span>`;
+            iconArea +=         `<span class="noselect">` + formatDateTime(data.regDateTime) + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area memo-initMode">';
             iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
@@ -604,7 +604,7 @@
             iconArea +=     '<div class="datetime">';
             iconArea +=         '<i class="' + classifyMarkIconType(data.epId) + `">` + data.episodeNo + `</i>`;
             iconArea +=         ' | ';
-            iconArea +=         `<span class="noselect">` + formatDateTime(data.regDate) + `</span>`;
+            iconArea +=         `<span class="noselect">` + formatDateTime(data.regDateTime) + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-initMode">';
             iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';

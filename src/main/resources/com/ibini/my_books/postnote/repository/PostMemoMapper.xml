@@ -47,7 +47,7 @@
         *
         FROM prj_post_memo
         WHERE post_no = #{postNo}
-        ORDER BY mod_date DESC  <!-- 페이징 처리 추후 추가 예정 -->
+        ORDER BY mod_datetime DESC  <!-- 페이징 처리 추후 추가 예정 -->
     </select>
 
     <!-- 메모 개별 조회 기능 -->
