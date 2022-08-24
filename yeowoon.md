@@ -9,6 +9,10 @@ post-btn-wrap
 <button class="post-btn post-del-btn far fa-trash-alt" title="삭제하기"></button>
 <button class="post-btn post-list-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
 
+
+-list
+("pl", postService.finaAllPostWithNameService()); //  List<PostWithName>
+-detail
 ("p", postService.fineOnePostWithName(postNo)); //  PostWithName
 
     // tbl_post
@@ -33,7 +37,7 @@ post-btn-wrap
     private String epName;      // 회차 구분명(ex. 페이지)
     private String epName2;   // 회차 구분명 (ex. p)
 
-    FormattingDateDTO shortDate;    //
+    FormattingDateDTO shortDate;    // 포매팅한 날짜 DTO (yyyy.MM.dd)
     private String oneLineTag;      // 포스트의 해시태그 한 줄로(PostService에서 세팅할 것)
 
     //  prj_genre
