@@ -331,9 +331,7 @@
                     .then(message => {
                         if (message === 'modify-success') {
                             alert('메모 수정!');
-                            toggleMemoMode($memoContent);
-
-                            $memoContent.setAttribute('data-initvalue', $memoContent.value);
+                            showMemoList();                           
 
                         } else {
                             alert('메모 수정 실패!');
@@ -358,9 +356,7 @@
                     .then(message => {
                         if (message === 'modify-success') {
                             alert('마크 수정!');
-                            toggleMarkMode($markContent);
-
-                            $markContent.setAttribute('data-initvalue', $markContent.value);
+                            showMarkList();
 
                         } else {
                             alert('마크 수정 실패!');
@@ -483,7 +479,7 @@
         /*======================================================================
             마크, 메모 리스트 영역
         ========================================================================*/
-        // ==================== 메모 영역 ====================   //
+        // ==================== 메모 영역 ==================== //
 
         // 메모 목록 보여주는 함수
         function showMemoList() {
