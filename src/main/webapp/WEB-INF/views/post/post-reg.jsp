@@ -1,5 +1,7 @@
+
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,8 +63,7 @@
         <!-- 새 포스트 등록 섹션 -->
         <section class="post-reg-section">
             <div class="inner-section">
-                <form id="write-form" action="/post/write/${account}" method="post" autocomplete="off"
-                    enctype="multipart/form-data">
+                <form id="write-form" action="/post/write/${account}" method="post" autocomplete="off" >
 
                     <!-- 임시 : 계정명(나중에 로그인 적용되면 빼기) -->
                     <input type="hidden" name="account" id="" value="${account}">
@@ -114,7 +115,7 @@
 
                                     <div class="platformSelText">
                                         <h3>플랫폼</h3>
-                                        <span class="platformInputShowEvent">플랫폼 추가를 원하시면 여기를 클릭해주세요</ㄴ>
+                                        <span class="platformInputShowEvent">플랫폼 추가를 원하시면 여기를 클릭해주세요</span>
                                     </div>
 
                                     <div class="select">
@@ -239,8 +240,6 @@
                     <div id="reg-btn">
                         <button class="white-box">등록</button>
                     </div>
-
-
                 </form> <!-- // end write-form -->
 
 

@@ -71,7 +71,8 @@
         
         // 장르리스트 불러오기
         function showGenreList() {
-            
+            console.log(url);
+
             fetch(url)
             .then(res => res.json())
             .then(genreList => {

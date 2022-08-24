@@ -47,10 +47,11 @@ public class PostController {
 
 
     //    포스트 등록 요청      post   /post/write
+    // @RequestBody Post 제거해서
     @Transactional
     @PostMapping("/write/{account}")
     public String postWrite(@PathVariable String account
-            , @RequestBody  Post post
+            , Post post
             , HashtagDomain tag) {
         log.info("/write/{account} account POST 요청!! - account : {}", account);
         log.info("PostController /post/write POST 요청!! - post: {}", post);
@@ -65,7 +66,7 @@ public class PostController {
         log.info("tag flag : {}", tagFlag);
 
 
-        return "redirect:/list";
+        return "redirect:/list/";
     }
 
 //    포스트 수정 폼 요청   get    /post/modify
