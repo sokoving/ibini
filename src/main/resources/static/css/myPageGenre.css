@@ -61,12 +61,26 @@
     padding: 0 20px;
 }
 
+.myPage-wrap .genre-wrap #genreSetting #genList .genreName #myPageGenreInput{
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding-left: 10px;
+    border: 1px solid #a5a197;
+}
+
+
 .myPage-wrap .genre-wrap #genreSetting #genList .modiNdel{
     width: 20%;
     padding-left: 30px;
 }
 
 .myPage-wrap .genre-wrap #genreSetting #genList .modiNdel #gendel{
-    margin-left: 10px
+    margin-left: 10px;
 
+}
+
+.myPage-wrap .genre-wrap #genreSetting #genList .modiNdel #modiResetBtn{
+    margin-left: 10px;
 }
