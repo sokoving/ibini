@@ -213,7 +213,9 @@
                         },
                         body: JSON.stringify({
                             "postNo": postNo,
-                            "content": $memoContent.value
+                            "content": $memoContent.value,
+                            "regAccount": regAccount,
+                            "modAccount": modAccount
                         })
                     }) 
                     .then(response => response.text())
@@ -523,7 +525,7 @@
             let iconArea = '';
             iconArea += '<div class="flex-sb">';
             iconArea +=     '<div class="datetime">';
-            iconArea +=         `<span class="noselect">` + formatDateTime(data.regDateTime) + `</span>`;
+            iconArea +=         `<span class="noselect">` + formatDateTime(data.modDatetime) + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area memo-initMode">';
             iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';

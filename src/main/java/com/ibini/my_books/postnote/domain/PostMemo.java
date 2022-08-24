@@ -12,8 +12,8 @@ public class PostMemo {
     private Long memoNo;         // 메모 번호
     private Long postNo;         // 포스트 번호
     private String content;      // 내용
-    private Date regDateTime;    // 작성일자, 시간
-    private Date modDateTime;    // 수정일자, 시간
+    private Date regDatetime;    // 작성일자, 시간
+    private Date modDatetime;    // 수정일자, 시간
     private String regAccount;   // 작성 account
     private String modAccount;   // 수정 account
 }
