@@ -42,7 +42,7 @@
             <h1> Welcome~ This is ibini's index page!! </h1>
 
             <a href="/list">포스트 전체 목록</a> <br>
-            <a href="/post/write">새 포스트 쓰기</a> <br>
+            <a href="/post/write/${account}">새 포스트 쓰기</a> <br>
 
             <c:if test="${loginUser == null}">
                 <div class="login-menu"><a href="/member/sign-in">sign-in</a></div>
@@ -55,6 +55,7 @@
             </c:if>
 
             <script>
+                
                 const msg = '${msg}';
                 if(msg === 'success') {
                     alert('회원탈퇴가 정상적으로 처리 되었습니다. 이용해주셔서 감사합니다.');

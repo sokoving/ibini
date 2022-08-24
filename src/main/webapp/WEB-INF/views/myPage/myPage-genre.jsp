@@ -66,7 +66,7 @@
 
     <script>
         const account = '${account}';
-        const url = "http://localhost:8383/genre/c1?account=" + account;
+        const url = "http://localhost:8383/genre/c1/" + account;
         const delModiURL = "http://localhost:8383/genre/c1/" + account;
         
         // 장르리스트 불러오기

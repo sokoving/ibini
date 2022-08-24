@@ -85,7 +85,7 @@
                 <c:forEach var="p" items="${pl}">
                     <a href="/post/detail/${p.postNo}">제목 : ${p.postTitle} </a>
                     <br>
-                    작가 : ${postWriter} <br>
+                    작가 : ${p.postWriter} <br>
                     카테고리 이름 : ${p.caName} <br>
                     현재 ${p.epName} : ${p.curEp}${p.epName2} <br>
                     총 ${p.epName} : ${p.totalEp}${p.epName2} <br>

@@ -38,18 +38,21 @@ public class PostController {
 
 
     //    포스트 등록 폼 요청   get    /post/write
-    @GetMapping("/write")
-    public String postWriteForm() {
+    @GetMapping("/write/{account}")
+    public String postWriteForm(@PathVariable String account, Model model) {
         log.info("PostController /post/write  GET 요청!!");
-
+        model.addAttribute("account", account);
         return "post/post-reg";
     }
 
 
     //    포스트 등록 요청      post   /post/write
     @Transactional
-    @PostMapping("/write")
-    public String postWrite(Post post, HashtagDomain tag) {
+    @PostMapping("/write/{account}")
+    public String postWrite(@PathVariable String account
+            , @RequestBody  Post post
+            , HashtagDomain tag) {
+        log.info("/write/{account} account POST 요청!! - account : {}", account);
         log.info("PostController /post/write POST 요청!! - post: {}", post);
         log.info("PostController /post/write POST 요청!! - hashtag: {}", tag);
 
@@ -61,20 +64,22 @@ public class PostController {
         boolean tagFlag = hashTagService.saveHashTag(tag);
         log.info("tag flag : {}", tagFlag);
 
+
         return "redirect:/list";
     }
 
 //    포스트 수정 폼 요청   get    /post/modify
-    @GetMapping("/modify")
-    public String modify(@ModelAttribute("postNo") Long postNo, Model model){
+    @GetMapping("/modify/{account}")
+    public String modify(@PathVariable String account,
+            @ModelAttribute("postNo") Long postNo, Model model){
         log.info("PostController /post/modify  GET 요청!! - {}", postNo);
 
         return "post/post-modify";
     }
 
 //    포스트 수정 요청      post   /post/modify
-    @PostMapping("/modify")
-    public String modify(Post post){
+    @PostMapping("/modify/{account}")
+    public String modify(Post post, @PathVariable String account){
         log.info("PostController /post/modify  POST 요청!! - {}", post);
 
         return "redirect:/list";
