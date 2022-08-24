@@ -17,6 +17,7 @@
     margin: 0 auto;
     padding: 30px;
     font-size: 50px;
+    text-shadow: #e90404 1px 1px 25px;
 }
 
 .myPage-wrap .platform-wrap h2{
