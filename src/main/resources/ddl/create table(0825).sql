@@ -7,7 +7,6 @@ DROP TABLE tbl_post;
 DROP TABLE prj_genre;
 DROP TABLE prj_platform;
 DROP TABLE tbl_member;
---DROP TABLE prj_category;
 
 
 CREATE TABLE tbl_post
@@ -64,20 +63,13 @@ CREATE TABLE prj_genre
 DROP SEQUENCE seq_prj_genre;
 CREATE SEQUENCE seq_prj_genre;
 
--- util에서 값 받아오기
---CREATE TABLE prj_category(
---    ca_id NUMBER(3)
---    , ca_name VARCHAR2(100)
---    , PRIMARY KEY (ca_id)
---);
-
 CREATE TABLE prj_platform
 (
     platform_id          NUMBER(9)         NOT NULL,    --플랫폼아이디
     account              VARCHAR2(50)      NOT NULL,    --회원 관리 번호
     platform_name        VARCHAR2(50)      NOT NULL,    --플랫폼 이름
-    platform_bg_color    VARCHAR2(50)      DEFAULT '#6c757d',   --플랫폼 배지 배경색
-    platform_font_color  VARCHAR2(50)      DEFAULT '#fff',      --플랫폼 배지 글자색
+    platform_bg_color    VARCHAR2(50)      DEFAULT 'rgb(108,117,125)',   --플랫폼 배지 배경색
+    platform_font_color  VARCHAR2(50)      DEFAULT 'rgb(255,255,255)',   --플랫폼 배지 글자색
      PRIMARY KEY (platform_id)
 );
 DROP SEQUENCE seq_prj_platform;
@@ -85,11 +77,13 @@ CREATE SEQUENCE seq_prj_platform;
 
 CREATE TABLE prj_post_memo
 (
-    memo_no     NUMBER(10)       NOT NULL,          --메모 번호
-    post_no     NUMBER(10)       NOT NULL,          --포스트 번호
-    content     CLOB             NOT NULL,          --메모내용
-    reg_date    DATE             DEFAULT SYSDATE,   --작성일자
-    mod_date    DATE             DEFAULT SYSDATE,   --수정일자
+    memo_no     NUMBER(10)      NOT NULL,       --메모 번호
+    post_no     NUMBER(10)      NOT NULL,       --포스트 번호
+    content     CLOB            NOT NULL,       --메모내용
+    reg_datetime    DATE             DEFAULT SYSDATE,   --작성일자
+    mod_datetime    DATE             DEFAULT SYSDATE,   --수정일자
+    reg_account    VARCHAR2(50)      NOT NULL,      --작성자 계정(회원관리번호)
+    mod_account    VARCHAR2(50)      NOT NULL,      --수정자 계정(회원관리번호)
      PRIMARY KEY (memo_no)
 );
 DROP SEQUENCE seq_prj_post_memo;
@@ -101,8 +95,10 @@ CREATE TABLE prj_post_mark
     post_no       NUMBER(10)      NOT NULL,         --포스트 번호
     episode_no    NUMBER(10)      NOT NULL,         --에피소드 번호(회차,페이지)
     content       CLOB            NOT NULL,         --북마크 내용
-    reg_date      DATE             DEFAULT SYSDATE, --작성일자
-    mod_date      DATE             DEFAULT SYSDATE, --수정일자
+    reg_datetime    DATE             DEFAULT SYSDATE,   --작성일자
+    mod_datetime    DATE             DEFAULT SYSDATE,   --수정일자
+    reg_account    VARCHAR2(50)      NOT NULL,      --작성자 계정(회원관리번호)
+    mod_account    VARCHAR2(50)      NOT NULL,      --수정자 계정(회원관리번호)
      PRIMARY KEY (mark_no)
 );
 DROP SEQUENCE seq_prj_post_mark;

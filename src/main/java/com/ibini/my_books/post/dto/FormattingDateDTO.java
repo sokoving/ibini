@@ -18,4 +18,5 @@ public class FormattingDateDTO {
         this.postRegDate = CommonUtil.changeDate(regDate);
         this.postUpdateDate = CommonUtil.changeDate(updateDate);
     }
+
 }
