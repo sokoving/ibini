@@ -17,6 +17,7 @@
         <%@ include file="../include/header.jsp" %>
 
 
+
         <section>
             <div class="inner-section">
 
@@ -73,9 +74,7 @@
                         <!-- top : 별점, 장르, 카테고리 -->
                         <div id="post-top">
                             <span class="top-span star-span"></span>
-                            <c:if test="${p.genreId != 0}">
-                                <span class="top-span genre-span">${p.genreName}</span>
-                            </c:if>
+                            <span class="top-span">${p.genreName}</span>
                             <span class="top-span">${p.caName}</span>
                         </div> <!-- // end post-top -->
 
@@ -98,27 +97,30 @@
 
                                     <!-- 연재 상태 -->
                                     <tr>
+                                        <td class="first-td">${p.platformName}</td>
+                                        <c:choose>
 
-                                        <td class="first-td">
-                                            <c:if test="${p.platformId != 0}">
-                                                ${p.platformName}
-                                            </c:if>
-                                        </td>
-                                        <td class="last-td">
-                                            <c:choose>
-                                                <c:when test="${p.publishStatus == 1}">
-                                                    ${p.publishCycle}
-                                                </c:when>
-                                                <c:otherwise>
-                                                    ${p.publishStatusName}
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </td>
+                                            <c:when test="${empty p.publishCycle}">
+                                                <td class="last-td">-</td>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <c:choose>
+                                                    <c:when test="${p.publishStatus <= 1}">
+                                                        <td class="last-td">${p.publishCycle}</td>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <td class="last-td">${p.publishStatusName}</td>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:otherwise>
+
+                                        </c:choose>
+                                        
                                     </tr>
                                     <tr class="empty-tr">
                                         <td colspan="2">-</td>
                                     </tr>
-
                                     <!-- 현재, 전체 페이지 -->
                                     <tr>
                                         <td class="first-td cur-ep">현재 ${p.epName}</td>
@@ -128,7 +130,6 @@
                                         <td class="first-td cur-ep">${p.curEp}${p.epName2}</td>
                                         <td class="last-td tot-ep">${p.totalEp}${p.epName2}</td>
                                     </tr>
-
                                     <tr>
                                         <td colspan="2"><i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
                                         </td>
@@ -142,14 +143,14 @@
                         <!-- bottom : 날짜, 수정삭제목록 버튼-->
                         <div id="post-bottom">
                             <div class="date-wrap">
-                                <span class="reg-date-span">등록일 ${date.postRegDate}</span>
+                                <span>등록일 ${p.shortDate.postRegDate}</span>
                                 |
-                                <span class="up-date-span">수정일 ${date.postUpdateDate}</span>
+                                <span>수정일 ${p.shortDate.postUpdateDate}</span>
                             </div>
                             <div class="post-btn-wrap">
-                                <button class="post-btn post-modi-btn fas fa-pencil-alt" title="수정하기"></button>
-                                <button class="post-btn post-del-btn far fa-trash-alt" title="삭제하기"></button>
-                                <button class="post-btn post-list-btn far fa-list-alt" title="목록으로"></button>
+                                <button class="post-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
+                                <button class="post-btn" title="삭제하기"><i class="far fa-trash-alt"></i></button>
+                                <button class="post-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
                             </div>
                         </div> <!-- // end post-bottom -->
 
@@ -194,12 +195,18 @@
                             </div>
 
                             <div id="tag-container">
-                                <c:forEach var="t" items="${tagList}">
-                                    <span class="hash-span" data-tag-no="${t.tagNo}">${t.tagName}</span>
-                                </c:forEach>
-                                <span class="hash-span tag-plus" style="display: none;">
-                                    <i class="far fa-plus-square"></i>
-                                </span>
+                                <span class="hash-span">태그1</span>
+                                <span class="hash-span">태그태그태그</span>
+                                <span class="hash-span">태그_테스트</span>
+                                <span class="hash-span">태그2</span>
+                                <span class="hash-span">태그_3</span>
+                                <span class="hash-span">태그태그</span>
+                                <span class="hash-span">태그_중</span>
+                                <span class="hash-span">태그</span>
+                                <span class="hash-span">태그_태그_태그</span>
+                                <span class="hash-span">태그_뾰잉뾰이이이잉</span>
+                                <span class="hash-span tag-plus" style="display: none;"><i
+                                        class="far fa-plus-square"></i></span>
                             </div>
                         </div> <!-- // end hash-wrap -->
 
@@ -261,29 +268,16 @@
             </div> <!-- // end inner-section -->
         </section> <!-- // end section -->
 
-
     </div> <!-- end wrap -->
 
-    <script src="/js/post-detail.js"></script>
+
+
     <script>
         // start jQuery
         $(document).ready(function () {
-            jQueryTagTest("테스트", $('.post-btn-wrap'));
-            const postNo = '${p.postNo}';
-            console.log("postNo : " + postNo);
-
-            // 수정, 삭제, 목록 버튼 클릭 이벤트
-            $('.post-btn-wrap').click(e => {
-            console.log(e.target);
-            clickPostBtn(e.target, postNo);
-        })
+            jQueryTagTest("태그 잡기 테스트", $('h1'));
 
 
-
-
-            // 별 찍기
-            const star = '${p.starRate}';
-            starRate(star);
 
 
         });

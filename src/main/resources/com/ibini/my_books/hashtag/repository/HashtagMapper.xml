@@ -14,10 +14,22 @@
     <!--    저장 -->
     <insert id="saveHashtag">
         INSERT INTO prj_hashtag
-        (tag_no, post_no, tag_name, account )
+            (tag_no,
+             post_no,
+             tag_name, account )
         VALUES
-        (seq_prj_hashtag.nextval, #{postNo}, #{tagName}, #{account})
+            (seq_prj_hashtag.nextval,
+            <choose>
+                <when test="postNo != null">
+                    #{postNo},
+                </when>
+                <otherwise>
+                    seq_tbl_post.currval,
+                </otherwise>
+            </choose>
+            #{tagName}, #{account})
     </insert>
+
 
     <!--    삭제-->
     <delete id="deleteHashtag">
@@ -37,12 +49,14 @@
     <select id="findOneTag" resultMap="hashtagMap">
         SELECT * FROM prj_hashtag
         WHERE tag_no = #{tagNo}
+        AND account = #{account}
     </select>
 
     <!--    해시태그 전체 조회 (계정정보)-->
     <select id="findAllHashTag" resultMap="hashtagMap">
         SELECT * FROM prj_hashtag
         WHERE account = #{account}
+        ORDER BY tag_no
     </select>
 
 

@@ -8,7 +8,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -23,14 +22,10 @@ public class ListController {
 //    포스트 전체 리스트 요청   get    /list
 
     @GetMapping
-    public String postDetail(Model model) {
+    public String postList(Model model) {
         log.info("ListController /list  GET 요청!!");
 
-        model.addAttribute("p", postService.finaAllPostWithNameService()); //  List<PostWithName>!
-        model.addAttribute("thumbs", imgService.getThumbs()); // List<PostImg>
-//        model.addAttribute("tagList", hashTagService.find); // List<HashtagDomain>
-//        model.addAttribute("imgList", imgService.getPostImgList(postNo));  // List<PostImg>
-//        model.addAttribute("date", postService.convertDate(postService.findOnePostService(postNo)));
+        model.addAttribute("pl", postService.finaAllPostWithNameService()); //  List<PostWithName>
 
         return "post/post-list";
     }

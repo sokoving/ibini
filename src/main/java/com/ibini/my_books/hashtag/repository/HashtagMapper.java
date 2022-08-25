@@ -19,7 +19,7 @@ public interface HashtagMapper {
 //    HashtagDomain findOneHasgtag(int postNo, int tagNo);
 
     // 하나의 게시글에 달린 여러가지 태그
-    HashtagDomain findOneTag(int tagNo);
+    HashtagDomain findOneTag(int tagNo, String account);
 
     // 전체조회 -> account? postNo?
     List<HashtagDomain> findAllHashTag(String account);

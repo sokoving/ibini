@@ -1,14 +1,15 @@
 package com.ibini.my_books.post.controller;
 
 
+import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.service.PostService;
-import com.ibini.my_books.postImg.domain.PostImg;
 import com.ibini.my_books.postImg.service.PostImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -46,18 +47,19 @@ public class PostController {
 
 
     //    포스트 등록 요청      post   /post/write
+    @Transactional
     @PostMapping("/write")
-    public String postWrite(Post post, PostImg postImg) {
-        log.info("PostController /post/write POST 요청!! - {}", post);
+    public String postWrite(Post post, HashtagDomain tag) {
+        log.info("PostController /post/write POST 요청!! - post: {}", post);
+        log.info("PostController /post/write POST 요청!! - hashtag: {}", tag);
 
         // tbl_post 저장
         boolean postFlag = postService.saveService(post);
+        log.info("post flag : {}", postFlag);
 
-        // prj_post_img 저장
-
-//        imgService.add(postImgList);
-
-        log.info("save flag : {}", postFlag);
+        // PRJ_HASHTAG 저장
+        boolean tagFlag = hashTagService.saveHashTag(tag);
+        log.info("tag flag : {}", tagFlag);
 
         return "redirect:/list";
     }
@@ -110,7 +112,6 @@ public class PostController {
         model.addAttribute("p", postService.fineOnePostWithName(postNo)); //  PostWithName
         model.addAttribute("tagList", hashTagService.findAllByPostNo(postNo)); // List<HashtagDomain>
         model.addAttribute("imgList", imgService.getPostImgList(postNo));  // List<PostImg>
-        model.addAttribute("date", postService.convertDate(postService.findOnePostService(postNo)));
 
         return "post/post-detail";
     }

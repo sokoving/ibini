@@ -21,11 +21,13 @@ public class PostImgService {
 
     }
 
-    public List<PostImg> getPostImgList(Long postNo){
+    public List<PostImg> getPostImgList(Long postNo) {
         return repository.findFiles(postNo);
     }
 
-//    썸네일 리스트 조회
-public List<PostImg> getThumbs(){return repository.findThumbs();}
+    //    썸네일 리스트 조회
+    public List<PostImg> getThumbs() {
+        return repository.findThumbs();
+    }
 
 }

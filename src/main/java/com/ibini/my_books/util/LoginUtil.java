@@ -20,7 +20,7 @@ public class LoginUtil {
     //로그인한 사용자 계정 가져오기
     public static String getCurrentMemberAccount(HttpSession session){
         Member member = (Member) session.getAttribute(LOGIN_FLAG);
-        return member.getAccount();
+        return member.getUserId();
     }
     //로그인한 사용자 패스워드 가져오기
     public static String getCurrentMemberPassword(HttpSession session){

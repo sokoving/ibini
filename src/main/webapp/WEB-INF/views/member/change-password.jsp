@@ -60,7 +60,7 @@
 
 
           h2 {
-            border-bottom: 2px solid;
+            border-bottom: 2px solid gray;
             width: 420px;
             text-align: center;
             font-family: 'poppins', sans-serif;
@@ -72,6 +72,7 @@
             height: 40px;
             /* margin-bottom: 30px; */
             font-family: 'poppins', sans-serif;
+            padding-top: 22px;
           }
 
           /* #nickmodify-btn {
@@ -110,25 +111,27 @@
           }
 
           .c-red {
-          color: red;
-        }
+            color: red;
+          }
 
-        .c-blue {
-          color: blue;
-        }
+          .c-blue {
+            color: blue;
+          }
 
-        #user_name {
+          #user_name {
             border: 2px solid;
             border-radius: 10px;
             width: 400px;
-            height: 40px;            
+            height: 40px;
             font-family: 'poppins', sans-serif;
           }
 
-          #Nickmodify-btn{
+          #pWmodify-btn {
             margin-right: 5px;
             width: 200px;
           }
+
+
         </style>
 
     </head>
@@ -139,7 +142,7 @@
 
           <section id="main-section">
             <img class="wave" src="/img/signin-1.png">
-            <h2 class="title">닉네임 수정</h2>
+            <h2 class="title">비밀번호 수정</h2>
 
             <section id="content-box">
               <div class="img">
@@ -153,22 +156,32 @@
                 <!-- <h5>nick-name :&nbsp;&nbsp;&nbsp;${loginUser.userName} </h5> -->
 
 
-                <form action="/member/modifyNick-check" name="nickModifyForm" method="post" id="nickModifyForm">
-                  <input type="hidden" name="userId" value="${loginUser.userId}">
+                <form action="/member/change-password" name="pWmodifyForm" method="post" id="pWmodifyForm">
+                  <input type="hidden" name="userId" id="originPw" value="${userId}">
 
-                  <h5>수정하실 닉네임을 입력해주세요.</h5>
-                  <input type="text" maxlength="6" id="user_name" name="userName"
-                    required="required" aria-required="true" placeholder="한글로 최대 6자"></td>
-                    <span id="nameChk"></span>
-                  
+
+                  <h5>수정할 비밀번호를 입력해주세요.</h5>
+                  <input type="password" size="17" maxlength="20" id="password" name="password"
+                    class="form-control tooltipstered" maxlength="20" required="required" aria-required="true"
+                    placeholder="영문과 특수문자를 포함한 최소 8자">
+                  <span id="pwChk"></span>
+
+                  <h5>비밀번호를 재확인해주세요.</h5>
+                  <input type="password" size="17" maxlength="20" id="password_check" name="pw_check"
+                    class="form-control tooltipstered" maxlength="20" required="required" aria-required="true"
+                    placeholder="비밀번호가 일치해야합니다.">
+                  <span id="pwChk2"></span>
+
+
+
                 </form>
 
                 <div class="btn-group">
-                <!-- 닉네임 수정 버튼 -->
-                <input type="submit" id="Nickmodify-btn" class="btn" value="닉네임 변경 하기">
-                <!-- 돌아가기 버튼 -->
-                <input type="button" id="main-btn" class="btn" value="main"></a>
-                <!-- main-back-btn -->
+                  <!-- 비밀번호 수정 버튼 -->
+                  <input type="submit" id="pWmodify-btn" class="btn" value="비밀번호 수정하기">
+                  <!-- 돌아가기 버튼 -->
+                  <input type="button" id="main-btn" class="btn" value="main"></a>
+                  <!-- main-back-btn -->
                 </div>
               </div>
 
@@ -179,40 +192,78 @@
       </section>
       </div>
 
-
       <script>
-        // 수정 닉네임 검증 - jquery
+
+        console.log('${userId}');
+
+
+
+        const msg = '${msg}';
+        console.log(msg);
+
+        if (msg === 'modify-fail') {
+          alert('비밀번호 수정에 실패 했습니다.')
+        }
+
+
+        //비밀번호 폼 검증 - jquery
         $(document).ready(function () {
-          //입력값 정규 표현식
-          const getName = RegExp(/^[가-힣]+$/); // 한글로 써야 한다. 유니코드 시작과 끝 가 - 힣
+          //입력값 검증 정규표현식
+          const getPwCheck = RegExp(
+            // 영문 숫자가 들어가야하고 특수기호를 하나라도 포함해야 하고 또는 시작을 특수문자로 해도 되고
+            // 영문과 숫자가 들어가야한다.
+            /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/);
 
-          const checkArr = [false];
+          // 입력값 검증 배열
+          const checkArr = [false, false];
 
-          //이름 입력값 검증.
-          $('#user_name').on('keyup', function () {
-            //이름값 공백 확인
-            if ($("#user_name").val() === "") {
-              $('#user_name').css('border-color', 'red');
-              $('#nameChk').html('<b class="c-red">[이름은 필수정보!]</b>');
+          //패스워드 입력값 검증.
+          $('#password').on('keyup', function () {
+            //비밀번호 공백 확인
+            if ($("#password").val() === "") {
+              $('#password').css('border-color', 'red');
+              $('#pwChk').html('<b class="c-red">[패스워드는 필수정보!]</b>');
               checkArr[0] = false;
             }
-            //이름값 유효성검사
-            else if (!getName.test($("#user_name").val())) {
-              $('#user_name').css('border-color', 'red');
-              $('#nameChk').html('<b class="c-red">[이름은 한글로 ~]</b>');
+            //비밀번호 유효성검사
+            else if (!getPwCheck.test($("#password").val()) || $("#password").val().length < 8) {
+              $('#password').css('border-color', 'red');
+              $('#pwChk').html('<b class="c-red">[특수문자 포함 8자이상]</b>');
               checkArr[0] = false;
             } else {
-              $('#user_name').css('border-color', 'skyblue');
-              $('#nameChk').html('<b class="c-blue">[참 잘했어요]</b>');
+              $('#password').css('border-color', 'skyblue');
+              $('#pwChk').html('<b class="c-blue">[참 잘했어요]</b>');
               checkArr[0] = true;
             }
 
           });
 
-          //닉네임 수정 양식 서버로 전송하는 클릭 이벤트
-          const $regForm = $('#nickModifyForm');
+          //패스워드 확인란 입력값 검증.
+          $('#password_check').on('keyup', function () {
+            //비밀번호 확인란 공백 확인
+            if ($("#password_check").val() === "") {
+              $('#password_check').css('border-color', 'red');
+              $('#pwChk2').html('<b class="c-red">[패스워드확인은 필수정보!]</b>');
+              checkArr[1] = false;
+            }
+            //비밀번호 확인란 유효성검사
+            else if ($("#password").val() !== $("#password_check").val()) {
+              $('#password_check').css('border-color', 'red');
+              $('#pwChk2').html('<b class="c-red">[위에랑 똑같이!!]</b>');
+              checkArr[1] = false;
+            } else {
+              $('#password_check').css('border-color', 'skyblue');
+              $('#pwChk2').html('<b class="c-blue">[참 잘했어요]</b>');
+              checkArr[1] = true;
+            }
 
-          $('#Nickmodify-btn').on('click', e => {
+          });
+
+
+          //수정된 비밀번호를 서버로 전송하는 클릭 이벤트
+          const $regForm = $('#pWmodifyForm');
+
+          $('#pWmodify-btn').on('click', e => {
             console.log('클릭이벤트 발생확인')
             if (!checkArr.includes(false)) {
               // console.log($regForm);
@@ -222,38 +273,17 @@
               alert('입력란을 다시 확인하세요!');
             }
           })
-
-
-
         });
-        console.log('${loginUser.userId}');
-
-        const msg = '${msg}';
-        console.log(msg);
-        if (msg === 'discord') {
-          alert('현재 비밀번호가 일치하지 않습니다. 확인후 재입력해주세요.');
-        }
-
-        if (msg === 'modify-fail') {
-          alert('비밀번호 수정에 실패 했습니다.')
-        }
-
-        if (msg === 'nickModify-fail') {
-          alert('닉네임 변경에 실패하였습니다.')
-        }
 
       </script>
 
-
       <script>
-
         const $mainBtn = document.getElementById('main-btn');
-
         $mainBtn.onclick = e => {
           location.href = '/';
         }
-
       </script>
+
     </body>
 
     </html>

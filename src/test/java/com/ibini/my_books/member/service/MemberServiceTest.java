@@ -20,6 +20,18 @@ class MemberServiceTest {
     @Autowired
     MemberService service;
 
+
+    @Test
+    @DisplayName("account가 시퀀스로 생성된 일련번호로 등록 되어야 한다.")
+    void insertMemberTest(){
+        Member m = new Member();
+        m.setPassword("gkskenftpt!");
+        m.setUserName("하나둘셋");
+        m.setEmail("yanbamb@naver.com");
+
+        service.signUp(m);
+
+    }
     @Test
     @DisplayName("평문 비밀번호로 회원가입하면 암호화되어 저장된다.")
     void signUpTest(){

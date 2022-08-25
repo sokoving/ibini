@@ -12,6 +12,7 @@ public class Member {
 
     private String account;
     private String password;
+    private String userId;
     private String userName;
     private String Email;
     private int postAmount;

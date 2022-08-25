@@ -1,61 +1,227 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<html>
-	<head>
-		<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- 부가적인 테마 -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	 	
-	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<title>회원탈퇴</title>
-	</head>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			// 취소
-			$(".cencle").on("click", function(){
-				
-				location.href = "/";
-						    
-			})
-		
-			$("#submit").on("click", function(){
-				if($("#password").val()==""){
-					alert("비밀번호를 입력해주세요.");
-					$("#password").focus();
-					return false;
-				}	
-			});
-			
-				
-			
-		})
-	</script>
-	<body>
-		<section id="container">
-			<form action="/member/join-out" method="post">
-				<div class="form-group has-feedback">
-					<label class="control-label" for="account">아이디</label>
-					<input class="form-control" type="text" id="account" name="account" value="${loginUser.account}" readonly="readonly"/>
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="password">패스워드</label>
-					<input class="form-control" type="password" id="password" name="password" />
-				</div>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-				<div class="form-group has-feedback">
-					<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
-				</div>
-			</form>
-			<div>
-				<c:if test="${msg == false}">
-					비밀번호가 맞지 않습니다.
-				</c:if>
-			</div>
-		</section>
-		
-	</body>
-	
-</html>
+    <!DOCTYPE html>
+    <html lang="ko">
+
+    <head>
+      <%@ include file="../include/static-head.jsp" %>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+        <style>
+          .wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            z-index: -1;
+          }
+
+          section {
+            border: none;
+          }
+
+          .img {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+          }
+
+          .img img {
+            width: 300px;
+          }
+
+
+          .btn {
+            display: block;
+            width: 35%;
+            height: 50px;
+            border-radius: 20px;
+            outline: none;
+            border: none;
+            background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+            background-size: 200%;
+            /* font-size: 1.2rem; */
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            /* margin: 1rem 0; */
+            cursor: pointer;
+            transition: .5s;
+            text-align: center;
+            margin-top: 15px;
+          }
+
+          .btn:hover {
+            background-position: right;
+          }
+
+
+
+          h2 {
+            border-bottom: 2px solid;
+            width: 400px;
+            text-align: center;
+            font-family: 'poppins', sans-serif;            
+          }
+
+          h5 {
+            /* border-bottom: 2px solid; */
+            width: 440px;
+            height: 40px;
+            /* margin-bottom: 30px; */
+            font-family: 'poppins', sans-serif;
+            padding-top: 20px;
+          }
+
+          /* #nickmodify-btn {
+            display: inline;
+            margin-left: 15px;
+            height: 35px;
+            width: 120px;
+            padding-bottom: 20px;
+          } */
+
+          #main-section {
+            margin: 200px auto 0;
+          }
+
+          #content-box {
+            display: flex;
+            margin-top: 0;
+            border: none;
+            padding: 0px;
+          }
+
+          #content {
+            margin-top: 100px;
+            margin-left: 130px;
+          }
+
+          .thank-msg {
+            margin-top: 30px;
+            font-family: 'poppins', sans-serif;
+            font-weight: 700;
+            font-size: 38px;
+          }
+
+          #main-btn {
+            width: 200px;
+          }
+
+          .c-red {
+          color: red;
+        }
+
+        .c-blue {
+          color: blue;
+        }
+
+        #user_name {
+            border: 2px solid;
+            border-radius: 10px;
+            width: 400px;
+            height: 40px;            
+            font-family: 'poppins', sans-serif;
+          }
+
+          #joinout-btn{
+            margin-right: 5px;
+            width: 200px;
+          }
+
+          #password {
+            border: 2px solid;
+            border-radius: 10px;
+            width: 400px;
+            height: 40px;            
+            font-family: 'poppins', sans-serif;
+          }
+        </style>
+
+    </head>
+
+    <body>
+      <div id="wrap">
+        <%@ include file="../include/header.jsp" %>
+
+          <section id="main-section">
+            <img class="wave" src="/img/signin-1.png">
+            <h2 class="title">회원탈퇴</h2>
+
+            <section id="content-box">
+              <div class="img">
+                <img src="/img/ibini_logo_5.png">
+                <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg -->
+              </div>
+
+              <div id="content">
+
+                <!-- userName-->
+                <!-- <h5>nick-name :&nbsp;&nbsp;&nbsp;${loginUser.userName} </h5> -->
+
+
+                <form action="/member/join-out" name="joinoutForm" method="post" id="joinoutForm">
+                  <input type="hidden" name="userId" value="${loginUser.userId}">
+
+                  <h5>회원 탈퇴를 하시려면 패스워드를 입력해주세요.</h5>
+                  <input type="password" size="17" maxlength="20" id="password" name="password"
+                    required="required" aria-required="true" placeholder="password"></td>
+                    <span id="nameChk"></span>
+                  
+                </form>
+
+                <div class="btn-group">
+                <!-- 닉네임 수정 버튼 -->
+                <input type="submit" id="joinout-btn" class="btn" value="회원탈퇴">
+                <!-- 돌아가기 버튼 -->
+                <input type="button" id="main-btn" class="btn" value="main"></a>
+                <!-- main-back-btn -->
+                </div>
+              </div>
+
+              <!-- <div class="thank-msg">ibinibooks를 이용해 주셔서 감사합니다.</div> -->
+
+      </div>
+      </section>
+      </section>
+      </div>
+
+
+      <script>      
+
+        const $regForm = document.getElementById('joinoutForm');
+        const $input = document.getElementById('password');
+        const $joinoutBtn = document.getElementById('joinout-btn');
+        const msg = '${msg}';
+        console.log(msg);        
+
+        $joinoutBtn.onclick = e=> {
+          console.log($input.value);
+          if($input.value == '') {
+            alert('비밀번호를 입력해주세요.');
+            return;
+          }
+
+          if (confirm('정말로 회원탈퇴를 진행 하시겠습니까?')) {
+              $regForm.submit();
+            }
+        }        
+        
+        if (msg === 'fail') {
+          alert('현재 비밀번호가 일치하지 않습니다. 확인후 재입력해주세요.');
+        }
+
+      </script>
+
+
+      <script>
+        const $mainBtn = document.getElementById('main-btn');
+        $mainBtn.onclick = e => {
+          location.href = '/';
+        }
+      </script>
+    </body>
+
+    </html>

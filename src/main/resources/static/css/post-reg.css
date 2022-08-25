@@ -1,8 +1,7 @@
 section.post-reg-section{
     border: none;
     padding: 100px 50px;
-    margin-top: 0;
-
+    /* margin-top: 0; */
     /* background-color: black; */
 }
 
@@ -41,7 +40,11 @@ section .inner-section{
   display: flex;
   justify-content: center;
   align-items: center;
-
+  cursor: pointer;
+}
+.white-box.icon-box:hover{
+    background-color: #ffca3d;
+    box-shadow: none;
 }
 
 .span-wrap{
@@ -64,15 +67,15 @@ section .inner-section{
 #reg-1 .img-wrap{
     flex-basis: 219px;
     flex-shrink: 0;
-
-    position: relative;
     
+    position: relative;
 }
 #reg-1 .img-box{
     width: 200px;
     height: 255px;
     background-color: #ffca3d;
     border-radius: 0.5em;
+    cursor: pointer;
 
     display: flex;
     justify-content: center;
@@ -125,12 +128,18 @@ section .inner-section{
     margin-top: 50px;
 }
 
+
 /* #reg-4 회차 구분, 현재 회차, 현재 페이지 */
 #reg-4 {
     padding: 0 70px;
     margin-top: 70px;
     text-align: center;
 }
+#reg-4 .span-wrap{
+    display: flex;
+    justify-content: center;
+}
+
 .radio-wrap .white-box{
     padding: 0;
 }
@@ -142,6 +151,10 @@ section .inner-section{
     font-size: 1em;
     font-weight: 700;
 }
+.radio-item:hover{
+    background-color: #ffda73;
+}
+
 .radio-item.checked {
     background-color: #ffca3d;
 }
@@ -168,15 +181,16 @@ section .inner-section{
     flex-flow: column;
     margin-top: 50px;
 }
-/* #reg-6 .white-box.upload-input{
+#reg-6 .upload-input{
     padding: 0;
     display: flex;
     justify-content: stretch;
+    cursor: pointer;
 }
 #reg-6 .upload-right{
     background-color: #ffca3d;
-    
-} */
+}
+
 
 /* 등록 버튼 */
 #reg-btn{

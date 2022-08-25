@@ -82,10 +82,20 @@
             <div class="inner-section list-sec">
 
 
-                <c:forEach var="t" items="${thumbs}">
-                    <a href="#">
-                        <img src="${t.fileName}" alt="">
-                    </a>
+                <c:forEach var="p" items="${pl}">
+                    <a href="/post/detail/${p.postNo}">제목 : ${p.postTitle} </a>
+                    <br>
+                    작가 : ${postWriter} <br>
+                    카테고리 이름 : ${p.caName} <br>
+                    현재 ${p.epName} : ${p.curEp}${p.epName2} <br>
+                    총 ${p.epName} : ${p.totalEp}${p.epName2} <br>
+                    장르 : ${p.genreName} <br>
+                    플랫폼 : ${p.platformName} <br>
+                    등록일 : ${p.shortDate.postRegDate} <br>
+                    수정일 : ${p.shortDate.postUpdateDate} <br>
+                    해시태그 : ${p.oneLineTag} <br>
+                    <img src="${p.thumbImg}" alt="">
+
                 </c:forEach>
 
             </div> <!-- // end list-sec -->

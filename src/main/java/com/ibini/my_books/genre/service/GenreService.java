@@ -39,5 +39,9 @@ public class GenreService {
         log.info("Genre Service : getTotalCountService call - {}", account);
         return genreMapper.getTotalCount(account);
     }
+    public boolean removeService(int genreId){
+        log.info("Genre Service : removeService call - {}", genreId);
+        return genreMapper.remove(genreId);
+    }
 
 }

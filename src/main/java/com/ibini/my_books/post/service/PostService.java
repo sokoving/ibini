@@ -1,5 +1,6 @@
 package com.ibini.my_books.post.service;
 
+import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.FormattingDateDTO;
 import com.ibini.my_books.post.dto.PostWithName;
@@ -17,6 +18,8 @@ import java.util.List;
 public class PostService {
 
     private final PostMapper postMapper;
+    private final HashTagService tagService;
+
 
     public boolean saveService(Post post){
         log.info("Post Service : saveService call - {}", post);
@@ -30,7 +33,14 @@ public class PostService {
 
     public List<PostWithName> finaAllPostWithNameService(){
         log.info("Post Service : finaAllPostWithNameService call");
-        return postMapper.findAllPostWithName();
+
+        List<PostWithName> postWithNameList = postMapper.findAllPostWithName();
+        int size = postWithNameList.size();
+        for (PostWithName postWithName : postWithNameList) {
+            postWithName.setting();
+            postWithName.setOneLineTag(tagService.mergeTag(postWithName.getPostNo()));
+        }
+        return postWithNameList;
     }
 
     public Post findOnePostService(Long postNo){
@@ -41,8 +51,9 @@ public class PostService {
     public PostWithName fineOnePostWithName(Long postNo){
         log.info("Post Service : fineOnePostWithName call");
         PostWithName p = postMapper.fineOnePostWithName(postNo);
-        p.setCaEpName();
-        log.info("p.caName - {}, p.epName -{}", p.getCaName(), p.getEpName());
+        p.setting();
+        p.setOneLineTag(tagService.mergeTag(postNo));
+//        log.info("p.caName - {}, p.epName -{}", p.getCaName(), p.getEpName());
         return p;
     }
 
@@ -61,12 +72,5 @@ public class PostService {
         return postMapper.getTotalCount();
     }
 
-//    post date를 포맷팅해서 리턴
-    public FormattingDateDTO convertDate(Post post){
-        FormattingDateDTO fd = new FormattingDateDTO();
-        fd.setPostRegDate(CommonUtil.changeDate(post.getRegDate()));
-        fd.setPostUpdateDate(CommonUtil.changeDate(post.getUpdateDate()));
-        return  fd;
-    }
 
 }

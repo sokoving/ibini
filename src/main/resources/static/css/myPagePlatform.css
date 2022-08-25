@@ -1,42 +1,160 @@
-.myPage-wrap {
-    background: rgb(27, 103, 78);
+@font-face {
+    font-family: 'PyeongChangPeace-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
 }
+
+
+.myPage-wrap {
+    font-family: 'PyeongChangPeace-Light', sans-serif;
+    background: #fffaee;
+    height: 500vh;
+}
+
+.myPage-wrap h1{
+    width: 70%;
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 50px;
+    text-shadow: #e90404 1px 1px 25px;
+}
+
+.myPage-wrap .platform-wrap h2{
+    width: 70%;
+    margin: 0 auto;
+    padding: 0px 30px 70px 30px;
+}
+
+
 .myPage-wrap .platform-wrap #selectSetting{
-    background: rgb(212, 172, 172);
+    
+    background: #fffaee;
     display: flex;
     flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    height: 40px;
-    padding: 10px;
-    height: 60px;
-    border-bottom: 1px solid rgb(215, 36, 116);
+    height: 45px;
+    margin: 10px;
+    /*border: 1px solid #000000;*/
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 2.7;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }
 
+/* 플랫폼 번호 */
 .myPage-wrap .platform-wrap #selectSetting #selList .platformNo{
-    background: rgb(53, 196, 215);
-    width: 10%;
+    background: #eeedeb;
+    /*border-radius: 20px;*/
+    width: 7%;
+    text-align: center;
 }
 
+
+/* 플랫폼 이름 */
 .myPage-wrap .platform-wrap #selectSetting #selList .platformName{
-    background: rgb(111, 128, 130);
-    width: 20%;
+    background: #fff;
+    width: 33%;
+    padding: 0 20px;
 }
+
+.myPage-wrap .platform-wrap #selectSetting #selList .platformName span{
+    color: #000000;
+}
+
+
+
+/* 플랫폼 배경 색상 */
 
 .myPage-wrap .platform-wrap #selectSetting #selList .bgColor{
     width: 20%;
+    display: flex;
+    justify-content: space-evenly;
 }
+
+.myPage-wrap .platform-wrap #selectSetting #selList .bgColor .bgColorBox{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin: auto;
+    border: 1px solid #e1e0e0;
+}
+
+
+/* 플랫폼 폰트 색상 */
 
 .myPage-wrap .platform-wrap #selectSetting #selList .fontColor{
     width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.myPage-wrap .platform-wrap #selectSetting #selList .fontColor .fontColorBox{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin: auto;
+    border: 1px solid #e1e0e0;
 }
 
 
-.myPage-wrap .platform-wrap #selectSetting #selList .modiNdel{
-    background: rgb(171, 116, 168);
-    width: 30%;
+/* 플랫폼 버튼 */
+.myPage-wrap .platform-wrap #selectSetting #selList .modiAndDel{
+    /*background: rgb(171, 116, 168);*/
+    padding-left: 30px;
+    width: 20%;
+}
+
+.myPage-wrap .platform-wrap #selectSetting #selList .modiAndDel #delBtn{
+    margin-left: 10px;
+}
+
+
+
+
+/* modal CSS */
+
+#modiBg {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#modiBg h2{
+    width: 100%;
+}
+
+#modiBg #eventRemoveBtn{
+    padding-left: 10px;
+}
+#modalBody h2{
+    /* background: rgb(255, 177, 177); */
+    padding: 30px 20px 0px;
+}
+#platModi #modiNameInput{
+    margin: 0px 20px 0px;
+    padding: 3px 10px;
+}
+
+#platModi #modiBgInput{
+    margin: 0px 20px 0px;
+    padding: 3px 10px;
+}
+
+#platModi #modiFontInput{
+    margin: 0px 20px 0px;
+    padding: 3px 10px;
+}
+
+/* picker */
+#picker .IroColorPicker{
+    padding: 0 20%;
 }
