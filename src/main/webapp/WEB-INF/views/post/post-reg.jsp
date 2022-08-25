@@ -114,7 +114,7 @@
                             <div class="select-container">
 
                                     <div class="platformSelText">
-                                        <h3>플랫폼</h3>
+                                        <span class="reg-span">플랫폼</span>
                                         <span class="platformInputShowEvent">플랫폼 추가를 원하시면 여기를 클릭해주세요</span>
                                     </div>
 
@@ -136,7 +136,7 @@
                             <div class="genre-container">
                                 <div class="genreSelectBox">
                                     <div id="genreClick">
-                                        <h3>장르</h3>
+                                        <span class="reg-span">장르</span>
                                         <span class="GenreInputShowEvent">장르 추가를 원하시면 여기를 클릭해주세요</span>
                                     </div>
 

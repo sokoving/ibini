@@ -1,5 +1,5 @@
 .select-container{
-    background: rgb(93, 148, 117);
+    /* background: rgb(93, 148, 117); */
 }
 
 .select-container .select {
@@ -14,19 +14,19 @@
 .select-container .platformSelText{
     padding: 5px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 
     padding: 5px 30px;
 }
 
 .select-container .platformSelText h3{
     width: 30%;
-    background: rgb(213, 64, 64);
+    /* background: rgb(213, 64, 64); */
 }
 
 .select-container .platformSelText .platformInputShowEvent {
     width: 70%;
-    background: rgb(121, 201, 114);
+    /* background: rgb(121, 201, 114); */
 
     /* font */
     font-style: italic;
@@ -47,8 +47,10 @@
 
 /* select css  */
 .select-container .select .platformSelBox #platformselect {
-    height: 3rem;
-    border-radius: 10px;
+    height: 40px;
+    width: 130px;
+    border-radius: 0.35em;
+    border: 1px solid #fff;
 
 }
 
@@ -60,18 +62,18 @@
     border-left: 0 solid transparent;
     border: 0;
     /* height: 5.8rem; */
-    height: 3rem;
+    height: 40px;
     padding: 0 calc(5.8rem * 0.5);
     /* border-radius: calc(5.8rem * 0.3); */
-    border-radius: 1em;
-    box-shadow: 0 0 2rem rgb(0, 0, 0, 20%);
+    border-radius: 0.35em;
+    /* box-shadow: 0 0 2rem rgb(0, 0, 0, 20%); */
 }
 
 .select-container .select .platformClick #platformBtn{
     background: white;
     color: rgb(7 2 18);
-    height: 3rem;
-    border-radius: 1em;
+    height: 40px;
+    border-radius: 0.35em;
     transition: all 200ms ease;
     border-left: 0 solid transparent;
     border: 0;
@@ -85,12 +87,12 @@
 /* ======================== genre select & input ============================= */
 
 .genre-container{
-    background: rgb(211, 205, 205);
+    /* background: rgb(211, 205, 205); */
 }
 
 .genre-container .genreSelectBox #genreClick{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 
     padding: 5px 30px;
 }
@@ -120,8 +122,10 @@
 
 /* select CSS */
 .genre-container .genreSelectBox .genreSelAndInput .genreSelectBox #genreSelect{
-    height: 3rem;
-    border-radius: 10px;
+    height: 40px;
+    width: 130px;
+    border-radius: 0.35em;
+    border: 1px solid #fff;
 }
 
 
@@ -136,23 +140,22 @@
     border-left: 0 solid transparent;
     border: 0;
     /* height: 5.8rem; */
-    height: 3rem;
+    height: 40px;
     padding: 0 calc(5.8rem * 0.5);
     /* border-radius: calc(5.8rem * 0.3); */
-    border-radius: 1em;
-    box-shadow: 0 0 2rem rgb(0, 0, 0, 20%);
+    border-radius: 0.35em;
+    /* box-shadow: 0 0 2rem rgb(0, 0, 0, 20%); */
 }
 
 .genre-container .genreSelectBox .genreSelAndInput .textClick #genreBtn{
     
     background: white;
     color: rgb(7 2 18);
-    height: 3rem;
-    border-radius: 1em;
+    height: 40px;
+    border-radius: 0.35em;
     transition: all 200ms ease;
     border-left: 0 solid transparent;
     border: 0;
-
 }
 
 
