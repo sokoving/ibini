@@ -14,15 +14,18 @@
 
 <body>
   <!-- header -->
-    <div id="header-wrap">
-        <%@ include file="./include/header.jsp" %>
-    </div>
-    <div id="content-wrap">
-        <h1> Welcome~ This is ibini's index page!! </h1>
+    <div id="wrap">
+          <div id="header-wrap">
+            <%@ include file="./include/header.jsp" %>
+        </div>
+        <div id="content-wrap">
+            <h1> Welcome~ This is ibini's index page!! </h1>
 
-        <a href="/list">포스트 전체 목록</a> <br>
-        <a href="/post/write/${account}">새 포스트 쓰기</a> <br>
+            <a href="/list">포스트 전체 목록</a> <br>
+            <a href="/post/write/${account}">새 포스트 쓰기</a> <br>
+        </div>
     </div>
+
 
   
 
