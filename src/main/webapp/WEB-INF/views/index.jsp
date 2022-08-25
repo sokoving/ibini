@@ -17,7 +17,7 @@
     <div id="wrap">
           <div id="header-wrap">
             <%@ include file="./include/header.jsp" %>
-        </div>
+          </div>
         <div id="content-wrap">
             <h1> Welcome~ This is ibini's index page!! </h1>
 
