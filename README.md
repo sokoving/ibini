@@ -42,3 +42,22 @@
 - (08.09 - 재영) member 테이블 컬럼(session_id, limit_time
   ) 추가, create table tbl_member sql문 수정
 - (08.08 - 여운) 프로젝트 파일 깃에 올림
+
+
+----
+
+header 사용시 include file을 header-wrap으로 감싸주기
+
+
+            <div id="header-wrap">
+                <%@ include file="./include/header.jsp" %>
+            </div>
+
+content 구역은 content-wrap으로 감싸서 header랑 content-wrap 분리후 사용
+
+      <div id="content-wrap">
+          <h1> Welcome~ This is ibini's index page!! </h1>
+  
+          <a href="/list">포스트 전체 목록</a> <br>
+          <a href="/post/write/${account}">새 포스트 쓰기</a> <br>
+      </div>
