@@ -21,7 +21,7 @@ public interface PostMarkMapper {
     boolean removeAll(Long postNo);
 
     // 마크 전체 조회 기능
-    List<PostMark> findAll(Long postNo); // 페이징 처리 추후 추가 예정 ( @Param )
+    List<PostMark> findAll(Long postNo);
 
     // 마크 개별 조회 기능
     PostMark findOne(Long markNo);

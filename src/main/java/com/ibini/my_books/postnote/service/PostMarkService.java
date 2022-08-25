@@ -33,7 +33,7 @@ public class PostMarkService {
         return postMarkMapper.removeAll(postNo);
     }
 
-    // 마크 전체 조회 요청 중간 처리 // 페이징 처리 추후 추가 예정
+    // 마크 전체 조회 요청 중간 처리
     public Map<String, Object> findAll(Long postNo) {
 
         Map<String, Object> markMap = new HashMap<>();

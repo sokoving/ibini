@@ -21,7 +21,7 @@ public interface PostMemoMapper {
     boolean removeAll(Long postNo);
 
     // 메모 전체 조회 기능
-    List<PostMemo> findAll(Long postNo); // 페이징 처리 추후 추가 예정
+    List<PostMemo> findAll(Long postNo);
 
     // 메모 개별 조회 기능
     PostMemo findOne(Long memoNo);

@@ -35,7 +35,7 @@ public class PostMemoService {
         return postMemoMapper.removeAll(postNo);
     }
 
-    // 메모 전체 조회 요청 중간 처리 // 페이징 처리 추후 추가 예정
+    // 메모 전체 조회 요청 중간 처리
     public Map<String, Object> findAll(Long postNo) {
 
         Map<String, Object> memoMap = new HashMap<>();

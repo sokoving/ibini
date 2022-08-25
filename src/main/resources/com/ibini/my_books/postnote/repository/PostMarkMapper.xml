@@ -50,7 +50,7 @@
         *
         FROM prj_post_mark
         WHERE post_no = #{postNo}
-        ORDER BY episode_no DESC    <!-- 페이징 처리 추후 추가 예정 -->
+        ORDER BY episode_no DESC
     </select>
 
     <!-- 마크 개별 조회 기능 -->
