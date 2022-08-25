@@ -107,7 +107,7 @@ header .gnb {
     display: none;
     /* height: 100vh; */
 
-    position: fixeds;
+    position: fixed;
     top: 57px;
     left: 80%;
 }
