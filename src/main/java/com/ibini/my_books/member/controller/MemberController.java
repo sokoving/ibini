@@ -93,7 +93,9 @@ public class MemberController {
 
     //로그아웃
     @GetMapping("/sign-out")
-    public String signOut(HttpServletRequest request, HttpServletResponse response , RedirectAttributes ra) throws Exception {
+    public String signOut(HttpServletRequest request, HttpServletResponse response
+            , RedirectAttributes ra) throws Exception {
+
         HttpSession session = request.getSession();
         //만약 자동 로그인 상태라면 해제한다. = 쿠키가 있다면
         if (LoginUtil.hasAutoLoginCookie(request)) {
@@ -118,11 +120,13 @@ public class MemberController {
 
         //로그인한 사람에게만 적용
         if (session.getAttribute("loginUser") != null) {
+            log.info("loginUser:{}",session.getAttribute("loginUser"));
             //1.세션에 정보를 삭제한다.
             session.removeAttribute("loginUser");
 
             //2. 세션을 무효화 한다.
             session.invalidate();
+            log.info("session 무효화:{}",session);
             return "redirect:/";
         }
         return "redirect:/member/sign-in";
