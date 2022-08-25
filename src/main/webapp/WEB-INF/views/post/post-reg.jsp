@@ -120,7 +120,7 @@
 
                                     <div class="select">
                                         <div class="platformSelBox">
-                                            <select name="platform" id="platformselect">
+                                            <select name="platformId" id="platformselect" >
                                                 <option value="#">플랫폼을 선택하세요</option>
                                             </select>
                                         </div>
@@ -142,7 +142,7 @@
 
                                     <div class="genreSelAndInput">
                                         <div class="genreSelectBox">
-                                            <select name="genre" id="genreSelect">
+                                            <select name="genreId" id="genreSelect">
                                                 <option value="#">장르를 선택하세요</option>
                                             </select>
                                         </div>
@@ -236,7 +236,6 @@
                     </div>
 
 
-
                     <div id="reg-btn">
                         <button class="white-box">등록</button>
                     </div>
@@ -276,263 +275,307 @@
 
         console.log(account);
         console.log(gAccount);
-                // 나중에 꼭 수정해주기
-                // const url = "http://localhost:8383/platform/c1?account=" + account;
-                const url = "http://localhost:8383/platform/c1/" + account;
 
-                // const genreURL = "http://localhost:8383/genre/c1?account=" + account;
+        // 나중에 꼭 수정해주기
+        // const url = "http://localhost:8383/platform/c1?account=" + account;
+        const url = "http://localhost:8383/platform/c1/" + account;
 
-                const genreURL = "http://localhost:8383/genre/c1/" + gAccount;
+        // const genreURL = "http://localhost:8383/genre/c1?account=" + account;
 
-                // 1. 저장하기!
-                    // 1. 버튼 클릭시 핸들러 작동
-                    // 2. 핸들러 함수로 value값 가져오기
-                    // 3. 전송할데이터 배열
-                    // 4. 요청 정보 객체
-                    // 5. fetch 전송하기 -> 220811 완료
-                // 2. 돔 만들기
-                    // 1. select -> option || ul -> li 생성 후 js로 select처럼 만들기
-                    // 1-1. select로 돔 구현함
-                    // 1-2. 저장이후에 보여주는 함수 만들기 + 비동기 GET요청?
-                // 3. 저장한 리스트 화면에 랜더링
-                    // 1. 뱃지 글자색 + 뱃지 배경색 디비에서 불러오기 -> before switch
-                // 4. 파일 라디오 버튼 체인지에 따라 생성하고 수정하기 - 아코디언도 가능?
+        const genreURL = "http://localhost:8383/genre/c1/" + gAccount;
 
-                // 플랫폼 저장 & 랜더링 기능 =======================================================
+        // 1. 저장하기!
+            // 1. 버튼 클릭시 핸들러 작동
+            // 2. 핸들러 함수로 value값 가져오기
+            // 3. 전송할데이터 배열
+            // 4. 요청 정보 객체
+            // 5. fetch 전송하기 -> 220811 완료
+        // 2. 돔 만들기
+            // 1. select -> option || ul -> li 생성 후 js로 select처럼 만들기
+            // 1-1. select로 돔 구현함
+            // 1-2. 저장이후에 보여주는 함수 만들기 + 비동기 GET요청?
+        // 3. 저장한 리스트 화면에 랜더링
+            // 1. 뱃지 글자색 + 뱃지 배경색 디비에서 불러오기 -> before switch
+        // 4. 파일 라디오 버튼 체인지에 따라 생성하고 수정하기 - 아코디언도 가능?
 
-                // makePlatformDom - 돔생성하기
-                function makePlatformDom(domainList) {
+        // 플랫폼 저장 & 랜더링 기능 =======================================================
 
-                    // 플랫폼 셀렉트 아래에 option 추가하기
-                    const platformselect = document.querySelectorAll('#platformselect'); // length = 1
+        // makePlatformDom - 돔생성하기
+        function makePlatformDom(domainList) {
 
-                    let tag = '';
+            // 플랫폼 셀렉트 아래에 option 추가하기
+            const platformselect = document.querySelectorAll('#platformselect'); // length = 1
 
-                    for (let key in domainList) {
+            let tag = '';
 
-                        // console.log(domainList[key].platformName);
-                        // console.log(domainList[key].platformId);
+            for (let key in domainList) {
 
-                        let platformName = domainList[key].platformName;
-                        let platformId = domainList[key].platformId;
+                // console.log(domainList[key].platformName);
+                // console.log(domainList[key].platformId);
 
-                        // option 생성할 필요가 없다 -> select 아래에 넣어주니까!!
-                        // var option = document.createElement("option");
-                        // tag 더해주기
-                        tag += `<option value=" ` + platformId + `">` + platformName + `</option>`;
+                let platformName = domainList[key].platformName;
+                let platformId = domainList[key].platformId;
 
+                // option 생성할 필요가 없다 -> select 아래에 넣어주니까!!
+                // var option = document.createElement("option");
+                // tag 더해주기
+                tag += `<option id="platform`+platformId+`" value="` + platformId + `">` + platformName + `</option>`;
+
+            }
+
+            document.getElementById('platformselect').innerHTML = tag;
+
+        }
+
+        function showdomainList() {
+            console.log(url);
+            fetch(url)
+            .then(res => res.json())
+            .then(domainList => {
+                console.log(domainList);
+                makePlatformDom(domainList);
+
+            });
+
+        }
+
+
+
+
+        // 플랫폼 저장 버튼 클릭 이벤트
+        function savePlatformClickEvent(){
+            document.getElementById('platformBtn').onclick = savePlatformHandler
+        }
+
+        //플랫폼 저장 핸들러
+        function savePlatformHandler(e){
+
+            e.preventDefault();
+            // 입력창
+            const $platformInput = document.getElementById("platformInput");
+
+            console.log($platformInput.value);
+            // [수정] 서버로 전송할 데이터 -> account 로그인 정보 넘겨주는거 받는걸로수정!
+            const platformData = {
+
+                "platformName": $platformInput.value,
+                "account" : account
+            }
+            console.log(platformData);
+
+            // POST 요청정보 객체
+            const reqInfo = {
+                method : "POST"
+                , headers : {
+                    'content-type' : 'application/json'
+                }
+                , body : JSON.stringify(platformData)
+
+            };
+            console.log(reqInfo);
+
+            fetch(url, reqInfo)
+                .then(res => res.text())
+                .then(msg=>{
+                    if(msg==="insert-success"){
+                        alert('새로운 플랫폼이 등록 완료되었습니다.');
+                        // 비워주기
+                        $platformInput.value = '';
+                        // select 해주기
+                        showdomainList();
+                    } else {
+                        alert('새로운 플랫폼 저장을 실패했습니다.');
                     }
+                })
 
-                    document.getElementById('platformselect').innerHTML = tag;
+        }
 
+
+
+
+
+        // 장르 저장 / 리스트 출력 =======================================================
+
+        function showGenreList() {
+            console.log(genreURL);
+            fetch(genreURL)
+            .then(res => res.json())
+            .then(genreList => {
+                console.log(genreList);
+                makeGenreDom(genreList);
+
+            });
+
+        }
+
+
+        // 장르 돔 생성
+        function makeGenreDom(genreList) {
+
+            // 플랫폼 셀렉트 아래에 option 추가하기
+            const genreSelect = document.querySelectorAll('#genreSelect'); // length = 1
+
+            let tag = '';
+
+            for (let key in genreList) {
+
+                console.log(genreList[key].genreId);
+                console.log(genreList[key].genreName);
+
+                let genreId = genreList[key].genreId;
+                let genreName = genreList[key].genreName;
+
+
+                // option 생성할 필요가 없다 -> select 아래에 넣어주니까!!
+                // var option = document.createElement("option");
+                // tag 더해주기
+                tag += `<option value="` + genreId + `">` + genreName + `</option>`;
+
+            }
+
+            document.getElementById('genreSelect').innerHTML = tag;
+
+        }
+
+        // 장르 클릭이벤트
+        function saveGenreClickEvent(){
+            document.getElementById('genreBtn').onclick = saveGenreHandler
+        }
+
+        function saveGenreHandler(e){
+            
+            e.preventDefault();
+            
+            const $genreInput = document.getElementById("genreInput");
+
+            console.log($genreInput.value);
+
+            // 요청정보
+            const genreData = {
+                    "account": gAccount ,
+                    "genreName": $genreInput.value
                 }
 
-                function showdomainList() {
-                    console.log(url);
-                    fetch(url)
-                    .then(res => res.json())
-                    .then(domainList => {
-                        console.log(domainList);
-                        makePlatformDom(domainList);
+            console.log(genreData);
 
-                    });
-
+            // POST 요청정보 객체
+            const reqInfo = {
+                method : "POST"
+                , headers : {
+                    'content-type' : 'application/json'
                 }
+                , body : JSON.stringify(genreData)
 
+            };
+            console.log(reqInfo);
 
-
-
-                // 플랫폼 저장 버튼 클릭 이벤트
-                function savePlatformClickEvent(){
-                    document.getElementById('platformBtn').onclick = savePlatformHandler
-                }
-
-                //플랫폼 저장 핸들러
-                function savePlatformHandler(e){
-
-                    e.preventDefault();
-                    // 입력창
-                    const $platformInput = document.getElementById("platformInput");
-
-                    console.log($platformInput.value);
-                    // [수정] 서버로 전송할 데이터 -> account 로그인 정보 넘겨주는거 받는걸로수정!
-                    const platformData = {
-                        "platformName": $platformInput.value,
-                        "account" : account
+            fetch(genreURL, reqInfo)
+                .then(res => res.text())
+                .then(msg=>{
+                    if(msg==="insert-success"){
+                        alert('새로운 장르가 등록 완료되었습니다.');
+                        // 비워주기
+                        $genreInput.value = '';
+                        // select 해주기
+                        showGenreList();
+                    } else {
+                        alert('새로운 장르 저장을 실패했습니다.');
                     }
-                    console.log(platformData);
+                })
 
-                    // POST 요청정보 객체
-                    const reqInfo = {
-                        method : "POST"
-                        , headers : {
-                            'content-type' : 'application/json'
-                        }
-                        , body : JSON.stringify(platformData)
-
-                    };
-                    console.log(reqInfo);
-
-                    fetch(url, reqInfo)
-                        .then(res => res.text())
-                        .then(msg=>{
-                            if(msg==="insert-success"){
-                                alert('새로운 플랫폼이 등록 완료되었습니다.');
-                                // 비워주기
-                                $platformInput.value = '';
-                                // select 해주기
-                                showdomainList();
-                            } else {
-                                alert('새로운 플랫폼 저장을 실패했습니다.');
-                            }
-                        })
-
-                }
+        }
 
 
 
 
-
-                // 장르 저장 / 리스트 출력 =======================================================
-
-                function showGenreList() {
-                    console.log(genreURL);
-                    fetch(genreURL)
-                    .then(res => res.json())
-                    .then(genreList => {
-                        console.log(genreList);
-                        makeGenreDom(genreList);
-
-                    });
-
-                }
+    // 즉시실행함수 ==========================================================
 
 
-                // 장르 돔 생성
-                function makeGenreDom(genreList) {
-
-                    // 플랫폼 셀렉트 아래에 option 추가하기
-                    const genreSelect = document.querySelectorAll('#genreSelect'); // length = 1
-
-                    let tag = '';
-
-                    for (let key in genreList) {
-
-                        console.log(genreList[key].genreId);
-                        console.log(genreList[key].genreName);
-
-                        let genreId = genreList[key].genreId;
-                        let genreName = genreList[key].genreName;
+    (function(){
 
 
-                        // option 생성할 필요가 없다 -> select 아래에 넣어주니까!!
-                        // var option = document.createElement("option");
-                        // tag 더해주기
-                        tag += `<option value=" ` + genreId + `">` + genreName + `</option>`;
+        // 플랫폼
+        showdomainList();
+        savePlatformClickEvent();
 
-                    }
+        // 장르
+        showGenreList();
+        saveGenreClickEvent();
 
-                    document.getElementById('genreSelect').innerHTML = tag;
 
-                }
-
-                // 장르 클릭이벤트
-                function saveGenreClickEvent(){
-                    document.getElementById('genreBtn').onclick = saveGenreHandler
-                }
-
-                function saveGenreHandler(e){
-                    
-                    e.preventDefault();
-                    
-                    const $genreInput = document.getElementById("genreInput");
-
-                    console.log($genreInput.value);
-
-                    // 요청정보
-                    const genreData = {
-                            "account": gAccount ,
-                            "genreName": $genreInput.value
-                        }
-
-                    console.log(genreData);
-
-                    // POST 요청정보 객체
-                    const reqInfo = {
-                        method : "POST"
-                        , headers : {
-                            'content-type' : 'application/json'
-                        }
-                        , body : JSON.stringify(genreData)
-
-                    };
-                    console.log(reqInfo);
-
-                    fetch(genreURL, reqInfo)
-                        .then(res => res.text())
-                        .then(msg=>{
-                            if(msg==="insert-success"){
-                                alert('새로운 장르가 등록 완료되었습니다.');
-                                // 비워주기
-                                $genreInput.value = '';
-                                // select 해주기
-                                showGenreList();
-                            } else {
-                                alert('새로운 장르 저장을 실패했습니다.');
-                            }
-                        })
-
-                }
+    })();
 
 
 
 
-                // 즉시실행함수 ==========================================================
+        // 장르 jquery ==========================================================
+        $(document).ready(function(){
+
+            // 플랫폼 클릭이벤트
+            $('.platformClick').hide();
+            $('.platformInputShowEvent').click(function(){
+                    // alert("platform");
+
+                    $('.platformClick').show();
+            });
 
 
-                (function(){
+            // 장르 클릭이벤트
+            $('.textClick').hide();
+            $('.GenreInputShowEvent').click(function(){
+                    // alert("hihihi");
+
+                    $('.textClick').show();
+            });         
+            //     // 2. 선택된 값 넘기기
+
+        }); // jquery end
+
+        // 1. 플랫폼 value값 가져오기 
+        $(document).ready(function(){       
+            
+            // $('#selTest').change(function(){
+                
+            //     console.log($(this).val());
+            //     // ($(this).val()); 
+            //     $("#selTest").val($(this).val()).prop("selected", true);
+            //     // $('#platformselect option:eq($(this).val())').prop('selected', true);
+            //     // $('#platformselect').val($(this).val()).prop("selected", "selected");
+            //     // alert($("#selTest option:selected").val());
+                
+            // });
+
+            $('#platformselect').change(function(){
+                
+                // alert($(this).val());
+                console.log("선택한 플랫폼id : "+ $(this).val());
+                $("#platformselect").val($(this).val()).prop("selected", true);
+                // $('#platformselect option:eq($(this).val())').prop('selected', true);
+                // $('#platformselect').val($(this).val()).prop("selected", true);
+                console.log("selected : " + $("#platformselect option:selected").val());
+                // alert($("#platformselect option:selected").val());
+                
+            });
+
+            $('#genreSelect').change(function(){
+                
+                // alert($(this).val());
+                console.log("genreSelect: "+$(this).val());
+                // $('#genreSelect').val($(this).val()).attr("selected", "selected");
+                $('#genreSelect').val($(this).val()).prop("selected", true);
+                console.log("genreSelect selecded : "+$( "#genreSelect option:selected" ).val());
+                // alert($( "#genreSelect option:selected" ).val());
+                
+            });
 
 
-                    // 플랫폼
-                    showdomainList();
-                    savePlatformClickEvent();
 
-                    // 장르
-                    showGenreList();
-                    saveGenreClickEvent();
+            
+        }); // jquery end
 
-
-                })();
-
-
-
-
-                // 장르 jquery ==========================================================
-                $(document).ready(function(){
-
-                    // 플랫폼 클릭이벤트
-                    $('.platformClick').hide();
-                    $('.platformInputShowEvent').click(function(){
-                            // alert("platform");
-
-                            $('.platformClick').show();
-                    });
-
-
-                    // 장르 클릭이벤트
-                    $('.textClick').hide();
-                    $('.GenreInputShowEvent').click(function(){
-                            // alert("hihihi");
-
-                            $('.textClick').show();
-                    });
-
-
-                }); // jquery end
-
+        
 
     </script>
-
 
 </body>
 

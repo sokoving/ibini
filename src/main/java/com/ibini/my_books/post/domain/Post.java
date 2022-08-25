@@ -11,6 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class Post {
 
+    // form 전송시 name이랑 domain이름이랑 동일하게!!!
+
     private Long postNo;            //  포스트 번호   NUMBER(10)  NOT NULL,
     private String account;         // 유저아이디    VARCHAR2(50)  NOT NULL,
     private int genreId;           // 장르아이디    NUMBER(3) NULL,
