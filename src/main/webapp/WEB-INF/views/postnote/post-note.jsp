@@ -598,7 +598,7 @@
         function appendMarkContentArea(data) {
             let content = '<div class="content-area" data-mark-no="' + data.markNo + '">';
 
-            // (회차/페이지/권)아이콘, 마크 버튼 영역 동적생성
+            // (회차 / 페이지 / 권수 / 퍼센트) 아이콘, 마크 버튼 영역 동적생성
             content += appendMarkIconAndButtonArea(data);
 
             // 북마크 내용 입력
@@ -608,7 +608,7 @@
             return content;
         }
 
-        // (회차/페이지/권)아이콘, , 마크 버튼 영역 동적생성
+        // (회차 / 페이지 / 권수 / 퍼센트) 아이콘, 마크 버튼 영역 동적생성
         function appendMarkIconAndButtonArea(data) {
             let iconArea = '';
             iconArea += '<div class="flex-sb">';
@@ -629,9 +629,9 @@
             return iconArea;
         }
 
-        // (회차/페이지/권)아이콘 종류 판단
+        // (회차(화) / 페이지(p) / 권수(권) / 퍼센트(%)) 아이콘 종류 판단
         function classifyMarkIconType(epId) {
-            // (고정)0:회차, 1:페이지, 2:권
+            // (고정) 0:회차, 1:페이지, 2:권수, 3:퍼센트
             switch(epId) {
                 case 0:
                     return 'marking-type1 noselect';
@@ -639,6 +639,8 @@
                     return 'marking-type2 noselect';
                 case 2:
                     return 'marking-type3 noselect';
+                case 4: 
+                    return 'marking-type3 noselect'
                 default : return 'marking-type1 noselect';
             }
         }
