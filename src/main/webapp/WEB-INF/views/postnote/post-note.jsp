@@ -45,7 +45,8 @@
             <div name="mark">
                 <div class="episode-no">
                     <label for="episode-no">회차
-                        <input type="number" id="episode-no" name="episodeNo" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        <!-- <input type="number" id="episode-no" name="episodeNo" min="1" max="9999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> -->
+                        <input type="text" id="episode-no" name="episodeNo" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                     </label>
                 </div>
                 <div class="text-area">
@@ -379,7 +380,7 @@
                     .then(message => {
                         if (message === 'delete-success') {
                             alert('메모 삭제!');
-                            $eventTag.parentElement.parentElement.parentElement.remove();
+                            showMemoList();
 
                         } else {
                             alert('메모 삭제 실패!');
@@ -394,7 +395,7 @@
                     .then(message => {
                         if (message === 'delete-success') {
                             alert('마크 삭제!');
-                            $eventTag.parentElement.parentElement.parentElement.remove();
+                            showMarkList();
 
                         } else {
                             alert('마크 삭제 실패!');
@@ -498,11 +499,15 @@
             const $memoContentList = document.querySelector('.content-wrapper div[name="memo"]');
 
             $memoContentList.innerHTML = '';
-            
-            for (let memo of memoList) {
 
-                // 메모 내용 동적생성
-                $memoContentList.innerHTML += appendMemoContentArea(memo);
+            if (memoList === null || memoList.length === 0 ) { // 메모가 하나도 없을 때               
+                $memoContentList.innerHTML += "<div>작성한 메모가 없습니다</div>"
+            
+            } else { 
+                for (let memo of memoList) {
+                    // 메모 내용 동적생성
+                    $memoContentList.innerHTML += appendMemoContentArea(memo);
+                }
             }
         }
         
@@ -578,10 +583,14 @@
 
             $markContentList.innerHTML = '';
 
-            for (let mark of markList) {
-
-                // 마크 내용 동적생성
-                $markContentList.innerHTML += appendMarkContentArea(mark);
+            if (markList === null || markList.length === 0 ) { // 마크가 하나도 없을 때               
+                $markContentList.innerHTML += "<div>작성한 북마크가 없습니다</div>"
+            
+            } else { 
+                for (let mark of markList) {
+                    // 마크 내용 동적생성
+                    $markContentList.innerHTML += appendMarkContentArea(mark);
+                }
             }
         }
 
