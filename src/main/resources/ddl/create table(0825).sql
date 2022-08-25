@@ -7,6 +7,7 @@ DROP TABLE tbl_post;
 DROP TABLE prj_genre;
 DROP TABLE prj_platform;
 DROP TABLE tbl_member;
+DROP TABLE prj_link_post;
 
 
 CREATE TABLE tbl_post
