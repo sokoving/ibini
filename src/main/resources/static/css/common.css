@@ -107,9 +107,9 @@ header .gnb {
     display: none;
     /* height: 100vh; */
 
-    position: absolute;
+    position: fixeds;
     top: 57px;
-    left: 85%;
+    left: 80%;
 }
 header .gnb.on{
     display: inline-block;
