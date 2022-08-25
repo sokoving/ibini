@@ -40,7 +40,7 @@
 .hover:hover{
     border: 1px solid #444;
     transform: scale(1.05);
-    transition: 0.15s;
+    /* transition: 0.1s; */
     cursor: pointer;
 }
 
@@ -232,7 +232,7 @@ section#list-sec{
 .item-right .ca-ge-wrap div:hover{
     background-color: #ffca3d;
     border: 1px solid #444;
-    transform: scale(1.05);
+    transform: scale(1.07);
     transition: 0.15s;
     cursor: pointer;
 }

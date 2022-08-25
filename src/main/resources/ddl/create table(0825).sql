@@ -1,13 +1,14 @@
 DROP TABLE prj_post_memo;
 DROP TABLE prj_post_mark;
 DROP TABLE prj_hashtag;
+DROP TABLE prj_link_post;
 DROP TABLE login_list;
 DROP TABLE prj_post_img;
 DROP TABLE tbl_post;
 DROP TABLE prj_genre;
 DROP TABLE prj_platform;
 DROP TABLE tbl_member;
-DROP TABLE prj_link_post;
+
 
 
 CREATE TABLE tbl_post

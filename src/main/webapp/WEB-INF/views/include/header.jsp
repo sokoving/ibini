@@ -19,19 +19,19 @@
         <a href="#" class="menu-close"><span class="far fa-window-close"></span></a>
         <ul>
             <li><a href="#">메뉴1</a></li>
-            <li><a href="#">메뉴2</a></li>
+            <li><a href="/myPage/ibini">마이페이지(현정)</a></li>
 
             <li><a href="/list">포스트 전체 목록</a></li>
             <li><a href="/post/write">새 포스트 쓰기</a></li>
 
             <c:if test="${loginUser == null}">
-            <li><a href="/member/sign-in">sign-in</a></li>
-            <li> <a href="/member/sign-up">sign-up</a></li>
+            <li><a href="/member/sign-in">로그인</a></li>
+            <li> <a href="/member/sign-up">회원가입</a></li>
             </c:if>
         
             <c:if test="${loginUser != null}">
-            <li> <a href="/member/my-page">My Page</a>   </li>
-            <li><a href="/member/sign-out">sign-out</a></li>
+            <li> <a href="/member/my-page">마이페이지(재영)</a>   </li>
+            <li><a href="/member/sign-out">로그아웃</a></li>
             </c:if>
         </ul>
     </nav> <!-- // end nav -->
