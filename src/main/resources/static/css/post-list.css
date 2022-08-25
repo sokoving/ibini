@@ -1,5 +1,5 @@
 /* 새 글 등록 영역 */
-.inner-section {
+#reg-sec .inner-section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,9 +36,227 @@
 }
 
 
+/* 하버 효과 */
+.hover:hover{
+    border: 1px solid #444;
+    transform: scale(1.05);
+    transition: 0.15s;
+    cursor: pointer;
+}
+
 /* 포스트 리스트 영역 */
-section.list-sec{
-    margin: 50px auto 0;
-    padding: 0;
-    background-color: pink;
+section#list-sec{
+    padding: 0 100px;
+    margin-top: 100px;
+    border: none;
+}
+
+#list-sec .inner-section{
+    display: flex;
+    flex-flow: column;
+}
+
+/* 포스트 목록 필터링 제목  */
+.section-h2{
+    border: 1px solid #adb5bd;
+    background-color: #ffe3da;
+    border-radius: 0.25rem;
+    margin-top: 30px;
+    /* padding: 20px 0; */
+
+    font-family: 'NanumBarunGothicBold';
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-h2 h2{
+    margin: 15px 0 10px;
+    line-height: 1.5;
+}
+
+
+
+/* ------------------------------------- */
+/* ---------개별 포스트 박스 영역 ---------*/
+/* ------------------------------------- */
+.item-wrap{
+    border: 1px solid #adb5bd;
+    border-radius: 0.25rem;
+    padding: 30px 15px;
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: space-between;
+}
+.item-wrap:last-child{
+    margin-bottom: 30px;
+}
+.item-wrap:hover{
+    background-color: #ffe3da;
+}
+
+/* ---------- left : 표지, 즐겨찾기 ---------- */
+.item-wrap .item-left{
+    flex: 0 1 20%;
+    border-radius: 0.25rem;
+    overflow: hidden;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+/* 표지 */
+.item-left .thumb-box{
+    border-radius: 0.25rem;
+    /* background-color: #fff7e3; */
+    overflow: hidden;
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item-left .thumb-box img{
+    width: 100%;
+}
+/* 즐겨찾기 버튼 */
+.item-left .favorite-btn{
+    border: 2px dotted #555;
+    border-radius: 0.25rem;
+    background-color: #777;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 0.9em;
+}
+.item-left .favorite-btn:hover{
+    background-color: #ffca3d;
+    color: #000;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+
+
+/* ---------- center : 상세정보 ---------- */
+.item-wrap .item-center{
+    flex-grow: 1;
+    margin-left: 20px;
+    box-sizing: border-box;
+    color: #555;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    /* background-color: aquamarine; */
+}
+/* 별점 */
+.item-center .star-rate{
+    margin-bottom: 5px;
+}
+/* 제목 */
+.item-center .post-title h3{
+    color: #444;
+    font-family: 'NanumBarunGothicBold';
+    margin: 0;
+
+}
+.item-center .post-title:hover{
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+/* 작가 */
+.item-center .post-writer{
+    font-weight: 700;
+}
+.item-center .post-writer:hover{
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+/* 플랫폼, 연재 상태 */
+.item-center .pl-pu-warp{
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* 플랫폼 */
+.plat-name{
+    background-color: #ffca3d;
+    border-radius: 0.25rem;
+    line-height: 1.5em;
+    font-weight: 700;
+    padding: 0.2em 0.35em 0.15em;
+    word-break: keep-all; 
+    margin-right: 5px;
+}
+
+/* 해시태그 */
+.item-center .tag-one-line{
+    margin-top: 10px;
+    color: #555;
+}
+
+
+/* ---------- right : 분류, 날짜 ---------- */
+.item-wrap .item-right{
+    flex: 0 0 20%;
+    line-height: 1.2;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    /* background-color: cadetblue; */
+}
+/* 장르, 카테고리 */
+.item-right .ca-ge-wrap{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    width: 100%;
+}
+.item-right .ca-ge-wrap div{
+    border-radius: 0.25em;
+    border: 1px dotted #555;
+    padding: 0.4em 0.2em;
+    margin: 0 0 5px 5px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1em;
+}
+.item-right .ca-ge-wrap div:hover{
+    background-color: #ffca3d;
+    border: 1px solid #444;
+    transform: scale(1.05);
+    transition: 0.15s;
+    cursor: pointer;
+}
+.item-right .ca-ge-wrap .genre-name{
+    font-size: 0.95em;
+    line-height: 1em;
+}
+/* 진행도(퍼센티지) */
+.item-right .read-percent{
+    text-align: center;
+    color: #ffca3d;
+    text-shadow: -1px 0 #000, 0 1px #000, 3px 0 #000, 0 -1px #000;
+    font-size: 1.7em;
+    font-family: 'NanumBarunGothicBold';
+    margin: 30px 0;
+    
+}
+/* 날짜 */
+.item-right .date-wrap{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    width: 100%;
+    font-size: 0.9em;
+    line-height: 1.1;
+    color: #555;
 }
