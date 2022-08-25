@@ -56,8 +56,5 @@ header 사용시 include file을 header-wrap으로 감싸주기
 content 구역은 content-wrap으로 감싸서 header랑 content-wrap 분리후 사용
 
       <div id="content-wrap">
-          <h1> Welcome~ This is ibini's index page!! </h1>
-  
-          <a href="/list">포스트 전체 목록</a> <br>
-          <a href="/post/write/${account}">새 포스트 쓰기</a> <br>
+          <h1>HTML코드</h1>
       </div>
