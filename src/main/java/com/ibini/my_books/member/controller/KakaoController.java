@@ -45,7 +45,7 @@ public class KakaoController {
         //로그인 처리
         if (userInfo != null){
             Member member = new Member();
-            member.setAccount(userInfo.getEmail());
+            member.setUserId(userInfo.getEmail());
             member.setUserName(userInfo.getNickName());
             member.setEmail(userInfo.getEmail());
 

@@ -12,6 +12,7 @@ import java.util.Date;
 public class AutoLoginDTO {
 
     private String account;
+    private String userId;
     private String sessionId;
     private Date limitTime;
 }
