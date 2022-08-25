@@ -73,8 +73,8 @@ CREATE TABLE prj_platform
     platform_id          NUMBER(9)         NOT NULL,
     account              VARCHAR2(50)      NOT NULL,
     platform_name        VARCHAR2(50)      NOT NULL,
-    platform_bg_color    VARCHAR2(50)      DEFAULT '#6c757d',
-    platform_font_color  VARCHAR2(50)      DEFAULT '#fff',
+    platform_bg_color    VARCHAR2(50)      DEFAULT 'rgb(108,117,125)',
+    platform_font_color  VARCHAR2(50)      DEFAULT 'rgb(255,255,255)',
      PRIMARY KEY (platform_id)
 );
 DROP SEQUENCE seq_prj_platform;

@@ -23,3 +23,29 @@ document.querySelector('.ep-btn-group').onclick = function() {
         }       
     }
 }
+
+// js platform select event
+
+const platformselect = document.getElementById('platformselect');
+// platformselect.onclick = e => {
+//     console.log(e.target.value);
+//     console.log(e.target.options[e.target.selectedIndex].text);
+
+//     let value = e.target.value;
+
+    
+    
+
+// }
+
+// jQuery
+    $(document).ready(function(){
+        $('#platformselect').change(function(){
+            
+            alert($(this).val());
+            $('#platformselect').val($(this).val()).prop("selected",true);
+            
+        });
+        
+
+    }); // jquery end
