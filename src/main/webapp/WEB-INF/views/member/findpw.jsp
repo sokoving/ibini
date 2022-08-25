@@ -2,7 +2,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
         <!DOCTYPE html>
-        <html lang="en">
+        <html lang="ko">
 
         <head>
 
@@ -80,11 +80,12 @@
             .login-content .input-div {
               position: relative;
               display: grid;
-              grid-template-columns: 7% 93%;
+              /* grid-template-columns: 7% 93%; */
               margin: 25px 0;
               padding: 5px 0;
               border-bottom: 2px solid #d9d9d9;
             }
+
 
             .login-content .input-div.one {
               margin-top: 0;
@@ -297,6 +298,7 @@
               transition: .5s;
             }
 
+
           </style>
         </head>
 
@@ -309,59 +311,63 @@
               <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg">
             </div>
             <div class="login-content">
-              <form action="/member/sign-in" name="sign-in" method="post" id="signInFrom">
-                
+
+
+              <!-- 인증코드가 없는 경우 보여지는 웹브라우저 -->
+              <c:if test="${empty code}">
+              <form action="/member/findpw" name="findpw" method="post" id="findpw">                
                 <img src="/img/ibini_logo_4.png">
                 <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg -->
-                <h2 class="title">Welcome</h2>
+                <h2 class="title"> 비밀번호 찾기</h2>
                 <div class="input-div one">
-                  <div class="i">
-                    <i class="fas fa-user"></i>
+                   <div class="i">
+                    <!-- <i class="fas fa-user"></i> -->
                   </div>
                   <div class="div">
                     <h5>userId</h5>
-                    <input type="text" name="userId" id="signInId" class="input" maxlength="14">
+                    <input type="text" name="userId" id="userId" class="input" maxlength="14">
                   </div>
                 </div>
                 <div class="input-div pass">
                   <div class="i">
-                    <i class="fas fa-lock"></i>
+                    <!-- <i class="fas fa-lock"></i> -->
                   </div>
                   <div class="div">
-                    <h5>Password</h5>
-                    <input type="password" class="input" maxlength="20" id="signInPw" name="password">
+                    <h5>email</h5>
+                    <input type="text" class="input" id="email" name="email">
                   </div>
-                </div>
+                </div>               
 
-                <div id="autologin-forgotpassword">
-                <!-- 자동 로그인 체크 박스 -->
-                <label for="auto-login" id="auto-login">
-                  <span>
-                    <i class="fas fa-sign-in-alt"></i>
-                    자동 로그인
-                    <input type="checkbox" id="auto-login" name="autoLogin">
-                  </span>
-                </label>
-
-                <!-- 비밀번호 찾기 링크 -->
-                <a href="/member/findpw" id="forgotPw">Forgot Password?</a>
-                </div>
-
-                <!-- 로그인 버튼 -->
-                <input type="submit" class="btn" value="Sign-In">
-
-                <!-- 회원가입 링크 -->
-                <a class="sign-up-btn" href="/member/sign-up">Sign-Up</a>
-
-                  <!-- 카카오계정 로그인 링크 -->
-                  <a id="custom-login-btn"
-                  href="https://kauth.kakao.com/oauth/authorize?client_id=${kakaoAppKey}&redirect_uri=http://localhost:8383${kakaoRedirect}&response_type=code">
-                      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg"
-                          width="350" />
-                  </a>
-
+                <!-- 인증번호 버튼 -->
+                <input type="submit" class="btn" value="인증번호 받기">
 
               </form>
+            </c:if>
+
+            <!-- 인증코드가 있는 경우 보여지는 웹브라우저 화면 -->
+            <c:if test="${not empty code}">
+              <form action="/member/checkcode" method="post">
+                <img src="/img/ibini_logo_4.png">
+                <input type="hidden" name="code" id="code" value="${code}">
+                <input type="hidden" name="userId" value="${userId}">
+                <div class="input-div two">
+                  <div class="i">
+                   <!-- <i class="fas fa-user"></i> -->
+                 </div>
+                 <div class="div">
+                   <h5>인증코드를 입력해주세요.</h5>
+                   <input type="text" class="input" name="inputcode" id="inputcode" class="inputcode" maxlength="8">
+                 </div>
+                 </div>
+
+                 <!-- 인증번호 버튼 -->
+                <input type="submit" class="btn" value="인증코드 확인">
+              </form>
+
+
+            </c:if>
+
+
             </div>
           </div>
 
@@ -369,6 +375,8 @@
 
 
           <script>
+            const code = '${code}';
+            console.log(code);
 
             const inputs = document.querySelectorAll(".input");
 
@@ -394,22 +402,19 @@
             //Source :- https://github.com/sefyudem/Responsive-Login-Form/blob/master/img/avatar.svg
 
             const msg = '${msg}';
-            if (msg === 'reg-success') {
-              alert('축하합니다. 회원가입에 성공했습니다.');
-            }
-
-            const loginMsg = '${loginMsg}';
-            if (loginMsg === 'NO_ACC') {
+            if (msg === 'not-find-userId') {
               alert('존재하지 않는 회원 입니다.');
-            } else if (loginMsg === 'NO_PW') {
-              alert('비밀번호가 틀렸습니다.');
             }
 
-            const warningMsg = '${message}';
-            console.log(warningMsg);
-            if (warningMsg == 'no-login') {
-              alert('로그인 후 사용할 수 있습니다.')
+            if (msg === 'email-discord') {
+              alert('회원가입된 이메일과 일치하지 않습니다.');
             }
+
+            if (msg === 'discord-code') {
+              alert('인증코드가 일치하지 않습니다. 확인 후 다시 입력해주세요.');
+            }
+
+
 
           </script>
 
