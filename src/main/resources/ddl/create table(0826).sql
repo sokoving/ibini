@@ -8,8 +8,6 @@ DROP TABLE tbl_post;
 DROP TABLE prj_genre;
 DROP TABLE prj_platform;
 DROP TABLE tbl_member;
-DROP TABLE prj_link_post;
-
 
 
 CREATE TABLE tbl_post
@@ -148,7 +146,7 @@ CREATE TABLE prj_link_post(
 
 	CREATE TABLE tbl_manage_member
 	(
-	    user_id             VARCHAR2(50)     NOT NULL,   --회원 아이디
+	    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   --회원 아이디
 	    user_condition       VARCHAR2(150)    DEFAULT 'true',    --회원의 가입 상태
 	     PRIMARY KEY (user_id)
 	);
@@ -171,6 +169,9 @@ CREATE TABLE prj_link_post(
 	answer_date           DATE              NULL,   --답변 등록일자
 	 PRIMARY KEY (serial_number)
 	);
+	DROP SEQUENCE seq_tbl_manage_inquiry;
+    CREATE SEQUENCE seq_tbl_manage_inquiryr;
+
 
 	CREATE TABLE tbl_reason_break_away
 	(
