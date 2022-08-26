@@ -135,12 +135,15 @@
       <!-- 문의사항 등록하기  -->
     <insert id="inquiryRegister">
         INSERT INTO tbl_manage_inquiry
-        (serial_number, user_id, inquiry_title, inquiry)
+            (
+                serial_number,
+                user_id, inquiry_title, inquiry
+            )
         VALUES
-        (
-        TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_manage_inquiry.nextval, 4, '0'),
-        #{inquiryTitle},#{userId}, #{inquiry}
-        )
+            (
+                TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_manage_inquiry.nextval, 4, '0'),
+                #{userId}, #{inquiryTitle}, #{inquiry}
+            )
     </insert>
 
         <!--    답변 등록하기 -->

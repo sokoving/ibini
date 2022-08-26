@@ -8,8 +8,6 @@ DROP TABLE tbl_post;
 DROP TABLE prj_genre;
 DROP TABLE prj_platform;
 DROP TABLE tbl_member;
-DROP TABLE prj_link_post;
-
 
 
 CREATE TABLE tbl_post
@@ -148,14 +146,14 @@ CREATE TABLE prj_link_post(
 
 	CREATE TABLE tbl_manage_member
 	(
-	    user_id             VARCHAR2(50)     NOT NULL,   --회원 아이디
+	    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   --회원 아이디
 	    user_condition       VARCHAR2(150)    DEFAULT 'true',    --회원의 가입 상태
 	     PRIMARY KEY (user_id)
 	);
 
 	CREATE TABLE tbl_manage_break_away
 	(
-	    user_id             VARCHAR2(50)     NOT NULL ,   --회원 아이디
+	    user_id             VARCHAR2(50)     NOT NULL,   --회원 아이디
 	    reason_num       NUMBER(9)    NOT NULL,          --탈퇴사유 번호
 	     PRIMARY KEY (user_id)
 	);
@@ -172,7 +170,7 @@ CREATE TABLE prj_link_post(
 	 PRIMARY KEY (serial_number)
 	);
 	DROP SEQUENCE seq_tbl_manage_inquiry;
-    CREATE SEQUENCE seq_tbl_manage_inquiryr;
+    CREATE SEQUENCE seq_tbl_manage_inquiry;
 
 
 	CREATE TABLE tbl_reason_break_away
