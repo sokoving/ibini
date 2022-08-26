@@ -62,12 +62,14 @@
             <div class="inner-section">
 
                 <!-- 새 글 등록 버튼 -->
-                <div class="new-post">
-                    <div class="reg-btn">
-                        <span class="fas fa-plus"></span>
-                        <h2>새 포스트를 등록해 보세요</h2>
+                <a href="/post/write">
+                    <div class="new-post">
+                        <div class="reg-btn">
+                            <span class="fas fa-plus"></span>
+                            <h2>새 포스트를 등록해 보세요</h2>
+                        </div>
                     </div>
-                </div>
+                </a>
                 <!-- 새 글 등록 메뉴 -->
                 <div class="reg-menu on">
                     <ul>
@@ -107,7 +109,9 @@
                                 <div class="star-rate" data-star-rate="3"></div>
                                 <%-- 제목 --%>
                                 <div class="post-title">
-                                    <a href="/post/detail/${p.postNo}"><h3>${p.postTitle}</h3></a>
+                                    <a href="/post/detail/${p.postNo}">
+                                        <h3>${p.postTitle}</h3>
+                                    </a>
                                 </div>
                                 <%-- 작가 --%>
                                 <div class="post-writer">${p.postWriter}</div>
@@ -116,7 +120,7 @@
                             <div class="pl-pu-warp">
                                 <%-- 플랫폼 --%>
                                 <span class="plat-name hover">${p.platformName}</span>
-                                
+
                                 <%-- 연재주기 or 연재상태 --%>
                                 <c:choose>
                                     <%-- 연재주기값 없음 : - --%>
