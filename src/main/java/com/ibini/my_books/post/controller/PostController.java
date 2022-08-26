@@ -87,7 +87,7 @@ public class PostController {
     }
 
     // 포스트 삭제 폼 요청      get    /post/delete
-    @GetMapping("/delete")
+    @GetMapping("/delete/{account}")
     public String delete(@ModelAttribute("postNo") Long postNo, Model model) {
         log.info("PostController /post/delete  GET 요청!! - {}", postNo);
 
@@ -95,7 +95,7 @@ public class PostController {
     }
 
     //    포스트 삭제 요청  post    /post/delete
-    @PostMapping("/delete")
+    @PostMapping("/delete/{account}")
     public String delete(Long postNo, RedirectAttributes ra) {
         log.info("PostController /post/delete  POST 요청!! - {}", postNo);
         boolean flag = postService.removeService(postNo);
@@ -111,8 +111,9 @@ public class PostController {
 
     //    포스트 상세 조회 요청  get   /post/detail
 
-    @GetMapping("/detail/{postNo}")
-    public String postDetail(@PathVariable Long postNo, Model model) {
+    @GetMapping("/detail/{postNo}/{account}")
+    public String postDetail(@PathVariable String account,
+            @PathVariable Long postNo, Model model) {
         log.info("PostController /post/detail/{}  GET 요청!!", postNo);
 
         model.addAttribute("p", postService.fineOnePostWithName(postNo)); //  PostWithName

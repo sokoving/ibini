@@ -75,7 +75,7 @@
                             <!-- top : 별점, 장르, 카테고리 -->
                             <div id="post-top">
                                 <span class="top-span star-span"></span>
-                                <span class="top-span">${p.genreId}</span>
+                                <span class="top-span">${p.genreName}</span>
                                 <span class="top-span">${p.caName}</span>
                             </div> <!-- // end post-top -->
 
@@ -98,7 +98,7 @@
 
                                         <!-- 연재 상태 -->
                                         <tr>
-                                            <td class="first-td">${p.platformId}</td>
+                                            <td class="first-td">${p.platformName}</td>
                                             <c:choose>
 
                                                 <c:when test="${empty p.publishCycle}">
