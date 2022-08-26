@@ -2,10 +2,7 @@ package com.ibini.my_books.member.service;
 
 import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
-import com.ibini.my_books.member.dto.AnswerDTO;
-import com.ibini.my_books.member.dto.AutoLoginDTO;
-import com.ibini.my_books.member.dto.LoginDTO;
-import com.ibini.my_books.member.dto.InquiryDTO;
+import com.ibini.my_books.member.dto.*;
 import com.ibini.my_books.member.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -190,6 +187,10 @@ public class MemberService {
         log.info("자동 로그인 - 로그아웃처리 쿠키 삭제후 쿠기 정보 {}:", dto);
     }
 
+
+    //    ========== 회원관리 =============== //
+
+
     //문의글 등록하기
     public boolean inquiryRegister(InquiryDTO dto){
         return memberMapper.inquiryRegister(dto);
@@ -214,6 +215,18 @@ public class MemberService {
     public List<InquiryTable> findAllInquiry(){
         return memberMapper.findAllInquiry();
     }
+
+    // 문의글 수정
+    public boolean inquiryModify(InquiryModifyDTO dto){
+        return memberMapper.inquiryModify(dto);
+    }
+
+    // 문의글 삭제
+    public boolean inquiryDelete(String serialNumber){
+        return memberMapper.inquiryDelete(serialNumber);
+    }
+
+
 
 
 

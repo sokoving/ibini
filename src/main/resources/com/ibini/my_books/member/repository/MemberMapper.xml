@@ -114,6 +114,7 @@
     <resultMap id="manageInquiry" type="com.ibini.my_books.member.domain.InquiryTable">
         <result column="serial_number" property="serialNumber"/>
         <result column="user_id" property="userId"/>
+        <result column="inquiry_title" property="inquiryTitle"/>
         <result column="inquiry_date" property="inquiryDate"/>
         <result column="answer_date" property="answerDate"/>
     </resultMap>
@@ -134,11 +135,11 @@
       <!-- 문의사항 등록하기  -->
     <insert id="inquiryRegister">
         INSERT INTO tbl_manage_inquiry
-        (serial_number, user_id, inquiry)
+        (serial_number, user_id, inquiry_title, inquiry)
         VALUES
         (
         TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0'),
-        #{userId}, #{inquiry}
+        #{inquiryTitle},#{userId}, #{inquiry}
         )
     </insert>
 
@@ -172,6 +173,19 @@
         SELECT * FROM tbl_manage_inquiry
 
     </select>
+
+    <!-- 문의글 수정 -->
+    <update id="inquiryModify">
+        UPDATE tbl_manage_inquiry
+        SET inquiry_title = #{inquiryTitle}, inquiry = #{inquiry}
+        WHERE serial_number = #{serialNumber}
+    </update>
+
+    <!-- 문의글 삭제 -->
+    <delete id="inquiryDelete">
+        DELETE FROM tbl_manage_inquiry
+        WHERE serial_number = #{serialNumber}
+    </delete>
 
 
 

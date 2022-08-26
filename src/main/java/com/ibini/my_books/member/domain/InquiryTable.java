@@ -13,6 +13,7 @@ import java.util.Date;
 public class InquiryTable {
     private String serialNumber;
     private String userId;
+    private String inquiryTitle;
     private String inquiry;
     private Date inquiryDate;
     private String answer;

@@ -7,10 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class InquiryDTO {
-
-    private String userId;
+public class InquiryModifyDTO {
+    private String serialNumber;
     private String inquiryTitle;
     private String inquiry;
-
 }

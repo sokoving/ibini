@@ -5,6 +5,7 @@ import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.AnswerDTO;
 import com.ibini.my_books.member.dto.AutoLoginDTO;
 import com.ibini.my_books.member.dto.InquiryDTO;
+import com.ibini.my_books.member.dto.InquiryModifyDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -63,6 +64,13 @@ public interface MemberMapper {
 
     //관리자 페이지에서 문의내역 전체 조회하기
      List<InquiryTable> findAllInquiry();
+
+     //문의글 수정
+    boolean inquiryModify(InquiryModifyDTO dto);
+
+    // 문의글 삭제
+    boolean inquiryDelete(String serialNumber);
+
 
 
 }

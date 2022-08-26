@@ -4,6 +4,7 @@ import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.AnswerDTO;
 import com.ibini.my_books.member.dto.InquiryDTO;
+import com.ibini.my_books.member.dto.InquiryModifyDTO;
 import com.ibini.my_books.member.dto.LoginDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,7 @@ class MemberServiceTest {
         Member m = service.getMember("vacation");
         InquiryDTO dto = new InquiryDTO();
         dto.setUserId(m.getUserId());
+        dto.setInquiryTitle("3번째 문의글 제목");
         dto.setInquiry("3번째 문의 글입니다.");
 
         service.inquiryRegister(dto);
@@ -99,6 +101,30 @@ class MemberServiceTest {
         for (InquiryTable i : allInquiry) {
             System.out.println(i);
         }
+    }
+
+    @Test
+    @DisplayName("시리얼넘버와 일치하는 문의글이 수정 되어야 한다.")
+    void inquiryModifyTest(){
+        String serialNumber = "2208260009";
+
+        InquiryModifyDTO i = new InquiryModifyDTO();
+        i.setSerialNumber(serialNumber);
+        i.setInquiryTitle("수정된 문의글 제목");
+        i.setInquiry("수정된 문의 내용");
+
+        boolean flag = service.inquiryModify(i);
+
+        assertTrue(flag);
+
+    }
+
+    @Test
+    @DisplayName("시리얼 번호의 게시글이 삭제 되어야 한다.")
+    void inquiryDeleteTest(){
+        String serialNumber = "2208260009";
+        boolean flag = service.inquiryDelete(serialNumber);
+        assertTrue(flag);
     }
 
 
