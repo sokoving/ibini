@@ -170,7 +170,7 @@ CREATE TABLE prj_link_post(
 	 PRIMARY KEY (serial_number)
 	);
 	DROP SEQUENCE seq_tbl_manage_inquiry;
-    CREATE SEQUENCE seq_tbl_manage_inquiryr;
+    CREATE SEQUENCE seq_tbl_manage_inquiry;
 
 
 	CREATE TABLE tbl_reason_break_away

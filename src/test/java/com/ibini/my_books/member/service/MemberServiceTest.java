@@ -56,8 +56,8 @@ class MemberServiceTest {
         Member m = service.getMember("vacation");
         InquiryDTO dto = new InquiryDTO();
         dto.setUserId(m.getUserId());
-        dto.setInquiryTitle("4번째 문의글 제목");
-        dto.setInquiry("4번째 문의 글입니다.");
+        dto.setInquiryTitle("5번째 문의글 제목");
+        dto.setInquiry("5번째 문의 글입니다.");
 
         service.inquiryRegister(dto);
     }
@@ -66,7 +66,7 @@ class MemberServiceTest {
     @DisplayName("해당 문의글에 답글이 등록 되어야 한다.")
     void answerRegisterTest(){
         String answer = "회원님의 성원에 감사드립니다.";
-        String serialNumber = "2208260024";
+        String serialNumber = "2208260001";
         AnswerDTO dto = new AnswerDTO();
         dto.setAnswer(answer);
         dto.setSerialNumber(serialNumber);

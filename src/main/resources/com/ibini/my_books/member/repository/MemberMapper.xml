@@ -141,13 +141,9 @@
             )
         VALUES
             (
-                TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0'),
+                TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_manage_inquiry.nextval, 4, '0'),
                 #{userId}, #{inquiryTitle}, #{inquiry}
             )
-        (
-        TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_manage_inquiry.nextval, 4, '0'),
-        #{inquiryTitle},#{userId}, #{inquiry}
-        )
     </insert>
 
         <!--    답변 등록하기 -->
