@@ -1,14 +1,14 @@
 package com.ibini.my_books.member.service;
 
+import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
-import com.ibini.my_books.member.dto.AutoLoginDTO;
-import com.ibini.my_books.member.dto.LoginDTO;
+import com.ibini.my_books.member.dto.*;
 import com.ibini.my_books.member.repository.MemberMapper;
-import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.ibini.my_books.member.service.LoginFlag.*;
 import static com.ibini.my_books.util.LoginUtil.*;
@@ -30,11 +31,15 @@ public class MemberService {
     private final BCryptPasswordEncoder encoder;
 
     //회원 가입 중간처리
+    @Transactional
     public boolean signUp(Member member) {
         //비밀번호 인코딩
         member.setPassword(encoder.encode(member.getPassword()));
-
-        return memberMapper.register(member);
+        boolean flag = memberMapper.register(member);
+        if (flag) {
+            return memberMapper.registerManageMember(member);
+        }
+        return false;
     }
 
 
@@ -59,7 +64,7 @@ public class MemberService {
 
     //로그인 처리
     public LoginFlag login(LoginDTO inputData, HttpSession session
-    ,HttpServletResponse response) {
+            , HttpServletResponse response) {
         //0.회원가입 여부 확인
         Member foundMember = memberMapper.findUser(inputData.getUserId());
 
@@ -81,9 +86,9 @@ public class MemberService {
                 session.setMaxInactiveInterval(60 * 60); // 1시간 설정
 
                 //자동 로그인 처리
-                if(inputData.isAutoLogin()){
+                if (inputData.isAutoLogin()) {
                     log.info("checked auto login user!!");
-                    keepLogin(foundMember.getUserId(),session,response);
+                    keepLogin(foundMember.getUserId(), session, response);
                 }
 
                 return SUCCESS;
@@ -103,7 +108,7 @@ public class MemberService {
         Cookie c = new Cookie(LOGIN_COOKIE, sessionId);
 
         //2. 쿠키 설정(수명,사용 경로)
-        int limitTime = 60*60*24*90;
+        int limitTime = 60 * 60 * 24 * 90;
         c.setMaxAge(limitTime);
         c.setPath("/");
 
@@ -116,7 +121,7 @@ public class MemberService {
 
         //자동로그인 유지시간(초)를 날짜로 변환 (db에는 날짜형식으로 들어가야함.)
         long nowTime = System.currentTimeMillis();
-        Date limitDate = new Date(nowTime +((long)limitTime*1000));
+        Date limitDate = new Date(nowTime + ((long) limitTime * 1000));
         // 밀리초에 1000을 곱해서 초로 바꾸고
         // 오늘로부터 90일 후의 시간을 구해서 limitTime에 초기화
         dto.setLimitTime(limitDate);
@@ -165,7 +170,7 @@ public class MemberService {
         return memberMapper.memberDelete(userId, password);
     }
 
-    public void autoLogout(String userId, HttpServletRequest request,HttpServletResponse response) {
+    public void autoLogout(String userId, HttpServletRequest request, HttpServletResponse response) {
         //1. 자동로그인 쿠키를 불러온 뒤 수명을 0초로 세팅해서 클라이언트에게 돌려보낸다.
         Cookie c = getAutoLoginCookie(request);
         if (c != null) {
@@ -179,11 +184,55 @@ public class MemberService {
         dto.setUserId(userId);
         memberMapper.saveAutoLoginValue(dto);
 
-        log.info("자동 로그인 - 로그아웃처리 쿠키 삭제후 쿠기 정보 {}:",dto);
+        log.info("자동 로그인 - 로그아웃처리 쿠키 삭제후 쿠기 정보 {}:", dto);
     }
 
 
+    //    ========== 회원관리 =============== //
+
+
+    //문의글 등록하기
+    public boolean inquiryRegister(InquiryDTO dto){
+        return memberMapper.inquiryRegister(dto);
     }
+
+    //답변 등록하기
+    public boolean answerRegister(AnswerDTO dto){
+        return memberMapper.answerRegister(dto);
+    }
+
+    // 문의내역 상세보기
+    public InquiryTable findOneInquiry(String serialNumber){
+        return memberMapper.findOneInquiry(serialNumber);
+    }
+
+    //회원 마이페이지에서 회원의 문의내역 전체 조회하기
+    public List<InquiryTable> findMemberInquiry(String account){
+        return memberMapper.findMemberInquiry(account);
+    };
+
+    //관리자 페이지에서 문의내역 전체 조회하기
+    public List<InquiryTable> findAllInquiry(){
+        return memberMapper.findAllInquiry();
+    }
+
+    // 문의글 수정
+    public boolean inquiryModify(InquiryModifyDTO dto){
+        return memberMapper.inquiryModify(dto);
+    }
+
+    // 문의글 삭제
+    public boolean inquiryDelete(String serialNumber){
+        return memberMapper.inquiryDelete(serialNumber);
+    }
+
+
+
+
+
+
+
+}//end class
 
 
 //

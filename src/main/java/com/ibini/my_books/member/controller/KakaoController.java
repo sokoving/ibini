@@ -1,6 +1,6 @@
 package com.ibini.my_books.member.controller;
 
-import com.ibini.my_books.member.domain.KakaoUserInfoDTO;
+import com.ibini.my_books.member.dto.KakaoUserInfoDTO;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.service.KakaoService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,10 @@
 package com.ibini.my_books.member.service;
 
+import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
+import com.ibini.my_books.member.dto.AnswerDTO;
+import com.ibini.my_books.member.dto.InquiryDTO;
+import com.ibini.my_books.member.dto.InquiryModifyDTO;
 import com.ibini.my_books.member.dto.LoginDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,8 +36,98 @@ class MemberServiceTest {
         m.setEmail("yanbamb@naver.com");
 
         service.signUp(m);
+    }
+
+    @Test
+    @DisplayName("회원가입이 처리되면 회원관리테이블에 회원아이디가 등록 되어야 한다.")
+    void insertMember1Test(){
+        Member m = new Member();
+        m.setUserId("vacation");
+        m.setPassword("woduddlek!");
+        m.setUserName("회원관리자");
+        m.setEmail("yanbam@naver.com");
+
+        service.signUp(m);
+    }
+
+    @Test
+    @DisplayName("문의글이 등록 되어야 한다.")
+    void inquiryRegisterTest(){
+        Member m = service.getMember("vacation");
+        InquiryDTO dto = new InquiryDTO();
+        dto.setUserId(m.getUserId());
+        dto.setInquiryTitle("3번째 문의글 제목");
+        dto.setInquiry("3번째 문의 글입니다.");
+
+        service.inquiryRegister(dto);
+    }
+
+    @Test
+    @DisplayName("해당 문의글에 답글이 등록 되어야 한다.")
+    void answerRegisterTest(){
+        String answer = "회원님의 성원에 감사드립니다.";
+        String serialNumber = "2208250003";
+        AnswerDTO dto = new AnswerDTO();
+        dto.setAnswer(answer);
+        dto.setSerialNumber(serialNumber);
+        System.out.println("dto.getAnswer() = " + dto.getAnswer());
+        System.out.println("dto.getSerialNumber() = " + dto.getSerialNumber());
+        service.answerRegister(dto);
+    }
+
+    @Test
+    @DisplayName("시리얼넘버에 맞는 문의 내역이 조회 되어야 한다.")
+    void findOneInquiryTest(){
+        String serialNumber = "2208260004";
+        InquiryTable i = service.findOneInquiry(serialNumber);
+        System.out.println(i);
+    }
+
+    @Test
+    @DisplayName("userId의 모든 문의글이 조회 되어야 한다.")
+    void findMemeberInquiryTest(){
+        String userId = "vacation";
+        List<InquiryTable> i = service.findMemberInquiry(userId);
+        for (InquiryTable y : i) {
+            System.out.println(y);
+        }
+    }
+
+
+    @Test
+    @DisplayName("모든 문의글을 조회 되어야 한다.")
+    void findAllInquiryTest(){
+        List<InquiryTable> allInquiry = service.findAllInquiry();
+        for (InquiryTable i : allInquiry) {
+            System.out.println(i);
+        }
+    }
+
+    @Test
+    @DisplayName("시리얼넘버와 일치하는 문의글이 수정 되어야 한다.")
+    void inquiryModifyTest(){
+        String serialNumber = "2208260009";
+
+        InquiryModifyDTO i = new InquiryModifyDTO();
+        i.setSerialNumber(serialNumber);
+        i.setInquiryTitle("수정된 문의글 제목");
+        i.setInquiry("수정된 문의 내용");
+
+        boolean flag = service.inquiryModify(i);
+
+        assertTrue(flag);
 
     }
+
+    @Test
+    @DisplayName("시리얼 번호의 게시글이 삭제 되어야 한다.")
+    void inquiryDeleteTest(){
+        String serialNumber = "2208260009";
+        boolean flag = service.inquiryDelete(serialNumber);
+        assertTrue(flag);
+    }
+
+
     @Test
     @DisplayName("평문 비밀번호로 회원가입하면 암호화되어 저장된다.")
     void signUpTest(){
