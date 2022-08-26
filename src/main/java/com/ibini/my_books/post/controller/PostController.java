@@ -4,7 +4,9 @@ package com.ibini.my_books.post.controller;
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
+import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
+import com.ibini.my_books.postImg.domain.PostImg;
 import com.ibini.my_books.postImg.service.PostImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -109,9 +113,17 @@ public class PostController {
     public String postDetail(@PathVariable Long postNo, Model model) {
         log.info("PostController /post/detail/{}  GET 요청!!", postNo);
 
-        model.addAttribute("p", postService.fineOnePostWithName(postNo)); //  PostWithName
-        model.addAttribute("tagList", hashTagService.findAllByPostNo(postNo)); // List<HashtagDomain>
-        model.addAttribute("imgList", imgService.getPostImgList(postNo));  // List<PostImg>
+        PostWithName postWithName = postService.fineOnePostWithName(postNo);
+        model.addAttribute("p", postWithName);
+
+        List<HashtagDomain> tagList = hashTagService.findAllByPostNo(postNo);
+        model.addAttribute("tagList", tagList);
+
+        List<PostImg> imgList = imgService.getPostImgList(postNo);
+        model.addAttribute("imgList", imgList);
+
+
+        System.out.println("postNo = " + postNo);
 
         return "post/post-detail";
     }
