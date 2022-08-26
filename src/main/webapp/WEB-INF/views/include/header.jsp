@@ -23,9 +23,8 @@
                 <li><a href="#">메뉴1</a></li>
                 <li><a href="/myPage/ibini">마이페이지(현정)</a></li>
 
-<<<<<<<<< Temporary merge branch 1
                 <li><a href="/list">포스트 전체 목록</a></li>
-                <li><a href="/post/write/ibini">새 포스트 쓰기</a></li>
+                <li><a href="/post/write">새 포스트 쓰기</a></li>
 
             <c:if test="${loginUser == null}">
             <li><a href="/member/sign-in">로그인</a></li>

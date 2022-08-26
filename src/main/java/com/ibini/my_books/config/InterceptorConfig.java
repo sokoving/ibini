@@ -22,7 +22,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //member 인터셉터 설정
         registry.addInterceptor(memberInterceptor)
-                .addPathPatterns("/member/*")
+                .addPathPatterns("/member/*","/list/**", "/post/**")
                 .excludePathPatterns("/member/sign-up","/member/sign-in","/member/check",
                         "/member/findpw","/member/checkcode","/member/change-password");
 

@@ -8,6 +8,7 @@ import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.postImg.domain.PostImg;
 import com.ibini.my_books.postImg.service.PostImgService;
+import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -42,9 +44,13 @@ public class PostController {
 
 
     //    포스트 등록 폼 요청   get    /post/write
-    @GetMapping("/write/{account}")
-    public String postWriteForm(@PathVariable String account, Model model) {
+    @GetMapping("/write")
+    public String postWriteForm(Model model, HttpSession session) {
         log.info("PostController /post/write  GET 요청!!");
+
+        // 현재 로그인한 유저의 account 가져오기
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
+
         model.addAttribute("account", account);
         return "post/post-reg";
     }

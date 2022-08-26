@@ -20,7 +20,7 @@ VALUES
 commit;
 
 
-insert into prj_genre VALUES (0, 'ibini', '미분류');
+insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '미분류');
 insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '판타지');
 insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '로맨스');
 insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '무협');
