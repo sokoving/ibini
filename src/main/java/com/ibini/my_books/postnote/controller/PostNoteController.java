@@ -69,7 +69,6 @@ public class PostNoteController {
 
 
 
-
     // 메모 등록
     @PostMapping("/memo")
     public ResponseEntity<String> createMemo(@RequestBody PostMemo postMemo) {
