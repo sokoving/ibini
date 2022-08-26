@@ -142,3 +142,4 @@ CREATE TABLE prj_link_post(
    link_post    NUMBER(10)     NOT NULL,      --post_no와 연결할 포스트 번호
      PRIMARY KEY (link_no)
 );
+

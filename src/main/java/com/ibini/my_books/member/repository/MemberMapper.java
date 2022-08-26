@@ -1,9 +1,13 @@
 package com.ibini.my_books.member.repository;
 
+import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
+import com.ibini.my_books.member.dto.AnswerDTO;
 import com.ibini.my_books.member.dto.AutoLoginDTO;
+import com.ibini.my_books.member.dto.InquiryDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -39,5 +43,26 @@ public interface MemberMapper {
 
     //쿠키값(세션아이디)을 가지고 있는 회원정보 조회
     Member findMemberBysessionId(String sessionId);
+
+//    ========== 회원관리 =============== //
+
+    //회원관리 테이블에 회원 등록
+    boolean registerManageMember(Member member);
+
+   //문의사항 등록하기
+    boolean inquiryRegister(InquiryDTO dto);
+
+    //답변 등록하기
+    boolean answerRegister(AnswerDTO dto);
+
+    //문의내역 상세보기 (시리얼 넘버로 찾는다.)
+    InquiryTable findOneInquiry(String serialNumber);
+
+    //회원 마이페이지에서 회원의 문의내역 전체 조회하기
+    List<InquiryTable> findMemberInquiry(String account);
+
+    //관리자 페이지에서 문의내역 전체 조회하기
+     List<InquiryTable> findAllInquiry();
+
 
 }

@@ -1,4 +1,4 @@
-package com.ibini.my_books.member.domain;
+package com.ibini.my_books.member.dto;
 
 import lombok.*;
 

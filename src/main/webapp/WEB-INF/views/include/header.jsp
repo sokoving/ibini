@@ -30,8 +30,9 @@
             </c:if>
         
             <c:if test="${loginUser != null}">
-            <li> <a href="/member/my-page">My Page</a>   </li>
-            <li><a href="/member/sign-out">sign-out</a></li>
+                <li> <a href="/member/my-info">내 정보</a></li>
+                <li><a href="/member/inquiry">문의하기</a></li>
+                <li><a href="/member/sign-out">로그아웃</a></li>
             </c:if>
         </ul>
     </nav> <!-- // end nav -->

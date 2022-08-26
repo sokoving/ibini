@@ -30,6 +30,19 @@ class MemberMapperTest {
     }
 
     @Test
+    @DisplayName("회원관리 테이블에 회원아이디가 등록 되어야 한다.")
+    void registerManageMemberTest(){
+        Member m = new Member();
+        m.setUserId("vacation");
+        m.setPassword("vacation!");
+        m.setEmail("yanbam@naver.com");
+        m.setUserName("메룽메룽");
+
+        mapper.registerManageMember(m);
+
+    }
+
+    @Test
     @DisplayName("비밀번호가 암호화 인코딩 되어야 한다.")
     void encodePasswordTest(){
 
