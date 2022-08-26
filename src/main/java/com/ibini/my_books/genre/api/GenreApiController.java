@@ -4,6 +4,7 @@ import com.ibini.my_books.genre.domain.Genre;
 import com.ibini.my_books.genre.service.GenreService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,17 +19,20 @@ import java.util.List;
 public class GenreApiController {
     private final GenreService genreService;
 
-    @GetMapping("")
-    public List<Genre> showGenre(@RequestParam String account){
+    @GetMapping("/{account}")
+    public List<Genre> showGenre(@PathVariable String account, Model model){
         log.info("GenreApiController genre account - {}", account);
         List<Genre> genreList = genreService.findAllService(account);
         log.info("GenreApiController genreList - {}", genreList);
 
+        model.addAttribute("account", account);
+
         return genreList;
     }
 
-    @PostMapping("")
-    public String saveGenre(@RequestBody Genre genre){
+    @PostMapping("/{account}")
+    public String saveGenre(@PathVariable String account,
+            @RequestBody Genre genre){
         log.info("GenreApiController genre POST! - {}", genre);
         boolean b = genreService.saveService(genre);
         log.info("GenreApiController genre POST! boolean - {}", b);

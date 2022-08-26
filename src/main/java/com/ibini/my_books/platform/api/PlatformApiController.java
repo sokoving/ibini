@@ -4,6 +4,7 @@ import com.ibini.my_books.platform.domain.PlatformDomain;
 import com.ibini.my_books.platform.service.PlatformService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,14 +17,44 @@ public class PlatformApiController {
 
     private final PlatformService platformService;
 
-    // 플랫폼 목록 요청
-    @GetMapping("")
-    public List<PlatformDomain> list(@RequestParam String account){
+    /*
+                POST write url
+                http://localhost:8383/post/write/ibini
+                GET POST URL
+                const account = '${account}';
+                // 나중에 꼭 수정해주기
+                const url = "http://localhost:8383/platform/c1?account=" + account;
+
+                const genreURL = "http://localhost:8383/genre/c1?account=" + account;
+     */
+
+    @GetMapping("/{account}")
+    public List<PlatformDomain> list(@PathVariable String account, Model model){
         log.info("PlatformController - GET! account -{}", account);
         List<PlatformDomain> domainList = platformService.findAllPlatform(account);
         log.info("domainList - {}", domainList);
 
+        model.addAttribute("account", account);
         return domainList;
+    }
+
+    // 등록 - 비동기?
+    /*
+        등록시 사용한 페이로드
+        {
+            "account" : "ibini",
+            "platformName" : "alradin",
+            "platformBgColor" : "#6c757d",
+            "platformFontColor" : "#fff"
+        }
+     */
+    @PostMapping("/{account}")
+    public String savaPlatform(@PathVariable String account,
+                               @RequestBody PlatformDomain platformDomain){
+        log.info("PlatformController : POST - {}", platformDomain);
+        boolean flag = platformService.savePlatform(platformDomain);
+
+        return flag ? "insert-success" : "insert-fail";
     }
 
     
@@ -65,23 +96,7 @@ public class PlatformApiController {
         return deletePlatform ? "del-success" : "del-fail";
     }
     
-    // 등록 - 비동기?
-    /*
-        등록시 사용한 페이로드
-        {
-            "account" : "ibini",
-            "platformName" : "alradin",
-            "platformBgColor" : "#6c757d",
-            "platformFontColor" : "#fff"
-        }
-     */
-    @PostMapping("")
-    public String savaPlatform(@RequestBody PlatformDomain platformDomain){
-        log.info("PlatformController : POST - {}", platformDomain);
-        boolean flag = platformService.savePlatform(platformDomain);
 
-        return flag ? "insert-success" : "insert-fail";
-    }
 
 
 }

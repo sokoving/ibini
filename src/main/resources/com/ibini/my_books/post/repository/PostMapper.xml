@@ -72,6 +72,7 @@
             post_title,    post_writer,    publish_status,    publish_cycle,
             ep_id,    cur_ep,    total_ep,    reg_date,    update_date,    star_rate
         FROM tbl_post
+        ORDER BY post_no desc
     </select>
 
     <select id="findAllPostWithName" resultMap="postWithNameMap">
@@ -93,6 +94,7 @@
             ON p.post_no= pi.post_no
             where pi.thumbnail = 'true'
                 or pi.thumbnail is null
+        ORDER BY p.post_no desc
     </select>
 
 
