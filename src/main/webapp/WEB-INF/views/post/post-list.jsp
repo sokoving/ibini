@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -56,21 +58,23 @@
         <%@ include file="../include/header.jsp" %>
 
         <!-- 새 포스트 등록 섹션 -->
-        <section>
-            <div class="inner-section reg-sec">
+        <section id="reg-sec">
+            <div class="inner-section">
 
                 <!-- 새 글 등록 버튼 -->
-                <div class="new-post">
-                    <div class="reg-btn">
-                        <span class="fas fa-plus"></span>
-                        <span>새 포스트를 등록해 보세요!</span>
+                <a href="/post/write">
+                    <div class="new-post">
+                        <div class="reg-btn">
+                            <span class="fas fa-plus"></span>
+                            <h2>새 포스트를 등록해 보세요</h2>
+                        </div>
                     </div>
-                </div>
+                </a>
                 <!-- 새 글 등록 메뉴 -->
                 <div class="reg-menu on">
                     <ul>
-                        <li>직접 입력해 등록하기</li>
-                        <li>검색해 등록하기</li>
+                        <li>직접 입력해서 등록하기</li>
+                        <li>검색해서 등록하기</li>
                     </ul>
                 </div>
             </div> <!-- // end reg-sec -->
@@ -78,27 +82,97 @@
 
 
         <!-- 포스트 리스트 섹션 -->
-        <section>
-            <div class="inner-section list-sec">
-
+        <section id="list-sec">
+            <div class="inner-section">
+                <!-- 포스트 목록 필터링 제목 -->
+                <div class="section-h2">
+                    <h2>전체 포스트</h2>
+                </div>
 
                 <c:forEach var="p" items="${pl}">
-                    <a href="/post/detail/${p.postNo}">제목 : ${p.postTitle} </a>
-                    <br>
-                    작가 : ${p.postWriter} <br>
-                    카테고리 이름 : ${p.caName} <br>
-                    현재 ${p.epName} : ${p.curEp}${p.epName2} <br>
-                    총 ${p.epName} : ${p.totalEp}${p.epName2} <br>
-                    장르 : ${p.genreName} <br>
-                    플랫폼 : ${p.platformName} <br>
-                    등록일 : ${p.shortDate.postRegDate} <br>
-                    수정일 : ${p.shortDate.postUpdateDate} <br>
-                    해시태그 : ${p.oneLineTag} <br>
-                    <img src="${p.thumbImg}" alt="">
+                    <%-- 포스트 개별 영역 --%>
+                    <div class="item-wrap hover">
+                        <%-- left : 표지, 즐겨찾기 --%>
+                        <div class="item-left">
+                            <div class="thumb-box">
+                                <img class="hover"
+                                    src="https://pbs.twimg.com/media/D1TH4BrU0AE4IAP?format=jpg&name=4096x4096"
+                                    alt="포스트 썸네일">
+                            </div>
+                            <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
+                        </div> <%-- // end item-left --%>
 
+                        <%-- center : 상세정보 --%>
+                        <div class="item-center">
+                            <div class="center-top">
+                                <%-- 별점 --%>
+                                <div class="star-rate" data-star-rate="3"></div>
+                                <%-- 제목 --%>
+                                <div class="post-title">
+                                    <a href="/post/detail/${p.postNo}">
+                                        <h3>${p.postTitle}</h3>
+                                    </a>
+                                </div>
+                                <%-- 작가 --%>
+                                <div class="post-writer">${p.postWriter}</div>
+                            </div>
+
+                            <div class="pl-pu-warp">
+                                <%-- 플랫폼 --%>
+                                <span class="plat-name hover">${p.platformName}</span>
+
+                                <%-- 연재주기 or 연재상태 --%>
+                                <c:choose>
+                                    <%-- 연재주기값 없음 : - --%>
+                                    <c:when test="${empty p.publishCycle}">
+                                        <span class="pu-cycle">-</span>
+                                    </c:when>
+                                    <%-- 연재주기값 있음 : - --%>
+                                    <c:otherwise>
+                                        <c:choose>
+                                            <%-- 연재상태가 미분류, 연재 : 연재주기 --%>
+                                            <c:when test="${p.publishStatus <= 1}">
+                                                <span class="pu-cycle">${p.publishCycle}</span>
+                                            </c:when>
+                                            <%-- 연재상태가 휴재, 완결 : 연재상태 --%>
+                                            <c:otherwise>
+                                                <span class="pu-cycle">${p.publishStatusName}</span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div> <%-- // end pl-pu-wrap --%>
+
+                            <%-- 해시태그 --%>
+                            <div class="tag-one-line">${p.oneLineTag}</div>
+                        </div> <%-- // end item-center --%>
+
+                        <%-- right : 분류, 진행도, 날짜 --%>
+                        <div class="item-right">
+                            <div class="ca-ge-wrap">
+                                <%-- 카테고리 --%>
+                                <div class="ca-name">${p.caName}</div>
+                                <%-- 장르 --%>
+                                <div class="genre-name">${p.genreName}</div>
+                            </div>
+                            <%-- 진행도 --%>
+                            <div class="read-percent">
+                                <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}" integerOnly="true" />
+                                ${percent}%
+                            </div>
+                            <div class="date-wrap">
+                                <%-- 포스트 수정일 --%>
+                                <div class="post-reg-date">갱신 ${p.shortDate.postUpdateDate}</div>
+                                <%-- 포스트 등록일 --%>
+                                <div class="post-reg-date">작성 ${p.shortDate.postRegDate}</div>
+                            </div>
+                        </div> <%-- // end item-right --%>
+                    </div> <%-- // end item-wrap --%>
                 </c:forEach>
 
-            </div> <!-- // end list-sec -->
+
+
+            </div> <!-- // end  inner-section-->
         </section> <!-- // end section -->
 
     </div> <!-- end wrap -->

@@ -28,6 +28,8 @@ ul{
 
 #wrap {
     font-size: 18px;
+    width: 1000px;
+    margin: 0 auto;
     color: inherit;
     font-family: 'NanumSquareRound', sans-serif;
 }
@@ -47,11 +49,14 @@ ul{
 
 /* 헤더 */
 header{
+    position: absolute;
+    width: inherit;
+    top: 0;
     z-index: 1000;
 }
 
 header #header-container{
-    
+
     display: flex;
     flex-wrap: wrap;
 }
@@ -63,6 +68,7 @@ header #inner-header {
     height: 80px;
     padding-left: 30px;
     border-bottom: 5px double #ffca3d;
+
     display: flex;
     justify-content: space-between;
     /* align-items: end; */
