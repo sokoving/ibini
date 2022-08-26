@@ -119,7 +119,7 @@
 
                                 <div class="pl-pu-warp">
                                     <%-- 플랫폼 --%>
-                                    <span class="plat-name hover">${p.platformName}</span>
+                                    <span class="plat-name hover" style="background: ${p.platformBgColor}; color: ${p.platformFontColor};">${p.platformName}</span>
 
                                     <%-- 연재주기 or 연재상태 --%>
                                     <c:choose>
