@@ -178,6 +178,8 @@ public class MemberService {
         dto.setLimitTime(new Date());
         dto.setUserId(userId);
         memberMapper.saveAutoLoginValue(dto);
+
+        log.info("자동 로그인 - 로그아웃처리 쿠키 삭제후 쿠기 정보 {}:",dto);
     }
 
 
