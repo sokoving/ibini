@@ -99,7 +99,7 @@ header #header-container #inner-header .menuBtn {
 
 header #inner-header .menu-open{
     font-size: 1.3em;
-    margin-right: 10px;
+    margin: auto 10px;
 }
 
 
@@ -149,4 +149,8 @@ section {
     margin: 10px auto 0;
     padding: 30px;
     box-sizing: border-box;
+}
+
+#content-wrap {
+    margin-top: 100px;
 }

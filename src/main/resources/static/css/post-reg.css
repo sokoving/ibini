@@ -6,7 +6,7 @@ section.post-reg-section{
 }
 
 section .inner-section{
-    width: 70%;
+    /*width: 70%;*/
     margin: 0 auto;
     background-color: #eeedeb;
     border-radius: 1em;
