@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -116,20 +118,33 @@
                                             </c:otherwise>
 
                                         </c:choose>
-                                        
+
                                     </tr>
                                     <tr class="empty-tr">
                                         <td colspan="2">-</td>
                                     </tr>
                                     <!-- 현재, 전체 페이지 -->
-                                    <tr>
-                                        <td class="first-td cur-ep">현재 ${p.epName}</td>
-                                        <td class="last-td tot-ep">전체 ${p.epName}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="first-td cur-ep">${p.curEp}${p.epName2}</td>
-                                        <td class="last-td tot-ep">${p.totalEp}${p.epName2}</td>
-                                    </tr>
+                                    <c:choose>
+                                        <c:when test="${p.epId == 3}">
+                                            <tr>
+                                                <td class="first-td cur-ep">진행도</td>
+                                                <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}" integerOnly="true" />
+                                                <td class="last-td tot-ep">${percent}%</td>
+                                            </tr>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr>
+                                                <td class="first-td cur-ep">현재 ${p.epName}</td>
+                                                <td class="last-td tot-ep">전체 ${p.epName}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="first-td cur-ep">${p.curEp}${p.epName2}</td>
+                                                <td class="last-td tot-ep">${p.totalEp}${p.epName2}</td>
+                                            </tr>
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                    <!-- 수정 버튼 -->
                                     <tr>
                                         <td colspan="2"><i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
                                         </td>
@@ -195,18 +210,11 @@
                             </div>
 
                             <div id="tag-container">
-                                <span class="hash-span">태그1</span>
-                                <span class="hash-span">태그태그태그</span>
-                                <span class="hash-span">태그_테스트</span>
-                                <span class="hash-span">태그2</span>
-                                <span class="hash-span">태그_3</span>
-                                <span class="hash-span">태그태그</span>
-                                <span class="hash-span">태그_중</span>
-                                <span class="hash-span">태그</span>
-                                <span class="hash-span">태그_태그_태그</span>
-                                <span class="hash-span">태그_뾰잉뾰이이이잉</span>
-                                <span class="hash-span tag-plus" style="display: none;"><i
-                                        class="far fa-plus-square"></i></span>
+                                <c:forEach var="t" items="${tagList}">
+                                    <span class="hash-span" data-tag-no="${t.tagNo}">${t.tagName}</span>
+                                </c:forEach>
+
+                                <span class="hash-span tag-plus hide"><i class="far fa-plus-square"></i></span>
                             </div>
                         </div> <!-- // end hash-wrap -->
 
@@ -270,12 +278,15 @@
 
     </div> <!-- end wrap -->
 
-
-
+    <script src="/js/post-detail.js"></script>
     <script>
         // start jQuery
         $(document).ready(function () {
-            jQueryTagTest("태그 잡기 테스트", $('h1'));
+            // jQueryTagTest("태그 잡기 테스트", $('h1'));
+
+            const star = '${p.starRate}'
+            console.log(star);
+            starRate(star);
 
 
 
