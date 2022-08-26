@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -38,7 +37,7 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/post-reg.css">
     <!-- css -->
-    <link rel="stylesheet" href="/css/platform.css"/>
+    <link rel="stylesheet" href="/css/platform.css" />
 
 
     <!-- jquery -->
@@ -58,14 +57,14 @@
 <body>
 
     <div id="wrap">
-        
+
         <%@ include file="../include/header.jsp" %>
 
 
         <!-- 새 포스트 등록 섹션 -->
         <section class="post-reg-section">
             <div class="inner-section">
-                <form id="write-form" action="/post/write/${account}" method="post" autocomplete="off" >
+                <form id="write-form" action="/post/write/${account}" method="post" autocomplete="off">
 
                     <!-- 임시 : 계정명(나중에 로그인 적용되면 빼기) -->
                     <input type="hidden" name="account" id="" value="${account}">
@@ -115,23 +114,23 @@
                         <div class="plge-wrap">
                             <div class="select-container">
 
-                                    <div class="platformSelText">
-                                        <span class="reg-span">플랫폼</span>
-                                        <span class="platformInputShowEvent">플랫폼 추가를 원하시면 여기를 클릭해주세요</span>
+                                <div class="platformSelText">
+                                    <span class="reg-span">플랫폼</span>
+                                    <span class="platformInputShowEvent">플랫폼 추가를 원하시면 여기를 클릭해주세요</span>
+                                </div>
+
+                                <div class="select">
+                                    <div class="platformSelBox">
+                                        <select name="platformId" id="platformselect">
+                                            <option value="#">플랫폼을 선택하세요</option>
+                                        </select>
                                     </div>
 
-                                    <div class="select">
-                                        <div class="platformSelBox">
-                                            <select name="platformId" id="platformselect" >
-                                                <option value="#">플랫폼을 선택하세요</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="platformClick" name="platformAdd">
-                                            <input type="text" id="platformInput">
-                                            <button id="platformBtn">저장</button>
-                                        </div>
+                                    <div class="platformClick" name="platformAdd">
+                                        <input type="text" id="platformInput">
+                                        <button id="platformBtn">저장</button>
                                     </div>
+                                </div>
                             </div>
 
 
@@ -157,7 +156,7 @@
                                 </div>
 
                             </div>
-                                
+
 
 
                         </div> <!-- // end plge-wrap -->
@@ -230,10 +229,10 @@
                         <span class="reg-span">이미지 첨부하기</span>
                         <label>
                             <div class="white-box upload-input">
-                                    <span class="upload-right">파일 선택</span>
-                                    <!-- <span class="upload-left">클릭으로 이미지를 등록해 보세요</span> -->
+                                <span class="upload-right">파일 선택</span>
+                                <!-- <span class="upload-left">클릭으로 이미지를 등록해 보세요</span> -->
                             </div>
-                                <!-- <input class="file-input" type="file"> -->
+                            <!-- <input class="file-input" type="file"> -->
                         </label>
                     </div>
 
@@ -272,45 +271,45 @@
 
             // 플랫폼 클릭이벤트
             $('.platformClick').hide();
-            $('.platformInputShowEvent').click(function(){
-                    // alert("platform");
+            $('.platformInputShowEvent').click(function () {
+                // alert("platform");
 
-                    $('.platformClick').show();
+                $('.platformClick').show();
             });
 
 
-            
+
 
             // 장르 클릭이벤트
             $('.textClick').hide();
-            $('.GenreInputShowEvent').click(function(){
-                    // alert("hihihi");
+            $('.GenreInputShowEvent').click(function () {
+                // alert("hihihi");
 
-                    $('.textClick').show();
-            });         
-            
+                $('.textClick').show();
+            });
+
             // 1. 플랫폼 value값 가져오기 
-            $('#platformselect').change(function(){
-                
+            $('#platformselect').change(function () {
+
                 // alert($(this).val());
-                console.log("선택한 플랫폼id : "+ $(this).val());
+                console.log("선택한 플랫폼id : " + $(this).val());
                 $("#platformselect").val($(this).val()).prop("selected", true);
                 // $('#platformselect option:eq($(this).val())').prop('selected', true);
                 // $('#platformselect').val($(this).val()).prop("selected", true);
                 console.log("selected : " + $("#platformselect option:selected").val());
                 // alert($("#platformselect option:selected").val());
-                
+
             });
 
-            $('#genreSelect').change(function(){
-                
+            $('#genreSelect').change(function () {
+
                 // alert($(this).val());
-                console.log("genreSelect: "+$(this).val());
+                console.log("genreSelect: " + $(this).val());
                 // $('#genreSelect').val($(this).val()).attr("selected", "selected");
                 $('#genreSelect').val($(this).val()).prop("selected", true);
-                console.log("genreSelect selecded : "+$( "#genreSelect option:selected" ).val());
+                console.log("genreSelect selecded : " + $("#genreSelect option:selected").val());
                 // alert($( "#genreSelect option:selected" ).val());
-                
+
             });
 
 
@@ -333,8 +332,6 @@
         // const genreURL = "http://localhost:8383/genre/c1?account=" + account;
 
         const genreURL = "http://localhost:8383/genre/c1/" + gAccount;
-
-
     </script>
 
 </body>

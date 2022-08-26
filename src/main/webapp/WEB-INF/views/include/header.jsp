@@ -9,8 +9,8 @@
             <h1><img src="/img/ibini_logo_4.png" alt=""></h1>
 
             <a href="#" class="menu-open">
-            <c:if test="${loginUser != null}">
-                <span class="user-name">${loginUser.userName} 님</span>
+                <c:if test="${loginUser != null}">
+                    <span class="user-name">${loginUser.userName} 님</span>
                 </c:if>
                 <span class="fas fa-bars"></span>
             </a>
@@ -32,7 +32,7 @@
                 </c:if>
 
                 <c:if test="${loginUser != null}">
-                    <li> <a href="/member/my-page">마이페이지(재영)</a>   </li>
+                    <li> <a href="/member/my-page">마이페이지(재영)</a> </li>
                     <li><a href="/member/sign-out">로그아웃</a></li>
                 </c:if>
             </ul>
