@@ -6,10 +6,6 @@
 <html lang="ko">
 
 <head>
-
-    <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,56 +53,57 @@
 
         <%@ include file="../include/header.jsp" %>
 
-        <!-- 새 포스트 등록 섹션 -->
-        <section id="reg-sec">
-            <div class="inner-section">
+        <div id="content-wrap">
+            <!-- 새 포스트 등록 섹션 -->
+            <section id="reg-sec">
+                <div class="inner-section">
 
-                <!-- 새 글 등록 버튼 -->
-                <a href="/post/write">
-                    <div class="new-post">
-                        <div class="reg-btn">
-                            <span class="fas fa-plus"></span>
-                            <h2>새 포스트를 등록해 보세요</h2>
+                    <!-- 새 글 등록 버튼 -->
+                    <a href="/post/write">
+                        <div class="new-post">
+                            <div class="reg-btn">
+                                <span class="fas fa-plus"></span>
+                                <h2>새 포스트를 등록해 보세요</h2>
+                            </div>
                         </div>
+                    </a>
+                    <!-- 새 글 등록 메뉴 -->
+                    <div class="reg-menu on">
+                        <ul>
+                            <li>직접 입력해서 등록하기</li>
+                            <li>검색해서 등록하기</li>
+                        </ul>
                     </div>
-                </a>
-                <!-- 새 글 등록 메뉴 -->
-                <div class="reg-menu on">
-                    <ul>
-                        <li>직접 입력해서 등록하기</li>
-                        <li>검색해서 등록하기</li>
-                    </ul>
-                </div>
-            </div> <!-- // end reg-sec -->
-        </section> <!-- // end section -->
+                </div> <!-- // end reg-sec -->
+            </section> <!-- // end section -->
 
 
-        <!-- 포스트 리스트 섹션 -->
-        <section id="list-sec">
-            <div class="inner-section">
-                <!-- 포스트 목록 필터링 제목 -->
-                <div class="section-h2">
-                    <h2>전체 포스트</h2>
-                </div>
+            <!-- 포스트 리스트 섹션 -->
+            <section id="list-sec">
+                <div class="inner-section">
+                    <!-- 포스트 목록 필터링 제목 -->
+                    <div class="section-h2">
+                        <h2>전체 포스트</h2>
+                    </div>
 
-                <c:forEach var="p" items="${pl}">
-                    <%-- 포스트 개별 영역 --%>
-                    <div class="item-wrap hover">
-                        <%-- left : 표지, 즐겨찾기 --%>
-                        <div class="item-left">
-                            <c:choose>
-                                <c:when test="${p.thumbImg != null}">
-                                    <div class="thumb-box">
-                                        <img class="thumb-img hover" src="${p.thumbImg}" alt="포스트 썸네일">
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="thumb-box"></div>
-                                </c:otherwise>
-                            </c:choose>
+                    <c:forEach var="p" items="${pl}">
+                        <%-- 포스트 개별 영역 --%>
+                        <div class="item-wrap hover">
+                            <%-- left : 표지, 즐겨찾기 --%>
+                            <div class="item-left">
+                                <c:choose>
+                                    <c:when test="${p.thumbImg != null}">
+                                        <div class="thumb-box">
+                                            <img class="thumb-img hover" src="${p.thumbImg}" alt="포스트 썸네일">
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="thumb-box"></div>
+                                    </c:otherwise>
+                                </c:choose>
 
-                            <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
-                        </div> <%-- // end item-left --%>
+                                <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
+                            </div> <%-- // end item-left --%>
 
                             <%-- center : 상세정보 --%>
                             <div class="item-center">
@@ -149,37 +146,39 @@
                                     </c:choose>
                                 </div> <%-- // end pl-pu-wrap --%>
 
-                            <%-- 해시태그 --%>
-                            <div class="tag-one-line">${p.oneLineTag}</div>
-                        </div> <%-- // end item-center --%>
+                                <%-- 해시태그 --%>
+                                <div class="tag-one-line">${p.oneLineTag}</div>
+                            </div> <%-- // end item-center --%>
 
-                        <%-- right : 분류, 진행도, 날짜 --%>
-                        <div class="item-right">
-                            <div class="ca-ge-wrap">
-                                <%-- 카테고리 --%>
-                                <div class="ca-name">${p.caName}</div>
-                                <%-- 장르 --%>
-                                <div class="genre-name">${p.genreName}</div>
-                            </div>
-                            <%-- 진행도 --%>
-                            <div class="read-percent">
-                                <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}" integerOnly="true" />
-                                ${percent}%
-                            </div>
-                            <div class="date-wrap">
-                                <%-- 포스트 수정일 --%>
-                                <div class="post-reg-date">갱신 ${p.shortDate.postUpdateDate}</div>
-                                <%-- 포스트 등록일 --%>
-                                <div class="post-reg-date">작성 ${p.shortDate.postRegDate}</div>
-                            </div>
-                        </div> <%-- // end item-right --%>
-                    </div> <%-- // end item-wrap --%>
-                </c:forEach>
+                            <%-- right : 분류, 진행도, 날짜 --%>
+                            <div class="item-right">
+                                <div class="ca-ge-wrap">
+                                    <%-- 카테고리 --%>
+                                    <div class="ca-name">${p.caName}</div>
+                                    <%-- 장르 --%>
+                                    <div class="genre-name">${p.genreName}</div>
+                                </div>
+                                <%-- 진행도 --%>
+                                <div class="read-percent">
+                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
+                                        integerOnly="true" />
+                                    ${percent}%
+                                </div>
+                                <div class="date-wrap">
+                                    <%-- 포스트 수정일 --%>
+                                    <div class="post-reg-date">갱신 ${p.shortDate.postUpdateDate}</div>
+                                    <%-- 포스트 등록일 --%>
+                                    <div class="post-reg-date">작성 ${p.shortDate.postRegDate}</div>
+                                </div>
+                            </div> <%-- // end item-right --%>
+                        </div> <%-- // end item-wrap --%>
+                    </c:forEach>
 
 
 
-            </div> <!-- // end  inner-section-->
-        </section> <!-- // end section -->
+                </div> <!-- // end  inner-section-->
+            </section> <!-- // end section -->
+        </div>
 
     </div> <!-- end wrap -->
 
