@@ -146,3 +146,37 @@ CREATE TABLE prj_link_post(
      PRIMARY KEY (link_no)
 );
 
+	CREATE TABLE tbl_manage_member
+	(
+	    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   --회원 아이디
+	    user_condition       VARCHAR2(150)    DEFAULT 'true',    --회원의 가입 상태
+	     PRIMARY KEY (user_id)
+	);
+
+	CREATE TABLE tbl_manage_break_away
+	(
+	    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   --회원 아이디
+	    reason_num       NUMBER(9)    NOT NULL,          --탈퇴사유 번호
+	     PRIMARY KEY (user_id)
+	);
+
+	CREATE TABLE tbl_manage_inquiry
+	(
+	serial_number       VARCHAR2(50)     NOT NULL,          --회원 관리 번호(수정X, 시스템 입력)
+	user_id             VARCHAR2(50)     NOT NULL ,   --회원 아이디(수정X)
+	inquiry_title         VARCHAR2(70)    NOT NULL,          --문의사항 제목
+	inquiry            VARCHAR2(2000)    NOT NULL,          --문의사항
+	inquiry_date           DATE             DEFAULT SYSDATE,   --문의사항(등록일자)
+	answer            VARCHAR2(2000)     NULL,          --답변
+	answer_date           DATE              NULL,   --답변 등록일자
+	 PRIMARY KEY (serial_number)
+	);
+
+	CREATE TABLE tbl_reason_break_away
+	(
+	    reason_num       NUMBER(9)    NOT NULL,          --탈퇴사유 번호
+	    out_reason      VARCHAR2(1000)     NOT NULL UNIQUE,   -- 탈퇴 이유
+	     PRIMARY KEY (reason_num)
+	);
+
+
