@@ -9,6 +9,7 @@
 
     <%@ include file="../include/static-head.jsp" %>
 
+
 </head>
 
 <body>
@@ -30,35 +31,40 @@
 
                             <!-- 썸네일 이미지 -->
                             <div id="thumb-img">
-                                <img class="post-img"
-                                    src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="썸네일 이미지">
+                                <c:if test="${p.thumbImg != null}">
+                                    <img class="post-img" src="${p.thumbImg}" alt="포스트 썸네일 이미지">
+                                </c:if>
                             </div>
 
                             <!-- 첨부 이미지 목록 -->
                             <div id="img-arr-wrap">
-                                <button type="button" data-role="none" class="slick-prev slick-arrow" aria-label="Previous"
-                                    role="button">
+                                <button type="button" data-role="none" class="slick-prev slick-arrow"
+                                    aria-label="Previous" role="button">
                                     <i class="fas fa-angle-up"></i>
                                 </button>
 
                                 <!-- 슬릭 이미지 목록 -->
                                 <div class="img-box-wrap">
-                                    <div class="img-box">
-                                        <img class="post-img"
-                                            src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
-                                    </div>
-                                    <div class="img-box">
-                                        <img class="post-img"
-                                            src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
-                                    </div>
-                                    <div class="img-box">
-                                        <img class="post-img"
-                                            src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
-                                    </div>
-                                    <div class="img-box img-half-down">
-                                        <img class="post-img"
-                                            src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
-                                    </div>
+
+                                    <c:if test="${imgList != null}">
+                                        <c:forEach var="img" items="${imgList}">
+                                            <c:choose>
+                                                <c:when test="${img.thumbnail}">
+                                                    <div class="img-box post-thumb">
+                                                        <img class="post-img" src="${img.fileName}" alt="포스트 표지"
+                                                            title="${img.originalFileName}">
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="img-box">
+                                                        <img class="post-img" src="${img.fileName}" alt="포스트 첨부 이미지"
+                                                            title="${img.originalFileName}">
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </c:if>
+
                                 </div>
 
                                 <button type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next"
@@ -127,7 +133,8 @@
                                             <c:when test="${p.epId == 3}">
                                                 <tr>
                                                     <td class="first-td cur-ep">진행도</td>
-                                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}" integerOnly="true" />
+                                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
+                                                        integerOnly="true" />
                                                     <td class="last-td tot-ep">${percent}%</td>
                                                 </tr>
                                             </c:when>
@@ -145,7 +152,8 @@
 
                                         <!-- 수정 버튼 -->
                                         <tr>
-                                            <td colspan="2"><i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
+                                            <td colspan="2"><i class="modi-hotkey fas fa-toggle-off"
+                                                    title="바로 수정하기"></i>
                                             </td>
                                             <!-- <i class="fas fa-toggle-on"></i> -->
                                         </tr>
@@ -233,7 +241,8 @@
 
                                                 <div class="link-post-info">
                                                     <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
-                                                    <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금 10시</span>
+                                                    <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금
+                                                            10시</span>
                                                     </div>
                                                 </div>
 
@@ -249,7 +258,8 @@
 
                                                 <div class="link-post-info">
                                                     <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
-                                                    <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금 10시</span>
+                                                    <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금
+                                                            10시</span>
                                                     </div>
                                                 </div>
 
@@ -284,9 +294,14 @@
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
+            // 별 찍기
             const star = '${p.starRate}'
-            console.log(star);
             starRate(star);
+
+            const imgList = '${imgList}';
+            console.log(imgList);
+
+
 
 
 

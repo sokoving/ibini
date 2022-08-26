@@ -37,4 +37,3 @@
 
 <!-- custom js -->
 <script src="/js/common.js" defer></script>
-

@@ -6,7 +6,6 @@
 <html lang="ko">
 
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,10 +53,8 @@
 
         <%@ include file="../include/header.jsp" %>
 
-        <!-- 새 포스트 등록 섹션 -->
         <div id="content-wrap">
-
-
+            <!-- 새 포스트 등록 섹션 -->
             <section id="reg-sec">
                 <div class="inner-section">
 
@@ -94,11 +91,17 @@
                         <div class="item-wrap hover">
                             <%-- left : 표지, 즐겨찾기 --%>
                             <div class="item-left">
-                                <div class="thumb-box">
-                                    <img class="hover"
-                                        src="https://pbs.twimg.com/media/D1TH4BrU0AE4IAP?format=jpg&name=4096x4096"
-                                        alt="포스트 썸네일">
-                                </div>
+                                <c:choose>
+                                    <c:when test="${p.thumbImg != null}">
+                                        <div class="thumb-box">
+                                            <img class="thumb-img hover" src="${p.thumbImg}" alt="포스트 썸네일">
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="thumb-box"></div>
+                                    </c:otherwise>
+                                </c:choose>
+
                                 <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
                             </div> <%-- // end item-left --%>
 
@@ -157,7 +160,8 @@
                                 </div>
                                 <%-- 진행도 --%>
                                 <div class="read-percent">
-                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}" integerOnly="true" />
+                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
+                                        integerOnly="true" />
                                     ${percent}%
                                 </div>
                                 <div class="date-wrap">

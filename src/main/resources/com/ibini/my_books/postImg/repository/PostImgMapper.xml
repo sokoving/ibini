@@ -25,6 +25,7 @@
         SELECT file_name
         FROM prj_post_img
         WHERE post_no = #{postNo}
+        ORDER BY thumbnail desc
     </select>
 
     <select id="findFiles" resultMap="postImgMap">
@@ -32,6 +33,7 @@
             file_name, post_no, original_file_name, thumbnail
         FROM prj_post_img
         WHERE post_no = #{postNo}
+        ORDER BY thumbnail desc
     </select>
 
     <select id="findThumbs" resultMap="postImgMap">
