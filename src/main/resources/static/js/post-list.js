@@ -1,6 +1,6 @@
 // -------------- 전역변수, 함수 선언부 ----------- //
 // 별 특수문자 채우는 함수
-function drawStars(node){
+function drawStars(){
     const $stars = document.querySelectorAll('.star-rate');
 
     for (let i= 0; i < $stars.length; i++ ){

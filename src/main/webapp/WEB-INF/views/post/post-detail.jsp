@@ -9,6 +9,7 @@
 
     <%@ include file="../include/static-head.jsp" %>
 
+
 </head>
 
 <body>
@@ -28,11 +29,12 @@
                         <!-- 이미지 영역 -->
                         <div id="img-wrap">
 
-                            <!-- 썸네일 이미지 -->
-                            <div id="thumb-img">
-                                <img class="post-img"
-                                    src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="썸네일 이미지">
-                            </div>
+                        <!-- 썸네일 이미지 -->
+                        <div id="thumb-img">
+                            <c:if test="${p.thumbImg != null}">
+                                <img class="post-img" src="${p.thumbImg}" alt="포스트 썸네일 이미지">
+                            </c:if>
+                        </div>
 
                             <!-- 첨부 이미지 목록 -->
                             <div id="img-arr-wrap">
@@ -41,25 +43,29 @@
                                     <i class="fas fa-angle-up"></i>
                                 </button>
 
-                                <!-- 슬릭 이미지 목록 -->
-                                <div class="img-box-wrap">
-                                    <div class="img-box">
-                                        <img class="post-img"
-                                            src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
-                                    </div>
-                                    <div class="img-box">
-                                        <img class="post-img"
-                                            src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
-                                    </div>
-                                    <div class="img-box">
-                                        <img class="post-img"
-                                            src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
-                                    </div>
-                                    <div class="img-box img-half-down">
-                                        <img class="post-img"
-                                            src="https://pbs.twimg.com/media/FaVPI-LVEAAoybZ?format=jpg&name=large" alt="">
-                                    </div>
-                                </div>
+                            <!-- 슬릭 이미지 목록 -->
+                            <div class="img-box-wrap">
+
+                                <c:if test="${imgList != null}">
+                                    <c:forEach var="img" items="${imgList}">
+                                        <c:choose>
+                                            <c:when test="${img.thumbnail}">
+                                                <div class="img-box post-thumb">
+                                                    <img class="post-img"
+                                                        src="${img.fileName}" alt="포스트 표지" title="${img.originalFileName}">
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="img-box">
+                                                    <img class="post-img"
+                                                        src="${img.fileName}" alt="포스트 첨부 이미지" title="${img.originalFileName}">
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </c:if>
+
+                            </div>
 
                                 <button type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next"
                                     role="button" style="display: block;">
@@ -118,30 +124,31 @@
 
                                             </c:choose>
 
-                                        </tr>
-                                        <tr class="empty-tr">
-                                            <td colspan="2">-</td>
-                                        </tr>
-                                        <!-- 현재, 전체 페이지 -->
-                                        <c:choose>
-                                            <c:when test="${p.epId == 3}">
-                                                <tr>
-                                                    <td class="first-td cur-ep">진행도</td>
-                                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}" integerOnly="true" />
-                                                    <td class="last-td tot-ep">${percent}%</td>
-                                                </tr>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <tr>
-                                                    <td class="first-td cur-ep">현재 ${p.epName}</td>
-                                                    <td class="last-td tot-ep">전체 ${p.epName}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first-td cur-ep">${p.curEp}${p.epName2}</td>
-                                                    <td class="last-td tot-ep">${p.totalEp}${p.epName2}</td>
-                                                </tr>
-                                            </c:otherwise>
-                                        </c:choose>
+                                    </tr>
+                                    <tr class="empty-tr">
+                                        <td colspan="2">-</td>
+                                    </tr>
+                                    <!-- 현재, 전체 페이지 -->
+                                    <c:choose>
+                                        <c:when test="${p.epId == 3}">
+                                            <tr>
+                                                <td class="first-td cur-ep">진행도</td>
+                                                <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
+                                                    integerOnly="true" />
+                                                <td class="last-td tot-ep">${percent}%</td>
+                                            </tr>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr>
+                                                <td class="first-td cur-ep">현재 ${p.epName}</td>
+                                                <td class="last-td tot-ep">전체 ${p.epName}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="first-td cur-ep">${p.curEp}${p.epName2}</td>
+                                                <td class="last-td tot-ep">${p.totalEp}${p.epName2}</td>
+                                            </tr>
+                                        </c:otherwise>
+                                    </c:choose>
 
                                         <!-- 수정 버튼 -->
                                         <tr>
@@ -284,9 +291,14 @@
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
+            // 별 찍기
             const star = '${p.starRate}'
-            console.log(star);
             starRate(star);
+
+            const imgList = '${imgList}';
+            console.log(imgList);
+
+
 
 
 
