@@ -56,8 +56,8 @@ class MemberServiceTest {
         Member m = service.getMember("vacation");
         InquiryDTO dto = new InquiryDTO();
         dto.setUserId(m.getUserId());
-        dto.setInquiryTitle("3번째 문의글 제목");
-        dto.setInquiry("3번째 문의 글입니다.");
+        dto.setInquiryTitle("4번째 문의글 제목");
+        dto.setInquiry("4번째 문의 글입니다.");
 
         service.inquiryRegister(dto);
     }

@@ -138,7 +138,7 @@
         (serial_number, user_id, inquiry_title, inquiry)
         VALUES
         (
-        TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0'),
+        TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_manage_inquiry.nextval, 4, '0'),
         #{inquiryTitle},#{userId}, #{inquiry}
         )
     </insert>
