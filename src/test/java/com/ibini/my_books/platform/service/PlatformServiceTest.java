@@ -14,6 +14,8 @@ class PlatformServiceTest {
 
     @Autowired
     PlatformMapper platformMapper;
+    @Autowired
+    PlatformService platformService;
     
     @Test
     @DisplayName("수정이 성공해야 한다")
@@ -33,5 +35,21 @@ class PlatformServiceTest {
 
         assertTrue(b);
 
+    }
+
+    @Test
+    @DisplayName("기본 플랫폼이 세팅돼야 한다")
+    void setPlatformForNewMemberTest(){
+        String account = "2208260002";
+        boolean flag = platformService.setPlatformForNewMember(account);
+        assertTrue(flag);
+    }
+
+    @Test
+    @DisplayName("탈퇴할 회원의 모든 플랫폼 데이터가 삭제돼야 한다")
+    void removePlatformForOutMemberTest(){
+        String account = "2208260002";
+        boolean flag = platformService.removePlatformForOutMember(account);
+        assertTrue(flag);
     }
 }

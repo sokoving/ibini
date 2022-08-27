@@ -15,7 +15,7 @@
 <!--    저장 -->
     <insert id="savePlatform">
         INSERT INTO prj_platform
-        (platform_id, account, platform_name )
+        (platform_id, account, platform_name)
         VALUES
         (seq_prj_platform.nextval, #{account}, #{platformName})
     </insert>
@@ -47,6 +47,13 @@
         SELECT * FROM prj_platform
         WHERE account = #{account}
         ORDER BY platform_id
+    </select>
+
+<!--  계정에 있는 플랫폼 수 조회  -->
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM prj_platform
+        WHERE account = #{account}
     </select>
 
 
