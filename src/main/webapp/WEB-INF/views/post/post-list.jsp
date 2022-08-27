@@ -122,7 +122,10 @@
 
                                 <div class="pl-pu-warp">
                                     <%-- 플랫폼 --%>
-                                    <span class="plat-name hover">${p.platformName}</span>
+                                    <c:set var="bg" value="${p.platformBgColor}" />
+                                    <c:set var="color" value="${p.platformFontColor}" />
+                                    <span class="plat-name hover"
+                                        style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">${p.platformName}</span>
 
                                     <%-- 연재주기 or 연재상태 --%>
                                     <c:choose>
@@ -189,6 +192,8 @@
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
+            // 별점에 따른 별 찍기
+            drawStars();
 
 
 

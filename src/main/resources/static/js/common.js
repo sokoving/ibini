@@ -4,11 +4,6 @@ function jQueryTagTest(msg, node) {
   console.log(node);
 }
 
-// 플랫폼 배지에 색 칠하는 함수
-function paintPlatformBadge(){
-  console.log("paintPlatformBadge 호출");
-}
-
 
 
 

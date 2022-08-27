@@ -26,15 +26,15 @@ public class PostService {
         return postMapper.save(post);
     }
 
-    public List<Post> findAllPostService(){
+    public List<Post> findAllPostService(String account){
         log.info("Post Service : findAllService call");
-        return postMapper.findAllPost();
+        return postMapper.findAllPost(account);
     }
 
-    public List<PostWithName> finaAllPostWithNameService(){
+    public List<PostWithName> finaAllPostWithNameService(String account){
         log.info("Post Service : finaAllPostWithNameService call");
 
-        List<PostWithName> postWithNameList = postMapper.findAllPostWithName();
+        List<PostWithName> postWithNameList = postMapper.findAllPostWithName(account);
         int size = postWithNameList.size();
         for (PostWithName postWithName : postWithNameList) {
             postWithName.setting();
@@ -67,9 +67,9 @@ public class PostService {
         return postMapper.modify(post);
     }
 
-    public int getTotalCount(){
+    public int getTotalCount(String account){
         log.info("Post Service : getTotalCountService call");
-        return postMapper.getTotalCount();
+        return postMapper.getTotalCount(account);
     }
 
 
