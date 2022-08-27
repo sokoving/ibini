@@ -146,7 +146,7 @@ CREATE TABLE prj_link_post(
 
 	CREATE TABLE tbl_manage_member
 	(
-	    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   --회원 아이디
+	    user_id             VARCHAR2(50)     NOT NULL,   --회원 아이디
 	    user_condition       VARCHAR2(150)    DEFAULT 'true',    --회원의 가입 상태
 	     PRIMARY KEY (user_id)
 	);

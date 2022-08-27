@@ -5,11 +5,12 @@ UPDATE "IBINI"."PRJ_PLATFORM" SET PLATFORM_BG_COLOR = '#03c75a', PLATFORM_FONT_C
 UPDATE "IBINI"."PRJ_PLATFORM" SET PLATFORM_BG_COLOR = '#1E9EFF' WHERE ROWID = 'AAAFKgAABAAALSRAAD' AND ORA_ROWSCN = '1083260'
 UPDATE "IBINI"."PRJ_PLATFORM" SET PLATFORM_NAME = '카카오웹툰', PLATFORM_BG_COLOR = '#000' WHERE ROWID = 'AAAFKgAABAAALSRAAE' AND ORA_ROWSCN = '1083260'
 UPDATE "IBINI"."PRJ_PLATFORM" SET PLATFORM_BG_COLOR = '#03c75a', PLATFORM_FONT_COLOR = '#fff' WHERE ROWID = 'AAAFKgAABAAALSRAAF' AND ORA_ROWSCN = '1083260'
---0 미분류          배경: #088F8F 글자색: #fff
---1 카카오 페이지   배경: #f9e000	글자색: #333
---2 네이버 시리즈   배경: #03c75a	글자색: #000
---3 리디북스        배경: #1E9EFF	글자색: #fff
---4 카카오 웹툰     배경: #000	    글자색: #fff
---5 네이버 퉵툰   배경: #03c75a	글자색: #fff
---문피아          배경: #5aa2dd/ #5f9bd1 글자색: #333
+--0 미분류          배경: #088F8F rgb(108,117,125)     글자색: #fff rgb(255, 255, 255)
+--1 카카오 페이지    배경: #f9e000 rgb(249, 224, 0) 	 글자색: #333 rgb(51, 51, 51)
+--2 네이버 시리즈    배경: #03c75a rgb(3, 199, 90)	     글자색: #000 rgb(0, 0, 0)
+--3 리디북스        배경: #1E9EFF rgb(30, 158, 255) 	 글자색: #fff rgb(255, 255, 255)
+--4 카카오 웹툰     배경: #000000 rgb(0, 0, 0)	         글자색: #fff rgb(255, 255, 255)
+--5 네이버 퉵툰     배경: #03c75a rgb(3, 199, 90)	     글자색: #fff rgb(255, 255, 255)
+
+--문피아          배경: #5aa2dd/ #5f9bd1 글자색: #333 rgb(51, 51, 51)
 --조아라          배경: #004c99 글자색: #a5f72c

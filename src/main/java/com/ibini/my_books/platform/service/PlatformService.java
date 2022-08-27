@@ -1,5 +1,6 @@
 package com.ibini.my_books.platform.service;
 
+import com.ibini.my_books.hashtag.repository.HashtagMapper;
 import com.ibini.my_books.platform.domain.PlatformDomain;
 import com.ibini.my_books.platform.repository.PlatformMapper;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -50,16 +52,26 @@ public class PlatformService {
     @Transactional
     public boolean setPlatformForNewMember(String account){
         log.info("Platform Service : setPlatformForNewMember call - {}", account);
-        String[] basic = {"미분류", "카카오페이지", "네이버시리즈", "리디북스", "카카오웹툰", "네이버웹툰"};
 
-        for (String b : basic) {
+        //      key : 플랫폼 이름,  value[0] : 배경색, value[1] : 글자색;
+        HashMap<String, String[]> bgMap = new HashMap<>();
+        bgMap.put("미분류", new String[] {"rgb(108,117,125)", "rgb(255, 255, 255)"});
+        bgMap.put("카카오페이지", new String[] {"rgb(249, 224, 0)", "rgb(51, 51, 51)"});
+        bgMap.put("네이버시리즈", new String[] {"rgb(3, 199, 90)", "rgb(0, 0, 0)"});
+        bgMap.put("리디북스", new String[] {"rgb(30, 158, 255)", "rgb(255, 255, 255)"});
+        bgMap.put("카카오웹툰", new String[] {"rgb(0, 0, 0)", "rgb(255, 255, 255)"});
+        bgMap.put("네이버웹툰", new String[] {"rgb(3, 199, 90)", "rgb(255, 255, 255)"});
+
+        for (String s : bgMap.keySet()) {
             PlatformDomain p = new PlatformDomain();
             p.setAccount(account);
-            p.setPlatformName(b);
+            p.setPlatformName(s);
+            p.setPlatformBgColor(bgMap.get(s)[0]);
+            p.setPlatformFontColor(bgMap.get(s)[1]);
             platformMapper.savePlatform(p);
         }
 
-        return platformMapper.getTotalCount(account) == basic.length;
+        return platformMapper.getTotalCount(account) == bgMap.size();
     }
 
     //    회원 탈퇴 시 계정 내 모든 장르 삭제
