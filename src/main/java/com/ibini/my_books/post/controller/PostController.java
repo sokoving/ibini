@@ -105,9 +105,11 @@ public class PostController {
     }
 
     //    포스트 삭제 요청  post    /post/delete
+    @Transactional
     @PostMapping("/delete")
     public String delete(Long postNo, RedirectAttributes ra) {
         log.info("PostController /post/delete  POST 요청!! - {}", postNo);
+
         boolean flag = postService.removeService(postNo);
 
         if (flag){

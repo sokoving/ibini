@@ -23,4 +23,11 @@ public interface PostImgMapper {
 //    썸네일 true 포스트이미지 리스트 조회
     List<PostImg> findThumbs();
 
+    // fileName 으로 postImg DB에서 삭제
+    boolean removeByName(String fileName);
+
+//    post_no으로 postImg DB에서 삭제
+    boolean removeByPostNo(Long postNo);
+
+
 }

@@ -30,4 +30,15 @@ public class PostImgService {
         return repository.findThumbs();
     }
 
+
+    // fileName 으로 postImg DB에서 삭제
+    public boolean removeByName(String fileName){
+        return repository.removeByName(fileName);
+    }
+
+    //    post_no으로 postImg DB에서 삭제
+    public boolean removeByPostNo(Long postNo){
+        return repository.removeByPostNo(postNo);
+    }
+
 }

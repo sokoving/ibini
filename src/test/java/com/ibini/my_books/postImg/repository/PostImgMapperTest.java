@@ -62,5 +62,22 @@ class PostImgMapperTest {
             System.out.println(thumb);
         }
     }
+    //
+//    boolean (String fileName);
+    @Test
+    @DisplayName("fileName 으로 postImg DB에서 삭제")
+    void removeByNameTest(){
+        String fileName = "https://pbs.twimg.com/media/FZ8Ufq4akAA2aOs?format=jpg&name=900x900";
+        boolean flag = mapper.removeByName(fileName);
+        assertTrue(flag);
+    }
 
+    @Test
+    @DisplayName("post_no으로 postImg DB에서 삭제")
+    void removeByPostNoTest(){
+        Long postNo = 1L;
+        boolean flag = mapper.removeByPostNo(postNo);
+        assertTrue(flag
+        );
+    }
 }

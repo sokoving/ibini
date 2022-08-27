@@ -5,6 +5,7 @@ import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.FormattingDateDTO;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.repository.PostMapper;
+import com.ibini.my_books.postImg.service.PostImgService;
 import com.ibini.my_books.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,6 +20,7 @@ public class PostService {
 
     private final PostMapper postMapper;
     private final HashTagService tagService;
+    private final PostImgService imgService;
 
 
     public boolean saveService(Post post){
@@ -59,6 +61,11 @@ public class PostService {
 
     public boolean removeService(Long postNo){
         log.info("Post Service : removeService call - {}", postNo);
+
+//        포스트 삭제 전 해시태그, 이미지 전부 지우기
+        tagService.removeTagOnPost(postNo);
+        imgService.removeByPostNo(postNo);
+
         return postMapper.remove(postNo);
     }
 

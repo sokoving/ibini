@@ -170,9 +170,9 @@
                                     <span>수정일 ${p.shortDate.postUpdateDate}</span>
                                 </div>
                                 <div class="post-btn-wrap">
-                                    <button class="post-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
-                                    <button class="post-btn" title="삭제하기"><i class="far fa-trash-alt"></i></button>
-                                    <button class="post-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
+                                    <button class="post-btn post-modi-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="post-btn post-del-btn" title="삭제하기"><i class="far fa-trash-alt"></i></button>
+                                    <button class="post-btn post-list-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
                                 </div>
                             </div> <!-- // end post-bottom -->
 
@@ -292,14 +292,20 @@
     <script>
         // start jQuery
         $(document).ready(function () {
+            // 포스트 번호
+            const postNo = '${p.postNo}';
+            console.log(postNo);
+            
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
             // 별 찍기
             const star = '${p.starRate}'
             starRate(star);
 
-            const imgList = '${imgList}';
-            console.log(imgList);
+            $('.post-btn-wrap').click(function(e) {
+                console.log(e.target);
+                clickPostBtn(e.target, postNo)
+        })
 
 
 

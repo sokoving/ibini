@@ -27,4 +27,7 @@ public interface HashtagMapper {
     // 한 포스트에 달린 해시태그 전체 조회
     List<HashtagDomain> findAllHashTagByPostNo(Long postNo);
 
+    // 한 포스트에 달린 해시태그 전부 삭제
+    boolean removeTagOnPost(Long postNo);
+
 }
