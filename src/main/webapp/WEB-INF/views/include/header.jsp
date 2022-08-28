@@ -15,7 +15,7 @@
                 <span class="fas fa-bars"></span>
             </a>
 
-    </div> <!-- // end inner-header -->
+        </div> <!-- // end inner-header -->
 
         <nav class="gnb">
             <a href="#" class="menu-close"><span class="far fa-window-close"></span></a>
@@ -26,17 +26,17 @@
                 <li><a href="/list">포스트 전체 목록</a></li>
                 <li><a href="/post/write">새 포스트 쓰기</a></li>
 
-            <c:if test="${loginUser == null}">
-            <li><a href="/member/sign-in">로그인</a></li>
-            <li> <a href="/member/sign-up">회원가입</a></li>
-            </c:if>
+                <c:if test="${loginUser == null}">
+                    <li><a href="/member/sign-in">로그인</a></li>
+                    <li> <a href="/member/sign-up">회원가입</a></li>
+                </c:if>
 
-            <c:if test="${loginUser != null}">
-                <li> <a href="/member/my-info">내 정보</a></li>
-                <li><a href="/member/inquiry">문의하기</a></li>
-                <li><a href="/member/sign-out">로그아웃</a></li>
-            </c:if>
-        </ul>
-    </nav> <!-- // end nav -->
-
+                <c:if test="${loginUser != null}">
+                    <li> <a href="/member/my-info">내 정보</a></li>
+                    <li><a href="/member/inquiry">문의하기</a></li>
+                    <li><a href="/member/sign-out">로그아웃</a></li>
+                </c:if>
+            </ul>
+        </nav> <!-- // end nav -->
+    </div> <!-- // end header-container -->
 </header> <!-- end header -->
