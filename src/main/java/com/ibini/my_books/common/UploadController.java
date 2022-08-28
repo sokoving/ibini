@@ -2,6 +2,7 @@ package com.ibini.my_books.common;
 
 import com.ibini.my_books.postImg.repository.PostImgMapper;
 import com.ibini.my_books.util.FileUtils;
+import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.IOUtils;
@@ -10,12 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -34,7 +37,11 @@ public class UploadController {
     // upload-form.jsp로 포워딩 요청
 
     @GetMapping("/upload-form")
-    public String uploadForm() {
+    public String uploadForm(HttpSession session, Model model) {
+
+        // 현재 로그인한 유저의 account 가져다가 넣기
+        model.addAttribute("account", LoginUtil.getCurrentMemberAccountForDB(session));
+
         return "upload/upload-form";
     }
 

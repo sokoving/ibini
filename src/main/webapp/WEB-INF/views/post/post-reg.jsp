@@ -66,9 +66,8 @@
             <div class="inner-section">
                 <form id="write-form" action="/post/write/${account}" method="post" autocomplete="off">
 
-                    <!-- 임시 : 계정명(나중에 로그인 적용되면 빼기) -->
+                    <!-- 히든 : 계정-->
                     <input type="hidden" name="account" id="" value="${account}">
-
                     <!-- 히든 : 카테고리 아이디(웹소설 일단 고정)-->
                     <input type="hidden" name="caId" value="1">
 
@@ -76,11 +75,17 @@
                     <div id="reg-1">
                         <!-- 이미지 -->
                         <div class="img-wrap">
-                            <label>
-                                <div class="img-box">
-                                    클릭으로 <br> 이미지 추가하기
-                                    <!-- <input class="file-input" type="file" name="#"> -->
+                            <div class="img-box">
+                                <span class="box-msg">썸네일을 등록해 보세요</span>
+                            </div>
+                            <label class="file-box">
+                                <div class="file-box-left">
+                                    파일 선택
                                 </div>
+                                <div class="file-box-right">
+                                    등록된 썸네일이 없습니다.
+                                </div>
+                                <input class="file-input" type="file" name="#">
                             </label>
                         </div>
 
@@ -227,12 +232,14 @@
 
                     <div id="reg-6">
                         <span class="reg-span">이미지 첨부하기</span>
-                        <label>
-                            <div class="white-box upload-input">
-                                <span class="upload-right">파일 선택</span>
-                                <!-- <span class="upload-left">클릭으로 이미지를 등록해 보세요</span> -->
+                        <label class="file-box">
+                            <div class="file-box-left">
+                                파일 선택
                             </div>
-                            <!-- <input class="file-input" type="file"> -->
+                            <div class="file-box-right">
+                                첨부된 이미지가 없습니다.
+                            </div>
+                            <input class="file-input" type="file" name="#">
                         </label>
                     </div>
 

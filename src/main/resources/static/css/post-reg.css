@@ -15,14 +15,45 @@ section .inner-section{
 }
 
 /* 공통 */
+/* 파일 인풋창 */
+.file-input{
+    display: none;
+}
+.file-box{
+    background: #fff;
+    border-radius: 0.35em;
+    width: 100%;
+    overflow: auto;
+    cursor: pointer;
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+
+    box-shadow: 1px 1px 1px #888;
+}
+.file-box:hover{
+    box-shadow: -1px -1px #888 ;
+}
+.file-box .file-box-left{
+    background-color: #ffca3d;
+    padding: 0.35em 0.5em;
+    flex: 1 1 90px;
+    text-align: center;
+}
+.file-box .file-box-right{
+    font-size: 0.8em;
+    margin-left: 0.5em;
+    padding: 0.2em;
+    word-break: keep-all;
+    flex: 100 1;
+    color: #777;
+}
+
 .reg-span{
     font-weight: 700;
     margin-bottom: 0.5em;
 }
-.file-input{
-    display: none;
-}
-
 .white-box{
     background: #fff;
     border-radius: 0.35em;
@@ -71,12 +102,17 @@ section .inner-section{
     flex-shrink: 0;
     
     position: relative;
+
+    /* background-color: pink; */
 }
 #reg-1 .img-box{
-    width: 200px;
-    height: 255px;
+    width: 210px;
+    height: 290px;
     background-color: #ffca3d;
+    border: 1px solid #787878 ;
     border-radius: 0.5em;
+    padding: 15px;
+    box-sizing: border-box;
     cursor: pointer;
 
     display: flex;
@@ -85,10 +121,30 @@ section .inner-section{
 
     font-size: 1.5em;
     text-align: center;
+    word-break: keep-all;
 
     position: absolute;
     top: -80px;
-    left: -10px;
+    left: -40px;
+}
+
+.img-box .box-msg{
+    border: 1px dashed #787878 ;
+    border-radius: 0.5em;
+    height: 265px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 파일 인풋창 */
+.img-wrap .file-box{
+    position: absolute;
+    top: 232px;
+    left: -80px;
+    width: 275px;
+    text-align: center;
 }
 
 /* 제목, 작가 */
@@ -183,15 +239,7 @@ section .inner-section{
     flex-flow: column;
     margin-top: 50px;
 }
-#reg-6 .upload-input{
-    padding: 0;
-    display: flex;
-    justify-content: stretch;
-    cursor: pointer;
-}
-#reg-6 .upload-right{
-    background-color: #ffca3d;
-}
+
 
 
 /* 등록 버튼 */
