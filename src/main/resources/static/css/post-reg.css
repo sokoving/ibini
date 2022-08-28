@@ -244,6 +244,20 @@ section .inner-section{
     flex-flow: column;
     margin-top: 50px;
 }
+.uploaded-list{
+    margin-top: 10px;
+
+    display: flex;
+    flex-flow: row wrap;
+}
+.upload-img-box{
+    height: 100px;
+    margin: 5px;
+    overflow: hidden;
+}
+.upload-img-box .upload-img{
+    height: 100%;
+}
 
 
 
