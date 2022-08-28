@@ -5,22 +5,22 @@
 /*================================================
     태그별 css 설정
 ==================================================*/
-* {
+/* * {
     box-sizing: border-box;
-}
+} */
 
-body {
+/* body {
     width: 100vw;
     height: 100vh;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
     font-family: 'Nanum Gothic', sans-serif;
-    /* font-family: 'Nanum Pen Script', cursive; */
-    /* letter-spacing: 0.3em; */
+    font-family: 'Nanum Pen Script', cursive;
+    letter-spacing: 0.3em;
     line-height: 1.5em;
 
     overflow-x: hidden;
-}
+} */
 
 textarea {
     resize: none;
@@ -94,11 +94,13 @@ textarea {
     postnote 공통 css 설정
 ==================================================*/
 #postnote {
-    width: 60%;
-    min-width: 500px;
+    box-sizing: border-box;
+    width: 90%;
+    /* min-width: 500px; */
     border: 1px solid;
     padding: 0.5em;
     border-radius: 5px;
+    margin: 0 auto;
 }
 #postnote div {
     width: 100%;

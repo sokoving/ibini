@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class Test {
 
-    @GetMapping("/post/detail/test")
+    @GetMapping("/post/detail/tesff")
     public String home() {
 
 
-        return "postnote/post-note";
+        return "postnoteggg/post-note";
     }
 
 }
