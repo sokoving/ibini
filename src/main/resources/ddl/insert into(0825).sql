@@ -1,3 +1,8 @@
+-- insert into 말고 사이트 내 기능으로 데이터 생성할 것
+-- 회원가입, 새 포스트 쓰기
+-- 플랫폼, 장르는 회원가입할 때 자동 생성되게 만들 건데 아직 구현 안 함(구현하면 알려드림)
+
+
 -- insert 후 커밋 필수!!!
 INSERT INTO tbl_member
     (account, user_id, password, user_name, email)
@@ -20,7 +25,7 @@ VALUES
 commit;
 
 
-insert into prj_genre VALUES (0, 'ibini', '미분류');
+insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '미분류');
 insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '판타지');
 insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '로맨스');
 insert into prj_genre VALUES (seq_prj_genre.nextval, 'ibini', '무협');

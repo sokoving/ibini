@@ -44,4 +44,10 @@ public class GenreService {
         return genreMapper.remove(genreId);
     }
 
+//    새 회원 가입할 때 기본 장르 세팅 작업할 것
+    public boolean setGenreForNewMember(String account){
+
+        return false;
+    }
+
 }

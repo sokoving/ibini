@@ -33,8 +33,6 @@
 
     </insert>
 
-
-
     <!--    중복 체크 기능(아이디와 이메일을 동시에 처리 = 동적 sql)   -->
     <select id="isDuplicate" resultType="int">
 
@@ -112,5 +110,86 @@
         WHERE session_id = #{sessionId}
 
     </select>
+
+    <resultMap id="manageInquiry" type="com.ibini.my_books.member.domain.InquiryTable">
+        <result column="serial_number" property="serialNumber"/>
+        <result column="user_id" property="userId"/>
+        <result column="inquiry_title" property="inquiryTitle"/>
+        <result column="inquiry_date" property="inquiryDate"/>
+        <result column="answer_date" property="answerDate"/>
+    </resultMap>
+
+<!--    회원관리       -->
+
+    <!--  신규회원 회원 관리 테이블에 등록하기  -->
+
+    <insert id="registerManageMember">
+
+        INSERT INTO tbl_manage_member
+        (user_id)
+        VALUES
+        ( #{userId} )
+
+    </insert>
+
+      <!-- 문의사항 등록하기  -->
+    <insert id="inquiryRegister">
+        INSERT INTO tbl_manage_inquiry
+            (
+                serial_number,
+                user_id, inquiry_title, inquiry
+            )
+        VALUES
+            (
+                TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_manage_inquiry.nextval, 4, '0'),
+                #{userId}, #{inquiryTitle}, #{inquiry}
+            )
+    </insert>
+
+        <!--    답변 등록하기 -->
+    <update id="answerRegister">
+        UPDATE tbl_manage_inquiry
+        SET answer = #{answer}, answer_date = SYSDATE
+        WHERE serial_number = #{serialNumber}
+    </update>
+
+        <!-- 문의내역 상세 조회  -->
+    <select id="findOneInquiry" resultMap="manageInquiry">
+
+        SELECT * FROM tbl_manage_inquiry
+        WHERE serial_number = #{serialNumber}
+
+    </select>
+
+    <!-- 회원 마이페이지에서 회원 문의내역 조회하기  -->
+    <select id="findMemberInquiry" resultMap="manageInquiry">
+
+        SELECT * FROM tbl_manage_inquiry
+        WHERE user_id = #{userId}
+
+    </select>
+
+<!--     관리자 페이지에서 문의내역 전체 조회하기    -->
+
+    <select id="findAllInquiry" resultMap="manageInquiry">
+
+        SELECT * FROM tbl_manage_inquiry
+
+    </select>
+
+    <!-- 문의글 수정 -->
+    <update id="inquiryModify">
+        UPDATE tbl_manage_inquiry
+        SET inquiry_title = #{inquiryTitle}, inquiry = #{inquiry}
+        WHERE serial_number = #{serialNumber}
+    </update>
+
+    <!-- 문의글 삭제 -->
+    <delete id="inquiryDelete">
+        DELETE FROM tbl_manage_inquiry
+        WHERE serial_number = #{serialNumber}
+    </delete>
+
+
 
 </mapper>
