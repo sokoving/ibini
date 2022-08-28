@@ -80,4 +80,27 @@ class PostImgMapperTest {
         assertTrue(flag
         );
     }
+    @Test
+    @DisplayName("postNo 값이 있고 thumbnail이 true인 PostImg를 DB에 저장")
+    void addFileTest2(){
+        PostImg pi = new PostImg();
+        pi.setFileName("testtesttest");
+        pi.setPostNo(32L);
+        pi.setAccount("2208260002");
+        pi.setOriginalFileName("test");
+        pi.setThumbnail("true");
+
+        mapper.addFile(pi);
+    }
+    @Test
+    @DisplayName("postNo 값이 있고 thumbnail이 null인 PostImg를 DB에 저장")
+    void addFileTest3(){
+        PostImg pi = new PostImg();
+        pi.setFileName("testtesttesttest");
+        pi.setPostNo(32L);
+        pi.setAccount("2208260002");
+        pi.setOriginalFileName("testtest");
+
+        mapper.addFile(pi);
+    }
 }

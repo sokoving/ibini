@@ -15,10 +15,13 @@ public class PostImgService {
 
     private final PostImgMapper repository;
 
+    public boolean saveService(PostImg postImg) {
+        log.info("PostImgService saveService Call - {}", postImg);
+        return repository.addFile(postImg);
+    }
+
     public List<String> getFiles(Long postNo) {
-
         return repository.findFileNames(postNo);
-
     }
 
     public List<PostImg> getPostImgList(Long postNo) {

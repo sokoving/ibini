@@ -108,12 +108,14 @@ section .inner-section{
 #reg-1 .img-box{
     width: 210px;
     height: 290px;
+    overflow: hidden;
+
     background-color: #ffca3d;
-    border: 1px solid #787878 ;
     border-radius: 0.5em;
+    border: 1px solid #787878 ;
+    
     padding: 15px;
     box-sizing: border-box;
-    cursor: pointer;
 
     display: flex;
     justify-content: center;
@@ -126,6 +128,9 @@ section .inner-section{
     position: absolute;
     top: -80px;
     left: -40px;
+}
+.img-box .post-img{
+    height: inherit;
 }
 
 .img-box .box-msg{

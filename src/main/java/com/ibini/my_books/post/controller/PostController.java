@@ -7,6 +7,7 @@ import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.postImg.domain.PostImg;
+import com.ibini.my_books.postImg.dto.ThumbImgDTO;
 import com.ibini.my_books.postImg.service.PostImgService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
@@ -59,13 +60,12 @@ public class PostController {
     //    포스트 등록 요청      post   /post/write
     // @RequestBody Post 제거해서
     @Transactional
-    @PostMapping("/write/{account}")
-    public String postWrite(@PathVariable String account
-            , Post post
-            , HashtagDomain tag) {
-        log.info("/write/{account} account POST 요청!! - account : {}", account);
-        log.info("PostController /post/write POST 요청!! - post: {}", post);
-        log.info("PostController /post/write POST 요청!! - hashtag: {}", tag);
+    @PostMapping("/write")
+    public String postWrite(Post post, HashtagDomain tag, ThumbImgDTO thumbImgDTO) {
+        log.info("\"PostController /post/write POST 요청!!");
+        log.info("/post/write - post: {}", post);
+        log.info("/post/write - hashtag: {}", tag);
+        log.info("/post/write - thumbImgDTO : {}", thumbImgDTO);
 
         // tbl_post 저장
         boolean postFlag = postService.saveService(post);
@@ -74,6 +74,9 @@ public class PostController {
         // PRJ_HASHTAG 저장
         boolean tagFlag = hashTagService.saveHashTag(tag);
         log.info("tag flag : {}", tagFlag);
+
+        // tbl_post_img 저장
+        if(thumbImgDTO != null) imgService.saveService(thumbImgDTO.convertToPostImg());
 
 
         return "redirect:/list/";

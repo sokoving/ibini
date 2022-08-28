@@ -8,8 +8,8 @@ import java.util.List;
 @Mapper
 public interface PostImgMapper {
 
-    // 파일추가
-    void addFile(PostImg postImg);
+    // DB post_img 테이블에 저장
+    boolean addFile(PostImg postImg);
 
     // 게시물에 붙어있는 첨부파일경로명 전부 조회
     List<String> findFileNames(Long postNo);

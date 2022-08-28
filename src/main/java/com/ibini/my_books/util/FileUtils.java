@@ -48,8 +48,6 @@ public class FileUtils {
         // ex) 상어.png -> dfsfsdfsdfsdfsdfsdfd_상어.jpg
         String newFileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
 
-
-
         // 업로드 경로를 변경
         // E:/sl_test/upload -> E:/sl_test/upload/2022/08/09
         String newUploadPath = getNewUploadPath(uploadPath);
@@ -57,13 +55,11 @@ public class FileUtils {
         // 파일 업로드 수행
         File f = new File(newUploadPath, newFileName);
 
-
         try {
             file.transferTo(f); // 그 폴더에 그 파일명으로 폴더저장
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         // 파일의 풀 경로 (디렉토리경로 + 파일명)
         String fileFullPath = newUploadPath + File.separator + newFileName;
