@@ -23,7 +23,7 @@ public class ListController {
 
 //    포스트 전체 리스트 요청   get    /list
 
-    @GetMapping
+    @GetMapping()
     public String postList(Model model) {
         log.info("ListController /list  GET 요청!!");
         String account = "ibini";

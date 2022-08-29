@@ -17,6 +17,15 @@ ul{
 }
 
 /* common style */
+
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #wrap {
     font-size: 18px;
     width: 1000px;
@@ -29,30 +38,69 @@ ul{
     display: none !important;
 }
 
+
+
+/* jsp불러올때 #header-wrap으로 감싸기 */
+#header-wrap{
+    width: 100%;
+    /* background: #000; */
+}
+
+
 /* 헤더 */
 header{
-    position: absolute;
     width: inherit;
     top: 0;
     z-index: 1000;
 }
+
+header #header-container{
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
 header #inner-header {
     /* background-color: yellow; */
-    margin-top: 30px;
-    padding: 10px;
+    /* margin-top: 30px; */
+    width: 100%;
+    height: 80px;
+    padding-left: 30px;
     border-bottom: 5px double #ffca3d;
 
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    /* align-items: end; */
 
-    position: relative;
+    /* position: relative; */
 }
+
+
+header #header-container #inner-header h1 {
+    height: 80px;
+    width: 150px;
+}
+
+
+header #header-container #inner-header h1 img{
+    max-width: 100%;
+    max-height: 100%;
+    padding: 10px;
+}
+
+header #header-container #inner-header .menuBtn {
+
+    width: 70px;
+    padding: 20px;
+}
+
+
 
 header #inner-header .menu-open{
     font-size: 1.3em;
-    margin-right: 10px;
+    margin: auto 10px;
 }
+
 
 header.on {
     background: #222;
@@ -71,13 +119,14 @@ header .gnb {
     display: none;
     /* height: 100vh; */
 
-    position: relative;
-    right: -100%;
-    top: -50px;
+    position: fixed;
+    top: 57px;
+    left: 80%;
 }
 header .gnb.on{
     display: inline-block;
 }
+
 header .gnb .menu-close{
     text-align: right;
 
@@ -96,7 +145,11 @@ section {
     width: 90%;
     border: 1px solid #adb5bd;
     border-radius: 0.25rem;
-    margin: 300px auto 0;
+    margin: 10px auto 0;
     padding: 30px;
     box-sizing: border-box;
+}
+
+#content-wrap {
+    margin-top: 100px;
 }

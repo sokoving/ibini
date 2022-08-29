@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +36,8 @@
     <!-- custom css -->
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/post-reg.css">
+    <!-- css -->
+    <link rel="stylesheet" href="/css/platform.css" />
 
 
     <!-- jquery -->
@@ -47,23 +50,24 @@
     <!-- custom js -->
     <script src="/js/common.js" defer></script>
     <script src="/js/post-reg.js" defer></script>
+    <script src="/js/post-platformAndGenre.js" defer></script>
 
 </head>
 
 <body>
 
     <div id="wrap">
+
         <%@ include file="../include/header.jsp" %>
 
 
         <!-- 새 포스트 등록 섹션 -->
         <section class="post-reg-section">
             <div class="inner-section">
-                <form id="write-form" action="/post/write" method="post" autocomplete="off"
-                    enctype="multipart/form-data">
+                <form id="write-form" action="/post/write/${account}" method="post" autocomplete="off">
 
                     <!-- 임시 : 계정명(나중에 로그인 적용되면 빼기) -->
-                    <input type="hidden" name="account" id="" value="ibini">
+                    <input type="hidden" name="account" id="" value="${account}">
 
                     <!-- 히든 : 카테고리 아이디(웹소설 일단 고정)-->
                     <input type="hidden" name="caId" value="1">
@@ -108,66 +112,53 @@
                     <!-- 플랫폼, 장르 -->
                     <div id="reg-2">
                         <div class="plge-wrap">
+                            <div class="select-container">
 
-                            <!-- 플랫폼 영역 -->
-                            <div class="span-wrap">
-                                <span class="reg-span">플랫폼</span>
-                                <span class="explain-span">새 이름을 입력하고 버튼을 누르면 플랫폼이 추가됩니다 ↓</span>
-                            </div>
-
-                            <div class="select-add-wrap">
-                                <!-- 플랫폼 선택 -->
-                                <div class="divided-select">
-                                    <select class="white-box" name="platformId">
-                                        <option value="0">플랫폼을 선택하세요</option>
-                                        <option value="1">카카오페이지</option>
-                                        <option value="2">네이버시리즈</option>
-                                        <option value="3">리디북스</option>
-                                        <option value="4">다음웹툰</option>
-                                        <option value="5">네이버웹툰</option>
-                                    </select>
+                                <div class="platformSelText">
+                                    <span class="reg-span">플랫폼</span>
+                                    <span class="platformInputShowEvent">플랫폼 추가를 원하시면 여기를 클릭해주세요</span>
                                 </div>
 
-                                <!-- 새 플랫폼 추가 -->
-                                <div class="divided-input">
-                                    <input class="white-box" type="text" placeholder="새 플랫폼을 추가해 보세요">
-                                </div>
-                                <div class="divided-btn">
-                                    <div class="white-box icon-box ">
-                                        <span class="fas fa-plus-square"></span>
+                                <div class="select">
+                                    <div class="platformSelBox">
+                                        <select name="platformId" id="platformselect">
+                                            <option value="#">플랫폼을 선택하세요</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="platformClick" name="platformAdd">
+                                        <input type="text" id="platformInput">
+                                        <button id="platformBtn">저장</button>
                                     </div>
                                 </div>
-                            </div> <!-- // end (platform) select-add-wrap -->
-
-                            <!-- 장르 영역 -->
-                            <div class="span-wrap">
-                                <span class="reg-span">장르</span>
-                                <span class="explain-span">새 이름을 입력하고 버튼을 누르면 장르가 추가됩니다 ↓</span>
                             </div>
 
-                            <div class="select-add-wrap">
-                                <!-- 장르 선택 -->
-                                <div class="divided-select">
-                                    <select class="white-box" name="genreId" id="">
-                                        <option value="0">장르를 선택하세요</option>
-                                        <option value="1">판타지</option>
-                                        <option value="2">로맨스</option>
-                                        <option value="3">무협</option>
-                                        <option value="4">아포칼립스</option>
-                                        <option value="5">공포</option>
-                                    </select>
+
+                            <div class="genre-container">
+                                <div class="genreSelectBox">
+                                    <div id="genreClick">
+                                        <span class="reg-span">장르</span>
+                                        <span class="GenreInputShowEvent">장르 추가를 원하시면 여기를 클릭해주세요</span>
+                                    </div>
+
+                                    <div class="genreSelAndInput">
+                                        <div class="genreSelectBox">
+                                            <select name="genreId" id="genreSelect">
+                                                <option value="#">장르를 선택하세요</option>
+                                            </select>
+                                        </div>
+                                        <div class="textClick" name="genreAdd">
+                                            <input type="text" id="genreInput">
+                                            <button id="genreBtn">저장</button>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <!-- 새 장르 추가 -->
-                                <div class="divided-input">
-                                    <input class="white-box" type="text" placeholder="새 장르를 추가해 보세요">
-                                </div>
-                                <div class="divided-btn">
-                                    <div class="white-box icon-box ">
-                                        <span class="fas fa-plus-square"></span>
-                                    </div>
-                                </div>
-                            </div> <!-- // end (platform) select-add-wrap -->
+                            </div>
+
+
+
                         </div> <!-- // end plge-wrap -->
                     </div> <!-- // end reg-2 -->
 
@@ -238,20 +229,17 @@
                         <span class="reg-span">이미지 첨부하기</span>
                         <label>
                             <div class="white-box upload-input">
-                                    <span class="upload-right">파일 선택</span>
-                                    <!-- <span class="upload-left">클릭으로 이미지를 등록해 보세요</span> -->
+                                <span class="upload-right">파일 선택</span>
+                                <!-- <span class="upload-left">클릭으로 이미지를 등록해 보세요</span> -->
                             </div>
-                                <!-- <input class="file-input" type="file"> -->
+                            <!-- <input class="file-input" type="file"> -->
                         </label>
                     </div>
-
 
 
                     <div id="reg-btn">
                         <button class="white-box">등록</button>
                     </div>
-
-
                 </form> <!-- // end write-form -->
 
 
@@ -278,12 +266,73 @@
             })
 
 
+            // platform jquery ========================================================
+
+
+            // 플랫폼 클릭이벤트
+            $('.platformClick').hide();
+            $('.platformInputShowEvent').click(function () {
+                // alert("platform");
+
+                $('.platformClick').show();
+            });
+
+
+
+
+            // 장르 클릭이벤트
+            $('.textClick').hide();
+            $('.GenreInputShowEvent').click(function () {
+                // alert("hihihi");
+
+                $('.textClick').show();
+            });
+
+            // 1. 플랫폼 value값 가져오기 
+            $('#platformselect').change(function () {
+
+                // alert($(this).val());
+                console.log("선택한 플랫폼id : " + $(this).val());
+                $("#platformselect").val($(this).val()).prop("selected", true);
+                // $('#platformselect option:eq($(this).val())').prop('selected', true);
+                // $('#platformselect').val($(this).val()).prop("selected", true);
+                console.log("selected : " + $("#platformselect option:selected").val());
+                // alert($("#platformselect option:selected").val());
+
+            });
+
+            $('#genreSelect').change(function () {
+
+                // alert($(this).val());
+                console.log("genreSelect: " + $(this).val());
+                // $('#genreSelect').val($(this).val()).attr("selected", "selected");
+                $('#genreSelect').val($(this).val()).prop("selected", true);
+                console.log("genreSelect selecded : " + $("#genreSelect option:selected").val());
+                // alert($( "#genreSelect option:selected" ).val());
+
+            });
+
+
 
 
         });
         // end jQuery
-    </script>
 
+        // 비동기 요청 경로
+        const account = '${account}';
+        const gAccount = '${account}'
+
+        console.log(account);
+        console.log(gAccount);
+
+        // 나중에 꼭 수정해주기
+        // const url = "http://localhost:8383/platform/c1?account=" + account;
+        const url = "http://localhost:8383/platform/c1/" + account;
+
+        // const genreURL = "http://localhost:8383/genre/c1?account=" + account;
+
+        const genreURL = "http://localhost:8383/genre/c1/" + gAccount;
+    </script>
 
 </body>
 

@@ -3,7 +3,7 @@ package com.ibini.my_books.member.service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.ibini.my_books.member.domain.KakaoUserInfoDTO;
+import com.ibini.my_books.member.dto.KakaoUserInfoDTO;
 import com.ibini.my_books.member.domain.OauthValue;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 @Service
 @Log4j2

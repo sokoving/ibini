@@ -340,6 +340,12 @@ public class MemberController {
 
         }
 
+        //문의하기
+    @GetMapping("/inquiry")
+    public void inquiry(){
+        log.info("/member/inqury GET!! ");
+    }
+
 
 
     }
