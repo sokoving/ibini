@@ -16,16 +16,7 @@
         <result property="epId" column="ep_id" />
     </resultMap>
 
-    <resultMap id="markMap2" type="com.ibini.my_books.postnote.domain.PostMark">
-        <result property="markNo" column="mark_no" />
-        <result property="postNo" column="post_no" />
-        <result property="episodeNo" column="episode_no" />
-        <result property="regDatetime" column="reg_datetime" />
-        <result property="modDatetime" column="mod_datetime" />
-        <result property="regAccount" column="reg_account" />
-        <result property="modAccount" column="mod_account" />
-        <result property="epId" column="ep_id" />
-    </resultMap>
+
 
     <!-- 마크 저장 -->
     <insert id="save">
@@ -61,14 +52,14 @@
         SELECT
             pm.mark_no, pm.post_no, p.ep_id, pm.episode_no, pm.content, pm.reg_account, pm.mod_account, pm.reg_datetime, pm.mod_datetime
         FROM prj_post_mark pm
-        JOIN tbl_post p
+        LEFT OUTER JOIN tbl_post p
             ON pm.post_no = p.post_no
         WHERE pm.post_no = #{postNo}
         ORDER BY pm.episode_no DESC
     </select>
 
     <!-- 마크 개별 조회 기능 -->
-    <select id="findOne" resultMap="markMap2">
+    <select id="findOne" resultMap="markMap">
         SELECT
             *
         FROM prj_post_mark
