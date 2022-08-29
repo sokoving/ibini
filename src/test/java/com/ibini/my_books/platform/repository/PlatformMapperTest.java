@@ -77,4 +77,12 @@ class PlatformMapperTest {
         platformMapper.findAllPlatform(account).forEach(System.out::println);
 
     }
+
+    @Test
+    @DisplayName("계정에 있는 모든 플랫폼의 수를 조회한다")
+    void getTotalCountTest(){
+        String account = "ibini";
+        int result = platformMapper.getTotalCount(account);
+        assertEquals(6, result);
+    }
 }

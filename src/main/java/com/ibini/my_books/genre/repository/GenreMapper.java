@@ -48,4 +48,6 @@ public interface GenreMapper {
     int getTotalCount(String account);
 //    int getTotalCount2(Search search);
 
+
+
 }

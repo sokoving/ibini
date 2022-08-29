@@ -25,7 +25,9 @@ class PostServiceTest {
     @Test
     @DisplayName("모든 값이 세팅된 postWithName 객체가 모두 조회되어야 한다")
     void fineAllPostWithNameTest(){
-        List<PostWithName> pl = postService.finaAllPostWithNameService();
+        String account = "2208260002";
+
+        List<PostWithName> pl = postService.finaAllPostWithNameService(account);
 
         for (PostWithName p : pl) {
             System.out.println(p);

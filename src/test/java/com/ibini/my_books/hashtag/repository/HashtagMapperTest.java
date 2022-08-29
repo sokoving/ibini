@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -85,6 +86,16 @@ class HashtagMapperTest {
 
         assertEquals(4, hl.size());
 
+    }
+
+    @Test
+    @DisplayName("한 포스트에 등록된 모드 해시태그가 삭제된다")
+    void removeTagOnPostTest(){
+        Long postNo = 27L;
+        boolean flag = hashtagMapper.removeTagOnPost(postNo);
+        List<HashtagDomain> hl = hashtagMapper.findAllHashTagByPostNo(postNo);
+        System.out.println("hl.size() = " + hl.size());
+        assertEquals(0, hl.size());
     }
 
 

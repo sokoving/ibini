@@ -15,9 +15,17 @@
 <!--    저장 -->
     <insert id="savePlatform">
         INSERT INTO prj_platform
-        (platform_id, account, platform_name )
+            (
+                platform_id, account, platform_name
+                <if test="platformBgColor != null"> ,platform_bg_color </if>
+                <if test="platformFontColor != null"> ,platform_font_color </if>
+            )
         VALUES
-        (seq_prj_platform.nextval, #{account}, #{platformName})
+            (
+                seq_prj_platform.nextval, #{account}, #{platformName}
+              <if test="platformBgColor != null"> ,#{platformBgColor} </if>
+              <if test="platformFontColor != null"> ,#{platformFontColor} </if>
+             )
     </insert>
     
 <!--    삭제-->
@@ -47,6 +55,13 @@
         SELECT * FROM prj_platform
         WHERE account = #{account}
         ORDER BY platform_id
+    </select>
+
+<!--  계정에 있는 플랫폼 수 조회  -->
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM prj_platform
+        WHERE account = #{account}
     </select>
 
 

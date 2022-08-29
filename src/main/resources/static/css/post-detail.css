@@ -25,20 +25,16 @@ section #img-post-wrap {
     margin-top: 40px;
 }
 
-#img-wrap .post-img {
-    overflow: hidden;
-    width: 100%;
-    border: 1px solid #ffca3d;
-    border-radius: 0.25rem;
-}
 #img-wrap .img-box.post-thumb{
-    border: 3px solid #ffca3d;
+    border: 5px solid #ffca3d;
 }
 
 /* 썸네일 이미지 */
 #img-wrap #thumb-img {
     background-color: #ffca3d;
-    border-radius: 0.25rem;
+    border-radius: 0.5em;
+    padding: 5px;
+    box-sizing: border-box;
     width: 210px;
     height: 292px;
     overflow: hidden;
@@ -50,6 +46,14 @@ section #img-post-wrap {
     justify-content: center;
     align-items: center;
 }
+#thumb-img .post-img{
+    height: inherit;
+}
+
+.img-box .post-img{
+    width: 100%;
+}
+
 
 /* 첨부 이미지, 방향키 목록 */
 #img-wrap #img-arr-wrap {
@@ -86,7 +90,8 @@ section #img-post-wrap {
     height: 60px;
     overflow: hidden;
     
-    border-radius: 0.25rem;
+    background-color: #ffca3d;
+    border-radius: 0.5em;
     margin: 3px 0;
     cursor: pointer;
 }

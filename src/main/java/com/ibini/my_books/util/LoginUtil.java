@@ -22,6 +22,13 @@ public class LoginUtil {
         Member member = (Member) session.getAttribute(LOGIN_FLAG);
         return member.getUserId();
     }
+
+    //로그인한 사용자 account 가져오기
+    public static String getCurrentMemberAccountForDB(HttpSession session){
+        Member member = (Member) session.getAttribute(LOGIN_FLAG);
+        return member.getAccount();
+    }
+
     //로그인한 사용자 패스워드 가져오기
     public static String getCurrentMemberPassword(HttpSession session){
         Member member = (Member) session.getAttribute(LOGIN_FLAG);

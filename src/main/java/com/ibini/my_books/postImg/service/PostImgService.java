@@ -15,10 +15,13 @@ public class PostImgService {
 
     private final PostImgMapper repository;
 
+    public boolean saveService(PostImg postImg) {
+        log.info("PostImgService saveService Call - {}", postImg);
+        return repository.addFile(postImg);
+    }
+
     public List<String> getFiles(Long postNo) {
-
         return repository.findFileNames(postNo);
-
     }
 
     public List<PostImg> getPostImgList(Long postNo) {
@@ -28,6 +31,17 @@ public class PostImgService {
     //    썸네일 리스트 조회
     public List<PostImg> getThumbs() {
         return repository.findThumbs();
+    }
+
+
+    // fileName 으로 postImg DB에서 삭제
+    public boolean removeByName(String fileName){
+        return repository.removeByName(fileName);
+    }
+
+    //    post_no으로 postImg DB에서 삭제
+    public boolean removeByPostNo(Long postNo){
+        return repository.removeByPostNo(postNo);
     }
 
 }

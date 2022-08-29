@@ -109,7 +109,7 @@
                             <div class="item-center">
                                 <div class="center-top">
                                     <%-- 별점 --%>
-                                    <div class="star-rate" data-star-rate="3"></div>
+                                    <div class="star-rate" data-star-rate=${p.starRate}></div>
                                     <%-- 제목 --%>
                                     <div class="post-title">
                                         <a href="/post/detail/${p.postNo}">
@@ -122,7 +122,10 @@
 
                                 <div class="pl-pu-warp">
                                     <%-- 플랫폼 --%>
-                                    <span class="plat-name hover">${p.platformName}</span>
+                                    <c:set var="bg" value="${p.platformBgColor}" />
+                                    <c:set var="color" value="${p.platformFontColor}" />
+                                    <span class="plat-name hover"
+                                        style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">${p.platformName}</span>
 
                                     <%-- 연재주기 or 연재상태 --%>
                                     <c:choose>
@@ -130,7 +133,7 @@
                                         <c:when test="${empty p.publishCycle}">
                                             <span class="pu-cycle">-</span>
                                         </c:when>
-                                        <%-- 연재주기값 있음 : - --%>
+                                        <%-- 연재주기값 있음 --%>
                                         <c:otherwise>
                                             <c:choose>
                                                 <%-- 연재상태가 미분류, 연재 : 연재주기 --%>
@@ -183,12 +186,14 @@
     </div> <!-- end wrap -->
 
 
-
+    <script src="js/post-list.js"></script>
     <script>
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
+            // 별점에 따른 별 찍기
+            drawStarsAtList();
 
 
 

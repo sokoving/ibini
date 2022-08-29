@@ -1,10 +1,12 @@
 package com.ibini.my_books.hashtag.service;
 
+import com.ibini.my_books.genre.domain.Genre;
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.repository.HashtagMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -88,6 +90,13 @@ public class HashTagService {
         }
         return String.valueOf(mergeTag);
     }
+
+//    포스트 삭제 시 포스트에 등록된 해시태그 전부 삭제
+@Transactional
+public boolean removeTagOnPost(Long postNo){
+    log.info("HashTag Service : removeTagOnPost call - {}", postNo);
+    return hashtagMapper.removeTagOnPost(postNo);
+}
 
 
 }

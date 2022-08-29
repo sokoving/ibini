@@ -111,6 +111,13 @@
 
     </select>
 
+    <!--  userId로 account 가져오기  -->
+    <select id="changIdToAccount" resultType="String">
+        select account
+        from tbl_member
+        where user_id = #{userId}
+    </select>
+
     <resultMap id="manageInquiry" type="com.ibini.my_books.member.domain.InquiryTable">
         <result column="serial_number" property="serialNumber"/>
         <result column="user_id" property="userId"/>
