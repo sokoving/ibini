@@ -29,7 +29,7 @@ public class NationalSearchController {
     private String key = "4d558d393158f70a939dc6c9f6fd608fa97e902d5f35e1f2c937bd025387bdc5";
 
     @GetMapping("/findtitle")
-    public String findData(Model model){
+    public String findData(String SearchTitle, Model model){
         // JSON 받기
         StringBuffer result = new StringBuffer();
 
@@ -73,37 +73,34 @@ public class NationalSearchController {
             // JSon 받은 걸로 특정 조건 DATA 가져오기
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result.toString());
-//            log.info("element - {}",element);
 
             JsonObject object = element.getAsJsonObject();
-//            log.info("object - {}", object);
 
             // json array - docs
             JsonArray docs = object.getAsJsonArray("docs");
-//            log.info("docs - {}", docs);
+            log.info("docs - {}", docs);
 
-            JsonArray arrays = null;
 
+            // JSP로 넘겨줄 List
             ArrayList<Map<String, Object>> infoList = new ArrayList<>();
             Map<String, Object> infoMap = new HashMap<>();
+
             for (int i = 0; i < docs.size(); i++) {
-//                arrays.add(docs.get(i).getAsString("TITLE"));
                 JsonObject obj = docs.get(i).getAsJsonObject();
                 String title = obj.get("TITLE").getAsString();
                 String author = obj.get("AUTHOR").getAsString();
 
-                log.info(title);
-
-                log.info(author);
-                log.info("--------------------------");
-                infoMap.put("TITLE", title);
-                infoMap.put("AUTHOR", author);
+                infoMap.put("title", title);
+                log.info("title - {}", title);
+                infoMap.put("author", author);
+                log.info("author - {}", author);
                 infoList.add(infoMap);
-
+                log.info("i - {}", i);
+                log.info("infoList - {}", infoList);
             }
             log.info("info - {}", infoList);
 
-//            model.addAttribute("je", title);
+            model.addAttribute("info", infoList);
             // json 문자열을
 
 

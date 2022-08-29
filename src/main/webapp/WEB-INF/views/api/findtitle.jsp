@@ -10,10 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>apiTest</title>
     <style>
-        .title{
+        #search {
             background: rgb(229, 173, 173);
         }
-        .author{
+        #infoList{
             background: rgb(171, 217, 209);
         }
 
@@ -24,12 +24,21 @@
 
     <div class="wrap">
         <h1>hi</h1>
+        <div id="search">
+            <input type="text">
+            <!-- keyup event -->
+            <button type="button" id="searchBtn">검색</button>
+        </div>
         <div class="api">
-
-            ${api}
             <br>
-            <!-- ${array} -->
-            ${je}
+            <div id="infoList">
+                <c:forEach var="infoMap" items="${info}" >
+                    <span class="title">${infoMap.title}</span>
+                    <span class="author">${infoMap.author}</span>
+                </c:forEach>
+                
+            </div>
+            
             
         </div>
 
