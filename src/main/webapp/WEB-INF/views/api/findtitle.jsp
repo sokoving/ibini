@@ -10,6 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>apiTest</title>
     <style>
+        .title{
+            background: rgb(229, 173, 173);
+        }
+        .author{
+            background: rgb(171, 217, 209);
+        }
 
     </style>
 </head>
@@ -19,7 +25,12 @@
     <div class="wrap">
         <h1>hi</h1>
         <div class="api">
+
             ${api}
+            <br>
+            <!-- ${array} -->
+            ${je}
+            
         </div>
 
     </div>
