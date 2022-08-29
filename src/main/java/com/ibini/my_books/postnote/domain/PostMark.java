@@ -1,5 +1,6 @@
 package com.ibini.my_books.postnote.domain;
 
+import com.ibini.my_books.post.domain.Post;
 import lombok.*;
 
 import java.util.Date;
@@ -17,4 +18,6 @@ public class PostMark {
     private Date modDatetime;    // 수정일자, 시간
     private String regAccount;   // 작성 account
     private String modAccount;   // 수정 account
+
+    private int epId;
 }
