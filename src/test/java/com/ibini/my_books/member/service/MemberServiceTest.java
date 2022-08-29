@@ -56,8 +56,8 @@ class MemberServiceTest {
         Member m = service.getMember("vacation");
         InquiryDTO dto = new InquiryDTO();
         dto.setUserId(m.getUserId());
-        dto.setInquiryTitle("5번째 문의글 제목");
-        dto.setInquiry("5번째 문의 글입니다.");
+        dto.setInquiryTitle("3번째 문의글 제목");
+        dto.setInquiry("3번째 문의 글입니다.");
 
         service.inquiryRegister(dto);
     }
@@ -78,14 +78,14 @@ class MemberServiceTest {
     @Test
     @DisplayName("시리얼넘버에 맞는 문의 내역이 조회 되어야 한다.")
     void findOneInquiryTest(){
-        String serialNumber = "2208260024";
+        String serialNumber = "2208290021";
         InquiryTable i = service.findOneInquiry(serialNumber);
         System.out.println(i);
     }
 
     @Test
     @DisplayName("userId의 모든 문의글이 조회 되어야 한다.")
-    void findMemeberInquiryTest(){
+    void findMemberInquiryTest(){
         String userId = "vacation";
         List<InquiryTable> i = service.findMemberInquiry(userId);
         for (InquiryTable y : i) {
@@ -122,7 +122,7 @@ class MemberServiceTest {
     @Test
     @DisplayName("시리얼 번호의 게시글이 삭제 되어야 한다.")
     void inquiryDeleteTest(){
-        String serialNumber = "2208260009";
+        String serialNumber = "2208260001";
         boolean flag = service.inquiryDelete(serialNumber);
         assertTrue(flag);
     }

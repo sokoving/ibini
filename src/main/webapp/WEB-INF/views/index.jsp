@@ -30,6 +30,11 @@
 
 
     <script>
+      const auth = '${loginUser.auth}';
+      console.log(auth);
+
+      
+
         const msg = '${msg}';
         if (msg === 'join-out-success') {
             alert('회원탈퇴가 정상적으로 처리 되었습니다.');

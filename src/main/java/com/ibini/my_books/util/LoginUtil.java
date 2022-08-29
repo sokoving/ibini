@@ -17,11 +17,12 @@ public class LoginUtil {
         return session.getAttribute(LOGIN_FLAG) != null;
     }
 
-    //로그인한 사용자 계정 가져오기
+    //로그인한 사용자 account 가져오기
     public static String getCurrentMemberAccount(HttpSession session){
         Member member = (Member) session.getAttribute(LOGIN_FLAG);
         return member.getUserId();
     }
+
     //로그인한 사용자 패스워드 가져오기
     public static String getCurrentMemberPassword(HttpSession session){
         Member member = (Member) session.getAttribute(LOGIN_FLAG);

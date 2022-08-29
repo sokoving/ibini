@@ -16,15 +16,20 @@ public class InterceptorConfig implements WebMvcConfigurer {
     private final MemberInterceptor memberInterceptor;
     private final AfterLoginInterceptor afterLoginInterceptor;
     private final AutoLoginInterceptor autoLoginInterceptor;
+//    private final ListInterceptor listInterceptor;
 
     //인터셉터 설정 추가 메서드
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //member 인터셉터 설정
         registry.addInterceptor(memberInterceptor)
-                .addPathPatterns("/member/*")
+                .addPathPatterns("/member/*", "/list/**")
                 .excludePathPatterns("/member/sign-up","/member/sign-in","/member/check",
                         "/member/findpw","/member/checkcode","/member/change-password");
+
+//        //list 인터셉터 설정
+//        registry.addInterceptor(listInterceptor)
+//                        .addPathPatterns("/list/**");
 
         //after 로그인 인터셉터 설정
         registry.addInterceptor(afterLoginInterceptor)

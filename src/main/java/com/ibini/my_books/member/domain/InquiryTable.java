@@ -18,4 +18,6 @@ public class InquiryTable {
     private Date inquiryDate;
     private String answer;
     private Date answerDate;
+    private String inquiryPrettierDate;
+    private String answerPrettierDate;
 }

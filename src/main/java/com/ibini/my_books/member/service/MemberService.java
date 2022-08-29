@@ -82,6 +82,7 @@ public class MemberService {
                 //로그인 성공
                 //세션에 사용자 정보기록 저장
                 session.setAttribute("loginUser", foundMember);
+
                 //세션 타임아웃 설정
                 session.setMaxInactiveInterval(60 * 60); // 1시간 설정
 
@@ -190,6 +191,18 @@ public class MemberService {
 
     //    ========== 회원관리 =============== //
 
+    // 문의글 시간 포맷팅 메서드;
+    private void convertDateFormat(InquiryTable inquiry) {
+        Date inquiryDate = inquiry.getInquiryDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd a hh:mm");
+        //문의 등록 시간 포맷팅
+        inquiry.setInquiryPrettierDate(sdf.format(inquiryDate));
+
+        //답변 등록 시간 포맷팅
+        Date answerDate = inquiry.getAnswerDate();
+        inquiry.setAnswerPrettierDate(sdf.format(answerDate));
+
+    }
 
     //문의글 등록하기
     public boolean inquiryRegister(InquiryDTO dto){
@@ -203,17 +216,27 @@ public class MemberService {
 
     // 문의내역 상세보기
     public InquiryTable findOneInquiry(String serialNumber){
-        return memberMapper.findOneInquiry(serialNumber);
+        InquiryTable oneInquiry = memberMapper.findOneInquiry(serialNumber);
+        convertDateFormat(oneInquiry);
+        return oneInquiry;
     }
 
     //회원 마이페이지에서 회원의 문의내역 전체 조회하기
-    public List<InquiryTable> findMemberInquiry(String account){
-        return memberMapper.findMemberInquiry(account);
+    public List<InquiryTable> findMemberInquiry(String userId){
+        List<InquiryTable> memberInquiry = memberMapper.findMemberInquiry(userId);
+        for (InquiryTable inquiryTable : memberInquiry) {
+            convertDateFormat(inquiryTable);
+        }
+        return memberInquiry;
     };
 
     //관리자 페이지에서 문의내역 전체 조회하기
     public List<InquiryTable> findAllInquiry(){
-        return memberMapper.findAllInquiry();
+        List<InquiryTable> allInquiry = memberMapper.findAllInquiry();
+        for (InquiryTable inquiryTable : allInquiry) {
+            convertDateFormat(inquiryTable);
+        }
+        return allInquiry;
     }
 
     // 문의글 수정
