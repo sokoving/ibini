@@ -1,6 +1,5 @@
 package com.ibini.my_books.hashtag.service;
 
-import com.ibini.my_books.genre.domain.Genre;
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.repository.HashtagMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,18 +18,26 @@ public class HashTagService {
     private final HashtagMapper hashtagMapper;
 
     // 저장
-    public boolean saveHashTag(HashtagDomain hashtagDomain){
+    @Transactional
+    public boolean saveHashTag(HashtagDomain hashtagDomain) {
         log.info(" HashTagService save - {} ", hashtagDomain);
+        boolean b = false;
+
+        String tagName = hashtagDomain.getTagName();
+        if (tagName.trim().isEmpty() || tagName == null){
+            return b;
+        }
         // 저장하기 전에 쪼개주기
         String[] cutHashtag = cutHashtag(hashtagDomain);
         log.info(Arrays.toString(cutHashtag));
-        boolean b = false;
+
         for (String tag : cutHashtag) {
             hashtagDomain.setTagName(tag);
             b = hashtagMapper.saveHashtag(hashtagDomain);
-        }
 //        System.out.println(b);
+        }
         return b;
+
 
     }
 
@@ -47,28 +54,28 @@ public class HashTagService {
 
 
     // 삭제
-    public void deleteHashTag(int tagNo){
+    public void deleteHashTag(int tagNo) {
         log.info(" HashTagService delete - {} ", tagNo);
         boolean b = hashtagMapper.deleteHashtag(tagNo);
-        
+
     }
-    
+
     // 하나만 조회
-    public void findOneTag(int tagNo, String account){
+    public void findOneTag(int tagNo, String account) {
         log.info(" HashTagService findOne - {} ", tagNo);
         HashtagDomain oneTag = hashtagMapper.findOneTag(tagNo, account);
     }
 
     // 수정
-    public void modiHashTag(HashtagDomain hashtagDomain){
+    public void modiHashTag(HashtagDomain hashtagDomain) {
         log.info("HashTagService/modihashTag - {}", hashtagDomain);
         boolean b = hashtagMapper.modifyHashtag(hashtagDomain);
-        
+
     }
 
 
     // 포스트에 달린 해시태그 전부 조회
-    public List<HashtagDomain> findAllByPostNo(Long postNo){
+    public List<HashtagDomain> findAllByPostNo(Long postNo) {
         log.info("HashTagService findAllByPostNo call ");
         return hashtagMapper.findAllHashTagByPostNo(postNo);
     }
@@ -91,12 +98,12 @@ public class HashTagService {
         return String.valueOf(mergeTag);
     }
 
-//    포스트 삭제 시 포스트에 등록된 해시태그 전부 삭제
-@Transactional
-public boolean removeTagOnPost(Long postNo){
-    log.info("HashTag Service : removeTagOnPost call - {}", postNo);
-    return hashtagMapper.removeTagOnPost(postNo);
-}
+    //    포스트 삭제 시 포스트에 등록된 해시태그 전부 삭제
+    @Transactional
+    public boolean removeTagOnPost(Long postNo) {
+        log.info("HashTag Service : removeTagOnPost call - {}", postNo);
+        return hashtagMapper.removeTagOnPost(postNo);
+    }
 
 
 }

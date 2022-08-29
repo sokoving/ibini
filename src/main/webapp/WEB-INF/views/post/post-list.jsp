@@ -42,6 +42,7 @@
 
     <!-- custom js -->
     <script src="/js/common.js" defer></script>
+    <script src="js/post-list.js" defer></script>
 
 
 </head>
@@ -94,7 +95,8 @@
                                 <c:choose>
                                     <c:when test="${p.thumbImg != null}">
                                         <div class="thumb-box">
-                                            <img class="thumb-img hover" src="/loadFile?fileName=${p.thumbImg}" alt="포스트 썸네일">
+                                            <img class="thumb-img hover" src="/loadFile?fileName=${p.thumbImg}"
+                                                alt="포스트 썸네일">
                                         </div>
                                     </c:when>
                                     <c:otherwise>
@@ -186,8 +188,25 @@
     </div> <!-- end wrap -->
 
 
-    <script src="js/post-list.js"></script>
+    
     <script>
+        // 별 특수문자 채우는 함수
+        function drawStarsAtList() {
+            const $stars = document.querySelectorAll('.star-rate');
+            //    console.log($stars);
+
+            for (let i = 0; i < $stars.length; i++) {
+                const num = $stars[i].dataset.starRate;
+                //    console.log(num);
+                let msg = '';
+                for (let j = 0; j < num; j++) {
+                    msg += '⭐';
+                }
+                $stars[i].textContent = msg;
+            }
+
+        }
+
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));

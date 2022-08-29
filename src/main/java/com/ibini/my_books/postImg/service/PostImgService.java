@@ -22,15 +22,20 @@ public class PostImgService {
     }
 
     public void postRegService(ThumbImgDTO thumbImgDTO) {
+        log.info("PostImgService postRegService CALL - {}", thumbImgDTO);
+
         //        썸네일 저장
         if (thumbImgDTO.getThumbFileName() != null) {
-            repository.cleanThumb(thumbImgDTO.getPostNo());
+//            repository.cleanThumb(thumbImgDTO.getPostNo());
             repository.addFile(thumbImgDTO.extractThumb());
+
         }
 //        첨부파일 저장
         if (thumbImgDTO.getFileNames() != null) {
             List<PostImg> piList = thumbImgDTO.extractImg();
+            System.out.println("IMG service piList = " + piList);
             for (PostImg pi : piList) {
+                System.out.println("IMG service pi = " + pi);
                 repository.addFile(pi);
             }
         }

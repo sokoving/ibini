@@ -30,6 +30,7 @@ public class ThumbImgDTO {
         pi.setPostNo(this.postNo);
         pi.setAccount(this.account);
         pi.setOriginalFileName(FileUtils.extractOriginFileName(thumbFileName));
+        System.out.println("DTO extractThumb pi = " + pi);
 
         return pi;
     }
@@ -47,9 +48,10 @@ public class ThumbImgDTO {
             pi.setOriginalFileName(FileUtils.extractOriginFileName(s));
 
             piList.add(pi);
+            System.out.println("DTO extractImg pi = " + pi);
         }
 
-
+        System.out.println("DTO piList = " + piList);
         return piList;
     }
 

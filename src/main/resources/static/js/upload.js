@@ -1,4 +1,4 @@
-// 파일 선택 후 썸네일 랜더링, 히든인풋 만드는 함수
+// 썸네일 선택 후 랜더링, 히든인풋 만드는 함수
 function showThumbImg(fileName, fileOriginName) {
     console.log('showThumbImg 함수 호출 : ', fileName);
     console.log('showThumbImg 함수 호출 : ', fileOriginName);
@@ -27,6 +27,8 @@ function showThumbImg(fileName, fileOriginName) {
     $('#write-form').append($thumbFileName);
 }
 
+
+// 첨부파일 선택 후 랜더링, 히든인풋 만드는 함수
 function showImgs(fileNames) {
     console.log('showImgs 함수 호출 : ', fileNames);
     const $boxMsg = $('#reg-6 .file-box-right');

@@ -51,14 +51,14 @@
                                             <c:choose>
                                                 <c:when test="${img.thumbnail}">
                                                     <div class="img-box post-thumb">
-                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}" alt="포스트 표지"
-                                                            title="${img.originalFileName}">
+                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}"
+                                                            alt="포스트 표지" title="${img.originalFileName}">
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="img-box">
-                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}" alt="포스트 첨부 이미지"
-                                                            title="${img.originalFileName}">
+                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}"
+                                                            alt="포스트 첨부 이미지" title="${img.originalFileName}">
                                                     </div>
                                                 </c:otherwise>
                                             </c:choose>
@@ -104,7 +104,7 @@
 
                                         <!-- 연재 상태 -->
                                         <tr>
-                                            <td class="first-td">${p.platformId}</td>
+                                            <td class="first-td">${p.platformName}</td>
                                             <c:choose>
 
                                                 <c:when test="${empty p.publishCycle}">
@@ -302,6 +302,26 @@
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
             // 별 찍기
+            function drawStarsAtDetail(star) {
+                // console.log("starRate 함수 시작!");
+                // console.log(star);
+
+                const $star = $('.star-span');
+                let text = '';
+
+                // 별점이 0일 경우
+                if (star === '0' || star === null) {
+                    $star.removeClass('top-span')
+                    return;
+                } else {
+                    // 별점이 1보다 큰 경우
+                    for (let i = 0; i < star; i++) {
+                        text += '⭐';
+                    }
+                    $star.text(text);
+                }
+            }
+
             const star = '${p.starRate}'
             drawStarsAtDetail(star);
 

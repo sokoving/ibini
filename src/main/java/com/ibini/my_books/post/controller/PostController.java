@@ -61,13 +61,12 @@ public class PostController {
     // @RequestBody Post 제거해서
     @Transactional
     @PostMapping("/write")
-    public String postWrite(Post post, HashtagDomain tag
-//            , ThumbImgDTO thumbImgDTO
+    public String postWrite(Post post, HashtagDomain tag, ThumbImgDTO thumbImgDTO
     ) {
         log.info("\"PostController /post/write POST 요청!!");
         log.info("/post/write - post: {}", post);
         log.info("/post/write - hashtag: {}", tag);
-//        log.info("/post/write - thumbImgDTO : {}", thumbImgDTO);
+        log.info("/post/write - thumbImgDTO : {}", thumbImgDTO);
 
         // tbl_post 저장
         boolean postFlag = postService.saveService(post);
@@ -78,8 +77,7 @@ public class PostController {
         log.info("tag flag : {}", tagFlag);
 
         // tbl_post_img 저장
-//        if(thumbImgDTO != null) imgService.saveService(thumbImgDTO.extractThumb());
-
+        imgService.postRegService(thumbImgDTO);
 
         return "redirect:/list/";
     }
