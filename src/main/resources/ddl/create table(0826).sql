@@ -137,7 +137,7 @@ DROP SEQUENCE seq_login_list;
 CREATE SEQUENCE seq_login_list;
 
 CREATE TABLE prj_link_post(
-   link_no      VARCHAR2(100)       NOT NULL, --일련번호(회원관리번호_원본포스트번호_연결할포스트번호)
+   link_no      VARCHAR2(100)       NOT NULL, --일련번호(원본포스트번호_연결할포스트번호)
    post_no      NUMBER(10)       NOT NULL,    --포스트 번호
    account      VARCHAR2(50)     NOT NULL,    --회원 관리 번호
    link_post    NUMBER(10)     NOT NULL,      --post_no와 연결할 포스트 번호

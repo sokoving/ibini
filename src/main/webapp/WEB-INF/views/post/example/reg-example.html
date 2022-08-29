@@ -58,7 +58,7 @@
         <!-- 새 포스트 등록 섹션 -->
         <section class="post-reg-section">
             <div class="inner-section">
-                <form id="write-form" action="/post/write" method="post" autocomplete="off"
+                <form id="write-form" action="#" method="post" autocomplete="off"
                     enctype="multipart/form-data">
 
                     <!-- 히든 : 카테고리 아이디(웹소설 일단 고정)-->
@@ -89,20 +89,20 @@
                         <div class="tw-wrap">
                             <div class="span-wrap">
                                 <span class="reg-span">책 제목</span>
-                                <span class="explain-span">제목을 입력해 주세요</span>
+                                <span class="explain-span title-msg">[ 제목을 입력해 주세요 ]</span>
                             </div>
                             <input class="white-box title-input" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">작가</span>
-                                <span class="explain-span">작가를 입력해 주세요</span>
+                                <span class="explain-span writer-msg hide">작가를 입력해 주세요</span>
                             </div>
                             <input class="white-box writer-input" type="text" name="postWriter"
                                 placeholder="작가를 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
-                                <span class="explain-span">1~5 사이의 정수를 입력해 주세요</span>
+                                <span class="explain-span star-msg hide">1~5 사이의 정수를 입력해 주세요</span>
                             </div>
                             <input class="white-box title-input" type="number" name="starRate" placeholder="예시) 5">
                         </div>
@@ -195,7 +195,7 @@
                         <div class="span-wrap">
                             <span class="reg-span">연재 일시</span>
                         </div>
-                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 금 10시">
+                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
                     </div> <!-- // end reg-3 -->
 
 
@@ -260,7 +260,7 @@
 
 
                     <div id="reg-btn">
-                        <button class="white-box">등록</button>
+                        <button id="post-reg-btn" class="white-box">등록</button>
                     </div>
                 </form> <!-- // end write-form -->
             </div> <!-- // end inner-section -->
@@ -274,6 +274,18 @@
         // start jQuery
         $(document).ready(function () {
             jQueryTagTest("태그 잡기 테스트", $('h1'));
+
+            // 포스트 입력 폼 제출 이벤트
+            const $regBtn = $('#post-reg-btn');
+            // jQueryTagTest($regBtn, "태그 잡기 테스트");
+            $regBtn.click(e => {
+                e.preventDefault();
+                validateFormValue();
+
+                // $('#post-reg-form').submit();
+            })
+
+            
 
 
 

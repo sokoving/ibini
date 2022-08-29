@@ -63,7 +63,7 @@ public class PostController {
     @PostMapping("/write")
     public String postWrite(Post post, HashtagDomain tag, ThumbImgDTO thumbImgDTO
     ) {
-        log.info("\"PostController /post/write POST 요청!!");
+        log.info("PostController /post/write POST 요청!!");
         log.info("/post/write - post: {}", post);
         log.info("/post/write - hashtag: {}", tag);
         log.info("/post/write - thumbImgDTO : {}", thumbImgDTO);

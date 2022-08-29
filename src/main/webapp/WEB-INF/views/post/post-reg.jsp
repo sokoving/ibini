@@ -96,22 +96,22 @@
                         <div class="tw-wrap">
                             <div class="span-wrap">
                                 <span class="reg-span">책 제목</span>
-                                <span class="explain-span">제목을 입력해 주세요</span>
+                                <span class="explain-span hide">제목을 입력해 주세요</span>
                             </div>
                             <input class="white-box title-input" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">작가</span>
-                                <span class="explain-span">작가를 입력해 주세요</span>
+                                <span class="explain-span hide">작가를 입력해 주세요</span>
                             </div>
                             <input class="white-box writer-input" type="text" name="postWriter"
                                 placeholder="작가를 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
-                                <span class="explain-span">1~5 사이의 정수를 입력해 주세요</span>
+                                <span class="explain-span hide">1~9 사이의 정수를 입력해 주세요.</span>
                             </div>
-                            <input class="white-box title-input" type="number" name="starRate" placeholder="예시) 5">
+                            <input class="white-box title-input" type="number" name="starRate" placeholder="1~9 사이의 정수를 입력해 주세요">
 
 
                         </div>

@@ -87,8 +87,9 @@ section .inner-section{
 }
 .explain-span{
     font-size: 0.8em;
-    font-style: italic;
+    /* font-style: italic; */
     /* text-decoration: underline; */
+    color: #f44659;
     margin-right: 15px;
 }
 
