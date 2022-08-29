@@ -64,7 +64,7 @@
         <!-- 새 포스트 등록 섹션 -->
         <section class="post-reg-section">
             <div class="inner-section">
-                <form id="write-form" action="/post/write/${account}" method="post" autocomplete="off">
+                <form id="write-form" action="/post/write" method="post" autocomplete="off">
 
                     <!-- 히든 : 계정-->
                     <input type="hidden" name="account" id="" value="${account}">
@@ -85,7 +85,7 @@
                                 <div class="file-box-right">
                                     등록된 썸네일이 없습니다.
                                 </div>
-                                <input class="file-input" type="file" name="#">
+                                <input class="file-input" type="file" name="#" disabled>
                             </label>
                         </div>
 
@@ -239,7 +239,7 @@
                             <div class="file-box-right">
                                 첨부된 이미지가 없습니다.
                             </div>
-                            <input class="file-input" type="file" name="#">
+                            <input class="file-input" type="file" name="#" disabled>
                         </label>
                     </div>
 
