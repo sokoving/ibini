@@ -1,6 +1,7 @@
 package com.ibini.my_books.postImg.controller;
 
 import com.ibini.my_books.postImg.domain.PostImg;
+import com.ibini.my_books.postImg.dto.ThumbImgDTO;
 import com.ibini.my_books.postImg.service.PostImgService;
 import com.ibini.my_books.util.FileUtils;
 import lombok.RequiredArgsConstructor;
@@ -35,25 +36,26 @@ public class PostImgController {
     // 이미지 업로드 등록 요청
     @PostMapping("/write")
     @ResponseBody // 비동기니까
-    public String getFiles(
-            @RequestParam("files") List<MultipartFile> fileList) {
+    public String getFiles(ThumbImgDTO thumbImgDTO) {
 
-        log.info("controller request /upload/form POST - {}", fileList);
+        log.info("controller request /upload/form POST - {}", thumbImgDTO);
 
-        log.info("/upload POST - {}", fileList);
 //리스트에담아서 서비스에보냄 서비스에서반복문돌려서 맵퍼에다집어넣는다
-        for (MultipartFile file: fileList) {
-        PostImg postImg = new PostImg();
-            postImg.setPostNo(1L);
-            postImg.setFileName(file.getOriginalFilename());
-            log.info("file-name: {}", file.getName());
-            log.info("file-origin-name: {}", file.getOriginalFilename());
-            log.info("file-size: {}KB", (double) file.getSize() / 1024);
-            log.info("file-type: {}", file.getContentType());
-            System.out.println("=============================================");
-
-            FileUtils.uploadFile(file, UPLOAD_PATH);
-        }
+//        for (java.lang.Object o : ) {
+//
+//        }
+//        for (MultipartFile file: fileList) {
+//        PostImg postImg = new PostImg();
+//            postImg.setPostNo(1L);
+//            postImg.setFileName(file.getOriginalFilename());
+//            log.info("file-name: {}", file.getName());
+//            log.info("file-origin-name: {}", file.getOriginalFilename());
+//            log.info("file-size: {}KB", (double) file.getSize() / 1024);
+//            log.info("file-type: {}", file.getContentType());
+//            System.out.println("=============================================");
+//
+//            FileUtils.uploadFile(file, UPLOAD_PATH);
+//        }
 
 //        return new ResponseEntity<>(files, HttpStatus.OK);
         return "redirect:/post_img/write";

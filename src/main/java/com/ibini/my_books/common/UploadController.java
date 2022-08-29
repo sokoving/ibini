@@ -1,6 +1,5 @@
 package com.ibini.my_books.common;
 
-import com.ibini.my_books.postImg.domain.PostImg;
 import com.ibini.my_books.postImg.dto.ThumbImgDTO;
 import com.ibini.my_books.postImg.repository.PostImgMapper;
 import com.ibini.my_books.postImg.service.PostImgService;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,7 +56,7 @@ public class UploadController {
 //        log.info("/upload POST! - {}", fileList);
 
 //        썸네일 저장
-        postImgService.saveService(thumbImgDTO.convertToPostImg());
+        postImgService.saveService(thumbImgDTO.extractThumb());
 
 
 //        for (MultipartFile file: fileList) {

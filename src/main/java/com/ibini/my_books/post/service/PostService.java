@@ -23,16 +23,19 @@ public class PostService {
     private final PostImgService imgService;
 
 
+//    포스트 등록
     public boolean saveService(Post post){
         log.info("Post Service : saveService call - {}", post);
         return postMapper.save(post);
     }
 
+//    계정별 포스트 전체 조회
     public List<Post> findAllPostService(String account){
         log.info("Post Service : findAllService call");
         return postMapper.findAllPost(account);
     }
 
+//    계정별 포스트dto 전체 조회
     public List<PostWithName> finaAllPostWithNameService(String account){
         log.info("Post Service : finaAllPostWithNameService call");
 
@@ -45,11 +48,13 @@ public class PostService {
         return postWithNameList;
     }
 
+//    포스트 개별 조회
     public Post findOnePostService(Long postNo){
         log.info("Post Service : findOnePostService call");
         return postMapper.findOnePost(postNo);
     }
 
+//    포스트 dto 개별 조회
     public PostWithName fineOnePostWithName(Long postNo){
         log.info("Post Service : fineOnePostWithName call");
         PostWithName p = postMapper.fineOnePostWithName(postNo);
@@ -59,6 +64,7 @@ public class PostService {
         return p;
     }
 
+//    포스트 삭제
     public boolean removeService(Long postNo){
         log.info("Post Service : removeService call - {}", postNo);
 
@@ -69,11 +75,13 @@ public class PostService {
         return postMapper.remove(postNo);
     }
 
+//    수정
     public boolean modifyService(Post post){
         log.info("Post Service : modifyeService call - {}", post);
         return postMapper.modify(post);
     }
 
+//    계정별 포스트 수 전체 조회
     public int getTotalCount(String account){
         log.info("Post Service : getTotalCountService call");
         return postMapper.getTotalCount(account);

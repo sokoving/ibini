@@ -59,7 +59,7 @@ function showImgs(fileNames) {
         // 히든인풋
         const $imgFileName = document.createElement('input');
         $imgFileName.setAttribute('type', 'hidden');
-        $imgFileName.setAttribute('name', 'fileName');
+        $imgFileName.setAttribute('name', 'fileNames');
         $imgFileName.setAttribute('value', fileName);
         $('#write-form').append($imgFileName);
 
