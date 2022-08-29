@@ -51,6 +51,7 @@
     <script src="/js/common.js" defer></script>
     <script src="/js/post-reg.js" defer></script>
     <script src="/js/post-platformAndGenre.js" defer></script>
+    <script src="/js/upload.js" defer></script>
 
 </head>
 
@@ -64,7 +65,7 @@
         <!-- 새 포스트 등록 섹션 -->
         <section class="post-reg-section">
             <div class="inner-section">
-                <form id="write-form" action="/post/write" method="post" autocomplete="off">
+                <form id="write-form" action="/upload" method="post" autocomplete="off" enctype="multipart/form-data">
 
                     <!-- 히든 : 계정-->
                     <input type="hidden" name="account" id="" value="${account}">
@@ -77,6 +78,8 @@
                         <div class="img-wrap">
                             <div class="img-box">
                                 <span class="box-msg">썸네일을 등록해 보세요</span>
+                                <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
+                                <!-- <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
                             </div>
                             <label class="file-box">
                                 <div class="file-box-left">
@@ -85,7 +88,7 @@
                                 <div class="file-box-right">
                                     등록된 썸네일이 없습니다.
                                 </div>
-                                <input class="file-input" type="file" name="#" disabled>
+                                <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
                             </label>
                         </div>
 
@@ -236,11 +239,17 @@
                             <div class="file-box-left">
                                 파일 선택
                             </div>
-                            <div class="file-box-right">
+                            <div class="file-box-right"  data-imgs-num="0">
                                 첨부된 이미지가 없습니다.
                             </div>
-                            <input class="file-input" type="file" name="#" disabled>
+                            <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
                         </label>
+                        <div class="uploaded-list">
+                            <!-- <div class="upload-img-box">
+                                <img class="upload-img" src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
+                            </div> -->
+                        </div>
+
                     </div>
 
 
@@ -263,7 +272,9 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-            // jQueryTagTest("h1", "태그 잡기 테스트");
+
+            const account = "${account}";
+            console.log(account);
 
             // 포스트 입력 폼 제출 이벤트
             const $regBtn = $('#post-reg-btn');

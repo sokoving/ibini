@@ -32,7 +32,7 @@
                             <!-- 썸네일 이미지 -->
                             <div id="thumb-img">
                                 <c:if test="${p.thumbImg != null}">
-                                    <img class="post-img" src="${p.thumbImg}" alt="썸네일 이미지">
+                                    <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
                                 </c:if>
                             </div>
 
@@ -51,13 +51,13 @@
                                             <c:choose>
                                                 <c:when test="${img.thumbnail}">
                                                     <div class="img-box post-thumb">
-                                                        <img class="post-img" src="${img.fileName}" alt="포스트 표지"
+                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}" alt="포스트 표지"
                                                             title="${img.originalFileName}">
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="img-box">
-                                                        <img class="post-img" src="${img.fileName}" alt="포스트 첨부 이미지"
+                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}" alt="포스트 첨부 이미지"
                                                             title="${img.originalFileName}">
                                                     </div>
                                                 </c:otherwise>

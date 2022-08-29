@@ -94,7 +94,7 @@
                                 <c:choose>
                                     <c:when test="${p.thumbImg != null}">
                                         <div class="thumb-box">
-                                            <img class="thumb-img hover" src="${p.thumbImg}" alt="포스트 썸네일">
+                                            <img class="thumb-img hover" src="/loadFile?fileName=${p.thumbImg}" alt="포스트 썸네일">
                                         </div>
                                     </c:when>
                                     <c:otherwise>

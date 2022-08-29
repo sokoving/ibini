@@ -20,14 +20,17 @@ public interface PostImgMapper {
     // 게시물 번호로 PostImg 객체 리스트 전부 조회
     List<PostImg> findFiles(Long postNo);
 
-//    썸네일 true 포스트이미지 리스트 조회
+    //    썸네일 true 포스트이미지 리스트 조회
     List<PostImg> findThumbs();
 
     // fileName 으로 postImg DB에서 삭제
     boolean removeByName(String fileName);
 
-//    post_no으로 postImg DB에서 삭제
+    //    post_no으로 postImg DB에서 삭제
     boolean removeByPostNo(Long postNo);
+
+    //    포스트의 썸네일 삭제
+    boolean cleanThumb(Long postNo);
 
 
 }
