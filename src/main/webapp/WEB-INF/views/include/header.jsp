@@ -21,7 +21,7 @@
             <a href="#" class="menu-close"><span class="far fa-window-close"></span></a>
             <ul>
                 <li><a href="#">메뉴1</a></li>
-                <li><a href="/myPage/ibini">마이페이지(현정)</a></li>
+                <li><a href="/myPage">마이페이지(현정)</a></li>
 
                 <li><a href="/list">포스트 전체 목록</a></li>
                 <li><a href="/post/write">새 포스트 쓰기</a></li>
