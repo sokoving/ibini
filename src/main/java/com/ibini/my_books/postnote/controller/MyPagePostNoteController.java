@@ -21,17 +21,6 @@ public class MyPagePostNoteController {
     private final PostMarkService postMarkService;
     private final PostMemoService postMemoService;
 
-//    @GetMapping("/note")
-//    public String
-
-
-
-
-
-
-
-
-
 
     // 게시물 목록 요청
 //    @GetMapping("/list")
