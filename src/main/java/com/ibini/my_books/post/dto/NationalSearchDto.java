@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class nationalSearchDto {
+public class NationalSearchDto {
 
     private String title;
     private String author;
