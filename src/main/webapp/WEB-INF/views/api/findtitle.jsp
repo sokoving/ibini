@@ -71,73 +71,50 @@
 
         <script>
 
-        function search(target){
+        function search(target) {
+
 
             var word = target.value;
             var encodeWord = encodeURI(word);
-            // console.log(word);
-            // console.log(encodeWord);
-            $(function (){
-                //start Ajax
-                $.ajax({
-                    type : 'GET',
-                    dataType : 'json',
-                    url : "https://www.nl.go.kr/seoji/SearchApi.do?" +
-                        "cert_key=4d558d393158f70a939dc6c9f6fd608fa97e902d5f35e1f2c937bd025387bdc5" +
-                        "&result_style=json&page_no=1&page_size=10" + 
-                        "&title="+word,
-                error : function(err) {
-                    console.log("실행중 오류가 발생하였습니다.");
-                },
-                success : function(data) {
-                        // json data String으로 바꿔주기
-                        // var arr = JSON.parse(data);
-                        // console.log("arr : ", data);
-                        console.log("docs : ", data.docs);
-                        
+            console.log(word);
+            console.log(encodeWord);
 
-                        // list 배열에서 꺼내주기?
-                        // let docs = Object.entries(arr);
-                        // console.log("docs : " + docs);
+            // 비동기 GET
+            let url = "https://www.nl.go.kr/seoji/SearchApi.do?" +
+                "cert_key=4d558d393158f70a939dc6c9f6fd608fa97e902d5f35e1f2c937bd025387bdc5" +
+                "&result_style=json&page_no=1&page_size=30" +
+                "&title=" + word;
 
-                        
+            console.log('url : ', url);
 
-                        // 1. list에서 1번에 있는 doc 잡기
-                        // 2. doc에서 제목, 작가, 출판사? 잡아오기
-                        // 3. 랜더링 해주기
-                        // 4. 선택한 값을 POST에 넘기기기
-                        // 4-1. post 슬라이드 형태로 구현하기
+            // 비동기 GET 요철 Header
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) =>{
+                    console.log(data);
+                    let docs = data.docs;
+                    let searchTotal = data.TOTAL_COUNT;
+                    console.log('searchTotal:', searchTotal);
+                    console.log('docs : ', docs);
 
-                        // console.log("결과 갯수 : "+data.dataSearch.content.length);
-                        // console.log("첫번째 결과 : "+data.dataSearch.content[0]);
-                        $("#List").empty();
-                        var checkWord = $("#word").val(); //검색어 입력값
-                        // console.log(data.dataSearch.content.length);
-                        // if(checkWord.length > 0 && data.dataSearch.content.length > 0){
-                            
-                        //     for (i = 0; i < data.dataSearch.content.length; i++) {
+                    // docs 안에 있는 거 잡기
+                    let title = docs.TITLE;
+                    let author = docs.AUTHOR;
+                    let publisher = docs.PUBLISHER;
+                    console.log("t - a - p : ", title);
 
-                        //         $("#List")
-                        //             .append(
-                        //                     "<li class='schoolList' value='"
-                        //                         + data.dataSearch.content[i].schoolName
-                        //                         + "' data-input='"
-                        //                         + data.dataSearch.content[i].schoolName
-                        //                         + ">"
-                        //                         + "<a href='javascript:void(0);'>"
-                        //                         + data.dataSearch.content[i].schoolName
-                        //                         + "</a>"
-                        //                         + "</li>");
 
-                        //     }
+                }); // then end
+                // 1. 전체길이
 
-                    }
-                    
-                                        
-                })
-            });//end Ajax
-        };// end jquery
+                // 2. 페이지번호
+                // 3. 작가
+                // 4. 제목
+                // 5. 출판사
 
+
+
+        }
     
 
 
