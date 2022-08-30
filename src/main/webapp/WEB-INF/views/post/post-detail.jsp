@@ -107,23 +107,23 @@
                                             <td class="first-td">${p.platformName}</td>
                                             <c:choose>
 
-                                                <c:when test="${empty p.publishCycle}">
-                                                    <td class="last-td">-</td>
+                                                <c:when test="${p.publishStatus <= 1}">
+                                                    <c:choose>
+                                                        <c:when test="${empty p.publishCycle}">
+                                                            <td class="last-td">${p.publishStatusName}</td>
+                                                        </c:when>
+
+                                                        <c:otherwise>
+                                                            <td class="last-td">${p.publishCycle}</td>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:when>
 
                                                 <c:otherwise>
-                                                    <c:choose>
-                                                        <c:when test="${p.publishStatus <= 1}">
-                                                            <td class="last-td">${p.publishCycle}</td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <td class="last-td">${p.publishStatusName}</td>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                    <td class="last-td">${p.publishStatusName}</td>
                                                 </c:otherwise>
 
                                             </c:choose>
-
                                         </tr>
                                         <tr class="empty-tr">
                                             <td colspan="2">-</td>
@@ -310,7 +310,7 @@
                 let text = '';
 
                 // 별점이 0일 경우
-                if (star <= 0|| star === null) {
+                if (star <= 0 || star === null) {
                     $star.removeClass('top-span')
                     return;
                 } else {

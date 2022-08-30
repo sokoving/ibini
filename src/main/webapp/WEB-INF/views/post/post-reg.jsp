@@ -275,10 +275,11 @@
             const $regBtn = $('#post-reg-btn');
             // jQueryTagTest($regBtn, "태그 잡기 테스트");
             $regBtn.click(e => {
+                // e.preventDefault();
+                validateFormValue();
+
                 $('#post-reg-form').submit();
             })
-
-// 입력값 검증
 
 
 

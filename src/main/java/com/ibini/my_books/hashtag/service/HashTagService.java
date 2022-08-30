@@ -32,7 +32,7 @@ public class HashTagService {
         log.info(Arrays.toString(cutHashtag));
 
         for (String tag : cutHashtag) {
-            hashtagDomain.setTagName(tag);
+            hashtagDomain.setTagName(tag.trim());
             b = hashtagMapper.saveHashtag(hashtagDomain);
 //        System.out.println(b);
         }
@@ -46,7 +46,7 @@ public class HashTagService {
         String hashTag = hashtagDomain.getTagName();
 //        System.out.println(hashTag);
         hashTag = hashTag.substring(1);
-        String[] hashTags = hashTag.split(" #");
+        String[] hashTags = hashTag.split("#");
 //        System.out.println(Arrays.toString(hashTags));
         return hashTags;
 

@@ -129,26 +129,23 @@
                                     <span class="plat-name hover"
                                         style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">${p.platformName}</span>
 
-                                    <%-- 연재주기 or 연재상태 --%>
-                                    <c:choose>
-                                        <%-- 연재주기값 없음 : - --%>
-                                        <c:when test="${empty p.publishCycle}">
-                                            <span class="pu-cycle">-</span>
-                                        </c:when>
-                                        <%-- 연재주기값 있음 --%>
-                                        <c:otherwise>
-                                            <c:choose>
-                                                <%-- 연재상태가 미분류, 연재 : 연재주기 --%>
-                                                <c:when test="${p.publishStatus <= 1}">
-                                                    <span class="pu-cycle">${p.publishCycle}</span>
-                                                </c:when>
-                                                <%-- 연재상태가 휴재, 완결 : 연재상태 --%>
-                                                <c:otherwise>
-                                                    <span class="pu-cycle">${p.publishStatusName}</span>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:otherwise>
-                                    </c:choose>
+                                        <c:choose>
+                                            <c:when test="${p.publishStatus <= 1}">
+                                                <c:choose>
+                                                    <c:when test="${empty p.publishCycle}">
+                                                        <td class="last-td">${p.publishStatusName}</td>
+                                                    </c:when>
+
+                                                    <c:otherwise>
+                                                        <td class="last-td">${p.publishCycle}</td>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td class="last-td">${p.publishStatusName}</td>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                 </div> <%-- // end pl-pu-wrap --%>
 
                                 <%-- 해시태그 --%>
