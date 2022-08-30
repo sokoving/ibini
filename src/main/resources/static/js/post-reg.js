@@ -1,23 +1,23 @@
 // 입력하지 않은 값 처리 함수
-function validateFormValue() {
+function validateFormValue(e) {
     const $title = $('input[name=postTitle]');
-    console.log('title: ', $title.val());
+    // console.log('title: ', $title.val());
     const $writer = $('input[name=postWriter]');
-    console.log('writer: ', $writer.val());
+    // console.log('writer: ', $writer.val());
     const $star = $('input[name=starRate]');
-    console.log('star: ', $star.val());
-    console.log('platform: ', $('select[name=platformId]').val());
+    // console.log('star: ', $star.val());
+    // console.log('platform: ', $('select[name=platformId]').val());
     const $genre = $('select[name=genreId]').val();
-    console.log('genre: ', $('select[name=genreId]').val());
-    console.log('publishStatus: ', $('input[name=publishStatus]').val());
-    console.log('publishCycle: ', $('input[name=publishCycle]').val());
+    // console.log('genre: ', $('select[name=genreId]').val());
+    // console.log('publishStatus: ', $('input[name=publishStatus]').val());
+    // console.log('publishCycle: ', $('input[name=publishCycle]').val());
     const $epId = $('input[name=epId]');
     console.log('epId: ', $epId.val());
     const $curEp = $('input[name=curEp]');
     console.log('curEp: ', $curEp.val());
     const $totalEp = $('input[name=totalEp]');
     console.log('totalEp: ', $totalEp.val());
-    console.log('tag: ', $('input[name=tagName]').val());
+    // console.log('tag: ', $('input[name=tagName]').val());
 
     let flag = false; // 입력 제대로하면 true로 변경 
 
