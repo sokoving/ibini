@@ -68,8 +68,10 @@
 
         #content-wrap #infoListMakeDom .bookInfo:hover{
             background-color: #ffebbb;
+            box-shadow: rgb(0 0 0 / 10%) 0px 5px 2px 1px;
             transform: scale(1.03);
             transition: 0.2s;
+
         }
 
 
@@ -140,9 +142,29 @@
                 
             </div>
 
+            <!-- 조회수 버튼 -->
             <div id="moreInfo">
-                <!-- 전체 조회수 초과할 경우 -->
+                <!-- 조회수 연괸 버튼 -->
             </div>
+
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             
         </div>
         
@@ -323,9 +345,14 @@
                 console.log('titleDiv : ', titleDiv);
                 console.log('authorDiv : ', authorDiv);
 
-                if(confirm( ' [ '+ authorDiv + ' ] 작가의 [ ' + titleDiv + ' ] 작품을 선택하셨나요?')){
-                    // 맞으면 전송 보내기
-                    
+                if(confirm( ' [ '+ authorDiv + ' ] 작가님의 [ ' + titleDiv + ' ] 작품을 선택하셨나요?')){
+                    // 맞으면 /Post/write 전송 보내기
+                    var myModal = document.getElementById('myModal')
+                    var myInput = document.getElementById('myInput')
+
+                    myModal.addEventListener('shown.bs.modal', function () {
+                        myInput.focus()
+                    })
                 }
 
 
@@ -337,8 +364,8 @@
                 console.log('spanAuthor : ', spanAuthor);
 
                 if(confirm( ' [ ' + spanAuthor + ' ] 작가의 [ ' + spanTitle + ' ] 작품을 선택하셨나요?')){
-                    // 맞으면 전송 보내기
-
+                    // 맞으면 /Post/write 전송 보내기
+                    
                 }
                 
             }
