@@ -239,7 +239,7 @@
                             <div class="file-box-right">
                                 첨부된 이미지가 없습니다.
                             </div>
-                            <input class="file-input" type="file" name="#" disabled>
+                            <input class="file-input" type="file" name="#">
                         </label>
                     </div>
 
@@ -264,40 +264,27 @@
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("h1", "태그 잡기 테스트");
-
             // 포스트 입력 폼 제출 이벤트
             const $regBtn = $('#post-reg-btn');
             // jQueryTagTest($regBtn, "태그 잡기 테스트");
             $regBtn.click(e => {
                 $('#post-reg-form').submit();
             })
-
-
             // platform jquery ========================================================
-
-
             // 플랫폼 클릭이벤트
             $('.platformClick').hide();
             $('.platformInputShowEvent').click(function () {
                 // alert("platform");
-
                 $('.platformClick').show();
             });
-
-
-
-
             // 장르 클릭이벤트
             $('.textClick').hide();
             $('.GenreInputShowEvent').click(function () {
                 // alert("hihihi");
-
                 $('.textClick').show();
             });
-
-            // 1. 플랫폼 value값 가져오기 
+            // 1. 플랫폼 value값 가져오기
             $('#platformselect').change(function () {
-
                 // alert($(this).val());
                 console.log("선택한 플랫폼id : " + $(this).val());
                 $("#platformselect").val($(this).val()).prop("selected", true);
@@ -305,39 +292,26 @@
                 // $('#platformselect').val($(this).val()).prop("selected", true);
                 console.log("selected : " + $("#platformselect option:selected").val());
                 // alert($("#platformselect option:selected").val());
-
             });
-
             $('#genreSelect').change(function () {
-
                 // alert($(this).val());
                 console.log("genreSelect: " + $(this).val());
                 // $('#genreSelect').val($(this).val()).attr("selected", "selected");
                 $('#genreSelect').val($(this).val()).prop("selected", true);
                 console.log("genreSelect selecded : " + $("#genreSelect option:selected").val());
                 // alert($( "#genreSelect option:selected" ).val());
-
             });
-
-
-
-
         });
         // end jQuery
-
         // 비동기 요청 경로
         const account = '${account}';
         const gAccount = '${account}'
-
         console.log(account);
         console.log(gAccount);
-
         // 나중에 꼭 수정해주기
         // const url = "http://localhost:8383/platform/c1?account=" + account;
         const url = "http://localhost:8383/platform/c1/" + account;
-
         // const genreURL = "http://localhost:8383/genre/c1?account=" + account;
-
         const genreURL = "http://localhost:8383/genre/c1/" + gAccount;
     </script>
 

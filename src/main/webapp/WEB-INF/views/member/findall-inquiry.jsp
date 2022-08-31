@@ -166,6 +166,27 @@
                         </ul>
                     </c:if>
 
+                    <!-- 페이지 버튼 만들기 -->
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+
+                          <c:forEach var="n" begin = "1" end = "10" step="1">
+                          <li class="page-item"><a class="page-link" href="#">${n}</a></li>
+                          </c:forEach>
+
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+
                     <div class="modal fade" id="answerregisterModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
