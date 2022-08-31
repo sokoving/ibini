@@ -198,10 +198,13 @@ public class MemberService {
         //문의 등록 시간 포맷팅
         inquiry.setInquiryPrettierDate(sdf.format(inquiryDate));
 
-        //답변 등록 시간 포맷팅
-        Date answerDate = inquiry.getAnswerDate();
-        inquiry.setAnswerPrettierDate(sdf.format(answerDate));
-
+        if (inquiry.getAnswerDate() == null){
+            return;
+        } else {
+            //답변 등록 시간 포맷팅
+            Date answerDate = inquiry.getAnswerDate();
+            inquiry.setAnswerPrettierDate(sdf.format(answerDate));
+        }
     }
 
     //문의글 등록하기

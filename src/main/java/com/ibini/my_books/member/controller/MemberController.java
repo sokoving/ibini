@@ -361,13 +361,14 @@ public class MemberController {
     }
 
     //회원 문의내역 상세조회
+    @ResponseBody
     @GetMapping("/findone-inquiry/{serialNumber}")
-    public String findOneInquiry(@PathVariable String serialNumber, Model model){
+    public InquiryTable findOneInquiry(@PathVariable String serialNumber, Model model){
         log.info("/member/findone-inquiry GET 요청! serialNumber : {}", serialNumber);
 
         InquiryTable oneInquiry = memberService.findOneInquiry(serialNumber);
         model.addAttribute("inquiry",oneInquiry);
-        return "/member/findone-inquiry";
+        return oneInquiry;
     }
 
     //회원 문의내역 수정 GET
@@ -454,17 +455,20 @@ public class MemberController {
     }
 
     //관리자 페이지 : 답변등록하기 POST
+    @ResponseBody
     @PostMapping("/admin/answer-register")
-    public String answerRegister(AnswerDTO dto, Model model, RedirectAttributes ra){
-        String serialNumber = dto.getSerialNumber();
-        boolean flag = memberService.answerRegister(dto);
-        if (flag){
-            ra.addFlashAttribute("msg","asnwer-success");
-            return "redirect:/member/admin/findall-inquiry";
-        } else{
-            ra.addFlashAttribute("msg","answer-fail");
-            return "redirect:/member/admin/answer-register"+serialNumber;
-        }
+    public String answerRegister(@RequestBody AnswerDTO answerDate, Model model, RedirectAttributes ra){
+        log.info("/admin/answer-register POST 비동기 요청!! dto{} ",answerDate);
+        String serialNumber = answerDate.getSerialNumber();
+        boolean flag = memberService.answerRegister(answerDate);
+       return flag?"answer-register-success" : "answer-register-fail";
+//        if (flag){
+//            ra.addFlashAttribute("msg","asnwer-success");
+//            return "redirect:/member/admin/findall-inquiry";
+//        } else{
+//            ra.addFlashAttribute("msg","answer-fail");
+//            return "redirect:/member/admin/answer-register"+serialNumber;
+//        }
 
     }
 
