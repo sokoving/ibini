@@ -89,6 +89,25 @@
             width: 15%;
         }
 
+        /* moreBtn */
+        .noResult {
+            background: #eeedeb;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .noResult span {
+            font-size: 20px;
+        }
+        #moreBtn {
+            background: #eeedeb;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+            width: 100%;
+        }
 
 
     </style>
@@ -100,6 +119,7 @@
 <body>
 
     <div id="wrap">
+        
 
         <%@ include file="../include/header.jsp" %>
     
@@ -123,6 +143,7 @@
             <div id="moreInfo">
                 <!-- 전체 조회수 초과할 경우 -->
             </div>
+            
         </div>
         
     </div>
@@ -157,7 +178,7 @@
                     makeSearchDom(data);
 
                 });
-
+            
                 // 1. 전체길이
                 // 2. 페이지번호
                 // 3. 작가
@@ -263,14 +284,23 @@
 
             const moreInfo = document.querySelector('#moreInfo');
 
+            // 검색결과 찾기 ========================================================
+
             let btntag = ``;
+            
             if(searchTotal == 0 ){
                 moreInfo.innerHTML = '';
-                btntag = `<span>검색 결과가 없습니다</span>`
+                btntag = `
+                    <div class="noResult">
+                        <span>검색 결과가 없습니다</span>
+                    </div>`
 
             } else if(searchTotal >= 30){
                 moreInfo.innerHTML = '';
-                btntag = `<button type="button" id="moreBtn" onclick ="location.href ='#'">더보기</button>`;
+                btntag = `
+
+                        <button type="button" id="moreBtn" onclick ="location.href ='#'">더보기</button>
+                `;
             }
              
             moreInfo.innerHTML = btntag;
