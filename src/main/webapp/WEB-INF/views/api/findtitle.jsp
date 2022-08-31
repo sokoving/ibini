@@ -11,17 +11,31 @@
     <title>apiTest</title>
     <style>
 
-        #search {
+        #content-wrap #search {
             background: rgb(229, 173, 173);
+            height: 50px;
         }
 
-        #infoListMakeDom{
+        #content-wrap #search #word{
+            height: 50px;
+            padding: 10px;
+            margin-right: 10%;
+            width: 40%;
+        }
+        #content-wrap #search #searchBtn{
+            background-color: cornsilk;
+            height: 40px;
+            width: 100px;
+        }
+
+
+        #content-wrap #infoListMakeDom{
             background: rgb(247 247 247);
             display: flex;
             flex-wrap: wrap;
             
         }
-        #infoListMakeDom #bookInfo{
+        #content-wrap #infoListMakeDom .bookInfo{
             width: 100%;
             justify-content: space-evenly;
             margin: 10px;
@@ -38,20 +52,18 @@
 
 
         /* dom css */
-        #infoListMakeDom #tagNoDiv{
-            width: 7%;
+        #content-wrap #infoListMakeDom .titleDiv{
+            width: 45%;
+            padding-left: 25px;
         }
-        #infoListMakeDom #titleDiv{
-            width: 40%;
-        }
-        #infoListMakeDom #authorDiv{
+        #content-wrap #infoListMakeDom .authorDiv{
             width: 20%;
         }
-        #infoListMakeDom #publisherDiv{
+        #content-wrap #infoListMakeDom .publisherDiv{
             width: 20%;
         }
-        #infoListMakeDom #publishPredateDiv{
-            width: 13%;
+        #content-wrap #infoListMakeDom .publishPredateDiv{
+            width: 15%;
         }
 
 
@@ -69,7 +81,8 @@
         <%@ include file="../include/header.jsp" %>
     
         <div id="content-wrap">
-            <h1>hi</h1>
+            <h1>검색해서 책 등록하기</h1>
+            <br>
             <div id="search">
                 <input id="word" type="text" onkeyup="search(this);">
                 <!-- keyup event -->
@@ -140,7 +153,6 @@
             console.log('searchTotal:', searchTotal);
             // console.log('docs : ', docs);
 
-            // console.log("t - a - p : ", docs[0].TITLE);
             const infoListMakeDom = document.querySelector('#infoListMakeDom');
         
             // 잡아서 배열에 저장하기?
@@ -159,6 +171,7 @@
                 // 자르는 용도 변수
                 let publisherSplit = '';
                 let titleSplit = '';
+                let authorSplitLength = '';
                 
                 // 제목 자르기
                 if(title.length >= 25){
@@ -186,7 +199,7 @@
 
                 // 작가 이름 길이 자르기
                 if(authorSplit.length >= 9){
-                    let authorSplitLength = author.substr(0, 9).concat("..");
+                    authorSplitLength = author.substr(0, 9).concat("..");
                 } else {
                     // 변수 바꿔담기
                     authorSplitLength = authorSplit;
@@ -201,26 +214,23 @@
                 }
 
 
-                // console.log('authorSplit : ', authorSplit);
-                // publisher = docs[i].PUBLISHER;
-
                 // 돔 생성 ==============================================================
                 tag += `
-                <div id="bookInfo">
-                    <div id="tagNoDiv">
-                        <span id="tagNo">`+ i +`</span>
+                <div class="bookInfo">
+                    <div class="titleDiv">
+                        <input class="hiddenTitle" type="hidden" value="`+ title +`">
+                        <span class="title">`+ titleSplit +`</span>
                     </div>
-                    <div id="titleDiv">
-                        <span id="title">`+ titleSplit +`</span>
+                    <div class="authorDiv">
+                        <input type="hidden" value="`+ authorSplit +`">
+                        <span class="author">`+ authorSplitLength +`</span>
                     </div>
-                    <div id="authorDiv">
-                        <span id="author">`+ authorSplitLength +`</span>
+                    <div class="publisherDiv">
+                        <input type="hidden" value="`+ publisher +`">
+                        <span class="publisher">` + publisherSplit +`</span>
                     </div>
-                    <div id="publisherDiv">
-                        <span id="publisher">` + publisherSplit +`</span>
-                    </div>
-                    <div id="publishPredateDiv">
-                        <span id="publishPredate">` + docs[i].PUBLISH_PREDATE +`</span>
+                    <div class="publishPredateDiv">
+                        <span class="publishPredate">` + docs[i].PUBLISH_PREDATE +`</span>
                     </div>
                 </div>
                 `;
@@ -244,25 +254,44 @@
 
         }
 
-    // 클릭이벤트시 정보 전송
-    // start jQuery
-    $(document).ready(function () {
-        
-        $('#infoListMakeDom').click(function () {
-            console.log($(this).val());
-
-        });
-
+        const infoListMakeDom = document.getElementById('infoListMakeDom');
         
 
+        infoListMakeDom.onclick = e =>{
+
+            let target = e.target
+
+            if(target.matches('.titleDiv')){
+                
+                // form에 넘길거
+                let titleDiv = target.firstElementChild.value;
+                let authorDiv = target.parentElement.firstChild.nextElementSibling.nextElementSibling.firstElementChild.value;
+                
+                console.log('titleDiv : ', titleDiv);
+                console.log('authorDiv : ', authorDiv);
+
+                if(confirm( authorDiv + ' 작가의 ' + titleDiv + '작품을 선택하셨나요?')){
+                    // 맞으면 전송 보내기
+                    
+                }
 
 
+            } else if(target.matches('.title')){
+                // title - span / author - span from에 넘기는 값
+                let spanTitle = target.previousElementSibling.value;
+                let spanAuthor = target.parentElement.parentElement.firstChild.nextElementSibling.nextElementSibling.innerText;
+                console.log('spanTitle : ', spanTitle);
+                console.log('spanAuthor : ', spanAuthor);
 
-    });
-    // end jQuery
+                if(confirm( spanAuthor + ' 작가의 ' + spanTitle + '작품을 선택하셨나요?')){
+                    // 맞으면 전송 보내기
 
+                }
+                
+            }
+            
 
-
+        }
 
 
     </script>
