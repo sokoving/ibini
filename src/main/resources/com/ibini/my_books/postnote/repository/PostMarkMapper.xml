@@ -73,4 +73,9 @@
         WHERE post_no = #{postNo}
     </select>
 
+    <!-- 마이페이지 포스트, 썸네일, 마크 조회 -->
+    <select id="findAllMyPage" resultMap="myPageMap">
+
+    </select>
+
 </mapper>

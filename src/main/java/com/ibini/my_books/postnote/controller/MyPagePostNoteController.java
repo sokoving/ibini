@@ -1,25 +1,19 @@
 package com.ibini.my_books.postnote.controller;
 
-import com.ibini.my_books.post.controller.PostController;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
-import com.ibini.my_books.postnote.search.Search;
 import com.ibini.my_books.postnote.service.PostMarkService;
 import com.ibini.my_books.postnote.service.PostMemoService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @Log4j2
