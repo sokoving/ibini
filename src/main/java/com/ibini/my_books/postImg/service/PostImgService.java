@@ -1,6 +1,7 @@
 package com.ibini.my_books.postImg.service;
 
 import com.ibini.my_books.postImg.domain.PostImg;
+import com.ibini.my_books.postImg.dto.ThumbImgDTO;
 import com.ibini.my_books.postImg.repository.PostImgMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,6 +21,26 @@ public class PostImgService {
         return repository.addFile(postImg);
     }
 
+    public void postRegService(ThumbImgDTO thumbImgDTO) {
+        log.info("PostImgService postRegService CALL - {}", thumbImgDTO);
+
+        //        썸네일 저장
+        if (thumbImgDTO.getThumbFileName() != null) {
+//            repository.cleanThumb(thumbImgDTO.getPostNo());
+            repository.addFile(thumbImgDTO.extractThumb());
+
+        }
+//        첨부파일 저장
+        if (thumbImgDTO.getFileNames() != null) {
+            List<PostImg> piList = thumbImgDTO.extractImg();
+            System.out.println("IMG service piList = " + piList);
+            for (PostImg pi : piList) {
+                System.out.println("IMG service pi = " + pi);
+                repository.addFile(pi);
+            }
+        }
+    }
+
     public List<String> getFiles(Long postNo) {
         return repository.findFileNames(postNo);
     }
@@ -35,12 +56,12 @@ public class PostImgService {
 
 
     // fileName 으로 postImg DB에서 삭제
-    public boolean removeByName(String fileName){
+    public boolean removeByName(String fileName) {
         return repository.removeByName(fileName);
     }
 
     //    post_no으로 postImg DB에서 삭제
-    public boolean removeByPostNo(Long postNo){
+    public boolean removeByPostNo(Long postNo) {
         return repository.removeByPostNo(postNo);
     }
 

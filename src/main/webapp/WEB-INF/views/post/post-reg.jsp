@@ -51,6 +51,7 @@
     <script src="/js/common.js" defer></script>
     <script src="/js/post-reg.js" defer></script>
     <script src="/js/post-platformAndGenre.js" defer></script>
+    <script src="/js/upload.js" defer></script>
 
 </head>
 
@@ -63,8 +64,10 @@
 
         <!-- 새 포스트 등록 섹션 -->
         <section class="post-reg-section">
+            <div class="top-msg">* 필수 입력 사항 <br>선택 사항은 입력하지 않으면 기본값으로 세팅됩니다.(수정 가능)</div>
             <div class="inner-section">
-                <form id="write-form" action="/post/write" method="post" autocomplete="off">
+                <form id="write-form" action="#" method="post" autocomplete="off"
+                    enctype="multipart/form-data">
 
                     <!-- 히든 : 계정-->
                     <input type="hidden" name="account" id="" value="${account}">
@@ -77,6 +80,8 @@
                         <div class="img-wrap">
                             <div class="img-box">
                                 <span class="box-msg">썸네일을 등록해 보세요</span>
+                                <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
+                                <!-- <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
                             </div>
                             <label class="file-box">
                                 <div class="file-box-left">
@@ -85,34 +90,33 @@
                                 <div class="file-box-right">
                                     등록된 썸네일이 없습니다.
                                 </div>
-                                <input class="file-input" type="file" name="#" disabled>
+                                <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
                             </label>
                         </div>
 
                         <!-- 제목, 작가, 별점 -->
                         <div class="tw-wrap">
                             <div class="span-wrap">
-                                <span class="reg-span">책 제목</span>
-                                <span class="explain-span">제목을 입력해 주세요</span>
+                                <span class="reg-span">* 책 제목</span>
+                                <span class="explain-span title-msg"></span>
                             </div>
-                            <input class="white-box title-input" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
+                            <input class="white-box" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
 
                             <div class="span-wrap">
-                                <span class="reg-span">작가</span>
-                                <span class="explain-span">작가를 입력해 주세요</span>
+                                <span class="reg-span">* 작가</span>
+                                <span class="explain-span writer-msg"></span>
                             </div>
-                            <input class="white-box writer-input" type="text" name="postWriter"
+                            <input class="white-box" type="text" name="postWriter"
                                 placeholder="작가를 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
-                                <span class="explain-span">1~5 사이의 정수를 입력해 주세요</span>
+                                <span class="explain-span star-msg"></span>
                             </div>
-                            <input class="white-box title-input" type="number" name="starRate" placeholder="예시) 5">
-
-
+                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                         </div>
                     </div> <!-- // end reg-1 -->
+
 
                     <!-- 플랫폼, 장르 -->
                     <div id="reg-2">
@@ -239,7 +243,7 @@
                             <div class="file-box-right">
                                 첨부된 이미지가 없습니다.
                             </div>
-                            <input class="file-input" type="file" name="#">
+                            <input class="file-input" type="file" name="#" disabled>
                         </label>
                     </div>
 
@@ -264,27 +268,40 @@
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("h1", "태그 잡기 테스트");
+
             // 포스트 입력 폼 제출 이벤트
             const $regBtn = $('#post-reg-btn');
             // jQueryTagTest($regBtn, "태그 잡기 테스트");
             $regBtn.click(e => {
                 $('#post-reg-form').submit();
             })
+
+
             // platform jquery ========================================================
+
+
             // 플랫폼 클릭이벤트
             $('.platformClick').hide();
             $('.platformInputShowEvent').click(function () {
                 // alert("platform");
+
                 $('.platformClick').show();
             });
+
+
+
+
             // 장르 클릭이벤트
             $('.textClick').hide();
             $('.GenreInputShowEvent').click(function () {
                 // alert("hihihi");
+
                 $('.textClick').show();
             });
-            // 1. 플랫폼 value값 가져오기
+
+            // 1. 플랫폼 value값 가져오기 
             $('#platformselect').change(function () {
+
                 // alert($(this).val());
                 console.log("선택한 플랫폼id : " + $(this).val());
                 $("#platformselect").val($(this).val()).prop("selected", true);
@@ -292,26 +309,39 @@
                 // $('#platformselect').val($(this).val()).prop("selected", true);
                 console.log("selected : " + $("#platformselect option:selected").val());
                 // alert($("#platformselect option:selected").val());
+
             });
+
             $('#genreSelect').change(function () {
+
                 // alert($(this).val());
                 console.log("genreSelect: " + $(this).val());
                 // $('#genreSelect').val($(this).val()).attr("selected", "selected");
                 $('#genreSelect').val($(this).val()).prop("selected", true);
                 console.log("genreSelect selecded : " + $("#genreSelect option:selected").val());
                 // alert($( "#genreSelect option:selected" ).val());
+
             });
+
+
+
+
         });
         // end jQuery
+
         // 비동기 요청 경로
         const account = '${account}';
         const gAccount = '${account}'
+
         console.log(account);
         console.log(gAccount);
+
         // 나중에 꼭 수정해주기
         // const url = "http://localhost:8383/platform/c1?account=" + account;
         const url = "http://localhost:8383/platform/c1/" + account;
+
         // const genreURL = "http://localhost:8383/genre/c1?account=" + account;
+
         const genreURL = "http://localhost:8383/genre/c1/" + gAccount;
     </script>
 

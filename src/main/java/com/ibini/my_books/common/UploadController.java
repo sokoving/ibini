@@ -1,5 +1,6 @@
 package com.ibini.my_books.common;
 
+import com.ibini.my_books.postImg.domain.PostImg;
 import com.ibini.my_books.postImg.dto.ThumbImgDTO;
 import com.ibini.my_books.postImg.repository.PostImgMapper;
 import com.ibini.my_books.postImg.service.PostImgService;
@@ -31,7 +32,7 @@ import java.util.List;
 public class UploadController {
 
     // 업로드 파일 저장 경로
-    private static final String UPLOAD_PATH = "E:\\sl_test\\upload";
+    private static final String UPLOAD_PATH = "E:\\ibiniImg\\upload";
     private final PostImgMapper postImgMapper;
     private final PostImgService postImgService;
 
@@ -49,24 +50,10 @@ public class UploadController {
     // MultipartFile: 클라이언트가 전송한 파일 정보들을 담은 객체
     // ex) 원본 파일명, 파일 용량, 파일 컨텐츠타입
     @PostMapping("/upload")// name = files 로 받아서 files 로해야함
-    public String upload(ThumbImgDTO thumbImgDTO
-//            , @RequestParam("files") List<MultipartFile> fileList
-    ) {
+    public String upload(ThumbImgDTO thumbImgDTO) {
         log.info("/upload POST! - {}", thumbImgDTO);
-//        log.info("/upload POST! - {}", fileList);
 
-//        썸네일 저장
-        postImgService.saveService(thumbImgDTO.extractThumb());
-
-
-//        for (MultipartFile file: fileList) {
-//            log.info("file-name: {}", file.getName());
-//            log.info("file-origin-name: {}", file.getOriginalFilename());
-//            log.info("file-size: {}KB", (double) file.getSize() / 1024);
-//            log.info("file-type: {}", file.getContentType());
-//            System.out.println("=============================================");
-//            FileUtils.uploadFile(file, UPLOAD_PATH); / 파일올리기안하기
-//        }
+        postImgService.postRegService(thumbImgDTO);
 
         return "redirect:/upload-form";
     }
@@ -106,7 +93,7 @@ public class UploadController {
         }
 
         // 2. 해당 파일을 InputStream을 통해 불러온다. /하드디스크랑 서버프로그램연결
-        try (FileInputStream fis = new FileInputStream(f)){
+        try (FileInputStream fis = new FileInputStream(f)) {
 
             // 3. 클라이언트에게 순수 이미지를 응답해야 하므로 MIME TYPE을 융합
             // ex) image/jpeg, image/png, image/gif/ 이미지인지
