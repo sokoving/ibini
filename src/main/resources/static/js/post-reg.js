@@ -1,26 +1,37 @@
+// -------------- 전역변수 -------------- //
+const $title = $('input[name=postTitle]');
+const $writer = $('input[name=postWriter]');
+const $star = $('input[name=starRate]');
+const $genre = $('select[name=genreId]');
+const $epId = $('input[name=epId]');
+const $curEp = $('input[name=curEp]');
+const $totalEp = $('input[name=totalEp]');
+
+// --------- 함수 정의부 ---------- //
+
 // 입력하지 않은 값 처리 함수
 function validateFormValue() {
-    const $title = $('input[name=postTitle]');
-    console.log('title: ', $title.val());
-    const $writer = $('input[name=postWriter]');
-    console.log('writer: ', $writer.val());
-    const $star = $('input[name=starRate]');
-    console.log('star: ', $star.val());
-    console.log('platform: ', $('select[name=platformId]').val());
-    const $genre = $('select[name=genreId]').val();
-    console.log('genre: ', $('select[name=genreId]').val());
+
+    // console.log('title: ', $title.val());
+    // console.log('writer: ', $writer.val());
+    // console.log('star: ', $star.val());
+    // console.log('platform: ', $('select[name=platformId]').val());
+    // console.log('genre: ', $('select[name=genreId]').val());
     console.log('publishStatus: ', $('input[name=publishStatus]').val());
-    console.log('publishCycle: ', $('input[name=publishCycle]').val());
-    const $epId = $('input[name=epId]');
+    // console.log('publishCycle: ', $('input[name=publishCycle]').val());
     console.log('epId: ', $epId.val());
-    const $curEp = $('input[name=curEp]');
     console.log('curEp: ', $curEp.val());
-    const $totalEp = $('input[name=totalEp]');
     console.log('totalEp: ', $totalEp.val());
-    console.log('tag: ', $('input[name=tagName]').val());
+    // console.log('tag: ', $('input[name=tagName]').val());
 
     let flag = false; // 입력 제대로하면 true로 변경 
 
+    // 작가 값이 없는 경우
+    if ($writer.val().trim() === '') {
+        $('.writer-msg').text('[ 작가를 입력해 주세요 ]');
+        $('.writer-msg').css('color', '#f44659');
+        $writer.focus();
+    }
 
     // 제목 값이 없는 경우 
     if ($title.val().trim() === '') {
@@ -28,21 +39,27 @@ function validateFormValue() {
         $('.title-msg').css('color', '#f44659');
         $title.focus();
     }
-    // 작가 값이 없는 경우
-    else if ($writer.val().trim() === '') {
-        $('.writer-msg').text('[ 작가를 입력해 주세요 ]');
-        $('.writer-msg').css('color', '#f44659');
-        $writer.focus();
-    }
+
     // 별점 값이 없는 경우,
     if ($star.val().trim() === '') {
         $star.val(0);
     }
+
     // 회차 값이 둘 다 없을 경우
-    if($curEp.val() === '' || $totalEp === ''){
-        // $epId.val(3)
-        $curEp.val(0);
-        $totalEp.val(100);
+    if ($curEp.val() === '' || $totalEp === '') {
+        const $radioGroup = document.getElementsByName('epId');
+        for (let radio of $radioGroup) {
+            if (radio.checked) {
+                radio.parentElement.classList.remove('checked');
+                radio.setAttribute("checked", false);
+            }
+            if (radio.value == 3) {
+                radio.parentElement.classList.add('checked');
+                radio.setAttribute("checked", true);
+                $curEp.val(0);
+                $totalEp.val(100);
+            }
+        }
     }
 
 
@@ -80,12 +97,11 @@ document.querySelector('.pub-btn-group').onclick = function () {
 // 회차 버튼 체크 함수
 document.querySelector('.ep-btn-group').onclick = function () {
     const $radioGroup = document.getElementsByName('epId');
-    const $curEp = $('input[name=curEp]');
-    const $totalEp = $('input[name=totalEp]');
     for (let radio of $radioGroup) {
 
         if (radio.checked) {
             radio.parentElement.classList.add('checked');
+            radio.setAttribute("checked", true);
 
             // 회차 버튼 아래 텍스트 변경
             let epName = radio.previousElementSibling.textContent;
@@ -106,6 +122,7 @@ document.querySelector('.ep-btn-group').onclick = function () {
             }
         } else {
             radio.parentElement.classList.remove('checked');
+            radio.setAttribute("checked", false);
         }
     }
 }
