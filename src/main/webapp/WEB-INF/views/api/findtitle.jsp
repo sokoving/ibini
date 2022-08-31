@@ -30,7 +30,7 @@
 
 
         #content-wrap #infoListMakeDom{
-            background: rgb(247 247 247);
+            background: #fffaee;
             display: flex;
             flex-wrap: wrap;
             
@@ -47,6 +47,12 @@
             line-height: 2.7;
             box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 
+        }
+
+        #content-wrap #infoListMakeDom .bookInfo:hover{
+            background-color: #ffebbb;
+            transform: scale(1.03);
+            transition: 0.2s;
         }
 
 
@@ -113,7 +119,7 @@
 
         function search(target) {
 
-
+            const keyCode = "4d558d393158f70a939dc6c9f6fd608fa97e902d5f35e1f2c937bd025387bdc5";
             var word = target.value;
             var encodeWord = encodeURI(word);
             console.log(word);
@@ -121,7 +127,7 @@
 
             // 비동기 GET
             let url = "https://www.nl.go.kr/seoji/SearchApi.do?" +
-                "cert_key=4d558d393158f70a939dc6c9f6fd608fa97e902d5f35e1f2c937bd025387bdc5" +
+                "cert_key=" + keyCode + 
                 "&result_style=json&page_no=1&page_size=30" +
                 "&title=" + word;
 
