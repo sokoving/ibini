@@ -6,11 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 @Controller
 @Log4j2
@@ -25,16 +21,15 @@ public class NationalSearchController {
     // 리스트 값 중 하나를 클릭하면 form에 값을 넣어줌?
     // 페이징 기능
 
-    @GetMapping("/findtitle/{searchTitle}")
-    public String findData(@PathVariable String searchTitle,
+    @GetMapping("/findtitle")
+    public String findData(
                            Model model){
-        log.info("searchTitle - {}", searchTitle);
 //        log.info("pageNum-{}", pageNum);
         // 검색하면 조회된 검색결과의 1page를 랜더링 해주는 함수
-        ArrayList<Map<String, Object>> serviceFirstPage = nationalSearchService.findFirstPage(searchTitle);
+//        ArrayList<Map<String, Object>> serviceFirstPage = nationalSearchService.findFirstPage(searchTitle);
 
 //        model.addAttribute("api", serviceFirstPage);
-        model.addAttribute("info", serviceFirstPage);
+//        model.addAttribute("info", serviceFirstPage);
 
         return "api/findtitle";
 
