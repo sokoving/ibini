@@ -32,7 +32,7 @@
                             <!-- 썸네일 이미지 -->
                             <div id="thumb-img">
                                 <c:if test="${p.thumbImg != null}">
-                                    <img class="post-img" src="${p.thumbImg}" alt="포스트 썸네일 이미지">
+                                    <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
                                 </c:if>
                             </div>
 
@@ -51,14 +51,14 @@
                                             <c:choose>
                                                 <c:when test="${img.thumbnail}">
                                                     <div class="img-box post-thumb">
-                                                        <img class="post-img" src="${img.fileName}" alt="포스트 표지"
-                                                            title="${img.originalFileName}">
+                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}"
+                                                            alt="포스트 표지" title="${img.originalFileName}">
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="img-box">
-                                                        <img class="post-img" src="${img.fileName}" alt="포스트 첨부 이미지"
-                                                            title="${img.originalFileName}">
+                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}"
+                                                            alt="포스트 첨부 이미지" title="${img.originalFileName}">
                                                     </div>
                                                 </c:otherwise>
                                             </c:choose>
@@ -107,23 +107,23 @@
                                             <td class="first-td">${p.platformName}</td>
                                             <c:choose>
 
-                                                <c:when test="${empty p.publishCycle}">
-                                                    <td class="last-td">-</td>
+                                                <c:when test="${p.publishStatus <= 1}">
+                                                    <c:choose>
+                                                        <c:when test="${empty p.publishCycle}">
+                                                            <td class="last-td">${p.publishStatusName}</td>
+                                                        </c:when>
+
+                                                        <c:otherwise>
+                                                            <td class="last-td">${p.publishCycle}</td>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:when>
 
                                                 <c:otherwise>
-                                                    <c:choose>
-                                                        <c:when test="${p.publishStatus <= 1}">
-                                                            <td class="last-td">${p.publishCycle}</td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <td class="last-td">${p.publishStatusName}</td>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                    <td class="last-td">${p.publishStatusName}</td>
                                                 </c:otherwise>
 
                                             </c:choose>
-
                                         </tr>
                                         <tr class="empty-tr">
                                             <td colspan="2">-</td>
@@ -170,9 +170,12 @@
                                     <span>수정일 ${p.shortDate.postUpdateDate}</span>
                                 </div>
                                 <div class="post-btn-wrap">
-                                    <button class="post-btn" title="수정하기"><i class="fas fa-pencil-alt"></i></button>
-                                    <button class="post-btn" title="삭제하기"><i class="far fa-trash-alt"></i></button>
-                                    <button class="post-btn" title="목록으로"><i class="far fa-list-alt"></i></button>
+                                    <button class="post-btn post-modi-btn" title="수정하기"><i
+                                            class="fas fa-pencil-alt"></i></button>
+                                    <button class="post-btn post-del-btn" title="삭제하기"><i
+                                            class="far fa-trash-alt"></i></button>
+                                    <button class="post-btn post-list-btn" title="목록으로"><i
+                                            class="far fa-list-alt"></i></button>
                                 </div>
                             </div> <!-- // end post-bottom -->
 
@@ -292,14 +295,41 @@
     <script>
         // start jQuery
         $(document).ready(function () {
+            // 포스트 번호
+            const postNo = '${p.postNo}';
+            console.log(postNo);
+
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
             // 별 찍기
-            const star = '${p.starRate}'
-            starRate(star);
+            function drawStarsAtDetail(star) {
+                // console.log("starRate 함수 시작!");
+                // console.log(star);
 
-            const imgList = '${imgList}';
-            console.log(imgList);
+                const $star = $('.star-span');
+                let text = '';
+
+                // 별점이 0일 경우
+                if (star <= 0 || star === null) {
+                    $star.removeClass('top-span')
+                    return;
+                } else {
+                    // 별점이 1보다 큰 경우
+                    for (let i = 0; i < star; i++) {
+                        text += '⭐';
+                    }
+                    $star.text(text);
+                }
+            }
+
+            const star = '${p.starRate}'
+            drawStarsAtDetail(star);
+
+            // 포스트 수정, 삭제, 목록 버튼 이벤트
+            $('.post-btn-wrap').click(function (e) {
+                clickPostBtn(e.target, postNo)
+            })
+
 
 
 

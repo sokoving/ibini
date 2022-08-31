@@ -7,6 +7,7 @@ import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.postImg.domain.PostImg;
+import com.ibini.my_books.postImg.dto.ThumbImgDTO;
 import com.ibini.my_books.postImg.service.PostImgService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
@@ -59,13 +60,13 @@ public class PostController {
     //    포스트 등록 요청      post   /post/write
     // @RequestBody Post 제거해서
     @Transactional
-    @PostMapping("/write/{account}")
-    public String postWrite(@PathVariable String account
-            , Post post
-            , HashtagDomain tag) {
-        log.info("/write/{account} account POST 요청!! - account : {}", account);
-        log.info("PostController /post/write POST 요청!! - post: {}", post);
-        log.info("PostController /post/write POST 요청!! - hashtag: {}", tag);
+    @PostMapping("/write")
+    public String postWrite(Post post, HashtagDomain tag, ThumbImgDTO thumbImgDTO
+    ) {
+        log.info("PostController /post/write POST 요청!!");
+        log.info("/post/write - post: {}", post);
+        log.info("/post/write - hashtag: {}", tag);
+        log.info("/post/write - thumbImgDTO : {}", thumbImgDTO);
 
         // tbl_post 저장
         boolean postFlag = postService.saveService(post);
@@ -75,6 +76,8 @@ public class PostController {
         boolean tagFlag = hashTagService.saveHashTag(tag);
         log.info("tag flag : {}", tagFlag);
 
+        // tbl_post_img 저장
+        imgService.postRegService(thumbImgDTO);
 
         return "redirect:/list/";
     }
@@ -97,7 +100,7 @@ public class PostController {
     }
 
     // 포스트 삭제 폼 요청      get    /post/delete
-    @GetMapping("/delete/{account}")
+    @GetMapping("/delete")
     public String delete(@ModelAttribute("postNo") Long postNo, Model model) {
         log.info("PostController /post/delete  GET 요청!! - {}", postNo);
 
@@ -105,9 +108,11 @@ public class PostController {
     }
 
     //    포스트 삭제 요청  post    /post/delete
-    @PostMapping("/delete/{account}")
+    @Transactional
+    @PostMapping("/delete")
     public String delete(Long postNo, RedirectAttributes ra) {
         log.info("PostController /post/delete  POST 요청!! - {}", postNo);
+
         boolean flag = postService.removeService(postNo);
 
         if (flag){
@@ -121,9 +126,8 @@ public class PostController {
 
     //    포스트 상세 조회 요청  get   /post/detail
 
-    @GetMapping("/detail/{postNo}/{account}")
-    public String postDetail(@PathVariable String account,
-            @PathVariable Long postNo, Model model) {
+    @GetMapping("/detail/{postNo}")
+    public String postDetail(@PathVariable Long postNo, Model model) {
         log.info("PostController /post/detail/{}  GET 요청!!", postNo);
 
         PostWithName postWithName = postService.fineOnePostWithName(postNo);

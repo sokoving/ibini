@@ -6,20 +6,37 @@
 <mapper namespace="com.ibini.my_books.postImg.repository.PostImgMapper">
 
     <resultMap id="postImgMap" type="com.ibini.my_books.postImg.domain.PostImg">
-        <result property="fileName" column="file_name" />
-        <result property="postNo" column="post_no" />
-        <result property="originalFileName" column="original_file_name" />
-        <result property="regDate" column="reg_date" />
+        <result property="fileName" column="file_name"/>
+        <result property="postNo" column="post_no"/>
+        <result property="originalFileName" column="original_file_name"/>
+        <result property="regDate" column="reg_date"/>
     </resultMap>
 
     <insert id="addFile">
         INSERT INTO prj_post_img
-            (file_name, post_no, account, original_file_name)
+            (
+                file_name,
+                post_no,
+                account,
+                original_file_name
+                <if test="thumbnail">, thumbnail</if>
+            )
         VALUES
-            (#{fileName}, seq_tbl_post.currval, #{account}, #{originalFileName})
+            (
+                #{fileName},
+                <choose>
+                    <when test="postNo != null">
+                        #{postNo},
+                    </when>
+                    <otherwise>
+                        seq_tbl_post.currval,
+                    </otherwise>
+                </choose>
+                #{account},
+                #{originalFileName}
+                <if test="thumbnail">, #{thumbnail}</if>
+            )
     </insert>
-
-
 
     <select id="findFileNames" resultType="string">
         SELECT file_name
@@ -30,7 +47,7 @@
 
     <select id="findFiles" resultMap="postImgMap">
         select
-            file_name, post_no, original_file_name, thumbnail
+        file_name, post_no, original_file_name, thumbnail
         FROM prj_post_img
         WHERE post_no = #{postNo}
         ORDER BY thumbnail desc
@@ -41,6 +58,24 @@
         where THUMBNAIL='true'
     </select>
 
+    <!--    fileName 으로 postImg DB에서 삭제-->
+    <delete id="removeByPostNo">
+        DELETE FROM prj_post_img
+        WHERE post_no = #{postNo}
+    </delete>
+
+    <!--   post_no으로 postImg DB에서 삭제-->
+    <delete id="removeByName">
+        DELETE FROM prj_post_img
+        WHERE file_name = #{fileName}
+    </delete>
+
+    <!--  post에 있는 썸네일 전체 삭제  -->
+    <delete id="cleanThumb">
+        DELETE FROM prj_post_img
+        WHERE post_no = #{postNo}
+            and thumbnail = 'true'
+    </delete>
 
 
 </mapper>

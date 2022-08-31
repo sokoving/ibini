@@ -72,6 +72,7 @@
             post_title,    post_writer,    publish_status,    publish_cycle,
             ep_id,    cur_ep,    total_ep,    reg_date,    update_date,    star_rate
         FROM tbl_post
+        WHERE account = #{account}
         ORDER BY post_no desc
     </select>
 
@@ -82,7 +83,9 @@
             p.post_title,    p.post_writer,    p.publish_status,    p.publish_cycle,
             p.ep_id,    p.cur_ep,    p.total_ep,    p.reg_date,    p.update_date,    p.star_rate
             ,pi.file_name
-        FROM tbl_post p
+        FROM (
+                select * from tbl_post WHERE account = #{account}
+             )p
 
         LEFT OUTER JOIN prj_genre g
             ON p.genre_id = g.genre_id
@@ -158,6 +161,7 @@
     <select id="getTotalCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_post
+        WHERE account = #{account}
     </select>
 
 <!--    <select id="getTotalCount2" resultType="int">-->

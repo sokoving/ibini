@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootTest
 class HashTagServiceTest {
@@ -37,19 +36,19 @@ class HashTagServiceTest {
         HashtagDomain hashtagDomain = new HashtagDomain();
         hashtagDomain.setPostNo(1L);
         hashtagDomain.setAccount("ibini");
-        hashtagDomain.setTagName("#로맨스 #판타지 #서양배경 #성장물");
+        hashtagDomain.setTagName("# 로맨스 #판타지#서양 배경 #성장물");
 
 
         String hashTag = hashtagDomain.getTagName();
         System.out.println(hashTag);
         hashTag = hashTag.substring(1);
-        String[] hashTags = hashTag.split(" #");
+        String[] hashTags = hashTag.split("#");
         System.out.println(Arrays.toString(hashTags));
 
         // hashtag[] => DB에 하나씩 넣어주기
         for (String tag : hashTags) {
-            System.out.println(tag);
-            hashtagDomain.setTagName(tag);
+            System.out.println(tag.trim());
+            hashtagDomain.setTagName(tag.trim());
             hashtagMapper.saveHashtag(hashtagDomain);
             // domain
         }
@@ -74,4 +73,14 @@ class HashTagServiceTest {
         String s = hashTagService.mergeTag(postNo);
         System.out.println("s = " + s);
     }
+
+    @Test
+    @DisplayName("포스트에 등록된 해시태그 전부 삭제")
+    void removeTagOnPostTest(){
+        Long postNo = 2L;
+        boolean flag = hashTagService.removeTagOnPost(postNo);
+
+    }
+
+
 }

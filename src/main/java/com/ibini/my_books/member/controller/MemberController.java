@@ -13,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,6 +42,7 @@ public class MemberController {
     }
 
     //회원가입 처리 요청
+    @Transactional
     @PostMapping("sign-up")
     public String signUp(Member member, RedirectAttributes ra) {
         log.info("/member/sign-up POST ! - {}", member);
@@ -242,6 +244,7 @@ public class MemberController {
         log.info("/member/join-out GET!! /member/join-out.jsp");
     }
 
+    @Transactional
     @PostMapping("/join-out")
     public String joinOut(String userId, String password, RedirectAttributes ra) {
         log.info("/member/join-out POST !! userId : {}, password : {}", userId, password);

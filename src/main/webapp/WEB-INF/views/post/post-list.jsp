@@ -42,6 +42,7 @@
 
     <!-- custom js -->
     <script src="/js/common.js" defer></script>
+    <script src="js/post-list.js" defer></script>
 
 
 </head>
@@ -94,7 +95,8 @@
                                 <c:choose>
                                     <c:when test="${p.thumbImg != null}">
                                         <div class="thumb-box">
-                                            <img class="thumb-img hover" src="${p.thumbImg}" alt="포스트 썸네일">
+                                            <img class="thumb-img hover" src="/loadFile?fileName=${p.thumbImg}"
+                                                alt="포스트 썸네일">
                                         </div>
                                     </c:when>
                                     <c:otherwise>
@@ -109,7 +111,7 @@
                             <div class="item-center">
                                 <div class="center-top">
                                     <%-- 별점 --%>
-                                    <div class="star-rate" data-star-rate="3"></div>
+                                    <div class="star-rate" data-star-rate=${p.starRate}></div>
                                     <%-- 제목 --%>
                                     <div class="post-title">
                                         <a href="/post/detail/${p.postNo}">
@@ -122,28 +124,28 @@
 
                                 <div class="pl-pu-warp">
                                     <%-- 플랫폼 --%>
-                                    <span class="plat-name hover" style="background: ${p.platformBgColor}; color: ${p.platformFontColor};">${p.platformName}</span>
+                                    <c:set var="bg" value="${p.platformBgColor}" />
+                                    <c:set var="color" value="${p.platformFontColor}" />
+                                    <span class="plat-name hover"
+                                        style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">${p.platformName}</span>
 
-                                    <%-- 연재주기 or 연재상태 --%>
-                                    <c:choose>
-                                        <%-- 연재주기값 없음 : - --%>
-                                        <c:when test="${empty p.publishCycle}">
-                                            <span class="pu-cycle">-</span>
-                                        </c:when>
-                                        <%-- 연재주기값 있음 : - --%>
-                                        <c:otherwise>
-                                            <c:choose>
-                                                <%-- 연재상태가 미분류, 연재 : 연재주기 --%>
-                                                <c:when test="${p.publishStatus <= 1}">
-                                                    <span class="pu-cycle">${p.publishCycle}</span>
-                                                </c:when>
-                                                <%-- 연재상태가 휴재, 완결 : 연재상태 --%>
-                                                <c:otherwise>
-                                                    <span class="pu-cycle">${p.publishStatusName}</span>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:otherwise>
-                                    </c:choose>
+                                        <c:choose>
+                                            <c:when test="${p.publishStatus <= 1}">
+                                                <c:choose>
+                                                    <c:when test="${empty p.publishCycle}">
+                                                        <td class="last-td">${p.publishStatusName}</td>
+                                                    </c:when>
+
+                                                    <c:otherwise>
+                                                        <td class="last-td">${p.publishCycle}</td>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td class="last-td">${p.publishStatusName}</td>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                 </div> <%-- // end pl-pu-wrap --%>
 
                                 <%-- 해시태그 --%>
@@ -185,10 +187,29 @@
 
 
     <script>
+        // 별 특수문자 채우는 함수
+        function drawStarsAtList() {
+            const $stars = document.querySelectorAll('.star-rate');
+            //    console.log($stars);
+
+            for (let i = 0; i < $stars.length; i++) {
+                const num = $stars[i].dataset.starRate;
+                //    console.log(num);
+                let msg = '';
+                for (let j = 0; j < num; j++) {
+                    msg += '⭐';
+                }
+                $stars[i].textContent = msg;
+            }
+
+        }
+
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
+            // 별점에 따른 별 찍기
+            drawStarsAtList();
 
 
 

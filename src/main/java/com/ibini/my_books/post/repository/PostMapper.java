@@ -14,8 +14,8 @@ public interface PostMapper {
     boolean save(Post post);
 
     // 게시글 전체 조회 (tbl_post만 조회)
-    List<Post> findAllPost();
-    List<PostWithName> findAllPostWithName();
+    List<Post> findAllPost(String account);
+    List<PostWithName> findAllPostWithName(String account);
 
     // 게시글 전체 조회 with paging
 //    List<Post> findAll(Page page);
@@ -34,7 +34,7 @@ public interface PostMapper {
     boolean modify(Post post);
 
     // 전체 게시물 수 조회
-    int getTotalCount();
+    int getTotalCount(String account);
 //    int getTotalCount2(Search search);
 
 

@@ -45,6 +45,9 @@ public interface MemberMapper {
     //쿠키값(세션아이디)을 가지고 있는 회원정보 조회
     Member findMemberBysessionId(String sessionId);
 
+    //userId로 account 가져오기
+    String changIdToAccount(String userId);
+
 //    ========== 회원관리 =============== //
 
     //회원관리 테이블에 회원 등록
