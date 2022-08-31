@@ -191,13 +191,14 @@
                         <div class="span-wrap">
                             <span class="reg-span">연재 일시</span>
                         </div>
-                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 금 10시">
+                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
                     </div> <!-- // end reg-3 -->
 
                     <!-- 회차 구분, 현재 회차, 현재 페이지 -->
                     <div id="reg-4">
                         <div class="span-wrap">
                             <span class="reg-span">회차 구분</span>
+                            <span class="explain-span ep-msg"></span>
                         </div>
 
                         <div class="radio-wrap ep-btn-group">
@@ -281,10 +282,11 @@
             const $regBtn = $('#post-reg-btn');
             // jQueryTagTest($regBtn, "태그 잡기 테스트");
             $regBtn.click(e => {
-                // e.preventDefault();
-                // validateFormValue();
-
-                $('#post-reg-form').submit();
+                e.preventDefault();
+                if (!validateFormValue()){
+                    return;
+                }
+                $('#write-form').submit();
             })
 
 
