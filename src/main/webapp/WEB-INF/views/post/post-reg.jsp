@@ -190,6 +190,7 @@
                         </div>
                         <div class="span-wrap">
                             <span class="reg-span">연재 일시</span>
+                            <span class="explain-span ep-msg"></span>
                         </div>
                         <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
                     </div> <!-- // end reg-3 -->
@@ -274,9 +275,22 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-
+            // jQueryTagTest("태그 잡기 테스트", $('h1'));
             const account = "${account}";
             console.log(account);
+
+            // 입력창 키업 이벤트
+            const $form = $('#write-form');
+            // console.log($form);
+            $form.on({
+                keydown: function (e) {
+                    return checkKeydown(e);
+                },
+                keyup: function(e){
+                    checkKeyup(e);
+                }
+            });
+
 
             // 포스트 입력 폼 제출 이벤트
             const $regBtn = $('#post-reg-btn');

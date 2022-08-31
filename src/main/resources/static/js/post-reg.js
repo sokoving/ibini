@@ -7,11 +7,64 @@ const $cycle = $('input[name=publishCycle]')
 const $epId = $('input[name=epId]');
 const $curEp = $('input[name=curEp]');
 const $totalEp = $('input[name=totalEp]');
-const tag = $('input[name=tagName]')
+const $tag = $('input[name=tagName]')
 
 // --------- 함수 정의부 ---------- //
 
+// 키다운 이벤트 처리 함수
+function checkKeydown(e) {
+    const keyCode = e.keyCode;
+    const target = e.target;
+    // console.log(keyCode);
+    // 엔터로 서브밋되는 거 막기
+    if (e.keyCode === 13) {
+        e.preventDefault();
+    }
 
+    // 공백으로 시작, 공백 반복 입력 막기
+    let fullValue = target.value;
+    let lastValue = fullValue.charAt(fullValue.length - 1);
+    if (fullValue === '' || lastValue === ' ') {
+        if (keyCode === 32) {
+            return false;
+        }
+    }
+    switch (target.name) {
+        case 'postTitle':
+    }
+    if (target.name === 'postTitle') {
+
+    }
+    switch (target.name) {
+        case 'tagName':
+            $('#reg-5 .explain-span').text('[ 각 해시태그는 #를 기준으로 구별됩니다. ]');
+            $('#reg-5 .explain-span').css('color', '#555');
+            break;
+        case 'postTitle':
+        case 'postWriter':
+        case 'starRate':
+            let $msg = e.target.previousElementSibling.children[1];
+            $msg.textContent = '';
+            break;
+        case 'totalEp':
+        case 'curEp':
+            let $epMsg = $('#reg-4 .explain-span');
+            $epMsg.text('');
+            break;
+        default:
+            break;
+    }
+}
+
+function checkKeyup(e) {
+    // 해시태그가 #으로 시작하지 않으면 # 넣어주기
+    if (e.target.name === 'tagName') {
+        let fullValue = e.target.value;
+        if (fullValue.length > 0 && fullValue.charAt(0) !== '#') {
+            $tag.val('#' + fullValue);
+        }
+    }
+}
 
 
 
@@ -37,6 +90,8 @@ function validateFormValue() {
         $('.writer-msg').css('color', '#f44659');
         $writer.focus();
         flag = false;
+    } else {
+        $('.writer-msg').text('');
     }
 
     // 제목 값이 없는 경우 
@@ -45,6 +100,8 @@ function validateFormValue() {
         $('.title-msg').css('color', '#f44659');
         $title.focus();
         flag = false;
+    } else {
+        $('.title-msg').text('');
     }
 
     // 별점 값이 없는 경우,
@@ -53,6 +110,11 @@ function validateFormValue() {
         $('.star-msg').text('[ 기본값으로 세팅됐습니다. ]');
         $('.star-msg').css('color', '#005666');
         flag = false;
+    } else if ($star.val() < 0 || $star.val() > 9) {
+        $('.star-msg').text('[ 1~9 사이의 숫자를 입력해 주세요 ]');
+        $('.star-msg').css('color', '#005666');
+    } else {
+        $('.star-msg').text('');
     }
 
 
@@ -75,17 +137,16 @@ function validateFormValue() {
                 $totalEp.attr('readonly', 'readonly')
             }
         }
-        $('.ep-msg').text('[ 기본값으로 세팅됐습니다. ]');
-        $('.ep-msg').css('color', '#005666');
+        $('#reg-4 .ep-msg').text('[ 기본값으로 세팅됐습니다. ]');
+        $('#reg-4 .ep-msg').css('color', '#005666');
 
     } // 회차 값이 둘 중 하나만 없을 경우
     else if ($curEp.val() === '') {
         $curEp.val($totalEp.val());
-        $('.ep-msg').text('[ 기본값으로 세팅됐습니다. ]');
-        $('.ep-msg').css('color', '#005666');
-    }
-    else if($totalEp.val() === ''){
-        if($curEp.val() > 0){
+        $('#reg-4 .ep-msg').text('[ 기본값으로 세팅됐습니다. ]');
+        $('#reg-4 .ep-msg').css('color', '#005666');
+    } else if ($totalEp.val() === '') {
+        if ($curEp.val() > 0) {
             $totalEp.val($curEp.val());
         } else {
             $totalEp.val(1);
@@ -95,24 +156,27 @@ function validateFormValue() {
     }
 
     // 현재 회차가 전체 회차보다 클 때
-    else if(+$curEp.val() > +$totalEp.val()){
+    else if (+$curEp.val() > +$totalEp.val()) {
         $('.ep-msg').text('[ 현재회차는 전체회차보다 클 수 없습니다. ]');
         $('.ep-msg').css('color', '#f44659');
         $curEp.focus();
         flag = false;
     }
     // 전체 회차가 0일 때
-    else if($totalEp.val() == 0){
+    else if ($totalEp.val() == 0) {
         $('.ep-msg').text('[ 전체회차는 0보다 커야 합니다. ]');
         $('.ep-msg').css('color', '#f44659');
         $totalEp.val(1)
         $totalEp.focus();
         flag = false;
+    } else {
+        $('.ep-msg').text('');
     }
 
     console.log('flag:', flag);
     return flag;
 }
+// 큰 이미지 사이징하기
 
 // 썸네일 이미지 중복 업로드 막기(upload.js에서)
 

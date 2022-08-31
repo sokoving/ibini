@@ -194,6 +194,7 @@
                         </div>
                         <div class="span-wrap">
                             <span class="reg-span">연재 일시</span>
+                            <span class="explain-span ep-msg"></span>
                         </div>
                         <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
                     </div> <!-- // end reg-3 -->
@@ -287,26 +288,13 @@
 
             // 입력창 키업 이벤트
             const $form = $('#write-form');
-            console.log($form);
+            // console.log($form);
             $form.on({
                 keydown: function (e) {
-                    // 엔터로 서브밋되는 거 막기
-                    if (e.keyCode === 13) {
-                        e.preventDefault();
-                    }
-
-                    // 스페이스바 반복 입력 막기
-                    console.log(e.keyCode);
-
-                    const val = e.target.value;
-                    const last = val.charAt(val.length - 1)
-
-                    console.log(val);
-                    console.log(last);
-
-                    // if(last === 32){
-                    //     return;
-                    // }
+                    return checkKeydown(e);
+                },
+                keyup: function(e){
+                    checkKeyup(e);
                 }
 
 
