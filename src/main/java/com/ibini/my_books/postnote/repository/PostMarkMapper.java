@@ -1,5 +1,6 @@
 package com.ibini.my_books.postnote.repository;
 
+import com.ibini.my_books.postnote.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
 import com.ibini.my_books.postnote.dto.MyPageMark;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,5 +32,5 @@ public interface PostMarkMapper {
     int getPostMarkCount(Long postNo);
 
     // 마이페이지 포스트, 썸네일 마크 조회
-    List<MyPageMark> findAllMyPage(Long postNo);
+    List<MyPageMark> findAllMyPage(String account, Search search);
 }
