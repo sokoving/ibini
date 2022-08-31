@@ -24,4 +24,7 @@ public interface PlatformMapper {
     // 전체조회
     List<PlatformDomain> findAllPlatform(String account);
 
+    // 계정에 있는 플랫폼 수 조회
+    int getTotalCount(String account);
+
 }

@@ -1,9 +1,11 @@
 package com.ibini.my_books.member.service;
 
+import com.ibini.my_books.genre.service.GenreService;
 import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.*;
 import com.ibini.my_books.member.repository.MemberMapper;
+import com.ibini.my_books.platform.service.PlatformService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,6 +31,8 @@ public class MemberService {
     private final MemberMapper memberMapper;
 
     private final BCryptPasswordEncoder encoder;
+    private final GenreService genreService;
+    private final PlatformService platformService;
 
     //회원 가입 중간처리
     @Transactional
@@ -37,6 +41,11 @@ public class MemberService {
         member.setPassword(encoder.encode(member.getPassword()));
         boolean flag = memberMapper.register(member);
         if (flag) {
+            // 새로 가입한 회원 계정을 가져와 기본 장르, 플랫폼 세팅
+            String account = memberMapper.changIdToAccount(member.getUserId());
+            genreService.setGenreForNewMember(account);
+            platformService.setPlatformForNewMember(account);
+
             return memberMapper.registerManageMember(member);
         }
         return false;
@@ -82,7 +91,6 @@ public class MemberService {
                 //로그인 성공
                 //세션에 사용자 정보기록 저장
                 session.setAttribute("loginUser", foundMember);
-
                 //세션 타임아웃 설정
                 session.setMaxInactiveInterval(60 * 60); // 1시간 설정
 
@@ -147,8 +155,7 @@ public class MemberService {
 
     // 회원 정보 닉네임 수정 기능
     public boolean updateName(String userId, String userName) {
-        boolean flag = memberMapper.updateName(userId, userName);
-        return flag;
+        return memberMapper.updateName(userId, userName);
     }
 
 
@@ -162,12 +169,17 @@ public class MemberService {
 //        m.setPassword(encodePw);
 
         //DB에 변경된 정보 업데이트
-        boolean flag = memberMapper.updatePw(userId, encodePw);
-        return flag;
+        return memberMapper.updatePw(userId, encodePw);
     }
 
     //회원 탈퇴
+    @Transactional
     public boolean memberDelete(String userId, String password) {
+//        탈퇴 회원의 계정으로 등록된 모든 장르 삭제
+        String account = memberMapper.changIdToAccount(userId);
+        genreService.removeGenreForOutMember(account);
+        platformService.removePlatformForOutMember(account);
+
         return memberMapper.memberDelete(userId, password);
     }
 

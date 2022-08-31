@@ -74,4 +74,12 @@ class HashTagServiceTest {
         String s = hashTagService.mergeTag(postNo);
         System.out.println("s = " + s);
     }
+
+    @Test
+    @DisplayName("포스트에 등록된 해시태그 전부 삭제")
+    void removeTagOnPostTest(){
+        Long postNo = 2L;
+        boolean flag = hashTagService.removeTagOnPost(postNo);
+
+    }
 }

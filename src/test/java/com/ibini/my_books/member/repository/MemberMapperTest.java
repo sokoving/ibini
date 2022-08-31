@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MemberMapperTest {
-
     @Autowired
     MemberMapper mapper;
 
@@ -117,6 +116,15 @@ class MemberMapperTest {
         boolean flag = mapper.updateEmail(account, email);
 
         assertTrue(flag);
+    }
+
+    @Test
+    @DisplayName("userId로 account를 조회한다")
+    void changIdToAccountTest(){
+        String userId = "yeowoon";
+        String account = mapper.changIdToAccount(userId);
+        System.out.println("account = " + account);
+        assertEquals(account, "2208260002");
     }
 
 

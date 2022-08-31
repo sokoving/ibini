@@ -21,6 +21,7 @@
 
             <a href="/list">포스트 전체 목록</a> <br>
             <a href="/post/write/${account}">새 포스트 쓰기</a> <br>
+            <a href="/upload-form">파일 업로드 테스트</a>
         </div>
     </div>
 

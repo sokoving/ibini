@@ -1,7 +1,10 @@
 package com.ibini.my_books.common;
 
+import com.ibini.my_books.postImg.dto.ThumbImgDTO;
 import com.ibini.my_books.postImg.repository.PostImgMapper;
+import com.ibini.my_books.postImg.service.PostImgService;
 import com.ibini.my_books.util.FileUtils;
+import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.IOUtils;
@@ -10,12 +13,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -29,33 +33,40 @@ public class UploadController {
     // 업로드 파일 저장 경로
     private static final String UPLOAD_PATH = "E:\\sl_test\\upload";
     private final PostImgMapper postImgMapper;
+    private final PostImgService postImgService;
 
 
     // upload-form.jsp로 포워딩 요청
-
     @GetMapping("/upload-form")
-    public String uploadForm() {
+    public String uploadForm(HttpSession session, Model model) {
+        // 현재 로그인한 유저의 account 가져다가 넣기
+        model.addAttribute("account", LoginUtil.getCurrentMemberAccountForDB(session));
         return "upload/upload-form";
     }
+
 
     // 파일 업로드 처리를 위한 요청
     // MultipartFile: 클라이언트가 전송한 파일 정보들을 담은 객체
     // ex) 원본 파일명, 파일 용량, 파일 컨텐츠타입
     @PostMapping("/upload")// name = files 로 받아서 files 로해야함
-    public String upload(@RequestParam("files") List<MultipartFile> fileList) {
-        log.info("/upload POST! - {}", fileList);
+    public String upload(ThumbImgDTO thumbImgDTO
+//            , @RequestParam("files") List<MultipartFile> fileList
+    ) {
+        log.info("/upload POST! - {}", thumbImgDTO);
+//        log.info("/upload POST! - {}", fileList);
 
-        for (MultipartFile file: fileList) {
-            log.info("file-name: {}", file.getName());
-            log.info("file-origin-name: {}", file.getOriginalFilename());
-            log.info("file-size: {}KB", (double) file.getSize() / 1024);
-            log.info("file-type: {}", file.getContentType());
-            System.out.println("=============================================");
-
+//        썸네일 저장
+        postImgService.saveService(thumbImgDTO.extractThumb());
 
 
+//        for (MultipartFile file: fileList) {
+//            log.info("file-name: {}", file.getName());
+//            log.info("file-origin-name: {}", file.getOriginalFilename());
+//            log.info("file-size: {}KB", (double) file.getSize() / 1024);
+//            log.info("file-type: {}", file.getContentType());
+//            System.out.println("=============================================");
 //            FileUtils.uploadFile(file, UPLOAD_PATH); / 파일올리기안하기
-        }
+//        }
 
         return "redirect:/upload-form";
     }

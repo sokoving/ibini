@@ -40,7 +40,8 @@ class PostMapperTest {
     @Test
     @DisplayName("포스트 전체 목록이 조회돼야 한다")
     void findAllPostTest(){
-        List<Post> allPost = mapper.findAllPost();
+        String account = "2208260002";
+        List<Post> allPost = mapper.findAllPost(account);
         for (Post post : allPost) {
             System.out.println(post);
         }
@@ -49,7 +50,8 @@ class PostMapperTest {
     @Test
     @DisplayName("포스트, 장르, 플랫폼 테이블이 조인돼서 모두 조회돼야 한다")
     void findAllPostWithNameTest(){
-        List<PostWithName> all = mapper.findAllPostWithName();
+        String account = "ibini";
+        List<PostWithName> all = mapper.findAllPostWithName(account);
         for (PostWithName p : all) {
             System.out.println(p);
         }
@@ -100,8 +102,9 @@ class PostMapperTest {
     @Test
     @DisplayName("포스트 테이블에 저장된 모든 행의 수를 반환한다")
     void getTotalCountTest(){
-        int cnt = mapper.getTotalCount();
+        String account = "ibini";
+        int cnt = mapper.getTotalCount(account);
         System.out.println("cnt = " + cnt);
-        assertEquals(4, cnt);
+        assertEquals(26, cnt);
     }
 }
