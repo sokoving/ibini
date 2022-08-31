@@ -203,7 +203,7 @@ section .inner-section{
 }
 #reg-4 .span-wrap{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 #reg-4 input{
     text-align: center;
@@ -237,7 +237,7 @@ section .inner-section{
     margin-right: 10px;
 }
 .ep-radio{
-    display: none;
+    /* display: none; */
 }
 
 /* #reg-5 해시태그 */

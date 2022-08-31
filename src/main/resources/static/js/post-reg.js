@@ -1,62 +1,118 @@
-// 입력하지 않은 값 처리 함수
-function validateFormValue(e) {
-    const $title = $('input[name=postTitle]');
+// -------------- 전역변수 -------------- //
+const $title = $('input[name=postTitle]');
+const $writer = $('input[name=postWriter]');
+const $star = $('input[name=starRate]');
+const $genre = $('select[name=genreId]');
+const $cycle = $('input[name=publishCycle]')
+const $epId = $('input[name=epId]');
+const $curEp = $('input[name=curEp]');
+const $totalEp = $('input[name=totalEp]');
+const tag = $('input[name=tagName]')
+
+// --------- 함수 정의부 ---------- //
+
+
+
+
+
+// 입력하지 않았거나 잘못 입력한 값 처리 함수
+function validateFormValue() {
     // console.log('title: ', $title.val());
-    const $writer = $('input[name=postWriter]');
     // console.log('writer: ', $writer.val());
-    const $star = $('input[name=starRate]');
     // console.log('star: ', $star.val());
     // console.log('platform: ', $('select[name=platformId]').val());
-    const $genre = $('select[name=genreId]').val();
     // console.log('genre: ', $('select[name=genreId]').val());
-    // console.log('publishStatus: ', $('input[name=publishStatus]').val());
+    console.log('publishStatus: ', $('input[name=publishStatus]').val());
     // console.log('publishCycle: ', $('input[name=publishCycle]').val());
-    const $epId = $('input[name=epId]');
     console.log('epId: ', $epId.val());
-    const $curEp = $('input[name=curEp]');
     console.log('curEp: ', $curEp.val());
-    const $totalEp = $('input[name=totalEp]');
     console.log('totalEp: ', $totalEp.val());
-    // console.log('tag: ', $('input[name=tagName]').val());
+    console.log('tag: ', $('input[name=tagName]').val());
 
-    let flag = false; // 입력 제대로하면 true로 변경 
+    let flag = true; // 입력 제대로 안 하면 false로 변경
 
+    // 작가 값이 없는 경우
+    if ($writer.val().trim() === '') {
+        $('.writer-msg').text('[ 작가를 입력해 주세요 ]');
+        $('.writer-msg').css('color', '#f44659');
+        $writer.focus();
+        flag = false;
+    }
 
     // 제목 값이 없는 경우 
     if ($title.val().trim() === '') {
         $('.title-msg').text('[ 제목을 입력해 주세요 ]');
         $('.title-msg').css('color', '#f44659');
         $title.focus();
+        flag = false;
     }
-    // 작가 값이 없는 경우
-    else if ($writer.val().trim() === '') {
-        $('.writer-msg').text('[ 작가를 입력해 주세요 ]');
-        $('.writer-msg').css('color', '#f44659');
-        $writer.focus();
-    }
+
     // 별점 값이 없는 경우,
     if ($star.val().trim() === '') {
         $star.val(0);
+        $('.star-msg').text('[ 기본값으로 세팅됐습니다. ]');
+        $('.star-msg').css('color', '#005666');
+        flag = false;
     }
+
+
     // 회차 값이 둘 다 없을 경우
-    if($curEp.val() === '' || $totalEp === ''){
-        // $epId.val(3)
-        $curEp.val(0);
-        $totalEp.val(100);
+    if ($curEp.val() === '' && $totalEp.val() === '') {
+        const $radioGroup = document.getElementsByName('epId');
+        for (let radio of $radioGroup) {
+            if (radio.checked) {
+                radio.parentElement.classList.remove('checked');
+                radio.setAttribute("checked", false);
+            }
+            if (radio.value == 3) {
+                radio.parentElement.classList.add('checked');
+                radio.setAttribute("checked", true);
+                $curEp.prev().text('현재 진행도(%)');
+                $curEp.attr('placeholder', '0~100 사이 숫자')
+                $curEp.val(0);
+                $totalEp.prev().text('전체 진행도(%)');
+                $totalEp.val(100);
+                $totalEp.attr('readonly', 'readonly')
+            }
+        }
+        $('.ep-msg').text('[ 기본값으로 세팅됐습니다. ]');
+        $('.ep-msg').css('color', '#005666');
+
+    } // 회차 값이 둘 중 하나만 없을 경우
+    else if ($curEp.val() === '') {
+        $curEp.val($totalEp.val());
+        $('.ep-msg').text('[ 기본값으로 세팅됐습니다. ]');
+        $('.ep-msg').css('color', '#005666');
+    }
+    else if($totalEp.val() === ''){
+        if($curEp.val() > 0){
+            $totalEp.val($curEp.val());
+        } else {
+            $totalEp.val(1);
+        }
+        $('.ep-msg').text('[ 기본값으로 세팅됐습니다. ]');
+        $('.ep-msg').css('color', '#005666');
     }
 
-
-    // // 회차 구분이 안 들어간 경우
-    // //epId = 3, curEp = 0, totalEp = 100 고정
-    // } else if() {
-
-    // } 
+    // 현재 회차가 전체 회차보다 클 때
+    else if(+$curEp.val() > +$totalEp.val()){
+        $('.ep-msg').text('[ 현재회차는 전체회차보다 클 수 없습니다. ]');
+        $('.ep-msg').css('color', '#f44659');
+        $curEp.focus();
+        flag = false;
+    }
+    // 전체 회차가 0일 때
+    else if($totalEp.val() == 0){
+        $('.ep-msg').text('[ 전체회차는 0보다 커야 합니다. ]');
+        $('.ep-msg').css('color', '#f44659');
+        $totalEp.val(1)
+        $totalEp.focus();
+        flag = false;
+    }
 
     console.log('flag:', flag);
     return flag;
 }
-
-// 연속 스페이스바 막는 이벤트
 
 // 썸네일 이미지 중복 업로드 막기(upload.js에서)
 
@@ -79,13 +135,15 @@ document.querySelector('.pub-btn-group').onclick = function () {
 }
 // 회차 버튼 체크 함수
 document.querySelector('.ep-btn-group').onclick = function () {
+    // 기존에 메시지 있으면 지우기
+    $('.ep-msg').text('');
+
     const $radioGroup = document.getElementsByName('epId');
-    const $curEp = $('input[name=curEp]');
-    const $totalEp = $('input[name=totalEp]');
     for (let radio of $radioGroup) {
 
         if (radio.checked) {
             radio.parentElement.classList.add('checked');
+            radio.setAttribute("checked", true);
 
             // 회차 버튼 아래 텍스트 변경
             let epName = radio.previousElementSibling.textContent;
@@ -106,6 +164,7 @@ document.querySelector('.ep-btn-group').onclick = function () {
             }
         } else {
             radio.parentElement.classList.remove('checked');
+            radio.setAttribute("checked", false);
         }
     }
 }
