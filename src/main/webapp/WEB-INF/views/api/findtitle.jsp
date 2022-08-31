@@ -10,7 +10,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>apiTest</title>
     <style>
+        @font-face {
+            font-family: 'PyeongChangPeace-Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+        }
 
+        #content-wrap h1{
+            margin: 0 auto;
+            padding: 30px;
+            font-size: 50px;
+            text-shadow: #e90404 1px 1px 40px;
+            font-family: 'PyeongChangPeace-Light';
+        }
+        #content-wrap br {
+            width: 100%;
+            color: black;
+        }
         #content-wrap #search {
             background: rgb(229, 173, 173);
             height: 50px;
@@ -276,7 +293,7 @@
                 console.log('titleDiv : ', titleDiv);
                 console.log('authorDiv : ', authorDiv);
 
-                if(confirm( authorDiv + ' 작가의 ' + titleDiv + '작품을 선택하셨나요?')){
+                if(confirm( ' [ '+ authorDiv + ' ] 작가의 [ ' + titleDiv + ' ] 작품을 선택하셨나요?')){
                     // 맞으면 전송 보내기
                     
                 }
@@ -285,11 +302,11 @@
             } else if(target.matches('.title')){
                 // title - span / author - span from에 넘기는 값
                 let spanTitle = target.previousElementSibling.value;
-                let spanAuthor = target.parentElement.parentElement.firstChild.nextElementSibling.nextElementSibling.innerText;
+                let spanAuthor = target.parentElement.parentElement.firstChild.nextElementSibling.nextElementSibling.firstElementChild.value;
                 console.log('spanTitle : ', spanTitle);
                 console.log('spanAuthor : ', spanAuthor);
 
-                if(confirm( spanAuthor + ' 작가의 ' + spanTitle + '작품을 선택하셨나요?')){
+                if(confirm( ' [ ' + spanAuthor + ' ] 작가의 [ ' + spanTitle + ' ] 작품을 선택하셨나요?')){
                     // 맞으면 전송 보내기
 
                 }
