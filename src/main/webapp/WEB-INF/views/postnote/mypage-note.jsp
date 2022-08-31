@@ -20,20 +20,14 @@
     <!-- bootstrap js -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script> -->
 
-    <!-- jQuery UI CSS파일 -->
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
     <!-- jQuery 기본 js파일 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <!-- jQuery UI 라이브러리 js파일 -->
-    <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-
-    <link rel="stylesheet" href="/css/calendar.css">
 
     <!-- naver font -->
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/mypage-note.css">
+    <link rel="stylesheet" href="myPageNote.css">
 </head>
 
 <body>
@@ -58,20 +52,8 @@
                 <div class="search-wrapper">
                     <div name="mark">
                         <div class="search-mark">
-                            <select name="">
-                                <option value="">책 제목</option>
-                                <option value="">마크 내용</option>
-                                <option value="">회차</option>
-                            </select>
+                            <span>책 제목</span>
                             <input type="text" name="keyword" placeholder="검색어를 입력하세요" autocomplete="off">
-
-                            <label for="start-date">
-                                <i class="fas fa-calendar-alt"></i>
-                            </label>
-                            <input type="text" id="start-date" autocomplete="off">
-                            ~
-                            <input type="text" id="end-date" autocomplete="off">
-
                             <button class="search-button" type="submit">
                                 검색
                             </button>
@@ -79,19 +61,8 @@
                     </div> <!-- end mark -->
                     <div class="hidden" name="memo">
                         <div class="search-mark">
-                            <select name="">
-                                <option value="">책 제목</option>
-                                <option value="">메모 내용</option>
-                            </select>
+                            <span>책 제목</span>
                             <input type="text" name="keyword" placeholder="검색어를 입력하세요" autocomplete="off">
-
-                            <label for="start-date">
-                                <i class="fas fa-calendar-alt"></i>
-                            </label>
-                            <input type="text" id="start-date" autocomplete="off">
-                            ~
-                            <input type="text" id="end-date" autocomplete="off">
-
                             <button class="search-button" type="submit">
                                 검색
                             </button>
@@ -115,71 +86,142 @@
             <div class="body-wrapper">
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
-                    <c:forEach var="p" items="${postList}">
-                        <div class="content">
-                            <div class="book-wrapper flex-fs">
-                                <!-- 책 이미지 -->
-                                <c:choose>
-                                    <c:when test="${p.thumbImg != null}">
-                                        <div class="book-image w30 noselect">
-                                            <img class="book-image" src="${p.thumbImg}" alt="book image">
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="book-image w30 noselect"></div>
-                                    </c:otherwise>
-                                </c:choose>
-                                <!-- <div class="book-image w30 noselect">
-                                    <img class="book-image" src="${p.thumbImg}" alt="book image">
-                                </div> -->
-
-                                <!-- 포스트 번호 -->
-                                <span id="postNo" style="display: none;">${p.postNo}</span>
-
-                                <!-- 책 정보 -->
-                                <div class="book-info w70">
-                                    <!-- 책 제목 -->
-                                    <div class="book-title">
-                                        <span>${p.postTitle}</span>
+                    <div class="content">
+                        <div class="book-wrapper flex-fs">
+                            <!-- 책 이미지 -->
+                            <div class="book-image w30 noselect">
+                                <img class="book-image" src="./project3.png" alt="book image">
+                            </div>
+                            <!-- 책 정보 -->
+                            <div class="book-info w70">
+                                <!-- 책 제목 -->
+                                <div class="book-title">
+                                    <span>여행계획 짜기</span>
+                                </div>
+                                <!-- MARK 내용 -->
+                                <div class="my-text">
+                                    <div class="episode-no">
+                                        <span>ep.15</span>
                                     </div>
-                    
-                                    <!-- MARK 내용 -->
-                                    <div id="mark-info" class="my-text">
-                                        <div class="episode-no">
-                                            <span>ep.15</span>
-                                        </div>
-                                        <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
-                                            asdasdagre기머이ㅓ니ㅓ리너일너ㅣㅇ허닝허닝허니어니어히나ㅓ히나ㅓㅇ히나ㅓㅇ히나ㅓㅇ히ㅏ넝히머이허닝허니어
-                                        </textarea>
-                                        <!-- Mark 날짜 -->
-                                        <div class="meta-data">
-                                            <span>2022-08-22</span>
-                                        </div>
-                                        <hr>
-
-                                        <div class="episode-no">
-                                            <span>ep.1225</span>
-                                        </div>
-                                        <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                            rgarg&#10;&#10;raeheath
-                                        </textarea>
-                                        <!-- Mark 날짜 -->
-                                        <div class="meta-data">
-                                            2022-08-22
-                                        </div>
-                                        <hr>
-                                    </div> <!-- end my-text -->
-                                    <div class="view-more">
-                                        <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
+                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
+                                        asdasdagre기머이ㅓ니ㅓ리너일너ㅣㅇ허닝허닝허니어니어히나ㅓ히나ㅓㅇ히나ㅓㅇ히나ㅓㅇ히ㅏ넝히머이허닝허니어
+                                    </textarea>
+                                    <!-- Mark 날짜 -->
+                                    <div class="meta-data">
+                                        <span>2022-08-22</span>
                                     </div>
-                                </div> <!-- end book-info -->
-                            </div> <!-- end book-wrapper -->
-                        </div> <!-- end content -->
-                    </c:forEach>
-                    
+                                    <hr>
+
+                                    <div class="episode-no">
+                                        <span>ep.1225</span>
+                                    </div>
+                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
+                                        rgarg&#10;&#10;raeheath
+                                    </textarea>
+                                    <!-- Mark 날짜 -->
+                                    <div class="meta-data">
+                                        2022-08-22
+                                    </div>
+                                    <hr>
+                                </div> <!-- end my-text -->
+                                <div class="view-more">
+                                    <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
+                                </div>
+                            </div> <!-- end book-info -->
+                        </div> <!-- end book-wrapper -->
+                    </div> <!-- end content -->
+
+                    <div class="content">
+                        <div class="book-wrapper flex-fs">
+                            <!-- 책 이미지 -->
+                            <div class="book-image w30 noselect">
+                                <img class="book-image" src="./project3.png" alt="book image">
+                            </div>
+                            <!-- 책 정보 -->
+                            <div class="book-info w70">
+                                <!-- 책 제목 -->
+                                <div class="book-title">
+                                    <span>여행계획 짜기</span>
+                                </div>
+                                <!-- MARK 내용 -->
+                                <div class="my-text">
+                                    <div class="episode-no">
+                                        <span>ep.1555</span>
+                                    </div>
+                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
+                                        asdasdagre
+                                    </textarea>
+                                    <!-- Mark 날짜 -->
+                                    <div class="meta-data">
+                                        <span>2022-08-22</span>
+                                    </div>
+                                    <hr>
+
+                                    <div class="episode-no">
+                                        <span>ep.15</span>
+                                    </div>
+                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
+                                        rgarg&#10;&#10;raeheath
+                                    </textarea>
+                                    <!-- Mark 날짜 -->
+                                    <div class="meta-data">
+                                        2022-08-22
+                                    </div>
+                                    <hr>
+                                </div> <!-- end my-text -->
+                                <div class="view-more">
+                                    <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
+                                </div>
+                            </div> <!-- end book-info -->
+                        </div> <!-- end book-wrapper -->
+                    </div> <!-- end content -->
+
+                    <div class="content">
+                        <div class="book-wrapper flex-fs">
+                            <!-- 책 이미지 -->
+                            <div class="book-image w30 noselect">
+                                <img class="book-image" src="./project3.png" alt="book image">
+                            </div>
+                            <!-- 책 정보 -->
+                            <div class="book-info w70">
+                                <!-- 책 제목 -->
+                                <div class="book-title">
+                                    <span>여행계획 짜기</span>
+                                </div>
+                                <!-- MARK 내용 -->
+                                <div class="my-text">
+                                    <div class="episode-no">
+                                        <span>ep.5455</span>
+                                    </div>
+                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
+                                        asdasdagre
+                                    </textarea>
+                                    <!-- Mark 날짜 -->
+                                    <div class="meta-data">
+                                        <span>2022-08-22</span>
+                                    </div>
+                                    <hr>
+
+                                    <div class="episode-no">
+                                        <span>ep.15454</span>
+                                    </div>
+                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
+                                        rgarg&#10;&#10;raeheath
+                                    </textarea>
+                                    <!-- Mark 날짜 -->
+                                    <div class="meta-data">
+                                        2022-08-22
+                                    </div>
+                                    <hr>
+                                </div> <!-- end my-text -->
+                                <div class="view-more">
+                                    <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
+                                </div>
+                            </div> <!-- end book-info -->
+                        </div> <!-- end book-wrapper -->
+                    </div> <!-- end content -->
                 </div> <!-- end content-wrapper name="mark" -->
 
-                
                 <div class="content-wrapper hidden" name="memo">
                     <div class="content">
                         <div class="book-wrapper flex-fs">
@@ -261,33 +303,6 @@
                 </div> <!-- end content-wrapper name="memo" -->
         </section>
     </div> <!-- end wrap -->
-
-    <script>
-        $(document).ready(function () {
-            $("#start-date, #end-date").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showMonthAfterYear: true,
-                monthNamesShort: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
-                    '12'],
-                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                dateFormat: 'yy-mm-dd',
-            });
-            $('#start-date').datepicker('setDate', 'today');
-
-            $('#start-date').datepicker("option", "maxDate", $("#end-date").val());
-            $('#start-date').datepicker("option", "onClose", function (selectedDate) {
-                $("#end-date").datepicker("option", "minDate", selectedDate);
-            });
-
-            $('#end-date').datepicker();
-            $('#end-date').datepicker("option", "minDate", $("#start-date").val());
-            $('#end-date').datepicker("option", "onClose", function (selectedDate) {
-                $("#start-date").datepicker("option", "maxDate", selectedDate);
-            });
-        });
-    </script>
-
 
     <script>
         /*======================================================================

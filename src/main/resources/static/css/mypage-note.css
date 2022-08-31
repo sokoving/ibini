@@ -164,65 +164,35 @@ section {
     font-size: 17px;
 }
 
-/* select option */
-.search-wrapper select {
-    width: 15%;
+/* search-title 영역 */
+.search-wrapper span {
+    width: 20%;
     padding: 0.53rem;
-    border-radius: 0.25rem;
-    outline: none;
-    vertical-align: bottom;
-}
-.search-wrapper select:hover {
-    outline: 2px solid #495057;;
-    border: none;
-}
-
-/* input 검색창, 날짜 영역 */
-.search-wrapper input[type="text"] {
     border: 1px solid #6c757d;
     border-radius: 0.25rem;
-
-    padding: 0.3rem;
-}
-.search-wrapper input[type="text"]:hover,
-.search-wrapper input[type="text"]:focus {
-    outline: 2px solid #495057;
-    border: none;
+    outline: none;
+    vertical-align: middle;
 }
 
 /* input 검색창 영역 */
 .search-wrapper input[name="keyword"] {
-   width: 33%;
-   margin-right: 2rem;
-   padding: 0.35rem 0.7rem;
-}
-
-/* 날짜 선택 영역 */
-.search-wrapper label .fa-calendar-alt {
-    margin-right: 0.3rem;
-}
-/* 날짜 input */
-#start-date, #end-date {
-    width: 15%;
-    text-align: center;
-    vertical-align: middle;
+    width: 50%;
+    border: 1px solid #6c757d;
+    border-radius: 0.25rem;
     margin-right: 0.5rem;
-    padding: 0.4rem;
-
-    font-size: 16px;
-}  
-#start-date {
-    margin-right: 0.5rem;
+    padding: 0.35rem 0.7rem;
 }
-#end-date {
-    margin-left: 0.5rem;
+.search-wrapper input[name="keyword"]:hover,
+.search-wrapper input[name="keyword"]:focus {
+    outline: 2px solid #495057;
+    border: none;
 }
 
 /* 검색 버튼 */
 .search-wrapper .search-button {
     border: 1px solid #495057;
     border-radius: 0.25rem;
-    padding: 0.4rem 0.7rem;
+    padding: 0.4rem 1rem;
 
     font-size: 16px;
     background: #f5f9fc;;
@@ -320,12 +290,12 @@ section {
 .book-wrapper .book-info .my-text .episode-no {
     margin-top: 1rem;
 
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
 }
 .book-wrapper .book-info .my-text .episode-no span {
     padding: 0.4rem;
-    background: #864545;
+    background: #c59c9c;
     border-radius: 0.3rem;
 }
 /* MARK content */
@@ -342,9 +312,9 @@ section {
 
 /* meta data 날짜 영역 */
 .content-wrapper .meta-data {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: bold;
-    text-decoration: underline;
+    /* text-decoration: underline; */
     
     display: flex;
     flex-direction: row-reverse;
