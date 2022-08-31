@@ -69,9 +69,10 @@
                         <!-- 이미지 -->
                         <div class="img-wrap">
                             <div class="img-box">
-                                <span class="box-msg">썸네일을 등록해 보세요</span>
+                                <span class="box-msg hide">썸네일을 등록해 보세요</span>
                                 <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
-                                <!-- <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
+                                <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt="">
+                                <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt="">
                             </div>
                             <label class="file-box">
                                 <div class="file-box-left">
@@ -263,8 +264,8 @@
                         </label>
                         <div class="uploaded-list">
                             <!-- <div class="upload-img-box">
-                                <img class="upload-img" src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
-                            </div> -->
+                                   <img class="upload-img" src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
+                                </div> -->
                         </div>
 
                     </div>
@@ -286,6 +287,11 @@
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
+            // 썸네일 하나만 등록시키기
+            console.log($('.post-img'));
+            
+
+
             // 입력창 키업 이벤트
             const $form = $('#write-form');
             // console.log($form);
@@ -293,7 +299,7 @@
                 keydown: function (e) {
                     return checkKeydown(e);
                 },
-                keyup: function(e){
+                keyup: function (e) {
                     checkKeyup(e);
                 }
 
