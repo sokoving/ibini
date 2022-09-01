@@ -80,10 +80,6 @@
                         padding-right: 20px;
                     }
 
-                    .detail {
-                        cursor: pointer;
-                    }
-
                     .inquiry-content {
                         margin-left: 80px;
                         width: 850px;
@@ -122,6 +118,7 @@
                     .answer {
                         margin-left: 110px;
                         border: 1px solid;
+                        width: 820px;
                     }
 
                     /* 답변 상세보기시 출력되는 답변: */
@@ -129,14 +126,6 @@
                         margin-left: 100px;
                         margin-top: 20px;
                     }
-
-                    /*
-                    .answer{                        
-                        width: 350px;
-                        border: 1px solid;
-                        padding: 15px;
-                        margin-left: 130px;
-                    } */
 
                     /* 페이지 form */
 
@@ -177,6 +166,19 @@
                     .newMark.answernewmark {
                         display: flex;
                         justify-content: right;
+                    }
+
+                    /* 접기 버튼 */
+                    .close-btn {
+                        margin-top: auto;
+                        border: 1px solid;
+                        width: 50px;
+                        text-align: center;
+                        cursor: pointer;
+                    }
+
+                    .hidden{
+                        display: none;
                     }
                 </style>
 
@@ -234,7 +236,9 @@
                                             </div>
                                         </c:if>
                                     </ul>
+                                    <div class="close-btn hidden">접기</div>
                                 </li>
+
                             </c:forEach>
                         </ul>
                     </c:if>
@@ -321,13 +325,14 @@
                 function makeAnswerDOM(oneInquiry, $ul) {
                     const $li = document.createElement('li');
                     const $div = document.createElement('div');
-                    $div.textContent = '답변: :'
+                    $div.textContent = '답변:'
                     $div.classList.add('answerDetailTitle');
                     $li.textContent = oneInquiry.answer;
                     $li.dataset.serialNum = oneInquiry.serialNumber;
                     $li.classList.add('answer');
                     $ul.append($div);
                     $ul.append($li);
+
 
                 }
 
@@ -339,71 +344,248 @@
 
                 const $table = document.querySelector(".inquiryMainTable");
 
-                //답변 자세히 보기버튼이벤트
-                const $detail = document.querySelector('.detail');
-                console.log($detail);
+                //문의글 상세보기 태그 만들기 함수
+                function makeInquiryDOM(oneInquiry, $ul) {
+                    const $li = document.createElement('li');
+                    const $div = document.createElement('div');
+                    $div.textContent = '내용 :'
+                    $div.classList.add('detailTitle');
+                    $li.textContent = oneInquiry.inquiry;
+                    $li.dataset.serialNumber = oneInquiry.serialNumber;
+                    $li.classList.add('inquiry-content');
+                    $ul.append($div);
+                    $ul.append($li);
+                }
+
+                // 답변 상세보기 태그 만들기 함수 makeAnswerDOM
+                function makeAnswerDOM(oneInquiry, $ul) {
+                    const $li = document.createElement('li');
+                    const $div = document.createElement('div');
+                    $div.textContent = '답변:'
+                    $div.classList.add('answerDetailTitle');
+                    $li.textContent = oneInquiry.answer;
+                    $li.dataset.serialNum = oneInquiry.serialNumber;
+                    $li.classList.add('answer');
+                    $ul.append($div);
+                    $ul.append($li);
+
+
+                }
+
+                // 접기 버튼 태그 만들기 함수 makeCloseDOM
+                function makeCloseDOM($ul) {
+                    const $btn = document.createElement('button');
+                    $btn.textContent = '접기';
+                    $btn.classList.add('close-btn');
+                    $btn.type = 'button';
+                    $ul.append($btn);
+                }
+
+                // ===== 조회 화면 접기 이벤트 =====
 
                 $table.addEventListener('click', e => {
-                    if (!e.target.matches('.table2 li')) return;
-                    console.log('detail 클릭:', e.target);
-                    let serialNumber = e.target.parentElement.parentElement.firstElementChild.dataset.serialNum;
-                    let $ul = e.target.parentElement.parentElement.parentElement.firstElementChild;
-                    fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
-                        .then(res => res.json())
-                        .then(oneInquiry => {
-                            if (e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == "0") {
-                                console.log('if문 :', e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum);
-                                makeAnswerDOM(oneInquiry, $ul);
-
-                            } return;
 
 
-                        });
+                    console.log('if문 전 close-btn 클릭됨!', e.target);
+                    if (!e.target.matches('.close-btn')) return;
+                    console.log('close-btn 클릭됨!', e.target);
+
+                    // 노드 삭제를 위해 타겟의 부모요소 선택 [문의글만 있는 경우]
+                    const $parentNode = e.target.parentElement.firstElementChild.firstElementChild;
+                    // console.log('삭제대상의 부모:', $parentNode);
+
+                    // 삭제할 노드 선택 [문의글만 있는 경우 - 문의 제목]
+                    const $removeTargetT = e.target.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling;
+                    // console.log('???',$removeTargetT);
+                    // 삭제할 노드 선택 [문의글만 있는 경우 - 문의 내용]
+                    const $removeTargetC = e.target.parentElement.firstElementChild.firstElementChild.lastElementChild;
+                    // console.log('삭제대상:', $removeTarget);
+
+                    //삭제 글만 있는 경우 조건식
+                    // console.log($removeTarget.classList.contains('inquiry-content'));
+
+                    // 노드 삭제를 위해 타겟의 부모요소 선택 [문의글과 답변이 있는 경우]
+                    const $parentNodeA = e.target.parentElement.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling;
+                    // console.log('삭제대상의 부모:', $parentNodeA);
+
+                    // 삭제할 노드 선택 [문의글과 답변이 있는 경우 - 답변 제목]
+                    const $removeTargetAT = e.target.parentElement.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild;
+                    // console.log('???',$removeTargetAT);
+
+                    // 삭제할 노드 선택 [문의글과 답변이 있는 경우 - 답변 내용]
+                    const $removeTargetAC = e.target.parentElement.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild;
+                    // console.log('삭제대상:', $removeTargetA);
+
+                    // 문의글과 답변이 있는 경우 조건식
+                    // console.log($removeTargetA.classList.contains('answer'));
+
+                    //부모노드.removeChild(삭제할노드)
+
+                    // 접기 버튼 숨기기위해 노드 설정
+                    const $closeBtn = e.target
+
+                    if($removeTargetC.classList.contains('inquiry-content')){
+                        $parentNode.removeChild($removeTargetT);
+                        $parentNode.removeChild($removeTargetC);
+                        $closeBtn.classList.add('hidden');
+                    };
+
+                    console.log('if문 돌기전',$removeTargetAC.classList.contains('answer'))
+                    if($removeTargetAC.classList.contains('answer')) {
+                        console.log('if문 돌고',$removeTargetAC.classList.contains('answer'))
+                        $parentNodeA.removeChild($removeTargetAT);
+                        $parentNodeA.removeChild($removeTargetAC);
+                        $closeBtn.classList.add('hidden');
+
+                    };
+
+
+
                 })
 
 
+                // const $table2 = document.querySelector('.table2');
+                // console.log($table2);
+                // $table2.addEventListener('click',e=>{
+                //     console.log('타겟 :',e.target);
+                // })
 
-                //상세보기 요청 이벤트
+                // 그런데 체크박스를 동적으로 만들어주는 경우에는 위와 같은 태그가 먹지 않았다. 
+                // 찾아보니 동적 태그일 경우에는 document.ready의 이벤트가 작동하지 않는다. 
+                // document.ready 는 화면이 최초에 로드되었을 때에 화면 안에 있는 태그들에 이벤트를 걸기 때문에, 
+                // 로드되었을 때 존재하지 않는 태그에 대해서는 이벤트를 걸 수 없는 것이다
+
+                // const $closeBtn = document.querySelector('.close-btn');
+                // console.log($closeBtn);
+
+
+                // ===== 상세보기 요청 이벤트 - 상세보기 클릭시 답변도 나오게 하기 =====
+                // close-btn 태그를 만들 위치를 정하기 위한 checkArr
                 console.log($table);
                 $table.addEventListener('click', e => {
+
                     // console.log(e.target);
                     if (!e.target.matches('.table1 li')) return;
-                    console.log('li 클릭됨! -', e.target);
+                    // console.log('li 클릭됨! -', e.target);
+                    // console.log('일련번호 확인 : ', e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild);
 
                     let serialNumber = e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.dataset.serialNum;
-                    console.log('확인 일련번호 :', serialNumber);
                     let $ul = e.target.parentElement.parentElement;
-                    console.log($ul);
+                    // console.log(e.target.parentElement.lastElementChild);
                     // console.log('글번호 :', serialNumber);
                     // location.href = '/member/findone-inquiry/' + serialNumber;
+
                     //비동기로 문의글 상세정보 가지고 오기              
                     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
                         .then(res => res.json())
                         .then(oneInquiry => {
+                            console.log(e.target.parentElement.parentElement.parentElement.lastElementChild);
                             if (e.target.parentElement.parentElement.lastElementChild.dataset.serialNumber == oneInquiry.serialNumber) {
                                 return;
                             };
                             makeInquiryDOM(oneInquiry, $ul);
-                        });
-                })
-                // $table.onclick = e => {
-                //     console.log(e.target);
-                //     if (!e.target.matches('.inquiryTable li')) return;
-                //     console.log('li 클릭됨! -', e.target);
+                            // 접기 버튼 활성화 시키기
+                            const $closeBtn = e.target.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling
+                            $closeBtn.classList.remove('hidden');
 
-                //     let serialNumber = e.target.parentElement.parentElement.firstElementChild.firstElementChild.dataset.serialNum;
-                //     let $ul = e.target.parentElement;
-                //     console.log('글번호 :', serialNumber);
+                            // // 상세보기만 한 경우 close-btn 태그 만들기
+                            // if (oneInquiry.answer == null) {
+                            //     const $ul = e.target.parentElement.parentElement;
+                            //     makeCloseDOM($ul);
+                            // }
+
+                            // 답변 상세보기
+                            if (oneInquiry.answer != null) {
+                                let $ul = e.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
+                                fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
+                                    .then(res => res.json())
+                                    .then(oneInquiry => {
+                                        // console.log('if문 가동전 비교 타겟:',e.target.parentElement.lastElementChild);
+                                        // console.log('if문 가동전 타겟의 넘버:',e.target.parentElement.lastElementChild.dataset.serialNum);
+                                        // console.log('if문 가동전 시리얼 넘버:',serialNumber)
+                                        console.log('if문 가동전 :', e.target.parentElement.parentElement.nextElementSibling.nextElementSibling);
+                                        if (e.target.parentElement.parentElement.nextElementSibling.nextElementSibling.dataset.serialNum == "0") {
+                                            console.log('if문 :', e.target.parentElement.parentElement.nextElementSibling.nextElementSibling.dataset.serialNum);
+                                            makeAnswerDOM(oneInquiry, $ul);
+
+                                            // 문의글조회+답글조회 될때 접기 버튼 태그 만들기
+                                            const $ulClose = e.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
+                                            // const $ulClose = e.target.parentElement.parentElement.parentElement.parentElement.lastElementChild;
+                                            // makeCloseDOM($ulClose);
+
+                                        } return;
+                                        // e.target.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == oneInquiry.serialNumber
+                                    });
+                            }
+
+                            // // close-btn 태그 생성
+                            // console.log('체크배열 확인 : ', checkArr);
+                            // console.log('상세보기만 있을때 삽입태그 위치:', document.e.target.parentElement.parentElement);
+                            // console.log('둘다 있을때 삽입태그 위치:', e.target.parentElement.parentElement.nextElementSibling.nextElementSibling);
+                            // if (!checkArr.includes(false)) {
+
+                            //     console.log('close-btn if문 상세보기만')
+                            // } else {                                
+                            //     console.log('close-btn if문 답변도같이')
+                            // }
+
+
+                        });
+
+                })
+
+                // const $table = document.querySelector(".inquiryMainTable");
+
+                // //답변 자세히 보기버튼이벤트
+                // const $detail = document.querySelector('.detail');
+                // console.log($detail);
+
+                // $table.addEventListener('click', e => {
+                //     if (!e.target.matches('.table2 .detail')) return;
+                //     console.log('detail 클릭:', e.target);
+                //     let serialNumber = e.target.parentElement.parentElement.firstElementChild.dataset.serialNum;
+                //     // console.log('답변 자세히 보기 시리얼넘버:', serialNumber);
+                //     let $ul = e.target.parentElement.parentElement.parentElement.firstElementChild;
+                //     // console.log(e.target.parentElement.parentElement.firstElementChild.dataset.serialNum);
+                //     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
+                //         .then(res => res.json())
+                //         .then(oneInquiry => {
+                //             // console.log('if문 가동전 비교 타겟:',e.target.parentElement.lastElementChild);
+                //             // console.log('if문 가동전 타겟의 넘버:',e.target.parentElement.lastElementChild.dataset.serialNum);
+                //             // console.log('if문 가동전 시리얼 넘버:',serialNumber)
+                //             if (e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == "0") {
+                //                 console.log('if문 :', e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum);
+                //                 makeAnswerDOM(oneInquiry, $ul);
+
+                //             } return;
+                //             // e.target.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == oneInquiry.serialNumber
+
+                //         });                })
+
+
+                // //상세보기 요청 이벤트
+                // console.log($table);
+                // $table.addEventListener('click', e => {
+                //     // console.log(e.target);
+                //     if (!e.target.matches('.table1 li')) return;
+                //     console.log('li 클릭됨! -', e.target);
+                //     console.log('일련번호 확인 : ', e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild);
+
+                //     let serialNumber = e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.dataset.serialNum;
+                //     let $ul = e.target.parentElement.parentElement;
+                //     // console.log(e.target.parentElement.lastElementChild);
+                //     // console.log('글번호 :', serialNumber);
                 //     // location.href = '/member/findone-inquiry/' + serialNumber;
                 //     //비동기로 문의글 상세정보 가지고 오기              
                 //     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
                 //         .then(res => res.json())
                 //         .then(oneInquiry => {
-                //             // console.log(oneInquiry);
-                //             // console.log(oneInquiry.inquiry);
-                //             makeInquiryDOM(oneInquiry,$ul);
+                //             if (e.target.parentElement.parentElement.lastElementChild.dataset.serialNumber == oneInquiry.serialNumber) {
+                //                 return;
+                //             };
+                //             makeInquiryDOM(oneInquiry, $ul);
                 //         });
-                // }
+                // })
 
 
                 const msg = '${msg}'
