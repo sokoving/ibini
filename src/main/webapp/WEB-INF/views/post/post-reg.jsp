@@ -66,8 +66,7 @@
         <section class="post-reg-section">
             <div class="top-msg">* 필수 입력 사항 <br>선택 사항은 입력하지 않으면 기본값으로 세팅됩니다.(수정 가능)</div>
             <div class="inner-section">
-                <form id="write-form" action="#" method="post" autocomplete="off"
-                    enctype="multipart/form-data">
+                <form id="write-form" action="#" method="post" autocomplete="off" enctype="multipart/form-data">
 
                     <!-- 히든 : 계정-->
                     <input type="hidden" name="account" id="" value="${account}">
@@ -106,14 +105,15 @@
                                 <span class="reg-span">* 작가</span>
                                 <span class="explain-span writer-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postWriter"
-                                placeholder="작가를 입력해 주세요">
+                            <input class="white-box" type="text" name="postWriter" placeholder="작가를 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
                                 <span class="explain-span star-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요"
+                                maxlength="1"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                         </div>
                     </div> <!-- // end reg-1 -->
 
@@ -224,11 +224,15 @@
                         <div class="ep-wrap">
                             <div class="ep-input-wrap">
                                 <span class="reg-span">현재 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="text" name="curEp" placeholder="0~99999 사이 숫자" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+                                <input class="white-box" type="text" name="curEp" placeholder="0~99999 사이 숫자"
+                                    maxlength="5"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                             <div class="ep-input-wrap">
                                 <span class="reg-span">전체 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="text" name="totalEp" placeholder="0~99999 사이 숫자" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+                                <input class="white-box" type="text" name="totalEp" placeholder="0~99999 사이 숫자"
+                                    maxlength="5"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                         </div>
                     </div>
@@ -253,8 +257,14 @@
                             <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
                         </label>
                         <div class="uploaded-list">
-                            <!-- <div class="upload-img-box">
-                                <img class="upload-img" src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
+                            <!-- 
+                                파일 올릴 때마다 생성될 것
+                            <div class="upload-img-box">
+                                <img class="upload-img"
+                                    src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
+                                <i class="fas fa-times-circle upload-cancel-btn"></i>
+                                <input type="hidden" name="filNames"
+                                value="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large">
                             </div> -->
                         </div>
 
@@ -286,7 +296,7 @@
                 keydown: function (e) {
                     return checkKeydown(e);
                 },
-                keyup: function(e){
+                keyup: function (e) {
                     checkKeyup(e);
                 }
             });
@@ -297,7 +307,7 @@
             // jQueryTagTest($regBtn, "태그 잡기 테스트");
             $regBtn.click(e => {
                 e.preventDefault();
-                if (!validateFormValue()){
+                if (!validateFormValue()) {
                     return;
                 }
                 $('#write-form').submit();
@@ -401,10 +411,7 @@
                         console.log(fileNames);
                         showImgs(fileNames);
                     });
-            });
-
-
-
+            }); // end 첨부 이미지 인풋 체인지 이벤트
 
 
             // 썸네일 인풋 체인지 이벤트
@@ -454,6 +461,12 @@
                         showThumbImg(fileNames, fileOriginName);
                     });
             }); // end 썸네일 인풋 체인지 이벤트
+
+
+
+            // 첨부 이미지 삭제 이벤트
+            $('.uploaded-list').click(delUploadImg);
+
 
             //==================================================//
 

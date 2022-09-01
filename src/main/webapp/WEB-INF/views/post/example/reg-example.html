@@ -71,7 +71,8 @@
                             <div class="img-box">
                                 <span class="box-msg hide">썸네일을 등록해 보세요</span>
                                 <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
-                                <img class="post-img thumb-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt="">
+                                <img class="post-img thumb-img"
+                                    src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt="">
                             </div>
                             <label class="file-box">
                                 <div class="file-box-left">
@@ -256,15 +257,21 @@
                             <div class="file-box-left">
                                 파일 선택
                             </div>
-                            <div class="file-box-right" data-imgs-num="0">
-                                첨부된 이미지가 없습니다.
+                            <div class="file-box-right">
+                                첨부 이미지 4개
                             </div>
                             <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
                         </label>
                         <div class="uploaded-list">
-                            <!-- <div class="upload-img-box">
-                                   <img class="upload-img" src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
-                                </div> -->
+
+                            <div class="upload-img-box">
+                                <img class="upload-img"
+                                    src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="111">
+                                <span class="fas fa-times-circle upload-cancel-btn"></span>
+                                <input type="hidden" name="filNames"
+                                    value="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large">
+                            </div>
+                            
                         </div>
 
                     </div>
@@ -273,6 +280,13 @@
                     <div id="reg-btn">
                         <button id="post-reg-btn" class="white-box">등록</button>
                     </div>
+
+
+
+
+
+
+
                 </form> <!-- // end write-form -->
             </div> <!-- // end inner-section -->
         </section> <!-- // end section -->
@@ -296,8 +310,6 @@
                 keyup: function (e) {
                     checkKeyup(e);
                 }
-
-
             });
 
 
@@ -310,6 +322,35 @@
                     // $('#post-reg-form').submit();
                 }
             })
+
+            //첨부 이미지 삭제 이벤트
+            // const $uploadImgBox = $('.upload-img-box');
+            // $uploadImgBox.click('e', function (e) {
+            //     $target = e.target;
+
+            //     if (!$target.classList.contains('upload-cancel-btn')) {
+            //         return;
+            //     }
+            //     // 타깃 부모 노드 삭제(랜더링 이미지, 히든인풋 포함)
+            //     $target.parentElement.remove();
+            //     // 파일 선택창 메세지 다시 세팅
+            //     setUploadCount()
+            // })
+
+            // // 최하단 파일 선택창 메세지 세팅해주는 함수
+            // function setUploadCount() {
+            //     const upImgCnt = $('.upload-img').length;
+            //     console.log(upImgCnt);
+            //     if (upImgCnt === 0) {
+            //         $('.file-box-right').text("현재 첨부한 이미지가 없습니다.");
+            //     } else {
+            //         $('.file-box-right').text("첨부 이미지 " + upImgCnt + "개");
+            //     };
+            // }
+
+            
+            // 첨부 이미지 삭제 이벤트
+            $('.uploaded-list').click(delUploadImg);
 
 
 
