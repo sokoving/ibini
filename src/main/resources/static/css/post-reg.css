@@ -1,11 +1,11 @@
-section.post-reg-section{
+section.post-reg-section {
     border: none;
     padding: 100px 50px;
     /* margin-top: 0; */
     /* background-color: black; */
 }
 
-section .inner-section{
+section .inner-section {
     /*width: 70%;*/
     margin: 0 auto;
     background-color: #eeedeb;
@@ -13,17 +13,19 @@ section .inner-section{
     padding: 80px;
     /* box-sizing: border-box; */
 }
-.top-msg{
+
+.top-msg {
     text-align: right;
     padding-right: 50px;
 }
 
 /* 공통 */
 /* 파일 인풋창 */
-.file-input{
+.file-input {
     display: none;
 }
-.file-box{
+
+.file-box {
     background: #fff;
     border-radius: 0.35em;
     width: 100%;
@@ -36,16 +38,19 @@ section .inner-section{
 
     box-shadow: 1px 1px 1px #888;
 }
-.file-box:hover{
-    box-shadow: -1px -1px #888 ;
+
+.file-box:hover {
+    box-shadow: -1px -1px #888;
 }
-.file-box .file-box-left{
+
+.file-box .file-box-left {
     background-color: #ffca3d;
     padding: 0.35em 0.5em;
     flex: 1 1 90px;
     text-align: center;
 }
-.file-box .file-box-right{
+
+.file-box .file-box-right {
     font-size: 0.8em;
     margin-left: 0.5em;
     padding: 0.2em;
@@ -54,11 +59,12 @@ section .inner-section{
     color: #777;
 }
 
-.reg-span{
+.reg-span {
     font-weight: 700;
     margin-bottom: 0.5em;
 }
-.white-box{
+
+.white-box {
     background: #fff;
     border-radius: 0.35em;
     font-size: 1.2em;
@@ -72,24 +78,27 @@ section .inner-section{
     align-items: center;
 
 }
-.white-box.icon-box{
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+
+.white-box.icon-box {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
-.white-box.icon-box:hover{
+
+.white-box.icon-box:hover {
     background-color: #ffca3d;
     box-shadow: none;
 }
 
-.span-wrap{
+.span-wrap {
     display: flex;
     justify-content: space-between;
-    
+
 }
-.explain-span{
+
+.explain-span {
     font-size: 0.8em;
     color: #555;
     margin-right: 15px;
@@ -99,24 +108,26 @@ section .inner-section{
 #reg-1 {
     display: flex;
 }
+
 /* 이미지 */
-#reg-1 .img-wrap{
+#reg-1 .img-wrap {
     flex-basis: 219px;
     flex-shrink: 0;
-    
+
     position: relative;
 
     /* background-color: pink; */
 }
-#reg-1 .img-box{
+
+#reg-1 .img-box {
     width: 210px;
     height: 290px;
     overflow: hidden;
 
     background-color: #ffca3d;
     border-radius: 0.5em;
-    border: 1px solid #787878 ;
-    
+    border: 1px solid #787878;
+
     padding: 15px;
     box-sizing: border-box;
 
@@ -132,12 +143,13 @@ section .inner-section{
     top: -80px;
     left: -40px;
 }
-.img-box .post-img{
+
+.img-box .post-img {
     height: inherit;
 }
 
-.img-box .box-msg{
-    border: 1px dashed #787878 ;
+.img-box .box-msg {
+    border: 1px dashed #787878;
     border-radius: 0.5em;
     height: 265px;
 
@@ -147,7 +159,7 @@ section .inner-section{
 }
 
 /* 파일 인풋창 */
-.img-wrap .file-box{
+.img-wrap .file-box {
     position: absolute;
     top: 232px;
     left: -80px;
@@ -156,7 +168,7 @@ section .inner-section{
 }
 
 /* 제목, 작가 */
-#reg-1 .tw-wrap{
+#reg-1 .tw-wrap {
     display: flex;
     flex-flow: column;
     flex-grow: 1;
@@ -168,21 +180,25 @@ section .inner-section{
     margin-top: 50px;
 }
 
-.select-add-wrap{
+.select-add-wrap {
     display: flex;
 }
-.select-add-wrap .divided-select{
+
+.select-add-wrap .divided-select {
     flex: 1 1 46%;
 }
-.select-add-wrap .divided-input{
+
+.select-add-wrap .divided-input {
     flex: 1 1 46%;
     font-size: 0.8em;
     margin-left: 10px;
 }
-.select-add-wrap .divided-btn{
+
+.select-add-wrap .divided-btn {
     flex: 1 1 8%;
 }
-.divided-btn .icon-box{
+
+.divided-btn .icon-box {
     /* border: 1px dotted #787878; */
     box-shadow: 1px 1px 1px #787878;
 }
@@ -201,27 +217,32 @@ section .inner-section{
     margin-top: 70px;
     text-align: center;
 }
-#reg-4 .span-wrap{
+
+#reg-4 .span-wrap {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
-#reg-4 input{
+
+#reg-4 input {
     text-align: center;
     padding-left: 0;
 }
 
-.radio-wrap .white-box{
+.radio-wrap .white-box {
     padding: 0;
 }
-.radio-wrap{
+
+.radio-wrap {
     display: flex;
 }
-.radio-item{
+
+.radio-item {
     margin-right: 10px;
     font-size: 1em;
     font-weight: 700;
 }
-.radio-item:hover{
+
+.radio-item:hover {
     background-color: #ffda73;
 }
 
@@ -229,14 +250,16 @@ section .inner-section{
     background-color: #ffca3d;
 }
 
-#reg-4 .ep-wrap{
+#reg-4 .ep-wrap {
     display: flex;
     justify-content: space-between;
 }
-#reg-4 .ep-input-wrap{
+
+#reg-4 .ep-input-wrap {
     margin-right: 10px;
 }
-.ep-radio{
+
+.ep-radio {
     /* display: none; */
 }
 
@@ -251,29 +274,55 @@ section .inner-section{
     flex-flow: column;
     margin-top: 50px;
 }
-.uploaded-list{
+
+.uploaded-list {
     margin-top: 10px;
 
     display: flex;
     flex-flow: row wrap;
 }
-.upload-img-box{
+
+.upload-img-box {
     height: 100px;
     margin: 5px;
-    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    /* overflow: hidden; */
 }
-.upload-img-box .upload-img{
+
+.upload-img-box .upload-img {
     height: 100%;
+    margin-right: 10px;
+
+}
+
+.upload-img-box:hover {
+    transform: scale(1.2);
+    transition: 0.15s;
+}
+
+.upload-img-box .upload-cancel-btn {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    text-shadow: -2px 0 #fff, 0 3px #fff, 3px 0 #fff, 0 -1px #fff;
+    z-index: 100;
+}
+
+.upload-img-box .upload-cancel-btn:hover {
+    transform: scale(1.3);
+    transition: 0.15s;
 }
 
 
 
 /* 등록 버튼 */
-#reg-btn{
+#reg-btn {
     display: flex;
     justify-content: center;
 }
-#reg-btn .white-box{
+
+#reg-btn .white-box {
     margin-top: 30px;
     width: 20%;
     padding: 1.2em 0 1.2em 0;

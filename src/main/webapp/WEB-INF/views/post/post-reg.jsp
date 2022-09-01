@@ -66,8 +66,7 @@
         <section class="post-reg-section">
             <div class="top-msg">* 필수 입력 사항 <br>선택 사항은 입력하지 않으면 기본값으로 세팅됩니다.(수정 가능)</div>
             <div class="inner-section">
-                <form id="write-form" action="#" method="post" autocomplete="off"
-                    enctype="multipart/form-data">
+                <form id="write-form" action="#" method="post" autocomplete="off" enctype="multipart/form-data">
 
                     <!-- 히든 : 계정-->
                     <input type="hidden" name="account" id="" value="${account}">
@@ -106,14 +105,15 @@
                                 <span class="reg-span">* 작가</span>
                                 <span class="explain-span writer-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postWriter"
-                                placeholder="작가를 입력해 주세요">
+                            <input class="white-box" type="text" name="postWriter" placeholder="작가를 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
                                 <span class="explain-span star-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요"
+                                maxlength="1"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                         </div>
                     </div> <!-- // end reg-1 -->
 
@@ -190,27 +190,33 @@
                         </div>
                         <div class="span-wrap">
                             <span class="reg-span">연재 일시</span>
+                            <span class="explain-span ep-msg"></span>
                         </div>
-                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 금 10시">
+                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
                     </div> <!-- // end reg-3 -->
 
                     <!-- 회차 구분, 현재 회차, 현재 페이지 -->
                     <div id="reg-4">
                         <div class="span-wrap">
                             <span class="reg-span">회차 구분</span>
+                            <span class="explain-span ep-msg"></span>
                         </div>
 
                         <div class="radio-wrap ep-btn-group">
-                            <label class="white-box radio-item checked">회차(화)
+                            <label class="white-box radio-item checked">
+                                <span>회차(화)</span>
                                 <input class="ep-radio" type="radio" name="epId" value="0" checked>
                             </label>
-                            <label class="white-box radio-item">페이지(p)
+                            <label class="white-box radio-item">
+                                <span>페이지(p)</span>
                                 <input class="ep-radio" type="radio" name="epId" value="1">
                             </label>
-                            <label class="white-box radio-item">권수
+                            <label class="white-box radio-item">
+                                <span>권수</span>
                                 <input class="ep-radio" type="radio" name="epId" value="2">
                             </label>
-                            <label class="white-box radio-item">퍼센트(%)
+                            <label class="white-box radio-item">
+                                <span>퍼센트(%)</span>
                                 <input class="ep-radio" type="radio" name="epId" value="3">
                             </label>
                         </div>
@@ -218,11 +224,15 @@
                         <div class="ep-wrap">
                             <div class="ep-input-wrap">
                                 <span class="reg-span">현재 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="number" name="curEp">
+                                <input class="white-box" type="text" name="curEp" placeholder="0~99999 사이 숫자"
+                                    maxlength="5"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                             <div class="ep-input-wrap">
                                 <span class="reg-span">전체 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="number" name="totalEp">
+                                <input class="white-box" type="text" name="totalEp" placeholder="0~99999 사이 숫자"
+                                    maxlength="5"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                         </div>
                     </div>
@@ -230,6 +240,7 @@
                     <div id="reg-5">
                         <div class="span-wrap">
                             <span class="reg-span">해시태그</span>
+                            <span class="explain-span">[ 각 해시태그는 #를 기준으로 구별됩니다. ]</span>
                         </div>
                         <input class="white-box" type="text" name="tagName" placeholder="예시) #태그1 #태그_2">
                     </div>
@@ -240,23 +251,30 @@
                             <div class="file-box-left">
                                 파일 선택
                             </div>
-                            <div class="file-box-right">
+                            <div class="file-box-right" data-imgs-num="0">
                                 첨부된 이미지가 없습니다.
                             </div>
-                            <input class="file-input" type="file" name="#" disabled>
+                            <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
                         </label>
+                        <div class="uploaded-list">
+                            <!--
+                                파일 올릴 때마다 생성될 것
+                            <div class="upload-img-box">
+                                <img class="upload-img"
+                                    src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
+                                <i class="fas fa-times-circle upload-cancel-btn"></i>
+                                <input type="hidden" name="filNames"
+                                value="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large">
+                            </div> -->
+                        </div>
+
                     </div>
 
 
                     <div id="reg-btn">
-                        <button class="white-box">등록</button>
+                        <button id="post-reg-btn" class="white-box">등록</button>
                     </div>
                 </form> <!-- // end write-form -->
-
-
-
-
-
             </div> <!-- // end inner-section -->
         </section> <!-- // end section -->
 
@@ -267,14 +285,34 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-            // jQueryTagTest("h1", "태그 잡기 테스트");
+            // jQueryTagTest("태그 잡기 테스트", $('h1'));
+            const account = "${account}";
+            console.log(account);
+
+            // 입력창 키업 이벤트
+            const $form = $('#write-form');
+            // console.log($form);
+            $form.on({
+                keydown: function (e) {
+                    return checkKeydown(e);
+                },
+                keyup: function (e) {
+                    checkKeyup(e);
+                }
+            });
+
 
             // 포스트 입력 폼 제출 이벤트
             const $regBtn = $('#post-reg-btn');
             // jQueryTagTest($regBtn, "태그 잡기 테스트");
             $regBtn.click(e => {
-                $('#post-reg-form').submit();
+                e.preventDefault();
+                if (!validateFormValue()) {
+                    return;
+                }
+                $('#write-form').submit();
             })
+
 
 
             // platform jquery ========================================================
@@ -299,7 +337,7 @@
                 $('.textClick').show();
             });
 
-            // 1. 플랫폼 value값 가져오기 
+            // 1. 플랫폼 value값 가져오기
             $('#platformselect').change(function () {
 
                 // alert($(this).val());
@@ -322,6 +360,115 @@
                 // alert($( "#genreSelect option:selected" ).val());
 
             });
+
+            //========================이미지 첨부====================//
+
+            // 첨부 이미지 인풋 체인지 이벤트
+            const $imgsInput = $('.imgs-input');
+
+            $imgsInput.change(e => {
+                // 첨부 파일 정보를 서버로 전송
+                // 1. 선택된 파일 데이터 읽기
+                const files = e.originalEvent.target.files;
+                console.log('input file data: ', files);
+
+                // 원본 이름 배열
+                const originNames = [];
+                // 이미지 파일이 아니면 리턴
+                for (const f of files) {
+                    if (!isImageFile(f.name)) {
+                        alert('이미지 파일만 업로드 가능합니다.');
+                        return;
+                    }
+                    originNames.push(f.name);
+                }
+                console.log(originNames);
+
+                // 2. 읽은 파일 데이터를 input[type=file]태그에 저장
+                const $fileInput = $('#ajax-file-multi');
+                console.log($fileInput[0].files);
+
+                // 3. 파일 데이터를 비동기 전송하기 위해서는 FormData객체가 필요
+                const formData = new FormData();
+
+                // 4. 전송할 파일들을 전부 FormData안에 포장
+                for (let file of $fileInput[0].files) {
+                    formData.append('files', file);
+                }
+                console.log(formData);
+
+                // 5. 비동기 요청 전송
+                const reqInfo = {
+                    method: 'POST',
+                    body: formData
+                };
+                fetch('/ajax-upload', reqInfo)
+                    .then(res => {
+                        console.log(res.status);
+                        return res.json();
+                    })
+                    .then(fileNames => {
+                        console.log(fileNames);
+                        showImgs(fileNames);
+                    });
+            }); // end 첨부 이미지 인풋 체인지 이벤트
+
+
+            // 썸네일 인풋 체인지 이벤트
+            const $thumbInput = $('.thumb-input');
+
+            $thumbInput.change(e => {
+                console.log('체인지 이벤트 작동!');
+                // 선택된 파일 정보를 서버로 전송
+                // 1. 드롭된 파일 데이터 읽기
+                const files = e.originalEvent.target.files;
+                console.log('input file data: ', files);
+
+                // 파일 오리지널 이름
+                const fileOriginName = files[0].name;
+                console.log('fileOriginName : ', fileOriginName);
+
+                // 파일이 이미지가 아니라면 이벤트 종료
+                if (!isImageFile(fileOriginName)) {
+                    alert('이미지 파일만 업로드 가능합니다.');
+                    return;
+                }
+
+                // 2. 읽은 파일 데이터를 input[type=file]태그에 저장
+                const $fileInput = $('#ajax-file');
+                $fileInput.prop('files', files); // 첫번째 파라미터는 input의 name 속성과 맞추기
+                console.log($fileInput[0].files);
+
+                // 3. 파일 데이터를 비동기 전송하기 위해서는 FormData객체가 필요
+                const formData = new FormData();
+                // 4. 전송할 파일들을 전부 FormData안에 포장
+                for (let file of $fileInput[0].files) {
+                    formData.append('files', file);
+                }
+
+                // 5. 비동기 요청 전송
+                const reqInfo = {
+                    method: 'POST',
+                    body: formData
+                };
+                fetch('/ajax-upload', reqInfo)
+                    .then(res => {
+                        console.log(res.status);
+                        return res.json();
+                    })
+                    .then(fileNames => {
+                        console.log(fileNames);
+                        showThumbImg(fileNames, fileOriginName);
+                    });
+            }); // end 썸네일 인풋 체인지 이벤트
+
+
+
+            // 첨부 이미지 삭제 이벤트
+            $('.uploaded-list').click(delUploadImg);
+
+
+            //==================================================//
 
 
 
