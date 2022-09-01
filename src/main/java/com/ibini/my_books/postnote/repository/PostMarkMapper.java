@@ -33,5 +33,5 @@ public interface PostMarkMapper {
     int getPostMarkCount(Long postNo);
 
     // 마이페이지 포스트, 썸네일 마크 조회
-    List<MyPageMark> findAllMyPage(String account, Long postNo);
+    List<MyPageMark> findAllMyPage(String account, Long postNo, Search search);
 }

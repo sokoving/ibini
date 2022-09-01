@@ -47,12 +47,12 @@ public class MyPagePostNoteController {
 //    }
 
     @GetMapping("/list")
-    public String viewPostList(Model model, HttpSession session, Post post) {
+    public String viewPostList(Model model, HttpSession session, Post post, Search search) {
         log.info("GET!");
         Long postNo = post.getPostNo();
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
 
-        List<MyPageMark> myPageMarkList = postMarkService.findAllMyPage(account, postNo);
+        List<MyPageMark> myPageMarkList = postMarkService.findAllMyPage(account, postNo, search);
         model.addAttribute("myPageMarkList", myPageMarkList);
         return "postnote/mypage-note";
     }

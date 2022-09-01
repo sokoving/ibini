@@ -55,8 +55,8 @@ public class PostMarkService {
         return postMarkMapper.getPostMarkCount(postNo);
     }
 
-    public List<MyPageMark> findAllMyPage(String account, Long postNo) {
-        List<MyPageMark> myPageNoteList = postMarkMapper.findAllMyPage(account, postNo);
+    public List<MyPageMark> findAllMyPage(String account, Long postNo, Search search) {
+        List<MyPageMark> myPageNoteList = postMarkMapper.findAllMyPage(account, postNo, search);
 
         return myPageNoteList;
     }
