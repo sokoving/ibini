@@ -136,8 +136,6 @@
                             </div>
                             <input class="white-box title-input" type="number" name="starRate" placeholder="예시) 5"
                                 disabled>
-
-
                         </div>
                     </div> <!-- // end reg-1 -->
 
@@ -190,8 +188,8 @@
             const $imgsInput = $('.imgs-input');
 
             $imgsInput.change(e => {
-                // 드롭된 파일 정보를 서버로 전송
-                // 1. 드롭된 파일 데이터 읽기
+                // 첨부 파일 정보를 서버로 전송
+                // 1. 선택된 파일 데이터 읽기
                 const files = e.originalEvent.target.files;
                 console.log('input file data: ', files);
 

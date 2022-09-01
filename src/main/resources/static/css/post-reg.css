@@ -13,6 +13,10 @@ section .inner-section{
     padding: 80px;
     /* box-sizing: border-box; */
 }
+.top-msg{
+    text-align: right;
+    padding-right: 50px;
+}
 
 /* 공통 */
 /* 파일 인풋창 */
@@ -87,8 +91,7 @@ section .inner-section{
 }
 .explain-span{
     font-size: 0.8em;
-    font-style: italic;
-    /* text-decoration: underline; */
+    color: #555;
     margin-right: 15px;
 }
 
@@ -202,6 +205,10 @@ section .inner-section{
     display: flex;
     justify-content: center;
 }
+#reg-4 input{
+    text-align: center;
+    padding-left: 0;
+}
 
 .radio-wrap .white-box{
     padding: 0;
@@ -230,7 +237,7 @@ section .inner-section{
     margin-right: 10px;
 }
 .ep-radio{
-    display: none;
+    /* display: none; */
 }
 
 /* #reg-5 해시태그 */

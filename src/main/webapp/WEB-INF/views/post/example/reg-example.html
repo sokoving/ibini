@@ -57,13 +57,13 @@
 
         <!-- 새 포스트 등록 섹션 -->
         <section class="post-reg-section">
+            <div class="top-msg">* 필수 입력 사항 <br>선택 사항은 입력하지 않으면 기본값으로 세팅됩니다.(수정 가능)</div>
             <div class="inner-section">
-                <form id="write-form" action="/post/write" method="post" autocomplete="off"
+                <form id="write-form" action="#" method="post" autocomplete="off"
                     enctype="multipart/form-data">
 
                     <!-- 히든 : 카테고리 아이디(웹소설 일단 고정)-->
                     <input type="hidden" name="caId" value="1">
-
 
                     <!-- 이미지, 제목, 작가, 별점-->
                     <div id="reg-1">
@@ -71,6 +71,7 @@
                         <div class="img-wrap">
                             <div class="img-box">
                                 <span class="box-msg">썸네일을 등록해 보세요</span>
+                                <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
                                 <!-- <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
                             </div>
                             <label class="file-box">
@@ -80,30 +81,30 @@
                                 <div class="file-box-right">
                                     등록된 썸네일이 없습니다.
                                 </div>
-                                <input class="file-input" type="file" name="#">
+                                <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
                             </label>
                         </div>
 
                         <!-- 제목, 작가, 별점 -->
                         <div class="tw-wrap">
                             <div class="span-wrap">
-                                <span class="reg-span">책 제목</span>
-                                <span class="explain-span">제목을 입력해 주세요</span>
+                                <span class="reg-span">* 책 제목</span>
+                                <span class="explain-span title-msg"></span>
                             </div>
-                            <input class="white-box title-input" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
+                            <input class="white-box" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
 
                             <div class="span-wrap">
-                                <span class="reg-span">작가</span>
-                                <span class="explain-span">작가를 입력해 주세요</span>
+                                <span class="reg-span">* 작가</span>
+                                <span class="explain-span writer-msg"></span>
                             </div>
-                            <input class="white-box writer-input" type="text" name="postWriter"
+                            <input class="white-box" type="text" name="postWriter"
                                 placeholder="작가를 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
-                                <span class="explain-span">1~5 사이의 정수를 입력해 주세요</span>
+                                <span class="explain-span star-msg"></span>
                             </div>
-                            <input class="white-box title-input" type="number" name="starRate" placeholder="예시) 5">
+                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                         </div>
                     </div> <!-- // end reg-1 -->
 
@@ -115,7 +116,7 @@
                             <!-- 플랫폼 영역 -->
                             <div class="span-wrap">
                                 <span class="reg-span">플랫폼</span>
-                                <span class="explain-span">새 이름을 입력하고 버튼을 누르면 플랫폼이 추가됩니다 ↓</span>
+                                <span class="explain-span">새 플랫폼을 추가하려면 버튼을 눌러주세요 ↓</span>
                             </div>
 
                             <div class="select-add-wrap">
@@ -133,7 +134,7 @@
 
                                 <!-- 새 플랫폼 추가 -->
                                 <div class="divided-input">
-                                    <input class="white-box" type="text" placeholder="새 플랫폼을 추가해 보세요">
+                                    <input class="white-box hide" type="text" placeholder="플랫폼 이름을 입력해 주세요">
                                 </div>
                                 <div class="divided-btn">
                                     <div class="white-box icon-box ">
@@ -145,7 +146,7 @@
                             <!-- 장르 영역 -->
                             <div class="span-wrap">
                                 <span class="reg-span">장르</span>
-                                <span class="explain-span">새 이름을 입력하고 버튼을 누르면 장르가 추가됩니다 ↓</span>
+                                <span class="explain-span">새 장르를 추가하려면 버튼을 눌러주세요 ↓</span>
                             </div>
 
                             <div class="select-add-wrap">
@@ -163,7 +164,7 @@
 
                                 <!-- 새 장르 추가 -->
                                 <div class="divided-input">
-                                    <input class="white-box" type="text" placeholder="새 장르를 추가해 보세요">
+                                    <input class="white-box hide" type="text" placeholder="장르명을 입력해 주세요">
                                 </div>
                                 <div class="divided-btn">
                                     <div class="white-box icon-box ">
@@ -194,7 +195,7 @@
                         <div class="span-wrap">
                             <span class="reg-span">연재 일시</span>
                         </div>
-                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 금 10시">
+                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
                     </div> <!-- // end reg-3 -->
 
 
@@ -205,16 +206,20 @@
                         </div>
 
                         <div class="radio-wrap ep-btn-group">
-                            <label class="white-box radio-item checked">회차(화)
+                            <label class="white-box radio-item checked">
+                                <span>회차(화)</span>
                                 <input class="ep-radio" type="radio" name="epId" value="0" checked>
                             </label>
-                            <label class="white-box radio-item">페이지(p)
+                            <label class="white-box radio-item">
+                                <span>페이지(p)</span>
                                 <input class="ep-radio" type="radio" name="epId" value="1">
                             </label>
-                            <label class="white-box radio-item">권수
+                            <label class="white-box radio-item">
+                                <span>권수</span>
                                 <input class="ep-radio" type="radio" name="epId" value="2">
                             </label>
-                            <label class="white-box radio-item">퍼센트(%)
+                            <label class="white-box radio-item">
+                                <span>퍼센트(%)</span>
                                 <input class="ep-radio" type="radio" name="epId" value="3">
                             </label>
                         </div>
@@ -222,11 +227,11 @@
                         <div class="ep-wrap">
                             <div class="ep-input-wrap">
                                 <span class="reg-span">현재 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="number" name="curEp">
+                                <input class="white-box" type="text" name="curEp" placeholder="0~99999 사이 숫자" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                             <div class="ep-input-wrap">
                                 <span class="reg-span">전체 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="number" name="totalEp">
+                                <input class="white-box" type="text" name="totalEp" placeholder="0~99999 사이 숫자" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                         </div>
                     </div>
@@ -234,6 +239,7 @@
                     <div id="reg-5">
                         <div class="span-wrap">
                             <span class="reg-span">해시태그</span>
+                            <span class="explain-span">[ 각 해시태그는 #를 기준으로 구별됩니다. ]</span>
                         </div>
                         <input class="white-box" type="text" name="tagName" placeholder="예시) #태그1 #태그_2">
                     </div>
@@ -244,10 +250,10 @@
                             <div class="file-box-left">
                                 파일 선택
                             </div>
-                            <div class="file-box-right">
+                            <div class="file-box-right"  data-imgs-num="0">
                                 첨부된 이미지가 없습니다.
                             </div>
-                            <input class="file-input" type="file" name="#">
+                            <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
                         </label>
                         <div class="uploaded-list">
                             <!-- <div class="upload-img-box">
@@ -259,7 +265,7 @@
 
 
                     <div id="reg-btn">
-                        <button class="white-box">등록</button>
+                        <button id="post-reg-btn" class="white-box">등록</button>
                     </div>
                 </form> <!-- // end write-form -->
             </div> <!-- // end inner-section -->
@@ -272,7 +278,19 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-            jQueryTagTest("태그 잡기 테스트", $('h1'));
+            // jQueryTagTest("태그 잡기 테스트", $('h1'));
+
+            // 포스트 입력 폼 제출 이벤트
+            const $regBtn = $('#post-reg-btn');
+            // jQueryTagTest($regBtn, "태그 잡기 테스트");
+            $regBtn.click(e => {
+                e.preventDefault();
+                validateFormValue();
+
+                // $('#post-reg-form').submit();
+            })
+
+            
 
 
 

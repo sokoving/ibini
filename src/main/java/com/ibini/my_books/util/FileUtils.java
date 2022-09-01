@@ -111,4 +111,10 @@ public class FileUtils {
     public static String getFileExtension(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
+
+//    풀경로에서 원본파일명을 반환하는 메서드
+    public static String extractOriginFileName(String fileName) {
+        return fileName.substring(fileName.indexOf("_") + 1);
+    }
+
 }

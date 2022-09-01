@@ -70,5 +70,12 @@
         WHERE file_name = #{fileName}
     </delete>
 
+    <!--  post에 있는 썸네일 전체 삭제  -->
+    <delete id="cleanThumb">
+        DELETE FROM prj_post_img
+        WHERE post_no = #{postNo}
+            and thumbnail = 'true'
+    </delete>
+
 
 </mapper>
