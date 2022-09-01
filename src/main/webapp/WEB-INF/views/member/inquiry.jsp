@@ -71,7 +71,7 @@
                     }
 
                     .table1 .title {
-                        padding-left: 80px;
+                        /* padding-left: 80px; */
                     }
 
                     .table2 li {
@@ -101,7 +101,7 @@
 
                     /* 제목 li 태그 */
                     .table1 .title {
-                        padding-left: 80px;
+                        /* padding-left: 80px; */
                     }
 
                     /* 문의글 상세보기시 출력되는 태그 li */
@@ -168,6 +168,16 @@
                         margin-left: 5px;
                     }
 
+                    /* 새로운 글 표시 */
+
+                    .newMark.inquirynewmark {
+                        display: flex;
+                    }
+
+                    .newMark.answernewmark {
+                        display: flex;
+                        justify-content: right;
+                    }
                 </style>
 
         </head>
@@ -196,7 +206,12 @@
                                         <ul class="table1-secondchild">
                                             <li class="inquiry-title" data-serial-num="${list.serialNumber}">
                                                 [문의]&nbsp;${list.userId}</li>
-                                            <li class="title"> 제목 : ${list.inquiryTitle}</li>
+                                            <div class="newMark inquirynewmark">
+                                                <c:if test="${list.newInquiryArticle}">
+                                                    <span class="badge rounded-pill bg-danger">new</span>
+                                                </c:if>
+                                                <li class="title"> 제목 : ${list.inquiryTitle}</li>
+                                            </div>
                                         </ul>
                                         <ul class="table1-secondchild detailAnswerclick"></ul>
                                         <li data-serial-num="0" class="if-setting"></li>
@@ -210,7 +225,13 @@
 
                                         </c:if>
                                         <c:if test="${list.answer != null}">
-                                            <li class="detail">[답변완료]</li>
+                                            <div class="newMark answernewmark">
+                                                <c:if test="${list.newAnswerArticle}">
+                                                    <span class="badge rounded-pill bg-danger">new</span>
+                                                </c:if>
+                                                <li class="detail">[답변완료]</li>
+
+                                            </div>
                                         </c:if>
                                     </ul>
                                 </li>
@@ -325,16 +346,17 @@
                 $table.addEventListener('click', e => {
                     if (!e.target.matches('.table2 li')) return;
                     console.log('detail 클릭:', e.target);
-                    let serialNumber = e.target.parentElement.firstElementChild.dataset.serialNum;
-                    let $ul = e.target.parentElement.parentElement.firstElementChild;
+                    let serialNumber = e.target.parentElement.parentElement.firstElementChild.dataset.serialNum;
+                    let $ul = e.target.parentElement.parentElement.parentElement.firstElementChild;
                     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
                         .then(res => res.json())
                         .then(oneInquiry => {
-                            if (e.target.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == "0") {
-                                console.log('if문 :', e.target.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum);
+                            if (e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == "0") {
+                                console.log('if문 :', e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum);
                                 makeAnswerDOM(oneInquiry, $ul);
 
                             } return;
+
 
                         });
                 })
@@ -348,15 +370,17 @@
                     if (!e.target.matches('.table1 li')) return;
                     console.log('li 클릭됨! -', e.target);
 
-                    let serialNumber = e.target.parentElement.parentElement.firstElementChild.firstElementChild.dataset.serialNum;
-                    let $ul = e.target.parentElement;
+                    let serialNumber = e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.dataset.serialNum;
+                    console.log('확인 일련번호 :', serialNumber);
+                    let $ul = e.target.parentElement.parentElement;
+                    console.log($ul);
                     // console.log('글번호 :', serialNumber);
                     // location.href = '/member/findone-inquiry/' + serialNumber;
                     //비동기로 문의글 상세정보 가지고 오기              
                     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
                         .then(res => res.json())
                         .then(oneInquiry => {
-                            if (e.target.parentElement.lastElementChild.dataset.serialNumber == oneInquiry.serialNumber) {
+                            if (e.target.parentElement.parentElement.lastElementChild.dataset.serialNumber == oneInquiry.serialNumber) {
                                 return;
                             };
                             makeInquiryDOM(oneInquiry, $ul);

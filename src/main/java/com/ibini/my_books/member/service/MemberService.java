@@ -244,6 +244,7 @@ public class MemberService {
         List<InquiryTable> memberInquiry = memberMapper.findMemberInquiry(userId, page);
         for (InquiryTable inquiryTable : memberInquiry) {
             convertDateFormat(inquiryTable);
+            checkNewInquiryArticle(inquiryTable);
         }
 
         findDataMap.put("oneList",memberInquiry);
@@ -291,14 +292,17 @@ public class MemberService {
         long diff = nowTime - regDateTime;
 
         // 신규 게시물 제한 시간
-        long limitTime = 60 * 1 * 1000; // 5분
+        long limitTime = 60 * 60 * 1000; // 5분
 
         if (diff < limitTime) {
             i.setNewInquiryArticle(true);
         }
 
+//        log.info("answerDate change confirm : {}",i.getAnswerDate());
+//        log.info("newAnswerArticle change confirm : {}"());
         if(i.getAnswerDate() != null){
             // 게시물의 작성일자와 현재 시간을 대조
+            log.info("newAnswerArticle change 메서드 confirm");
 
             // 게시물의 작성일자 가져오기 16억 5초
             long regDateTimeA = i.getAnswerDate().getTime();
@@ -307,12 +311,12 @@ public class MemberService {
             long nowTimeA = System.currentTimeMillis();
 
             // 현재 시간 - 작성 시간
-            long diffA = nowTime - regDateTime;
+            long diffA = nowTimeA - regDateTimeA;
 
             // 신규 게시물 제한 시간
-            long limitTimeA = 60 * 1 * 1000; // 5분
+            long limitTimeA = 60 * 60 * 1000; // 5분
 
-            if (diff < limitTime) {
+            if (diffA < limitTimeA) {
                 i.setNewAnswerArticle(true);
             }
 
