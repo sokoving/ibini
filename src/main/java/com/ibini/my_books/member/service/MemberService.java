@@ -1,6 +1,7 @@
 package com.ibini.my_books.member.service;
 
 import com.ibini.my_books.genre.service.GenreService;
+import com.ibini.my_books.member.common.paging.Page;
 import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.*;
@@ -20,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.ibini.my_books.member.service.LoginFlag.*;
 import static com.ibini.my_books.util.LoginUtil.*;
@@ -237,21 +239,31 @@ public class MemberService {
     }
 
     //회원 마이페이지에서 회원의 문의내역 전체 조회하기
-    public List<InquiryTable> findMemberInquiry(String userId){
-        List<InquiryTable> memberInquiry = memberMapper.findMemberInquiry(userId);
+    public Map<String,Object> findMemberInquiry(String userId, Page page){
+        HashMap<String, Object> findDataMap = new HashMap<>();
+        List<InquiryTable> memberInquiry = memberMapper.findMemberInquiry(userId, page);
         for (InquiryTable inquiryTable : memberInquiry) {
             convertDateFormat(inquiryTable);
         }
-        return memberInquiry;
+
+        findDataMap.put("oneList",memberInquiry);
+        findDataMap.put("tc",memberMapper.getTotalMemberInquiry(userId));
+
+        return findDataMap;
     };
 
     //관리자 페이지에서 문의내역 전체 조회하기
-    public List<InquiryTable> findAllInquiry(){
-        List<InquiryTable> allInquiry = memberMapper.findAllInquiry();
+    public Map<String,Object> findAllInquiry(Page page){
+        HashMap<String, Object> allFindDataMap = new HashMap<>();
+        List<InquiryTable> allInquiry = memberMapper.findAllInquiry(page);
         for (InquiryTable inquiryTable : allInquiry) {
             convertDateFormat(inquiryTable);
+            checkNewInquiryArticle(inquiryTable);
         }
-        return allInquiry;
+
+        allFindDataMap.put("allList",allInquiry);
+        allFindDataMap.put("tc",memberMapper.getTotalInquiry());
+        return allFindDataMap;
     }
 
     // 문의글 수정
@@ -264,8 +276,48 @@ public class MemberService {
         return memberMapper.inquiryDelete(serialNumber);
     }
 
+    // 새로 작성한 글 표시하기 위한 메서드
+    private void checkNewInquiryArticle(InquiryTable i) {
 
+        // 게시물의 작성일자와 현재 시간을 대조
 
+        // 게시물의 작성일자 가져오기 16억 5초
+        long regDateTime = i.getInquiryDate().getTime();
+
+        // 현재 시간 얻기 (밀리초) 16억 10초
+        long nowTime = System.currentTimeMillis();
+
+        // 현재 시간 - 작성 시간
+        long diff = nowTime - regDateTime;
+
+        // 신규 게시물 제한 시간
+        long limitTime = 60 * 1 * 1000; // 5분
+
+        if (diff < limitTime) {
+            i.setNewInquiryArticle(true);
+        }
+
+        if(i.getAnswerDate() != null){
+            // 게시물의 작성일자와 현재 시간을 대조
+
+            // 게시물의 작성일자 가져오기 16억 5초
+            long regDateTimeA = i.getAnswerDate().getTime();
+
+            // 현재 시간 얻기 (밀리초) 16억 10초
+            long nowTimeA = System.currentTimeMillis();
+
+            // 현재 시간 - 작성 시간
+            long diffA = nowTime - regDateTime;
+
+            // 신규 게시물 제한 시간
+            long limitTimeA = 60 * 1 * 1000; // 5분
+
+            if (diff < limitTime) {
+                i.setNewAnswerArticle(true);
+            }
+
+        }
+    }
 
 
 

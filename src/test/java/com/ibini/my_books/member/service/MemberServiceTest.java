@@ -1,5 +1,6 @@
 package com.ibini.my_books.member.service;
 
+import com.ibini.my_books.member.common.paging.Page;
 import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.AnswerDTO;
@@ -83,25 +84,27 @@ class MemberServiceTest {
         System.out.println(i);
     }
 
-    @Test
-    @DisplayName("userId의 모든 문의글이 조회 되어야 한다.")
-    void findMemberInquiryTest(){
-        String userId = "vacation";
-        List<InquiryTable> i = service.findMemberInquiry(userId);
-        for (InquiryTable y : i) {
-            System.out.println(y);
-        }
-    }
+//    @Test
+//    @DisplayName("userId의 모든 문의글이 조회 되어야 한다.")
+//    void findMemberInquiryTest(){
+//       Page page = new Page();
+//        String userId = "vacation";
+//        List<InquiryTable> i = service.findMemberInquiry(userId,page);
+//        for (InquiryTable y : i) {
+//            System.out.println(y);
+//        }
+//    }
 
 
-    @Test
-    @DisplayName("모든 문의글을 조회 되어야 한다.")
-    void findAllInquiryTest(){
-        List<InquiryTable> allInquiry = service.findAllInquiry();
-        for (InquiryTable i : allInquiry) {
-            System.out.println(i);
-        }
-    }
+//    @Test
+//    @DisplayName("모든 문의글을 조회 되어야 한다.")
+//    void findAllInquiryTest(){
+//        Page page = new Page();
+//        List<InquiryTable> allInquiry = service.findAllInquiry(page);
+//        for (InquiryTable i : allInquiry) {
+//            System.out.println(i);
+//        }
+//    }
 
     @Test
     @DisplayName("시리얼넘버와 일치하는 문의글이 수정 되어야 한다.")

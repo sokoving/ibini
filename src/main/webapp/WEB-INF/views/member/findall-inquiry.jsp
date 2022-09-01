@@ -88,15 +88,14 @@
                         width: 100px;
                     }
 
-                    .inquiryMainTable li{
+                    .inquiryMainTable li {
                         margin-bottom: 5px;
                     }
 
                     /* ========== 문의 - 아이디 - 제목 - 내용 - 답변 ========== */
                     /* 문의/아이디 표시 li 태그 */
-                    .inquiry-title{
-                    }
-                    
+                    .inquiry-title {}
+
                     /* 제목 li 태그 */
                     .table1 .title {
                         padding-left: 80px;
@@ -108,7 +107,13 @@
                         width: 850px;
                         border: 1px solid;
                         padding: 15px;
-                        
+
+                    }
+
+
+                    /* 문의글 상세보기시 제목 :  */
+                    .detailTitle {
+                        margin-left: 90px;
                     }
 
                     /* 답변 상세보기시 출력되는 태그 li */
@@ -117,7 +122,42 @@
                         border: 1px solid;
                     }
 
+                    /* 답변 상세보기시 출력되는 답변: */
+                    .answerDetailTitle {
+                        margin-left: 100px;
+                        margin-top: 20px;
+                    }
 
+                    /* 페이지 form */
+
+                    .bottom-section {
+                        margin-top: 50px;
+                        margin-bottom: 100px;
+                        display: flex;
+                    }
+
+                    .bottom-section nav {
+                        flex: 9;
+                        /* 부모에게 display: flex; */
+                        display: flex;
+                        justify-content: center;
+                    }
+
+                    .pagination-custom a {
+                        color: #444 !important;
+                        /* !important */
+                    }
+
+                    /* 현재 보고 있는 페이지 음영처리 */
+                    .pagination-custom li.active a,
+                    .pagination-custom li:hover a {
+                        background: #333 !important;
+                        color: #fff !important;
+                    }
+
+                    .page-item {
+                        margin-left: 5px;
+                    }
                 </style>
 
         </head>
@@ -143,7 +183,8 @@
                                 <li class="inquiryTable">
                                     <ul class="inner-inquiryTable table1">
                                         <ul class="table1-secondchild">
-                                            <li class="inquiry-title" data-serial-num="${list.serialNumber}">[문의]&nbsp;${list.userId}</li>
+                                            <li class="inquiry-title" data-serial-num="${list.serialNumber}">
+                                                [문의]&nbsp;${list.userId}</li>
                                             <li class="title"> 제목 : ${list.inquiryTitle}</li>
                                         </ul>
                                         <ul class="table1-secondchild detailAnswerclick"></ul>
@@ -152,10 +193,12 @@
                                     <ul class="inner-inquiryTable table2">
                                         <li data-serial-num="${list.serialNumber}">${list.inquiryPrettierDate}</li>
                                         <c:if test="${list.answer == null}">
+                                            <!-- 모달 버튼 -->
                                             <li class="answer-register"> <a id="registerBtn" type="button"
                                                     class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#answerregisterModal" data-bs-whatever=""
-                                                    href="#"> [미응답] </a> </li>
+                                                    data-bs-target="#answerregisterModal"
+                                                    data-bs-whatever="${list.serialNumber}" href="#">
+                                                    [미응답] </a> </li>
                                         </c:if>
                                         <c:if test="${list.answer != null}">
                                             <li class="detail">[답변완료]</li>
@@ -167,32 +210,45 @@
                     </c:if>
 
                     <!-- 페이지 버튼 만들기 -->
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                              <span aria-hidden="true">&laquo;</span>
-                            </a>
-                          </li>
+                    <div class="bottom-section">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination pagination-lg pagination-custom">
+                                <c:if test="$pm.prev">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="/member/admin/findall-inquiry?&pageNum=${pm.beginPage - 1}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
 
-                          <c:forEach var="n" begin = "1" end = "10" step="1">
-                          <li class="page-item"><a class="page-link" href="#">${n}</a></li>
-                          </c:forEach>
+                                <c:forEach var="n" begin="${pm.beginPage}" end="${pm.endPage}" step="1">
+                                    <li class="page-item" data-page-num="${n}"><a class="page-link"
+                                            href="/member/admin/findall-inquiry?&pageNum=${n}">${n}</a></li>
+                                </c:forEach>
 
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true">&raquo;</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
+                                <c:if test="${pm.next}">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="/member/admin/findall-inquiry?&pageNum=${pm.endPage - 1}"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </nav>
+                    </div>
 
+
+                    <!-- 모달 팝업 모달 답변 쓰기 -->
                     <div class="modal fade" id="answerregisterModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">답변 작성하기</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -219,15 +275,55 @@
                         </div>
                     </div>
 
+
+                    <!--================== script =================================-->
+                    <script>
+                        // 현재 위치한 페이지에 active 스타일 부여하기
+                        function appendPageActive() {
+
+                            // 현재 내가 보고 있는 페이지 넘버
+                            const curPageNum = '${pm.page.pageNum}';
+                            // console.log("현재페이지: ", curPageNum);
+
+                            // 페이지 li태그들을 전부 확인해서 
+                            // 현재 위치한 페이지 넘버와 텍스트컨텐츠가 일치하는 li를 찾아서 class active 부여
+                            const $ul = document.querySelector('.pagination');
+                            console.log($ul);
+
+                            for (let $li of [...$ul.children]) {
+                                console.log(curPageNum);
+                                console.log($li.dataset.pageNum);
+                                if (curPageNum === $li.dataset.pageNum) {
+
+                                    $li.classList.add('active');
+                                    break;
+                                }
+                            }
+                        }
+                        // 즉시실행함수
+                        (function () {
+                            appendPageActive();
+                        })();
+                    </script>
+
+
                     <script>
                         // 부트 모달 스트랩 스크립트
                         var answerregisterModal = document.getElementById('answerregisterModal')
+
                         answerregisterModal.addEventListener('show.bs.modal', function (event) {
 
                             // Button that triggered the modal
                             var button = event.relatedTarget
+                            // console.log('button :',button);
                             // Extract info from data-bs-* attributes
                             var recipient = button.getAttribute('data-bs-whatever')
+                            // console.log('recipient :',recipient);
+                            // console.log('모달 클릭시 해당영역의 제목:',button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent);
+                            const titleContent = button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent;
+                            // console.log('타이틀내용 :',titleContent);
+                            // console.log('제목넣기 테스트 : ', document.getElementById('recipient-name').textContent );
+                            document.getElementById('recipient-name').textContent = titleContent;
                             // If necessary, you could initiate an AJAX request here
                             // and then do the updating in a callback.
                             //
@@ -235,32 +331,31 @@
                             var modalTitle = answerregisterModal.querySelector('.modal-title')
                             var modalBodyInput = answerregisterModal.querySelector('.modal-body input')
 
-                            modalTitle.textContent = '답변 작성하기 ' + recipient
+                            modalTitle.textContent = '[답변 작성] - 문의 번호 [' + recipient + ']';
                             modalBodyInput.value = recipient
 
-                            // 모달을 띄울 때 다음 작업(수정완료처리)을 위해 댓글번호를 모달에 달아두자.
-                            const $modal = document.querySelector('.modal');
-                            console.log('$modal');
+                            $serialNumInput = document.getElementById('hidden-serialNumber');
+                            $contentInput = document.getElementById('message-text');
 
+                            // 모달을 띄울 때 다음 작업(수정완료처리)을 위해 댓글번호를 모달에 달아두자.
                         })
 
                         // 답변등록 화면 열기 처리 이벤트                
-                        const $modal = $('#answerregisterModal');
+                        // const $modal = $('#answerregisterModal');
+                        // const $l = document.getElementById('registerBtn');
+                        // console.log($l);
 
-                        document.getElementById('registerBtn').onclick = e => {
-                            console.log('답변 등록 버튼 클릭');
-                              console.log(e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.lastElementChild.textContent);
-                             console.log(e.target.parentElement.parentElement.firstElementChild.dataset.serialNum);
-                            const title = e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.lastElementChild.textContent;
-                            const serialNumber = e.target.parentElement.parentElement.firstElementChild.dataset.serialNum;
-                            document.getElementById('recipient-name').textContent = title;
-                            document.getElementById('hidden-serialNumber').value = serialNumber;
-                        }
+                        // $l.onclick = e => {
+                        //     console.log('답변 등록 버튼 클릭');
+                        //     console.log(e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.lastElementChild.textContent);
+                        //     console.log(e.target.parentElement.parentElement.firstElementChild.dataset.serialNum);
+                        //     const title = e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.lastElementChild.textContent;
+                        //     const serialNumber = e.target.parentElement.parentElement.firstElementChild.dataset.serialNum;
+                        //     document.getElementById('recipient-name').textContent = title;
+                        //     document.getElementById('hidden-serialNumber').value = serialNumber;
+                        // }
 
                         //답글 달기 비동기 처리 이벤트
-                        $serialNumInput = document.getElementById('hidden-serialNumber');
-                        $contentInput = document.getElementById('message-text');
-
                         document.getElementById('register-success').onclick = e => {
                             console.log(e.target);
                             // const serialNumber = e.target.closest('.table1').firstElementChild.dataset.serialNum;
@@ -283,14 +378,15 @@
 
                             console.log(reqInfo);
 
-
+                            const $modal = document.querySelector('.modal');
+                            console.log('modal?:',$modal);
 
                             fetch('http://localhost:8383/member/admin/answer-register/', reqInfo)
                                 .then(res => res.text())
                                 .then(msg => {
                                     if (msg === 'answer-register-success') {
                                         alert('답변 등록 성공!!');
-                                        $modal.modal('hide'); // 모달창 닫기
+                                        $modal.hide; // 모달창 닫기
                                         // showReplies(); // 댓글 새로불러오기
                                         location.href = '/member/admin/findall-inquiry';
                                     } else {
@@ -298,6 +394,17 @@
                                     }
                                 });
                         }
+
+                        // // 댓글 목록을 서버로부터 비동기요청으로 불러오는 함수
+                        // function showReplies(pageNum = 1) {
+
+                        //     fetch(URL + '?boardNo=' + bno + '&pageNum=' + pageNum)
+                        //         .then(res => res.json())
+                        //         .then(replyMap => {
+                        //             // console.log(replyMap.replyList);
+                        //             makeReplyDOM(replyMap);
+                        //         });
+                        // }
 
                     </script>
 
@@ -307,22 +414,29 @@
                 //문의글 상세보기 태그 만들기 함수
                 function makeInquiryDOM(oneInquiry, $ul) {
                     const $li = document.createElement('li');
+                    const $div = document.createElement('div');
+                    $div.textContent = '내용 :'
+                    $div.classList.add('detailTitle');
                     $li.textContent = oneInquiry.inquiry;
                     $li.dataset.serialNumber = oneInquiry.serialNumber;
                     $li.classList.add('inquiry-content');
+                    $ul.append($div);
                     $ul.append($li);
                 }
 
                 // 답변 상세보기 태그 만들기 함수 makeAnswerDOM
                 function makeAnswerDOM(oneInquiry, $ul) {
                     const $li = document.createElement('li');
+                    const $div = document.createElement('div');
+                    $div.textContent = '답변: :'
+                    $div.classList.add('answerDetailTitle');
                     $li.textContent = oneInquiry.answer;
                     $li.dataset.serialNum = oneInquiry.serialNumber;
                     $li.classList.add('answer');
+                    $ul.append($div);
                     $ul.append($li);
 
                 }
-
                 // //글쓰기로 이동하기 버튼 이벤트
                 // const $writeBtn = document.querySelector('.register-btn');
                 // $writeBtn.addEventListener('click', e => {
@@ -336,7 +450,7 @@
                 console.log($detail);
 
                 $table.addEventListener('click', e => {
-                    if (!e.target.matches('.table2 li')) return;
+                    if (!e.target.matches('.table2 .detail')) return;
                     console.log('detail 클릭:', e.target);
                     let serialNumber = e.target.parentElement.firstElementChild.dataset.serialNum;
                     let $ul = e.target.parentElement.parentElement.firstElementChild;

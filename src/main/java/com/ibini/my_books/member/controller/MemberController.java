@@ -1,12 +1,11 @@
 package com.ibini.my_books.member.controller;
 
+import com.ibini.my_books.member.common.paging.Page;
+import com.ibini.my_books.member.common.paging.PageMaker;
 import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.domain.SNSLogin;
-import com.ibini.my_books.member.dto.AnswerDTO;
-import com.ibini.my_books.member.dto.InquiryDTO;
-import com.ibini.my_books.member.dto.InquiryModifyDTO;
-import com.ibini.my_books.member.dto.LoginDTO;
+import com.ibini.my_books.member.dto.*;
 import com.ibini.my_books.member.service.EmailServiceImpl;
 import com.ibini.my_books.member.service.KakaoService;
 import com.ibini.my_books.member.service.LoginFlag;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.ibini.my_books.member.domain.OauthValue.*;
 import static com.ibini.my_books.member.service.LoginFlag.*;
@@ -356,11 +356,14 @@ public class MemberController {
 
         //회원 문의내역 전체조회
     @GetMapping("/inquiry")
-    public void inquiry(String userId, Model model){
-        log.info("/member/inquiry GET!! ");
-        List<InquiryTable> list = memberService.findMemberInquiry(userId);
-        log.info("list {}",list);
-        model.addAttribute("list",list);
+    public void inquiry(String userId, Page page, Model model){
+        log.info("/member/inquiry GET!! userId:{} , Page:{}",userId,page);
+        Map<String, Object> findInquiryData = memberService.findMemberInquiry(userId, page);
+        log.info("findInquiryData {}",findInquiryData);
+        //페이지 정보 생성
+        PageMaker pm = new PageMaker(page, (Integer) findInquiryData.get("tc"));
+        model.addAttribute("list",findInquiryData.get("oneList"));
+        model.addAttribute("pm",pm);
     }
 
     //회원 문의내역 상세조회
@@ -440,11 +443,19 @@ public class MemberController {
 
     //관리자 페이지에서 회원 문의내역 전체조회
     @GetMapping("/admin/findall-inquiry")
-    public String adminInquiry(Model model){
-        log.info("/member/admin/findall-inquiry GET!! ");
-        List<InquiryTable> list = memberService.findAllInquiry();
-        log.info("list {}",list);
-        model.addAttribute("list",list);
+    public String adminInquiry(Model model, Page page){
+        log.info("/member/admin/findall-inquiry GET!! // page:{} ",page);
+
+        Map<String, Object> allFindInquiry = memberService.findAllInquiry(page);
+
+        log.info("list {}",allFindInquiry.get("allList"));
+
+        PageMaker pm = new PageMaker(page, (Integer) allFindInquiry.get("tc"));
+        log.info("pm : {}", pm);
+
+
+        model.addAttribute("list",allFindInquiry.get("allList"));
+        model.addAttribute("pm",pm);
         return "/member/findall-inquiry";
     }
 

@@ -1,12 +1,11 @@
 package com.ibini.my_books.member.repository;
 
+import com.ibini.my_books.member.common.paging.Page;
 import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
-import com.ibini.my_books.member.dto.AnswerDTO;
-import com.ibini.my_books.member.dto.AutoLoginDTO;
-import com.ibini.my_books.member.dto.InquiryDTO;
-import com.ibini.my_books.member.dto.InquiryModifyDTO;
+import com.ibini.my_books.member.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -63,16 +62,23 @@ public interface MemberMapper {
     InquiryTable findOneInquiry(String serialNumber);
 
     //회원 마이페이지에서 회원의 문의내역 전체 조회하기
-    List<InquiryTable> findMemberInquiry(String account);
+    List<InquiryTable> findMemberInquiry(@RequestParam("userID") String userId,
+                                         @RequestParam("page")Page page);
 
     //관리자 페이지에서 문의내역 전체 조회하기
-     List<InquiryTable> findAllInquiry();
+     List<InquiryTable> findAllInquiry(@RequestParam("page") Page page);
 
      //문의글 수정
     boolean inquiryModify(InquiryModifyDTO dto);
 
     // 문의글 삭제
     boolean inquiryDelete(String serialNumber);
+
+    // 회원 로그인 상태 - 총 문의글 수 구하기 (페이지 처리)
+    int getTotalMemberInquiry(String userId);
+
+    // 관리자 로그인 상태 - 총 문의글 수 구하기 (페이지 처리)
+    int getTotalInquiry();
 
 
 
