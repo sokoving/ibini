@@ -258,10 +258,14 @@ section {
     text-align: center;
     min-height: 250px;
     margin-right: 2rem;
+
+    display: flex;
+    align-items: center;
 }
 .book-wrapper img.book-image {
-    object-fit: cover;
-    height: 250px;
+    width: 100%;
+    /* object-fit: cover; */
+    /* height: 250px; */
 }
 
 /* 책 부가정보 영역 */

@@ -24,6 +24,7 @@ public interface PostMarkMapper {
 
     // 마크 전체 조회 기능
     List<PostMark> findAll(Long postNo);
+    List<PostMark> findAll2(Long postNo);
 
     // 마크 개별 조회 기능
     PostMark findOne(Long markNo);
@@ -32,5 +33,5 @@ public interface PostMarkMapper {
     int getPostMarkCount(Long postNo);
 
     // 마이페이지 포스트, 썸네일 마크 조회
-    List<MyPageMark> findAllMyPage(String account, Search search);
+    List<MyPageMark> findAllMyPage(String account, Long postNo);
 }

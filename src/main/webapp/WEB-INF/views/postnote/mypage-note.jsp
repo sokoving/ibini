@@ -27,7 +27,7 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="myPageNote.css">
+    <link rel="stylesheet" href="/css/mypage-note.css">
 </head>
 
 <body>
@@ -86,50 +86,57 @@
             <div class="body-wrapper">
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
-                    <div class="content">
-                        <div class="book-wrapper flex-fs">
-                            <!-- 책 이미지 -->
-                            <div class="book-image w30 noselect">
-                                <img class="book-image" src="./project3.png" alt="book image">
-                            </div>
-                            <!-- 책 정보 -->
-                            <div class="book-info w70">
-                                <!-- 책 제목 -->
-                                <div class="book-title">
-                                    <span>여행계획 짜기</span>
-                                </div>
-                                <!-- MARK 내용 -->
-                                <div class="my-text">
-                                    <div class="episode-no">
-                                        <span>ep.15</span>
-                                    </div>
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
-                                        asdasdagre기머이ㅓ니ㅓ리너일너ㅣㅇ허닝허닝허니어니어히나ㅓ히나ㅓㅇ히나ㅓㅇ히나ㅓㅇ히ㅏ넝히머이허닝허니어
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        <span>2022-08-22</span>
-                                    </div>
-                                    <hr>
+                    <c:forEach var="p" items="${myPageMarkList}">
+                        <c:if test="${not empty p.content}">
+                        <div class="content">
+                            <div class="book-wrapper flex-fs">
+                                <!-- 책 이미지 -->
+                                <c:choose>
+                                    <c:when test="${p.thumbImg != null}">
+                                        <div class="book-image w30 noselect">
+                                            <img class="book-image" src="/loadFile?fileName=${p.thumbImg}" alt="book image">
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="book-image w30 noselect"></div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <!-- <div class="book-image w30 noselect">
+                                    <img class="book-image" src="${p.thumbImg}" alt="book image">
+                                </div> -->
 
-                                    <div class="episode-no">
-                                        <span>ep.1225</span>
+                                <!-- 포스트 번호 -->
+                                <span id="postNo" style="display: none;">${p.postNo}</span>
+                                
+                                <!-- 책 정보 -->
+                                <div class="book-info w70">
+                                    
+                                    <!-- 책 제목 -->
+                                    <div class="book-title">
+                                        <span>${p.postTitle}</span>
                                     </div>
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                        rgarg&#10;&#10;raeheath
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        2022-08-22
+                                    <!-- MARK 내용 -->
+                                    <div id="mark-info" class="my-text">
+                                        <div class="episode-no">
+                                            <span>${p.episodeNo}</span>
+                                        </div>
+                                            <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
+                                                ${p.content}
+                                            </textarea>
+                                        <!-- Mark 날짜 -->
+                                        <div class="meta-data">
+                                            <span>${p.modDatetime}</span>
+                                        </div>
+                                        <hr>
+                                    </div> <!-- end my-text -->
+                                    <div class="view-more">
+                                        <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
                                     </div>
-                                    <hr>
-                                </div> <!-- end my-text -->
-                                <div class="view-more">
-                                    <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
-                                </div>
-                            </div> <!-- end book-info -->
-                        </div> <!-- end book-wrapper -->
-                    </div> <!-- end content -->
+                                </div> <!-- end book-info -->
+                            </div> <!-- end book-wrapper -->
+                        </div> <!-- end content -->
+                    </c:if>
+                    </c:forEach>
 
                     <div class="content">
                         <div class="book-wrapper flex-fs">
@@ -382,111 +389,7 @@
 
 
 
-        // ==================== 마크 영역 ==================== //
-
-        const postNo = document.getElementById('postNo').textContent;
-
-        // 마크 목록 보여주는 함수
-        function showMarkList() {
-
-        fetch('/post/detail/test/mark' + '?postNo=' + postNo)
-            .then(response => response.json())
-            .then(markMap => {
-                makeMarkDOM(markMap);
-            })    
-        }
-
-        // 마크 내용 입력하기
-        function makeMarkDOM({markList, markCnt}) {
-        const $markContentList = document.getElementById('mark-info');
-
-        $markContentList.innerHTML = '';
-
-        if (markList === null || markList.length === 0 ) { // 마크가 하나도 없을 때               
-            $markContentList.innerHTML += "<div>작성한 북마크가 없습니다</div>"
-
-        } else { 
-            for (let mark of markList) {
-                // 마크 내용 동적생성
-                $markContentList.innerHTML += appendMarkContentArea(mark);
-            }
-        }
-        }
-
-        // 북마크 내용 동적생성
-        function appendMarkContentArea(data) {
-        let content = '<div class="content-area" data-mark-no="' + data.markNo + '">';
-
-        // (회차 / 페이지 / 권수 / 퍼센트) 아이콘, 마크 버튼 영역 동적생성
-        content += appendMarkIconAndButtonArea(data);
-
-        // 북마크 내용 입력
-        content += appendMarkContent(data);
-
-        content += '</div>';
-        return content;
-        }
-
-        // (회차 / 페이지 / 권수 / 퍼센트) 아이콘, 마크 버튼 영역 동적생성
-        function appendMarkIconAndButtonArea(data) {
-        let iconArea = '';
-        iconArea += '<div class="flex-sb">';
-        iconArea +=     '<div class="datetime">';
-        iconArea +=        `<i class="` + classifyMarkIconType(data.epId) + `">` + data.episodeNo + `</i>`;
-        iconArea +=         ' | ';
-        iconArea +=         `<span class="noselect">` + data.modDatetime + `</span>`;
-        iconArea +=     '</div>';
-        iconArea +=     '<div class="button-area mark-initMode">';
-        iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
-        iconArea +=         '<i class="fas fa-trash-alt button" onclick="btnDelete_onclick(this)"></i>';
-        iconArea +=     '</div>';
-        iconArea +=     '<div class="button-area mark-modifyMode button-hidden">';
-        iconArea +=         '<i class="fas fa-check-square button" onclick="btnModifySave_onclick(this)"></i>';
-        iconArea +=         '<i class="fas fa-times button" onclick="btnCancle_onclick(this)"></i>';
-        iconArea +=     '</div>';
-        iconArea += '</div>';
-        return iconArea;
-        }
-
-        // (회차(화) / 페이지(p) / 권수(권) / 퍼센트(%)) 아이콘 종류 판단
-        function classifyMarkIconType(epId) {
-        // (고정) 0:회차, 1:페이지, 2:권수, 3:퍼센트
-        switch(epId) {
-            case 0:
-                return 'marking-type1 noselect';
-            case 1:
-                return 'marking-type2 noselect';
-            case 2:
-                return 'marking-type3 noselect';
-            case 3: 
-                return 'marking-type3 noselect'
-            default : return 'marking-type1 noselect';
-        }
-        }
-
-        // 북마크 내용 입력
-        function appendMarkContent(data) {
-        return '<textarea class="content" readonly data-initvalue="' + data.content + '">'
-            + data.content
-            + '</textarea>'
-        ;
-        }
-
-        // 북마크 button-area 모드 전환
-        async function toggleMarkMode($markContent) {
-        // 저장, 취소 버튼 show <-> hide
-        const $saveMark = $markContent.previousSibling.querySelector('.mark-modifyMode');
-        $saveMark.classList.toggle('button-hidden');
-
-        // 수정, 삭제 버튼 hide <-> show
-        const $cancleMark = $markContent.previousSibling.querySelector('.mark-initMode');
-        $cancleMark.classList.toggle('button-hidden');
-
-        $markContent.toggleAttribute('readonly');
-        }
-
-
-        showMarkList();
+       
 
         
     </script>

@@ -1,7 +1,11 @@
 package com.ibini.my_books.postnote.controller;
 
+import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
+import com.ibini.my_books.postnote.common.search.Search;
+import com.ibini.my_books.postnote.domain.PostMark;
+import com.ibini.my_books.postnote.dto.MyPageMark;
 import com.ibini.my_books.postnote.service.PostMarkService;
 import com.ibini.my_books.postnote.service.PostMemoService;
 import com.ibini.my_books.util.LoginUtil;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Log4j2
@@ -27,15 +32,31 @@ public class MyPagePostNoteController {
 
 
     // 마이페이지 post, postMark 게시물 목록 요청
-    @GetMapping("/list")
-    public String viewPostList(Model model, HttpSession session) {
-        log.info("GET!");
+//    @GetMapping("/list")
+//    public String viewPostList(Model model, HttpSession session, Search search) {
+//        log.info("GET!");
+//
+//        String account = LoginUtil.getCurrentMemberAccountForDB(session);
+//        List<PostWithName> postList = postService.finaAllPostWithNameService(account);
+//        for (PostWithName post : postList) {
+//            model.addAttribute("markList", postMarkService.findAll2(post.getPostNo()));
+//        }
+//
+//        model.addAttribute("postList", postList);
+//        return "postnote/mypage-note";
+//    }
 
+    @GetMapping("/list")
+    public String viewPostList(Model model, HttpSession session, Post post) {
+        log.info("GET!");
+        Long postNo = post.getPostNo();
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
-        List<PostWithName> postList = postService.finaAllPostWithNameService(account);
-        model.addAttribute("postList", postList);
+
+        List<MyPageMark> myPageMarkList = postMarkService.findAllMyPage(account, postNo);
+        model.addAttribute("myPageMarkList", myPageMarkList);
         return "postnote/mypage-note";
     }
+
 
 
 

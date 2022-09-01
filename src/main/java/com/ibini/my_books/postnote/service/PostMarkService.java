@@ -1,6 +1,8 @@
 package com.ibini.my_books.postnote.service;
 
+import com.ibini.my_books.postnote.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
+import com.ibini.my_books.postnote.dto.MyPageMark;
 import com.ibini.my_books.postnote.repository.PostMarkMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,4 +54,17 @@ public class PostMarkService {
     public int getPostMarkCount(Long postNo) {
         return postMarkMapper.getPostMarkCount(postNo);
     }
+
+    public List<MyPageMark> findAllMyPage(String account, Long postNo) {
+        List<MyPageMark> myPageNoteList = postMarkMapper.findAllMyPage(account, postNo);
+
+        return myPageNoteList;
+    }
+
+    public List<PostMark> findAll2(Long postNo) {
+        List<PostMark> findAll2List = postMarkMapper.findAll2(postNo);
+
+        return findAll2List;
+    }
+
 }

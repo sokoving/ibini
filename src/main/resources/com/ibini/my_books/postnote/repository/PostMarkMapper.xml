@@ -16,6 +16,14 @@
         <result property="epId" column="ep_id" />
     </resultMap>
 
+    <resultMap id="myPageMap" type="com.ibini.my_books.postnote.dto.MyPageMark">
+        <result property="postNo" column="post_no" />
+        <result property="postTitle" column="post_title" />
+        <result property="epId" column="ep_id" />
+        <result property="episodeNo" column="episode_no" />
+        <result property="modDatetime" column="mod_datetime" />
+        <result property="thumbImg" column="file_name" />
+    </resultMap>
 
 
     <!-- 마크 저장 -->
@@ -75,7 +83,29 @@
 
     <!-- 마이페이지 포스트, 썸네일, 마크 조회 -->
     <select id="findAllMyPage" resultMap="myPageMap">
-
+        SELECT
+        p.post_no, p.account, p.post_title, p.ep_id, pm.episode_no,pm.content, pm.mod_datetime, i.file_name
+        FROM  (
+            select * from tbl_post
+            WHERE account = #{account}
+<!--                AND post_no = #{postNo}-->
+        )p
+        LEFT OUTER JOIN prj_post_mark pm
+        ON p.post_no = pm.post_no
+        LEFT OUTER JOIN prj_post_img i
+        ON p.post_no = i.post_no
+        WHERE i.thumbnail = 'true'
+        or i.thumbnail is null
+        ORDER BY p.post_no
     </select>
 
+    <select id="findAll2" resultMap="markMap">
+        SELECT
+        pm.mark_no, pm.post_no, p.ep_id, pm.episode_no, pm.content, pm.reg_account, pm.mod_account, pm.reg_datetime, pm.mod_datetime
+        FROM prj_post_mark pm
+        LEFT OUTER JOIN tbl_post p
+        ON pm.post_no = p.post_no
+        WHERE pm.post_no = #{postNo}
+        ORDER BY pm.episode_no DESC
+    </select>
 </mapper>
