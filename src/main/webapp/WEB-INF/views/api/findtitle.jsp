@@ -129,8 +129,9 @@
             <h1>검색해서 책 등록하기</h1>
             <br>
             <div id="search">
-                <input id="word" type="text" onkeyup="search(this);">
                 <!-- keyup event -->
+                <input id="word" type="text" onkeyup="search(this);">
+                
                 <button type="button" id="searchBtn">검색</button>
             </div>
 
@@ -159,7 +160,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" href="location.href ='/post/write/">저장</button>
                         </div>
                     </div>
                 </div>
@@ -239,6 +240,12 @@
                 let titleSplit = '';
                 let authorSplitLength = '';
                 
+                // 이상한 기호 [] 자르기
+                if(title.includes('[연재]')){
+                    // 이상하게 넘어가는거 잘라주기
+                    title = title.split('[연재]').join("");
+                } 
+
                 // 제목 자르기
                 if(title.length >= 25){
                     titleSplit = title.substr(0, 25).concat("..");
@@ -276,6 +283,7 @@
                 if(publisher.length >= 10){
                     publisherSplit = publisher.substr(0, 9).concat("..");
                 } else {
+                    // 변수 바꿔담기
                     publisherSplit = publisher;
                 }
 
@@ -320,8 +328,7 @@
             } else if(searchTotal >= 30){
                 moreInfo.innerHTML = '';
                 btntag = `
-
-                        <button type="button" id="moreBtn" onclick ="location.href ='#'">더보기</button>
+                    <button type="button" id="moreBtn" onclick ="location.href ='#'">더보기</button>
                 `;
             }
              
@@ -347,12 +354,12 @@
 
                 if(confirm( ' [ '+ authorDiv + ' ] 작가님의 [ ' + titleDiv + ' ] 작품을 선택하셨나요?')){
                     // 맞으면 /Post/write 전송 보내기
-                    var myModal = document.getElementById('myModal')
-                    var myInput = document.getElementById('myInput')
+                    // /post/write/title/author -> /post/write
+                    // 1. moda에 location href로 보내려고 했는데 모달이 작동 안함?
+                    console.log(titleDiv, authorDiv);
 
-                    myModal.addEventListener('shown.bs.modal', function () {
-                        myInput.focus()
-                    })
+                    popup(titleDiv, authorDiv);
+                    
                 }
 
 
@@ -365,11 +372,20 @@
 
                 if(confirm( ' [ ' + spanAuthor + ' ] 작가의 [ ' + spanTitle + ' ] 작품을 선택하셨나요?')){
                     // 맞으면 /Post/write 전송 보내기
-                    
+                    popup(spanTitle, spanAuthor);
                 }
                 
             }
             
+
+        }
+
+        // /post/write 넘어가는 함수
+        function popup(titleDiv, authorDiv) {
+            
+            var url = "/post/write?title=" + titleDiv + "&author=" + authorDiv;
+            console.log(url);
+            window.open(url,'','top=100, left=100');
 
         }
 

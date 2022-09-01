@@ -100,14 +100,14 @@
                                 <span class="reg-span">* 책 제목</span>
                                 <span class="explain-span title-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
+                            <input class="white-box" type="text" name="postTitle" value="${bookInfo.title}">
 
                             <div class="span-wrap">
                                 <span class="reg-span">* 작가</span>
                                 <span class="explain-span writer-msg"></span>
                             </div>
                             <input class="white-box" type="text" name="postWriter"
-                                placeholder="작가를 입력해 주세요">
+                                value="${bookInfo.author}">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
