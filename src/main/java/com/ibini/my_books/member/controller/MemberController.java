@@ -1,8 +1,11 @@
 package com.ibini.my_books.member.controller;
 
+import com.ibini.my_books.member.common.paging.Page;
+import com.ibini.my_books.member.common.paging.PageMaker;
+import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.domain.SNSLogin;
-import com.ibini.my_books.member.dto.LoginDTO;
+import com.ibini.my_books.member.dto.*;
 import com.ibini.my_books.member.service.EmailServiceImpl;
 import com.ibini.my_books.member.service.KakaoService;
 import com.ibini.my_books.member.service.LoginFlag;
@@ -22,9 +25,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.List;
+import java.util.Map;
+
 import static com.ibini.my_books.member.domain.OauthValue.*;
 import static com.ibini.my_books.member.service.LoginFlag.*;
 import static com.ibini.my_books.util.LoginUtil.LOGIN_FROM;
+import static com.ibini.my_books.util.LoginUtil.getCurrentMemberAccount;
 
 @Controller
 @Log4j2
@@ -86,6 +93,7 @@ public class MemberController {
 
         if (flag == SUCCESS) {
             log.info("login success!");
+            log.info("loginUser:{}",session.getAttribute("loginUser"));
             return "redirect:/";
         }
         ra.addFlashAttribute("loginMsg", flag);
@@ -343,11 +351,142 @@ public class MemberController {
 
         }
 
-        //문의하기
+
+//        =============== 회원 관리 ====================
+
+        //회원 문의내역 전체조회
     @GetMapping("/inquiry")
-    public void inquiry(){
-        log.info("/member/inqury GET!! ");
+    public void inquiry(String userId, Page page, Model model){
+        log.info("/member/inquiry GET!! userId:{} , Page:{}",userId,page);
+        Map<String, Object> findInquiryData = memberService.findMemberInquiry(userId, page);
+        log.info("findInquiryData {}",findInquiryData);
+        //페이지 정보 생성
+        PageMaker pm = new PageMaker(page, (Integer) findInquiryData.get("tc"));
+        model.addAttribute("list",findInquiryData.get("oneList"));
+        model.addAttribute("pm",pm);
     }
+
+    //회원 문의내역 상세조회
+    @ResponseBody
+    @GetMapping("/findone-inquiry/{serialNumber}")
+    public InquiryTable findOneInquiry(@PathVariable String serialNumber, Model model){
+        log.info("/member/findone-inquiry GET 요청! serialNumber : {}", serialNumber);
+
+        InquiryTable oneInquiry = memberService.findOneInquiry(serialNumber);
+        model.addAttribute("inquiry",oneInquiry);
+        return oneInquiry;
+    }
+
+    //회원 문의내역 수정 GET
+    @GetMapping("/inquiry-modify")
+    public String inquiryModify(String serialNumber, Model model){
+        log.info("/member/inquiry-modify/{}",serialNumber);
+        log.info("/serialNumber = {}", serialNumber);
+        InquiryTable oneInquiry = memberService.findOneInquiry(serialNumber);
+
+        log.info("수정하기 페이지 inquiry 정보 :{}",oneInquiry);
+        model.addAttribute("inquiry",oneInquiry);
+
+        return "/member/inquiry-modify";
+    }
+
+    //회원 문의내역 수정 POST
+    @PostMapping("/inquiry-modify")
+    public String inquiryModify(InquiryModifyDTO dto, RedirectAttributes ra, HttpSession session){
+        log.info("/member/inquiry-modify POST!! 회원정부 수정 post 요청");
+        log.info("수정 post dto:{}",dto);
+        boolean flag = memberService.inquiryModify(dto);
+        if (flag){
+            ra.addFlashAttribute("msg","inquiry-modify-success");
+            String account = getCurrentMemberAccount(session);
+            return "redirect:/member/inquiry?userId="+account;
+        } else {
+            ra.addFlashAttribute("msg","inquiry-modify-fail");
+            return "redirect:/member/inquiry-modify/" + dto.getSerialNumber();
+        }
+    }
+
+    //회원 문의내역 삭제하기
+    @GetMapping("/inquiry-delete")
+    public String inquiryDelete(String serialNumber,RedirectAttributes ra, HttpSession session){
+        log.info("/member/inquiry-delete GET! 회원문의내역 삭제 하기!!");
+        String userId = getCurrentMemberAccount(session);
+        boolean flag = memberService.inquiryDelete(serialNumber);
+        if (flag){
+            ra.addFlashAttribute("msg","inquiry-delete-success");
+            return "redirect:/member/inquiry?userId="+userId;
+        } else{
+            ra.addFlashAttribute("msg","inquiry-delete-fail");
+            return "redirect:/member/findone-inquiry?serialNumber="+serialNumber;
+        }
+    }
+
+    //회원 문의내역 등록하기 GET
+    @GetMapping("/inquiry-register")
+    public void inquiryRegister(){
+        log.info("/member/inquiry-register GET!! 글쓰기 GET 요청!!");
+    }
+
+    //회원 문의내역 등록하기 POST
+    @PostMapping("/inquiry-register")
+    public String inquiryRegister(InquiryDTO dto, RedirectAttributes ra){
+        log.info("/member/inquiry-register POST!! 회원문의내역 등록하기 POST 요청!!");
+        boolean flag = memberService.inquiryRegister(dto);
+        if (flag){
+            ra.addFlashAttribute("msg","inquiry-register-success");
+            return "redirect:/member/inquiry?userId="+dto.getUserId();
+        } else {
+            ra.addFlashAttribute("msg","inquiry-register-fail");
+            return "redirect:/member/inquiry-register";
+        }
+    }
+
+    //관리자 페이지에서 회원 문의내역 전체조회
+    @GetMapping("/admin/findall-inquiry")
+    public String adminInquiry(Model model, Page page){
+        log.info("/member/admin/findall-inquiry GET!! // page:{} ",page);
+
+        Map<String, Object> allFindInquiry = memberService.findAllInquiry(page);
+
+        log.info("list {}",allFindInquiry.get("allList"));
+
+        PageMaker pm = new PageMaker(page, (Integer) allFindInquiry.get("tc"));
+        log.info("pm : {}", pm);
+
+
+        model.addAttribute("list",allFindInquiry.get("allList"));
+        model.addAttribute("pm",pm);
+        return "/member/findall-inquiry";
+    }
+
+    //관리자 페이지 : 답변등록하기 GET
+    @GetMapping("/admin/answer-register")
+    public String answerRegister(String serialNumber,Model model){
+        log.info("/member/admin/answer-register GET 요청! , serialNumber:{}",serialNumber);
+        InquiryTable oneInquiry = memberService.findOneInquiry(serialNumber);
+        model.addAttribute("inquiry",oneInquiry);
+        return "/member/answer-register";
+    }
+
+    //관리자 페이지 : 답변등록하기 POST
+    @ResponseBody
+    @PostMapping("/admin/answer-register")
+    public String answerRegister(@RequestBody AnswerDTO answerDate, Model model, RedirectAttributes ra){
+        log.info("/admin/answer-register POST 비동기 요청!! dto{} ",answerDate);
+        String serialNumber = answerDate.getSerialNumber();
+        boolean flag = memberService.answerRegister(answerDate);
+       return flag?"answer-register-success" : "answer-register-fail";
+//        if (flag){
+//            ra.addFlashAttribute("msg","asnwer-success");
+//            return "redirect:/member/admin/findall-inquiry";
+//        } else{
+//            ra.addFlashAttribute("msg","answer-fail");
+//            return "redirect:/member/admin/answer-register"+serialNumber;
+//        }
+
+    }
+
+
 
 
 
