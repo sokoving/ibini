@@ -30,7 +30,7 @@ function clickPostBtn(target, postNo) {
     // 수정 폼 요청
     if (target.matches('.fa-pencil-alt') || target.matches('.post-modi-btn')) {
 //        console.log("포스트 수정");
-        // location.href = '/post/modify?postNo=' + postNo;
+        location.href = '/post/modify/' + postNo;
     }
 
     // 삭제 폼 요청

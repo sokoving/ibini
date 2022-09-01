@@ -83,18 +83,41 @@ public class PostController {
     }
 
 //    포스트 수정 폼 요청   get    /post/modify
-    @GetMapping("/modify/{account}")
-    public String modify(@PathVariable String account,
-            @ModelAttribute("postNo") Long postNo, Model model){
+    @GetMapping("/modify/{postNo}")
+    public String modify(@PathVariable Long postNo, Model model){
         log.info("PostController /post/modify  GET 요청!! - {}", postNo);
+
+        PostWithName postWithName = postService.fineOnePostWithName(postNo);
+        model.addAttribute("p", postWithName);
+
+        List<HashtagDomain> tagList = hashTagService.findAllByPostNo(postNo);
+        model.addAttribute("tagList", tagList);
+
+        List<PostImg> imgList = imgService.getPostImgList(postNo);
+        model.addAttribute("imgList", imgList);
 
         return "post/post-modify";
     }
 
 //    포스트 수정 요청      post   /post/modify
-    @PostMapping("/modify/{account}")
-    public String modify(Post post, @PathVariable String account){
+    @PostMapping("/modify")
+    public String modify(Post post
+//            , HashtagDomain hashtagDomain, ThumbImgDTO thumbImgDTO
+    ){
         log.info("PostController /post/modify  POST 요청!! - {}", post);
+//        log.info("/post/modify - hashtag: {}", tag);
+//        log.info("/post/modify - thumbImgDTO : {}", thumbImgDTO);
+
+        // tbl_post 저장
+        boolean postFlag = postService.modifyService(post);
+        log.info("post flag : {}", postFlag);
+
+        // PRJ_HASHTAG 저장
+//        boolean tagFlag = hashTagService.saveHashTag(tag);
+//        log.info("tag flag : {}", tagFlag);
+
+        // tbl_post_img 저장
+//        imgService.postRegService(thumbImgDTO);
 
         return "redirect:/list";
     }
@@ -138,9 +161,6 @@ public class PostController {
 
         List<PostImg> imgList = imgService.getPostImgList(postNo);
         model.addAttribute("imgList", imgList);
-
-
-        System.out.println("postNo = " + postNo);
 
         return "post/post-detail";
     }
