@@ -251,7 +251,7 @@
                             <div class="file-box-left">
                                 파일 선택
                             </div>
-                            <div class="file-box-right" data-imgs-num="0">
+                            <div class="file-box-right">
                                 첨부된 이미지가 없습니다.
                             </div>
                             <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>

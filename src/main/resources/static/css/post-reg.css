@@ -260,7 +260,7 @@ section .inner-section {
 }
 
 .ep-radio {
-    /* display: none; */
+    display: none;
 }
 
 /* #reg-5 해시태그 */
