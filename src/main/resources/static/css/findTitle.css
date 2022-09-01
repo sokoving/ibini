@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'PyeongChangPeace-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+#content-wrap h1{
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 50px;
+    text-shadow: #e90404 1px 1px 40px;
+    font-family: 'PyeongChangPeace-Light';
+}
+#content-wrap br {
+    width: 100%;
+    color: black;
+}
+#content-wrap #search {
+    background: #f9f8f6;
+    height: 50px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+#content-wrap #search #word{
+    height: 50px;
+    padding: 10px;
+    margin-right: 5%;
+    width: 80%;
+}
+#content-wrap #search #searchBtn{
+    background-color: #ffe4a2;
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+
+
+#content-wrap #infoListMakeDom{
+    background: #fffaee;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    
+}
+
+#content-wrap #infoListMakeDom .bookInfo{
+    width: 100%;
+    justify-content: space-evenly;
+    margin: 10px;
+    display: flex;
+    /*border: 1px solid #000000;*/
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 2.7;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+
+}
+
+#content-wrap #infoListMakeDom .bookInfo:hover{
+    background-color: #ffebbb;
+    box-shadow: rgb(0 0 0 / 10%) 0px 5px 2px 1px;
+    transform: scale(1.03);
+    transition: 0.2s;
+
+}
+
+
+
+/* dom css */
+#content-wrap #infoListMakeDom .titleDiv{
+    width: 45%;
+    padding-left: 25px;
+}
+#content-wrap #infoListMakeDom .authorDiv{
+    width: 20%;
+}
+#content-wrap #infoListMakeDom .publisherDiv{
+    width: 20%;
+}
+#content-wrap #infoListMakeDom .publishPredateDiv{
+    width: 15%;
+}
+
+/* moreBtn */
+.noResult {
+    background: #f9f8f6;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+.noResult span {
+    font-size: 20px;
+}
+#moreBtn {
+    background: #f9f8f6;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+    border-radius: 10px;
+    width: 100%;
+}
