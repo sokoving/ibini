@@ -66,7 +66,7 @@
         <section class="post-reg-section">
             <div class="top-msg">* 필수 입력 사항 <br>선택 사항은 입력하지 않으면 기본값으로 세팅됩니다.(수정 가능)</div>
             <div class="inner-section">
-                <form id="write-form" action="#" method="post" autocomplete="off" enctype="multipart/form-data">
+                <form id="modi-form" action="/post/modify" method="post" autocomplete="off" enctype="multipart/form-data">
 
                     <!-- 히든 : 계정-->
                     <input type="hidden" name="account" id="" value="${account}">
@@ -77,20 +77,40 @@
                     <div id="reg-1">
                         <!-- 이미지 -->
                         <div class="img-wrap">
-                            <div class="img-box">
-                                <span class="box-msg">썸네일을 등록해 보세요</span>
-                                <img class="post-img" src="" alt="">
-                            </div>
-                            <label class="file-box">
-                                <div class="file-box-left">
-                                    파일 선택
-                                </div>
-                                <div class="file-box-right">
-                                    등록된 썸네일이 없습니다.
-                                </div>
-                                <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
-                            </label>
-                        </div>
+                            <c:choose>
+                                <c:when test="${p.thumbImg != null}">
+                                    <div class="img-box">
+                                        <span class="box-msg">썸네일을 등록해 보세요</span>
+                                        <img class="post-img" src="" alt="">
+                                    </div>
+                                    <label class="file-box">
+                                        <div class="file-box-left">
+                                            파일 선택
+                                        </div>
+                                        <div class="file-box-right">
+                                            등록된 썸네일이 없습니다.
+                                        </div>
+                                        <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
+                                    </label>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <div class="img-box">
+                                        <span class="box-msg hide">썸네일을 등록해 보세요</span>
+                                        <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
+                                    </div>
+                                    <label class="file-box">
+                                        <div class="file-box-left">
+                                            파일 선택
+                                        </div>
+                                        <div class="file-box-right">
+                                            <!-- 오리지널 이름 추출해서 넣기 -->
+                                        </div>
+                                        <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
+                                    </label>
+                                </c:otherwise>
+                            </c:choose>
+                        </div> <!-- // end img-wrap -->
 
                         <!-- 제목, 작가, 별점 -->
                         <div class="tw-wrap">
@@ -273,7 +293,7 @@
                     <div id="reg-btn">
                         <button id="post-reg-btn" class="white-box">등록</button>
                     </div>
-                </form> <!-- // end write-form -->
+                </form> <!-- // end modi-form -->
             </div> <!-- // end inner-section -->
         </section> <!-- // end section -->
 
@@ -285,11 +305,11 @@
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
-            const account = "${account}";
-            console.log(account);
+            const account = "${p.account}";
+            console.log("account : " + account);
 
             // 입력창 키업 이벤트
-            const $form = $('#write-form');
+            const $form = $('#modi-form');
             // console.log($form);
             $form.on({
                 keydown: function (e) {
@@ -309,7 +329,7 @@
                 if (!validateFormValue()) {
                     return;
                 }
-                $('#write-form').submit();
+                $('#modi-form').submit();
             })
 
 
@@ -479,8 +499,8 @@
         const account = '${account}';
         const gAccount = '${account}'
 
-        console.log(account);
-        console.log(gAccount);
+        // console.log(account);
+        // console.log(gAccount);
 
         // 나중에 꼭 수정해주기
         // const url = "http://localhost:8383/platform/c1?account=" + account;

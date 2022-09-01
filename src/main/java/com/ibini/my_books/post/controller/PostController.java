@@ -84,7 +84,7 @@ public class PostController {
 
 //    포스트 수정 폼 요청   get    /post/modify
     @GetMapping("/modify/{postNo}")
-    public String modify(@PathVariable Long postNo, Model model){
+    public String modify(@PathVariable Long postNo, Model model, HttpSession session){
         log.info("PostController /post/modify  GET 요청!! - {}", postNo);
 
         PostWithName postWithName = postService.fineOnePostWithName(postNo);
@@ -95,6 +95,10 @@ public class PostController {
 
         List<PostImg> imgList = imgService.getPostImgList(postNo);
         model.addAttribute("imgList", imgList);
+
+        // 현재 로그인한 유저의 account 가져오기
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
+        model.addAttribute("account", account);
 
         return "post/post-modify";
     }
