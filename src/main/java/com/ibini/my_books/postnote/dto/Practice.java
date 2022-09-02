@@ -47,11 +47,6 @@ public class Practice {
             List.add(String.valueOf(markNoList));
         }
         System.out.println(List);
-//        for (int i = 0; i < postNoList.size() ; i++) {
-//            for (int j = 0; j < markNoList.size(); j++) {
-//                System.out.println(Arrays.toString(markNoList[j]));
-//
-//            }
-//        }
+
     }
 }
