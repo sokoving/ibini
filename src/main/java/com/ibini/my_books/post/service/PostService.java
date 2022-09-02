@@ -77,7 +77,7 @@ public class PostService {
 
 //    수정
     public boolean modifyService(Post post){
-        log.info("Post Service : modifyeService call - {}", post);
+        log.info("Post Service : modifyService call - {}", post);
         return postMapper.modify(post);
     }
 

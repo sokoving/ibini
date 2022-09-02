@@ -77,40 +77,21 @@
                     <div id="reg-1">
                         <!-- 이미지 -->
                         <div class="img-wrap">
-                            <c:choose>
-                                <c:when test="${p.thumbImg != null}">
-                                    <div class="img-box">
-                                        <span class="box-msg">썸네일을 등록해 보세요</span>
-                                        <img class="post-img" src="" alt="">
-                                    </div>
-                                    <label class="file-box">
-                                        <div class="file-box-left">
-                                            파일 선택
-                                        </div>
-                                        <div class="file-box-right">
-                                            등록된 썸네일이 없습니다.
-                                        </div>
-                                        <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
-                                    </label>
-                                </c:when>
-
-                                <c:otherwise>
-                                    <div class="img-box">
-                                        <span class="box-msg hide">썸네일을 등록해 보세요</span>
-                                        <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
-                                    </div>
-                                    <label class="file-box">
-                                        <div class="file-box-left">
-                                            파일 선택
-                                        </div>
-                                        <div class="file-box-right">
-                                            <!-- 오리지널 이름 추출해서 넣기 -->
-                                        </div>
-                                        <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
-                                    </label>
-                                </c:otherwise>
-                            </c:choose>
-                        </div> <!-- // end img-wrap -->
+                            <div class="img-box">
+                                <span class="box-msg">썸네일을 등록해 보세요</span>
+                                <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
+                                <!-- <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
+                            </div>
+                            <label class="file-box">
+                                <div class="file-box-left">
+                                    파일 선택
+                                </div>
+                                <div class="file-box-right">
+                                    등록된 썸네일이 없습니다.
+                                </div>
+                                <input type="file" name="files" id="ajax-file" class="file-input thumb-input" disabled>
+                            </label>
+                        </div>
 
                         <!-- 제목, 작가, 별점 -->
                         <div class="tw-wrap">
@@ -118,20 +99,22 @@
                                 <span class="reg-span">* 책 제목</span>
                                 <span class="explain-span title-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
+                            <input value="${p.postTitle}" class="white-box" type="text" name="postTitle"
+                                placeholder="제목을 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">* 작가</span>
                                 <span class="explain-span writer-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postWriter" placeholder="작가를 입력해 주세요">
+                            <input value="${p.postWriter}" class="white-box" type="text" name="postWriter"
+                                placeholder="작가를 입력해 주세요">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
                                 <span class="explain-span star-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요"
-                                maxlength="1"
+                            <input value="${p.starRate}" class="white-box" type="text" name="starRate"
+                                placeholder="1에서 9 사이의 정수를 입력해 주세요" maxlength="1"
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                         </div>
                     </div> <!-- // end reg-1 -->
@@ -150,7 +133,9 @@
                                 <div class="select">
                                     <div class="platformSelBox">
                                         <select name="platformId" id="platformselect">
-                                            <option value="#">플랫폼을 선택하세요</option>
+                                            <c:forEach var="plat" items="${platformList}">
+                                                <option value="${plat.platformId}">${plat.platformName}</option>    
+                                            </c:forEach>
                                         </select>
                                     </div>
 
@@ -172,7 +157,9 @@
                                     <div class="genreSelAndInput">
                                         <div class="genreSelectBox">
                                             <select name="genreId" id="genreSelect">
-                                                <option value="#">장르를 선택하세요</option>
+                                                <c:forEach var="genre" items="${genreList}">
+                                                    <option value="${genre.genreId}">${genre.genreName}</option>    
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="textClick" name="genreAdd">
@@ -197,8 +184,8 @@
                             <span class="reg-span">연재 상태</span>
                         </div>
                         <div class="radio-wrap pub-btn-group">
-                            <label class="white-box radio-item checked">연재
-                                <input class="ep-radio" type="radio" name="publishStatus" value="1" checked>
+                            <label class="white-box radio-item">연재
+                                <input class="ep-radio" type="radio" name="publishStatus" value="1">
                             </label>
                             <label class="white-box radio-item">휴재
                                 <input class="ep-radio" type="radio" name="publishStatus" value="2">
@@ -211,7 +198,18 @@
                             <span class="reg-span">연재 일시</span>
                             <span class="explain-span ep-msg"></span>
                         </div>
-                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
+
+                        <c:choose>
+                            <c:when test="${p.publishCycle == ''}">
+                                <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
+                            </c:when>
+                            <c:otherwise>
+                                <input value="${p.publishCycle}" class="white-box" type="text" name="publishCycle"
+                                    placeholder="예시) 월, 수, 금 10시">
+                            </c:otherwise>
+                        </c:choose>
+
+
                     </div> <!-- // end reg-3 -->
 
                     <!-- 회차 구분, 현재 회차, 현재 페이지 -->
@@ -222,9 +220,9 @@
                         </div>
 
                         <div class="radio-wrap ep-btn-group">
-                            <label class="white-box radio-item checked">
+                            <label class="white-box radio-item">
                                 <span>회차(화)</span>
-                                <input class="ep-radio" type="radio" name="epId" value="0" checked>
+                                <input class="ep-radio" type="radio" name="epId" value="0">
                             </label>
                             <label class="white-box radio-item">
                                 <span>페이지(p)</span>
@@ -243,14 +241,14 @@
                         <div class="ep-wrap">
                             <div class="ep-input-wrap">
                                 <span class="reg-span">현재 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="text" name="curEp" placeholder="0~99999 사이 숫자"
-                                    maxlength="5"
+                                <input value="${p.curEp}" class="white-box" type="text" name="curEp"
+                                    placeholder="0~99999 사이 숫자" maxlength="5"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                             <div class="ep-input-wrap">
                                 <span class="reg-span">전체 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="text" name="totalEp" placeholder="0~99999 사이 숫자"
-                                    maxlength="5"
+                                <input value="${p.totalEp}" class="white-box" type="text" name="totalEp"
+                                    placeholder="0~99999 사이 숫자" maxlength="5"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                         </div>
@@ -305,8 +303,11 @@
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
-            const account = "${p.account}";
-            console.log("account : " + account);
+            const account = "${account}";
+            console.log(account);
+
+
+
 
             // 입력창 키업 이벤트
             const $form = $('#modi-form');
@@ -319,6 +320,14 @@
                     checkKeyup(e);
                 }
             });
+
+            // 불러온 플랫폼, 장르 아이디 selected 체크하는 이벤트
+            const $platformList = $('select[name=platformId]');
+            console.log($platformList);
+            console.log($platformList.children());
+
+
+
 
 
             // 포스트 입력 폼 제출 이벤트
@@ -497,7 +506,7 @@
 
         // 비동기 요청 경로
         const account = '${account}';
-        const gAccount = '${account}'
+        const gAccount = '${account}';
 
         // console.log(account);
         // console.log(gAccount);

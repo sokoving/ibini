@@ -289,6 +289,11 @@
             const account = "${account}";
             console.log(account);
 
+            // 플랫폼, 장르 선택창 불러오기
+            showdomainList();
+            showGenreList();
+
+
             // 입력창 키업 이벤트
             const $form = $('#write-form');
             // console.log($form);
@@ -478,10 +483,10 @@
 
         // 비동기 요청 경로
         const account = '${account}';
-        const gAccount = '${account}'
+        const gAccount = '${account}';
 
-        console.log(account);
-        console.log(gAccount);
+        // console.log(account);
+        // console.log(gAccount);
 
         // 나중에 꼭 수정해주기
         // const url = "http://localhost:8383/platform/c1?account=" + account;

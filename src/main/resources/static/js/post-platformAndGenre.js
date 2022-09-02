@@ -44,7 +44,7 @@ console.log('post-platformAndGenre start');
     }
 
     function showdomainList() {
-        console.log(url);
+        // console.log(url);
         fetch(url)
         .then(res => res.json())
         .then(domainList => {
@@ -70,14 +70,14 @@ console.log('post-platformAndGenre start');
         // 입력창
         const $platformInput = document.getElementById("platformInput");
 
-        console.log($platformInput.value);
+        // console.log($platformInput.value);
         // [수정] 서버로 전송할 데이터 -> account 로그인 정보 넘겨주는거 받는걸로수정!
         const platformData = {
 
             "platformName": $platformInput.value,
             "account" : account
         }
-        console.log(platformData);
+        // console.log(platformData);
 
         // POST 요청정보 객체
         const reqInfo = {
@@ -88,7 +88,7 @@ console.log('post-platformAndGenre start');
             , body : JSON.stringify(platformData)
 
         };
-        console.log(reqInfo);
+        // console.log(reqInfo);
 
         fetch(url, reqInfo)
             .then(res => res.text())
@@ -113,7 +113,7 @@ console.log('post-platformAndGenre start');
     // 장르 저장 / 리스트 출력 =======================================================
 
     function showGenreList() {
-        console.log(genreURL);
+        // console.log(genreURL);
         fetch(genreURL)
         .then(res => res.json())
         .then(genreList => {
@@ -135,8 +135,8 @@ console.log('post-platformAndGenre start');
 
         for (let key in genreList) {
 
-            console.log(genreList[key].genreId);
-            console.log(genreList[key].genreName);
+            // console.log(genreList[key].genreId);
+            // console.log(genreList[key].genreName);
 
             let genreId = genreList[key].genreId;
             let genreName = genreList[key].genreName;
@@ -164,7 +164,7 @@ console.log('post-platformAndGenre start');
         
         const $genreInput = document.getElementById("genreInput");
 
-        console.log($genreInput.value);
+        // console.log($genreInput.value);
 
         // 요청정보
         const genreData = {
@@ -172,7 +172,7 @@ console.log('post-platformAndGenre start');
                 "genreName": $genreInput.value
             }
 
-        console.log(genreData);
+        // console.log(genreData);
 
         // POST 요청정보 객체
         const reqInfo = {
@@ -183,7 +183,7 @@ console.log('post-platformAndGenre start');
             , body : JSON.stringify(genreData)
 
         };
-        console.log(reqInfo);
+        // console.log(reqInfo);
 
         fetch(genreURL, reqInfo)
             .then(res => res.text())
@@ -204,6 +204,11 @@ console.log('post-platformAndGenre start');
 
 
 
+
+
+
+
+
     // 즉시실행함수 ==========================================================
 
 
@@ -211,11 +216,11 @@ console.log('post-platformAndGenre start');
 
 
         // 플랫폼
-        showdomainList();
+        // showdomainList();
         savePlatformClickEvent();
 
         // 장르
-        showGenreList();
+        // showGenreList();
         saveGenreClickEvent();
 
 

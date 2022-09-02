@@ -1,8 +1,11 @@
 package com.ibini.my_books.post.controller;
 
 
+import com.ibini.my_books.genre.domain.Genre;
+import com.ibini.my_books.genre.service.GenreService;
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.service.HashTagService;
+import com.ibini.my_books.platform.service.PlatformService;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
@@ -31,6 +34,8 @@ public class PostController {
     private final PostImgService imgService;
     private final PostService postService;
     private final HashTagService hashTagService;
+    private final GenreService genreService;
+    private final PlatformService platformService;
 
     /*
         포스트 등록 폼 요청   get    /post/write
@@ -41,7 +46,6 @@ public class PostController {
         포스트 삭제 요청  post    /post/delete
         포스트 상세 조회 요청  get   /post/detail
      */
-
 
 
     //    포스트 등록 폼 요청   get    /post/write
@@ -82,32 +86,33 @@ public class PostController {
         return "redirect:/list/";
     }
 
-//    포스트 수정 폼 요청   get    /post/modify
+    //    포스트 수정 폼 요청   get    /post/modify
     @GetMapping("/modify/{postNo}")
-    public String modify(@PathVariable Long postNo, Model model, HttpSession session){
+    public String modify(@PathVariable Long postNo, Model model, HttpSession session) {
         log.info("PostController /post/modify  GET 요청!! - {}", postNo);
-
-        PostWithName postWithName = postService.fineOnePostWithName(postNo);
-        model.addAttribute("p", postWithName);
-
-        List<HashtagDomain> tagList = hashTagService.findAllByPostNo(postNo);
-        model.addAttribute("tagList", tagList);
-
-        List<PostImg> imgList = imgService.getPostImgList(postNo);
-        model.addAttribute("imgList", imgList);
-
-        // 현재 로그인한 유저의 account 가져오기
+        // 현재 로그인한 유저의 account
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         model.addAttribute("account", account);
+//        수정할 포스트 정보
+        model.addAttribute("p", postService.fineOnePostWithName(postNo));
+//        계정의 장르 목록
+        model.addAttribute("genreList", genreService.findAllService(account));
+//        계정의 플랫폼 목록
+        model.addAttribute("platformList", platformService.findAllPlatform(account));
+//        포스트의 태그 리스트
+        model.addAttribute("tagList", hashTagService.findAllByPostNo(postNo));
+//        포스트의 이미지 리스트
+        model.addAttribute("imgList", imgService.getPostImgList(postNo));
+
 
         return "post/post-modify";
     }
 
-//    포스트 수정 요청      post   /post/modify
+    //    포스트 수정 요청      post   /post/modify
     @PostMapping("/modify")
     public String modify(Post post
 //            , HashtagDomain hashtagDomain, ThumbImgDTO thumbImgDTO
-    ){
+    ) {
         log.info("PostController /post/modify  POST 요청!! - {}", post);
 //        log.info("/post/modify - hashtag: {}", tag);
 //        log.info("/post/modify - thumbImgDTO : {}", thumbImgDTO);
@@ -142,12 +147,12 @@ public class PostController {
 
         boolean flag = postService.removeService(postNo);
 
-        if (flag){
+        if (flag) {
             ra.addFlashAttribute("del-msg", "del-success");
         } else {
             ra.addFlashAttribute("del-msg", "del-fail");
         }
-        return  "redirect:/list";
+        return "redirect:/list";
     }
 
 
