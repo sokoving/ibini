@@ -296,10 +296,15 @@
             $('.platformClick').hide();
             $('.platformInputShowEvent').click(function () {
                 // alert("platform");
-
                 $('.platformClick').show();
-            });
+                
+                // $('.platformInputShowEvent').show().click(function (){
+                //     $('.platformClick').hide();
+                // })
 
+            });
+            // 클릭시 삭제하기
+            
 
 
 
@@ -307,9 +312,14 @@
             $('.textClick').hide();
             $('.GenreInputShowEvent').click(function () {
                 // alert("hihihi");
-
                 $('.textClick').show();
+              
+                // $('.GenreInputShowEvent').show().click(function (){
+                //     $('.textClick').hide();
+                // })
             });
+
+
 
             // 1. 플랫폼 value값 가져오기
             $('#platformselect').change(function () {

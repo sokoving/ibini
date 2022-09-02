@@ -188,7 +188,14 @@
                 if (title.includes('[연재]')) {
                     // 이상하게 넘어가는거 잘라주기
                     title = title.split('[연재]').join("");
+                } else if(title.includes('[')){
+                    title = title.replace('[', '(');
+                } 
+                
+                if(title.includes(']')){
+                    title = title.replace(']', ')');
                 }
+
 
                 // 제목 자르기
                 if (title.length >= 25) {

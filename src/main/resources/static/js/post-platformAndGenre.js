@@ -51,6 +51,21 @@ console.log('post-platformAndGenre start');
             console.log(domainList);
             makePlatformDom(domainList);
 
+            // 플랫폼 이름 찾아서 select 해주기
+            const platformselect = document.getElementById('platformselect');
+            let len = platformselect.length
+
+            if(len > 6){
+
+                console.log(platformselect);
+                let last = platformselect.lastChild;
+                last.selected = true;
+
+                console.log(last);
+            }
+            
+            
+
         });
 
     }
@@ -70,11 +85,12 @@ console.log('post-platformAndGenre start');
         // 입력창
         const $platformInput = document.getElementById("platformInput");
 
-        console.log($platformInput.value);
+        console.log();
+        let platformName = $platformInput.value;
         // [수정] 서버로 전송할 데이터 -> account 로그인 정보 넘겨주는거 받는걸로수정!
         const platformData = {
 
-            "platformName": $platformInput.value,
+            "platformName": platformName,
             "account" : account
         }
         console.log(platformData);
@@ -96,9 +112,11 @@ console.log('post-platformAndGenre start');
                 if(msg==="insert-success"){
                     alert('새로운 플랫폼이 등록 완료되었습니다.');
                     // 비워주기
-                    $platformInput.value = '';
+                    platformName = '';
                     // select 해주기
                     showdomainList();
+                    
+
                 } else {
                     alert('새로운 플랫폼 저장을 실패했습니다.');
                 }
@@ -120,6 +138,18 @@ console.log('post-platformAndGenre start');
             console.log(genreList);
             makeGenreDom(genreList);
 
+            // 플랫폼 이름 찾아서 select 해주기
+            const genreSelecter = document.getElementById('genreSelect');
+            let len = genreSelecter.length
+
+            if(len > 4){
+                
+                console.log(genreSelecter);
+                let last = genreSelecter.lastChild;
+                last.selected = true;
+
+                console.log(last);
+            }
         });
 
     }
