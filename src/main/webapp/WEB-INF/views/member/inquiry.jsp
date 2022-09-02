@@ -5,183 +5,7 @@
 
         <head>
             <%@ include file="../include/static-head.jsp" %>
-                <style>
-                    /* header section 초기화 */
-                    section {
-                        width: 100%;
-                        border: none;
-                        border-radius: none;
-                        margin: 0;
-                        padding: 0;
-                        box-sizing: none;
-                    }
-
-                    .title-2 {
-                        width: 500px;
-                        text-align: center;
-                        /* background: yellow; */
-                        margin: 20px auto 0;
-                    }
-
-                    .btn {
-                        cursor: pointer;
-                        border: 2px solid;
-                        background: rgb(95, 225, 219);
-                    }
-
-                    .add-btn {
-                        margin-top: 80px;
-                    }
-
-                    .register-btn {
-                        width: 150px;
-                        margin-left: 850px;
-                        margin-bottom: 5px;
-                        background: rgb(235, 232, 181);
-                    }
-
-                    .inquiryMainTable {
-                        border-top: 4px solid;
-                        border-bottom: 4px solid;
-                    }
-
-                    .inquiryTable {
-                        width: 100%;
-                        margin: 0 auto 0;
-                        /* background: yellow; */
-                        display: flex;
-                        border-bottom: 2px solid;
-                        margin-bottom: 5px;
-                        padding: 15px 0;
-                    }
-
-                    .inquiryTable .table1 {
-                        /* background: #000; */
-                        cursor: pointer;
-                    }
-
-                    .inner-inquiryTable {
-                        width: 500px;
-                        /* background: green; */
-                    }
-
-                    .table1 li {
-                        /* background: gray; */
-                        padding-left: 20px;
-                    }
-
-                    .table1 .title {
-                        /* padding-left: 80px; */
-                    }
-
-                    .table2 li {
-                        /* background: violet; */
-                        text-align: right;
-                        padding-right: 20px;
-                    }
-
-                    .inquiry-content {
-                        margin-left: 80px;
-                        width: 850px;
-                        /* border: 1px solid; */
-                        padding: 15px;
-                    }
-
-                    .inquiryMainTable li {
-                        margin-bottom: 5px;
-                    }
-
-                    /* ========== 문의 - 아이디 - 제목 - 내용 - 답변 ========== */
-                    /* 문의/아이디 표시 li 태그 */
-                    .inquiry-title {}
-
-                    /* 제목 li 태그 */
-                    .table1 .title {
-                        /* padding-left: 80px; */
-                    }
-
-                    /* 문의글 상세보기시 출력되는 태그 li */
-                    .inquiry-content {
-                        margin-left: 100px;
-                        /* width: 850px; */
-                        border: 1px solid;
-                        padding: 15px;
-
-                    }
-
-                    /* 문의글 상세보기시 제목 :  */
-                    .detailTitle {
-                        margin-left: 90px;
-                    }
-
-                    /* 답변 상세보기시 출력되는 태그 li */
-                    .answer {
-                        margin-left: 110px;
-                        border: 1px solid;
-                        width: 820px;
-                    }
-
-                    /* 답변 상세보기시 출력되는 답변: */
-                    .answerDetailTitle {
-                        margin-left: 100px;
-                        margin-top: 20px;
-                    }
-
-                    /* 페이지 form */
-
-                    .bottom-section {
-                        margin-top: 50px;
-                        margin-bottom: 100px;
-                        display: flex;
-                    }
-
-                    .bottom-section nav {
-                        flex: 9;
-                        /* 부모에게 display: flex; */
-                        display: flex;
-                        justify-content: center;
-                    }
-
-                    .pagination-custom a {
-                        color: #444 !important;
-                        /* !important */
-                    }
-
-                    .pagination-custom li.active a,
-                    .pagination-custom li:hover a {
-                        background: #333 !important;
-                        color: #fff !important;
-                    }
-
-                    .page-item {
-                        margin-left: 5px;
-                    }
-
-                    /* 새로운 글 표시 */
-
-                    .newMark.inquirynewmark {
-                        display: flex;
-                    }
-
-                    .newMark.answernewmark {
-                        display: flex;
-                        justify-content: right;
-                    }
-
-                    /* 접기 버튼 */
-                    .close-btn {
-                        margin-top: auto;
-                        border: 1px solid;
-                        width: 50px;
-                        text-align: center;
-                        cursor: pointer;
-                    }
-
-                    .hidden{
-                        display: none;
-                    }
-                </style>
-
+                <link rel="stylesheet" href="/css/inquiry.css">
         </head>
 
 
@@ -190,7 +14,51 @@
                 <%@ include file="../include/header.jsp" %>
                     <section>
                         <h1> 문의하기 </h1>
-                        <div class="register-btn btn"> 문의글 등록하기</div>
+                        <!-- 모달 버튼 -->
+                        <div class="answer-register"> <a id="registerBtn" type="button" class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#inquiryregisterModal"
+                                data-bs-whatever="" href="#">
+                                [문의글 등록하기] </a> </div>
+
+                        <!-- 모달 팝업 모달 문의글 쓰기 -->
+                        <div class="modal fade" id="inquiryregisterModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <input type="hidden" id="user-id" name="userId" value="${loginUser.userId}">
+                                                
+                                                <div for="recipient-name" class="col-form-label"> 제목: </div>
+                                                <input type="text" id="inquirytitle" name="inquiryTitle" 
+                                                 style="border: 1px solid gray; width: 465px;">
+                                                <!-- <div class="form-control" id="recipient-name"></div> -->
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">문의사항:</label>
+                                                <textarea class="form-control" id="message-text" name="inquiry"
+                                                    maxlength="800"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" id="register-success"
+                                            class="btn btn-primary">작성완료</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 모달 적용 전 문의글 등록 -->
+                        <!-- <div class="register-btn btn"> 문의글 등록하기 </div> -->
                     </section>
 
                     <c:if test="${empty list}">
@@ -278,7 +146,102 @@
 
             </div>
             <!--================== script =================================-->
+            <!-- 문의글 등록 검증 jQuery -->
+
+            // 문의글 등록하기 모달
+            <!--   // 부트 모달 스트랩 스크립트 [답변 등록] -->
             <script>
+                var inquiryregisterModal = document.getElementById('inquiryregisterModal')
+
+                inquiryregisterModal.addEventListener('show.bs.modal', function (event) {
+
+                    // **** Button that triggered the modal
+                    var button = event.relatedTarget // 클릭된 버튼 태그
+
+                    // **** Extract info from data-bs-* attributes
+                    // var recipient = button.getAttribute('data-bs-whatever') // 클릭된 버튼태그의 데이터속성
+
+                    // **** If necessary, you could initiate an AJAX request here
+                    // **** and then do the updating in a callback.
+                    //
+                    // **** Update the modal's content.
+                    var modalTitle = inquiryregisterModal.querySelector('.modal-title') // 모달창의 제목 <h5> 태그
+                    var modalBodyInput = inquiryregisterModal.querySelector('.modal-body input') // 모달 폼안에있는 input데이터
+                    // console.log('modalBodyInput :',modalBodyInput); // 모달 폼안에있는 input데이터
+
+                    modalTitle.textContent = '[문의글 작성]';
+
+                    $userIdInput = document.getElementById('user-id');
+                    $inquiryTitleInput = document.getElementById('inquirytitle');
+                    $contentTextInput = document.getElementById('message-text');
+                    console.log($contentTextInput);
+
+                })
+
+                  //문의사항 등록 비동기 처리 이벤트
+                            document.getElementById('register-success').onclick = e => {
+                            console.log(e.target);
+                            const userId = '${loginUser.userId}';
+                            console.log(userId);
+
+                            //서버로 전송할 데이터들
+                            const inquiryData = {
+                                userId: $userIdInput.value,
+                                inquiryTitle: $inquiryTitleInput.value,
+                                inquiry : $contentTextInput.value
+                            };
+
+                            if(inquiryData.inquiryTitle.trim() === ''){
+                                alert('제목을 입력해주세요');
+                                return;
+                            }
+
+                            if(inquiryData.inquiry.trim() === ''){
+                                alert('문의사항을 입력해주세요.');
+                                return;
+                            }
+                            
+                            console.log('검증 : ',inquiryData.inquiryTitle);
+
+
+                            // POST요청을 위한 요청 정보 객체
+                            const reqInfo = {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(inquiryData)
+                            };
+
+                            console.log(reqInfo);
+
+                            const $modal = document.querySelector('.modal');
+                            console.log('modal?:', $modal);
+
+                            fetch('http://localhost:8383/member/inquiry-register/', reqInfo)
+                                .then(res => res.text())
+                                .then(msg => {
+                                    if (msg === 'inquiry-register-success') {
+                                        alert('문의 사항이 등록 되었습니다.');
+                                        $modal.hide; // 모달창 닫기
+                                        // showReplies(); // 댓글 새로불러오기
+                                        location.href = '/member/inquiry?userId='+userId;
+                                    } else {
+                                        alert('문의 사항이 등록되지 않았습니다. 입력 내용을 확인해주세요.');
+                                    }
+                                });
+                        }
+
+
+
+                // //글쓰기로 이동하기 버튼 이벤트
+                // const $writeBtn = document.querySelector('.register-btn');
+                // $writeBtn.addEventListener('click', e => {
+                //     location.href = '/member/inquiry-register';
+                // })
+
+
+
                 // 현재 위치한 페이지에 active 스타일 부여하기
                 function appendPageActive() {
 
@@ -336,11 +299,6 @@
 
                 }
 
-                //글쓰기로 이동하기 버튼 이벤트
-                const $writeBtn = document.querySelector('.register-btn');
-                $writeBtn.addEventListener('click', e => {
-                    location.href = '/member/inquiry-register';
-                })
 
                 const $table = document.querySelector(".inquiryMainTable");
 
@@ -424,15 +382,15 @@
                     // 접기 버튼 숨기기위해 노드 설정
                     const $closeBtn = e.target
 
-                    if($removeTargetC.classList.contains('inquiry-content')){
+                    if ($removeTargetC.classList.contains('inquiry-content')) {
                         $parentNode.removeChild($removeTargetT);
                         $parentNode.removeChild($removeTargetC);
                         $closeBtn.classList.add('hidden');
                     };
 
-                    console.log('if문 돌기전',$removeTargetAC.classList.contains('answer'))
-                    if($removeTargetAC.classList.contains('answer')) {
-                        console.log('if문 돌고',$removeTargetAC.classList.contains('answer'))
+                    console.log('if문 돌기전', $removeTargetAC.classList.contains('answer'))
+                    if ($removeTargetAC.classList.contains('answer')) {
+                        console.log('if문 돌고', $removeTargetAC.classList.contains('answer'))
                         $parentNodeA.removeChild($removeTargetAT);
                         $parentNodeA.removeChild($removeTargetAC);
                         $closeBtn.classList.add('hidden');
@@ -443,25 +401,13 @@
 
                 })
 
-
-                // const $table2 = document.querySelector('.table2');
-                // console.log($table2);
-                // $table2.addEventListener('click',e=>{
-                //     console.log('타겟 :',e.target);
-                // })
-
                 // 그런데 체크박스를 동적으로 만들어주는 경우에는 위와 같은 태그가 먹지 않았다. 
                 // 찾아보니 동적 태그일 경우에는 document.ready의 이벤트가 작동하지 않는다. 
                 // document.ready 는 화면이 최초에 로드되었을 때에 화면 안에 있는 태그들에 이벤트를 걸기 때문에, 
                 // 로드되었을 때 존재하지 않는 태그에 대해서는 이벤트를 걸 수 없는 것이다
 
-                // const $closeBtn = document.querySelector('.close-btn');
-                // console.log($closeBtn);
-
 
                 // ===== 상세보기 요청 이벤트 - 상세보기 클릭시 답변도 나오게 하기 =====
-                // close-btn 태그를 만들 위치를 정하기 위한 checkArr
-                console.log($table);
                 $table.addEventListener('click', e => {
 
                     // console.log(e.target);
@@ -473,7 +419,6 @@
                     let $ul = e.target.parentElement.parentElement;
                     // console.log(e.target.parentElement.lastElementChild);
                     // console.log('글번호 :', serialNumber);
-                    // location.href = '/member/findone-inquiry/' + serialNumber;
 
                     //비동기로 문의글 상세정보 가지고 오기              
                     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
@@ -487,12 +432,6 @@
                             // 접기 버튼 활성화 시키기
                             const $closeBtn = e.target.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling
                             $closeBtn.classList.remove('hidden');
-
-                            // // 상세보기만 한 경우 close-btn 태그 만들기
-                            // if (oneInquiry.answer == null) {
-                            //     const $ul = e.target.parentElement.parentElement;
-                            //     makeCloseDOM($ul);
-                            // }
 
                             // 답변 상세보기
                             if (oneInquiry.answer != null) {
@@ -511,82 +450,15 @@
                                             // 문의글조회+답글조회 될때 접기 버튼 태그 만들기
                                             const $ulClose = e.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
                                             // const $ulClose = e.target.parentElement.parentElement.parentElement.parentElement.lastElementChild;
-                                            // makeCloseDOM($ulClose);
 
                                         } return;
-                                        // e.target.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == oneInquiry.serialNumber
+
                                     });
                             }
-
-                            // // close-btn 태그 생성
-                            // console.log('체크배열 확인 : ', checkArr);
-                            // console.log('상세보기만 있을때 삽입태그 위치:', document.e.target.parentElement.parentElement);
-                            // console.log('둘다 있을때 삽입태그 위치:', e.target.parentElement.parentElement.nextElementSibling.nextElementSibling);
-                            // if (!checkArr.includes(false)) {
-
-                            //     console.log('close-btn if문 상세보기만')
-                            // } else {                                
-                            //     console.log('close-btn if문 답변도같이')
-                            // }
-
 
                         });
 
                 })
-
-                // const $table = document.querySelector(".inquiryMainTable");
-
-                // //답변 자세히 보기버튼이벤트
-                // const $detail = document.querySelector('.detail');
-                // console.log($detail);
-
-                // $table.addEventListener('click', e => {
-                //     if (!e.target.matches('.table2 .detail')) return;
-                //     console.log('detail 클릭:', e.target);
-                //     let serialNumber = e.target.parentElement.parentElement.firstElementChild.dataset.serialNum;
-                //     // console.log('답변 자세히 보기 시리얼넘버:', serialNumber);
-                //     let $ul = e.target.parentElement.parentElement.parentElement.firstElementChild;
-                //     // console.log(e.target.parentElement.parentElement.firstElementChild.dataset.serialNum);
-                //     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
-                //         .then(res => res.json())
-                //         .then(oneInquiry => {
-                //             // console.log('if문 가동전 비교 타겟:',e.target.parentElement.lastElementChild);
-                //             // console.log('if문 가동전 타겟의 넘버:',e.target.parentElement.lastElementChild.dataset.serialNum);
-                //             // console.log('if문 가동전 시리얼 넘버:',serialNumber)
-                //             if (e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == "0") {
-                //                 console.log('if문 :', e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum);
-                //                 makeAnswerDOM(oneInquiry, $ul);
-
-                //             } return;
-                //             // e.target.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == oneInquiry.serialNumber
-
-                //         });                })
-
-
-                // //상세보기 요청 이벤트
-                // console.log($table);
-                // $table.addEventListener('click', e => {
-                //     // console.log(e.target);
-                //     if (!e.target.matches('.table1 li')) return;
-                //     console.log('li 클릭됨! -', e.target);
-                //     console.log('일련번호 확인 : ', e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild);
-
-                //     let serialNumber = e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.dataset.serialNum;
-                //     let $ul = e.target.parentElement.parentElement;
-                //     // console.log(e.target.parentElement.lastElementChild);
-                //     // console.log('글번호 :', serialNumber);
-                //     // location.href = '/member/findone-inquiry/' + serialNumber;
-                //     //비동기로 문의글 상세정보 가지고 오기              
-                //     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
-                //         .then(res => res.json())
-                //         .then(oneInquiry => {
-                //             if (e.target.parentElement.parentElement.lastElementChild.dataset.serialNumber == oneInquiry.serialNumber) {
-                //                 return;
-                //             };
-                //             makeInquiryDOM(oneInquiry, $ul);
-                //         });
-                // })
-
 
                 const msg = '${msg}'
                 if (msg == 'inquiry-modify-success') {
