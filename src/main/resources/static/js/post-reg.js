@@ -232,3 +232,46 @@ document.querySelector('.ep-btn-group').onclick = function () {
         }
     }
 }
+
+
+//-------------------modi---------------//
+// 불러온 플랫폼, 장르 아이디 넣으면 selected 체크하는 함수
+function setModiSelect(platfomrId, genreId) {
+    const $platformList = $('select[name=platformId]').children();
+    for (let i = 0; i < $platformList.length; i++) {
+        if (platfomrId === $platformList[i].value) {
+            $platformList[i].setAttribute('selected', 'selected');
+        }
+    }
+
+    const $genreList = $('select[name=genreId]').children();
+
+    for (let i = 0; i < $genreList.length; i++) {
+        if (genreId === $genreList[i].value) {
+            $genreList[i].setAttribute('selected', 'selected');
+        }
+    }
+
+}
+
+// 불러온 연재, 회차 아이디 넣으면 checked 체크하는 함수
+function setModiRadio(pubId, epId) {
+    const $pubList = $('input[name=publishStatus]');
+    console.log("pubId : " + pubId);
+    for (let i = 0; i < $pubList.length; i++) {
+        if (pubId === $pubList[i].value) {
+            console.log($pubList[i]);
+            $pubList[i].setAttribute('checked', 'true');
+            $pubList[i].parentElement.classList.add('checked');
+        }
+    }
+
+    const $epList = $('input[name=epId]');
+    for (let i = 0; i < $epList.length; i++) {
+        if (epId === $epList[i].value) {
+            console.log($epList[i]);
+            $epList[i].setAttribute('checked', 'true');
+            $epList[i].parentElement.classList.add('checked');
+        }
+    }
+}

@@ -66,12 +66,14 @@
         <section class="post-reg-section">
             <div class="top-msg">* 필수 입력 사항 <br>선택 사항은 입력하지 않으면 기본값으로 세팅됩니다.(수정 가능)</div>
             <div class="inner-section">
-                <form id="modi-form" action="/post/modify" method="post" autocomplete="off" enctype="multipart/form-data">
+                <form id="modi-form" action="/post/modify" method="post" autocomplete="off"
+                    enctype="multipart/form-data">
 
                     <!-- 히든 : 계정-->
                     <input type="hidden" name="account" id="" value="${account}">
                     <!-- 히든 : 카테고리 아이디(웹소설 일단 고정)-->
                     <input type="hidden" name="caId" value="1">
+                    <input type="hidden" name="postNo" value="${p.postNo}">
 
                     <!-- 이미지, 제목, 작가, 별점-->
                     <div id="reg-1">
@@ -134,7 +136,7 @@
                                     <div class="platformSelBox">
                                         <select name="platformId" id="platformselect">
                                             <c:forEach var="plat" items="${platformList}">
-                                                <option value="${plat.platformId}">${plat.platformName}</option>    
+                                                <option value="${plat.platformId}">${plat.platformName}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -158,7 +160,7 @@
                                         <div class="genreSelectBox">
                                             <select name="genreId" id="genreSelect">
                                                 <c:forEach var="genre" items="${genreList}">
-                                                    <option value="${genre.genreId}">${genre.genreName}</option>    
+                                                    <option value="${genre.genreId}">${genre.genreName}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -289,7 +291,8 @@
 
 
                     <div id="reg-btn">
-                        <button id="post-reg-btn" class="white-box">등록</button>
+                        <button id="post-reg-btn" class="white-box">수정</button>
+                        <button id="post-return-btn" class="white-box">취소</button>
                     </div>
                 </form> <!-- // end modi-form -->
             </div> <!-- // end inner-section -->
@@ -307,8 +310,6 @@
             console.log(account);
 
 
-
-
             // 입력창 키업 이벤트
             const $form = $('#modi-form');
             // console.log($form);
@@ -321,13 +322,15 @@
                 }
             });
 
-            // 불러온 플랫폼, 장르 아이디 selected 체크하는 이벤트
-            const $platformList = $('select[name=platformId]');
-            console.log($platformList);
-            console.log($platformList.children());
+            // 불러온 플랫폼, 장르 아이디 selected하기
+            const platfomrId = "${p.platformId}";
+            const genreId = "${p.genreId}";
+            setModiSelect(platfomrId, genreId);
 
-
-
+            // 불러온 연재, 회차 아이디로 checked하기
+            const pubId = "${p.publishStatus}";
+            const epId = "${p.epId}";
+            setModiRadio(pubId, epId);
 
 
             // 포스트 입력 폼 제출 이벤트
@@ -353,7 +356,6 @@
 
                 $('.platformClick').show();
             });
-
 
 
 
