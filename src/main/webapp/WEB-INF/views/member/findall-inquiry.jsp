@@ -5,171 +5,7 @@
 
         <head>
             <%@ include file="../include/static-head.jsp" %>
-                <style>
-                    /* header section 초기화 */
-                    section {
-                        width: 0;
-                        border: none;
-                        border-radius: none;
-                        margin: 0;
-                        padding: 0;
-                        box-sizing: none;
-                    }
-
-                    .title-2 {
-                        width: 500px;
-                        text-align: center;
-                        /* background: yellow; */
-                        margin: 20px auto 0;
-                    }
-
-
-                    .btn {
-                        cursor: pointer;
-                        width: 70px;
-                        border: 2px solid;
-                    }
-
-                    .add-btn {
-                        margin-top: 80px;
-                    }
-
-                    .register-btn {
-                        width: 200px;
-                    }
-
-                    .inquiryMainTable {
-                        border-top: 4px solid;
-                        border-bottom: 4px solid;
-                    }
-
-                    .inquiryTable {
-                        width: 100%;
-                        margin: 0 auto 0;
-                        /* background: yellow; */
-                        display: flex;
-                        border-bottom: 2px solid;
-                        margin-bottom: 5px;
-                        padding: 15px 0;
-                    }
-
-                    .inquiryTable .table1 {
-                        /* background: #000; */
-                        cursor: pointer;
-                    }
-
-                    .inner-inquiryTable {
-                        width: 500px;
-                        /* background: green; */
-                    }
-
-                    .table1 li {
-                        /* background: gray; */
-                        padding-left: 20px;
-                    }
-
-                    .table2 li {
-                        /* background: violet; */
-                        text-align: right;
-                        padding-right: 20px;
-                    }
-
-                    .detail {
-                        cursor: pointer;
-                    }
-
-                    /* 미응답 li태그 */
-                    .answer-register {
-                        cursor: pointer;
-                    }
-
-                    /* 미응답 모달 버튼 */
-                    .btn-primary {
-                        width: 100px;
-                    }
-
-                    .inquiryMainTable li {
-                        margin-bottom: 5px;
-                    }
-
-                    /* ========== 문의 - 아이디 - 제목 - 내용 - 답변 ========== */
-                    /* 문의/아이디 표시 li 태그 */
-                    .inquiry-title {}
-
-                    /* 제목 li 태그 */
-                    .table1 .title {
-                        /* padding-left: 80px; */
-                    }
-
-                    /* 문의글 상세보기시 출력되는 태그 li */
-                    .inquiry-content {
-                        margin-left: 80px;
-                        width: 850px;
-                        border: 1px solid;
-                        padding: 15px;
-
-                    }
-
-
-                    /* 문의글 상세보기시 제목 :  */
-                    .detailTitle {
-                        margin-left: 90px;
-                    }
-
-                    /* 답변 상세보기시 출력되는 태그 li */
-                    .answer {
-                        margin-left: 110px;
-                        border: 1px solid;
-                    }
-
-                    /* 답변 상세보기시 출력되는 답변: */
-                    .answerDetailTitle {
-                        margin-left: 100px;
-                        margin-top: 20px;
-                    }
-
-                    /* 페이지 form */
-
-                    .bottom-section {
-                        margin-top: 50px;
-                        margin-bottom: 100px;
-                        display: flex;
-                    }
-
-                    .bottom-section nav {
-                        flex: 9;
-                        /* 부모에게 display: flex; */
-                        display: flex;
-                        justify-content: center;
-                    }
-
-                    .pagination-custom a {
-                        color: #444 !important;
-                        /* !important */
-                    }
-
-                    /* 현재 보고 있는 페이지 음영처리 */
-                    .pagination-custom li.active a,
-                    .pagination-custom li:hover a {
-                        background: #333 !important;
-                        color: #fff !important;
-                    }
-
-                    .page-item {
-                        margin-left: 5px;
-                    }
-
-                    /* 새로운글 표시  */
-                    .newMark.inquirynewmark {
-                        display: flex;
-                    }
-
-                    .newMark.answernewmark {
-                        display: flex;
-                        justify-content: right;
-                    }
-                </style>
-
+            <link rel="stylesheet" href="/css/inquiry-all.css">
         </head>
 
 
@@ -208,6 +44,7 @@
                                     <ul class="inner-inquiryTable table2">
                                         <li data-serial-num="${list.serialNumber}">${list.inquiryPrettierDate}</li>
                                         <c:if test="${list.answer == null}">
+                                            
                                             <!-- 모달 버튼 -->
                                             <li class="answer-register"> <a id="registerBtn" type="button"
                                                     class="btn btn-primary" data-bs-toggle="modal"
@@ -225,6 +62,7 @@
                                             </div>
                                         </c:if>
                                     </ul>
+                                    <div class="close-btn hidden">접기</div>
                                 </li>
                             </c:forEach>
                         </ul>
@@ -298,8 +136,8 @@
 
 
                     <!--================== script =================================-->
+                    <!-- page script -->
                     <script>
-                        console.log('article:', '${list[8]}');
                         // 현재 위치한 페이지에 active 스타일 부여하기
                         function appendPageActive() {
 
@@ -322,60 +160,52 @@
                                 }
                             }
                         }
-                        // 즉시실행함수
-                        (function () {
-                            appendPageActive();
-                        })();
+
                     </script>
 
 
+                    <!--   // 부트 모달 스트랩 스크립트 [답변 등록] -->
                     <script>
-                        // 부트 모달 스트랩 스크립트
                         var answerregisterModal = document.getElementById('answerregisterModal')
 
                         answerregisterModal.addEventListener('show.bs.modal', function (event) {
 
                             // Button that triggered the modal
                             var button = event.relatedTarget
-                            // console.log('button :',button);
+                            console.log('button :',button); // 클릭된 버튼 태그
+                            
                             // Extract info from data-bs-* attributes
                             var recipient = button.getAttribute('data-bs-whatever')
-                            // console.log('recipient :',recipient);
+                            console.log('recipient :',recipient); // 클릭된 버튼 태그의 데이터 속성
+
                             // console.log('모달 클릭시 해당영역의 제목:',button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent);
                             const titleContent = button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent;
-                            // console.log('타이틀내용 :',titleContent);
-                            // console.log('제목넣기 테스트 : ', document.getElementById('recipient-name').textContent );
+                            console.log('타이틀내용 :',titleContent); // 클릭된 버튼으로 부터 제목태그 가지고 오기  
+                        
                             document.getElementById('recipient-name').textContent = titleContent;
+                            console.log('recipient-name:',document.getElementById('recipient-name'));
+                            // 제목이 들어가는 div 태그
+
                             // If necessary, you could initiate an AJAX request here
                             // and then do the updating in a callback.
-                            //
+
                             // Update the modal's content.
                             var modalTitle = answerregisterModal.querySelector('.modal-title')
+                            console.log('modalTitle :',modalTitle); //<h5> 태그 타이틀 ex)[문의번호 답변 작성]
+
                             var modalBodyInput = answerregisterModal.querySelector('.modal-body input')
+                            console.log('modalBodyInput :',modalBodyInput); // 모달 폼안에있는 input데이터
+
 
                             modalTitle.textContent = '[답변 작성] - 문의 번호 [' + recipient + ']';
-                            modalBodyInput.value = recipient
+                            modalBodyInput.value = recipient //hidden 으로 숨겨놓은 serialNumber의 값을 넣기
 
                             $serialNumInput = document.getElementById('hidden-serialNumber');
                             $contentInput = document.getElementById('message-text');
+                            console.log($contentInput);
 
                             // 모달을 띄울 때 다음 작업(수정완료처리)을 위해 댓글번호를 모달에 달아두자.
                         })
-
-                        // 답변등록 화면 열기 처리 이벤트                
-                        // const $modal = $('#answerregisterModal');
-                        // const $l = document.getElementById('registerBtn');
-                        // console.log($l);
-
-                        // $l.onclick = e => {
-                        //     console.log('답변 등록 버튼 클릭');
-                        //     console.log(e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.lastElementChild.textContent);
-                        //     console.log(e.target.parentElement.parentElement.firstElementChild.dataset.serialNum);
-                        //     const title = e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.lastElementChild.textContent;
-                        //     const serialNumber = e.target.parentElement.parentElement.firstElementChild.dataset.serialNum;
-                        //     document.getElementById('recipient-name').textContent = title;
-                        //     document.getElementById('hidden-serialNumber').value = serialNumber;
-                        // }
 
                         //답글 달기 비동기 처리 이벤트
                         document.getElementById('register-success').onclick = e => {
@@ -387,6 +217,13 @@
                                 serialNumber: $serialNumInput.value,
                                 answer: $contentInput.value
                             };
+
+                            if(answerDate.answer.trim() === ''){
+                                alert('답변을 입력해주세요');
+                                return;
+                            }
+
+                            console.log('answerDate:',answerDate);
 
 
                             // POST요청을 위한 요청 정보 객체
@@ -432,7 +269,9 @@
 
             </div>
 
+            <!-- 문의/답변 상세 조회 script -->
             <script>
+
                 //문의글 상세보기 태그 만들기 함수
                 function makeInquiryDOM(oneInquiry, $ul) {
                     const $li = document.createElement('li');
@@ -450,7 +289,7 @@
                 function makeAnswerDOM(oneInquiry, $ul) {
                     const $li = document.createElement('li');
                     const $div = document.createElement('div');
-                    $div.textContent = '답변: :'
+                    $div.textContent = '답변:'
                     $div.classList.add('answerDetailTitle');
                     $li.textContent = oneInquiry.answer;
                     $li.dataset.serialNum = oneInquiry.serialNumber;
@@ -459,58 +298,90 @@
                     $ul.append($li);
 
                 }
-                // //글쓰기로 이동하기 버튼 이벤트
-                // const $writeBtn = document.querySelector('.register-btn');
-                // $writeBtn.addEventListener('click', e => {
-                //     location.href = '/member/inquiry-register';
-                // })
 
+                // 접기 버튼 태그 만들기 함수 makeCloseDOM
+                function makeCloseDOM($ul) {
+                    const $btn = document.createElement('div');
+                    $btn.textContent = '접기';
+                    $btn.classList.add('close-btn');
+                    $ul.append($btn);
+                }
+
+                // ===== 조회 화면 접기 이벤트 =====
                 const $table = document.querySelector(".inquiryMainTable");
 
-                //답변 자세히 보기버튼이벤트
-                const $detail = document.querySelector('.detail');
-                console.log($detail);
-
                 $table.addEventListener('click', e => {
-                    if (!e.target.matches('.table2 .detail')) return;
-                    console.log('detail 클릭:', e.target);
-                    let serialNumber = e.target.parentElement.parentElement.firstElementChild.dataset.serialNum;
-                    // console.log('답변 자세히 보기 시리얼넘버:', serialNumber);
-                    let $ul = e.target.parentElement.parentElement.parentElement.firstElementChild;
-                    // console.log(e.target.parentElement.parentElement.firstElementChild.dataset.serialNum);
-                    fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
-                        .then(res => res.json())
-                        .then(oneInquiry => {
-                            // console.log('if문 가동전 비교 타겟:',e.target.parentElement.lastElementChild);
-                            // console.log('if문 가동전 타겟의 넘버:',e.target.parentElement.lastElementChild.dataset.serialNum);
-                            // console.log('if문 가동전 시리얼 넘버:',serialNumber)
-                            if (e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == "0") {
-                                console.log('if문 :', e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum);
-                                makeAnswerDOM(oneInquiry, $ul);
-
-                            } return;
 
 
+                    console.log('if문 전 close-btn 클릭됨!', e.target);
+                    if (!e.target.matches('.close-btn')) return;
+                    console.log('close-btn 클릭됨!', e.target);
 
-                            // e.target.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == oneInquiry.serialNumber
+                    // 노드 삭제를 위해 타겟의 부모요소 선택 [문의글만 있는 경우]
+                    const $parentNode = e.target.parentElement.firstElementChild.firstElementChild;
+                    // console.log('삭제대상의 부모:', $parentNode);
 
-                        });
+                    // 삭제할 노드 선택 [문의글만 있는 경우 - 문의 제목]
+                    const $removeTargetT = e.target.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling;
+                    // console.log('???',$removeTargetT);
+                    // 삭제할 노드 선택 [문의글만 있는 경우 - 문의 내용]
+                    const $removeTargetC = e.target.parentElement.firstElementChild.firstElementChild.lastElementChild;
+                    // console.log('삭제대상:', $removeTarget);
+
+                    //삭제 글만 있는 경우 조건식
+                    // console.log($removeTarget.classList.contains('inquiry-content'));
+
+                    // 노드 삭제를 위해 타겟의 부모요소 선택 [문의글과 답변이 있는 경우]
+                    const $parentNodeA = e.target.parentElement.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling;
+                    // console.log('삭제대상의 부모:', $parentNodeA);
+
+                    // 삭제할 노드 선택 [문의글과 답변이 있는 경우 - 답변 제목]
+                    const $removeTargetAT = e.target.parentElement.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild;
+                    // console.log('???',$removeTargetAT);
+
+                    // 삭제할 노드 선택 [문의글과 답변이 있는 경우 - 답변 내용]
+                    const $removeTargetAC = e.target.parentElement.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild;
+                    // console.log('삭제대상:', $removeTargetA);
+
+                    // 문의글과 답변이 있는 경우 조건식
+                    // console.log($removeTargetA.classList.contains('answer'));
+
+                    // 접기 버튼 숨기기위해 노드 설정
+                    const $closeBtn = e.target
+                    // console.log('?????? : ',$closeBtn);
+
+                    //부모노드.removeChild(삭제할노드) 노드 삭제하기 문법
+
+                    if ($removeTargetC.classList.contains('inquiry-content')) {
+                        $parentNode.removeChild($removeTargetT);
+                        $parentNode.removeChild($removeTargetC);
+                        $closeBtn.classList.add('hidden');
+
+                    };
+
+                    console.log('if문 돌기전', $removeTargetAC.classList.contains('answer'))
+                    if ($removeTargetAC.classList.contains('answer')) {
+                        console.log('if문 돌고', $removeTargetAC.classList.contains('answer'))
+                        $parentNodeA.removeChild($removeTargetAT);
+                        $parentNodeA.removeChild($removeTargetAC);
+                        $closeBtn.classList.add('hidden');
+
+                    };
                 })
 
-
-                //상세보기 요청 이벤트
-                console.log($table);
+                // ===== 상세보기 요청 이벤트 - 상세보기 클릭시 답변도 나오게 하기 =====
                 $table.addEventListener('click', e => {
+
                     // console.log(e.target);
                     if (!e.target.matches('.table1 li')) return;
-                    console.log('li 클릭됨! -', e.target);
-                    console.log('일련번호 확인 : ', e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild);
+                    // console.log('li 클릭됨! -', e.target);
+                    // console.log('일련번호 확인 : ', e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild);
 
                     let serialNumber = e.target.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.dataset.serialNum;
                     let $ul = e.target.parentElement.parentElement;
                     // console.log(e.target.parentElement.lastElementChild);
                     // console.log('글번호 :', serialNumber);
-                    // location.href = '/member/findone-inquiry/' + serialNumber;
+
                     //비동기로 문의글 상세정보 가지고 오기              
                     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
                         .then(res => res.json())
@@ -519,28 +390,40 @@
                                 return;
                             };
                             makeInquiryDOM(oneInquiry, $ul);
+
+                            // 접기 버튼 활성화 시키기
+                            const $closeBtn = e.target.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling
+                            $closeBtn.classList.remove('hidden');
+
+                            // 답변 상세보기
+                            if (oneInquiry.answer != null) {
+                                let $ul = e.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
+                                fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
+                                    .then(res => res.json())
+                                    .then(oneInquiry => {
+                                        // console.log('if문 가동전 비교 타겟:',e.target.parentElement.lastElementChild);
+                                        // console.log('if문 가동전 타겟의 넘버:',e.target.parentElement.lastElementChild.dataset.serialNum);
+                                        // console.log('if문 가동전 시리얼 넘버:',serialNumber)
+                                        console.log('if문 가동전 :', e.target.parentElement.parentElement.nextElementSibling.nextElementSibling);
+                                        if (e.target.parentElement.parentElement.nextElementSibling.nextElementSibling.dataset.serialNum == "0") {
+                                            console.log('if문 :', e.target.parentElement.parentElement.nextElementSibling.nextElementSibling.dataset.serialNum);
+                                            makeAnswerDOM(oneInquiry, $ul);
+
+                                        } return;
+                                        // e.target.parentElement.parentElement.firstElementChild.lastElementChild.dataset.serialNum == oneInquiry.serialNumber
+                                    });
+                            }
+
                         });
                 })
-                // $table.onclick = e => {
-                //     console.log(e.target);
-                //     if (!e.target.matches('.inquiryTable li')) return;
-                //     console.log('li 클릭됨! -', e.target);
 
-                //     let serialNumber = e.target.parentElement.parentElement.firstElementChild.firstElementChild.dataset.serialNum;
-                //     let $ul = e.target.parentElement;
-                //     console.log('글번호 :', serialNumber);
-                //     // location.href = '/member/findone-inquiry/' + serialNumber;
-                //     //비동기로 문의글 상세정보 가지고 오기              
-                //     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
-                //         .then(res => res.json())
-                //         .then(oneInquiry => {
-                //             // console.log(oneInquiry);
-                //             // console.log(oneInquiry.inquiry);
-                //             makeInquiryDOM(oneInquiry,$ul);
-                //         });
-                // }
+                    // ============== 즉시실행함수 =================
+                    (function () {
+                        appendPageActive();
+                    })();
 
 
+                // ======== msg alert ========
                 const msg = '${msg}'
                 if (msg == 'inquiry-modify-success') {
                     alert('문의 사항이 수정 되었습니다.');
