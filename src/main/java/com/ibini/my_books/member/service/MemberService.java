@@ -44,13 +44,19 @@ public class MemberService {
         boolean flag = memberMapper.register(member);
         if (flag) {
             // 새로 가입한 회원 계정을 가져와 기본 장르, 플랫폼 세팅
-            String account = memberMapper.changIdToAccount(member.getUserId());
+            String account = memberMapper.changeIdToAccount(member.getUserId());
             genreService.setGenreForNewMember(account);
             platformService.setPlatformForNewMember(account);
 
             return memberMapper.registerManageMember(member);
         }
         return false;
+    }
+
+    //회원 탈퇴사유 직접입력한 경우 내용 등록
+    public boolean insertReason(String outReason){
+        boolean flag = memberMapper.insertReason(outReason);
+        return flag;
     }
 
 
@@ -174,13 +180,21 @@ public class MemberService {
         return memberMapper.updatePw(userId, encodePw);
     }
 
-    //회원 탈퇴
+    // ========= 회원 탈퇴
+
+    //회원 탈퇴 처리
     @Transactional
-    public boolean memberDelete(String userId, String password) {
+    public boolean memberDelete(String userId, String password,int reasonNum) {
 //        탈퇴 회원의 계정으로 등록된 모든 장르 삭제
-        String account = memberMapper.changIdToAccount(userId);
+        String account = memberMapper.changeIdToAccount(userId);
         genreService.removeGenreForOutMember(account);
         platformService.removePlatformForOutMember(account);
+//        탈퇴한 회원의 상태 변경
+        memberMapper.changeCondition(userId);
+
+//        탈퇴한 회원의 회원 탈퇴 사유 입력
+        memberMapper.insertReasonNum(userId,reasonNum);
+
 
         return memberMapper.memberDelete(userId, password);
     }

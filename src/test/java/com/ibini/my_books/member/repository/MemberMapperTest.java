@@ -1,5 +1,6 @@
 package com.ibini.my_books.member.repository;
 
+import com.ibini.my_books.member.domain.ManageMember;
 import com.ibini.my_books.member.domain.Member;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,24 @@ class MemberMapperTest {
 
         mapper.registerManageMember(m);
 
+    }
+
+    @Test
+    @DisplayName("회원관리 테이블의 상태가 변경 되어야 한다.")
+    void changeConditionTest(){
+        String userId = "vacation";
+        boolean b = mapper.changeCondition(userId);
+        assertTrue(b);
+
+    }
+
+    @Test
+    @DisplayName("탈퇴회원 아이디와 탈퇴사유가 입력 되어야 한다.")
+    void insertReasonNumTest(){
+        String userId = "test1";
+        int reasonNum = 1;
+
+        mapper.insertReasonNum(userId,reasonNum);
     }
 
     @Test
@@ -122,7 +141,7 @@ class MemberMapperTest {
     @DisplayName("userId로 account를 조회한다")
     void changIdToAccountTest(){
         String userId = "yeowoon";
-        String account = mapper.changIdToAccount(userId);
+        String account = mapper.changeIdToAccount(userId);
         System.out.println("account = " + account);
         assertEquals(account, "2208260002");
     }

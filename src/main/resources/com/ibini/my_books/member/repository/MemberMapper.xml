@@ -37,7 +37,7 @@
     <select id="isDuplicate" resultType="int">
 
         SELECT COUNT(*)
-        FROM tbl_member
+        FROM tbl_manage_member
 
         <if test="type=='userId'" >
             WHERE user_id = #{value}
@@ -94,6 +94,45 @@
         WHERE user_id = #{userId}
     </delete>
 
+    <!--  회원관리테이블의 상태 변경 true -> false  -->
+    <update id="changeCondition">
+
+        UPDATE tbl_manage_member
+        SET user_condition = 'false'
+        WHERE user_id = #{userId}
+
+    </update>
+
+    <!--  탈퇴 회원 관리 테이블 userId = reasonNum  -->
+
+    <insert id="insertReasonNum">
+
+        INSERT INTO tbl_manage_break_away
+        (
+           user_id,reason_num
+        )
+            VALUES
+               (
+                  #{userId}, #{reasonNum}
+                )
+
+    </insert>
+
+<!--    insertReason -->
+
+    <insert id="insertReason">
+
+        INSERT INTO tbl_reason_break_away
+            (
+        reason_num, out_reason
+             )
+        VALUES
+             (
+        seq_tbl_reason_break_away.nextval, #{outReason}
+             )
+
+    </insert>
+
     <!--  자동 로그인 정보 추가  -->
     <update id="saveAutoLoginValue">
 
@@ -112,7 +151,7 @@
     </select>
 
     <!--  userId로 account 가져오기  -->
-    <select id="changIdToAccount" resultType="String">
+    <select id="changeIdToAccount" resultType="String">
         select account
         from tbl_member
         where user_id = #{userId}
@@ -133,9 +172,9 @@
     <insert id="registerManageMember">
 
         INSERT INTO tbl_manage_member
-        (user_id)
+        (user_id, email)
         VALUES
-        ( #{userId} )
+        ( #{userId}, #{email} )
 
     </insert>
 
@@ -234,3 +273,5 @@
 
 
 </mapper>
+
+

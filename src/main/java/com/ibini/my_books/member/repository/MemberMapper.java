@@ -45,7 +45,18 @@ public interface MemberMapper {
     Member findMemberBysessionId(String sessionId);
 
     //userId로 account 가져오기
-    String changIdToAccount(String userId);
+    String changeIdToAccount(String userId);
+
+    // 회원관리테이블의 상태 변경 true -> false
+    boolean changeCondition(String userId);
+
+    // 탈퇴 회원 관리 테이블 userId = reasonNum 삽입
+    boolean insertReasonNum(String userId,int reasonNum);
+
+   // 탈퇴사유 직접 입력시 tbl_reason_break_away 사유 등록하기
+    boolean insertReason(String outReason);
+
+    // 회원의 모든 게시물 삭제?
 
 //    ========== 회원관리 =============== //
 

@@ -7,7 +7,11 @@ DROP TABLE prj_post_img;
 DROP TABLE tbl_post;
 DROP TABLE prj_genre;
 DROP TABLE prj_platform;
+DROP TABLE tbl_reason_break_away;
 DROP TABLE tbl_member;
+DROP TABLE tbl_manage_member;
+DROP TABLE tbl_manage_break_away;
+DROP TABLE tbl_manage_inquiry;
 
 
 CREATE TABLE tbl_post
@@ -32,27 +36,6 @@ CREATE TABLE tbl_post
 );
 DROP SEQUENCE seq_tbl_post;
 CREATE SEQUENCE seq_tbl_post;
-
-CREATE TABLE tbl_member
-(
-    account             VARCHAR2(50)     NOT NULL,          --회원 관리 번호(수정X, 시스템 입력)
-    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   --회원 아이디(수정X, 회원 입력)
-    password            VARCHAR2(150)    NOT NULL,          --비밀번호
-    user_name           VARCHAR2(20)     NOT NULL,          --닉네임(수정O, 회원 입력)
-    email               VARCHAR2(100)    NOT NULL UNIQUE,   --유저 이메일 주소
-    post_amount         NUMBER(3)        NULL,      --한 페이지에 띄울 포스트 수	ex) 50
-    sort                VARCHAR2(50)     NULL,      --정렬 기준
-    auth                VARCHAR2(20)     DEFAULT 'COMMON',  --권한 (COMMON, ADMIN)
-    join_date           DATE             DEFAULT SYSDATE,   --가입날짜
-    last_login          DATE             DEFAULT SYSDATE,   --마지막 로그인 날짜
-    email_verification  VARCHAR2(20)     DEFAULT 'false',   --이메일 인증여부
-    session_id          VARCHAR2(200)    DEFAULT 'none',    --세션 아이디
-    limit_time          DATE,                               --세션 만료일
-     PRIMARY KEY (account)
-);
-DROP SEQUENCE seq_tbl_member;
-CREATE SEQUENCE seq_tbl_member;
--- TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0')
 
 CREATE TABLE prj_genre
 (
@@ -144,20 +127,47 @@ CREATE TABLE prj_link_post(
      PRIMARY KEY (link_no)
 );
 
+-- 회원 테이블
+CREATE TABLE tbl_member
+(
+    account             VARCHAR2(50)     NOT NULL,          --회원 관리 번호(수정X, 시스템 입력)
+    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   --회원 아이디(수정X, 회원 입력)
+    password            VARCHAR2(150)    NOT NULL,          --비밀번호
+    user_name           VARCHAR2(20)     NOT NULL,          --닉네임(수정O, 회원 입력)
+    email               VARCHAR2(100)    NOT NULL UNIQUE,   --유저 이메일 주소
+    post_amount         NUMBER(3)        NULL,      --한 페이지에 띄울 포스트 수	ex) 50
+    sort                VARCHAR2(50)     NULL,      --정렬 기준
+    auth                VARCHAR2(20)     DEFAULT 'COMMON',  --권한 (COMMON, ADMIN)
+    join_date           DATE             DEFAULT SYSDATE,   --가입날짜
+    last_login          DATE             DEFAULT SYSDATE,   --마지막 로그인 날짜
+    email_verification  VARCHAR2(20)     DEFAULT 'false',   --이메일 인증여부
+    session_id          VARCHAR2(200)    DEFAULT 'none',    --세션 아이디
+    limit_time          DATE,                               --세션 만료일
+     PRIMARY KEY (account)
+);
+
+DROP SEQUENCE seq_tbl_member;
+CREATE SEQUENCE seq_tbl_member;
+-- TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0')
+
+-- 회원 관리 테이블
 	CREATE TABLE tbl_manage_member
 	(
 	    user_id             VARCHAR2(50)     NOT NULL,   --회원 아이디
+	    email               VARCHAR2(100)    NOT NULL UNIQUE, -- 회원 이메일
 	    user_condition       VARCHAR2(150)    DEFAULT 'true',    --회원의 가입 상태
 	     PRIMARY KEY (user_id)
 	);
 
-	CREATE TABLE tbl_manage_break_away
+-- 회원 탈퇴 사유 관리 테이블
+CREATE TABLE tbl_manage_break_away
 	(
 	    user_id             VARCHAR2(50)     NOT NULL,   --회원 아이디
 	    reason_num       NUMBER(9)    NOT NULL,          --탈퇴사유 번호
 	     PRIMARY KEY (user_id)
 	);
 
+-- 회원 문의사항 관리 테이블
 	CREATE TABLE tbl_manage_inquiry
 	(
 	serial_number       VARCHAR2(50)     NOT NULL,          --회원 관리 번호(수정X, 시스템 입력)
@@ -173,11 +183,14 @@ CREATE TABLE prj_link_post(
     CREATE SEQUENCE seq_tbl_manage_inquiry;
 
 
+-- 탈퇴사유 내용 관리 테이블
 	CREATE TABLE tbl_reason_break_away
 	(
 	    reason_num       NUMBER(9)    NOT NULL,          --탈퇴사유 번호
-	    out_reason      VARCHAR2(1000)     NOT NULL UNIQUE,   -- 탈퇴 이유
+	    out_reason      VARCHAR2(1000)     NOT NULL ,   -- 탈퇴 이유
 	     PRIMARY KEY (reason_num)
 	);
 
+    CREATE SEQUENCE seq_tbl_reason_break_away;
+    DROP SEQUENCE seq_tbl_reason_break_away;
 

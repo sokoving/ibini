@@ -184,15 +184,15 @@ class MemberServiceTest {
 
     }
 
-    @Test
-    @DisplayName("가입된 회원의 정보가 삭제 되어야 한다.")
-    void deleteMemberTest(){
-        String account = "wldus";
-        String password = "$2a$10$Anr8kInQpqkrHo1pS4vih.mpwZakB4DO0TlXyOCTS3tspNu/gNf9O";
-
-        boolean flag = service.memberDelete(account, password);
-
-        assertTrue(flag);
-
-    }
+//    @Test
+//    @DisplayName("가입된 회원의 정보가 삭제 되어야 한다.")
+//    void deleteMemberTest(){
+//        String account = "wldus";
+//        String password = "$2a$10$Anr8kInQpqkrHo1pS4vih.mpwZakB4DO0TlXyOCTS3tspNu/gNf9O";
+//
+//        boolean flag = service.memberDelete(account, password);
+//
+//        assertTrue(flag);
+//
+//    }
 }

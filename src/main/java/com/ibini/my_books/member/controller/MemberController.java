@@ -252,32 +252,28 @@ public class MemberController {
         log.info("/member/join-out GET!! /member/join-out.jsp");
     }
 
-
-    //회원탈퇴를 위한 비밀번호 검증
-    @ResponseBody
-    @PostMapping("/join-out-confirm")
-    public String joinOutConfirm(String userId, String password){
-        log.info("/member/join-out-confirm POST 비동기 요청 !! userId : {}, password : {}", userId, password);
-        // 입력된 비밀번호와 db 비밀번호 일치 확인
-        boolean pwCheckFlag = memberService.modifyPwCheck(password, userId);
-        if (pwCheckFlag) {
-            return "confirm-success";
-        }
-        return "confirm-fail";
-    }
-
-
     @Transactional
     @PostMapping("/join-out")
-    public String joinOut(String userId, String password, RedirectAttributes ra) {
-        log.info("/member/join-out POST !! userId : {}, password : {}", userId, password);
+    public String joinOut(String userId, String password,int reasonNum, String outReason
+            ,RedirectAttributes ra) {
+        log.info("/member/join-out POST !! userId : {}, password : {}, " +
+                        "reasonNum : {}, outReason : {}",
+                userId, password,reasonNum,outReason);
+        if(reasonNum == 0) {
+            ra.addFlashAttribute("msg","not-reasonInput");
+            return "redirect:/member/join-out";
+        }
+        //회원탈퇴사유 직접 입력시
+        if(reasonNum > 3){
+            memberService.insertReason(outReason);
+        }
 
         // 입력된 비밀번호와 db 비밀번호 일치 확인
         boolean pwCheckFlag = memberService.modifyPwCheck(password, userId);
 
         if (pwCheckFlag) {
             ra.addFlashAttribute("msg", "success");
-            memberService.memberDelete(userId, password);
+            memberService.memberDelete(userId, password, reasonNum);
 
             return "redirect:/member/join-sign-out";
         }
