@@ -63,7 +63,7 @@
 
 
         <!-- 새 포스트 등록 섹션 -->
-        <section class="post-reg-section">
+        <section class="post-modi-section">
             <div class="top-msg">* 필수 입력 사항 <br>선택 사항은 입력하지 않으면 기본값으로 세팅됩니다.(수정 가능)</div>
             <div class="inner-section">
                 <form id="modi-form" action="/post/modify" method="post" autocomplete="off"
@@ -80,18 +80,35 @@
                         <!-- 이미지 -->
                         <div class="img-wrap">
                             <div class="img-box">
-                                <span class="box-msg">썸네일을 등록해 보세요</span>
-                                <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
-                                <!-- <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
+                                <c:choose>
+                                    <c:when test="${p.thumbImg != null}">
+                                        <span class="box-msg hide">썸네일을 등록해 보세요</span>
+                                        <img class="post-img thumb-img" src="/loadFile?fileName=${p.thumbImg}"
+                                            alt="썸네일 이미지">
+                                        <input class="thumbFileName-hidden-input" type="hidden" name="thumbFileName"
+                                            value="${p.thumbImg}">
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <span class="box-msg">썸네일을 등록해 보세요</span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <label class="file-box">
                                 <div class="file-box-left">
                                     파일 선택
                                 </div>
                                 <div class="file-box-right">
-                                    등록된 썸네일이 없습니다.
+                                    <c:choose>
+                                        <c:when test="${p.originalThumbName != null}">
+                                            ${p.originalThumbName}
+                                        </c:when>
+                                        <c:otherwise>
+                                            등록된 썸네일이 없습니다.
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
-                                <input type="file" name="files" id="ajax-file" class="file-input thumb-input" disabled>
+                                <input type="file" name="files" id="ajax-file" class="file-input thumb-input">
                             </label>
                         </div>
 
@@ -261,7 +278,8 @@
                             <span class="reg-span">해시태그</span>
                             <span class="explain-span">[ 각 해시태그는 #를 기준으로 구별됩니다. ]</span>
                         </div>
-                        <input class="white-box" type="text" name="tagName" placeholder="예시) #태그1 #태그_2">
+                        <input value="${p.oneLineTag}" class="white-box" type="text" name="tagName"
+                            placeholder="예시) #태그1 #태그_2">
                     </div>
 
                     <div id="reg-6">
@@ -270,7 +288,7 @@
                             <div class="file-box-left">
                                 파일 선택
                             </div>
-                            <div class="file-box-right">
+                            <div class="file-box-right upload-msg">
                                 첨부된 이미지가 없습니다.
                             </div>
                             <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
@@ -285,13 +303,27 @@
                                 <input type="hidden" name="filNames"
                                 value="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large">
                             </div> -->
+
+
+                            <c:if test="${imgList != null}">
+                                <c:forEach var="img" items="${imgList}">
+                                    <c:if test="${img.thumbnail != 'true'}">
+                                        <div class="upload-img-box">
+                                            <img class="upload-img" src="/loadFile?fileName=${img.fileName}"
+                                                alt="${img.originalFileName}">
+                                            <i class="fas fa-times-circle upload-cancel-btn"></i>
+                                            <input type="hidden" name="fileNames" value=${img.fileName}>
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
                         </div>
 
                     </div>
 
 
                     <div id="reg-btn">
-                        <button id="post-reg-btn" class="white-box">수정</button>
+                        <button id="post-reg-btn" class="white-box">확인</button>
                         <button id="post-return-btn" class="white-box">취소</button>
                     </div>
                 </form> <!-- // end modi-form -->
@@ -307,8 +339,13 @@
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
             const account = "${account}";
-            console.log(account);
+            console.log("account : " + account);
+            const postNo = "${postNo}";
+            console.log("postNo : " + postNo);
 
+
+            // 첨부파일 선택창 메세지 세팅
+            setUploadCount();
 
             // 입력창 키업 이벤트
             const $form = $('#modi-form');
@@ -322,14 +359,14 @@
                 }
             });
 
-            // 불러온 플랫폼, 장르 아이디 selected하기
-            const platfomrId = "${p.platformId}";
-            const genreId = "${p.genreId}";
-            setModiSelect(platfomrId, genreId);
+            // 불러온 플랫폼, 장르 아이디 selected
+            const platformId = "${p.platformId}",
+                genreId = "${p.genreId}";
+            setModiSelect(platformId, genreId);
 
-            // 불러온 연재, 회차 아이디로 checked하기
-            const pubId = "${p.publishStatus}";
-            const epId = "${p.epId}";
+            // 불러온 연재, 회차 아이디로 checked
+            const pubId = "${p.publishStatus}",
+                epId = "${p.epId}";
             setModiRadio(pubId, epId);
 
 

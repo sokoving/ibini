@@ -70,7 +70,7 @@ class PostMapperTest {
     @Test
     @DisplayName("장르, 플랫폼이 조인된 포스트 하나가 조회돼야 한다")
     void fineOnePostWithName(){
-        Long postNo = 1L;
+        Long postNo = 49L;
         PostWithName p = mapper.fineOnePostWithName(postNo);
         System.out.println("p = " + p);
 

@@ -99,36 +99,30 @@ public class PostController {
         model.addAttribute("genreList", genreService.findAllService(account));
 //        계정의 플랫폼 목록
         model.addAttribute("platformList", platformService.findAllPlatform(account));
-//        포스트의 태그 리스트
-        model.addAttribute("tagList", hashTagService.findAllByPostNo(postNo));
 //        포스트의 이미지 리스트
         model.addAttribute("imgList", imgService.getPostImgList(postNo));
-
 
         return "post/post-modify";
     }
 
     //    포스트 수정 요청      post   /post/modify
     @PostMapping("/modify")
-    public String modify(Post post
-//            , HashtagDomain hashtagDomain, ThumbImgDTO thumbImgDTO
-    ) {
-        log.info("PostController /post/modify  POST 요청!! - {}", post);
-//        log.info("/post/modify - hashtag: {}", tag);
-//        log.info("/post/modify - thumbImgDTO : {}", thumbImgDTO);
+    public String modify(Post post, HashtagDomain tag, ThumbImgDTO thumbImgDTO) {
+        log.info("PostController /post/modify  POST CALL!! - {}", post);
+        log.info("/post/modify - hashtag: {}", tag);
+        log.info("/post/modify - thumbImgDTO : {}", thumbImgDTO);
 
-        // tbl_post 저장
+        // tbl_post 수정
         boolean postFlag = postService.modifyService(post);
         log.info("post flag : {}", postFlag);
 
-        // PRJ_HASHTAG 저장
-//        boolean tagFlag = hashTagService.saveHashTag(tag);
-//        log.info("tag flag : {}", tagFlag);
+        // PRJ_HASHTAG 수정
+        hashTagService.modifyService(tag);
 
-        // tbl_post_img 저장
-//        imgService.postRegService(thumbImgDTO);
+//         tbl_post_img 수정
+        imgService.modifyService(thumbImgDTO);
 
-        return "redirect:/list";
+        return "redirect:/post/detail/"+ post.getPostNo();
     }
 
     // 포스트 삭제 폼 요청      get    /post/delete

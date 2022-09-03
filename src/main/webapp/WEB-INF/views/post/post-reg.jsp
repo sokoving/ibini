@@ -80,7 +80,7 @@
                             <div class="img-box">
                                 <span class="box-msg">썸네일을 등록해 보세요</span>
                                 <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
-                                <!-- <img class="post-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
+                                <!-- <img class="post-img thumb-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
                             </div>
                             <label class="file-box">
                                 <div class="file-box-left">
@@ -251,7 +251,7 @@
                             <div class="file-box-left">
                                 파일 선택
                             </div>
-                            <div class="file-box-right">
+                            <div class="file-box-right upload-msg">
                                 첨부된 이미지가 없습니다.
                             </div>
                             <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>

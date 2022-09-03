@@ -257,10 +257,10 @@ function setModiSelect(platfomrId, genreId) {
 // 불러온 연재, 회차 아이디 넣으면 checked 체크하는 함수
 function setModiRadio(pubId, epId) {
     const $pubList = $('input[name=publishStatus]');
-    console.log("pubId : " + pubId);
+    // console.log("pubId : " + pubId);
     for (let i = 0; i < $pubList.length; i++) {
         if (pubId === $pubList[i].value) {
-            console.log($pubList[i]);
+            // console.log($pubList[i]);
             $pubList[i].setAttribute('checked', 'true');
             $pubList[i].parentElement.classList.add('checked');
         }
@@ -269,7 +269,7 @@ function setModiRadio(pubId, epId) {
     const $epList = $('input[name=epId]');
     for (let i = 0; i < $epList.length; i++) {
         if (epId === $epList[i].value) {
-            console.log($epList[i]);
+            // console.log($epList[i]);
             $epList[i].setAttribute('checked', 'true');
             $epList[i].parentElement.classList.add('checked');
         }

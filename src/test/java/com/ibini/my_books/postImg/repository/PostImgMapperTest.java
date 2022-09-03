@@ -77,8 +77,7 @@ class PostImgMapperTest {
     void removeByPostNoTest(){
         Long postNo = 1L;
         boolean flag = mapper.removeByPostNo(postNo);
-        assertTrue(flag
-        );
+        assertTrue(flag);
     }
     @Test
     @DisplayName("postNo 값이 있고 thumbnail이 true인 PostImg를 DB에 저장")
@@ -102,5 +101,19 @@ class PostImgMapperTest {
         pi.setOriginalFileName("testtest");
 
         mapper.addFile(pi);
+    }
+
+    @Test
+    @DisplayName("썸네일이 있으면 수정하고 없으면 추가한다")
+    void mergeThumbTest(){
+        PostImg p = new PostImg();
+        p.setPostNo(35L);
+        p.setAccount("2208260002");
+        p.setFileName("mergeTest Name");
+        p.setOriginalFileName("originat_merge_test_name");
+
+        boolean flag = mapper.mergeThumb(p);
+        assertTrue(flag);
+
     }
 }

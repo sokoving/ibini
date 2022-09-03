@@ -54,6 +54,7 @@ public class PostWithName {
 
     // prj_post_img
     private String thumbImg;        // 썸네일 이미지 경로(표지)
+    private String originalThumbName; // 썸네일 원본 이름
 
 
 //   아이디로 이름을 세팅해주는 메서드

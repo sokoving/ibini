@@ -24,7 +24,7 @@ function showThumbImg(fileName, fileOriginName) {
         $thumbFileName.setAttribute('type', 'hidden');
         $thumbFileName.setAttribute('name', 'thumbFileName');
         $thumbFileName.setAttribute('value', fileName);
-        $('#write-form').append($thumbFileName);
+        $('#reg-1 .img-box').append($thumbFileName);
 
 
     }
@@ -72,7 +72,6 @@ function showImgs(fileNames) {
         $imgFileName.setAttribute('type', 'hidden');
         $imgFileName.setAttribute('name', 'fileNames');
         $imgFileName.setAttribute('value', fileName);
-        $('#write-form').append($imgFileName);
 
 
         // 어펜드
@@ -96,11 +95,11 @@ function isImageFile(originFileName) {
 // 최하단 파일 선택창 메세지 세팅해주는 함수
 function setUploadCount() {
     const upImgCnt = $('.upload-img').length;
-    console.log(upImgCnt);
+    // console.log(upImgCnt);
     if (upImgCnt === 0) {
-        $('.file-box-right').text("현재 첨부한 이미지가 없습니다.");
+        $('.upload-msg').text("현재 첨부한 이미지가 없습니다.");
     } else {
-        $('.file-box-right').text("첨부 이미지 " + upImgCnt + "개");
+        $('.upload-msg').text("첨부 이미지 " + upImgCnt + "개");
     };
 }
 

@@ -45,6 +45,7 @@
         <result property="platformFontColor" column="platform_font_color"/>
 
         <result property="thumbImg" column="file_name"/>
+        <result property="originalThumbName" column="ORIGINAL_FILE_NAME"/>
     </resultMap>
 
     <insert id="save">
@@ -82,7 +83,7 @@
             p.ca_id,    p.platform_id,  pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
             p.post_title,    p.post_writer,    p.publish_status,    p.publish_cycle,
             p.ep_id,    p.cur_ep,    p.total_ep,    p.reg_date,    p.update_date,    p.star_rate
-            ,pi.file_name
+            ,pi.file_name ,pi.ORIGINAL_FILE_NAME
         FROM (
                 select * from tbl_post WHERE account = #{account}
              )p
@@ -116,7 +117,7 @@
                 p.ca_id,    p.platform_id,  pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
                 p.post_title,    p.post_writer,    p.publish_status,    p.publish_cycle,
                 p.ep_id,    p.cur_ep,    p.total_ep,    p.reg_date,    p.update_date,    p.star_rate
-                ,pi.file_name
+                ,pi.file_name, pi.ORIGINAL_FILE_NAME
         FROM (
                 SELECT *
                 FROM tbl_post

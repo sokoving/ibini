@@ -71,11 +71,23 @@
     </delete>
 
     <!--  post에 있는 썸네일 전체 삭제  -->
-    <delete id="cleanThumb">
-        DELETE FROM prj_post_img
-        WHERE post_no = #{postNo}
-            and thumbnail = 'true'
-    </delete>
+<!--    <delete id="cleanThumb">-->
+<!--        DELETE FROM prj_post_img-->
+<!--        WHERE post_no = #{postNo}-->
+<!--            and thumbnail = 'true'-->
+<!--    </delete>-->
 
+    <!--  포스트에 썸네일이 있으면 수정, 없으면 새로 저장  -->
+    <update id="mergeThumb">
+        merge into prj_post_img a
+        using dual
+        on (post_no=${postNo} and thumbnail='true')
+        when matched then
+            UPDATE
+            set file_name = #{fileName}, reg_date = SYSDATE
+        when not MATCHED then
+           insert (a.file_name, a.post_no, a.account, a.original_file_name, a.thumbnail)
+           VALUES (#{fileName}, #{postNo}, #{account}, #{originalFileName}, 'true')
+    </update>
 
 </mapper>

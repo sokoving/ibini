@@ -1,4 +1,5 @@
-section.post-reg-section {
+section.post-reg-section,
+section.post-modi-section {
     border: none;
     padding: 100px 50px;
     /* margin-top: 0; */
@@ -334,10 +335,14 @@ section .inner-section {
 
 }
 
-
-
-
-
 #reg-btn {
     /* background: rgb(202, 74, 74); */
+}
+
+
+
+
+/*---------- modify.jsp ---------- */
+.post-modi-section .inner-section {
+    background-color: #ffe3da;
 }

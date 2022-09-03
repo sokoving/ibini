@@ -24,7 +24,7 @@ public class HashTagService {
         boolean b = false;
 
         String tagName = hashtagDomain.getTagName();
-        if (tagName.trim().isEmpty() || tagName == null){
+        if (tagName.trim().isEmpty()) {
             return b;
         }
         // 저장하기 전에 쪼개주기
@@ -53,24 +53,37 @@ public class HashTagService {
     }
 
 
-    // 삭제
+    // 태그 하나만 삭제
     public void deleteHashTag(int tagNo) {
         log.info(" HashTagService delete - {} ", tagNo);
         boolean b = hashtagMapper.deleteHashtag(tagNo);
 
     }
 
-    // 하나만 조회
+    // 태그 하나만 조회
     public void findOneTag(int tagNo, String account) {
         log.info(" HashTagService findOne - {} ", tagNo);
         HashtagDomain oneTag = hashtagMapper.findOneTag(tagNo, account);
     }
 
-    // 수정
+    // 태그 하나만 수정
     public void modiHashTag(HashtagDomain hashtagDomain) {
         log.info("HashTagService/modihashTag - {}", hashtagDomain);
         boolean b = hashtagMapper.modifyHashtag(hashtagDomain);
 
+    }
+
+
+    // 게시글 수정 시 해시태그 수정 처리
+    public void modifyService(HashtagDomain hashtagDomain) {
+        log.info("HashTagService/modiHashTag - {}", hashtagDomain);
+
+        // 이전 포스트 해시태그 전부 삭제
+        if (hashtagMapper.findAllHashTagByPostNo(hashtagDomain.getPostNo()).size() != 0) {
+            hashtagMapper.removeTagOnPost(hashtagDomain.getPostNo());
+        }
+        // 다시 저장
+        saveHashTag(hashtagDomain);
     }
 
 

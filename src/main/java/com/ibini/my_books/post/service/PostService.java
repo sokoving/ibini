@@ -2,11 +2,9 @@ package com.ibini.my_books.post.service;
 
 import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
-import com.ibini.my_books.post.dto.FormattingDateDTO;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.repository.PostMapper;
 import com.ibini.my_books.postImg.service.PostImgService;
-import com.ibini.my_books.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -56,11 +54,11 @@ public class PostService {
 
 //    포스트 dto 개별 조회
     public PostWithName fineOnePostWithName(Long postNo){
-        log.info("Post Service : fineOnePostWithName call");
+        log.debug("Post Service : fineOnePostWithName call");
         PostWithName p = postMapper.fineOnePostWithName(postNo);
         p.setting();
         p.setOneLineTag(tagService.mergeTag(postNo));
-//        log.info("p.caName - {}, p.epName -{}", p.getCaName(), p.getEpName());
+        log.info("findOnePostWitheName - {}", p);
         return p;
     }
 
