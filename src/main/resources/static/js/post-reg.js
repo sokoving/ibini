@@ -24,17 +24,15 @@ function checkKeydown(e) {
     // 공백으로 시작, 공백 반복 입력 막기
     let fullValue = target.value;
     let lastValue = fullValue.charAt(fullValue.length - 1);
+//    console.log("f : " + fullValue);
+//    console.log("l : " + lastValue);
     if (fullValue === '' || lastValue === ' ') {
         if (keyCode === 32) {
             return false;
         }
     }
-    switch (target.name) {
-        case 'postTitle':
-    }
-    if (target.name === 'postTitle') {
 
-    }
+    // 정상 입력 중에 띄울 안내 메시지
     switch (target.name) {
         case 'tagName':
             $('#reg-5 .explain-span').text('[ 각 해시태그는 #를 기준으로 구별됩니다. ]');
@@ -60,6 +58,9 @@ function checkKeyup(e) {
     // 해시태그가 #으로 시작하지 않으면 # 넣어주기
     if (e.target.name === 'tagName') {
         let fullValue = e.target.value;
+        let lastValue = fullValue.charAt(fullValue.length - 1);
+        // console.log("f : " + fullValue);
+        // console.log("l : " + lastValue);
         if (fullValue.length > 0 && fullValue.charAt(0) !== '#') {
             $tag.val('#' + fullValue);
         }

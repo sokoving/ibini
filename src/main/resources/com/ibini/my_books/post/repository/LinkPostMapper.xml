@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibini.my_books.post.repository.LinkPostMapper">
+
+    <resultMap id="linkPostMap" type="com.ibini.my_books.post.domain.LinkPost">
+        <result property="linkId" column="link_id"/>
+        <result property="rootPostNo" column="root_post_no"/>
+        <result property="linkPostNo" column="link_post_no"/>
+    </resultMap>
+
+    <insert id="connectPost">
+        insert into prj_link_post
+            (link_id, root_post_no, link_post_no)
+        VALUES
+            (#{linkId}, #{rootPostNo}, #{linkPostNo})
+    </insert>
+
+    <delete id="disconnectPost">
+        DELETE FROM prj_link_post
+        WHERE link_id = #{linkId}
+    </delete>
+
+    <select id="getLinkLIst" resultMap="linkPostMap">
+        select
+            link_id, root_post_no, link_post_no
+        from prj_link_post
+        where root_post_no=#{rootPostNo}
+        order by link_post_no desc
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        from prj_link_post
+        where root_post_no=#{rootPostNo}
+    </select>
+
+    <select id="isLinked" resultType="int">
+        SELECT
+        COUNT(*)
+        from prj_link_post
+        where root_post_no = #{rootPostNo}
+            and link_post_no = #{linkPostNo}
+    </select>
+
+</mapper>
