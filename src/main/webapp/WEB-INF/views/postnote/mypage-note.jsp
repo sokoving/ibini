@@ -53,17 +53,14 @@
                     <div name="mark">
                         <div class="search-mark">
                             <select name="type" id="search-option">
-                                <!-- <option value="postTitle">책 제목</option> -->
+                                <!-- <option value="postTitle" ${search.type == 'postTitle' ? 'selected="selected"' : '' }>책 제목</option> -->
                                 <option value="content" ${search.type == 'content' ? 'selected="selected"' : '' }>마크 내용</option>
-                                <option value="episodeNo"  ${search.type == 'episodeNo' ? 'selected="selected"' : '' }>회차</option>
+                                <option value="episodeNo" ${search.type == 'episodeNo' ? 'selected="selected"' : '' }>회차</option>
                             </select>
-                            <!-- <span>책 제목</span> -->
                            
                             <input id="searchText" type="text" name="keyword" value="${search.keyword}" placeholder="검색어를 입력하세요" autocomplete="off">
-                            <input id="searchNum" type="text" name="keyword" value="${search.keyword}" placeholder="회차를 입력하세요" autocomplete="off" 
-                            oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" style="display: none;">
 
-                            <button id="submit" class="search-button" type="submit">
+                            <button id="submit" class="search-button" type="button">
                                 검색
                             </button>
                         </div>
@@ -72,7 +69,7 @@
                         <div class="search-mark">
                             <span>책 제목</span>
                             <input type="text" name="keyword" placeholder="검색어를 입력하세요" autocomplete="off">
-                            <button class="search-button" type="submit">
+                            <button class="search-button" type="button">
                                 검색
                             </button>
                         </div>
@@ -96,7 +93,6 @@
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
                     <c:forEach var="p" items="${myPageMarkList}">
-                        
                         <div class="content">
                             <div class="book-wrapper flex-fs">
                                 <!-- 책 이미지 -->
@@ -110,23 +106,18 @@
                                         <div class="book-image w30 noselect"></div>
                                     </c:otherwise>
                                 </c:choose>
-                                <!-- <div class="book-image w30 noselect">
-                                        <img class="book-image" src="${p.thumbImg}" alt="book image">
-                                    </div> -->
-                                    
-                                    <!-- 포스트 번호 -->
-                                    <!-- <span id="postNo" style="display: none;">${p.postNo}</span> -->
-                                    
-                                    <!-- 책 정보 -->
-                                    <div class="book-info w70">
-                                        
-                                        
-                                        <!-- 책 제목 -->
-                                        <div class="book-title">
-                                            <span>${p.postTitle}</span>
-                                        </div>
-                                        <!-- MARK 내용 -->
-                                        <c:forEach var="m" items="${p.markList}">
+                            
+                                <!-- 포스트 번호 -->
+                                <!-- <span id="postNo" style="display: none;">${p.postNo}</span> -->
+                                
+                                <!-- 책 정보 -->
+                                <div class="book-info w70">
+                                    <!-- 책 제목 -->
+                                    <div class="book-title">
+                                        <span>${p.postTitle}</span>
+                                    </div>
+                                    <!-- MARK 내용 -->
+                                    <c:forEach var="m" items="${p.markList}" end="1">
                                         <div id="mark-info" class="my-text">
                                             <div class="episode-no">
                                                 <span>${m.episodeNo}</span>
@@ -140,15 +131,15 @@
                                             </div>
                                             <hr>
                                         </div> <!-- end my-text -->
-                                    </c:forEach>
-                                    <c:if test="${p.markList.size() > 2 }">
+                                    </c:forEach>    
+                                    <c:if test="${p.markList.size() > 2}">
                                         <div class="view-more">
                                             <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
                                         </div>
                                     </c:if>
-                                    </div> <!-- end book-info -->
-                                </div> <!-- end book-wrapper -->
-                            </div> <!-- end content -->
+                                </div> <!-- end book-info -->
+                            </div> <!-- end book-wrapper -->
+                        </div> <!-- end content -->
                     </c:forEach>
 
                     <!--  -->
@@ -314,46 +305,28 @@
     </script>
         
     <script>
-     
-        
-     $("#search-option").on("change",function(){
+        // 검색 Event
+        $("#submit").on("click",function(){
 
-        let searchType = this.value;
-
-        // 검색 타입에 따라서 발생하는 검색창이 달라지게 함
-        if(searchType == 'content'){
-            $("#searchNum").hide();
-            $("#searchNum").val('');
-            
-            $("#searchText").show();
-            $("#searchText").val('');   
-
-        }else if (searchType == 'episodeNo'){
-            $("#searchText").hide();
-            $("#searchText").val('');
-
-            $("#searchNum").show();
-            $("#searchNum").val('');
-        }//if end
-
-    });//change() end
-
-    $("#submit").on("click",function(){
-
-        if ($("#search-option option:selected").val() == 'episodeNo') {
-            const $keyword = $("#searchNum").val();
-            console.log($keyword);
-            location.href = '/mypostnote/list?type=episodeNo' + '&keyword=' + $keyword;
-
-            $("#search-option option:selected").val() == 'episodeNo';
-
-        } else {
             const $keyword = $("#searchText").val();
-            console.log($keyword);
-            location.href = '/mypostnote/list?type=content' + '&keyword=' + $keyword;
-        }
 
-    });//change() end
+            if ($("#search-option option:selected").val() == 'content') {                
+                location.href = '/mypostnote/list?type=content' + '&keyword=' + $keyword;
+    
+            } else if ($("#search-option option:selected").val() == 'episodeNo') {                
+                if (!$.isNumeric($keyword)) {
+                    alert('숫자만 입력하세요');
+                    return;
+                }      
+
+                location.href = '/mypostnote/list?type=episodeNo' + '&keyword=' + $keyword;
+            } 
+        });
+
+        // 옵션이 바뀌면 검색창을 초기화시켜주는 Event
+        $("#search-option").on("change",function(){
+            $("#searchText").val('');   
+        });
     </script>
 
    

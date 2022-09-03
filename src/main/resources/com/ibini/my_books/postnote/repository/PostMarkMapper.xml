@@ -105,8 +105,9 @@
         FROM (
                 select * from
                 prj_post_mark
-                <if test="search.type == 'content'">WHERE content LIKE '%' || #{search.keyword} || '%'</if>
-                <if test="search.type == 'episodeNo'">WHERE episode_no = #{search.keyword}</if>
+                WHERE 1=1
+                <if test="search.type == 'content'">AND content LIKE '%' || #{search.keyword} || '%'</if>
+                <if test="search.type == 'episodeNo'">AND episode_no = #{search.keyword}</if>
         ) pm
         LEFT OUTER JOIN tbl_post p
         ON pm.post_no = p.post_no
