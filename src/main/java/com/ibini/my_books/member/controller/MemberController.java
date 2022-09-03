@@ -252,6 +252,21 @@ public class MemberController {
         log.info("/member/join-out GET!! /member/join-out.jsp");
     }
 
+
+    //회원탈퇴를 위한 비밀번호 검증
+    @ResponseBody
+    @PostMapping("/join-out-confirm")
+    public String joinOutConfirm(String userId, String password){
+        log.info("/member/join-out-confirm POST 비동기 요청 !! userId : {}, password : {}", userId, password);
+        // 입력된 비밀번호와 db 비밀번호 일치 확인
+        boolean pwCheckFlag = memberService.modifyPwCheck(password, userId);
+        if (pwCheckFlag) {
+            return "confirm-success";
+        }
+        return "confirm-fail";
+    }
+
+
     @Transactional
     @PostMapping("/join-out")
     public String joinOut(String userId, String password, RedirectAttributes ra) {

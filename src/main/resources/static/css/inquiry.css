@@ -19,7 +19,7 @@
 .btn {
     cursor: pointer;
     border: 2px solid;
-    background: rgb(95, 225, 219);
+    background: rgb(138 200 231 / 36%)
 }
 
 .add-btn {
@@ -29,8 +29,7 @@
 .register-btn {
     width: 150px;
     margin-left: 850px;
-    margin-bottom: 15px;
-    background: rgb(235, 232, 181);
+    margin-bottom: 15px;    
 }
 
 .inquiryMainTable {
@@ -41,7 +40,7 @@
 .inquiryTable {
     width: 100%;
     margin: 0 auto 0;
-    /* background: yellow; */
+    background: #f8f3868c;
     display: flex;
     border-bottom: 2px solid;
     margin-bottom: 5px;
@@ -63,8 +62,9 @@
     padding-left: 20px;
 }
 
+/* 제목 li 태그 */
 .table1 .title {
-    /* padding-left: 80px; */
+    padding-left: 80px;
 }
 
 .table2 li {
@@ -73,12 +73,6 @@
     padding-right: 20px;
 }
 
-.inquiry-content {
-    margin-left: 80px;
-    width: 850px;
-    /* border: 1px solid; */
-    padding: 15px;
-}
 
 .inquiryMainTable li {
     margin-bottom: 5px;
@@ -88,17 +82,15 @@
 /* 문의/아이디 표시 li 태그 */
 .inquiry-title {}
 
-/* 제목 li 태그 */
-.table1 .title {
-    /* padding-left: 80px; */
-}
 
 /* 문의글 상세보기시 출력되는 태그 li */
 .inquiry-content {
     margin-left: 100px;
-    /* width: 850px; */
-    border: 1px solid;
+    width: 850px;
+    /* border: 1px solid; */
+    border-radius: 10px 10px 10px 10px /10px 10px 10px 10px;
     padding: 15px;
+    background: white;
 
 }
 
@@ -110,8 +102,10 @@
 /* 답변 상세보기시 출력되는 태그 li */
 .answer {
     margin-left: 110px;
-    border: 1px solid;
+    /* border: 1px solid; */
     width: 820px;
+    background: white;
+    border-radius: 10px 10px 10px 10px /10px 10px 10px 10px;
 }
 
 /* 답변 상세보기시 출력되는 답변: */
@@ -165,9 +159,11 @@
 .close-btn {
     margin-top: auto;
     border: 1px solid;
+    border-radius: 10%;
     width: 50px;
     text-align: center;
     cursor: pointer;
+    background: #dee2e6;
 }
 
 .hidden{
@@ -176,3 +172,7 @@
 
 
 /* 등록 모달 css */
+.inquiry-register{
+    margin-bottom: 5px;
+    /* background: rgb(138 200 231 / 36%); */
+}

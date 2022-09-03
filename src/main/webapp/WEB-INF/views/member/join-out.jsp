@@ -57,8 +57,6 @@
       background-position: right;
     }
 
-
-
     h2 {
       border-bottom: 2px solid;
       width: 400px;
