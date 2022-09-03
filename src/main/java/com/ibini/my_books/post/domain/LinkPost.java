@@ -22,7 +22,15 @@ public class LinkPost {
         this.linkId = rootPostNo+"_"+linkPostNo;
     }
 
+//    rootPostNo와 linkPostNo로 linkId 만들기
     public String getLinkId() {
         return rootPostNo+"_"+linkPostNo;
     }
+
+//    linkId로 LinkPost 객체 만들기
+    public static LinkPost getLinkPost(String linkId){
+        String[] rootLink = linkId.split("_");
+        return new LinkPost(Long.parseLong(rootLink[0]), Long.parseLong(rootLink[1]));
+    }
+
 }

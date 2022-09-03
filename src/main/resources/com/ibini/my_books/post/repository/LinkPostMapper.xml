@@ -11,6 +11,32 @@
         <result property="linkPostNo" column="link_post_no"/>
     </resultMap>
 
+    <resultMap id="postWithNameMap" type="com.ibini.my_books.post.dto.PostWithName">
+        <result property="postNo" column="post_no"/>
+        <result property="genreId" column="genre_id"/>
+        <result property="caId" column="ca_id"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postWriter" column="post_writer"/>
+        <result property="publishStatus" column="publish_status"/>
+        <result property="publishCycle" column="publish_cycle"/>
+        <result property="epId" column="ep_id"/>
+        <result property="curEp" column="cur_ep"/>
+        <result property="totalEp" column="total_ep"/>
+        <result property="regDate" column="reg_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="starRate" column="star_rate"/>
+
+        <result property="genreName" column="genre_name"/>
+
+        <result property="platformName" column="platform_name"/>
+        <result property="platformBgColor" column="platform_bg_color"/>
+        <result property="platformFontColor" column="platform_font_color"/>
+
+        <result property="thumbImg" column="file_name"/>
+        <result property="originalThumbName" column="ORIGINAL_FILE_NAME"/>
+    </resultMap>
+
     <insert id="connectPost">
         insert into prj_link_post
             (link_id, root_post_no, link_post_no)
@@ -23,12 +49,36 @@
         WHERE link_id = #{linkId}
     </delete>
 
-    <select id="getLinkLIst" resultMap="linkPostMap">
+    <select id="getLinkList" resultMap="linkPostMap">
         select
             link_id, root_post_no, link_post_no
         from prj_link_post
         where root_post_no=#{rootPostNo}
         order by link_post_no desc
+    </select>
+    
+    <select id="getLinkDTOLIst" resultMap="postWithNameMap">
+        select
+            p.post_no
+            , p.account, p.ca_id, p.post_title, p.post_writer
+            , p.genre_id, g.genre_name
+            , p.platform_id, pf.platform_name, pf.platform_bg_color, pf.platform_font_color
+            , p.publish_status, p.publish_cycle
+            , p.ep_id, p.cur_ep, p.total_ep
+            , p.reg_date, p.update_date, p.star_rate
+        from (
+                select
+                *
+                from prj_link_post
+                where root_post_no = #{rootPostNo}
+            ) a
+        LEFT OUTER JOIN tbl_post p
+            ON a.link_post_no = p.post_no
+        LEFT OUTER JOIN prj_genre g
+            ON p.genre_id = g.genre_id
+        LEFT OUTER JOIN prj_platform pf
+            ON p.platform_id = pf.platform_id
+        order by post_no desc
     </select>
 
     <select id="getCount" resultType="int">

@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,10 +37,32 @@ public class LInkPostAPIController {
             return new ResponseEntity<>("connect-fail", HttpStatus.METHOD_NOT_ALLOWED);
         }
 
-        return linkService.connectPost(linkPost)
+        return linkService.connectPostService(linkPost)
                 ? new ResponseEntity<>("connect-success", HttpStatus.OK)
                 : new ResponseEntity<>("connect-fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    // 연결 해제
+    @DeleteMapping("/{linkId}")
+    public ResponseEntity<String> disconnectPost(@PathVariable String linkId) {
+        log.info("/post/api/links DELETE! - {}", linkId);
+
+//        중복이면 삭제 진행
+        if (linkService.isLinked(LinkPost.getLinkPost(linkId))) {
+            log.info("isLinked - {}", true);
+
+            boolean flag = linkService.disconnectPostService(linkId);
+            log.info("disconnectPostService flag - {}", flag);
+            return flag
+                    ? new ResponseEntity<>("disconnect-success", HttpStatus.OK)
+                    : new ResponseEntity<>("disconnect-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            log.info("isLinked - {}", false);
+            return new ResponseEntity<>("connect-fail", HttpStatus.METHOD_NOT_ALLOWED);
+        }
+    }
+
+//
 
 
 }

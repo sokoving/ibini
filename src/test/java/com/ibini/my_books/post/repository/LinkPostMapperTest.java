@@ -1,11 +1,14 @@
 package com.ibini.my_books.post.repository;
 
 import com.ibini.my_books.post.domain.LinkPost;
+import com.ibini.my_books.post.dto.PostWithName;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +23,8 @@ class LinkPostMapperTest {
     @DisplayName("링크 연결돼야 함(데이터 저장)")
     void connectPostTest() {
 //    boolean connectPost(LinkPost linkPost);
-        Long rootPostNo = 50L;
-        Long linkPostNo = 45L;
+        Long rootPostNo = 45L;
+        Long linkPostNo = 2L;
         LinkPost lp = new LinkPost(rootPostNo, linkPostNo);
         System.out.println("lp = " + lp);
         boolean flag = mapper.connectPost(lp);
@@ -47,7 +50,7 @@ class LinkPostMapperTest {
     void getLinkLIstTest() {
         // List<LinkPost> getLinkLIst(Long rootPostNo);
         Long rootPostNo = 2L;
-        List<LinkPost> linkLIst = mapper.getLinkLIst(rootPostNo);
+        List<LinkPost> linkLIst = mapper.getLinkList(rootPostNo);
         for (LinkPost linkPost : linkLIst) {
             System.out.println(linkPost);
         }
@@ -67,7 +70,7 @@ class LinkPostMapperTest {
 
     @Test
     @DisplayName("중복 링크인지 확인한다")
-    void isLinkedTest(){
+    void isLinkedTest() {
 //    boolean isLinked(LinkPost linkPost);
         Long rootPostNo = 50L;
         Long linkPostNo = 51L;
@@ -77,4 +80,39 @@ class LinkPostMapperTest {
         assertEquals(1, result);
 
     }
+
+    @Test
+    @DisplayName("linkId로 LinkPost 객체 만들기")
+    void getLinkPostListTest() {
+        String linkId = "48_49";
+
+        String[] rootLink = linkId.split("_");
+        LinkPost linkPost = new LinkPost(Long.parseLong(rootLink[0]), Long.parseLong(rootLink[1]));
+        System.out.println("linkPost = " + linkPost);
+    }
+
+    @Test
+    @DisplayName("rootPostNo에 연결된 전체 post의 postWithName 객체 리스트가 조회돼야 한다")
+    void getLinkDTOLIstTest() {
+        Long rootPostNo = 45L;
+        List<PostWithName> linkDTOLIst = mapper.getLinkDTOLIst(rootPostNo);
+        ArrayList<PostWithName> newList = new ArrayList<>();
+        for (PostWithName postWithName : linkDTOLIst) {
+            try{
+                postWithName.setting();
+                newList.add(postWithName);
+                System.out.println(postWithName);
+            }catch (NullPointerException nullPointerException){
+                System.out.println("Null Pointer Exception - empty Post!!");
+            }
+        }
+        System.out.println("check here : " + linkDTOLIst.size());
+        System.out.println(newList.size());
+        System.out.println(newList);
+
+    }
+
+
+
+
 }
