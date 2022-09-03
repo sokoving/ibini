@@ -52,18 +52,20 @@
                 <div class="search-wrapper">
                     <div name="mark">
                         <div class="search-mark">
-                            <form action="/mypostnote/list" method="get">
-                                <select name="type" id="">
-                                    <!-- <option value="postTitle">책 제목</option> -->
-                                    <option value="content">마크 내용</option>
-                                    <option value="episodeNo">회차</option>
-                                </select>
+                            <select name="type" id="search-option">
+                                <!-- <option value="postTitle">책 제목</option> -->
+                                <option value="content" ${search.type == 'content' ? 'selected="selected"' : '' }>마크 내용</option>
+                                <option value="episodeNo"  ${search.type == 'episodeNo' ? 'selected="selected"' : '' }>회차</option>
+                            </select>
                             <!-- <span>책 제목</span> -->
-                            <input type="text" name="keyword" value="${search.keyword}" placeholder="검색어를 입력하세요" autocomplete="off">
-                            <button class="search-button" type="submit">
+                           
+                            <input id="searchText" type="text" name="keyword" value="${search.keyword}" placeholder="검색어를 입력하세요" autocomplete="off">
+                            <input id="searchNum" type="text" name="keyword" value="${search.keyword}" placeholder="회차를 입력하세요" autocomplete="off" 
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" style="display: none;">
+
+                            <button id="submit" class="search-button" type="submit">
                                 검색
                             </button>
-                            </form>
                         </div>
                     </div> <!-- end mark -->
                     <div class="hidden" name="memo">
@@ -139,9 +141,11 @@
                                             <hr>
                                         </div> <!-- end my-text -->
                                     </c:forEach>
+                                    <c:if test="${p.markList.size() > 2 }">
                                         <div class="view-more">
                                             <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
                                         </div>
+                                    </c:if>
                                     </div> <!-- end book-info -->
                                 </div> <!-- end book-wrapper -->
                             </div> <!-- end content -->
@@ -155,7 +159,7 @@
                         <div class="book-wrapper flex-fs">
                             <!-- 책 이미지 -->
                             <div class="book-image w30 noselect">
-                                <img class="book-image" src="./project3.png" alt="book image">
+                                <img class="book-image" src="" alt="book image">
                             </div>
                             <!-- 책 정보 -->
                             <div class="book-info w70">
@@ -194,7 +198,7 @@
                         <div class="book-wrapper flex-fs">
                             <!-- 책 이미지 -->
                             <div class="book-image w30 noselect">
-                                <img class="book-image" src="./project3.png" alt="book image">
+                                <img class="book-image" src="" alt="book image">
                             </div>
                             <!-- 책 정보 -->
                             <div class="book-info w70">
@@ -306,14 +310,53 @@
             }
         }
         testCall();
-     
 
-
-
-       
-
-        
     </script>
+        
+    <script>
+     
+        
+     $("#search-option").on("change",function(){
+
+        let searchType = this.value;
+
+        // 검색 타입에 따라서 발생하는 검색창이 달라지게 함
+        if(searchType == 'content'){
+            $("#searchNum").hide();
+            $("#searchNum").val('');
+            
+            $("#searchText").show();
+            $("#searchText").val('');   
+
+        }else if (searchType == 'episodeNo'){
+            $("#searchText").hide();
+            $("#searchText").val('');
+
+            $("#searchNum").show();
+            $("#searchNum").val('');
+        }//if end
+
+    });//change() end
+
+    $("#submit").on("click",function(){
+
+        if ($("#search-option option:selected").val() == 'episodeNo') {
+            const $keyword = $("#searchNum").val();
+            console.log($keyword);
+            location.href = '/mypostnote/list?type=episodeNo' + '&keyword=' + $keyword;
+
+            $("#search-option option:selected").val() == 'episodeNo';
+
+        } else {
+            const $keyword = $("#searchText").val();
+            console.log($keyword);
+            location.href = '/mypostnote/list?type=content' + '&keyword=' + $keyword;
+        }
+
+    });//change() end
+    </script>
+
+   
 </body>
 
 </html>

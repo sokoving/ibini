@@ -165,13 +165,16 @@ section {
 }
 
 /* search-title 영역 */
-.search-wrapper span {
-    width: 20%;
-    padding: 0.53rem;
-    border: 1px solid #6c757d;
+.search-wrapper select {
+    width: 15%;
+    padding: 0.5rem;
     border-radius: 0.25rem;
     outline: none;
-    vertical-align: middle;
+    vertical-align: bottom;
+}
+.search-wrapper select:hover {
+    outline: 2px solid #495057;;
+    border: none;
 }
 
 /* input 검색창 영역 */
