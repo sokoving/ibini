@@ -7,6 +7,9 @@ import com.ibini.my_books.postnote.repository.PostMarkMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +19,7 @@ import java.util.Map;
 public class PostMarkService {
 
     private final PostMarkMapper postMarkMapper;
-    
+
     // 마크 저장 요청 중간 처리
     public boolean save(PostMark postMark) { return postMarkMapper.save(postMark); }
 
@@ -64,7 +67,17 @@ public class PostMarkService {
     public List<PostMark> findAll2(Long postNo, Search search) {
         List<PostMark> findAll2List = postMarkMapper.findAll2(postNo, search);
 
+        convertDateFormat(findAll2List);
+
         return findAll2List;
     }
+    private void convertDateFormat(List<PostMark> postMark) {
 
+        for (PostMark m : postMark) {
+            Date date = m.getModDatetime();
+            SimpleDateFormat newDate = new SimpleDateFormat("yy-MM-dd");
+
+            m.setPrettierDate(newDate.format(date));
+        }
+    }
 }

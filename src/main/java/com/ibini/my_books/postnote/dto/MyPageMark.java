@@ -31,6 +31,6 @@ public class MyPageMark {
         // prj_post_mark
         private Long episodeNo;      // 에피소드 (회차, 페이지, 권, %)
         private String content;      // 내용
-        private Date modDatetime;    // 수정일자, 시간
+        private String modDatetime;    // 수정일자, 시간
     }
 }

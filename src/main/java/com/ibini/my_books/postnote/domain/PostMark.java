@@ -20,4 +20,7 @@ public class PostMark {
     private String modAccount;   // 수정 account
 
     private int epId;
+
+    //커스텀 필드
+    private String PrettierDate;
 }
