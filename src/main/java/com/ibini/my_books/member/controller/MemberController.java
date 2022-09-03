@@ -428,16 +428,23 @@ public class MemberController {
     }
 
     //회원 문의내역 등록하기 POST
+    @ResponseBody
     @PostMapping("/inquiry-register")
-    public String inquiryRegister(InquiryDTO dto, RedirectAttributes ra){
-        log.info("/member/inquiry-register POST!! 회원문의내역 등록하기 POST 요청!!");
+    public String inquiryRegister(@RequestBody InquiryDTO dto, RedirectAttributes ra){
+        log.info("/member/inquiry-register POST!! 회원문의내역 등록하기 POST 요청!! dto:{}",dto);
         boolean flag = memberService.inquiryRegister(dto);
-        if (flag){
-            ra.addFlashAttribute("msg","inquiry-register-success");
-            return "redirect:/member/inquiry?userId="+dto.getUserId();
+
+//        if (flag){
+//            ra.addFlashAttribute("msg","inquiry-register-success");
+//            return "redirect:/member/inquiry?userId="+dto.getUserId();
+//        } else {
+//            ra.addFlashAttribute("msg","inquiry-register-fail");
+//            return "redirect:/member/inquiry-register";
+//        }
+        if(flag){
+            return "inquiry-register-success";
         } else {
-            ra.addFlashAttribute("msg","inquiry-register-fail");
-            return "redirect:/member/inquiry-register";
+            return "inquiry-register-fail";
         }
     }
 
