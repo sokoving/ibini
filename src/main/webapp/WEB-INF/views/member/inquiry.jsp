@@ -148,7 +148,7 @@
             <!--================== script =================================-->
             <!-- 문의글 등록 검증 jQuery -->
 
-            // 문의글 등록하기 모달
+            <!-- // 문의글 등록하기 모달 -->
             <!--   // 부트 모달 스트랩 스크립트 [답변 등록] -->
             <script>
                 var inquiryregisterModal = document.getElementById('inquiryregisterModal')
