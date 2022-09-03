@@ -3,6 +3,7 @@ package com.ibini.my_books.postnote.dto;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Setter @Getter
 @ToString
@@ -19,8 +20,17 @@ public class MyPageMark {
     // prj_post_img
     private String thumbImg;     // 썸네일 이미지 경로(표지)
 
-    // prj_post_mark
-    private Long episodeNo;      // 에피소드 (회차, 페이지, 권, %)
-    private String content;      // 내용
-    private Date modDatetime;    // 수정일자, 시간
+    private List<Mark> markList;
+
+    @Setter @Getter
+    @ToString
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Mark {
+
+        // prj_post_mark
+        private Long episodeNo;      // 에피소드 (회차, 페이지, 권, %)
+        private String content;      // 내용
+        private Date modDatetime;    // 수정일자, 시간
+    }
 }

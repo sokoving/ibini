@@ -16,7 +16,7 @@
         <result property="epId" column="ep_id" />
     </resultMap>
 
-    <resultMap id="myPageMap" type="com.ibini.my_books.postnote.dto.MyPageMark">
+    <resultMap id="myPageMap" type="com.ibini.my_books.postnote.dto.MyPage">
         <result property="postNo" column="post_no" />
         <result property="postTitle" column="post_title" />
         <result property="epId" column="ep_id" />
@@ -102,7 +102,11 @@
     <select id="findAll2" resultMap="markMap">
         SELECT
         pm.mark_no, pm.post_no, p.ep_id, pm.episode_no, pm.content, pm.reg_account, pm.mod_account, pm.reg_datetime, pm.mod_datetime
-        FROM prj_post_mark pm
+        FROM (
+                select * from
+                prj_post_mark
+                <if test="search.type == 'content'">WHERE content LIKE '%' || #{search.keyword} || '%'</if>
+        ) pm
         LEFT OUTER JOIN tbl_post p
         ON pm.post_no = p.post_no
         WHERE pm.post_no = #{postNo}

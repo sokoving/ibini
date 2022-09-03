@@ -52,11 +52,17 @@
                 <div class="search-wrapper">
                     <div name="mark">
                         <div class="search-mark">
-                            <span>책 제목</span>
-                            <input type="text" name="keyword" placeholder="검색어를 입력하세요" autocomplete="off">
+                            <form action="/mypostnote/list" method="get">
+                                <select name="type" id="">
+                                    <option value="content">책 제목</option>
+                                    <!-- <option value="episodeNo">회차</option> -->
+                                </select>
+                            <!-- <span>책 제목</span> -->
+                            <input type="text" name="keyword" value="${search.keyword}" placeholder="검색어를 입력하세요" autocomplete="off">
                             <button class="search-button" type="submit">
                                 검색
                             </button>
+                            </form>
                         </div>
                     </div> <!-- end mark -->
                     <div class="hidden" name="memo">
@@ -80,14 +86,14 @@
                     </div>
                 </div> <!-- end list-wrapper -->
             </div> <!-- end header-wrapper -->
-
-
+            
+            
             <!-- body 영역 -->
             <div class="body-wrapper">
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
                     <c:forEach var="p" items="${myPageMarkList}">
-                        <c:if test="${not empty p.content}">
+                        
                         <div class="content">
                             <div class="book-wrapper flex-fs">
                                 <!-- 책 이미지 -->
@@ -102,40 +108,42 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <!-- <div class="book-image w30 noselect">
-                                    <img class="book-image" src="${p.thumbImg}" alt="book image">
-                                </div> -->
-
-                                <!-- 포스트 번호 -->
-                                <span id="postNo" style="display: none;">${p.postNo}</span>
-                                
-                                <!-- 책 정보 -->
-                                <div class="book-info w70">
+                                        <img class="book-image" src="${p.thumbImg}" alt="book image">
+                                    </div> -->
                                     
-                                    <!-- 책 제목 -->
-                                    <div class="book-title">
-                                        <span>${p.postTitle}</span>
-                                    </div>
-                                    <!-- MARK 내용 -->
-                                    <div id="mark-info" class="my-text">
-                                        <div class="episode-no">
-                                            <span>${p.episodeNo}</span>
+                                    <!-- 포스트 번호 -->
+                                    <!-- <span id="postNo" style="display: none;">${p.postNo}</span> -->
+                                    
+                                    <!-- 책 정보 -->
+                                    <div class="book-info w70">
+                                        
+                                        
+                                        <!-- 책 제목 -->
+                                        <div class="book-title">
+                                            <span>${p.postTitle}</span>
                                         </div>
+                                        <!-- MARK 내용 -->
+                                        <c:forEach var="m" items="${p.markList}">
+                                        <div id="mark-info" class="my-text">
+                                            <div class="episode-no">
+                                                <span>${m.episodeNo}</span>
+                                            </div>
                                             <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                                ${p.content}
-                                            </textarea>
-                                        <!-- Mark 날짜 -->
-                                        <div class="meta-data">
-                                            <span>${p.modDatetime}</span>
+                                                    ${m.content}
+                                                </textarea>
+                                            <!-- Mark 날짜 -->
+                                            <div class="meta-data">
+                                                <span>${m.modDatetime}</span>
+                                            </div>
+                                            <hr>
+                                        </div> <!-- end my-text -->
+                                    </c:forEach>
+                                        <div class="view-more">
+                                            <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
                                         </div>
-                                        <hr>
-                                    </div> <!-- end my-text -->
-                                    <div class="view-more">
-                                        <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
-                                    </div>
-                                </div> <!-- end book-info -->
-                            </div> <!-- end book-wrapper -->
-                        </div> <!-- end content -->
-                    </c:if>
+                                    </div> <!-- end book-info -->
+                                </div> <!-- end book-wrapper -->
+                            </div> <!-- end content -->
                     </c:forEach>
 
                     <div class="content">
