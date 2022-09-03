@@ -54,8 +54,9 @@
                         <div class="search-mark">
                             <form action="/mypostnote/list" method="get">
                                 <select name="type" id="">
-                                    <option value="content">책 제목</option>
-                                    <!-- <option value="episodeNo">회차</option> -->
+                                    <!-- <option value="postTitle">책 제목</option> -->
+                                    <option value="content">마크 내용</option>
+                                    <option value="episodeNo">회차</option>
                                 </select>
                             <!-- <span>책 제목</span> -->
                             <input type="text" name="keyword" value="${search.keyword}" placeholder="검색어를 입력하세요" autocomplete="off">
@@ -146,95 +147,7 @@
                             </div> <!-- end content -->
                     </c:forEach>
 
-                    <div class="content">
-                        <div class="book-wrapper flex-fs">
-                            <!-- 책 이미지 -->
-                            <div class="book-image w30 noselect">
-                                <img class="book-image" src="./project3.png" alt="book image">
-                            </div>
-                            <!-- 책 정보 -->
-                            <div class="book-info w70">
-                                <!-- 책 제목 -->
-                                <div class="book-title">
-                                    <span>여행계획 짜기</span>
-                                </div>
-                                <!-- MARK 내용 -->
-                                <div class="my-text">
-                                    <div class="episode-no">
-                                        <span>ep.1555</span>
-                                    </div>
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
-                                        asdasdagre
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        <span>2022-08-22</span>
-                                    </div>
-                                    <hr>
-
-                                    <div class="episode-no">
-                                        <span>ep.15</span>
-                                    </div>
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                        rgarg&#10;&#10;raeheath
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        2022-08-22
-                                    </div>
-                                    <hr>
-                                </div> <!-- end my-text -->
-                                <div class="view-more">
-                                    <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
-                                </div>
-                            </div> <!-- end book-info -->
-                        </div> <!-- end book-wrapper -->
-                    </div> <!-- end content -->
-
-                    <div class="content">
-                        <div class="book-wrapper flex-fs">
-                            <!-- 책 이미지 -->
-                            <div class="book-image w30 noselect">
-                                <img class="book-image" src="./project3.png" alt="book image">
-                            </div>
-                            <!-- 책 정보 -->
-                            <div class="book-info w70">
-                                <!-- 책 제목 -->
-                                <div class="book-title">
-                                    <span>여행계획 짜기</span>
-                                </div>
-                                <!-- MARK 내용 -->
-                                <div class="my-text">
-                                    <div class="episode-no">
-                                        <span>ep.5455</span>
-                                    </div>
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
-                                        asdasdagre
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        <span>2022-08-22</span>
-                                    </div>
-                                    <hr>
-
-                                    <div class="episode-no">
-                                        <span>ep.15454</span>
-                                    </div>
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                        rgarg&#10;&#10;raeheath
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        2022-08-22
-                                    </div>
-                                    <hr>
-                                </div> <!-- end my-text -->
-                                <div class="view-more">
-                                    <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
-                                </div>
-                            </div> <!-- end book-info -->
-                        </div> <!-- end book-wrapper -->
-                    </div> <!-- end content -->
+                    <!--  -->
                 </div> <!-- end content-wrapper name="mark" -->
 
                 <div class="content-wrapper hidden" name="memo">
