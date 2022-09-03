@@ -50,14 +50,16 @@ public class MyPagePostNoteController {
 
             List<MyPageMark.Mark> markDataList = new ArrayList<>();
 
-            for (PostMark mark : markList) {
-                MyPageMark.Mark markObject = new MyPageMark.Mark();
-                markObject.setEpisodeNo(mark.getEpisodeNo());
-                markObject.setContent(mark.getContent());
-                markObject.setModDatetime(mark.getModDatetime());
+            if (markList.size() != 0) {
+                for (PostMark mark : markList) {
+                    MyPageMark.Mark markObject = new MyPageMark.Mark();
+                    markObject.setEpisodeNo(mark.getEpisodeNo());
+                    markObject.setContent(mark.getContent());
+                    markObject.setModDatetime(mark.getPrettierDate());
 
-                markDataList.add(markObject);
-            }
+                    markDataList.add(markObject);
+                }
+
             MyPageMark myPageMark = new MyPageMark();
             myPageMark.setPostNo(postNo);
             myPageMark.setAccount(account);
@@ -67,6 +69,7 @@ public class MyPagePostNoteController {
             myPageMark.setMarkList(markDataList);
 
             myPageMarkList.add(myPageMark);
+            }
         }
 
         log.info(myPageMarkList);
