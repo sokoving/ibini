@@ -92,6 +92,13 @@
             <div class="body-wrapper">
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
+                    <c:if test="${empty myPageMarkList}">
+                        <ul class="blank" style="margin: 2rem;">
+                            <li style="margin-bottom: 1rem;"><strong style="color: red; font-size: 1.3em;">'${search.keyword}'</strong>에 대한 검색결과가 없습니다.</li>
+                            <li>* 입력하신 값이 정확한지 확인해 보세요.</li>
+                            <li>* 검색 옵션을 변경해서 다시 검색해 보세요.</li>
+                        </ul>
+                    </c:if>
                     <c:forEach var="p" items="${myPageMarkList}">
                         <div class="content">
                             <div class="book-wrapper flex-fs">
@@ -310,22 +317,32 @@
 
             const $keyword = $("#searchText").val();
 
-            if ($("#search-option option:selected").val() == 'content') {                
+            if ($("#search-option option:selected").val() == 'content') {     
+                if ($keyword.trim() === '') {
+                    location.href = '/mypostnote/list?type=content&keyword=';
+                    return;
+                }            
                 location.href = '/mypostnote/list?type=content' + '&keyword=' + $keyword;
     
             } else if ($("#search-option option:selected").val() == 'episodeNo') {                
+            
+                if ($keyword.trim() === '') {
+                    location.href = '/mypostnote/list?type=episode&keyword=';
+                    return;
+                } 
                 if (!$.isNumeric($keyword)) {
                     alert('숫자만 입력하세요');
                     return;
-                }      
-
+                }
+                
                 location.href = '/mypostnote/list?type=episodeNo' + '&keyword=' + $keyword;
             } 
         });
 
-        // 옵션이 바뀌면 검색창을 초기화시켜주는 Event
+        // 옵션이 바뀌면 검색창 / 내용창 메시지를 초기화시켜주는 Event
         $("#search-option").on("change",function(){
             $("#searchText").val('');   
+            $('.blank li').text('');
         });
     </script>
 
