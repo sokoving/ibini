@@ -434,6 +434,7 @@
                 .then(response => response.json())
                 .then(memoMap => {
                     makeMemoDOM(memoMap);
+                    testCall();
                 })    
         }
 
@@ -616,7 +617,7 @@
            
         
 
-            //  textarea 높이 자동조절
+        // textarea 높이 자동조절
         function resize_textarea($eventTag) {
             console.log($eventTag.value);
             $eventTag.style.height = "1px";
