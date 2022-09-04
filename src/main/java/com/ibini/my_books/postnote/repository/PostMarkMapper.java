@@ -2,7 +2,7 @@ package com.ibini.my_books.postnote.repository;
 
 import com.ibini.my_books.postnote.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
-import com.ibini.my_books.postnote.dto.MyPage;
+import com.ibini.my_books.postnote.dto.MyPagePostDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,7 +25,9 @@ public interface PostMarkMapper {
 
     // 마크 전체 조회 기능
     List<PostMark> findAll(Long postNo);
-    List<PostMark> findAll2(@Param("postNo") Long postNo, @Param("search") Search search);
+
+    // 마크 전체 조회 기능 With Search
+    List<PostMark> findAllWithSearch(@Param("postNo") Long postNo, @Param("search") Search search);
 
     // 마크 개별 조회 기능
     PostMark findOne(Long markNo);
@@ -33,6 +35,6 @@ public interface PostMarkMapper {
     // 전체 마크 수 조회
     int getPostMarkCount(Long postNo);
 
-    // 마이페이지 포스트, 썸네일 마크 조회
-    List<MyPage> findAllMyPage(String account, Long postNo, Search search);
+    // MyPagePostDTO post 조회(썸네일 포함)
+    List<MyPagePostDTO> findAllPostWithImg(@Param("account") String account, @Param("search") Search search);
 }

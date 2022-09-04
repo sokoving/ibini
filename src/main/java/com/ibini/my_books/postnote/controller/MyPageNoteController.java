@@ -5,30 +5,27 @@ import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.postnote.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
 import com.ibini.my_books.postnote.dto.MyPageMark;
+import com.ibini.my_books.postnote.dto.MyPagePostDTO;
 import com.ibini.my_books.postnote.service.PostMarkService;
 import com.ibini.my_books.postnote.service.PostMemoService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/mypostnote")
-public class MyPagePostNoteController {
+public class MyPageNoteController {
 
     private final PostMarkService postMarkService;
     private final PostMemoService postMemoService;
@@ -38,21 +35,22 @@ public class MyPagePostNoteController {
     // 마이페이지 post, postMark 게시물 목록 요청\
     @GetMapping("/list")
     public String viewPostList(Model model, HttpSession session, @ModelAttribute("search") Search search) {
-        log.info("GET!");
+        log.info("/mypostnote/list GET!");
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
-        List<PostWithName> postList = postService.finaAllPostWithNameService(account);
+        List<MyPagePostDTO> postList = postMarkService.findAllPostWithImg(account, search);
 
         List<MyPageMark> myPageMarkList = new ArrayList<>();
 
-        for (PostWithName post : postList) {
+        for (MyPagePostDTO post : postList) {
             Long postNo = post.getPostNo();
-            List<PostMark> markList = postMarkService.findAll2(postNo, search);
+            List<PostMark> markList = postMarkService.findAllWithSearch(postNo, search);
 
             List<MyPageMark.Mark> markDataList = new ArrayList<>();
 
             if (markList.size() != 0) {
                 for (PostMark mark : markList) {
                     MyPageMark.Mark markObject = new MyPageMark.Mark();
+                    markObject.setMarkNo(mark.getMarkNo());
                     markObject.setEpisodeNo(mark.getEpisodeNo());
                     markObject.setContent(mark.getContent());
                     markObject.setModDatetime(mark.getPrettierDate());

@@ -2,12 +2,11 @@ package com.ibini.my_books.postnote.service;
 
 import com.ibini.my_books.postnote.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
-import com.ibini.my_books.postnote.dto.MyPage;
+import com.ibini.my_books.postnote.dto.MyPagePostDTO;
 import com.ibini.my_books.postnote.repository.PostMarkMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,26 +57,27 @@ public class PostMarkService {
         return postMarkMapper.getPostMarkCount(postNo);
     }
 
-    public List<MyPage> findAllMyPage(String account, Long postNo, Search search) {
-        List<MyPage> myPageNoteList = postMarkMapper.findAllMyPage(account, postNo, search);
+    // 마크 전체 조회 With Search
+    public List<PostMark> findAllWithSearch(Long postNo, Search search) {
+        List<PostMark> markList = postMarkMapper.findAllWithSearch(postNo, search);
 
-        return myPageNoteList;
-    }
+        convertDateFormat(markList);
 
-    public List<PostMark> findAll2(Long postNo, Search search) {
-        List<PostMark> findAll2List = postMarkMapper.findAll2(postNo, search);
-
-        convertDateFormat(findAll2List);
-
-        return findAll2List;
+        return markList;
     }
     private void convertDateFormat(List<PostMark> postMark) {
-
         for (PostMark m : postMark) {
             Date date = m.getModDatetime();
-            SimpleDateFormat newDate = new SimpleDateFormat("yy-MM-dd");
+            SimpleDateFormat newDate = new SimpleDateFormat("yyyy.MM.dd");
 
             m.setPrettierDate(newDate.format(date));
         }
+    }
+
+    // 마이페이지 post, img 조회
+    public List<MyPagePostDTO> findAllPostWithImg(String account, Search search) {
+        List<MyPagePostDTO> postWithImgList = postMarkMapper.findAllPostWithImg(account, search);
+
+        return postWithImgList;
     }
 }

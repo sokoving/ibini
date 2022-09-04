@@ -46,7 +46,7 @@
     <!-- 메모 전체 조회 기능 -->
     <select id="findAll" resultMap="memoMap">
         SELECT
-        *
+            post_no, memo_no, content, reg_account, mod_account, reg_datetime, mod_datetime
         FROM prj_post_memo
         WHERE post_no = #{postNo}
         ORDER BY mod_datetime DESC
@@ -67,4 +67,14 @@
         WHERE post_no = #{postNo}
     </select>
 
+    <!-- 메모 전체 조회 기능 With Search -->
+    <select id="findAllWithSearch" resultMap="memoMap">
+        SELECT
+            post_no, memo_no, content, reg_account, mod_account, reg_datetime, mod_datetime
+        FROM prj_post_memo
+        WHERE 1=1
+            AND post_no = #{postNo}
+            <if test="search.type == 'content'">AND content LIKE '%' || #{search.keyword} || '%'</if>
+        ORDER BY mod_datetime DESC
+    </select>
 </mapper>

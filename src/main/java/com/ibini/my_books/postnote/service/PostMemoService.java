@@ -1,10 +1,14 @@
 package com.ibini.my_books.postnote.service;
 
+import com.ibini.my_books.postnote.common.search.Search;
+import com.ibini.my_books.postnote.domain.PostMark;
 import com.ibini.my_books.postnote.domain.PostMemo;
 import com.ibini.my_books.postnote.repository.PostMemoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,5 +57,22 @@ public class PostMemoService {
     // 전체 메모 수 조회 요청 중간 처리
     public int getPostMarkCount(Long postNo) {
         return postMemoMapper.getPostMemoCount(postNo);
+    }
+
+    // 마크 전체 조회 With Search
+    public List<PostMemo> findAllWithSearch(Long postNo, Search search) {
+        List<PostMemo> memoList = postMemoMapper.findAllWithSearch(postNo, search);
+
+        convertDateFormat(memoList);
+
+        return memoList;
+    }
+    private void convertDateFormat(List<PostMemo> postMemo) {
+        for (PostMemo m : postMemo) {
+            Date date = m.getModDatetime();
+            SimpleDateFormat newDate = new SimpleDateFormat("yyyy.MM.dd");
+
+            m.setPrettierDate(newDate.format(date));
+        }
     }
 }

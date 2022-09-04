@@ -93,7 +93,7 @@
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
                     <c:if test="${empty myPageMarkList}">
-                        <ul class="blank" style="margin: 2rem;">
+                        <ul class="blank-page" style="margin: 2rem;">
                             <li style="margin-bottom: 1rem;"><strong style="color: red; font-size: 1.3em;">'${search.keyword}'</strong>에 대한 검색결과가 없습니다.</li>
                             <li>* 입력하신 값이 정확한지 확인해 보세요.</li>
                             <li>* 검색 옵션을 변경해서 다시 검색해 보세요.</li>
@@ -319,22 +319,24 @@
 
             if ($("#search-option option:selected").val() == 'content') {     
                 if ($keyword.trim() === '') {
-                    location.href = '/mypostnote/list?type=content&keyword=';
+                    alert('검색어를 입력하세요')
+                    // location.href = '/mypostnote/list?type=content&keyword=';
                     return;
-                }            
+                }   
+                     
                 location.href = '/mypostnote/list?type=content' + '&keyword=' + $keyword;
     
-            } else if ($("#search-option option:selected").val() == 'episodeNo') {                
-            
+            } else if ($("#search-option option:selected").val() == 'episodeNo') {        
                 if ($keyword.trim() === '') {
-                    location.href = '/mypostnote/list?type=episode&keyword=';
+                    alert('검색어를 입력하세요')
+                    // location.href = '/mypostnote/list?type=episode&keyword=';
                     return;
                 } 
                 if (!$.isNumeric($keyword)) {
                     alert('숫자만 입력하세요');
                     return;
-                }
-                
+                }        
+
                 location.href = '/mypostnote/list?type=episodeNo' + '&keyword=' + $keyword;
             } 
         });
