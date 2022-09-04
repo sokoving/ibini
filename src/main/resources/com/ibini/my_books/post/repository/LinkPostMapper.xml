@@ -57,7 +57,7 @@
         order by link_post_no desc
     </select>
     
-    <select id="getLinkDTOLIst" resultMap="postWithNameMap">
+    <select id="getLinkDTOList" resultMap="postWithNameMap">
         select
             p.post_no
             , p.account, p.ca_id, p.post_title, p.post_writer

@@ -1,7 +1,6 @@
 package com.ibini.my_books.post.repository;
 
 import com.ibini.my_books.post.domain.LinkPost;
-import com.ibini.my_books.post.dto.LinkDTO;
 import com.ibini.my_books.post.dto.PostWithName;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,7 +18,7 @@ public interface LinkPostMapper {
     // 루트 포스트에 연결된 링크 포스트 전체 조회(post_no만)
     List<LinkPost> getLinkList(Long rootPostNo);
     // 루트 포스트에 연결된 링크 포스트 전체 조회(PostWithName이)
-    List<PostWithName> getLinkDTOLIst(Long rootPostNo);
+    List<PostWithName> getLinkDTOList(Long rootPostNo);
 
     // 루트 포스트에 연결된 포스트 수 조회
     int getCount(Long rootPostNo);

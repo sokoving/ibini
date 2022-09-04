@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -95,20 +94,14 @@ class LinkPostMapperTest {
     @DisplayName("rootPostNo에 연결된 전체 post의 postWithName 객체 리스트가 조회돼야 한다")
     void getLinkDTOLIstTest() {
         Long rootPostNo = 45L;
-        List<PostWithName> linkDTOLIst = mapper.getLinkDTOLIst(rootPostNo);
-        ArrayList<PostWithName> newList = new ArrayList<>();
-        for (PostWithName postWithName : linkDTOLIst) {
-            try{
-                postWithName.setting();
-                newList.add(postWithName);
-                System.out.println(postWithName);
-            }catch (NullPointerException nullPointerException){
-                System.out.println("Null Pointer Exception - empty Post!!");
-            }
+        List<PostWithName> linkDTOLIst = mapper.getLinkDTOList(rootPostNo);
+        for (PostWithName ll : linkDTOLIst) {
+            ll.setting();
+            System.out.println(ll);
         }
-        System.out.println("check here : " + linkDTOLIst.size());
-        System.out.println(newList.size());
-        System.out.println(newList);
+        System.out.println("--------------------------------------------------");
+        System.out.println("linkDTOLIst.size = " + linkDTOLIst.size());
+
 
     }
 

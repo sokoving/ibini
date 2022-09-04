@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @RestController
 @Log4j2
@@ -31,15 +31,9 @@ public class LInkPostAPIController {
     public ResponseEntity<String> connectPost(@RequestBody LinkPost linkPost) {
         log.info("/post/api/links POST! - {}", linkPost);
 
-//        중복이면 true > 등록 안 함
-        if (linkService.isLinked(linkPost)) {
-            log.info("isLinked - {}", true);
-            return new ResponseEntity<>("connect-fail", HttpStatus.METHOD_NOT_ALLOWED);
-        }
-
         return linkService.connectPostService(linkPost)
                 ? new ResponseEntity<>("connect-success", HttpStatus.OK)
-                : new ResponseEntity<>("connect-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                : new ResponseEntity<>("connect-fail", HttpStatus.BAD_REQUEST);
     }
 
     // 연결 해제
@@ -47,22 +41,18 @@ public class LInkPostAPIController {
     public ResponseEntity<String> disconnectPost(@PathVariable String linkId) {
         log.info("/post/api/links DELETE! - {}", linkId);
 
-//        중복이면 삭제 진행
-        if (linkService.isLinked(LinkPost.getLinkPost(linkId))) {
-            log.info("isLinked - {}", true);
-
-            boolean flag = linkService.disconnectPostService(linkId);
-            log.info("disconnectPostService flag - {}", flag);
-            return flag
-                    ? new ResponseEntity<>("disconnect-success", HttpStatus.OK)
-                    : new ResponseEntity<>("disconnect-fail", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            log.info("isLinked - {}", false);
-            return new ResponseEntity<>("connect-fail", HttpStatus.METHOD_NOT_ALLOWED);
-        }
+        return linkService.disconnectPostService(linkId)
+                ? new ResponseEntity<>("disconnect-success", HttpStatus.OK)
+                : new ResponseEntity<>("disconnect-fail", HttpStatus.BAD_REQUEST);
     }
 
-//
+    // 목록 조회
+    @GetMapping("/{rootPostNo}")
+    public ResponseEntity<Map<String, Object>> getList(@PathVariable Long rootPostNo) {
+        log.info("/post/api/links GET! - {}", rootPostNo);
+        Map<String, Object> linkMap = linkService.getLinkListService(rootPostNo);
+        return new ResponseEntity<>(linkMap, HttpStatus.OK);
+    }
 
 
 }
