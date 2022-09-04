@@ -22,8 +22,8 @@ class LinkPostMapperTest {
     @DisplayName("링크 연결돼야 함(데이터 저장)")
     void connectPostTest() {
 //    boolean connectPost(LinkPost linkPost);
-        Long rootPostNo = 45L;
-        Long linkPostNo = 2L;
+        Long rootPostNo = 46L;
+        Long linkPostNo = 4L;
         LinkPost lp = new LinkPost(rootPostNo, linkPostNo);
         System.out.println("lp = " + lp);
         boolean flag = mapper.connectPost(lp);
@@ -35,8 +35,8 @@ class LinkPostMapperTest {
     @DisplayName("링크 해제돼야 함(데이터 삭제)")
     void disconnectPostTest() {
 //    boolean disconnectPost(String linkId);
-        Long rootPostNo = 50L;
-        Long linkPostNo = 45L;
+        Long rootPostNo = 45L;
+        Long linkPostNo = 2L;
         LinkPost lp = new LinkPost(rootPostNo, linkPostNo);
         System.out.println("lp = " + lp);
         boolean flag = mapper.disconnectPost(lp.getLinkId());
@@ -48,12 +48,12 @@ class LinkPostMapperTest {
     @DisplayName("루트 포스트에 연결된 링크 포스트 전체 조회돼야 함")
     void getLinkLIstTest() {
         // List<LinkPost> getLinkLIst(Long rootPostNo);
-        Long rootPostNo = 2L;
+        Long rootPostNo = 45L;
         List<LinkPost> linkLIst = mapper.getLinkList(rootPostNo);
         for (LinkPost linkPost : linkLIst) {
             System.out.println(linkPost);
         }
-        assertEquals(0, linkLIst.size());
+        assertEquals(3, linkLIst.size());
     }
 
 
@@ -71,12 +71,12 @@ class LinkPostMapperTest {
     @DisplayName("중복 링크인지 확인한다")
     void isLinkedTest() {
 //    boolean isLinked(LinkPost linkPost);
-        Long rootPostNo = 50L;
-        Long linkPostNo = 51L;
+        Long rootPostNo = 45L;
+        Long linkPostNo = 1L;
         LinkPost lp = new LinkPost(rootPostNo, linkPostNo);
         System.out.println("lp = " + lp);
         int result = mapper.isLinked(lp);
-        assertEquals(1, result);
+        assertEquals(0, result);
 
     }
 

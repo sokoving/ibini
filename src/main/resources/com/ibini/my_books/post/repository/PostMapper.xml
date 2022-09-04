@@ -51,7 +51,6 @@
     <insert id="save">
         insert into tbl_post
         (
-            post_no,
             account,    genre_id,    ca_id,    platform_id,
             post_title,    post_writer,    publish_status,
             publish_cycle,    ep_id,    cur_ep,    total_ep,
@@ -59,7 +58,6 @@
         )
         VALUES
         (
-            seq_tbl_post.nextval,
             #{account},    #{genreId},    #{caId},    #{platformId},
             #{postTitle},    #{postWriter},    #{publishStatus},
             #{publishCycle},   #{epId},    #{curEp},    #{totalEp},
@@ -154,7 +152,7 @@
             ep_id=#{epId},
             cur_ep=#{curEp},
             total_ep=#{totalEp},
-            update_date = SYSDATE,
+            update_date = current_timestamp,
             star_rate=#{starRate}
         WHERE post_no = #{postNo}
     </update>

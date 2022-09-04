@@ -24,8 +24,8 @@ class HashtagMapperTest {
 
         HashtagDomain ht = new HashtagDomain();
         ht.setAccount("ibini");
-        ht.setPostNo(2L);
-        ht.setTagName("서양배경");
+        ht.setPostNo(3L);
+        ht.setTagName("아포칼립스");
 
         boolean b = hashtagMapper.saveHashtag(ht);
 
@@ -36,7 +36,7 @@ class HashtagMapperTest {
     @Test
     @DisplayName("선택한 하나의 해시태그를 삭제할 수 있어야 한다")
     void deleteHashtagTest(){
-        int tagNo = 5;
+        int tagNo = 1;
 
         boolean b = hashtagMapper.deleteHashtag(tagNo);
 
@@ -47,7 +47,7 @@ class HashtagMapperTest {
     @Test
     @DisplayName("선택한 하나의 해시태그를 찾을 수 있어야한다")
     void findOneHashTest(){
-        int tagNo = 9;
+        int tagNo = 2;
         String account = "ibini";
         HashtagDomain onePost = hashtagMapper.findOneTag(tagNo, account);
         System.out.println(onePost);
@@ -56,7 +56,7 @@ class HashtagMapperTest {
     @Test
     @DisplayName("선택한 하나의 해시태그를 수정할 수 있어야한다")
     void ModifyHashtagTest(){
-        int tagNo = 7;
+        int tagNo = 2;
         String account = "ibini";
         HashtagDomain onePost = hashtagMapper.findOneTag(tagNo, account);
         onePost.setTagName("아카데미물");
@@ -77,21 +77,22 @@ class HashtagMapperTest {
     @Test
     @DisplayName("한 포스트에 등록된 모든 해시태그를 조회해야 한다")
     void findAllByPostNoT(){
-        Long postNo = 1L;
+        Long postNo = 2L;
 
+        System.out.println("check here");
         List<HashtagDomain> hl = hashtagMapper.findAllHashTagByPostNo(postNo);
         for (HashtagDomain hashtagDomain : hl) {
             System.out.println(hashtagDomain);
         }
 
-        assertEquals(4, hl.size());
+        assertEquals(3, hl.size());
 
     }
 
     @Test
     @DisplayName("한 포스트에 등록된 모드 해시태그가 삭제된다")
     void removeTagOnPostTest(){
-        Long postNo = 27L;
+        Long postNo = 3L;
         boolean flag = hashtagMapper.removeTagOnPost(postNo);
         List<HashtagDomain> hl = hashtagMapper.findAllHashTagByPostNo(postNo);
         System.out.println("hl.size() = " + hl.size());

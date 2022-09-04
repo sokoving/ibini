@@ -20,10 +20,10 @@ class PostImgMapperTest {
     @DisplayName("파일추가")
     void addFile() {
         PostImg postImg = new PostImg();
-        postImg.setFileName("1111kjkj_kjkjk_상어.jpg");
-        postImg.setAccount("asdf");
-        postImg.setPostNo(1L);
-        postImg.setOriginalFileName("상어.jpg");
+        postImg.setFileName("333kjkj_kjkjk_상어.jpg");
+        postImg.setAccount("ibini");
+        postImg.setPostNo(2L);
+        postImg.setOriginalFileName("상어2.jpg");
 
         mapper.addFile(postImg);
     }
@@ -67,7 +67,7 @@ class PostImgMapperTest {
     @Test
     @DisplayName("fileName 으로 postImg DB에서 삭제")
     void removeByNameTest(){
-        String fileName = "https://pbs.twimg.com/media/FZ8Ufq4akAA2aOs?format=jpg&name=900x900";
+        String fileName = "2222kjkj_kjkjk_상어.jpg";
         boolean flag = mapper.removeByName(fileName);
         assertTrue(flag);
     }
@@ -103,17 +103,17 @@ class PostImgMapperTest {
         mapper.addFile(pi);
     }
 
-    @Test
-    @DisplayName("썸네일이 있으면 수정하고 없으면 추가한다")
-    void mergeThumbTest(){
-        PostImg p = new PostImg();
-        p.setPostNo(35L);
-        p.setAccount("2208260002");
-        p.setFileName("mergeTest Name");
-        p.setOriginalFileName("originat_merge_test_name");
-
-        boolean flag = mapper.mergeThumb(p);
-        assertTrue(flag);
-
-    }
+//    @Test
+//    @DisplayName("썸네일이 있으면 수정하고 없으면 추가한다")
+//    void mergeThumbTest(){
+//        PostImg p = new PostImg();
+//        p.setPostNo(35L);
+//        p.setAccount("2208260002");
+//        p.setFileName("mergeTest Name");
+//        p.setOriginalFileName("originat_merge_test_name");
+//
+//        boolean flag = mapper.mergeThumb(p);
+//        assertTrue(flag);
+//
+//    }
 }
