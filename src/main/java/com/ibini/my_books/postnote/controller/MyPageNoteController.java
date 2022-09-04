@@ -4,7 +4,9 @@ import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.postnote.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
+import com.ibini.my_books.postnote.domain.PostMemo;
 import com.ibini.my_books.postnote.dto.MyPageMark;
+import com.ibini.my_books.postnote.dto.MyPageMemo;
 import com.ibini.my_books.postnote.dto.MyPagePostDTO;
 import com.ibini.my_books.postnote.service.PostMarkService;
 import com.ibini.my_books.postnote.service.PostMemoService;
@@ -34,7 +36,7 @@ public class MyPageNoteController {
 
     // 마이페이지 post, postMark 게시물 목록 요청
     @GetMapping("/marklist")
-    public String viewPostList(Model model, HttpSession session, @ModelAttribute("search") Search search) {
+    public String viewPostWithMarkList(Model model, HttpSession session, @ModelAttribute("search") Search search) {
         log.info("/mypostnote/list GET!");
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         List<MyPagePostDTO> postList = postMarkService.findAllPostWithImg(account, search);
@@ -76,86 +78,45 @@ public class MyPageNoteController {
         return "postnote/mypage-mark";
     }
 
-//    @GetMapping("/list")
-//    public String viewPostList(Model model, HttpSession session, Search search) {
-//        log.info("GET!");
-//
-//        String account = LoginUtil.getCurrentMemberAccountForDB(session);
-//        List<PostWithName> postList = postService.finaAllPostWithNameService(account);
-//        for (PostWithName post : postList) {
-//            Long postNo = post.getPostNo();
-//            List<PostMark> markList = postMarkService.findAll2(postNo);
-//            model.addAttribute("markList", markList);
-//        }
-//        model.addAttribute("postList", postList);
-//        return "postnote/mypage-note";
-//    }
+    // 마이페이지 post, postMemo 게시물 목록 요청
+    @GetMapping("/memolist")
+    public String viewPostWithMemoList(Model model, HttpSession session, @ModelAttribute("search") Search search) {
+        log.info("/mypostnote/memolist GET!");
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
+        List<MyPagePostDTO> postList = postMarkService.findAllPostWithImg(account, search);
 
-//    @GetMapping("/list")
-//    public String viewPostList(Model model, HttpSession session, Post post, Search search) {
-//        log.info("GET!");
-//        Long postNo = post.getPostNo();
-//        String account = LoginUtil.getCurrentMemberAccountForDB(session);
-//
-//        List<MyPageMark> myPageMarkList = postMarkService.findAllMyPage(account, postNo, search);
-//        model.addAttribute("myPageMarkList", myPageMarkList);
-//        log.info(myPageMarkList);
-//        return "postnote/mypage-note";
-//    }
+        List<MyPageMemo> myPageMemoList = new ArrayList<>();
 
-//    @GetMapping("/list")
-//    public String viewPostList(Model model, HttpSession session, Post post, Search search) {
-//        log.info("GET!");
-//        Long postNo = post.getPostNo();
-//        String account = LoginUtil.getCurrentMemberAccountForDB(session);
-//
-//        List<MyPageMark> myPageMarkList = postMarkService.findAllMyPage(account, postNo, search);
-//        model.addAttribute("myPageMarkList", myPageMarkList);
-//        log.info(myPageMarkList);
-//        return "postnote/mypage-note";
-//    }
+        for (MyPagePostDTO post : postList) {
+            Long postNo = post.getPostNo();
+            List<PostMemo> memoList = postMemoService.findAllWithSearch(postNo, search);
 
+            List<MyPageMemo.Memo> memoDataList = new ArrayList<>();
 
+            if (memoList.size() != 0) {
+                for (PostMemo memo : memoList) {
+                    MyPageMemo.Memo memoObject = new MyPageMemo.Memo();
+                    memoObject.setMemoNo(memo.getMemoNo());
+                    memoObject.setContent(memo.getContent());
+                    memoObject.setModDatetime(memo.getPrettierDate());
 
+                    memoDataList.add(memoObject);
+                }
 
+                MyPageMemo myPageMemo = new MyPageMemo();
+                myPageMemo.setPostNo(postNo);
+                myPageMemo.setAccount(account);
+                myPageMemo.setPostTitle(post.getPostTitle());
+                myPageMemo.setThumbImg(post.getThumbImg());
+                myPageMemo.setMemoList(memoDataList);
 
+                myPageMemoList.add(myPageMemo);
+            }
+        }
 
+        log.info(myPageMemoList);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // 게시물 목록 요청
-//    @GetMapping("/list")
-//    public String list(@ModelAttribute("s") Search search, Model model) {
-//
-//
-//        Map<String, Object> boardMap = boardService.findAllWithSearchService(search);
-//        log.debug("return data - {}", boardMap);
-//
-//        model.addAttribute("bList", boardMap.get("bList"));
-//        model.addAttribute("pm", pm);
-//
-//        return "board/board-list";
-//    }
-
-
-
+        model.addAttribute("myPageMemoList", myPageMemoList);
+        return "postnote/mypage-memo";
+    }
 }

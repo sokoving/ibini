@@ -4,6 +4,10 @@ import lombok.*;
 
 import java.util.List;
 
+@Setter @Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class MyPageMemo {
 
     // tbl_post

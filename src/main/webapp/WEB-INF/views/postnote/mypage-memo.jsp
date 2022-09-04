@@ -1,5 +1,5 @@
-<!-- <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> -->
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -27,7 +27,9 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/main/resources/static//css/mypage-memo.css">
+    <link rel="stylesheet" href="/css/mypage-memo.css">
+    <link rel="stylesheet" href="/css/mypage-mark.css">
+
 </head>
 
 <body>
@@ -67,6 +69,7 @@
             <div class="body-wrapper">
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="memo">
+               
                     <c:if test="${empty myPageMemoList}">
                         <ul class="blank-page" style="margin: 2rem;">
                             <li style="margin-bottom: 1rem;"><strong style="color: red; font-size: 1.3em;">'${search.keyword}'</strong>에 대한 검색결과가 없습니다.</li>
@@ -74,6 +77,7 @@
                             <li>* 검색 옵션을 변경해서 다시 검색해 보세요.</li>
                         </ul>
                     </c:if>
+                   
                     <c:forEach var="p" items="${myPageMemoList}">
                         <div class="content">
                             <div class="book-wrapper flex-fs">
