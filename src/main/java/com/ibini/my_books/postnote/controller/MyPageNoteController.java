@@ -32,8 +32,8 @@ public class MyPageNoteController {
     private final PostService postService;
 
 
-    // 마이페이지 post, postMark 게시물 목록 요청\
-    @GetMapping("/list")
+    // 마이페이지 post, postMark 게시물 목록 요청
+    @GetMapping("/marklist")
     public String viewPostList(Model model, HttpSession session, @ModelAttribute("search") Search search) {
         log.info("/mypostnote/list GET!");
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
@@ -73,7 +73,7 @@ public class MyPageNoteController {
         log.info(myPageMarkList);
 
         model.addAttribute("myPageMarkList", myPageMarkList);
-        return "postnote/mypage-note";
+        return "postnote/mypage-mark";
     }
 
 //    @GetMapping("/list")

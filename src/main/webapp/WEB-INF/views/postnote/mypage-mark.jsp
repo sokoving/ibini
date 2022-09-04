@@ -27,33 +27,21 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/mypage-note.css">
+    <link rel="stylesheet" href="/css/mypage-mark.css">
 </head>
 
 <body>
     <!-- 최상단 wrap 영역 -->
     <div id="wrap">
-        <section>
+        <section class="noselect">
             <div class="header-wrapper">
-
-                <!-- 마크, 메모 탭 버튼 영역 -->
-                <div class="tab-button-wrapper flex">
-                    <div class="w50 selected" name="mark" onclick="oncick_tabButton(this)">
-                        <!-- <i class="fas fa-bookmark"></i> -->
-                        MARK
-                    </div>
-                    <div class="w50" name="memo" onclick="oncick_tabButton(this)">
-                        <!-- <i class="fas fa-sticky-note"></i> -->
-                        MEMO
-                    </div>
-                </div> <!-- end tab-button-wrapper -->
 
                 <!-- 검색 영역 -->
                 <div class="search-wrapper">
                     <div name="mark">
                         <div class="search-mark">
                             <select name="type" id="search-option">
-                                <!-- <option value="postTitle" ${search.type == 'postTitle' ? 'selected="selected"' : '' }>책 제목</option> -->
+                                <option value="postTitle" ${search.type == 'postTitle' ? 'selected="selected"' : '' }>책 제목</option>
                                 <option value="content" ${search.type == 'content' ? 'selected="selected"' : '' }>마크 내용</option>
                                 <option value="episodeNo" ${search.type == 'episodeNo' ? 'selected="selected"' : '' }>회차</option>
                             </select>
@@ -65,24 +53,12 @@
                             </button>
                         </div>
                     </div> <!-- end mark -->
-                    <div class="hidden" name="memo">
-                        <div class="search-mark">
-                            <span>책 제목</span>
-                            <input type="text" name="keyword" placeholder="검색어를 입력하세요" autocomplete="off">
-                            <button class="search-button" type="button">
-                                검색
-                            </button>
-                        </div>
-                    </div> <!-- end memo -->
                 </div> <!-- end search-wrapper -->
 
                 <!-- LIST 영역 -->
                 <div class="list-wrapper">
                     <div class="list-button">
                         <span>MARK LIST</span>
-                    </div>
-                    <div class="list-button hidden">
-                        <span>MEMO LIST</span>
                     </div>
                 </div> <!-- end list-wrapper -->
             </div> <!-- end header-wrapper -->
@@ -148,89 +124,7 @@
                             </div> <!-- end book-wrapper -->
                         </div> <!-- end content -->
                     </c:forEach>
-
-                    <!--  -->
                 </div> <!-- end content-wrapper name="mark" -->
-
-                <div class="content-wrapper hidden" name="memo">
-                    <div class="content">
-                        <div class="book-wrapper flex-fs">
-                            <!-- 책 이미지 -->
-                            <div class="book-image w30 noselect">
-                                <img class="book-image" src="" alt="book image">
-                            </div>
-                            <!-- 책 정보 -->
-                            <div class="book-info w70">
-                                <!-- 책 제목 -->
-                                <div class="book-title">
-                                    <span>여행계획 짜기</span>
-                                </div>
-                                <!-- MARK 내용 -->
-                                <div class="my-text">
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
-                                        asdasdagre
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        <span>2022-08-22</span>
-                                    </div>    
-                                    <hr>
-
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                        rgarg&#10;&#10;raeheath
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        2022-08-22
-                                    </div>  
-                                    <hr>
-                                </div> <!-- end my-text -->
-                                <div class="view-more">
-                                    <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
-                                </div>
-                            </div> <!-- end book-info -->
-                        </div> <!-- end book-wrapper -->
-                    </div> <!-- end content -->
-
-                    <div class="content">
-                        <div class="book-wrapper flex-fs">
-                            <!-- 책 이미지 -->
-                            <div class="book-image w30 noselect">
-                                <img class="book-image" src="" alt="book image">
-                            </div>
-                            <!-- 책 정보 -->
-                            <div class="book-info w70">
-                                <!-- 책 제목 -->
-                                <div class="book-title">
-                                    <span>여행계획 짜기</span>
-                                </div>
-                                <!-- MARK 내용 -->
-                                <div class="my-text">
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">ffff
-                                        asdasdagre
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        <span>2022-08-22</span>
-                                    </div>    
-                                    <hr>
-
-                                    <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                        rgarg&#10;&#10;raeheath
-                                    </textarea>
-                                    <!-- Mark 날짜 -->
-                                    <div class="meta-data">
-                                        2022-08-22
-                                    </div>  
-                                    <hr>
-                                </div> <!-- end my-text -->
-                                <div class="view-more">
-                                    <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
-                                </div>
-                            </div> <!-- end book-info -->
-                        </div> <!-- end book-wrapper -->
-                    </div> <!-- end content -->
-                </div> <!-- end content-wrapper name="memo" -->
         </section>
     </div> <!-- end wrap -->
 
@@ -238,13 +132,6 @@
         /*======================================================================
             이벤트 영역
         ========================================================================*/
-        // 탭 버튼 클릭
-        function oncick_tabButton($eventTag) {
-            const fireEvent = !$eventTag.classList.contains('selected');
-            if (fireEvent) toggleSelected($eventTag);
-            testCall();
-        }
-
         // textarea 높이 자동조절
         // function resize_textarea($eventTag) {
         //     console.log($eventTag.value);
@@ -262,38 +149,7 @@
         /*======================================================================
             함수 영역
         ========================================================================*/
-        // MARK or MEMO 선택처리
-        function toggleSelected($eventTag) {
 
-            // selected 클래스 toggle 처리
-            toggleSelectedClass($eventTag);
-
-            // hidden 클래스 toggle 처리
-            toggleHiddenClass($eventTag);
-        }
-
-        // selected 클래스 toggle 처리
-        function toggleSelectedClass($eventTag) {
-            const $titles = [...document.querySelector('section .tab-button-wrapper').children];
-            $titles.forEach($title => $title.classList.toggle('selected'));
-        }
-
-        // hidden 클래스 toggle 처리
-        function toggleHiddenClass($eventTag) {
-            const name = $eventTag.getAttribute('name');
-
-            // 검색 영역
-            const $searchList = [...document.querySelector('section .search-wrapper').children];
-            $searchList.forEach($search => $search.classList.toggle('hidden'));
-
-            // LIST 영역
-            const $lists = [...document.querySelector('section .list-wrapper').children];
-            $lists.forEach($list => $list.classList.toggle('hidden'));
-
-            // 데이터 목록 영역
-            const $contents = [...document.querySelector('section .body-wrapper').children];
-            $contents.forEach($content => $content.classList.toggle('hidden'));
-        }
 
         /*======================================================================
             테스트 영역
@@ -317,14 +173,24 @@
 
             const $keyword = $("#searchText").val();
 
-            if ($("#search-option option:selected").val() == 'content') {     
+            
+            if ($("#search-option option:selected").val() == 'postTitle') {     
+                if ($keyword.trim() === '') {
+                    alert('검색어를 입력하세요')
+                    // location.href = '/mypostnote/list?type=postTitle&keyword=';
+                    return;
+                }   
+                     
+                location.href = '/mypostnote/marklist?type=postTitle' + '&keyword=' + $keyword;
+    
+            } else if ($("#search-option option:selected").val() == 'content') {     
                 if ($keyword.trim() === '') {
                     alert('검색어를 입력하세요')
                     // location.href = '/mypostnote/list?type=content&keyword=';
                     return;
                 }   
                      
-                location.href = '/mypostnote/list?type=content' + '&keyword=' + $keyword;
+                location.href = '/mypostnote/marklist?type=content' + '&keyword=' + $keyword;
     
             } else if ($("#search-option option:selected").val() == 'episodeNo') {        
                 if ($keyword.trim() === '') {
@@ -337,7 +203,7 @@
                     return;
                 }        
 
-                location.href = '/mypostnote/list?type=episodeNo' + '&keyword=' + $keyword;
+                location.href = '/mypostnote/marklist?type=episodeNo' + '&keyword=' + $keyword;
             } 
         });
 

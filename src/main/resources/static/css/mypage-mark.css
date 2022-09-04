@@ -106,10 +106,10 @@ hr {
 
 section {
     width: 90%;
-    border: 1px solid #adb5bd;
-    border-radius: 0.25rem;
+    /* border: 1px solid #adb5bd; */
+    /* border-radius: 0.25rem; */
     margin: 10px auto 0;
-    padding: 24px;
+    /* padding: 24px; */
     box-sizing: border-box;
 }
 
@@ -119,49 +119,14 @@ section {
 /* .header-wrapper {
 } */
 /*================================================
-    tab-button-wrapper  / 탭 버튼 영역
-==================================================*/
-.tab-button-wrapper {
-    border: 1px solid #ced4da;
-    border-top-left-radius: 0.25rem 0.25rem;
-    border-top-right-radius: 0.25rem 0.25rem;
-
-    transition: 0.5s;
-    cursor: pointer;
-    
-    font-size: 1.2em;
-    text-align: center;
-}
-.tab-button-wrapper > div {
-    padding: 5px 0px;
-}
-.tab-button-wrapper div[name="mark"] {
-    border-top-left-radius: 0.25rem 0.25rem;
-}
-.tab-button-wrapper div[name="memo"] {
-    border-top-right-radius: 0.25rem 0.25rem;
-}
-.tab-button-wrapper > div:hover {
-    background-color: #ffe89f;
-    font-weight: bold;
-}
-.tab-button-wrapper .selected {
-    transition: 0.5s;
-    font-weight: bold;
-}
-
-/*================================================
     search-wrapper      / 검색 영역
 ==================================================*/
 .search-wrapper {
     border: 1px solid #adb5bd;
-    border-top: none;
-    border-bottom-left-radius: 0.25rem 0.25rem;
-    border-bottom-right-radius: 0.25rem 0.25rem;
-
+    border-radius: 0.25rem;
     padding: 1.5rem;
 
-    font-size: 17px;
+    font-size: 17px;       
 }
 
 /* search-title 영역 */
@@ -292,7 +257,7 @@ section {
     padding: 0.6rem;
 }
 
-/* MARK or MEMO 내용 영역 */
+/* MARK 내용 영역 */
 /* MARK episode-no */
 .book-wrapper .book-info .my-text .episode-no {
     margin-top: 1rem;
