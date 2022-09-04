@@ -1,23 +1,28 @@
 package com.ibini.my_books.post.controller;
 
 import com.ibini.my_books.post.domain.LinkPost;
+import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.LinkPostService;
+import com.ibini.my_books.post.service.PostService;
+import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-//@RequestMapping("/post/api/links")
-@RequestMapping("/api/links")
+@RequestMapping("/post/api/links")
 public class LInkPostAPIController {
 
     private final LinkPostService linkService;
+    private final PostService postService;
 
     /*
         - 연결 등록 요청 : /post/api/links - POST
@@ -54,5 +59,13 @@ public class LInkPostAPIController {
         return new ResponseEntity<>(linkMap, HttpStatus.OK);
     }
 
+    //  포스트 전체 리스트를 비동기로 보내줌
+    @GetMapping("/allPost")
+    public ResponseEntity<List<PostWithName>> getApiList(HttpSession session){
+        log.info("ListController /api/allPost GET!!");
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
+        List<PostWithName> postList = postService.finaAllPostWithNameService(account);
+        return new ResponseEntity<>(postList, HttpStatus.OK);
+    }
 
 }

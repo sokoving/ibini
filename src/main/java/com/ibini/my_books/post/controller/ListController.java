@@ -45,17 +45,6 @@ public class ListController {
 
         return "post/post-list";
     }
-    //    포스트 전체 리스트를 비동기로 보내줌
-    @GetMapping("/api/allPost")
-    @ResponseBody
-    public ResponseEntity<List<PostWithName>> getApiList(
-//            HttpSession session
-    ){
-        log.info("ListController /api/allPost GET!!");
-//        String account = LoginUtil.getCurrentMemberAccountForDB(session);
-        String account = "2209030021";
-        List<PostWithName> postList = postService.finaAllPostWithNameService(account);
-        return new ResponseEntity<>(postList, HttpStatus.OK);
-    }
+
 
 }

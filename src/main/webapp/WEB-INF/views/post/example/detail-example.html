@@ -304,8 +304,13 @@
 
                                 <div>
                                     <ul id="link-container">
+                                        <li class="link-zero-box">
+                                            
+                                            <div class="link-zero-1">등록된 연관 포스트가 없습니다.</div>
+                                            <div class="link-zero-2">위 토글 버튼을 눌러 새 포스트를 추가해 보세요</div>
+                                        </li>
                                         <li>
-                                            <a class="link-a" href="#" title="신기방기1">
+                                            <a class="link-a" href="#">
                                                 <div class="link-ca">웹소설</div>
 
                                                 <div class="link-post-info">
@@ -320,25 +325,6 @@
                                                     <span class="link-date">2022.05.05</span>
                                                 </div>
                                                 <i data-del-post-no="98"
-                                                    class="fas fa-times-circle link-remove-btn hide"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="link-a" href="#" title="신기방기1">
-                                                <div class="link-ca">웹소설</div>
-
-                                                <div class="link-post-info">
-                                                    <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
-                                                    <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금
-                                                            10시</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="link-post-date">
-                                                    <span class="link-percent">100%</span>
-                                                    <span class="link-date">2022.05.05</span>
-                                                </div>
-                                                <i data-del-post-no="99"
                                                     class="fas fa-times-circle link-remove-btn hide"></i>
                                             </a>
                                         </li>
@@ -382,8 +368,8 @@
 
             /* ------------------ 연관 포스트 -------------------------- */
             // rootPostNo
-            
-            
+
+
             // 토글, 자물쇠 아이콘 스위치하는 함수
             function switchToggle($toggleIcons) {
                 $toggleIcons[0].classList.toggle('fff');
@@ -435,7 +421,7 @@
             $('#link-container').click(function (e) {
                 e.preventDefault();
                 // 연관 포스트 삭제 요청 보내기
-                if(e.target.matches('.link-remove-btn')){
+                if (e.target.matches('.link-remove-btn')) {
                     console.log("root post no : " + postNo);
                     console.log("link post no : " + e.target.dataset.delPostNo);
                 }

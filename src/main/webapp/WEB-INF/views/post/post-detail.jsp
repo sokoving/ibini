@@ -152,10 +152,14 @@
 
                                         <!-- 수정 버튼 -->
                                         <tr>
-                                            <td colspan="2"><i class="modi-hotkey fas fa-toggle-off"
-                                                    title="바로 수정하기"></i>
+                                            <td colspan="2">
+                                                <div class="toggle-box">
+                                                    <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
+                                                    <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
+                                                    <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
+                                                    <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
+                                                </div>
                                             </td>
-                                            <!-- <i class="fas fa-toggle-on"></i> -->
                                         </tr>
                                     </table>
 
@@ -170,12 +174,15 @@
                                     <span>수정일 ${p.shortDate.postUpdateDate}</span>
                                 </div>
                                 <div class="post-btn-wrap">
-                                    <button class="post-btn post-modi-btn" title="수정하기"><i
-                                            class="fas fa-pencil-alt"></i></button>
-                                    <button class="post-btn post-del-btn" title="삭제하기"><i
-                                            class="far fa-trash-alt"></i></button>
-                                    <button class="post-btn post-list-btn" title="목록으로"><i
-                                            class="far fa-list-alt"></i></button>
+                                    <button class="post-btn post-modi-btn" title="수정하기">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                    <button class="post-btn post-list-btn" title="목록으로">
+                                        <i class="far fa-list-alt"></i>
+                                    </button>
+                                    <button class="post-btn post-del-btn" title="삭제하기">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
                                 </div>
                             </div> <!-- // end post-bottom -->
 
@@ -215,8 +222,12 @@
 
                                 <div class="h3-wrap">
                                     <h3>해시태그</h3>
-                                    <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
-                                    <!-- <i class="fas fa-toggle-on"></i> -->
+                                    <div class="toggle-box">
+                                        <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
+                                        <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
+                                        <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
+                                        <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
+                                    </div>
                                 </div>
 
                                 <div id="tag-container">
@@ -232,14 +243,34 @@
                             <div id="link-post-wrap">
                                 <div class="h3-wrap">
                                     <h3>연관 포스트</h3>
-                                    <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
-                                    <!-- <i class="fas fa-toggle-on"></i> -->
+
+                                    <!-- 등록할 포스트 검색하는 영역 -->
+                                    <div class="search-wrap hide">
+                                        <label class="form-label">
+                                            <input class="form-control" id="linkTitle" list="titleOptionList"
+                                                placeholder="제목 검색">
+                                        </label>
+                                        <!-- 검색 포스트 영역 -->
+                                        <datalist id="titleOptionList">
+                                            <option data-link-post-no="30" value="화산귀환 1권"> 네이버시리즈 | 비가
+                                        </datalist>
+                                        <i id="search-plus" class="far fa-plus-square" title="포스트 추가하기"></i>
+                                    </div> <!-- // end search wrap -->
+
+
+                                    <div class="toggle-box">
+                                        <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
+                                        <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
+                                        <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
+                                        <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
+                                    </div>
                                 </div>
 
                                 <div>
+                                    <!-- 연관 포스트 목록 영역 -->
                                     <ul id="link-container">
                                         <li>
-                                            <a class="link-a" href="#" title="신기방기1">
+                                            <a class="link-a" href="#">
                                                 <div class="link-ca">웹소설</div>
 
                                                 <div class="link-post-info">
@@ -253,23 +284,8 @@
                                                     <span class="link-percent">100%</span>
                                                     <span class="link-date">2022.05.05</span>
                                                 </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="link-a" href="#" title="신기방기1">
-                                                <div class="link-ca">웹소설</div>
-
-                                                <div class="link-post-info">
-                                                    <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
-                                                    <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금
-                                                            10시</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="link-post-date">
-                                                    <span class="link-percent">100%</span>
-                                                    <span class="link-date">2022.05.05</span>
-                                                </div>
+                                                <i data-del-post-no="98"
+                                                    class="fas fa-times-circle link-remove-btn hide"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -299,7 +315,70 @@
             const postNo = '${p.postNo}';
             console.log(postNo);
 
-            // jQueryTagTest("태그 잡기 테스트", $('h1'));
+
+            /* ------------------ 연관 포스트 -------------------------- */
+            // 요청 URL
+            const linkURL = '/post/api/links';
+            // 연관 포스트 목록 보여주기
+            showLinklist(linkURL, postNo);
+
+            // 연관 포스트 편집모드 열기 이벤트
+            const $postToggles = $('#link-post-wrap .toggle-box').children();
+            $postToggles[1].onclick = e => {
+                // 토글 아이콘 변경, 검색창, 삭제 버튼 띄우기
+                setLinkEditMod();   
+
+                
+            }
+
+
+            // 연관 포스트 편집모드 닫기
+            $postToggles[2].onclick = setLinkEditMod;
+
+
+            // 연관 포스트 등록 요청 보내기
+            $('#search-plus').click(function () {
+                console.log(postNo);
+
+                let linkPostNo = -1;
+                // input 입력값을 -> data-link-post-no 값으로 바꾸기
+                const inputValue = $('#linkTitle').val();
+                console.log(inputValue);
+                const $options = $('datalist[id=titleOptionList]').children()
+                for (let i = 0; i < $options.length; i++) {
+                    if (inputValue === $options[i].value) {
+                        linkPostNo = $options[i].dataset.linkPostNo
+                        console.log(linkPostNo);
+                        break;
+                    }
+                }
+                if (linkPostNo === -1) {
+                    alert("검색 포스트가 없습니다.");
+                    return;
+                }
+            });
+
+
+            // 연관 포스트 목록 클릭 이벤트
+            $('#link-container').click(function (e) {
+                e.preventDefault();
+                // 삭제버튼이 아닌 데 눌렀을 경우
+                const rootPostNo = e.target.parentElement.parentElement.lastElementChild;
+
+                // 연관 포스트 삭제 요청 보내기
+                if (e.target.matches('.link-remove-btn')) {
+                    const rootPostNo = e.target.dataset.delPostNo;
+                    console.log("root post no : " + postNo);
+                    console.log("link post no : " + rootPostNo);
+                } else if (rootPostNo.matches('.link-remove-btn')) {
+                    location.href = '/post/detail/' + rootPostNo.dataset.delPostNo;
+                }
+
+            });
+
+
+            /* ------------------ // end 연관 포스트 -------------------------- */
+
 
             // 별 찍기
             function drawStarsAtDetail(star) {
@@ -329,11 +408,6 @@
             $('.post-btn-wrap').click(function (e) {
                 clickPostBtn(e.target, postNo)
             })
-
-
-
-
-
 
 
         });

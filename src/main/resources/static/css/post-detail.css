@@ -385,3 +385,24 @@ section #remote-etc-wrap{
     font-size: 0.8em;
     color: #787878;
 }
+
+/* 연관 포스트 없을 때*/
+#link-container .link-zero-box{
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+
+    border: 1px dotted #888;
+    border-radius: 0.25rem;
+    margin-top: 10px;
+    opacity: 70%;
+}
+.link-zero-1{
+    background-color: #ffca3d;
+    padding: 10px 0 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+.link-zero-2{
+    padding: 5px 0 10px;
+}
