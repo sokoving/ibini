@@ -176,10 +176,14 @@
                                             <td class="last-td tot-ep">500p</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2"><i class="modi-hotkey fas fa-toggle-off"
-                                                    title="바로 수정하기"></i>
+                                            <td colspan="2">
+                                                <div class="toggle-box">
+                                                    <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
+                                                    <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
+                                                    <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
+                                                    <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
+                                                </div>
                                             </td>
-                                            <!-- <i class="fas fa-toggle-on"></i> -->
                                         </tr>
                                     </table>
 
@@ -194,12 +198,15 @@
                                     <span>수정일 2022.08.08</span>
                                 </div>
                                 <div class="post-btn-wrap">
-                                    <button class="post-btn post-modi-btn" title="수정하기"><i
-                                            class="fas fa-pencil-alt"></i></button>
-                                    <button class="post-btn post-del-btn" title="삭제하기"><i
-                                            class="far fa-trash-alt"></i></button>
-                                    <button class="post-btn post-list-btn" title="목록으로"><i
-                                            class="far fa-list-alt"></i></button>
+                                    <button class="post-btn post-modi-btn" title="수정하기">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                    <button class="post-btn post-list-btn" title="목록으로">
+                                        <i class="far fa-list-alt"></i>
+                                    </button>
+                                    <button class="post-btn post-del-btn" title="삭제하기">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
                                 </div>
                             </div> <!-- // end post-bottom -->
 
@@ -239,8 +246,12 @@
 
                                 <div class="h3-wrap">
                                     <h3>해시태그</h3>
-                                    <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
-                                    <!-- <i class="fas fa-toggle-on"></i> -->
+                                    <div class="toggle-box">
+                                        <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
+                                        <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
+                                        <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
+                                        <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
+                                    </div>
                                 </div>
 
                                 <div id="tag-container">
@@ -254,8 +265,9 @@
                                     <span class="hash-span">태그</span>
                                     <span class="hash-span">태그_태그_태그</span>
                                     <span class="hash-span">태그_뾰잉뾰이이이잉</span>
-                                    <span class="hash-span tag-plus" style="display: none;"><i
-                                            class="far fa-plus-square"></i></span>
+                                    <span class="hash-span tag-plus hide">
+                                        <i class="far fa-plus-square"></i>
+                                    </span>
                                 </div>
                             </div> <!-- // end hash-wrap -->
 
@@ -263,9 +275,32 @@
                             <div id="link-post-wrap">
                                 <div class="h3-wrap">
                                     <h3>연관 포스트</h3>
-                                    <i class="modi-hotkey fas fa-toggle-off" title="바로 수정하기"></i>
-                                    <!-- <i class="fas fa-toggle-on"></i> -->
+
+                                    <!-- 등록할 포스트 검색하는 영역 -->
+                                    <div class="search-wrap hide">
+                                        <label class="form-label">
+                                            <input class="form-control" id="linkTitle" list="titleOptionList"
+                                                placeholder="제목 검색">
+                                        </label>
+                                        <datalist id="titleOptionList">
+                                            <option data-link-post-no="30" value="화산귀환 1권"> 네이버시리즈 | 비가
+                                            <option data-link-post-no="31" value="화산귀환 2권"> 네이버시리즈 | 비가
+                                            <option data-link-post-no="32" value="화산귀환 3권"> 네이버시리즈 | 비가
+                                            <option data-link-post-no="33" value="내가 키운 S급들 1권"> 리디북스 | 근서
+                                            <option data-link-post-no="34" value="내가 키운 S급들 2권"> 리디북스 | 근서
+                                        </datalist>
+                                        <i id="search-plus" class="far fa-plus-square" title="포스트 추가하기"></i>
+                                    </div> <!-- // end search wrap -->
+
+
+                                    <div class="toggle-box">
+                                        <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
+                                        <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
+                                        <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
+                                        <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
+                                    </div>
                                 </div>
+
 
                                 <div>
                                     <ul id="link-container">
@@ -284,6 +319,8 @@
                                                     <span class="link-percent">100%</span>
                                                     <span class="link-date">2022.05.05</span>
                                                 </div>
+                                                <i data-del-post-no="98"
+                                                    class="fas fa-times-circle link-remove-btn hide"></i>
                                             </a>
                                         </li>
                                         <li>
@@ -301,6 +338,8 @@
                                                     <span class="link-percent">100%</span>
                                                     <span class="link-date">2022.05.05</span>
                                                 </div>
+                                                <i data-del-post-no="99"
+                                                    class="fas fa-times-circle link-remove-btn hide"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -340,6 +379,72 @@
             $('.post-btn-wrap').click(function (e) {
                 clickPostBtn(e.target, postNo)
             })
+
+            /* ------------------ 연관 포스트 -------------------------- */
+            // rootPostNo
+            
+            
+            // 토글, 자물쇠 아이콘 스위치하는 함수
+            function switchToggle($toggleIcons) {
+                $toggleIcons[0].classList.toggle('fff');
+                $toggleIcons[1].classList.toggle('hide');
+                $toggleIcons[2].classList.toggle('hide');
+                $toggleIcons[3].classList.toggle('fff');
+            }
+
+            function setLinkEditMod() {
+                switchToggle($postToggles); // 아이콘 바꾸기
+                $('.search-wrap').toggleClass('hide') // 검색창 표시
+                const $removeBtnList = $('.link-remove-btn');
+                for (let $btn of $removeBtnList) {
+                    $btn.classList.toggle('hide')
+                }
+            }
+
+
+            // 연관 포스트 편집모드 열기(등록, 삭제)
+            const $postToggles = $('#link-post-wrap .toggle-box').children();
+            $postToggles[1].onclick = setLinkEditMod;
+            // 연관 포스트 편집모드 닫기
+            $postToggles[2].onclick = setLinkEditMod;
+
+
+            // 연관 포스트 등록 요청 보내기
+            $('#search-plus').click(function () {
+                console.log(postNo);
+
+                let linkPostNo = -1;
+                // input 입력값을 -> data-link-post-no 값으로 바꾸기
+                const inputValue = $('#linkTitle').val();
+                console.log(inputValue);
+                const $options = $('datalist[id=titleOptionList]').children()
+                for (let i = 0; i < $options.length; i++) {
+                    if (inputValue === $options[i].value) {
+                        linkPostNo = $options[i].dataset.linkPostNo
+                        console.log(linkPostNo);
+                        break;
+                    }
+                }
+                if (linkPostNo === -1) {
+                    alert("검색 포스트가 없습니다.");
+                    return;
+                }
+            });
+
+
+            $('#link-container').click(function (e) {
+                e.preventDefault();
+                // 연관 포스트 삭제 요청 보내기
+                if(e.target.matches('.link-remove-btn')){
+                    console.log("root post no : " + postNo);
+                    console.log("link post no : " + e.target.dataset.delPostNo);
+                }
+
+            });
+
+
+            /* ------------------ // end 연관 포스트 -------------------------- */
+
 
 
 
