@@ -107,7 +107,7 @@
                                             </div>
                                             <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
                                                     ${m.content}
-                                                </textarea>
+                                            </textarea>
                                             <!-- Mark 날짜 -->
                                             <div class="meta-data">
                                                 <span>${m.modDatetime}</span>

@@ -35,24 +35,26 @@
 <body>
     <!-- MARK/MEMO 영역 도입부 -->
     <div id="postnote">
-        <!-- MARK/MEMO 탭 버튼 영역 -->
-        <div class="title-wrapper flex fixed">
+
+        <!-- MARK / MEMO 탭 버튼 영역 -->
+        <div class="title-wrapper flex">
             <div class="half selected" name="mark" onclick="btnTitle_onclick(this)">MARK</div>
             <div class="half" name="memo" onclick="btnTitle_onclick(this)">MEMO</div>
         </div>
-        <!-- MARK/MEMO 데이터 입력 영역 -->
+
+        <!-- MARK / MEMO 데이터 입력 영역 -->
         <div class="submit-wrapper">
             <div name="mark">
                 <div class="episode-no">
                     <label for="episode-no">회차
                         <!-- <input type="number" id="episode-no" name="episodeNo" min="1" max="9999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> -->
-                        <input type="text" id="episode-no" name="episodeNo" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                        <input type="text" id="episode-no" name="episodeNo" maxlength="10" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                     </label>
                 </div>
                 <div class="text-area">
-                    <textarea id="mark-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
+                    <textarea id="mark-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
                 </div>
-                <div class="flex submit-area">
+                <div class="submit-area">
                     <div class="info">
                         <span class="text-length">0/300</span>
                     </div>
@@ -63,9 +65,9 @@
             </div>
             <div class="hidden" name="memo">
                 <div class="text-area">
-                    <textarea id="memo-content" class="w100" cols="30" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
+                    <textarea id="memo-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
                 </div>
-                <div class="flex submit-area">
+                <div class="submit-area">
                     <div class="info">
                         <span class="text-length">0/300</span>
                     </div>
@@ -83,7 +85,7 @@
         <!-- MARK/MEMO 데이터 목록 영역 -->
         <div class="content-wrapper">
             <div name="mark">
-                <div class="content-area">
+                <!-- <div class="content-area">
                     <div class="flex-sb">
                         <div>
                             <i class="marking-type1 noselect">121</i>
@@ -98,42 +100,10 @@
                     <div class="content">
                         mark Content1
                     </div>
-                </div>
-                <div class="content-area">
-                    <div class="flex-sb">
-                        <div>
-                            <i class="marking-type2 noselect">23</i>
-                            |
-                            <span class="noselect">2022.08.15 13:22:34</span>
-                        </div>
-                        <div class="button-area">
-                            <ion-icon name="create-outline" class="button" onclick="btnModify_onclick(this)"></ion-icon>
-                            <ion-icon name="trash-outline" class="button" onclick="btnDelete_onclick(this)"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="content">
-                        mark Content2
-                    </div>
-                </div>
-                <div class="content-area">
-                    <div class="flex-sb">
-                        <div>
-                            <i class="marking-type3 noselect">5</i>
-                            |
-                            <span class="noselect">2022.08.15 13:22:34</span>
-                        </div>
-                        <div class="button-area">
-                            <ion-icon name="create-outline" class="button" onclick="btnModify_onclick(this)"></ion-icon>
-                            <ion-icon name="trash-outline" class="button" onclick="btnDelete_onclick(this)"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="content">
-                        mark Content3
-                    </div>
-                </div>
+                </div> -->
             </div>
             <div class="hidden" name="memo">
-                <div class="content-area">
+                <!-- <div class="content-area">
                     <div class="flex-sb">
                         <div>
                             <span class="noselect memo-datetime">2022.08.15 13:22:34</span>
@@ -146,38 +116,11 @@
                     <div class="content">
                         memo Content1
                     </div>
-                </div>
-                <div class="content-area">
-                    <div class="flex-sb">
-                        <div>
-                            <span class="noselect memo-datetime">2022.08.15 13:22:34</span>
-                        </div>
-                        <div class="button-area">
-                            <ion-icon name="create-outline" class="button" onclick="btnModify_onclick(this)"></ion-icon>
-                            <ion-icon name="trash-outline" class="button" onclick="btnDelete_onclick(this)"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="content">
-                        memo Content2
-                    </div>
-                </div>
-                <div class="content-area">
-                    <div class="flex-sb">
-                        <div>
-                            <span class="noselect memo-datetime">2022.08.15 13:22:34</span>
-                        </div>
-                        <div class="button-area">
-                            <ion-icon name="create-outline" class="button" onclick="btnModify_onclick(this)"></ion-icon>
-                            <ion-icon name="trash-outline" class="button" onclick="btnDelete_onclick(this)"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="content">
-                        memo Content3
-                    </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
+
     <script>
         // 마크 요청 URL
         const markURL = '/post/detail/test/mark';
@@ -476,7 +419,7 @@
             (hour < 10) ? hour = '0' + hour : hour;
             (minute < 10) ? minute = '0' + minute : minute;
 
-            return year + "." + month + "." + day + " " + ampm + " " + hour + ":" + minute;
+            return year + "." + month + "." + day + "  " + ampm + hour + ":" + minute;
         }
 
         /*======================================================================
@@ -574,6 +517,7 @@
                 .then(response => response.json())
                 .then(markMap => {
                     makeMarkDOM(markMap);
+                    testCall();
                 })    
         }
 
@@ -615,7 +559,7 @@
             iconArea +=     '<div class="datetime">';
             iconArea +=         '<i class="' + classifyMarkIconType(data.epId) + `">` + data.episodeNo + `</i>`;
             iconArea +=         ' | ';
-            iconArea +=         `<span class="noselect">` + formatDateTime(data.modDatetime) + `</span>`;
+            iconArea +=         `<span class="noselect mark-date">` + formatDateTime(data.modDatetime) + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-initMode">';
             iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
@@ -647,7 +591,7 @@
 
         // 북마크 내용 입력
         function appendMarkContent(data) {
-            return '<textarea class="content" readonly data-initvalue="' + data.content + '">'
+            return '<textarea class="content" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
                 + data.content
                 + '</textarea>'
             ;
@@ -668,8 +612,29 @@
 
 
         showMarkList();
-        showMemoList();    
+        showMemoList(); 
+           
         
+
+            //  textarea 높이 자동조절
+        function resize_textarea($eventTag) {
+            console.log($eventTag.value);
+            $eventTag.style.height = "1px";
+            $eventTag.style.height = (12 + $eventTag.scrollHeight) + "px";
+        }
+
+        function testCall() {
+            const $textAreaList = [...document.querySelectorAll('.content-area .content')];
+
+            for ($textArea of $textAreaList) {
+                // console.log($textArea.value);
+                $textArea.style.height = "1px";
+                $textArea.style.height = (12 + $textArea.scrollHeight) + "px";
+            }
+        }
+
+       
+
     </script>
 </body>
 </html>
