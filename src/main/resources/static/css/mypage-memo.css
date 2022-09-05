@@ -174,7 +174,7 @@ section {
     list-wrapper        / LIST 영역
 ==================================================*/
 .list-wrapper {
-    border: 1px solid #ced4da;
+    /* border: 1px solid #ced4da; */
     border-radius: 0.25rem;
     margin-top: 25px;
     padding: 8px 0px;
@@ -192,11 +192,13 @@ section {
 ==================================================*/
 .body-wrapper {
     height: 65vh;
-    border: 1px solid #adb5bd;
+    border-bottom: 1px solid #e9ecef;
     border-radius: 0.25rem;
     padding: 20px;
     overflow-y: auto;
     overflow-x: hidden;
+
+    background: #faf6f7;
 }
 
 /*================================================
@@ -204,9 +206,11 @@ section {
 ==================================================*/
 /* content 영역 */
 .body-wrapper .content-wrapper .content{
-    border: 1px solid #6c757d;
-    border-radius: 0.25rem;
-    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    padding: 30px;
+
+    background: #fff;
 }
 .body-wrapper .content-wrapper .content:nth-child(n+2){
     margin-top: 50px;
@@ -223,6 +227,7 @@ section {
     border-radius: 0.1rem;
 }
 .book-wrapper div.book-image {
+    border-radius: 20px;
     text-align: center;
     min-height: 250px;
     margin-right: 2rem;
@@ -253,7 +258,7 @@ section {
 }
 .book-wrapper .book-info .book-title span {
     background: rgb(250, 207, 211);
-    border-radius: 0.3rem;
+    border-radius: 0.6rem;
     padding: 0.6rem;
 }
 
