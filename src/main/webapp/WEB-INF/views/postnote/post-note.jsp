@@ -125,8 +125,7 @@
         // 마크 요청 URL
         const markURL = '/post/detail/test/mark';
         // const episodeNo = 1;
-        const regAccount = '김지연';
-        const modAccount = '김지연';
+        const account = '2209050001';
         
         // 메모 요청 URL
         const memoURL = '/post/detail/test/memo';
@@ -158,8 +157,7 @@
                         body: JSON.stringify({
                             "postNo": postNo,
                             "content": $memoContent.value,
-                            "regAccount": regAccount,
-                            "modAccount": modAccount
+                            "account": account
                         })
                     }) 
                     .then(response => response.text())
@@ -191,8 +189,7 @@
                             "postNo": postNo,
                             "episodeNo": $episodeNo.value,
                             "content": $markContent.value,
-                            "regAccount": regAccount,
-                            "modAccount": modAccount
+                            "account": account
                         })
                     }) 
                     .then(response => response.text())

@@ -160,7 +160,7 @@
                     // location.href = '/mypostnote/memolist?type=postTitle&keyword=';
                     return;
                 }                       
-                location.href = '/mypostnote/marklist?type=postTitle' + '&keyword=' + $keyword;
+                location.href = '/mypostnote/memolist?type=postTitle' + '&keyword=' + $keyword;
 
             } else if ($("#search-option option:selected").val() == 'content') {     
                 if ($keyword.trim() === '') {
