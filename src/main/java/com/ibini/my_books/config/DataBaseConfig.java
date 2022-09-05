@@ -18,10 +18,18 @@ public class DataBaseConfig {
     public DataSource dataSource() {
 
         HikariConfig config = new HikariConfig();
-        config.setUsername("ibini");
-        config.setPassword("1234");
-        config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:xe");
-        config.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+//        config.setUsername("ibini");
+//        config.setPassword("1234");
+//        config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:xe");
+//        config.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+
+        //============MariaDB==================
+//        config.setUsername("root");
+//        config.setPassword("mariadb");
+//        config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini);
+//        config.setDriverClassName("org.mariadb.jdbc.Driver");
+
+
 
         return new HikariDataSource(config);
     }
