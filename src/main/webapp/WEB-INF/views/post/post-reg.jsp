@@ -113,7 +113,9 @@
                                 <span class="reg-span">별점</span>
                                 <span class="explain-span star-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+                            <input class="white-box" type="text" name="starRate" placeholder="1에서 9 사이의 정수를 입력해 주세요"
+                                maxlength="1"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                         </div>
                     </div> <!-- // end reg-1 -->
 
@@ -190,14 +192,16 @@
                         </div>
                         <div class="span-wrap">
                             <span class="reg-span">연재 일시</span>
+                            <span class="explain-span ep-msg"></span>
                         </div>
-                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 금 10시">
+                        <input class="white-box" type="text" name="publishCycle" placeholder="예시) 월, 수, 금 10시">
                     </div> <!-- // end reg-3 -->
 
                     <!-- 회차 구분, 현재 회차, 현재 페이지 -->
                     <div id="reg-4">
                         <div class="span-wrap">
                             <span class="reg-span">회차 구분</span>
+                            <span class="explain-span ep-msg"></span>
                         </div>
 
                         <div class="radio-wrap ep-btn-group">
@@ -222,11 +226,15 @@
                         <div class="ep-wrap">
                             <div class="ep-input-wrap">
                                 <span class="reg-span">현재 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="text" name="curEp" placeholder="0~99999 사이 숫자" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+                                <input class="white-box" type="text" name="curEp" placeholder="0~99999 사이 숫자"
+                                    maxlength="5"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                             <div class="ep-input-wrap">
                                 <span class="reg-span">전체 회차</span> <!-- 회차는 ${p.epName}으로-->
-                                <input class="white-box" type="text" name="totalEp" placeholder="0~99999 사이 숫자" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+                                <input class="white-box" type="text" name="totalEp" placeholder="0~99999 사이 숫자"
+                                    maxlength="5"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
                         </div>
                     </div>
@@ -245,14 +253,20 @@
                             <div class="file-box-left">
                                 파일 선택
                             </div>
-                            <div class="file-box-right" data-imgs-num="0">
+                            <div class="file-box-right">
                                 첨부된 이미지가 없습니다.
                             </div>
                             <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
                         </label>
                         <div class="uploaded-list">
-                            <!-- <div class="upload-img-box">
-                                <img class="upload-img" src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
+                            <!--
+                                파일 올릴 때마다 생성될 것
+                            <div class="upload-img-box">
+                                <img class="upload-img"
+                                    src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
+                                <i class="fas fa-times-circle upload-cancel-btn"></i>
+                                <input type="hidden" name="filNames"
+                                value="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large">
                             </div> -->
                         </div>
 
@@ -273,18 +287,32 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-
+            // jQueryTagTest("태그 잡기 테스트", $('h1'));
             const account = "${account}";
             console.log(account);
+
+            // 입력창 키업 이벤트
+            const $form = $('#write-form');
+            // console.log($form);
+            $form.on({
+                keydown: function (e) {
+                    return checkKeydown(e);
+                },
+                keyup: function (e) {
+                    checkKeyup(e);
+                }
+            });
+
 
             // 포스트 입력 폼 제출 이벤트
             const $regBtn = $('#post-reg-btn');
             // jQueryTagTest($regBtn, "태그 잡기 테스트");
             $regBtn.click(e => {
-                // e.preventDefault();
-                // validateFormValue();
-
-                $('#post-reg-form').submit();
+                e.preventDefault();
+                if (!validateFormValue()) {
+                    return;
+                }
+                $('#write-form').submit();
             })
 
 
@@ -385,10 +413,7 @@
                         console.log(fileNames);
                         showImgs(fileNames);
                     });
-            });
-
-
-
+            }); // end 첨부 이미지 인풋 체인지 이벤트
 
 
             // 썸네일 인풋 체인지 이벤트
@@ -438,6 +463,12 @@
                         showThumbImg(fileNames, fileOriginName);
                     });
             }); // end 썸네일 인풋 체인지 이벤트
+
+
+
+            // 첨부 이미지 삭제 이벤트
+            $('.uploaded-list').click(delUploadImg);
+
 
             //==================================================//
 

@@ -1,5 +1,6 @@
 package com.ibini.my_books.member.service;
 
+import com.ibini.my_books.member.common.paging.Page;
 import com.ibini.my_books.member.domain.InquiryTable;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.AnswerDTO;
@@ -56,8 +57,8 @@ class MemberServiceTest {
         Member m = service.getMember("vacation");
         InquiryDTO dto = new InquiryDTO();
         dto.setUserId(m.getUserId());
-        dto.setInquiryTitle("5번째 문의글 제목");
-        dto.setInquiry("5번째 문의 글입니다.");
+        dto.setInquiryTitle("3번째 문의글 제목");
+        dto.setInquiry("3번째 문의 글입니다.");
 
         service.inquiryRegister(dto);
     }
@@ -78,30 +79,32 @@ class MemberServiceTest {
     @Test
     @DisplayName("시리얼넘버에 맞는 문의 내역이 조회 되어야 한다.")
     void findOneInquiryTest(){
-        String serialNumber = "2208260024";
+        String serialNumber = "2208290021";
         InquiryTable i = service.findOneInquiry(serialNumber);
         System.out.println(i);
     }
 
-    @Test
-    @DisplayName("userId의 모든 문의글이 조회 되어야 한다.")
-    void findMemeberInquiryTest(){
-        String userId = "vacation";
-        List<InquiryTable> i = service.findMemberInquiry(userId);
-        for (InquiryTable y : i) {
-            System.out.println(y);
-        }
-    }
+//    @Test
+//    @DisplayName("userId의 모든 문의글이 조회 되어야 한다.")
+//    void findMemberInquiryTest(){
+//       Page page = new Page();
+//        String userId = "vacation";
+//        List<InquiryTable> i = service.findMemberInquiry(userId,page);
+//        for (InquiryTable y : i) {
+//            System.out.println(y);
+//        }
+//    }
 
 
-    @Test
-    @DisplayName("모든 문의글을 조회 되어야 한다.")
-    void findAllInquiryTest(){
-        List<InquiryTable> allInquiry = service.findAllInquiry();
-        for (InquiryTable i : allInquiry) {
-            System.out.println(i);
-        }
-    }
+//    @Test
+//    @DisplayName("모든 문의글을 조회 되어야 한다.")
+//    void findAllInquiryTest(){
+//        Page page = new Page();
+//        List<InquiryTable> allInquiry = service.findAllInquiry(page);
+//        for (InquiryTable i : allInquiry) {
+//            System.out.println(i);
+//        }
+//    }
 
     @Test
     @DisplayName("시리얼넘버와 일치하는 문의글이 수정 되어야 한다.")
@@ -122,7 +125,7 @@ class MemberServiceTest {
     @Test
     @DisplayName("시리얼 번호의 게시글이 삭제 되어야 한다.")
     void inquiryDeleteTest(){
-        String serialNumber = "2208260009";
+        String serialNumber = "2208260001";
         boolean flag = service.inquiryDelete(serialNumber);
         assertTrue(flag);
     }

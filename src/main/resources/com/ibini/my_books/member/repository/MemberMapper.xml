@@ -163,7 +163,8 @@
         <!-- 문의내역 상세 조회  -->
     <select id="findOneInquiry" resultMap="manageInquiry">
 
-        SELECT * FROM tbl_manage_inquiry
+        SELECT *
+        FROM tbl_manage_inquiry
         WHERE serial_number = #{serialNumber}
 
     </select>
@@ -171,8 +172,17 @@
     <!-- 회원 마이페이지에서 회원 문의내역 조회하기  -->
     <select id="findMemberInquiry" resultMap="manageInquiry">
 
-        SELECT * FROM tbl_manage_inquiry
-        WHERE user_id = #{userId}
+        SELECT *
+           FROM (
+             SELECT ROWNUM rn, f_inquiry.*
+                FROM (
+                 SELECT  *
+                          FROM tbl_manage_inquiry
+                          WHERE user_id = #{userId}
+                          ORDER BY inquiry_date DESC
+                      )f_inquiry
+        )
+        WHERE rn BETWEEN (#{page.pageNum} - 1) * #{page.amount} + 1  AND (#{page.pageNum} * #{page.amount})
 
     </select>
 
@@ -180,7 +190,17 @@
 
     <select id="findAllInquiry" resultMap="manageInquiry">
 
-        SELECT * FROM tbl_manage_inquiry
+        SELECT *
+             FROM (
+                   SELECT ROWNUM rn, f_inquiry.*
+                   FROM (
+                         SELECT  *
+                         FROM tbl_manage_inquiry
+                         ORDER BY inquiry_date DESC
+                         )f_inquiry
+                     )
+        WHERE rn BETWEEN (#{pageNum} - 1) * #{amount} + 1  AND (#{pageNum} * #{amount})
+
 
     </select>
 
@@ -196,6 +216,20 @@
         DELETE FROM tbl_manage_inquiry
         WHERE serial_number = #{serialNumber}
     </delete>
+
+<!--    // 회원 로그인 상태 - 총 문의글 수 구하기 (페이지 처리)-->
+    <select id="getTotalMemberInquiry" resultType="int">
+
+        SELECT COUNT(*) FROM tbl_manage_inquiry WHERE user_id = #{userId}
+
+    </select>
+
+<!--    // 관리자 로그인 상태 - 총 문의글 수 구하기 (페이지 처리)-->
+    <select id="getTotalInquiry" resultType="int">
+
+        SELECT COUNT(*) FROM tbl_manage_inquiry
+
+    </select>
 
 
 
