@@ -16,7 +16,7 @@ import java.util.Map;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/post/detail")
+@RequestMapping("/post/detail/test")
 public class PostNoteController {
 
     private final PostMarkService postMarkService;
@@ -31,7 +31,6 @@ public class PostNoteController {
 
         return flag ? new ResponseEntity<>("insert-success", HttpStatus.OK)
                 : new ResponseEntity<>("insert-fail", HttpStatus.INTERNAL_SERVER_ERROR);
-        // BAD_REQUEST : 400, INTERNAL_SERVER_ERROR : 500
     }
 
     // 마크 수정
@@ -57,17 +56,16 @@ public class PostNoteController {
         return flag ? new ResponseEntity<>("delete-success", HttpStatus.OK)
                 : new ResponseEntity<>("delete-fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
+    
     // 마크 전체 목록
-    @GetMapping("/mark/{postNo}")
-    public ResponseEntity<List<PostMark>> viewMarkList(@PathVariable Long postNo) {
-        log.info("/mark/{} GET!", postNo);
+    @GetMapping("/mark")
+    public ResponseEntity< Map<String, Object>> viewMarkList(Long postNo) {
+        log.info("/mark GET!");
 
-        List<PostMark> postMarkList = postMarkService.findAll(postNo);
+        Map<String, Object> markMap = postMarkService.findAll(postNo);
 
-        return new ResponseEntity<>(postMarkList, HttpStatus.OK);
+        return new ResponseEntity<>(markMap, HttpStatus.OK);
     }
-
 
 
 
@@ -108,7 +106,7 @@ public class PostNoteController {
 
     // 메모 전체 목록
     @GetMapping("/memo")
-    public ResponseEntity< Map<String, Object>> viewMemoList(Long postNo) {
+    public ResponseEntity<Map<String, Object>> viewMemoList(Long postNo) {
         log.info("/memo GET!");
 
         Map<String, Object> memoMap = postMemoService.findAll(postNo);

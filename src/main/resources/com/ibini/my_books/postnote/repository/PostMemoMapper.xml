@@ -8,22 +8,23 @@
     <resultMap id="memoMap" type="com.ibini.my_books.postnote.domain.PostMemo">
         <result property="memoNo" column="memo_no" />
         <result property="postNo" column="post_no" />
-        <result property="regDate" column="reg_date" />
-        <result property="modDate" column="mod_date" />
+        <result property="regDatetime" column="reg_datetime" />
+        <result property="modDatetime" column="mod_datetime" />
     </resultMap>
 
     <!-- 메모 저장 -->
     <insert id="save">
         INSERT INTO prj_post_memo
-        (memo_no, post_no, content)
+            (post_no, content, account)
         VALUES
-        (seq_prj_post_memo.nextval, #{postNo}, #{content})
+            (#{postNo}, #{content}, #{account})
     </insert>
 
     <!-- 메모 수정 -->
     <update id="modify">
         UPDATE prj_post_memo
-        SET content = #{content}
+        SET content = #{content},
+        mod_datetime = current_timestamp
         WHERE memo_no = #{memoNo}
     </update>
 
@@ -42,10 +43,10 @@
     <!-- 메모 전체 조회 기능 -->
     <select id="findAll" resultMap="memoMap">
         SELECT
-        *
+            post_no, memo_no, content, account, reg_datetime, mod_datetime
         FROM prj_post_memo
         WHERE post_no = #{postNo}
-        ORDER BY mod_date DESC  <!-- 페이징 처리 추후 추가 예정 -->
+        ORDER BY mod_datetime DESC
     </select>
 
     <!-- 메모 개별 조회 기능 -->
@@ -63,4 +64,14 @@
         WHERE post_no = #{postNo}
     </select>
 
+    <!-- 메모 전체 조회 기능 With Search -->
+    <select id="findAllWithSearch" resultMap="memoMap">
+        SELECT
+            post_no, memo_no, content, account, reg_datetime, mod_datetime
+        FROM prj_post_memo
+        WHERE 1=1
+            AND post_no = #{postNo}
+            <if test="search.type == 'content'">AND content LIKE CONCAT('%', #{search.keyword}, '%')</if>
+        ORDER BY mod_datetime DESC
+    </select>
 </mapper>

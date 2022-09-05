@@ -1,0 +1,332 @@
+/*================================================
+    폰트 설정
+==================================================*/
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*================================================
+    태그별 css 설정
+==================================================*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+button,
+input {
+    background-color: inherit;
+    border: none;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    background: #fff;
+}
+
+textarea {
+    min-height: 5rem;
+    overflow-y: hidden;
+    resize: none;
+    cursor: default;
+    padding: 0.2em 0.5em;
+}
+
+hr {
+    width: 99%;
+    margin: 1em 0;
+}
+
+/*================================================
+    공통 css 설정
+==================================================*/
+.hidden {
+    display: none;
+}
+
+.selected {
+    background-color: #ffca3d;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.w20 {width: 20%;}
+.w30 {width: 30%;}
+.w50 {width: 50%;}
+.w70 {width: 70%;}
+.w80 {width: 80%;}
+.w100 {width: 100%;}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-fs {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/*================================================
+    wrap, section       / 최상단 wrap 영역  
+==================================================*/
+#wrap {
+    width: 1000px;
+    font-size: 18px;
+    font-family: 'NanumSquareRound', sans-serif;
+    color: #000;
+    background: #fff;
+    margin: 0 auto;
+}
+
+section {
+    width: 90%;
+    /* border: 1px solid #adb5bd; */
+    /* border-radius: 0.25rem; */
+    margin: 10px auto 0;
+    /* padding: 24px; */
+    box-sizing: border-box;
+}
+
+/*================================================
+    header-wrapper      / header 영역
+==================================================*/
+/* .header-wrapper {
+} */
+/*================================================
+    search-wrapper      / 검색 영역
+==================================================*/
+.search-wrapper {
+    border: 1px solid #adb5bd;
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+
+    font-size: 17px;       
+}
+
+/* search-title 영역 */
+.search-wrapper select {
+    width: 15%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    outline: none;
+    vertical-align: bottom;
+}
+.search-wrapper select:hover {
+    outline: 2px solid #495057;;
+    border: none;
+}
+
+/* input 검색창 영역 */
+.search-wrapper input[name="keyword"] {
+    width: 50%;
+    border: 1px solid #6c757d;
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+    padding: 0.35rem 0.7rem;
+}
+.search-wrapper input[name="keyword"]:hover,
+.search-wrapper input[name="keyword"]:focus {
+    outline: 2px solid #495057;
+    border: none;
+}
+
+/* 검색 버튼 */
+.search-wrapper .search-button {
+    border: 1px solid #495057;
+    border-radius: 0.25rem;
+    padding: 0.4rem 1rem;
+
+    font-size: 16px;
+    background: #f5f9fc;;
+}
+.search-wrapper .search-button:hover {
+    background: #e9ecef;;
+}
+
+
+/*================================================
+    list-wrapper        / LIST 영역
+==================================================*/
+.list-wrapper {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    margin-top: 25px;
+    padding: 8px 0px;
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+
+    cursor: default;
+    background-color: #ffca3d;
+}
+
+/*================================================
+    body-wrapper        / body 영역
+==================================================*/
+.body-wrapper {
+    height: 65vh;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25rem;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/*================================================
+    content-wrapper     / content 영역
+==================================================*/
+/* content 영역 */
+.body-wrapper .content-wrapper .content{
+    border: 1px solid #6c757d;
+    border-radius: 0.25rem;
+    padding: 20px;
+}
+.body-wrapper .content-wrapper .content:nth-child(n+2){
+    margin-top: 50px;
+}
+
+/* book-wrapper 영역 */
+.body-wrapper .content-wrapper .content .book-wrapper {
+    padding: 5px;
+}
+
+/* 책 이미지 영역 */
+.book-wrapper .book-image {
+    background: #ffe89f;
+    border-radius: 0.1rem;
+}
+.book-wrapper div.book-image {
+    text-align: center;
+    min-height: 250px;
+    margin-right: 2rem;
+
+    display: flex;
+    align-items: center;
+}
+.book-wrapper img.book-image {
+    width: 100%;
+    /* object-fit: cover; */
+    /* height: 250px; */
+}
+
+/* 책 부가정보 영역 */
+.book-wrapper .book-info {
+    padding-right: 15px;
+}
+
+/* 책 제목 영역 */
+.book-wrapper .book-info .book-title {
+    font-weight: bold;
+    font-size: 19px;
+
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 5px double #6c757d;
+}
+.book-wrapper .book-info .book-title span {
+    background: rgb(250, 207, 211);
+    border-radius: 0.3rem;
+    padding: 0.6rem;
+}
+
+/* MARK 내용 영역 */
+/* MARK episode-no */
+.book-wrapper .book-info .my-text .episode-no {
+    margin-top: 1rem;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+.book-wrapper .book-info .my-text .episode-no span {
+    padding: 0.4rem;
+    background: #c59c9c;
+    border-radius: 0.3rem;
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type1::after {
+    content: '화';
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type2::after {
+    content: 'p';
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type3::after {
+    content: '권';
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type4::after {
+    content: '%';
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type1 {
+    color: white;
+    background-color: rgb(191, 142, 142);
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type2 {
+    color: white;
+    background-color: blue;
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type3 {
+    color: white;
+    background-color: green;
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type4 {
+    color: white;
+    background-color: rgb(117, 63, 96);
+}
+
+/* MARK content */
+.book-wrapper .book-info .my-text textarea {
+    border: 1px solid #e9ecef;
+    border-radius: 0.25rem;
+    outline-color: #4a4a4a4f;
+    margin-top: 0.9rem;
+    font-size: 17px;
+}
+/* .book-wrapper .book-info .my-text textarea:first-child {
+    margin-top: 1rem;
+} */
+
+/* meta data 날짜 영역 */
+.content-wrapper .meta-data {
+    font-size: 15px;
+    font-weight: bold;
+    /* text-decoration: underline; */
+    
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* 더보기 영역 */
+.book-wrapper .book-info .view-more {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+
+
+
