@@ -270,6 +270,35 @@ section {
     background: #c59c9c;
     border-radius: 0.3rem;
 }
+.book-wrapper .book-info .my-text .episode-no span.marking-type1::after {
+    content: '화';
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type2::after {
+    content: 'p';
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type3::after {
+    content: '권';
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type4::after {
+    content: '%';
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type1 {
+    color: white;
+    background-color: rgb(191, 142, 142);
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type2 {
+    color: white;
+    background-color: blue;
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type3 {
+    color: white;
+    background-color: green;
+}
+.book-wrapper .book-info .my-text .episode-no span.marking-type4 {
+    color: white;
+    background-color: rgb(117, 63, 96);
+}
+
 /* MARK content */
 .book-wrapper .book-info .my-text textarea {
     border: 1px solid #e9ecef;

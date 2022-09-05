@@ -92,6 +92,8 @@
                             
                                 <!-- 포스트 번호 -->
                                 <!-- <span id="postNo" style="display: none;">${p.postNo}</span> -->
+                                <!-- epId (0:회차 1:페이지 2:권수 3:퍼센트) -->
+                                <span id="epId" class="hidden">${p.epId}</span>
                                 
                                 <!-- 책 정보 -->
                                 <div class="book-info w70">
@@ -103,11 +105,22 @@
                                     <c:forEach var="m" items="${p.markList}" end="1">
                                         <div id="mark-info" class="my-text">
                                             <div class="episode-no">
-                                                <span>${m.episodeNo}</span>
+                                                <c:choose>
+                                                    <c:when test="${p.epId == 0}">
+                                                        <span class="marking-type1">${m.episodeNo}</span>
+                                                    </c:when>
+                                                    <c:when test="${p.epId == 1}">
+                                                        <span class="marking-type2">${m.episodeNo}</span>
+                                                    </c:when>
+                                                    <c:when test="${p.epId == 2}">
+                                                        <span class="marking-type3">${m.episodeNo}</span>
+                                                    </c:when>
+                                                    <c:when test="${p.epId == 3}">
+                                                        <span class="marking-type4">${m.episodeNo}</span>
+                                                    </c:when>
+                                                </c:choose>
                                             </div>
-                                            <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                                    ${m.content}
-                                            </textarea>
+                                            <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">${m.content}</textarea>
                                             <!-- Mark 날짜 -->
                                             <div class="meta-data">
                                                 <span>${m.modDatetime}</span>
@@ -145,6 +158,45 @@
             // 지금은 샘플html이니 redirect 처리를 하도록 한다.
             window.location.href = './detail/detail.html';
         }
+
+        document.querySelector('.search-button').addEventListener('keyup', (e)=>{
+            if (e.keyCode === 13) {
+                const $keyword = $("#searchText").val();
+
+            
+                if ($("#search-option option:selected").val() == 'postTitle') {     
+                    if ($keyword.trim() === '') {
+                        alert('검색어를 입력하세요')
+                        // location.href = '/mypostnote/list?type=postTitle&keyword=';
+                        return;
+                    }   
+                        
+                    location.href = '/mypostnote/marklist?type=postTitle' + '&keyword=' + $keyword;
+        
+                } else if ($("#search-option option:selected").val() == 'content') {     
+                    if ($keyword.trim() === '') {
+                        alert('검색어를 입력하세요')
+                        // location.href = '/mypostnote/list?type=content&keyword=';
+                        return;
+                    }   
+                        
+                    location.href = '/mypostnote/marklist?type=content' + '&keyword=' + $keyword;
+        
+                } else if ($("#search-option option:selected").val() == 'episodeNo') {        
+                    if ($keyword.trim() === '') {
+                        alert('검색어를 입력하세요')
+                        // location.href = '/mypostnote/list?type=episode&keyword=';
+                        return;
+                    } 
+                    if (!$.isNumeric($keyword)) {
+                        alert('숫자만 입력하세요');
+                        return;
+                    }        
+
+                    location.href = '/mypostnote/marklist?type=episodeNo' + '&keyword=' + $keyword;
+                } 
+            }  
+        });
 
         /*======================================================================
             함수 영역
