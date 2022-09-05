@@ -145,12 +145,17 @@
         /*======================================================================
             이벤트 영역
         ========================================================================*/
-        // textarea 높이 자동조절
-        // function resize_textarea($eventTag) {
-        //     console.log($eventTag.value);
-        //     $eventTag.style.height = "1px";
-        //     $eventTag.style.height = (12 + $eventTag.scrollHeight) + "px";
-        // }
+        function resize_textarea() {
+            const $textAreaList = [...document.querySelectorAll('.my-text textarea')];
+
+            for ($textArea of $textAreaList) {
+                // console.log($textArea.value);
+                $textArea.style.height = "1px";
+                $textArea.style.height = (12 + $textArea.scrollHeight) + "px";
+            }
+        }
+
+        resize_textarea();
 
         // ... 더보기 클릭
         function click_viewMore($eventTag) {
@@ -202,31 +207,13 @@
             $("#searchText").val('');   
             $('.blank li').text('');
         });
+
         /*======================================================================
             함수 영역
         ========================================================================*/
         $(document).ready(function(){
-            // 실행할 기능을 정의해주세요.
+            
         });
-
-
-
-        /*======================================================================
-            테스트 영역
-        ========================================================================*/
-        function testCall() {
-            const $textAreaList = [...document.querySelectorAll('.my-text textarea')];
-
-            for ($textArea of $textAreaList) {
-                // console.log($textArea.value);
-                $textArea.style.height = "1px";
-                $textArea.style.height = (12 + $textArea.scrollHeight) + "px";
-            }
-        }
-        testCall();
-
     </script>
-
 </body>
-
 </html>
