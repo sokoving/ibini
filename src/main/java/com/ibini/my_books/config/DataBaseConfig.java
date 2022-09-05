@@ -18,12 +18,21 @@ public class DataBaseConfig {
     public DataSource dataSource() {
 
         HikariConfig config = new HikariConfig();
+        // oracle DB 설정
 //        config.setUsername("ibini");
-        config.setUsername("root");
-        config.setPassword("mariadb1234");
 //        config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:xe");
-        config.setJdbcUrl("jdbc:mariadb://localhost:3306/spring4");
 //        config.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+
+        // 집 DB 설정
+//        config.setUsername("root");
+//        config.setPassword("mariaDB");
+//        config.setJdbcUrl("jdbc:mariadb://localhost:3306/spring4");
+//        config.setDriverClassName("org.mariadb.jdbc.Driver");
+
+        // 컴퓨터디비
+        config.setUsername("root");
+        config.setPassword("mariadb");
+        config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini");
         config.setDriverClassName("org.mariadb.jdbc.Driver");
 
         return new HikariDataSource(config);
