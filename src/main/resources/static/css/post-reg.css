@@ -10,7 +10,7 @@ section .inner-section{
     margin: 0 auto;
     background-color: #eeedeb;
     border-radius: 1em;
-    padding: 80px;
+    padding: 100px;
     /* box-sizing: border-box; */
 }
 .top-msg{
