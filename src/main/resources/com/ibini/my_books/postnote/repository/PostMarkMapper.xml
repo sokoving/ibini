@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ibini.my_books.postnote.repository.PostMarkMapper">
-    
+
     <resultMap id="markMap" type="com.ibini.my_books.postnote.domain.PostMark">
         <result property="markNo" column="mark_no" />
         <result property="postNo" column="post_no" />

@@ -47,9 +47,9 @@
                                 <option value="content" ${search.type == 'content' ? 'selected="selected"' : '' }>메모 내용</option>
                             </select>
                            
-                            <input id="searchText" type="text" name="keyword" value="${search.keyword}" placeholder="검색어를 입력하세요" autocomplete="off">
+                            <input id="searchText" type="text" name="keyword" value="${search.keyword}" onkeyup="enterkey()"placeholder="검색어를 입력하세요" autocomplete="off">
 
-                            <button id="submit" class="search-button" type="button">
+                            <button id="submit" class="search-button" type="button" onclick="search()">
                                 검색
                             </button>
                         </div>
@@ -105,9 +105,7 @@
                                     <!-- MEMO 내용 -->
                                     <c:forEach var="m" items="${p.memoList}" end="1">
                                         <div id="memo-info" class="my-text">
-                                            <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">
-                                                    ${m.content}
-                                                </textarea>
+                                            <textarea class="w100" spellcheck="false" readonly>${m.content}</textarea>
                                             <!-- MEMO 날짜 -->
                                             <div class="meta-data">
                                                 <span>${m.modDatetime}</span>
@@ -145,11 +143,49 @@
             // 지금은 샘플html이니 redirect 처리를 하도록 한다.
             window.location.href = './detail/detail.html';
         }
+        
+        function enterkey() {
+            if (window.event.keyCode == 13) {
+                search();
+            }
+        }
+
+        // 검색 Event
+        function search() {
+            const $keyword = $("#searchText").val();
+
+            if ($("#search-option option:selected").val() == 'postTitle') {     
+                if ($keyword.trim() === '') {
+                    alert('검색어를 입력하세요')
+                    // location.href = '/mypostnote/memolist?type=postTitle&keyword=';
+                    return;
+                }                       
+                location.href = '/mypostnote/marklist?type=postTitle' + '&keyword=' + $keyword;
+
+            } else if ($("#search-option option:selected").val() == 'content') {     
+                if ($keyword.trim() === '') {
+                    alert('검색어를 입력하세요')
+                    return;
+                }                       
+                location.href = '/mypostnote/memolist?type=content' + '&keyword=' + $keyword;
+
+            }
+        };
+
+        // 옵션이 바뀌면 검색창 / 내용창 메시지를 초기화시켜주는 Event
+        $("#search-option").on("change",function(){
+            $("#searchText").val('');   
+            $('.blank li').text('');
+        });
 
         /*======================================================================
             함수 영역
         ========================================================================*/
-        
+        $(document).ready(function(){
+            // 실행할 기능을 정의해주세요.
+        });
+
+
 
         /*======================================================================
             테스트 영역
@@ -164,43 +200,7 @@
             }
         }
         testCall();
-
     </script>
-        
-    <script>
-        // 검색 Event
-        $("#submit").on("click",function(){
-
-            const $keyword = $("#searchText").val();
-
-            if ($("#search-option option:selected").val() == 'postTitle') {     
-                if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
-                    // location.href = '/mypostnote/memolist?type=postTitle&keyword=';
-                    return;
-                }   
-                     
-                location.href = '/mypostnote/memolist?type=postTitle' + '&keyword=' + $keyword;
-    
-            } else if ($("#search-option option:selected").val() == 'content') {     
-                if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
-                    // location.href = '/mypostnote/memolist?type=content&keyword=';
-                    return;
-                }   
-                     
-                location.href = '/mypostnote/memolist?type=content' + '&keyword=' + $keyword;
-            }
-        });
-
-        // 옵션이 바뀌면 검색창 / 내용창 메시지를 초기화시켜주는 Event
-        $("#search-option").on("change",function(){
-            $("#searchText").val('');   
-            $('.blank li').text('');
-        });
-    </script>
-
-   
 </body>
 
 </html>
