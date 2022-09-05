@@ -21,7 +21,7 @@ class PlatformMapperTest {
     @DisplayName("플랫폼 이름이 추가되야 한다")
     void savePlatformTest(){
         PlatformDomain pd = new PlatformDomain();
-        pd.setPlatformName("봄툰");
+        pd.setPlatformName("시리즈");
         pd.setAccount("ibini");
 //        pd.setPlatformBgColor("");
 //        pd.setPlatformFontColor("");
@@ -36,7 +36,7 @@ class PlatformMapperTest {
     @Test
     @DisplayName("플랫폼을 하나 조회할 수 있어야한다")
     void findOnePlatformTest(){
-        int platformid = 2;
+        int platformid = 1;
 
         PlatformDomain platform = platformMapper.findOnePlatform(platformid);
 
@@ -57,12 +57,12 @@ class PlatformMapperTest {
     @Test
     @DisplayName("선택한 플랫폼의 값을 수정할 수 있어야한다")
     void modifyTest(){
-        int platformId = 7;
+        int platformId = 2;
         PlatformDomain onePlatform = platformMapper.findOnePlatform(platformId);
         onePlatform.setPlatformId(onePlatform.getPlatformId());
         onePlatform.setPlatformName("레진코믹스");
-//        onePlatform.setPlatformBgColor("#ed1c24");
-//        onePlatform.setPlatformFontColor("#121212");
+        onePlatform.setPlatformBgColor("#ed1c24");
+        onePlatform.setPlatformFontColor("#121212");
 
         System.out.println("onePlatform = " + onePlatform);
         boolean b = platformMapper.modifyPlatform(onePlatform);
@@ -83,6 +83,7 @@ class PlatformMapperTest {
     void getTotalCountTest(){
         String account = "ibini";
         int result = platformMapper.getTotalCount(account);
-        assertEquals(6, result);
+        System.out.println(result);
+        assertEquals(2, result);
     }
 }
