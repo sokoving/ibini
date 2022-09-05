@@ -159,44 +159,6 @@
             window.location.href = './detail/detail.html';
         }
 
-        document.querySelector('.search-button').addEventListener('keyup', (e)=>{
-            if (e.keyCode === 13) {
-                const $keyword = $("#searchText").val();
-
-            
-                if ($("#search-option option:selected").val() == 'postTitle') {     
-                    if ($keyword.trim() === '') {
-                        alert('검색어를 입력하세요')
-                        // location.href = '/mypostnote/list?type=postTitle&keyword=';
-                        return;
-                    }   
-                        
-                    location.href = '/mypostnote/marklist?type=postTitle' + '&keyword=' + $keyword;
-        
-                } else if ($("#search-option option:selected").val() == 'content') {     
-                    if ($keyword.trim() === '') {
-                        alert('검색어를 입력하세요')
-                        // location.href = '/mypostnote/list?type=content&keyword=';
-                        return;
-                    }   
-                        
-                    location.href = '/mypostnote/marklist?type=content' + '&keyword=' + $keyword;
-        
-                } else if ($("#search-option option:selected").val() == 'episodeNo') {        
-                    if ($keyword.trim() === '') {
-                        alert('검색어를 입력하세요')
-                        // location.href = '/mypostnote/list?type=episode&keyword=';
-                        return;
-                    } 
-                    if (!$.isNumeric($keyword)) {
-                        alert('숫자만 입력하세요');
-                        return;
-                    }        
-
-                    location.href = '/mypostnote/marklist?type=episodeNo' + '&keyword=' + $keyword;
-                } 
-            }  
-        });
 
         /*======================================================================
             함수 영역
