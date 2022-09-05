@@ -38,11 +38,11 @@ section {
 .inquiryTable {
     width: 100%;
     margin: 0 auto 0;
-    /* background: yellow; */
     display: flex;
     border-bottom: 2px solid;
     margin-bottom: 5px;
     padding: 15px 0;
+    background: #f8f3868c;
 }
 
 .inquiryTable .table1 {
@@ -74,6 +74,14 @@ section {
 /* 미응답 모달 버튼 */
 .btn-primary {
     width: 100px;
+    background: rgb(138 200 231 / 36%)
+}
+
+/* 미응답 모달 버튼 하버효과 */
+.btn-primary:hover {
+    color: #fff;
+    background-color: #4c7fcc;
+    border-color: #4c7fcc;
 }
 
 .inquiryMainTable li {
@@ -86,15 +94,17 @@ section {
 
 /* 제목 li 태그 */
 .table1 .title {
-    /* padding-left: 80px; */
+    padding-left: 80px;
 }
 
 /* 문의글 상세보기시 출력되는 태그 li */
 .inquiry-content {
     margin-left: 80px;
     width: 850px;
-    border: 1px solid;
+    /* border: 1px solid; */
     padding: 15px;
+    border-radius: 10px 10px 10px 10px /10px 10px 10px 10px;
+    background: white;
 
 }
 
@@ -107,8 +117,10 @@ section {
 /* 답변 상세보기시 출력되는 태그 li */
 .answer {
     margin-left: 110px;
-    border: 1px solid;
+    /* border: 1px solid; */
+    background: white;
     width: 800px;
+    border-radius: 10px 10px 10px 10px /10px 10px 10px 10px;
 }
 
 /* 답변 상세보기시 출력되는 답변: */
@@ -151,6 +163,14 @@ section {
 /* 새로운글 표시  */
 .newMark.inquirynewmark {
     display: flex;
+}
+
+.badge{
+    font-size: 12px;
+}
+
+li.detail {
+    margin-left: 5px;
 }
 
 .newMark.answernewmark {

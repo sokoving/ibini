@@ -15,7 +15,7 @@
                     <section>
                         <h1> 문의하기 </h1>
                         <!-- 모달 버튼 -->
-                        <div class="answer-register"> <a id="registerBtn" type="button" class="btn btn-primary"
+                        <div class="inquiry-register"> <a id="registerBtn" type="button" class="btn btn-primary"
                                 data-bs-toggle="modal" data-bs-target="#inquiryregisterModal"
                                 data-bs-whatever="" href="#">
                                 [문의글 등록하기] </a> </div>
@@ -148,7 +148,7 @@
             <!--================== script =================================-->
             <!-- 문의글 등록 검증 jQuery -->
 
-            // 문의글 등록하기 모달
+            <!-- // 문의글 등록하기 모달 -->
             <!--   // 부트 모달 스트랩 스크립트 [답변 등록] -->
             <script>
                 var inquiryregisterModal = document.getElementById('inquiryregisterModal')

@@ -86,4 +86,13 @@ select * from prj_genre;
 --insert into prj_platform (platform_id, account, platform_name) VALUES (seq_prj_platform.nextval, 'ibini', '네이버웹툰');
 --commit;
 
+INSERT INTO tbl_reason_break_away
+(reason_num, out_reason)VALUES (seq_tbl_reason_break_away.nextval, '서비스 이용 불편');
+
+INSERT INTO tbl_reason_break_away
+(reason_num, out_reason)VALUES (seq_tbl_reason_break_away.nextval, '관리 및 피드백이 잘 안됨');
+
+INSERT INTO tbl_reason_break_away
+(reason_num, out_reason)VALUES (seq_tbl_reason_break_away.nextval, '에러가 많음');
+
 

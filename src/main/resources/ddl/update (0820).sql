@@ -14,3 +14,5 @@ UPDATE "IBINI"."PRJ_PLATFORM" SET PLATFORM_BG_COLOR = '#03c75a', PLATFORM_FONT_C
 
 --문피아          배경: #5aa2dd/ #5f9bd1 글자색: #333 rgb(51, 51, 51)
 --조아라          배경: #004c99 글자색: #a5f72c
+
+UPDATE tbl_member SET auth = 'ADMIN' WHERE user_id = 'admin';

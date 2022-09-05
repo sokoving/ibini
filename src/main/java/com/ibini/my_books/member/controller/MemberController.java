@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.util.List;
 import java.util.Map;
 
 import static com.ibini.my_books.member.domain.OauthValue.*;
@@ -254,15 +253,26 @@ public class MemberController {
 
     @Transactional
     @PostMapping("/join-out")
-    public String joinOut(String userId, String password, RedirectAttributes ra) {
-        log.info("/member/join-out POST !! userId : {}, password : {}", userId, password);
+    public String joinOut(String userId, String password,int reasonNum, String outReason
+            ,RedirectAttributes ra) {
+        log.info("/member/join-out POST !! userId : {}, password : {}, " +
+                        "reasonNum : {}, outReason : {}",
+                userId, password,reasonNum,outReason);
+        if(reasonNum == 0) {
+            ra.addFlashAttribute("msg","not-reasonInput");
+            return "redirect:/member/join-out";
+        }
+        //회원탈퇴사유 직접 입력시
+        if(reasonNum > 3){
+            memberService.insertReason(outReason);
+        }
 
         // 입력된 비밀번호와 db 비밀번호 일치 확인
         boolean pwCheckFlag = memberService.modifyPwCheck(password, userId);
 
         if (pwCheckFlag) {
             ra.addFlashAttribute("msg", "success");
-            memberService.memberDelete(userId, password);
+            memberService.memberDelete(userId, password, reasonNum);
 
             return "redirect:/member/join-sign-out";
         }
