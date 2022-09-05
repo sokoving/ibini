@@ -14,7 +14,8 @@ public class PostMemo {
     private String content;      // 내용
     private Date regDatetime;    // 작성일자, 시간
     private Date modDatetime;    // 수정일자, 시간
-    private String account;   // 작성 account
+    private String regAccount;   // 작성 account
+    private String modAccount;   // 수정 account
 
     //커스텀 필드
     private String PrettierDate;
