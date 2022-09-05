@@ -2,30 +2,29 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.ibini.my_books.postnote.repository.PostMemoMapper">
+
     <resultMap id="memoMap" type="com.ibini.my_books.postnote.domain.PostMemo">
         <result property="memoNo" column="memo_no" />
         <result property="postNo" column="post_no" />
         <result property="regDatetime" column="reg_datetime" />
         <result property="modDatetime" column="mod_datetime" />
-        <result property="regAccount" column="reg_account" />
-        <result property="modAccount" column="mod_account" />
     </resultMap>
 
     <!-- 메모 저장 -->
     <insert id="save">
         INSERT INTO prj_post_memo
-            (memo_no, post_no, content, reg_account, mod_account)
+            (post_no, content, account)
         VALUES
-            (seq_prj_post_memo.nextval, #{postNo}, #{content}, #{regAccount}, #{modAccount})
+            (#{postNo}, #{content}, #{account})
     </insert>
 
     <!-- 메모 수정 -->
     <update id="modify">
         UPDATE prj_post_memo
         SET content = #{content},
-        <!--            mod_account = #{modAccount}, 후에 추가 예정-->
-        mod_datetime = SYSDATE
+        mod_datetime = current_timestamp
         WHERE memo_no = #{memoNo}
     </update>
 
@@ -34,19 +33,22 @@
         DELETE FROM prj_post_memo
         WHERE memo_no = #{memoNo}
     </delete>
+
     <!-- 메모 전체 삭제 -->
     <delete id="removeAll">
         DELETE FROM prj_post_memo
         WHERE post_no = #{postNo}
     </delete>
+
     <!-- 메모 전체 조회 기능 -->
     <select id="findAll" resultMap="memoMap">
         SELECT
-            post_no, memo_no, content, reg_account, mod_account, reg_datetime, mod_datetime
+            post_no, memo_no, content, account, reg_datetime, mod_datetime
         FROM prj_post_memo
         WHERE post_no = #{postNo}
         ORDER BY mod_datetime DESC
     </select>
+
     <!-- 메모 개별 조회 기능 -->
     <select id="findOne" resultMap="memoMap">
         SELECT
@@ -54,20 +56,22 @@
         FROM prj_post_memo
         WHERE memo_no = #{memoNo}
     </select>
+
     <!-- 전체 메모 수 조회 -->
     <select id="getPostMemoCount" resultType="int">
         SELECT COUNT(*)
         FROM prj_post_memo
         WHERE post_no = #{postNo}
     </select>
+
     <!-- 메모 전체 조회 기능 With Search -->
     <select id="findAllWithSearch" resultMap="memoMap">
         SELECT
-            post_no, memo_no, content, reg_account, mod_account, reg_datetime, mod_datetime
+            post_no, memo_no, content, account, reg_datetime, mod_datetime
         FROM prj_post_memo
         WHERE 1=1
             AND post_no = #{postNo}
-            <if test="search.type == 'content'">AND content LIKE '%' || #{search.keyword} || '%'</if>
+            <if test="search.type == 'content'">AND content LIKE CONCAT('%', #{search.keyword}, '%')</if>
         ORDER BY mod_datetime DESC
     </select>
 </mapper>
