@@ -130,7 +130,8 @@ console.log('post-platformAndGenre start');
 
     // 장르 저장 / 리스트 출력 =======================================================
 
-    function showGenreList() {
+    function showGenreList(selectFlag) {
+    console.log("제발!" + selectFlag);
         console.log(genreURL);
         fetch(genreURL)
         .then(res => res.json())
@@ -142,7 +143,7 @@ console.log('post-platformAndGenre start');
             const genreSelecter = document.getElementById('genreSelect');
             let len = genreSelecter.length
 
-            if(len > 4){
+            if(selectFlag){
 
                 console.log(genreSelecter);
                 let last = genreSelecter.lastChild;
@@ -223,30 +224,10 @@ console.log('post-platformAndGenre start');
                     // 비워주기
                     $genreInput.value = '';
                     // select 해주기
-                    showGenreList();
+                    showGenreList(true);
                 } else {
                     alert('새로운 장르 저장을 실패했습니다.');
                 }
             })
 
     }
-
-
-
-
-    // 즉시실행함수 ==========================================================
-
-
-    (function(){
-
-
-        // 플랫폼
-        showdomainList();
-        savePlatformClickEvent();
-
-        // 장르
-        showGenreList();
-        saveGenreClickEvent();
-
-
-    })();

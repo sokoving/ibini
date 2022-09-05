@@ -292,7 +292,10 @@
 
             // 플랫폼, 장르 선택창 불러오기
             showdomainList();
-            showGenreList();
+                    savePlatformClickEvent();
+            showGenreList(false);
+                    saveGenreClickEvent();
+
 
 
             // 입력창 키업 이벤트
