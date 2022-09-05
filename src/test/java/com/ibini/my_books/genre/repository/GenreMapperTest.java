@@ -23,7 +23,7 @@ class GenreMapperTest {
     void saveTest(){
         Genre g = new Genre();
         g.setAccount("test");
-        g.setGenreName("스릴러");
+        g.setGenreName("현대판타지");
 
         boolean flag = mapper.save(g);
 
@@ -39,16 +39,16 @@ class GenreMapperTest {
             System.out.println(g);
         }
 
-        assertEquals(1, gl.size());
+        assertEquals(4, gl.size());
     }
 
     @Test
     @DisplayName("장르 아이디로 장르 객체 리턴한다")
     void fineOneGenreByGenreIdTest(){
-        int genreId = 0;
+        int genreId = 2;
         Genre g = mapper.fineOneGenreByGenreId(genreId);
         System.out.println("g = " + g);
-        assertEquals("미분류", g.getGenreName());
+        assertEquals("로맨스", g.getGenreName());
     }
 
     @Test
@@ -56,7 +56,7 @@ class GenreMapperTest {
     @Rollback
     @DisplayName("장르 데이터가 DB에서 삭제돼야 한다")
     void removeTest(){
-        int genreId = 6;
+        int genreId = 3;
         boolean flag = mapper.remove(genreId);
         assertTrue(flag);
     }
@@ -64,10 +64,10 @@ class GenreMapperTest {
     @Test
     @DisplayName("장르 데이터가 DB에서 수정돼야 한다")
     void modifyTest(){
-        int genreId = 6;
+        int genreId = 3;
         Genre g = mapper.fineOneGenreByGenreId(genreId);
         System.out.println("g = " + g);
-        g.setGenreName("공포");
+        g.setGenreName("무협");
         boolean flag = mapper.modify(g);
         System.out.println("g = " + g);
         assertTrue(flag);
@@ -76,10 +76,10 @@ class GenreMapperTest {
     @Test
     @DisplayName("계정에 속한 장르 데이터의 수를 조회해야 한다")
     void getTotalCountTest(){
-        String account = "ibini";
+        String account = "test";
         int cnt = mapper.getTotalCount(account);
         System.out.println("cnt = " + cnt);
 
-        assertEquals(5, cnt);
+        assertEquals(4, cnt);
     }
 }

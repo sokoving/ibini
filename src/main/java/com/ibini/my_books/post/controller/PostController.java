@@ -21,8 +21,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Log4j2
@@ -48,15 +51,38 @@ public class PostController {
      */
 
 
+
     //    포스트 등록 폼 요청   get    /post/write
     @GetMapping("/write")
-    public String postWriteForm(Model model, HttpSession session) {
+    public String postWriteForm(
+//            @PathVariable String title
+//            , @PathVariable String author,
+            Model model
+            , HttpSession session
+//            , HttpServletRequest request
+            , @RequestParam(value="title", required=false) String title
+            , @RequestParam(value ="author", required=false) String author
+            ) {
         log.info("PostController /post/write  GET 요청!!");
-
+        log.info("PostController /post/write title - {}", title);
+        log.info("PostController /post/write author - {}", author);
         // 현재 로그인한 유저의 account 가져오기
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
 
+        // 파라미터에서 타이틀이랑 작가 받아오기
+//        String title = request.getParameter("title");
+//        String author = request.getParameter("author");
+
+        log.info("title -{}", title);
+        // 책 정보 담아가기
+        Map<String, Object> bookInfoMap = new HashMap<>();
+        bookInfoMap.put("title", title);
+        bookInfoMap.put("author", author);
+
+        log.info("bookMap - {}", bookInfoMap.toString());
+
         model.addAttribute("account", account);
+        model.addAttribute("bookInfo", bookInfoMap);
         return "post/post-reg";
     }
 

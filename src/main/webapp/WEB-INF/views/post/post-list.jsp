@@ -185,7 +185,7 @@
     </div> <!-- end wrap -->
 
 
-    
+
     <script>
         // 별 특수문자 채우는 함수
         function drawStarsAtList() {

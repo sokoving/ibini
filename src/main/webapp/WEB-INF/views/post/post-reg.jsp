@@ -99,13 +99,14 @@
                                 <span class="reg-span">* 책 제목</span>
                                 <span class="explain-span title-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postTitle" placeholder="제목을 입력해 주세요">
+                            <input class="white-box" type="text" name="postTitle" value="${bookInfo.title}">
 
                             <div class="span-wrap">
                                 <span class="reg-span">* 작가</span>
                                 <span class="explain-span writer-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postWriter" placeholder="작가를 입력해 주세요">
+                            <input class="white-box" type="text" name="postWriter"
+                                value="${bookInfo.author}">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
@@ -285,7 +286,7 @@
     <script>
         // start jQuery
         $(document).ready(function () {
-            // jQueryTagTest("태그 잡기 테스트", $('h1'));
+
             const account = "${account}";
             console.log(account);
 
@@ -319,6 +320,7 @@
             })
 
 
+
             // platform jquery ========================================================
 
 
@@ -329,6 +331,10 @@
 
                 $('.platformClick').show();
             });
+            // 클릭시 삭제하기
+
+
+
 
             // 장르 클릭이벤트
             $('.textClick').hide();
@@ -383,8 +389,8 @@
         const account = '${account}';
         const gAccount = '${account}';
 
-        // console.log(account);
-        // console.log(gAccount);
+        console.log(account);
+        console.log(gAccount);
 
         // 나중에 꼭 수정해주기
         // const url = "http://localhost:8383/platform/c1?account=" + account;
