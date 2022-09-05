@@ -10,6 +10,14 @@
     <title></title>
 </head>
 <style>
+    #infoHeader .title{
+        background: rgb(219, 151, 233);
+        display: flex;
+    }
+    #infoHeader .number{
+        background: rgb(117, 117, 205);
+        display: flex;
+    }
     .tagname {
         background: rgb(176, 112, 112);
     }
@@ -23,17 +31,37 @@
 
     <h1>hihihi</h1>
     <!-- tagName -->
-    <h1># </h1>
-    <h1>${searchTag}</h1>
-    <h2>${hashtagName}</h2>
-    <h2> / </h2>
-    <h2>${total}</h2>
+    <section id="infoHeader">
+        
+        <div class="title">
+            <h1># </h1><h1>${searchTag}</h1>
+        </div>
+        
+        <div class="number">
+            <h2>${hashtagName}</h2><h2> / </h2><h2>${total}</h2>
+        </div>
 
-    <c:forEach var="tag" items="${tagName}">
-        <span class="tagName">${tag.tagName}</span>
-        <span class="tagName">${tag.postNo}</span>
-    </c:forEach>
+        <br>
 
+    </section>
+    
+    <div id="tagList">
+        
+        <c:forEach var="tag" items="${tagName}">
+        
+            <span class="tagName">${tag.postNo}</span>
+    
+            <span class="postNo">${tag.tagName}</span>
+            
+        </c:forEach>
+
+    </div>
+    
+    <script>
+
+
+
+    </script>
 </body>
 
 </html>

@@ -43,6 +43,7 @@ public class HashtagController {
         List<HashtagDomain> oneTagName = hashTagService.findOneTagName(tagName, account);
         log.info("oneTagName - {}", oneTagName);
 
+
         // total hashtag
         int total = hashTagService.totalHashtag(account);
 
