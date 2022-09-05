@@ -19,7 +19,7 @@ public class DataBaseConfig {
 
         HikariConfig config = new HikariConfig();
         config.setUsername("root");
-        config.setPassword("mariaDB");
+        config.setPassword("mariadb");
         config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini");
         config.setDriverClassName("org.mariadb.jdbc.Driver");
 

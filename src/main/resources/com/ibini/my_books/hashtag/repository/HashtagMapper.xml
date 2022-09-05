@@ -14,10 +14,13 @@
     <!--    저장 -->
     <insert id="saveHashtag">
         INSERT INTO prj_hashtag
-            (post_no,
+            (
+            tag_no,
+             post_no,
              tag_name, account )
         VALUES
             (
+            NEXTVAL(seq_prj_hashtag),
             <choose>
                 <when test="postNo != null">
                     #{postNo},

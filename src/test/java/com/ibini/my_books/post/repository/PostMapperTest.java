@@ -23,7 +23,7 @@ class PostMapperTest {
     @DisplayName("포스트가 DB에 저장돼야 한다")
     void saveTest(){
         Post p = new Post();
-        p.setAccount("test");
+        p.setAccount("ibini");
         p.setGenreId(2);
         p.setCaId(2);
         p.setPlatformId(2);
@@ -97,13 +97,13 @@ class PostMapperTest {
         Post p = new Post();
         p.setPostNo(2L);
         p.setAccount("ibini");
-        p.setGenreId(2);
-        p.setCaId(2);
-        p.setPlatformId(2);
-        p.setPostTitle("수정 제목 3");
-        p.setPostWriter("수정 작가 3");
+        p.setGenreId(3);
+        p.setCaId(3);
+        p.setPlatformId(3);
+        p.setPostTitle("수정 제목 2");
+        p.setPostWriter("수정 작가 2");
         p.setPublishStatus(3);
-        p.setPublishCycle("매월 4일");
+        p.setPublishCycle("매월 2일");
         p.setEpId(3);
         p.setCurEp(30);
         p.setTotalEp(300);
@@ -120,6 +120,6 @@ class PostMapperTest {
         String account = "ibini";
         int cnt = mapper.getTotalCount(account);
         System.out.println("cnt = " + cnt);
-        assertEquals(2, cnt);
+        assertEquals(7, cnt);
     }
 }

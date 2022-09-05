@@ -1,3 +1,14 @@
+DROP TABLE prj_post_memo;
+DROP TABLE prj_post_mark;
+DROP TABLE prj_hashtag;
+DROP TABLE prj_link_post;
+DROP TABLE login_list;
+DROP TABLE prj_post_img;
+DROP TABLE tbl_post;
+DROP TABLE prj_genre;
+DROP TABLE prj_platform;
+DROP TABLE tbl_member;
+
 CREATE TABLE tbl_post
 (
     post_no           INT(10)         AUTO_INCREMENT,    	-- 포스트 번호(pk)
@@ -32,12 +43,15 @@ CREATE TABLE prj_post_img
 
 CREATE TABLE prj_hashtag
 (
-    tag_no      INT(10)       AUTO_INCREMENT,
+    tag_no      INT(10)       NOT NULL,
     post_no     INT(10)       NOT NULL,
-    tag_name    VARCHAR(100)    NOT NULL,
-    account     VARCHAR(50)     NOT NULL,
+    tag_name    VARCHAR(100)  NOT NULL,
+    account     VARCHAR(50)   NOT NULL,
      PRIMARY KEY (tag_no)
 );
+DROP SEQUENCE seq_prj_hashtag;
+CREATE SEQUENCE seq_prj_hashtag START WITH 1 INCREMENT BY 1;
+
 
 CREATE TABLE prj_link_post(
    link_id        VARCHAR(100)   NOT NULL,   -- 일련번호(원본포스트번호_연결할포스트번호)

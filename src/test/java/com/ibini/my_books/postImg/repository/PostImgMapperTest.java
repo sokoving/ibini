@@ -32,7 +32,7 @@ class PostImgMapperTest {
     @DisplayName("파일경로들을 조회한다.")
     void findFileNamesTest() {
         //given
-        Long postNo = 1L;
+        Long postNo = 7L;
 
         //when
         List<String> fileNames = mapper.findFileNames(postNo);

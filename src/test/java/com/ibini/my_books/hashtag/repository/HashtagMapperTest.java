@@ -24,7 +24,7 @@ class HashtagMapperTest {
 
         HashtagDomain ht = new HashtagDomain();
         ht.setAccount("ibini");
-        ht.setPostNo(3L);
+        ht.setPostNo(1L);
         ht.setTagName("아포칼립스");
 
         boolean b = hashtagMapper.saveHashtag(ht);
@@ -77,7 +77,7 @@ class HashtagMapperTest {
     @Test
     @DisplayName("한 포스트에 등록된 모든 해시태그를 조회해야 한다")
     void findAllByPostNoT(){
-        Long postNo = 2L;
+        Long postNo = 1L;
 
         System.out.println("check here");
         List<HashtagDomain> hl = hashtagMapper.findAllHashTagByPostNo(postNo);
@@ -85,8 +85,7 @@ class HashtagMapperTest {
             System.out.println(hashtagDomain);
         }
 
-        assertEquals(3, hl.size());
-
+        assertEquals(2, hl.size());
     }
 
     @Test
