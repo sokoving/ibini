@@ -98,5 +98,16 @@ class HashtagMapperTest {
         assertEquals(0, hl.size());
     }
 
+    @Test
+    @DisplayName("tag name search")
+    void findTagNameTest(){
+        String tagname = "test";
+        String account = "2208310001";
+
+        List<HashtagDomain> tagName = hashtagMapper.findTagName(tagname, account);
+        System.out.println(tagName.toString());
+
+    }
+
 
 }

@@ -105,5 +105,10 @@ public class HashTagService {
         return hashtagMapper.removeTagOnPost(postNo);
     }
 
+    public List<HashtagDomain> findOneTagName(String tagName, String account){
+        log.info("HashTag Service findOneTagName -{}, -{} ", account, tagName);
+        return hashtagMapper.findTagName(tagName, account);
+    }
+
 
 }

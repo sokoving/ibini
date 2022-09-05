@@ -221,7 +221,7 @@
 
                                 <div id="tag-container">
                                     <c:forEach var="t" items="${tagList}">
-                                        <span class="hash-span" data-tag-no="${t.tagNo}">${t.tagName}</span>
+                                        <span class="hash-span" data-tag-no="${t.tagNo}" onclick="location.href='/hashtag/${t.tagName}'">${t.tagName}</span>
                                     </c:forEach>
 
                                     <span class="hash-span tag-plus hide"><i class="far fa-plus-square"></i></span>
