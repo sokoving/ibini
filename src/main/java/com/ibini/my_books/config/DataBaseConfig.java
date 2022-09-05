@@ -24,10 +24,10 @@ public class DataBaseConfig {
 //        config.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 
         //============MariaDB==================
-//        config.setUsername("root");
-//        config.setPassword("mariadb");
-//        config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini);
-//        config.setDriverClassName("org.mariadb.jdbc.Driver");
+        config.setUsername("root");
+        config.setPassword("mariadb");
+        config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini");
+        config.setDriverClassName("org.mariadb.jdbc.Driver");
 
 
 

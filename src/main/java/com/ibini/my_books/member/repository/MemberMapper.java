@@ -73,10 +73,13 @@ public interface MemberMapper {
     InquiryTable findOneInquiry(String serialNumber);
 
     //회원 마이페이지에서 회원의 문의내역 전체 조회하기
-    List<InquiryTable> findMemberInquiry(@RequestParam("userID") String userId,
-                                         @RequestParam("page")Page page);
+    List<InquiryTable> findMemberInquiry(@RequestParam("userId") String userId,
+                                         @RequestParam("page") Page page);
+//
+//
 
-    //관리자 페이지에서 문의내역 전체 조회하기
+
+        //관리자 페이지에서 문의내역 전체 조회하기
      List<InquiryTable> findAllInquiry(@RequestParam("page") Page page);
 
      //문의글 수정

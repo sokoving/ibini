@@ -38,6 +38,11 @@ dependencies {
 	//오라클 라이브러리 (11g edition - gradle, maven 라이센스 문제 공식 지원 불가)
 	implementation fileTree(dir: '/src/main/webapp/WEB-INF/lib', include: ['*.jar'])
 
+	//mariadb 커넥터
+    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+	implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.6'
+
+
 	//마이바티스 라이브러리
 	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0"
 
@@ -55,6 +60,8 @@ dependencies {
 
 	//이메일 인증
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+
 }
 
 tasks.named('test') {

@@ -40,6 +40,10 @@ CREATE TABLE tbl_member
      PRIMARY KEY (account)
 );
 
+DROP SEQUENCE seq_tbl_member;
+CREATE SEQUENCE seq_tbl_member START WITH 1 INCREMENT BY 1;
+
+
 -- =========== tbl_manage_member
 -- TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0')
 
@@ -105,7 +109,7 @@ CREATE TABLE tbl_manage_break_away
 	inquiry            VARCHAR(2000)    NOT NULL,          --문의사항
 	inquiry_date      DATETIME          DEFAULT current_timestamp,   --문의사항(등록일자)
 	answer            VARCHAR(2000)     NULL,          --답변
-	answer_date           DATE              NULL,   --답변 등록일자
+	answer_date       DATETIME              NULL,   --답변 등록일자
 	 PRIMARY KEY (serial_number)
 	);
 
@@ -130,6 +134,9 @@ CREATE TABLE tbl_manage_break_away
 	     PRIMARY KEY (reason_num)
 	);
 
+	DROP SEQUENCE seq_tbl_reason_break_away;
+    CREATE SEQUENCE seq_tbl_reason_break_away START WITH 1 INCREMENT BY 1;
+
 
 -- =========== login_list
 
@@ -147,7 +154,7 @@ CREATE SEQUENCE seq_login_list;
 -- 마리아 로그인 기록
 CREATE TABLE login_list(
    login_num      INT(10),       --일련번호
-   account       VARCHAR2(50),      --회원 관리 번호
-   login_log     DATE    DEFAULT SYSDATE,   --로그인이력
+   account       VARCHAR(50),      --회원 관리 번호
+   login_log     DATETIME    DEFAULT current_timestamp,   --로그인이력
      PRIMARY KEY (login_num)
 );
