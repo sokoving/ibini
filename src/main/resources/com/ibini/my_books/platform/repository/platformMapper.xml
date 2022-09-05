@@ -12,36 +12,36 @@
         <result property="platformFontColor" column="platform_font_color" />
     </resultMap>
 
-<!--    저장 -->
-<!--    <insert id="savePlatform">-->
-<!--        INSERT INTO prj_platform-->
-<!--            (-->
-<!--                platform_id, account, platform_name-->
-<!--                <if test="platformBgColor != null"> ,platform_bg_color </if>-->
-<!--                <if test="platformFontColor != null"> ,platform_font_color </if>-->
-<!--            )-->
-<!--        VALUES-->
-<!--            (-->
-<!--                seq_prj_platform.nextval, #{account}, #{platformName}-->
-<!--              <if test="platformBgColor != null"> ,#{platformBgColor} </if>-->
-<!--              <if test="platformFontColor != null"> ,#{platformFontColor} </if>-->
-<!--             )-->
-<!--    </insert>-->
-
+<!--    저장-->
     <insert id="savePlatform">
         INSERT INTO prj_platform
-        (
-         account, platform_name
-        <if test="platformBgColor != null"> ,platform_bg_color </if>
-        <if test="platformFontColor != null"> ,platform_font_color </if>
-        )
+            (
+                platform_id, account, platform_name
+                <if test="platformBgColor != null"> ,platform_bg_color </if>
+                <if test="platformFontColor != null"> ,platform_font_color </if>
+            )
         VALUES
-        (
-         #{account}, #{platformName}
-        <if test="platformBgColor != null"> ,#{platformBgColor} </if>
-        <if test="platformFontColor != null"> ,#{platformFontColor} </if>
-        )
+            (
+                seq_prj_platform.nextval, #{account}, #{platformName}
+              <if test="platformBgColor != null"> ,#{platformBgColor} </if>
+              <if test="platformFontColor != null"> ,#{platformFontColor} </if>
+             )
     </insert>
+
+<!--    <insert id="savePlatform">-->
+<!--        INSERT INTO prj_platform-->
+<!--        (-->
+<!--         account, platform_name-->
+<!--        <if test="platformBgColor != null"> ,platform_bg_color </if>-->
+<!--        <if test="platformFontColor != null"> ,platform_font_color </if>-->
+<!--        )-->
+<!--        VALUES-->
+<!--        (-->
+<!--         #{account}, #{platformName}-->
+<!--        <if test="platformBgColor != null"> ,#{platformBgColor} </if>-->
+<!--        <if test="platformFontColor != null"> ,#{platformFontColor} </if>-->
+<!--        )-->
+<!--    </insert>-->
     
 <!--    삭제-->
     <delete id="deletePlatform">
