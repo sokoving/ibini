@@ -20,6 +20,12 @@ public interface HashtagMapper {
 
     // hashtag 이름으로 조회
     List<HashtagDomain> findTagName(String tagName, String account);
+    
+    // 전제조회
+    int totalTag(String account);
+
+    // total tagName 조회
+    int totalTagName(String account ,String tagName);
 
     // 하나의 게시글에 달린 여러가지 태그
     HashtagDomain findOneTag(int tagNo, String account);

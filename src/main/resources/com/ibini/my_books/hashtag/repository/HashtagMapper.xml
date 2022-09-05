@@ -44,12 +44,30 @@
         WHERE tag_no = #{tagNo}
     </update>
 
+
+
+
 <!--    태그 이름으로 조회 -->
     <select id="findTagName" resultMap="hashtagMap">
         SELECT * FROM prj_hashtag
         WHERE tag_name = #{tagName}
         AND account = #{account}
     </select>
+
+<!--    total tag -->
+    <select id="totalTag" resultType="integer">
+        SELECT COUNT(*) FROM prj_hashtag
+        WHERE account = #{account}
+    </select>
+
+    <!--    선택된 tag -->
+    <select id="totalTagName" resultType="integer">
+        SELECT COUNT(*) FROM prj_hashtag
+        WHERE tag_name= #{tagName}
+        and account = #{account}
+    </select>
+
+
 
 
     <!--    태그 조회 -->

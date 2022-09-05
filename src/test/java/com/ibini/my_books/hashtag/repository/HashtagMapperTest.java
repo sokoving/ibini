@@ -109,5 +109,23 @@ class HashtagMapperTest {
 
     }
 
+    @Test
+    @DisplayName("total tag")
+    void totaltagTest(){
+        String account = "2208310001";
+        int i = hashtagMapper.totalTag(account);
+        System.out.println(i);
+    }
+
+    @Test
+    @DisplayName("search total tag")
+    void totaltag(){
+        String account = "2208310001";
+        String tagName = "서양배경";
+        int i = hashtagMapper.totalTagName(account, tagName);
+
+        System.out.println(i);
+    }
+
 
 }

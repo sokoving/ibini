@@ -105,9 +105,23 @@ public class HashTagService {
         return hashtagMapper.removeTagOnPost(postNo);
     }
 
+    // hashtag 이름으로 hashtag 찾기
     public List<HashtagDomain> findOneTagName(String tagName, String account){
         log.info("HashTag Service findOneTagName -{}, -{} ", account, tagName);
         return hashtagMapper.findTagName(tagName, account);
+    }
+
+    // 계정에 저장된 모든 hashtag 정보 찾기
+    public int totalHashtag(String account){
+
+        log.info("HashTag Service totalHashtag - {}",account);
+        return hashtagMapper.totalTag(account);
+
+    }
+
+    public int totalHashtagName(String account, String tagName){
+        log.info("Hashtag Service totalhashtagName -{}", account, tagName);
+        return hashtagMapper.totalTagName(account, tagName);
     }
 
 
