@@ -90,8 +90,7 @@
                                     </c:otherwise>
                                 </c:choose>
                             
-                                <!-- 포스트 번호 -->
-                                <!-- <span id="postNo" style="display: none;">${p.postNo}</span> -->
+                                
                                 <!-- epId (0:회차 1:페이지 2:권수 3:퍼센트) -->
                                 <span id="epId" class="hidden">${p.epId}</span>
                                 
@@ -130,8 +129,10 @@
                                     </c:forEach>    
                                     <c:if test="${p.markList.size() > 2}">
                                         <div class="view-more">
-                                            <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
+                                            <a class="noselect" onclick="click_viewMore(this)">... 더보기</a>
                                         </div>
+                                        <!-- 포스트 번호 -->
+                                        <span id="postNo" style="display: none;">${p.postNo}</span>
                                     </c:if>
                                 </div> <!-- end book-info -->
                             </div> <!-- end book-wrapper -->
@@ -159,9 +160,12 @@
 
         // ... 더보기 클릭
         function click_viewMore($eventTag) {
+
+            const $postNo = $eventTag.parentElement.nextElementSibling.textContent;
+            console.log($postNo);
             // fetch() 사용하여 팝업페이지 호출 및 책/회차 등의 변수값 전달
             // 지금은 샘플html이니 redirect 처리를 하도록 한다.
-            window.location.href = './detail/detail.html';
+            location.href = '/test/page2/'+ $postNo;
         }
         
         function enterkey() {
