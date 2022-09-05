@@ -16,8 +16,7 @@ public class PostMark {
     private String content;      // 내용
     private Date regDatetime;    // 작성일자, 시간
     private Date modDatetime;    // 수정일자, 시간
-    private String regAccount;   // 작성 account
-    private String modAccount;   // 수정 account
+    private String account;   // 작성 account
 
     private int epId;
 
