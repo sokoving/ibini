@@ -1,6 +1,7 @@
 package com.ibini.my_books.hashtag.repository;
 
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
+import com.ibini.my_books.hashtag.dto.HashtagDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,7 +20,8 @@ public interface HashtagMapper {
 //    HashtagDomain findOneHasgtag(int postNo, int tagNo);
 
     // hashtag 이름으로 조회
-    List<HashtagDomain> findTagName(String tagName, String account);
+    List<HashtagDomain> findOnlyHashtag(String tagName, String account);
+    List<HashtagDto> findTagName( String account, String tagName);
     
     // 전제조회
     int totalTag(String account);

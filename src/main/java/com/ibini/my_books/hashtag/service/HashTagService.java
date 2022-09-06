@@ -1,6 +1,7 @@
 package com.ibini.my_books.hashtag.service;
 
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
+import com.ibini.my_books.hashtag.dto.HashtagDto;
 import com.ibini.my_books.hashtag.repository.HashtagMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -106,9 +107,9 @@ public class HashTagService {
     }
 
     // hashtag 이름으로 hashtag 찾기
-    public List<HashtagDomain> findOneTagName(String tagName, String account){
+    public List<HashtagDto> findOneTagName(String account, String tagName){
         log.info("HashTag Service findOneTagName -{}, -{} ", account, tagName);
-        return hashtagMapper.findTagName(tagName, account);
+        return hashtagMapper.findTagName(account, tagName);
     }
 
     // 계정에 저장된 모든 hashtag 정보 찾기

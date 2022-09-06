@@ -11,6 +11,16 @@
         <result property="account" column="account"/>
     </resultMap>
 
+    <resultMap id="hashtagDtoMap" type="com.ibini.my_books.hashtag.dto.HashtagDto">
+        <result property="tagNo" column="tag_no"/>
+        <result property="postNo" column="post_no"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="account" column="account"/>
+        <result property="postTitle" column="post_title" />
+        <result property="postWriter" column="post_writer" />
+        <result property="platformName" column="platform_name" />
+    </resultMap>
+
     <!--    저장 -->
     <insert id="saveHashtag">
         INSERT INTO prj_hashtag
@@ -48,10 +58,27 @@
 
 
 <!--    태그 이름으로 조회 -->
-    <select id="findTagName" resultMap="hashtagMap">
+    <select id="findOnlyHashtag" resultMap="hashtagMap">
         SELECT * FROM prj_hashtag
         WHERE tag_name = #{tagName}
         AND account = #{account}
+    </select>
+
+    <select id="findTagName" resultMap="hashtagDtoMap">
+        SELECT
+        H.post_no
+        , A.post_title
+        , A.post_writer
+        , P.platform_name
+        , H.tag_name
+        , H.account
+        FROM tbl_post A
+        , prj_hashtag H
+        , prj_platform P
+        Where A.post_no = h.post_no
+        and a.platform_id = p.platform_id
+        and H.account = #{account}
+        and h.tag_name = #{tagName}
     </select>
 
 <!--    total tag -->

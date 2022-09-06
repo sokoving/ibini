@@ -1,8 +1,7 @@
 package com.ibini.my_books.hashtag.controller;
 
-import com.ibini.my_books.hashtag.domain.HashtagDomain;
+import com.ibini.my_books.hashtag.dto.HashtagDto;
 import com.ibini.my_books.hashtag.service.HashTagService;
-import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +39,7 @@ public class HashtagController {
 
         // hashtag List 가져오기
         String searchTag = tagName;
-        List<HashtagDomain> oneTagName = hashTagService.findOneTagName(tagName, account);
+        List<HashtagDto> oneTagName = hashTagService.findOneTagName(account, tagName);
         log.info("oneTagName - {}", oneTagName);
 
 

@@ -46,13 +46,17 @@
     </section>
     
     <div id="tagList">
-        
+
         <c:forEach var="tag" items="${tagName}">
-        
+
             <span class="tagName">${tag.postNo}</span>
-    
+
             <span class="postNo">${tag.tagName}</span>
-            
+            <span class="postTitle">${tag.postTitle}</span>
+            <span class="postWriter">${tag.postWriter}</span>
+            <span class="platformName">${tag.platformName}</span>
+
+
         </c:forEach>
 
     </div>

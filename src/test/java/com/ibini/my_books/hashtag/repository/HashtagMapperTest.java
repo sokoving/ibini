@@ -1,11 +1,11 @@
 package com.ibini.my_books.hashtag.repository;
 
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
+import com.ibini.my_books.hashtag.dto.HashtagDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -98,14 +98,28 @@ class HashtagMapperTest {
         assertEquals(0, hl.size());
     }
 
+
     @Test
     @DisplayName("tag name search")
-    void findTagNameTest(){
-        String tagname = "test";
+    void findOnlyHashtagTest(){
+        String tag = "서양배경";
         String account = "2208310001";
 
-        List<HashtagDomain> tagName = hashtagMapper.findTagName(tagname, account);
-        System.out.println(tagName.toString());
+        List<HashtagDomain> tagName = hashtagMapper.findOnlyHashtag(tag, account);
+        for (HashtagDomain hashtagDto : tagName) {
+            System.out.println(hashtagDto);
+        }
+
+    }
+
+    @Test
+    @DisplayName("tagName search get info")
+    void findTagNameTest(){
+        String tag = "서양배경";
+        String account = "2208310001";
+
+        List<HashtagDto> tagList = hashtagMapper.findTagName(account, tag);
+        System.out.println(tagList);
 
     }
 
