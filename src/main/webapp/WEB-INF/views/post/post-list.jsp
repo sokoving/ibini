@@ -92,17 +92,13 @@
                         <div class="item-wrap hover">
                             <%-- left : 표지, 즐겨찾기 --%>
                             <div class="item-left">
-                                <c:choose>
-                                    <c:when test="${p.thumbImg != null}">
-                                        <div class="thumb-box">
-                                            <img class="thumb-img hover" src="/loadFile?fileName=${p.thumbImg}"
-                                                alt="포스트 썸네일">
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="thumb-box"></div>
-                                    </c:otherwise>
-                                </c:choose>
+                                <div class="thumb-box">
+                                    <c:if test="${p.thumbImg != null}">
+                                        <img class="post-img"
+                                        src="/loadFile?fileName=${p.thumbImg}"
+                                        alt="포스트 썸네일">
+                                    </c:if>
+                                </div>
 
                                 <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
                             </div> <%-- // end item-left --%>
@@ -129,22 +125,22 @@
                                     <span class="plat-name hover"
                                         style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">${p.platformName}</span>
 
-                                        <c:choose>
-                                            <c:when test="${p.publishStatus <= 1}">
-                                                <c:choose>
-                                                    <c:when test="${empty p.publishCycle}">
-                                                        <td class="last-td">${p.publishStatusName}</td>
-                                                    </c:when>
+                                    <c:choose>
+                                        <c:when test="${p.publishStatus <= 1}">
+                                            <c:choose>
+                                                <c:when test="${empty p.publishCycle}">
+                                                    <td class="last-td">${p.publishStatusName}</td>
+                                                </c:when>
 
-                                                    <c:otherwise>
-                                                        <td class="last-td">${p.publishCycle}</td>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <td class="last-td">${p.publishStatusName}</td>
-                                            </c:otherwise>
-                                        </c:choose>
+                                                <c:otherwise>
+                                                    <td class="last-td">${p.publishCycle}</td>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td class="last-td">${p.publishStatusName}</td>
+                                        </c:otherwise>
+                                    </c:choose>
 
                                 </div> <%-- // end pl-pu-wrap --%>
 

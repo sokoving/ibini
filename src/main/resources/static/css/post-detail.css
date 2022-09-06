@@ -52,13 +52,16 @@ section #img-post-wrap {
     margin-top: 40px;
 }
 
-#img-wrap .img-box.post-thumb{
-    border: 5px solid #ffca3d;
+.post-img{
+    height: inherit;
+    border-radius: 0.5em;
 }
+
 
 /* 썸네일 이미지 */
 #img-wrap #thumb-img {
     background-color: #ffca3d;
+    border: 1px solid #ffca3d;
     border-radius: 0.5em;
     padding: 5px;
     box-sizing: border-box;
@@ -73,59 +76,36 @@ section #img-post-wrap {
     justify-content: center;
     align-items: center;
 }
-#thumb-img .post-img{
-    height: inherit;
-}
 
-.img-box .post-img{
-    width: 100%;
-}
-
-
-/* 첨부 이미지, 방향키 목록 */
-#img-wrap #img-arr-wrap {
-    border-radius: 0.25rem;
-    overflow: hidden;
-
-    order: 1;
-
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-}
-
-/* 첨부 목록 방향 아이콘 */
-#img-wrap #img-arr-wrap .slick-arrow {
-    border-radius: 0.25rem;
-    text-align: center;
-    color: #000;
-    cursor: pointer;
-}
-
-#img-wrap #img-arr-wrap .slick-arrow:hover {
-    background-color: #ffca3d;
-}
 
 /* 첨부 이미지 */
 #img-wrap .img-box-wrap {
     display: flex;
     flex-flow: column nowrap;
+    max-height: 292px;
+    overflow: hidden;
 }
-
-#img-wrap .img-box-wrap .img-box {
-    width: 70px;
-    height: 60px;
+/* 첨부 - 썸네일 */
+.img-box.post-thumb{
+    border: 2px solid #fd7e14;
+    background-color: #fd7e14;
+}
+/* 첨부 - 일반 */
+.img-box {
+    width: 60px;
+    height: 69px;
     overflow: hidden;
     
     background-color: #ffca3d;
+    border: 2px solid #ffca3d;
     border-radius: 0.5em;
     margin: 3px 0;
     cursor: pointer;
-}
-#img-wrap .img-box-wrap .img-box.img-half-down{
-    height: 30px;
-}
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 /* ----- 포스트 정보 영역 ----- */

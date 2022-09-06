@@ -109,7 +109,8 @@ section#list-sec{
 /* 표지 */
 .item-left .thumb-box{
     border-radius: 0.25rem;
-    /* background-color: #fff7e3; */
+    background-color: #ffe3da;
+    height: 161.16px;
     overflow: hidden;
     flex: 1;
 
@@ -117,8 +118,9 @@ section#list-sec{
     justify-content: center;
     align-items: center;
 }
-.item-left .thumb-box img{
-    width: 100%;
+.item-left .thumb-box .post-img{
+    height: inherit;
+    border-radius: 0.25rem;
 }
 /* 즐겨찾기 버튼 */
 .item-left .favorite-btn{

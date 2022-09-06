@@ -36,43 +36,30 @@
                                 </c:if>
                             </div>
 
+
                             <!-- 첨부 이미지 목록 -->
-                            <div id="img-arr-wrap">
-                                <button type="button" data-role="none" class="slick-prev slick-arrow"
-                                    aria-label="Previous" role="button">
-                                    <i class="fas fa-angle-up"></i>
-                                </button>
-
-                                <!-- 슬릭 이미지 목록 -->
-                                <div class="img-box-wrap">
-
-                                    <c:if test="${imgList != null}">
-                                        <c:forEach var="img" items="${imgList}">
-                                            <c:choose>
-                                                <c:when test="${img.thumbnail}">
-                                                    <div class="img-box post-thumb">
-                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}"
-                                                            alt="포스트 표지" title="${img.originalFileName}">
-                                                    </div>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <div class="img-box">
-                                                        <img class="post-img" src="/loadFile?fileName=${img.fileName}"
-                                                            alt="포스트 첨부 이미지" title="${img.originalFileName}">
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:forEach>
-                                    </c:if>
-
-                                </div>
-
-                                <button type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next"
-                                    role="button" style="display: block;">
-                                    <i class="fas fa-angle-down"></i>
-                                </button>
+                            <div class="img-box-wrap">
+                                <c:if test="${imgList != null}">
+                                    <c:forEach var="img" items="${imgList}">
+                                        <c:choose>
+                                            <c:when test="${img.thumbnail}">
+                                                <div class="img-box post-thumb">
+                                                    <img class="post-img"
+                                                        src="/loadFile?fileName=${img.fileName}"
+                                                        alt="표지 이미지" title="${img.originalFileName}">
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="img-box">
+                                                    <img class="post-img"
+                                                        src="/loadFile?fileName=${img.fileName}"
+                                                        alt="첨부 이미지" title="${img.originalFileName}">
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </c:if>
                             </div>
-
                         </div> <!-- // end img-wrap -->
 
                         <!-- 포스트 정보 영역 -->
@@ -326,9 +313,9 @@
             const $postToggles = $('#link-post-wrap .toggle-box').children();
             $postToggles[1].onclick = e => {
                 // 토글 아이콘 변경, 검색창, 삭제 버튼 띄우기
-                setLinkEditMod();   
+                setLinkEditMod();
 
-                
+
             }
 
 
