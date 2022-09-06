@@ -58,10 +58,13 @@
         background: #ffc699;
         width: 80%;
         border-radius: 10px;
+        border : solid 7px #ffc699;
         overflow: hidden;
-        padding: 10px;
+        /* padding: 10px; */
 
         margin: 0 auto 30px;
+        /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 
     }
 
@@ -69,11 +72,12 @@
         background: rgb(179, 202, 242);
         font-size: 25px;
         font-family: 600;
+        padding: 6px;
     }
 
     .tagInfo {
-        background: #fffaee;
-        padding: 0 20px;
+        background: #FFF9F4;
+        padding: 3px 20px;
         border-radius: 5px;
     }
 
@@ -105,7 +109,7 @@
                 <div class="number">
                     <h4>총 </h4>
                     <h4>${hashtagName}</h4>
-                    <h4>권의 책이 등록되어있습니다.</h4>
+                    <h4> 권의 책이 등록되어있습니다.</h4>
                 </div>
 
                 <br>
