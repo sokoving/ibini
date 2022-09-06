@@ -270,7 +270,8 @@ section #remote-etc-wrap{
     padding: 0.15em 0.5em;
     margin: 0 5px 5px 0;
     color: #555;
-    cursor: pointer;
+    /* cursor: pointer; */
+    cursor : url(../img/cursor.cur) 20 30, url(../img/cursor.cur) 20 30, auto;
 }
 #tag-container .hash-span:hover{
     transform: scale(1.01);

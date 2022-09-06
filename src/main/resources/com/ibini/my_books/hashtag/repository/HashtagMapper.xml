@@ -79,6 +79,7 @@
         and a.platform_id = p.platform_id
         and H.account = #{account}
         and h.tag_name = #{tagName}
+        ORDER BY post_no
     </select>
 
 <!--    total tag -->

@@ -235,6 +235,7 @@ section#list-sec{
     transform: scale(1.07);
     transition: 0.15s;
     cursor: pointer;
+
 }
 .item-right .ca-ge-wrap .genre-name{
     font-size: 0.95em;
