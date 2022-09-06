@@ -1,6 +1,7 @@
 package com.ibini.my_books.hashtag.service;
 
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
+import com.ibini.my_books.hashtag.dto.HashtagDto;
 import com.ibini.my_books.hashtag.repository.HashtagMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -116,6 +117,25 @@ public class HashTagService {
     public boolean removeTagOnPost(Long postNo) {
         log.info("HashTag Service : removeTagOnPost call - {}", postNo);
         return hashtagMapper.removeTagOnPost(postNo);
+    }
+
+    // hashtag 이름으로 hashtag 찾기
+    public List<HashtagDto> findOneTagName(String account, String tagName){
+        log.info("HashTag Service findOneTagName -{}, -{} ", account, tagName);
+        return hashtagMapper.findTagName(account, tagName);
+    }
+
+    // 계정에 저장된 모든 hashtag 정보 찾기
+    public int totalHashtag(String account){
+
+        log.info("HashTag Service totalHashtag - {}",account);
+        return hashtagMapper.totalTag(account);
+
+    }
+
+    public int totalHashtagName(String account, String tagName){
+        log.info("Hashtag Service totalhashtagName -{}", account, tagName);
+        return hashtagMapper.totalTagName(account, tagName);
     }
 
 

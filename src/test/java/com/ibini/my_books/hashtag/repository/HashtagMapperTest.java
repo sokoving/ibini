@@ -1,11 +1,11 @@
 package com.ibini.my_books.hashtag.repository;
 
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
+import com.ibini.my_books.hashtag.dto.HashtagDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -96,6 +96,49 @@ class HashtagMapperTest {
         List<HashtagDomain> hl = hashtagMapper.findAllHashTagByPostNo(postNo);
         System.out.println("hl.size() = " + hl.size());
         assertEquals(0, hl.size());
+    }
+
+
+    @Test
+    @DisplayName("tag name search")
+    void findOnlyHashtagTest(){
+        String tag = "서양배경";
+        String account = "2208310001";
+
+        List<HashtagDomain> tagName = hashtagMapper.findOnlyHashtag(tag, account);
+        for (HashtagDomain hashtagDto : tagName) {
+            System.out.println(hashtagDto);
+        }
+
+    }
+
+    @Test
+    @DisplayName("tagName search get info")
+    void findTagNameTest(){
+        String tag = "서양배경";
+        String account = "2208310001";
+
+        List<HashtagDto> tagList = hashtagMapper.findTagName(account, tag);
+        System.out.println(tagList);
+
+    }
+
+    @Test
+    @DisplayName("total tag")
+    void totaltagTest(){
+        String account = "2208310001";
+        int i = hashtagMapper.totalTag(account);
+        System.out.println(i);
+    }
+
+    @Test
+    @DisplayName("search total tag")
+    void totaltag(){
+        String account = "2208310001";
+        String tagName = "서양배경";
+        int i = hashtagMapper.totalTagName(account, tagName);
+
+        System.out.println(i);
     }
 
 

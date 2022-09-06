@@ -54,7 +54,7 @@ class PostMapperTest {
     @Test
     @DisplayName("포스트, 장르, 플랫폼 테이블이 조인돼서 모두 조회돼야 한다")
     void findAllPostWithNameTest(){
-        String account = "ibini";
+        String account = "2208310001";
         List<PostWithName> all = mapper.findAllPostWithName(account);
         for (PostWithName p : all) {
             System.out.println(p);
