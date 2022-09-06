@@ -616,7 +616,7 @@
                 case 2:
                     return 'marking-type3 noselect';
                 case 4: 
-                    return 'marking-type3 noselect'
+                    return 'marking-type4 noselect'
                 default : return 'marking-type1 noselect';
             }
         }

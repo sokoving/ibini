@@ -292,14 +292,17 @@ textarea {
 #postnote .content-wrapper div[name='mark'] .content-area span.mark-date {
     margin-left: 0.5em;
 }
-#postnote .content-wrapper .content-area i.marking-type1::before {
-    content: 'ep.';
+#postnote .content-wrapper .content-area i.marking-type1::after {
+    content: '화';
 }
 #postnote .content-wrapper .content-area i.marking-type2::before {
-    content: 'page.';
+    content: 'p';
 }
-#postnote .content-wrapper .content-area i.marking-type3::before {
-    content: 'chap.';
+#postnote .content-wrapper .content-area i.marking-type3::after {
+    content: '권';
+}
+#postnote .content-wrapper .content-area i.marking-type4::after {
+    content: '%';
 }
 #postnote .content-wrapper .content-area i.marking-type1 {
     color: white;
@@ -312,6 +315,10 @@ textarea {
 #postnote .content-wrapper .content-area i.marking-type3 {
     color: white;
     background-color: green;
+}
+#postnote .content-wrapper .content-area i.marking-type4 {
+    color: white;
+    background-color: rgb(90, 187, 90);
 }
 
 /* 아이콘 버튼 설정 */
