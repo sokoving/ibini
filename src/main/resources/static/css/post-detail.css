@@ -1,31 +1,38 @@
 /*---------- 공통 ----------*/
-h2, h3{
+h2,
+h3 {
     font-family: 'NanumBarunGothicBold';
 }
 
 /* 토글 */
-.toggle-box{
+.toggle-box {
     padding: 0.2em 0.6em;
     color: #787878;
     font-size: 1.2em;
     border-radius: 50rem;
 
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
-.toggle-box i{
+
+.toggle-box i {
     margin: 0 5px;
 }
-.fa-toggle-off, .fa-toggle-on{
+
+.fa-toggle-off,
+.fa-toggle-on {
     font-size: 1.3em;
     cursor: pointer;
 }
-.fa-toggle-off:hover, .fa-toggle-on:hover{
+
+.fa-toggle-off:hover,
+.fa-toggle-on:hover {
     transform: scale(1.3);
     transition: 0.3s;
 }
-.fff{
+
+.fff {
     color: #fff;
     transition: 0.3s;
 }
@@ -33,9 +40,9 @@ h2, h3{
 
 /*----------이미지, 포스트 정보 영역----------*/
 section #img-post-wrap {
-    /* border: 1px solid #ffca3d; */
     border-radius: 0.25rem;
     display: flex;
+    margin-top: 20px;
 }
 
 
@@ -49,10 +56,9 @@ section #img-post-wrap {
     align-items: flex-start;
     flex-basis: 295px;
     flex-shrink: 0;
-    margin-top: 40px;
 }
 
-.post-img{
+.post-img {
     height: inherit;
     border-radius: 0.5em;
 }
@@ -85,17 +91,19 @@ section #img-post-wrap {
     max-height: 292px;
     overflow: hidden;
 }
+
 /* 첨부 - 썸네일 */
-.img-box.post-thumb{
+.img-box.post-thumb {
     border: 2px solid #fd7e14;
     background-color: #fd7e14;
 }
+
 /* 첨부 - 일반 */
 .img-box {
     width: 60px;
     height: 69px;
     overflow: hidden;
-    
+
     background-color: #ffca3d;
     border: 2px solid #ffca3d;
     border-radius: 0.5em;
@@ -127,87 +135,95 @@ section #img-post-wrap {
     align-items: center;
 }
 
-/* #post-middle : 장르, 플랫폼, 연재 상태, 연재 일시, 회차 정보*/
-#post-box #post-middle{
+/* 책 제목 */
+#post-top #post-title {
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+
+/* #post-middle : 장르, 플랫폼, 연재 상태, 연재 일시, 페이지 정보*/
+#post-box #post-middle {
     color: #787878;
     text-align: center;
 
     display: flex;
     flex-direction: column;
 }
-#post-middle #post-title {
-    font-size: 1.5em;
-    font-weight: 700;
-}
 
-/* 책 제목 */
-#post-middle #post-title h2{
-    margin-top: 15px;
-    margin-bottom: 0;
-    color: #000;
-}
-/* 작가 이름 */
-/* #post-middle #post-writer {
-}  */
-
-
-/* 연재 상태, 현재, 전체 페이지 테이블 */
+/* 연재 상태, 페이지 정보 테이블 */
 #post-middle .middle-table {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin-top: 10px;
 }
-#post-middle .middle-table td{
+
+#post-middle .middle-table td {
     width: 500px;
     padding: 0 10px;
 }
-#post-middle .middle-table .first-td{
+
+#post-middle .middle-table .first-td {
     border-right: 1px solid #adb5bd;
     text-align: right;
 }
-#post-middle .middle-table .last-td{
+
+#post-middle .middle-table .last-td {
     text-align: left;
 }
-#post-middle .middle-table .empty-tr td{
+
+#post-middle .middle-table .empty-tr td {
     color: #fff;
     line-height: 10px;
 }
 
+/* 토글 */
+#post-middle .toggle-box {
+    margin-top: 25px;
+}
 
 /* #post-bottom : 날짜, 버튼*/
-#post-box #post-bottom{
+#post-bottom {
     display: flex;
+    flex-flow: row;
     justify-content: space-between;
-    align-items: end;
+    align-items: space-between;
+    margin-top: 10px;
 }
-#post-box #post-bottom .date-wrap{
+
+#post-bottom .date-wrap {
+    margin-top: 3px;
+    margin-left: 85px;
     font-size: 0.8em;
 }
-#post-box #post-bottom .post-btn{
+
+#post-bottom .post-btn {
     font-size: 1.5em;
     color: #555;
 }
-#post-box #post-bottom .post-btn:hover{
+
+#post-box #post-bottom .post-btn:hover {
     transform: scale(1.2);
 }
 
 
 
 /* ---------- 리모컨, 기타 영역 ----------  */
-section #remote-etc-wrap{
+section #remote-etc-wrap {
     display: flex;
 }
 
 /* ----- 리모컨 영역 ----- */
-#remote-etc-wrap #remote-controller{
+#remote-etc-wrap #remote-controller {
     flex-basis: 70px;
     flex-shrink: 0;
     padding-top: 50px;
     /* border: 1px solid #000; */
 
 }
-#remote-controller #inner-remote{
+
+#remote-controller #inner-remote {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -219,12 +235,13 @@ section #remote-etc-wrap{
 }
 
 /* ----- 기타 영역 ----- */
-#remote-etc-wrap #etc-wrap{
+#remote-etc-wrap #etc-wrap {
     flex-grow: 1;
     padding-left: 15px;
 }
+
 /* h3 */
-#remote-etc-wrap .h3-wrap{
+#remote-etc-wrap .h3-wrap {
     color: #787878;
     margin-top: 70px;
     padding-bottom: 10px;
@@ -234,7 +251,8 @@ section #remote-etc-wrap{
     justify-content: space-between;
     align-items: center;
 }
-#remote-etc-wrap .h3-wrap h3{
+
+#remote-etc-wrap .h3-wrap h3 {
     margin: 0;
     font-size: 1.3em;
 }
@@ -246,6 +264,7 @@ section #remote-etc-wrap{
     flex-wrap: wrap;
     padding-top: 15px;
 }
+
 #tag-container .hash-span {
     border: 1px dotted #888;
     border-radius: 0.25rem;
@@ -254,11 +273,13 @@ section #remote-etc-wrap{
     color: #555;
     cursor: pointer;
 }
-#tag-container .hash-span:hover{
+
+#tag-container .hash-span:hover {
     transform: scale(1.01);
     background-color: #ffca3d;
 }
-#tag-container .tag-plus{
+
+#tag-container .tag-plus {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -267,39 +288,89 @@ section #remote-etc-wrap{
     color: #787878;
 }
 
-#tag-container .tag-plus:hover{
+#tag-container .tag-plus:hover {
     transform: scale(1.2);
 }
 
 
 /* 연관포스트 검색창 */
-#link-post-wrap .search-wrap{
+#link-post-wrap .search-wrap {
     display: flex;
 }
-.search-wrap #search-plus{
-    font-size: 1.8em;
-    margin: 4px 0 0 7px;
-    cursor: pointer;
+.search-wrap .form-select{
+    
 }
-.search-wrap #search-plus:hover{
-    color: #000;
-    transform: scale(1.2);
-    transition: 0.3s;
-}
+
+
 .link-remove-btn {
     font-size: 1.5em;
 }
-.link-remove-btn:hover{
+
+.link-remove-btn:hover {
     color: #B22222;
     transform: scale(1.2);
     transition: 0.3s;
 }
 
 /* 연관 포스트 */
+/* 포스트 검색창 */
+
+#link-container .link-zero-box.search-box {
+    padding: 0 100px;
+    border: none;
+}
+#link-container .link-zero-1{
+    border-radius: 0.25rem;
+}
+.search-wrap {
+    display: flex;
+    padding: 0;
+    justify-content: center;
+
+    padding: 20px 0;
+}
+.search-wrap .form-select{
+    width: 20%;
+}
+.search-wrap #postSearchList{
+    flex-flow: 1;
+}
+.search-wrap .link-reg-btn{
+    width: 13%;
+}
+
+
+/* 연관 포스트 목록 없을 때*/
+#link-container .link-zero-box {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+
+    border: 1px dotted #888;
+    border-radius: 0.25rem;
+    margin-top: 10px;
+
+}
+
+.link-zero-1 {
+    background-color: #ffca3d;
+    padding: 10px 0 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+    opacity: 70%;
+}
+
+.link-zero-2 {
+    padding: 5px 0 10px;
+    opacity: 70%;
+}
+
+/* 연관 포스트 목록 있을 때 */
 #link-post-wrap #link-container {
     padding: 10px 0 0 0;
 }
-#link-container .link-a{
+
+#link-container .link-a {
     display: flex;
     flex-flow: nowrap;
     justify-content: space-between;
@@ -309,70 +380,56 @@ section #remote-etc-wrap{
     border-radius: 0.25rem;
     margin-top: 10px;
 }
-#link-container .link-a:hover{
+
+#link-container .link-a:hover {
     transform: scale(1.01);
     background-color: #ffca3d;
 }
-#link-container .link-ca{
+
+#link-container .link-percent {
     flex-basis: 80px;
     flex-shrink: 0;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     background-color: #ffca3d;
     font-weight: 700;
     color: #555;
 }
-#link-container .link-post-info{
+
+#link-container .link-post-info {
     padding: 5px 10px;
     flex-grow: 1;
 }
-#link-container .link-title{
+
+#link-container .link-title {
     font-family: 'NanumBarunGothicBold';
     color: #555;
 }
-#link-container .link-writer{
+
+#link-container .link-writer {
     font-size: 0.8em;
     color: #787878;
 }
 
-#link-container .link-post-date{
+#link-container .link-post-date {
     flex-basis: 100px;
     flex-shrink: 0;
-    
+
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
 }
-#link-container .link-percent{
+
+#link-container .link-percent {
     color: #000;
     font-weight: 700;
 }
-#link-container .link-date{
+
+#link-container .link-date {
     font-size: 0.8em;
     color: #787878;
-}
-
-/* 연관 포스트 없을 때*/
-#link-container .link-zero-box{
-    display: flex;
-    flex-flow: column;
-    text-align: center;
-
-    border: 1px dotted #888;
-    border-radius: 0.25rem;
-    margin-top: 10px;
-    opacity: 70%;
-}
-.link-zero-1{
-    background-color: #ffca3d;
-    padding: 10px 0 5px;
-    font-size: 1.1em;
-    font-weight: 700;
-}
-.link-zero-2{
-    padding: 5px 0 10px;
 }

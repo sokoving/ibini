@@ -44,15 +44,13 @@
                                         <c:choose>
                                             <c:when test="${img.thumbnail}">
                                                 <div class="img-box post-thumb">
-                                                    <img class="post-img"
-                                                        src="/loadFile?fileName=${img.fileName}"
+                                                    <img class="post-img" src="/loadFile?fileName=${img.fileName}"
                                                         alt="표지 이미지" title="${img.originalFileName}">
                                                 </div>
                                             </c:when>
                                             <c:otherwise>
                                                 <div class="img-box">
-                                                    <img class="post-img"
-                                                        src="/loadFile?fileName=${img.fileName}"
+                                                    <img class="post-img" src="/loadFile?fileName=${img.fileName}"
                                                         alt="첨부 이미지" title="${img.originalFileName}">
                                                 </div>
                                             </c:otherwise>
@@ -65,25 +63,25 @@
                         <!-- 포스트 정보 영역 -->
                         <div id="post-box">
 
-                            <!-- top : 별점, 장르, 카테고리 -->
+                            <!-- top : 별점, 제목, 작가, 장르-->
                             <div id="post-top">
                                 <span class="top-span star-span"></span>
-                                <span class="top-span">${p.genreName}</span>
-                                <span class="top-span">${p.caName}</span>
-                            </div> <!-- // end post-top -->
-
-                            <!-- middle : 제목, 작가, 연재 정보 -->
-                            <div id="post-middle">
-
                                 <!-- 책 제목 -->
                                 <div id="post-title">
                                     <h2 class="title-span">${p.postTitle}</h2>
                                 </div>
-
-                                <!-- 작가 이름 -->
+                                <!-- 작가 이름 | 장르 이름 -->
                                 <div id="post-writer">
-                                    <span class="writer-span">${p.postWriter}</span>
+                                    <span class="writer-span">${p.postWriter} | ${p.genreName}</span>
                                 </div>
+                            </div> <!-- // end post-top -->
+
+                            <!-- middle : 장르, 플랫폼, 연재 상태, 연재 일시, 페이지 정보 -->
+                            <div id="post-middle">
+
+
+
+
 
 
                                 <div id="publish-status">
@@ -93,7 +91,6 @@
                                         <tr>
                                             <td class="first-td">${p.platformName}</td>
                                             <c:choose>
-
                                                 <c:when test="${p.publishStatus <= 1}">
                                                     <c:choose>
                                                         <c:when test="${empty p.publishCycle}">
@@ -109,7 +106,6 @@
                                                 <c:otherwise>
                                                     <td class="last-td">${p.publishStatusName}</td>
                                                 </c:otherwise>
-
                                             </c:choose>
                                         </tr>
                                         <tr class="empty-tr">
@@ -152,29 +148,28 @@
 
                                 </div>
                             </div> <!-- // end post-middle -->
-
-                            <!-- bottom : 날짜, 수정삭제목록 버튼-->
-                            <div id="post-bottom">
-                                <div class="date-wrap">
-                                    <span>등록일 ${p.shortDate.postRegDate}</span>
-                                    |
-                                    <span>수정일 ${p.shortDate.postUpdateDate}</span>
-                                </div>
-                                <div class="post-btn-wrap">
-                                    <button class="post-btn post-modi-btn" title="수정하기">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
-                                    <button class="post-btn post-list-btn" title="목록으로">
-                                        <i class="far fa-list-alt"></i>
-                                    </button>
-                                    <button class="post-btn post-del-btn" title="삭제하기">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </div> <!-- // end post-bottom -->
-
                         </div> <!-- // end post-box -->
                     </div><!-- // end img-post-wrap -->
+                    <!-- bottom : 날짜, 수정삭제목록 버튼-->
+                    <div id="post-bottom">
+                        <div class="date-wrap">
+                            <span>등록일 ${p.shortDate.postRegDate}</span>
+                            |
+                            <span>수정일 ${p.shortDate.postUpdateDate}</span>
+                        </div>
+                        <div class="post-btn-wrap">
+                            <button class="post-btn post-modi-btn" title="수정하기">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button class="post-btn post-list-btn" title="목록으로">
+                                <i class="far fa-list-alt"></i>
+                            </button>
+                            <button class="post-btn post-del-btn" title="삭제하기">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div> <!-- // end post-bottom -->
+
 
                     <!-- 리모컨, 해시태그, 관련 링크 영역-->
                     <div id="remote-etc-wrap">
@@ -230,21 +225,6 @@
                             <div id="link-post-wrap">
                                 <div class="h3-wrap">
                                     <h3>연관 포스트</h3>
-
-                                    <!-- 등록할 포스트 검색하는 영역 -->
-                                    <div class="search-wrap hide">
-                                        <label class="form-label">
-                                            <input class="form-control" id="linkTitle" list="titleOptionList"
-                                                placeholder="제목 검색">
-                                        </label>
-                                        <!-- 검색 포스트 영역 -->
-                                        <datalist id="titleOptionList">
-                                            <option data-link-post-no="30" value="화산귀환 1권"> 네이버시리즈 | 비가
-                                        </datalist>
-                                        <i id="search-plus" class="far fa-plus-square" title="포스트 추가하기"></i>
-                                    </div> <!-- // end search wrap -->
-
-
                                     <div class="toggle-box">
                                         <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
                                         <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
@@ -256,9 +236,45 @@
                                 <div>
                                     <!-- 연관 포스트 목록 영역 -->
                                     <ul id="link-container">
+
+                                        <!-- 포스트 검색 영역 -->
+                                        <li class="link-zero-box search-box">
+
+                                            <div class="link-zero-1">연관 포스트를 추가해 보세요. <br> 바로가기 링크가 생깁니다.</div>
+
+                                            <div class="search-wrap">
+                                                <!-- 검색 유형 선택 -->
+                                                <select class="form-select" id="linkSearchType"
+                                                    saria-label=".form-select-sm example">
+                                                    <option value="title" selected>제목</option>
+                                                    <option value="writer">작가</option>
+                                                </select>
+                                                <!-- 포스트 검색, 추가 -->
+                                                <input class="form-control" list="datalistOptions" id="postSearchList"
+                                                    placeholder="포스트 제목 검색">
+                                                <datalist id="datalistOptions">
+                                                    <option data-link-post-no="30" value="화산귀환 1권"> 네이버시리즈 | 비가
+                                                    <option data-link-post-no="31" value="화산귀환 2권"> 네이버시리즈 | 비가
+                                                    <option data-link-post-no="32" value="화산귀환 3권"> 네이버시리즈 | 비가
+                                                    <option data-link-post-no="33" value="내가 키운 S급들 1권"> 리디북스 | 근서
+                                                    <option data-link-post-no="34" value="내가 키운 S급들 2권"> 리디북스 | 근서
+                                                </datalist>
+                                                <!-- 등록버튼 -->
+                                                <button type="button" class="link-reg-btn btn btn-secondary">저장</button>
+                                            </div> <!-- // end search wrap -->
+                                        </li>
+
+                                        <!-- 연결된 포스트가 없을 경우 -->
+                                        <li class="link-zero-box">
+                                            <div class="link-zero-1">등록된 연관 포스트가 없습니다.</div>
+                                            <div class="link-zero-2">위 토글 버튼을 눌러 새 포스트를 추가해 보세요</div>
+                                        </li>
+
+
+                                        <!-- 연결된 포스트가 있는 경우 -->
                                         <li>
                                             <a class="link-a" href="#">
-                                                <div class="link-ca">웹소설</div>
+                                                <div class="link-percent">100%</div>
 
                                                 <div class="link-post-info">
                                                     <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
@@ -268,7 +284,7 @@
                                                 </div>
 
                                                 <div class="link-post-date">
-                                                    <span class="link-percent">100%</span>
+                                                    <span class="link-date">수정일</span>
                                                     <span class="link-date">2022.05.05</span>
                                                 </div>
                                                 <i data-del-post-no="98"
