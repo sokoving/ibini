@@ -65,6 +65,18 @@ public class LinkPostService {
         return linkMap;
     }
 
+//    루트 포스트에 연결된 링크 포스트를  List<PostWithName>로 리턴
+    public  List<PostWithName> getLinkListByPostNo(Long rootPostNo){
+        log.info("LinkPostService getLinkListByPostNo CALL - {} ", rootPostNo);
+
+        List<PostWithName> linkList = mapper.getLinkDTOList(rootPostNo);
+        for (PostWithName pn : linkList) {
+            pn.setting();
+//            System.out.println(pn);
+        }
+        return linkList;
+    }
+
 
     // 루트 포스트에 연결된 포스트 수 조회
     public int getCount(Long rootPostNo) {
