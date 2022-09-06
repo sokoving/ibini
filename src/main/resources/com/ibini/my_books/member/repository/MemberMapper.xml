@@ -97,6 +97,19 @@
 
     </update>
 
+<!--    email로 회원 아이디 찾기 -->
+
+    <select id="findUserId" resultMap="MemberMap">
+
+        SELECT *
+        FROM tbl_member
+        WHERE email = #{email}
+
+    </select>
+
+<!--   eamil_verification kakao 변경 -->
+
+
 <!--  회원 탈퇴  -->
     <delete id="memberDelete">
         DELETE FROM tbl_member

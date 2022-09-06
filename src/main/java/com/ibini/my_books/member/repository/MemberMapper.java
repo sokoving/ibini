@@ -24,8 +24,11 @@ public interface MemberMapper {
      */ //중복체크 기능
     int isDuplicate(Map<String, Object> checkMap);
 
-    //회원정보 조회 기능
+    //회원정보 조회 기능 _ 아이디
     Member findUser(String userId);
+
+    //회원정보 조회 기능 _ 이메일
+    Member findUserId(String email);
 
     // 닉네임 수정 기능 (회원정보 수정)
     boolean updateName(String userId, String userName);

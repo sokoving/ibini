@@ -284,6 +284,26 @@ public class MemberController {
 
     }
 
+    // id 찾기
+    @GetMapping("/findid")
+    public void findid() {
+        log.info("/member/findid GET 요청!");
+    }
+
+    @PostMapping("/findid")
+    public String findid(String email, Model model, RedirectAttributes ra) {
+        log.info("/member/findid POST 요청! ");
+        Member member = memberService.findUserId(email);
+        log.info("findid = member : {}", member);
+        if (member == null) {
+            ra.addFlashAttribute("msg", "not-found-userid");
+            return "redirect:/member/findid";
+        } else {
+            model.addAttribute("userid", member.getUserId());
+        }return "/member/findid";
+    }
+
+
     //비밀번호 찾기
     @GetMapping("/findpw")
     public String fidnpw() {
@@ -504,16 +524,17 @@ public class MemberController {
 //        }
 
     }
-//    =========== 관리자의 전체 회원 관리 ===========
+
+    //    =========== 관리자의 전체 회원 관리 ===========
     @GetMapping("/findAll-ManageMember")
-    public void findAllManageMember(Model model){
+    public void findAllManageMember(Model model) {
         log.info("/member/findAll-ManageMember GET 요청!! ");
         List<ManageMember> allManageMember = memberService.findAllManageMember();
         int[] ints = memberService.currentInOutMember();
         log.info("allManageMember : {}", allManageMember);
-        log.info("현재 회원과 탈퇴한 회원 배열 : {}",ints);
-        model.addAttribute("mmList",allManageMember);
-        model.addAttribute("ints",ints);
+        log.info("현재 회원과 탈퇴한 회원 배열 : {}", ints);
+        model.addAttribute("mmList", allManageMember);
+        model.addAttribute("ints", ints);
 
     }
 

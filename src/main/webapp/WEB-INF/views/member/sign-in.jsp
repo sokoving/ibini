@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -341,10 +341,14 @@
               <input type="checkbox" id="auto-login" name="autoLogin">
             </span>
           </label>
-
-          <!-- 비밀번호 찾기 링크 -->
-          <a href="/member/findpw" id="forgotPw">Forgot Password?</a>
+          <div>
+            <!-- 아이디 찾기 링크 -->
+            <a href="/member/findid" id="forgotId">아이디를 잊으셨나요? </a>
+            <!-- 비밀번호 찾기 링크 -->
+            <a href="/member/findpw" id="forgotPw">password를 잊으셨나요?</a>
+</div>
         </div>
+
 
         <!-- 로그인 버튼 -->
         <input type="submit" class="btn" value="Sign-In">

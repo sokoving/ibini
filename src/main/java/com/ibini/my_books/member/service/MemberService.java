@@ -152,6 +152,11 @@ public class MemberService {
         return false;
     }
 
+   // 회원 아이디 찾기 email로 조회
+    public Member findUserId(String email){
+        return memberMapper.findUserId(email);
+    }
+
     // 회원 정보 닉네임 수정 기능
     public boolean updateName(String userId, String userName) {
         return memberMapper.updateName(userId, userName);
