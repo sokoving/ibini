@@ -2,6 +2,7 @@ package com.ibini.my_books.member.repository;
 
 import com.ibini.my_books.member.common.paging.Page;
 import com.ibini.my_books.member.domain.InquiryTable;
+import com.ibini.my_books.member.domain.ManageMember;
 import com.ibini.my_books.member.domain.Member;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -111,6 +112,41 @@ class MemberMapperTest {
                 System.out.println(inquiryTable);
             }
 
+
+    }
+
+//    현재 회원탈퇴관리 테이블의 마지막 reasonNum 구하기
+    @Test
+    @DisplayName("회원관리 테이블의 마지막 번호")
+    void getReasonNum(){
+        int currentReasonNum = mapper.getCurrentReasonNum();
+        System.out.println(currentReasonNum);
+    }
+
+    @Test
+    @DisplayName("관리자의 회원전체조회(탈퇴회원포함)")
+    void findAllManageMember(){
+        List<ManageMember> allManageMember = mapper.findAllManageMember();
+        for (ManageMember manageMember : allManageMember) {
+            System.out.println(manageMember);
+        }
+    }
+
+    @Test
+    @DisplayName("현재 가입한 회원의 수")
+    void getTotalCurrentMemberCount(){
+
+        int totalCurrentMemberCount = mapper.getTotalCurrentMemberCount();
+        System.out.println(totalCurrentMemberCount);
+
+    }
+
+    @Test
+    @DisplayName("현재 탈퇴한 회원 수")
+    void getTotalOutMemberCount(){
+
+        int totalOutMemberCount = mapper.getTotalOutMemberCount();
+        System.out.println(totalOutMemberCount);
 
     }
 

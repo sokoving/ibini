@@ -2,6 +2,7 @@ package com.ibini.my_books.member.repository;
 
 import com.ibini.my_books.member.common.paging.Page;
 import com.ibini.my_books.member.domain.InquiryTable;
+import com.ibini.my_books.member.domain.ManageMember;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.*;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,14 +15,14 @@ import java.util.Map;
 public interface MemberMapper {
 
     //회원 가입 기능
-    boolean register (Member member);
+    boolean register(Member member);
 
     /*
-    * 체크타입 : 계정 or 이메일
-    * 체크값 : 중복검사대상 값
-    *
-    */ //중복체크 기능
-    int isDuplicate(Map<String,Object> checkMap);
+     * 체크타입 : 계정 or 이메일
+     * 체크값 : 중복검사대상 값
+     *
+     */ //중복체크 기능
+    int isDuplicate(Map<String, Object> checkMap);
 
     //회원정보 조회 기능
     Member findUser(String userId);
@@ -36,7 +37,7 @@ public interface MemberMapper {
     boolean updateEmail(String userId, String email);
 
     // 회원탈퇴 기능
-    boolean memberDelete(String userId,String password);
+    boolean memberDelete(String userId, String password);
 
     //자동로그인 쿠키정보 저장
     void saveAutoLoginValue(AutoLoginDTO dto);
@@ -51,19 +52,18 @@ public interface MemberMapper {
     boolean changeCondition(String userId);
 
     // 탈퇴 회원 관리 테이블 userId = reasonNum 삽입
-    boolean insertReasonNum(String userId,int reasonNum);
+    boolean insertReasonNum(String userId, int reasonNum);
 
-   // 탈퇴사유 직접 입력시 tbl_reason_break_away 사유 등록하기
+    // 탈퇴사유 직접 입력시 tbl_reason_break_away 사유 등록하기
     boolean insertReason(String outReason);
 
     // 회원의 모든 게시물 삭제?
 
 //    ========== 회원관리 =============== //
+//    ========== 문의글 관리 =========
 
-    //회원관리 테이블에 회원 등록
-    boolean registerManageMember(Member member);
 
-   //문의사항 등록하기
+    //문의사항 등록하기
     boolean inquiryRegister(InquiryDTO dto);
 
     //답변 등록하기
@@ -79,10 +79,10 @@ public interface MemberMapper {
 //
 
 
-        //관리자 페이지에서 문의내역 전체 조회하기
-     List<InquiryTable> findAllInquiry(@RequestParam("page") Page page);
+    //관리자 페이지에서 문의내역 전체 조회하기
+    List<InquiryTable> findAllInquiry(@RequestParam("page") Page page);
 
-     //문의글 수정
+    //문의글 수정
     boolean inquiryModify(InquiryModifyDTO dto);
 
     // 문의글 삭제
@@ -94,6 +94,22 @@ public interface MemberMapper {
     // 관리자 로그인 상태 - 총 문의글 수 구하기 (페이지 처리)
     int getTotalInquiry();
 
+    // 탈퇴사유 관리 테이블의 reasonNum 가지고 오기
+    int getCurrentReasonNum();
+
+    //    =================회원관리=======================
+    //회원관리 테이블에 회원 등록
+    boolean registerManageMember(Member member);
+
+    //회원관리를 위한 전체회원 조회(탈퇴한 회원 포함) -> tbl_manage_member
+    List<ManageMember> findAllManageMember();
+
+    //    <!--  가입한 회원수 구하기  -->
+    int getTotalCurrentMemberCount();
+
+
+    //<!--   탈퇴한 회원수 구하기 -->
+    int getTotalOutMemberCount();
 
 
 }

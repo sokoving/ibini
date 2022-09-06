@@ -268,5 +268,31 @@
 
     </select>
 
+<!--  탈퇴사유 관리 테이블의 마지막 reasonNum 구하기  -->
+    <select id="getCurrentReasonNum" resultType="int">
+        SELECT COUNT(*) FROM tbl_reason_break_away
+    </select>
+
+<!--  관리자의 회원관리 탈퇴/가입 전체 회원 조회 findAllManageMember  -->
+    <resultMap id="manageMemberMap" type="com.ibini.my_books.member.domain.ManageMember">
+
+        <result column="user_id" property="userId"/>
+        <result column="user_condition" property="userCondition"/>
+
+    </resultMap>
+    <select id="findAllManageMember" resultMap="manageMemberMap">
+        SELECT * FROM tbl_manage_member
+    </select>
+
+<!--  가입한 회원수 구하기  -->
+    <select id="getTotalCurrentMemberCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_manage_member WHERE user_condition = 'true'
+    </select>
+
+<!--   탈퇴한 회원수 구하기 -->
+    <select id="getTotalOutMemberCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_manage_member WHERE user_condition = 'false'
+    </select>
+
 
 </mapper>

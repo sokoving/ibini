@@ -49,7 +49,9 @@
                             <c:if test="${loginUser.auth == 'ADMIN'}">
                                 <ul>
                                     <li><a href="#">관리자메뉴</a></li>
-                                    <li><a href="/member/admin/findall-inquiry">문의하기</a></li>
+                                    <li><a href="/member/findAll-ManageMember">회원관리</a></li>
+                                    <li><a href="#">탈퇴회원관리</a></li>
+                                    <li><a href="/member/admin/findall-inquiry">문의글 관리</a></li>                                    
 
                                     <c:if test="${loginUser != null}">
                                         <li><a href="/member/sign-out">로그아웃</a></li>

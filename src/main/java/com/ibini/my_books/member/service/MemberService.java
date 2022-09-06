@@ -3,6 +3,7 @@ package com.ibini.my_books.member.service;
 import com.ibini.my_books.genre.service.GenreService;
 import com.ibini.my_books.member.common.paging.Page;
 import com.ibini.my_books.member.domain.InquiryTable;
+import com.ibini.my_books.member.domain.ManageMember;
 import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.*;
 import com.ibini.my_books.member.repository.MemberMapper;
@@ -18,10 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.ibini.my_books.member.service.LoginFlag.*;
 import static com.ibini.my_books.util.LoginUtil.*;
@@ -52,13 +50,6 @@ public class MemberService {
         }
         return false;
     }
-
-    //회원 탈퇴사유 직접입력한 경우 내용 등록
-    public boolean insertReason(String outReason){
-        boolean flag = memberMapper.insertReason(outReason);
-        return flag;
-    }
-
 
     // 중복확인 중간처리
     public boolean checkSignUpValue(String type, String value) {
@@ -182,6 +173,14 @@ public class MemberService {
 
     // ========= 회원 탈퇴
 
+    //회원 탈퇴사유 직접입력한 경우 내용 등록
+    public boolean insertReason(String outReason){
+        boolean flag = memberMapper.insertReason(outReason);
+        log.info("직접입력 사유등록시 getcurrentReasonNum : {}",memberMapper.getCurrentReasonNum());
+        return flag;
+
+    }
+
     //회원 탈퇴 처리
     @Transactional
     public boolean memberDelete(String userId, String password,int reasonNum) {
@@ -192,8 +191,15 @@ public class MemberService {
 //        탈퇴한 회원의 상태 변경
         memberMapper.changeCondition(userId);
 
-//        탈퇴한 회원의 회원 탈퇴 사유 입력
-        memberMapper.insertReasonNum(userId,reasonNum);
+        if(reasonNum <= 3){
+            //탈퇴한 회원의 회원 탈퇴 사유 입력 {지정된 사유 입력시}
+            memberMapper.insertReasonNum(userId,reasonNum);
+        } else {
+            reasonNum = memberMapper.getCurrentReasonNum();
+            log.info("직접입력 회원정보 입력시 getcurrentReasonNum : {}",reasonNum);
+            memberMapper.insertReasonNum(userId,reasonNum);
+        }
+
 
 
         return memberMapper.memberDelete(userId, password);
@@ -218,6 +224,7 @@ public class MemberService {
 
 
     //    ========== 회원관리 =============== //
+//    ============= 문의글 관리하기================
 
     // 문의글 시간 포맷팅 메서드;
     private void convertDateFormat(InquiryTable inquiry) {
@@ -335,6 +342,20 @@ public class MemberService {
             }
 
         }
+    }
+
+//    ============== 관리자의 회원관리 =============
+    public List<ManageMember> findAllManageMember(){
+        return memberMapper.findAllManageMember();
+    }
+
+    public int[] currentInOutMember(){
+        int inMember = memberMapper.getTotalCurrentMemberCount();
+        int outMember = memberMapper.getTotalOutMemberCount();
+        int [] memberArray = new int [2];
+        memberArray[0] = inMember;
+        memberArray[1] = outMember;
+        return memberArray;
     }
 
 

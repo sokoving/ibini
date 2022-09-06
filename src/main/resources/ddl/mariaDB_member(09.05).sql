@@ -2,19 +2,19 @@
 -- sql 회원 테이블
 CREATE TABLE tbl_member
 (
-    account             VARCHAR2(50)     NOT NULL,          --회원 관리 번호(수정X, 시스템 입력)
-    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   --회원 아이디(수정X, 회원 입력)
-    password            VARCHAR2(150)    NOT NULL,          --비밀번호
-    user_name           VARCHAR2(20)     NOT NULL,          --닉네임(수정O, 회원 입력)
-    email               VARCHAR2(100)    NOT NULL UNIQUE,   --유저 이메일 주소
-    post_amount         NUMBER(3)        NULL,      --한 페이지에 띄울 포스트 수	ex) 50
-    sort                VARCHAR2(50)     NULL,      --정렬 기준
-    auth                VARCHAR2(20)     DEFAULT 'COMMON',  --권한 (COMMON, ADMIN)
-    join_date           DATE             DEFAULT SYSDATE,   --가입날짜
-    last_login          DATE             DEFAULT SYSDATE,   --마지막 로그인 날짜
-    email_verification  VARCHAR2(20)     DEFAULT 'false',   --이메일 인증여부
-    session_id          VARCHAR2(200)    DEFAULT 'none',    --세션 아이디
-    limit_time          DATE,                               --세션 만료일
+    account             VARCHAR2(50)     NOT NULL,          -- 회원 관리 번호(수정X, 시스템 입력)
+    user_id             VARCHAR2(50)     NOT NULL UNIQUE,   -- 회원 아이디(수정X, 회원 입력)
+    password            VARCHAR2(150)    NOT NULL,          -- 비밀번호
+    user_name           VARCHAR2(20)     NOT NULL,          -- 닉네임(수정O, 회원 입력)
+    email               VARCHAR2(100)    NOT NULL UNIQUE,   -- 유저 이메일 주소
+    post_amount         NUMBER(3)        NULL,      -- 한 페이지에 띄울 포스트 수	ex) 50
+    sort                VARCHAR2(50)     NULL,      -- 정렬 기준
+    auth                VARCHAR2(20)     DEFAULT 'COMMON',  -- 권한 (COMMON, ADMIN)
+    join_date           DATE             DEFAULT SYSDATE,   -- 가입날짜
+    last_login          DATE             DEFAULT SYSDATE,   -- 마지막 로그인 날짜
+    email_verification  VARCHAR2(20)     DEFAULT 'false',   -- 이메일 인증여부
+    session_id          VARCHAR2(200)    DEFAULT 'none',    -- 세션 아이디
+    limit_time          DATE,                               -- 세션 만료일
      PRIMARY KEY (account)
 );
 
