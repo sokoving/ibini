@@ -114,5 +114,10 @@ public interface MemberMapper {
     //<!--   탈퇴한 회원수 구하기 -->
     int getTotalOutMemberCount();
 
+//    <!--   email_verification kakao 변경 -->
+    boolean verificationKakaoChange(String email);
+
+//<!-- kakao 로그인 유저인지 확인 -->
+    int findVerificationKakao(String email);
 
 }

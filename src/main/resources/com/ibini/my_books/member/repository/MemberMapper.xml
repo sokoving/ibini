@@ -107,7 +107,21 @@
 
     </select>
 
-<!--   eamil_verification kakao 변경 -->
+<!--   email_verification kakao 변경 -->
+<update id="verificationKakaoChange">
+    UPDATE tbl_member
+    SET email_verification = 'kakao'
+    WHERE email = #{email}
+</update>
+
+<!-- kakao 로그인 유저인지 확인 -->
+<select id="findVerificationKakao" resultType="int">
+
+        SELECT COUNT(*)
+        FROM tbl_member
+        WHERE email_verification = 'kakao' AND email = #{email}
+
+</select>
 
 
 <!--  회원 탈퇴  -->

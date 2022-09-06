@@ -141,6 +141,11 @@ public class MemberService {
 
     }
 
+    // email-verification 변경
+    public boolean verificationKakaoChange(String email){
+        return memberMapper.verificationKakaoChange(email);
+    }
+
     // 비밀번호 일치 확인
     public boolean modifyPwCheck(String password, String userId) {
         Member member = memberMapper.findUser(userId);

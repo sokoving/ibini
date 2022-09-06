@@ -5,7 +5,7 @@
 
         <head>
             <%@ include file="../include/static-head.jsp" %>
-            <link rel="stylesheet" href="/css/inquiry-all.css">
+                <link rel="stylesheet" href="/css/inquiry-all.css">
         </head>
 
 
@@ -44,7 +44,7 @@
                                     <ul class="inner-inquiryTable table2">
                                         <li data-serial-num="${list.serialNumber}">${list.inquiryPrettierDate}</li>
                                         <c:if test="${list.answer == null}">
-                                            
+
                                             <!-- 모달 버튼 -->
                                             <li class="answer-register"> <a id="registerBtn" type="button"
                                                     class="btn btn-primary" data-bs-toggle="modal"
@@ -117,6 +117,10 @@
                                             <label for="recipient-name" class="col-form-label">문의글 제목:</label>
                                             <div class="form-control" id="recipient-name"></div>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="recipient-context" class="col-form-label">문의 내용:</label>
+                                            <div class="form-control" id="recipient-context"></div>
+                                        </div>
                                         <input type="hidden" id="hidden-serialNumber" name="serialNumber">
                                         <div class="mb-3">
                                             <label for="message-text" class="col-form-label">답글 작성:</label>
@@ -136,6 +140,7 @@
 
 
                     <!--================== script =================================-->
+
                     <!-- page script -->
                     <script>
                         // 현재 위치한 페이지에 active 스타일 부여하기
@@ -172,29 +177,52 @@
 
                             // Button that triggered the modal
                             var button = event.relatedTarget
-                            console.log('button :',button); // 클릭된 버튼 태그
-                            
+                            console.log('button :', button); // 클릭된 버튼 태그
+
                             // Extract info from data-bs-* attributes
                             var recipient = button.getAttribute('data-bs-whatever')
-                            console.log('recipient :',recipient); // 클릭된 버튼 태그의 데이터 속성
+                            console.log('recipient :', recipient); // 클릭된 버튼 태그의 데이터 속성
 
                             // console.log('모달 클릭시 해당영역의 제목:',button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent);
                             const titleContent = button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent;
-                            console.log('타이틀내용 :',titleContent); // 클릭된 버튼으로 부터 제목태그 가지고 오기  
-                        
+                            console.log('타이틀내용 :', titleContent); // 클릭된 버튼으로 부터 제목태그 가지고 오기  
+
+                            console.log('모달 클릭시 해당영역의 문의내용:', button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling);
+
                             document.getElementById('recipient-name').textContent = titleContent;
-                            console.log('recipient-name:',document.getElementById('recipient-name'));
+                            console.log('recipient-name:', document.getElementById('recipient-name'));
                             // 제목이 들어가는 div 태그
+
+                            const $modalDetail = document.getElementById('recipient-context');
+                            console.log('recipient-context :', document.getElementById('recipient-context'));
+                            //문의 내용이 들어가는 div 태그 // 삭제 대상의 부모노드
+
+                            //비동기로 문의글 상세정보 가지고 오기              
+                            fetch('http://localhost:8383/member/findone-inquiry/' + recipient)
+                                .then(res => res.json())
+                                .then(oneInquiry => {
+                                    const $p = document.createElement('p');
+                                    $p.textContent = oneInquiry.inquiry;
+                                    $p.id = 'modal-detail';
+                                    $modalDetail.append($p);
+                                });
+
+                            // 삭제할 노드 선택 [문의글만 있는 경우 - 문의 제목]
+                            const $removeTargetT = document.getElementById('modal-detail');
+                            $modalDetail.removeChild($removeTargetT);
+
+                            
+
 
                             // If necessary, you could initiate an AJAX request here
                             // and then do the updating in a callback.
 
                             // Update the modal's content.
                             var modalTitle = answerregisterModal.querySelector('.modal-title')
-                            console.log('modalTitle :',modalTitle); //<h5> 태그 타이틀 ex)[문의번호 답변 작성]
+                            console.log('modalTitle :', modalTitle); //<h5> 태그 타이틀 ex)[문의번호 답변 작성]
 
                             var modalBodyInput = answerregisterModal.querySelector('.modal-body input')
-                            console.log('modalBodyInput :',modalBodyInput); // 모달 폼안에있는 input데이터
+                            console.log('modalBodyInput :', modalBodyInput); // 모달 폼안에있는 input데이터
 
 
                             modalTitle.textContent = '[답변 작성] - 문의 번호 [' + recipient + ']';
@@ -218,12 +246,12 @@
                                 answer: $contentInput.value
                             };
 
-                            if(answerDate.answer.trim() === ''){
+                            if (answerDate.answer.trim() === '') {
                                 alert('답변을 입력해주세요');
                                 return;
                             }
 
-                            console.log('answerDate:',answerDate);
+                            console.log('answerDate:', answerDate);
 
 
                             // POST요청을 위한 요청 정보 객체

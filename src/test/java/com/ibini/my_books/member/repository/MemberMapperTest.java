@@ -150,6 +150,23 @@ class MemberMapperTest {
 
     }
 
+    @Test
+    @DisplayName("현재 탈퇴한 회원 수")
+    void verificationKakaoChange(){
+        String email = "rodrodzzang@naver.com";
+
+        mapper.verificationKakaoChange(email);
+
+    }
+
+    @Test
+    @DisplayName("암호화된 비밀번호 끼리 동등비교 가능여부 확인")
+    void test(){
+        Member rodrodzzang = mapper.findUserId("rodrodzzang");
+        boolean b = rodrodzzang.getPassword().equals(rodrodzzang.getPassword());
+        System.out.println(b);
+    }
+
 
 //    ==================================
 
