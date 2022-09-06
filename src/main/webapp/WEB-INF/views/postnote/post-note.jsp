@@ -144,7 +144,6 @@
 
         // 등록 버튼 onclick Event
         function btnAdd_onclick($eventTag) {
-
             if ($eventTag.getAttribute('name') == 'memo') {
                 const $memoContent = document.getElementById('memo-content');
                 
@@ -260,9 +259,12 @@
         // 수정 저장 버튼 onclick Event
         function btnModifySave_onclick($eventTag) {
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo'){
-
                 const memoNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-memo-no');
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');            
+
+                if (!validateMemoContent_modify($eventTag)) {
+                    return;
+                }
 
                 fetch(memoURL + '/' + memoNo, {
                         method: "PUT",
@@ -289,6 +291,10 @@
                 const markNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-mark-no');
                 const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
                 
+                if (!validateMarkEpAndContent_modify($eventTag)) {
+                    return;
+                }
+
                 fetch(markURL + '/' + markNo, {
                         method: "PUT",
                         headers: {
@@ -315,7 +321,6 @@
         // 삭제 버튼 onclick Event
         function btnDelete_onclick($eventTag) {
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
-
                 const memoNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-memo-no');
 
                 fetch(memoURL + '/' + memoNo, {method : 'DELETE'})
@@ -454,6 +459,37 @@
             }
             return flag;
         }
+
+        // 마크 content 수정 할 때 필수값 체크 method
+        function validateMarkEpAndContent_modify($eventTag) {
+            const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');  
+
+            let flag = false;
+            if ($markContent.value.trim() === '') {
+                alert('내용은 필수 입력값입니다');
+
+            } else {
+                flag = true;
+
+            }
+            return flag;
+        }
+
+        // 메모 content 수정 할 때 필수값 체크 method
+        function validateMemoContent_modify($eventTag) {
+            const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content'); 
+
+            let flag = false;
+            if ($memoContent.value.trim() === '') {
+                alert('내용은 필수 입력값입니다');
+
+            } else {
+                flag = true;
+
+            }
+            return flag;
+        }
+
 
         /*======================================================================
             마크, 메모 리스트 영역
