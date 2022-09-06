@@ -66,7 +66,7 @@
             
             
             <!-- body 영역 -->
-            <div class="body-wrapper">
+            <div class="body-wrapper scroll-bar">
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="memo">
                

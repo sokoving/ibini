@@ -65,7 +65,7 @@
             
             
             <!-- body 영역 -->
-            <div class="body-wrapper">
+            <div class="body-wrapper scroll-bar">
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
                     <c:if test="${empty myPageMarkList}">
@@ -127,13 +127,13 @@
                                             <hr>
                                         </div> <!-- end my-text -->
                                     </c:forEach>    
-                                    <c:if test="${p.markList.size() > 2}">
+                                    <%--<c:if test="${p.markList.size() > 2}">--%>
                                         <div class="view-more">
                                             <a class="noselect" onclick="click_viewMore(this)">... 더보기</a>
                                         </div>
                                         <!-- 포스트 번호 -->
                                         <span id="postNo" style="display: none;">${p.postNo}</span>
-                                    </c:if>
+                                    <%--</c:if>--%>
                                 </div> <!-- end book-info -->
                             </div> <!-- end book-wrapper -->
                         </div> <!-- end content -->

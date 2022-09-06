@@ -175,7 +175,8 @@ section {
 ==================================================*/
 .list-wrapper {
     /* border: 1px solid #ced4da; */
-    border-radius: 0.25rem;
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
     margin-top: 25px;
     padding: 8px 0px;
 
@@ -193,12 +194,27 @@ section {
 .body-wrapper {
     height: 65vh;
     border-bottom: 1px solid #e9ecef;
-    border-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
     padding: 20px;
     overflow-y: auto;
     overflow-x: hidden;
 
     background: #faf6f7;
+}
+
+/* 스크롤바 디자인 */
+.scroll-bar::-webkit-scrollbar {
+    width: 15px;  /* 스크롤바의 너비 */
+}
+.scroll-bar::-webkit-scrollbar-thumb {
+    height: 20%; /* 스크롤바의 길이 */
+    background: #ffca3d; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+.scroll-bar::-webkit-scrollbar-track {
+    background: #ffe6a2;  /*스크롤바 뒷 배경 색상*/
 }
 
 /*================================================
@@ -252,14 +268,14 @@ section {
     font-size: 19px;
 
     margin-top: 0.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 5px double #6c757d;
 }
 .book-wrapper .book-info .book-title span {
     background: rgb(250, 207, 211);
     border-radius: 0.6rem;
-    padding: 0.6rem;
+    padding: 0.7rem;
 }
 
 /* Mark / Memo 내용 영역 */
@@ -276,7 +292,7 @@ section {
     font-weight: bold;
 }
 .book-wrapper .book-info .my-text .episode-no span {
-    padding: 0.4rem;
+    padding: 0.55rem 0.8rem;
     background: #c59c9c;
     border-radius: 20px;
 }
@@ -315,11 +331,12 @@ section {
 
 /* MARK content */
 .book-wrapper .book-info .my-text textarea {
+    font-size: 17px;
     border: 1px solid #e9ecef;
     border-radius: 0.25rem;
     outline-color: #4a4a4a4f;
     margin-top: 0.9rem;
-    font-size: 17px;
+    padding: 15px;
 }
 /* .book-wrapper .book-info .my-text textarea:first-child {
     margin-top: 1rem;
@@ -340,7 +357,5 @@ section {
     display: flex;
     flex-direction: row-reverse;
 }
-
-
 
 

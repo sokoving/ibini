@@ -91,7 +91,7 @@
         LEFT OUTER JOIN tbl_post p
         ON pm.post_no = p.post_no
         WHERE pm.post_no = #{postNo}
-        ORDER BY pm.episode_no DESC
+        ORDER BY pm.episode_no
     </select>
 
     <!-- 마이페이지 포스트, 썸네일 조회 -->
@@ -109,6 +109,6 @@
         ON p.post_no= i.post_no
         WHERE i.thumbnail = 'true'
             OR i.thumbnail is null
-        ORDER BY p.post_no desc
+        ORDER BY p.post_title
     </select>
 </mapper>
