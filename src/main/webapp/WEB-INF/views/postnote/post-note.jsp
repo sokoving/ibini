@@ -146,8 +146,11 @@
         function btnAdd_onclick($eventTag) {
 
             if ($eventTag.getAttribute('name') == 'memo') {
-
                 const $memoContent = document.getElementById('memo-content');
+                
+                if (!validateMemoContent()) {
+                    return;
+                }
 
                 fetch(memoURL, {
                         method: "POST",
@@ -176,10 +179,13 @@
                 })
                 
             } else {
-
                 const $episodeNo = document.getElementById('episode-no');
                 const $markContent = document.getElementById('mark-content');
-
+                
+                if (!validateMarkEpAndContent()) {
+                    return;
+                }
+                
                 fetch(markURL, {
                         method: "POST",
                         headers: {
@@ -194,6 +200,7 @@
                     }) 
                     .then(response => response.text())
                     .then(message => {
+
                         if (message === 'insert-success') {
                             alert('마크 등록!');
 
@@ -212,7 +219,6 @@
 
         // 수정 버튼 onclick event
         function btnModify_onclick($eventTag) {
-
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
                 
@@ -230,7 +236,6 @@
 
         // 수정 취소 버튼 onclick event 
         function btnCancle_onclick($eventTag) {
-
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
                 
@@ -254,7 +259,6 @@
 
         // 수정 저장 버튼 onclick Event
         function btnModifySave_onclick($eventTag) {
-
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo'){
 
                 const memoNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-memo-no');
@@ -310,7 +314,6 @@
 
         // 삭제 버튼 onclick Event
         function btnDelete_onclick($eventTag) {
-
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
 
                 const memoNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-memo-no');
@@ -355,7 +358,6 @@
         ========================================================================*/
         // MARK or MEMO 선택처리
         function toggleSelected($eventTag) {
-
             // selected 클래스 toggle 처리
             toggleSelectedClass($eventTag);
 
@@ -419,6 +421,40 @@
             return year + "." + month + "." + day + "  " + ampm + hour + ":" + minute;
         }
 
+        // 마크 episodeNo, content 등록 할 때 필수값 체크 method
+        function validateMarkEpAndContent() {
+            const $episodeNo = document.getElementById('episode-no');
+            const $markContent = document.getElementById('mark-content');
+
+            let flag = false;
+            if ($episodeNo.value.trim() === '') {
+                alert('회차는 필수 입력값입니다');
+
+            } else if ($markContent.value.trim() === '') {
+                alert('내용은 필수 입력값입니다');
+
+            } else {
+                flag = true;
+
+            }
+            return flag;
+        }
+        
+        // 메모 content 등록 할 때 필수값 체크 method
+        function validateMemoContent() {
+            const $memoContent = document.getElementById('memo-content');
+
+            let flag = false;
+            if ($memoContent.value.trim() === '') {
+                alert('내용은 필수 입력값입니다');
+
+            } else {
+                flag = true;
+
+            }
+            return flag;
+        }
+
         /*======================================================================
             마크, 메모 리스트 영역
         ========================================================================*/
@@ -426,12 +462,11 @@
 
         // 메모 목록 보여주는 함수
         function showMemoList() {
-
             fetch(memoURL + '?postNo=' + postNo)
                 .then(response => response.json())
                 .then(memoMap => {
                     makeMemoDOM(memoMap);
-                    testCall();
+                    resize_textarea();
                 })    
         }
 
@@ -510,12 +545,11 @@
 
         // 마크 목록 보여주는 함수
         function showMarkList() {
-
             fetch(markURL + '?postNo=' + postNo)
                 .then(response => response.json())
                 .then(markMap => {
                     makeMarkDOM(markMap);
-                    testCall();
+                    resize_textarea();
                 })    
         }
 
@@ -608,31 +642,19 @@
             $markContent.toggleAttribute('readonly');
         }
 
-
-        showMarkList();
-        showMemoList(); 
-           
-        
-
         // textarea 높이 자동조절
-        function resize_textarea($eventTag) {
-            console.log($eventTag.value);
-            $eventTag.style.height = "1px";
-            $eventTag.style.height = (12 + $eventTag.scrollHeight) + "px";
-        }
-
-        function testCall() {
+        function resize_textarea() {
             const $textAreaList = [...document.querySelectorAll('.content-area .content')];
-
+            
             for ($textArea of $textAreaList) {
                 // console.log($textArea.value);
                 $textArea.style.height = "1px";
                 $textArea.style.height = (12 + $textArea.scrollHeight) + "px";
             }
         }
-
-       
-
+        
+        showMarkList();
+        showMemoList(); 
     </script>
 </body>
 </html>

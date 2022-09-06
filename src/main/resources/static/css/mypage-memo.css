@@ -268,7 +268,7 @@ section {
     font-size: 19px;
 
     margin-top: 0.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 5px double #6c757d;
 }
@@ -278,20 +278,8 @@ section {
     padding: 0.7rem;
 }
 
-/* MARK 내용 영역 */
-/* MARK episode-no */
-.book-wrapper .book-info .my-text .episode-no {
-    margin-top: 1rem;
-
-    font-size: 15px;
-    font-weight: bold;
-}
-.book-wrapper .book-info .my-text .episode-no span {
-    padding: 0.4rem;
-    background: #c59c9c;
-    border-radius: 0.3rem;
-}
-/* MARK content */
+/* MEMO 내용 영역 */
+/* MEMO content */
 .book-wrapper .book-info .my-text textarea {
     font-size: 17px;
     border: 1px solid #e9ecef;

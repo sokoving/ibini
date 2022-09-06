@@ -28,7 +28,6 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/mypage-memo.css">
-    <link rel="stylesheet" href="/css/mypage-mark.css">
 
 </head>
 
