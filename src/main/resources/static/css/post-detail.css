@@ -119,25 +119,15 @@ section #img-post-wrap {
     justify-content: space-between;
 }
 
-/* #post-top : 별점, 장르, 카테고리 */
+/* #post-top : 별점, 제목, 작가, 장르 */
 #post-box #post-top {
     display: flex;
-    justify-content: end;
+    flex-flow: column;
+    justify-content: center;
     align-items: center;
 }
 
-
-#post-box #post-top .top-span {
-    /* background-color: #adb5bd; */
-    /* color: #fff; */
-    border-radius: 50em;
-    border: 1px dotted #555;
-    padding: 0.2em 0.7em;
-    margin-left: 5px;
-    font-weight: 700;
-}
-
-/* #post-middle : 제목, 작가, 연재 상태, 페이지*/
+/* #post-middle : 장르, 플랫폼, 연재 상태, 연재 일시, 회차 정보*/
 #post-box #post-middle{
     color: #787878;
     text-align: center;

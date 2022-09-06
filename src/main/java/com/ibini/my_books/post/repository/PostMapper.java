@@ -16,7 +16,6 @@ public interface PostMapper {
     // 게시글 전체 조회 (tbl_post만 조회)
     List<Post> findAllPost(String account);
     List<PostWithName> findAllPostWithName(String account);
-
     // 게시글 전체 조회 with paging
 //    List<Post> findAll(Page page);
     // 게시글 전체 조회 with searching
