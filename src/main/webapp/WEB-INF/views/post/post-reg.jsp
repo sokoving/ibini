@@ -291,10 +291,10 @@
             console.log(account);
 
             // 플랫폼, 장르 선택창 불러오기
-            showdomainList();
-                    savePlatformClickEvent();
+            showdomainList(false);
+            savePlatformClickEvent();
             showGenreList(false);
-                    saveGenreClickEvent();
+            saveGenreClickEvent();
 
 
 

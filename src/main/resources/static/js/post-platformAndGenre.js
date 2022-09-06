@@ -43,7 +43,7 @@ console.log('post-platformAndGenre start');
 
     }
 
-    function showdomainList() {
+    function showdomainList(selectFlag) {
         console.log(url);
         fetch(url)
         .then(res => res.json())
@@ -55,7 +55,7 @@ console.log('post-platformAndGenre start');
             const platformselect = document.getElementById('platformselect');
             let len = platformselect.length
 
-            if(len > 6){
+            if(selectFlag){
 
                 console.log(platformselect);
                 let last = platformselect.lastChild;
@@ -114,7 +114,7 @@ console.log('post-platformAndGenre start');
                     // 비워주기
                     platformName = '';
                     // select 해주기
-                    showdomainList();
+                    showdomainList(true);
 
 
                 } else {
