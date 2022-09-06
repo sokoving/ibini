@@ -8,7 +8,7 @@
 <head>
 
     <%@ include file="../include/static-head.jsp" %>
-
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 
 </head>
 

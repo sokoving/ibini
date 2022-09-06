@@ -8,59 +8,138 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+
+    <%@ include file="../include/static-head.jsp" %>
+
 </head>
 <style>
-    #infoHeader .title{
-        background: rgb(219, 151, 233);
-        display: flex;
-    }
-    #infoHeader .number{
-        background: rgb(117, 117, 205);
-        display: flex;
-    }
-    .tagname {
-        background: rgb(176, 112, 112);
+    #content-wrap {
+        border-radius: 10px;
+        background-color: #f7f7f6;
+        padding: 30px 30px 10px;
     }
 
-    .postNo {
-        background: rgb(166, 252, 196);
+    #infoHeader {
+        width: 80%;
+        margin: 0 auto;
     }
+
+    #infoHeader hr {
+        border: 1px solid #333;
+    }
+
+    #infoHeader .title {
+        /* background: rgb(219, 151, 233); */
+        display: flex;
+    }
+
+    #infoHeader .title .titleSpan {
+        font-size: 45px;
+        font-weight: 600;
+        /* font-family: 'NanumSquareRoundBold'; */
+    }
+
+    #infoHeader .number {
+        /* background: rgb(117, 117, 205); */
+        display: flex;
+
+    }
+
+    #infoHeader .number h4 {
+        /* background: rgb(117, 117, 205); */
+        display: flex;
+        /* font-family: 'NanumSquareRoundBold'; */
+        font-size: 20px;
+        font-weight: 600;
+
+    }
+
+    .hashtagList {
+        background: #ffc699;
+        width: 80%;
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 10px;
+
+        margin: 0 auto 30px;
+
+    }
+
+    .hashtagList .tagNamediv {
+        background: rgb(179, 202, 242);
+        font-size: 25px;
+        font-family: 600;
+    }
+
+    .tagInfo {
+        background: #fffaee;
+        padding: 0 20px;
+        border-radius: 5px;
+    }
+
+    .tagInfo .titleAndNo {
+        font-size: 25px;
+        font-family: 600;
+    }
+
+    /* .tagInfo .titleAndNo .postTitle {
+
+    } */
 </style>
 
 <body>
 
-    <h1>hihihi</h1>
-    <!-- tagName -->
-    <section id="infoHeader">
-        
-        <div class="title">
-            <h1># </h1><h1>${searchTag}</h1>
+    <div id="wrap">
+
+        <%@ include file="../include/header.jsp" %>
+
+        <div id="content-wrap">
+            <!-- tagName -->
+            <div id="infoHeader">
+
+                <div class="title">
+                    <span class="titleSpan"># </span>
+                    <span class="titleSpan">${searchTag}</span>
+                </div>
+                <hr>
+                <div class="number">
+                    <h4>총 </h4>
+                    <h4>${hashtagName}</h4>
+                    <h4>권의 책이 등록되어있습니다.</h4>
+                </div>
+
+                <br>
+
+            </div>
+
+            <div id="tagList">
+
+                <c:forEach var="tag" items="${tagName}">
+                    <div class="hashtagList">
+                        <div class="tagNameDiv">
+                            <!-- <span># </span><span class="tagName">${tag.tagName}</span> -->
+                            <span class="postNo">PostNo. </span><span class="postNo">${tag.postNo}</span>
+                        </div>
+                        <div class="tagInfo">
+                            <div class="titleAndNo">
+                                <span class="postTitle">${tag.postTitle}</span>
+                            </div>
+                            <div class="detailInfo">
+                                <span>W. </span><span class="postWriter">${tag.postWriter}</span>
+                                <span>| </span><span class="platformName">${tag.platformName}</span>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+
+            </div>
+
         </div>
-        
-        <div class="number">
-            <h2>${hashtagName}</h2><h2> / </h2><h2>${total}</h2>
-        </div>
-
-        <br>
-
-    </section>
-    
-    <div id="tagList">
-
-        <c:forEach var="tag" items="${tagName}">
-
-            <span class="tagName">${tag.postNo}</span>
-
-            <span class="postNo">${tag.tagName}</span>
-            <span class="postTitle">${tag.postTitle}</span>
-            <span class="postWriter">${tag.postWriter}</span>
-            <span class="platformName">${tag.platformName}</span>
-
-
-        </c:forEach>
 
     </div>
-    
+
+
+
     <script>
 
 
