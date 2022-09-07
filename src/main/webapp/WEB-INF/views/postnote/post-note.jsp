@@ -627,7 +627,7 @@
             iconArea +=     '<div class="datetime">';
             iconArea +=         '<i class="' + classifyMarkIconType(data.epId) + `">` + data.episodeNo + `</i>`;
             iconArea +=         ' | ';
-            iconArea +=         `<span class="noselect mark-date">` + formatDateTime(data.modDatetime) + `</span>`;
+            iconArea +=         `<span class="noselect mark-date">` +data.prettierDate + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-initMode">';
             iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';

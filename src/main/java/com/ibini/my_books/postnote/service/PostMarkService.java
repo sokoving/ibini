@@ -41,7 +41,12 @@ public class PostMarkService {
     public Map<String, Object> findAll(Long postNo) {
 
         Map<String, Object> markMap = new HashMap<>();
-        markMap.put("markList", postMarkMapper.findAll(postNo));
+
+        List<PostMark> markList = postMarkMapper.findAll(postNo);
+        convertDateFormat(markList);
+
+//        markMap.put("markList", postMarkMapper.findAll(postNo));
+        markMap.put("markList", markList);
         markMap.put("markCnt", postMarkMapper.getPostMarkCount(postNo));
 
         return markMap;
