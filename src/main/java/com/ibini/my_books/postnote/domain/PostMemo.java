@@ -17,5 +17,5 @@ public class PostMemo {
     private String account;      // 작성 account
 
     //커스텀 필드
-    private String PrettierDate;
+    private String prettierDate;
 }

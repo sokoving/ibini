@@ -21,5 +21,5 @@ public class PostMark {
     private int epId;
 
     //커스텀 필드
-    private String PrettierDate;
+    private String prettierDate;
 }

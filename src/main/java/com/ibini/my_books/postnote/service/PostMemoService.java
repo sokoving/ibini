@@ -43,7 +43,10 @@ public class PostMemoService {
     public Map<String, Object> findAll(Long postNo) {
 
         Map<String, Object> memoMap = new HashMap<>();
-        memoMap.put("memoList", postMemoMapper.findAll(postNo));
+        List<PostMemo> memoList = postMemoMapper.findAll(postNo);
+        convertDateFormat(memoList);
+//        memoMap.put("memoList", postMemoMapper.findAll(postNo));
+        memoMap.put("memoList", memoList);
         memoMap.put("memoCnt", postMemoMapper.getPostMemoCount(postNo));
 
         return memoMap;
