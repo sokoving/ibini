@@ -8,7 +8,7 @@ const $linkUl = document.getElementById('link-container');
 
 
 
-// -------------------------- 연관 포스트 관련 함수 정의 --------------------------- //
+// -------------------------- 연관 포스트 요청 관련 함수 --------------------------- //
 
 // 연관포스트 목록을 요청하는 함수
 function showLinklist(linkURL, postNo) {
@@ -18,6 +18,29 @@ function showLinklist(linkURL, postNo) {
             makeLinkListDom(linkMap);
         })
 }
+
+// 연관포스트 해제(삭제)를 요청하는 함수
+function disconnectLink(linkURL, linkId) {
+    if (!confirm('연관 포스트 바로가기 링크를 삭제합니다')) return;
+    fetch(linkURL + '/' + linkId, {
+            method: 'DELETE'
+        })
+        .then(res => res.text())
+        .then(msg => {
+            if (msg === 'disconnect-success') {
+                alert('삭제되었습니다.');
+                showLinklist(); // 댓글 새로불러오기
+            } else {
+                alert('삭제에 실패했습니다.');
+            }
+        });
+}
+
+
+
+
+
+
 
 // 연관 포스트 목록 구성하기
 function makeLinkListDom({

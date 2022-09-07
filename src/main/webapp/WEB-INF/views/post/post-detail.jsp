@@ -356,6 +356,7 @@
                 e.preventDefault();
                 // 삭제버튼이 아닌 데 눌렀을 경우
                 const rootPostNo = e.target.parentElement.parentElement.lastElementChild;
+                console.log("??? : " + rootPostNo);
 
                 // 연관 포스트 삭제 요청 보내기
                 if (e.target.matches('.link-remove-btn')) {
