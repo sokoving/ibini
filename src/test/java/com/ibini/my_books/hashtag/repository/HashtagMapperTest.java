@@ -91,7 +91,7 @@ class HashtagMapperTest {
     @Test
     @DisplayName("한 포스트에 등록된 모드 해시태그가 삭제된다")
     void removeTagOnPostTest(){
-        Long postNo = 3L;
+        Long postNo = 12L;
         boolean flag = hashtagMapper.removeTagOnPost(postNo);
         List<HashtagDomain> hl = hashtagMapper.findAllHashTagByPostNo(postNo);
         System.out.println("hl.size() = " + hl.size());

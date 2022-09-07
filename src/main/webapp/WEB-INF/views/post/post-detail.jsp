@@ -384,7 +384,7 @@
                         .then(msg => {
                             if (msg === 'del-success') {
                                 alert('삭제 성공!');
-                                // showGenreList();
+                                showHashtagDom();
                                 console.log('delete - hashtag');
                             } else {
                                 alert('삭제 실패!!');
@@ -430,13 +430,26 @@
                                 alert('새로운 해시태그가 등록되었습니다.');
                                 // 비워주기
                                 addTag = '';
-
+                                showHashtagDom();
 
                             } else {
                                 alert('새로운 해시태그 저장을 실패하였습니다.');
                             }
                         })
 
+
+
+                }
+
+                function showHashtagDom() {
+                console.log(tagUrl);
+
+                fetch(tagUrl)
+                    .then(res => res.json())
+                    .then(hashtagList => {
+                        console.log(hashtagList);
+                        makeHashtagDom(hashtagList);
+                    });
 
 
                 }
@@ -478,6 +491,33 @@
                 for (let $btn of $removeBtnList) {
                     $btn.classList.toggle('hide')
                 }
+            }
+
+            // DOM 생성!!!!!
+            function makeHashtagDom(hashtagList){
+                
+                console.log('makeHashtagDom');
+
+                const tagContainer = document.getElementById('tag-container');
+                let tag = '';
+                tagContainer.innerHTML = tag;
+                for (let loop in hashtagList) {
+                    
+                    console.log(hashtagList);
+                    
+
+                    tagNo = hashtagList[loop].tagNo;
+                    tagName = hashtagList[loop].tagName;
+                    console.log(tagNo);
+                    console.log(tagName);
+                    
+                    tag += `
+                        <span class="hash-span" data-tag-no="` + tagNo + `">` + tagName + `</span>
+                    `;
+
+                }
+                tagContainer.innerHTML = tag;
+
             }
 
 

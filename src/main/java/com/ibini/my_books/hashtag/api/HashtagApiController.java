@@ -4,7 +4,10 @@ import com.ibini.my_books.hashtag.domain.HashtagDomain;
 import com.ibini.my_books.hashtag.service.HashTagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Log4j2
@@ -17,6 +20,18 @@ public class HashtagApiController {
 
 
     // 저장시 넘어가는거 ! post_no, tag_name, account
+
+    @GetMapping("/{account}/{postNo}")
+    public List<HashtagDomain> allTaglist(@PathVariable String account,
+                                          @PathVariable Long postNo,
+                                          Model model){
+        log.info("HashtagApiController allTaglist - {} -{}", account, postNo);
+        List<HashtagDomain> hashtagList = hashTagService.findAllByPostNo(postNo);
+        model.addAttribute("hashtagList", hashtagList);
+
+        return hashtagList;
+    }
+
     @PostMapping("/{account}/{postNo}")
     public String addTag(@PathVariable String account
                        , @RequestBody HashtagDomain hashtagDomain
