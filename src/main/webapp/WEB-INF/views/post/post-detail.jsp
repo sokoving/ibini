@@ -230,8 +230,15 @@
                                     </div>
                                 </div>
                                 <div class="inputHashtag hide">
-                                    <input type="text" id="hashtagInput">
-                                    <button type="button" id="hashtagInputBtn">저장</button>
+                                    <div class="label">
+                                        <label id="InfoText">해시태그를 추가로 글에 추가할 수 있습니다.</label>
+                                        <label id="InfoText">예시) #태그 #해시태그 </label>
+                                    </div>
+                                    <div id="tagInputAndBtn">
+                                        <input type="text" id="hashtagInput">
+                                        <button type="button" id="hashtagInputBtn">저장</button>
+                                    </div>
+
                                 </div>
 
                                 <div id="tag-container">

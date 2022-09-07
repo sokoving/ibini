@@ -1,31 +1,38 @@
 /*---------- 공통 ----------*/
-h2, h3{
+h2,
+h3 {
     font-family: 'NanumBarunGothicBold';
 }
 
 /* 토글 */
-.toggle-box{
+.toggle-box {
     padding: 0.2em 0.6em;
     color: #787878;
     font-size: 1.2em;
     border-radius: 50rem;
 
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
-.toggle-box i{
+
+.toggle-box i {
     margin: 0 5px;
 }
-.fa-toggle-off, .fa-toggle-on{
+
+.fa-toggle-off,
+.fa-toggle-on {
     font-size: 1.3em;
     cursor: pointer;
 }
-.fa-toggle-off:hover, .fa-toggle-on:hover{
+
+.fa-toggle-off:hover,
+.fa-toggle-on:hover {
     transform: scale(1.3);
     transition: 0.3s;
 }
-.fff{
+
+.fff {
     color: #fff;
     transition: 0.3s;
 }
@@ -52,7 +59,7 @@ section #img-post-wrap {
     margin-top: 40px;
 }
 
-#img-wrap .img-box.post-thumb{
+#img-wrap .img-box.post-thumb {
     border: 5px solid #ffca3d;
 }
 
@@ -73,11 +80,12 @@ section #img-post-wrap {
     justify-content: center;
     align-items: center;
 }
-#thumb-img .post-img{
+
+#thumb-img .post-img {
     height: inherit;
 }
 
-.img-box .post-img{
+.img-box .post-img {
     width: 100%;
 }
 
@@ -116,13 +124,14 @@ section #img-post-wrap {
     width: 70px;
     height: 60px;
     overflow: hidden;
-    
+
     background-color: #ffca3d;
     border-radius: 0.5em;
     margin: 3px 0;
     cursor: pointer;
 }
-#img-wrap .img-box-wrap .img-box.img-half-down{
+
+#img-wrap .img-box-wrap .img-box.img-half-down {
     height: 30px;
 }
 
@@ -158,24 +167,26 @@ section #img-post-wrap {
 }
 
 /* #post-middle : 제목, 작가, 연재 상태, 페이지*/
-#post-box #post-middle{
+#post-box #post-middle {
     color: #787878;
     text-align: center;
 
     display: flex;
     flex-direction: column;
 }
+
 #post-middle #post-title {
     font-size: 1.5em;
     font-weight: 700;
 }
 
 /* 책 제목 */
-#post-middle #post-title h2{
+#post-middle #post-title h2 {
     margin-top: 15px;
     margin-bottom: 0;
     color: #000;
 }
+
 /* 작가 이름 */
 /* #post-middle #post-writer {
 }  */
@@ -188,57 +199,65 @@ section #img-post-wrap {
     align-items: center;
     margin: 10px;
 }
-#post-middle .middle-table td{
+
+#post-middle .middle-table td {
     width: 500px;
     padding: 0 10px;
 }
-#post-middle .middle-table .first-td{
+
+#post-middle .middle-table .first-td {
     border-right: 1px solid #adb5bd;
     text-align: right;
 }
-#post-middle .middle-table .last-td{
+
+#post-middle .middle-table .last-td {
     text-align: left;
 }
-#post-middle .middle-table .empty-tr td{
+
+#post-middle .middle-table .empty-tr td {
     color: #fff;
     line-height: 10px;
 }
 
 
 /* #post-bottom : 날짜, 버튼*/
-#post-box #post-bottom{
+#post-box #post-bottom {
     display: flex;
     justify-content: space-between;
     align-items: end;
 }
-#post-box #post-bottom .date-wrap{
+
+#post-box #post-bottom .date-wrap {
     font-size: 0.8em;
     color: #a5a197;
 }
-#post-box #post-bottom .post-btn{
+
+#post-box #post-bottom .post-btn {
     font-size: 1.5em;
     color: #555;
 }
-#post-box #post-bottom .post-btn:hover{
+
+#post-box #post-bottom .post-btn:hover {
     transform: scale(1.2);
 }
 
 
 
 /* ---------- 리모컨, 기타 영역 ----------  */
-section #remote-etc-wrap{
+section #remote-etc-wrap {
     display: flex;
 }
 
 /* ----- 리모컨 영역 ----- */
-#remote-etc-wrap #remote-controller{
+#remote-etc-wrap #remote-controller {
     flex-basis: 70px;
     flex-shrink: 0;
     padding-top: 50px;
     /* border: 1px solid #000; */
 
 }
-#remote-controller #inner-remote{
+
+#remote-controller #inner-remote {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -250,12 +269,13 @@ section #remote-etc-wrap{
 }
 
 /* ----- 기타 영역 ----- */
-#remote-etc-wrap #etc-wrap{
+#remote-etc-wrap #etc-wrap {
     flex-grow: 1;
     padding-left: 15px;
 }
+
 /* h3 */
-#remote-etc-wrap .h3-wrap{
+#remote-etc-wrap .h3-wrap {
     color: #787878;
     margin-top: 70px;
     padding-bottom: 10px;
@@ -265,7 +285,8 @@ section #remote-etc-wrap{
     justify-content: space-between;
     align-items: center;
 }
-#remote-etc-wrap .h3-wrap h3{
+
+#remote-etc-wrap .h3-wrap h3 {
     margin: 0;
     font-size: 1.3em;
 }
@@ -277,6 +298,7 @@ section #remote-etc-wrap{
     flex-wrap: wrap;
     padding-top: 15px;
 }
+
 #tag-container .hash-span {
     border: 1px dotted #888;
     border-radius: 0.25rem;
@@ -286,11 +308,13 @@ section #remote-etc-wrap{
     /* cursor: pointer; */
     /* cursor : url(../img/cursor.cur) 20 30, url(../img/cursor.cur) 20 30, auto; */
 }
-#tag-container .hash-span:hover{
+
+#tag-container .hash-span:hover {
     transform: scale(1.01);
     background-color: #ffca3d;
 }
-#tag-container .tag-plus{
+
+#tag-container .tag-plus {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -299,29 +323,64 @@ section #remote-etc-wrap{
     color: #787878;
 }
 
-#tag-container .tag-plus:hover{
+#tag-container .tag-plus:hover {
     transform: scale(1.2);
 }
 
+#hash-wrap .inputHashtag #InfoText {
+    width: 100%;
+}
 
-/* 연관포스트 검색창 */
-#link-post-wrap .search-wrap{
+#hash-wrap .inputHashtag #tagInputAndBtn {
     display: flex;
 }
-.search-wrap #search-plus{
+
+#hash-wrap .inputHashtag #hashtagInputBtn {
+    margin-left: 20px;
+    background-color: #ffca3d;
+    border-radius: 10px;
+    padding: 0 10px;
+
+}
+
+#hash-wrap .inputHashtag #hashtagInput {
+
+    background: #eeedeb;
+    border-radius: 0.35em;
+    font-size: 1.2em;
+    /* width: 100%; */
+    /* height: 40px; */
+    /* margin-bottom: 1em; */
+    padding-left: 1em;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+
+
+/* 연관포스트 검색창 */
+#link-post-wrap .search-wrap {
+    display: flex;
+}
+
+.search-wrap #search-plus {
     font-size: 1.8em;
     margin: 4px 0 0 7px;
     cursor: pointer;
 }
-.search-wrap #search-plus:hover{
+
+.search-wrap #search-plus:hover {
     color: #000;
     transform: scale(1.2);
     transition: 0.3s;
 }
+
 .link-remove-btn {
     font-size: 1.5em;
 }
-.link-remove-btn:hover{
+
+.link-remove-btn:hover {
     color: #B22222;
     transform: scale(1.2);
     transition: 0.3s;
@@ -331,7 +390,8 @@ section #remote-etc-wrap{
 #link-post-wrap #link-container {
     padding: 10px 0 0 0;
 }
-#link-container .link-a{
+
+#link-container .link-a {
     display: flex;
     flex-flow: nowrap;
     justify-content: space-between;
@@ -341,55 +401,62 @@ section #remote-etc-wrap{
     border-radius: 0.25rem;
     margin-top: 10px;
 }
-#link-container .link-a:hover{
+
+#link-container .link-a:hover {
     transform: scale(1.01);
     background-color: #ffca3d;
 }
-#link-container .link-ca{
+
+#link-container .link-ca {
     flex-basis: 80px;
     flex-shrink: 0;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     background-color: #ffca3d;
     font-weight: 700;
     color: #555;
 }
-#link-container .link-post-info{
+
+#link-container .link-post-info {
     padding: 5px 10px;
     flex-grow: 1;
 }
-#link-container .link-title{
+
+#link-container .link-title {
     font-family: 'NanumBarunGothicBold';
     color: #555;
 }
-#link-container .link-writer{
+
+#link-container .link-writer {
     font-size: 0.8em;
     color: #787878;
 }
 
-#link-container .link-post-date{
+#link-container .link-post-date {
     flex-basis: 100px;
     flex-shrink: 0;
-    
+
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
 }
-#link-container .link-percent{
+
+#link-container .link-percent {
     color: #000;
     font-weight: 700;
 }
-#link-container .link-date{
+
+#link-container .link-date {
     font-size: 0.8em;
     color: #787878;
 }
 
 /* 연관 포스트 없을 때*/
-#link-container .link-zero-box{
+#link-container .link-zero-box {
     display: flex;
     flex-flow: column;
     text-align: center;
@@ -399,12 +466,14 @@ section #remote-etc-wrap{
     margin-top: 10px;
     opacity: 70%;
 }
-.link-zero-1{
+
+.link-zero-1 {
     background-color: #ffca3d;
     padding: 10px 0 5px;
     font-size: 1.1em;
     font-weight: 700;
 }
-.link-zero-2{
+
+.link-zero-2 {
     padding: 5px 0 10px;
 }
