@@ -229,11 +229,16 @@
                                         <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
                                     </div>
                                 </div>
+                                <div class="inputHashtag hide">
+                                    <input type="text" id="hashtagInput">
+                                    <button type="button" id="hashtagInputBtn">저장</button>
+                                </div>
 
                                 <div id="tag-container">
                                     <c:forEach var="t" items="${tagList}">
-                                        <span class="hash-span" data-tag-no="${t.tagNo}" onclick="location.href='/hashtag/${t.tagName}'">${t.tagName}</span>
+                                        <span class="hash-span" data-tag-no="${t.tagNo}">${t.tagName}</span>
                                     </c:forEach>
+                                    <!-- onclick="location.href='/hashtag/${t.tagName}'" -->
 
                                     <span class="hash-span tag-plus hide"><i class="far fa-plus-square"></i></span>
                                 </div>
@@ -315,6 +320,159 @@
             const postNo = '${p.postNo}';
             console.log(postNo);
 
+            let tagContainer = document.querySelector('#tag-container');
+
+            // 첫화면에서 클릭이벤트 작동
+            console.log('tagContainer : ', tagContainer);
+            tagContainer.onclick = e => {
+
+                console.log(e.target);
+                console.log(e.target.innerText);
+                let tagSpace = e.target.innerText;
+                url = '/hashtag/' + tagSpace;
+                console.log(url);
+                window.location.href = url;
+
+
+            }
+
+
+            // ===================== hashtag ============================
+            // hashtag 편집모드 열기 이벤트
+            const $hashtoggles = $('#hash-wrap .toggle-box').children();
+            // 편집모드 열기
+            $hashtoggles[1].onclick = e => {
+                // toggles 열기
+                sethashtagEditMod();
+
+                const account = '${p.account}';
+                const postNo = '${p.postNo}';
+                console.log(account);
+                console.log(postNo);
+
+                let tagUrl = 'http://localhost:8383/hashtag/api/v1/' + account + '/' + postNo;
+                console.log(tagUrl);
+
+
+
+                // tag click 막기
+                tagContainer.onclick = e => {
+                    console.log('tagContainer onclick');
+                    e.preventDefault();
+                    console.log(e.target.dataset.tagNo);
+
+                    console.log(e.target);
+                    console.log('dataset : ', e.target.dataset.tagNo);
+                    //data-set 잡아오기 -> 비동기 삭제 처리 -> 비동기 랜더링
+                    let dataset = e.target.dataset.tagNo;
+
+                    console.log('장르 삭제 - genreId : ', dataset);
+
+                    if (!confirm('선택하신 장르를 삭제하시겠습니까?')) return;
+
+                    fetch(tagUrl + '/' + dataset, {
+                            method: 'DELETE'
+                        })
+                        .then(res => res.text())
+                        .then(msg => {
+                            if (msg === 'del-success') {
+                                alert('삭제 성공!');
+                                // showGenreList();
+                                console.log('delete - hashtag');
+                            } else {
+                                alert('삭제 실패!!');
+                            }
+                        });
+
+
+                }
+
+                const hashtagInput = document.getElementById('hashtagInput');
+                const hashtagInputBtn = document.getElementById('hashtagInputBtn');
+
+                hashtagInputBtn.onclick = e => {
+                    // 클릭이벤트
+                    let addTag = hashtagInput.value;
+                    console.log(addTag);
+
+                    // 비동기 통신 전송 - account 정보 + postNo 정보
+                    const platformData = {
+
+                        "postNo": postNo,
+                        "account": account,
+                        "tagName": addTag
+                    }
+                    console.log('platformData : ', platformData);
+
+                    // POST 요청정보 객체
+                    const reqInfo = {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(platformData)
+
+                    };
+                    console.log('reqInfo : ', reqInfo);
+
+
+                    fetch(tagUrl, reqInfo)
+                        .then(res => res.text())
+                        .then(msg => {
+                            if (msg === "insert-success") {
+                                alert('새로운 해시태그가 등록되었습니다.');
+                                // 비워주기
+                                addTag = '';
+
+
+                            } else {
+                                alert('새로운 해시태그 저장을 실패하였습니다.');
+                            }
+                        })
+
+
+
+                }
+
+
+            }
+            //닫기
+            $hashtoggles[2].onclick = e => {
+                sethashtagEditMod();
+                // click event 작동하기
+                e.preventDefault();
+                tagContainer.onclick = e => {
+
+                    console.log(e.target);
+                    console.log(e.target.innerText);
+                    let tagSpace = e.target.innerText;
+                    url = '/hashtag/' + tagSpace;
+                    console.log(url);
+                    window.location.href = url;
+
+
+                }
+                // console.log('preventDefaul');
+            }
+
+            function sethashtagEditMod() {
+                console.log('sethashtagEditMod');
+                switchToggle($hashtoggles);
+                $('.inputHashtag').toggleClass('hide');
+                console.log('sethashtagEditMod');
+                // $('#tag-container').css("cursor", "url(../img/cursor.cur) 20 30, url(../img/cursor.cur) 20 30, auto" );
+
+            }
+
+            function setLinkEditMod() {
+                switchToggle($postToggles); // 아이콘 바꾸기
+                $('.search-wrap').toggleClass('hide') // 검색창 표시
+                const $removeBtnList = $('.link-remove-btn');
+                for (let $btn of $removeBtnList) {
+                    $btn.classList.toggle('hide')
+                }
+            }
+
 
             /* ------------------ 연관 포스트 -------------------------- */
             // 요청 URL
@@ -326,9 +484,9 @@
             const $postToggles = $('#link-post-wrap .toggle-box').children();
             $postToggles[1].onclick = e => {
                 // 토글 아이콘 변경, 검색창, 삭제 버튼 띄우기
-                setLinkEditMod();   
+                setLinkEditMod();
 
-                
+
             }
 
 

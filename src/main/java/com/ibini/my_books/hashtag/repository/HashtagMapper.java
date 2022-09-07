@@ -14,7 +14,7 @@ public interface HashtagMapper {
     // 수정
     boolean modifyHashtag(HashtagDomain hashtagDomain);
     // 삭제
-    boolean deleteHashtag(int tagNo);
+    boolean deleteHashtag(String account, int tagNo);
 
     // 하나조회
 //    HashtagDomain findOneHasgtag(int postNo, int tagNo);

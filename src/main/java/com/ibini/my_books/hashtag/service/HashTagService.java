@@ -30,7 +30,7 @@ public class HashTagService {
         }
         // 저장하기 전에 쪼개주기
         String[] cutHashtag = cutHashtag(hashtagDomain);
-        log.info(Arrays.toString(cutHashtag));
+        log.info("Arrays.toString -{} ", Arrays.toString(cutHashtag));
 
         for (String tag : cutHashtag) {
             hashtagDomain.setTagName(tag.trim());
@@ -55,10 +55,10 @@ public class HashTagService {
 
 
     // 태그 하나만 삭제
-    public void deleteHashTag(int tagNo) {
+    public boolean deleteHashTag(String account, int tagNo) {
         log.info(" HashTagService delete - {} ", tagNo);
-        boolean b = hashtagMapper.deleteHashtag(tagNo);
-
+        boolean b = hashtagMapper.deleteHashtag( account , tagNo);
+        return b;
     }
 
     // 태그 하나만 조회

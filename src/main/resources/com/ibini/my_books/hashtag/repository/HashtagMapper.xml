@@ -48,6 +48,7 @@
     <delete id="deleteHashtag">
         DELETE FROM prj_hashtag
         WHERE tag_no = #{tagNo}
+        AND account = #{account}
     </delete>
 
     <!--    수정-->

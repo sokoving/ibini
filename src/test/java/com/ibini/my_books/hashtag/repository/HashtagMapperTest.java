@@ -36,9 +36,9 @@ class HashtagMapperTest {
     @Test
     @DisplayName("선택한 하나의 해시태그를 삭제할 수 있어야 한다")
     void deleteHashtagTest(){
-        int tagNo = 1;
-
-        boolean b = hashtagMapper.deleteHashtag(tagNo);
+        int tagNo = 34;
+        String account = "2209050001";
+        boolean b = hashtagMapper.deleteHashtag(account, tagNo);
 
         assertTrue(b);
         
