@@ -261,14 +261,13 @@
                                 <div>
                                     <ul id="link-container">
 
-                                        <!-- 포스트 검색 영역 -->
-                                        <li class="link-zero-box search-box">
-                                            
-                                            <div class="link-zero-1">연관 포스트를 추가해 보세요. <br> 바로가기 링크가 생깁니다.</div>
+                                        <!-- 포스트 검색 영역 ( + 연관 포스트가 없을 때)-->
+                                        <li class="link-zero-box">
+                                            <div class="search-msg">연관 포스트를 추가해 보세요. <br> 바로가기 링크가 생깁니다.</div>
 
                                             <div class="search-wrap">
                                                 <!-- 검색 유형 선택 -->
-                                                <select class="form-select" id="linkSearchType" saria-label=".form-select-sm example">
+                                                <select class="form-select" id="linkSearchType">
                                                     <option value="title" selected>제목</option>
                                                     <option value="writer">작가</option>
                                                 </select>
@@ -287,18 +286,32 @@
                                             </div> <!-- // end search wrap -->
                                         </li>
 
-                                        <!-- 연결된 포스트가 없을 경우 -->
-                                        <li class="link-zero-box">
-                                            <div class="link-zero-1">등록된 연관 포스트가 없습니다.</div>
-                                            <div class="link-zero-2">위 토글 버튼을 눌러 새 포스트를 추가해 보세요</div>
-                                        </li>
-
 
                                         <!-- 연결된 포스트가 있는 경우 -->
                                         <li>
-                                            <a class="link-a" href="#">
+                                            <a class="link-a" href="/post/detail/1">
                                                 <!-- 진행도 배경색과 글자색에 플랫폼 색깔 넣기 -->
-                                                <div class="link-percent">100%</div>
+                                                <div class="link-percent" style="background-color: #000; color:#fff">100%</div>
+
+                                                <div class="link-post-info">
+                                                    <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
+                                                    <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금
+                                                            10시</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="link-post-date">
+                                                    <span class="link-date">수정일</span>
+                                                    <span class="link-date">2022.05.05</span>
+                                                </div>
+                                                <i data-del-post-no="98"
+                                                    class="fas fa-times-circle link-remove-btn hide"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="link-a" href="/post/detail/1">
+                                                <!-- 진행도 배경색과 글자색에 플랫폼 색깔 넣기 -->
+                                                <div class="link-percent" style="background-color: #000; color:#fff">100%</div>
 
                                                 <div class="link-post-info">
                                                     <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>

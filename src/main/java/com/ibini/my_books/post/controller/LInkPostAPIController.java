@@ -18,7 +18,8 @@ import java.util.Map;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/post/api/links")
+//@RequestMapping("/post/api/links")
+@RequestMapping("/api/links")
 public class LInkPostAPIController {
 
     private final LinkPostService linkService;

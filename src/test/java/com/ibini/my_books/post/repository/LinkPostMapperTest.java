@@ -22,8 +22,8 @@ class LinkPostMapperTest {
     @DisplayName("링크 연결돼야 함(데이터 저장)")
     void connectPostTest() {
 //    boolean connectPost(LinkPost linkPost);
-        Long rootPostNo = 46L;
-        Long linkPostNo = 4L;
+        Long rootPostNo = 18L;
+        Long linkPostNo = 17L;
         LinkPost lp = new LinkPost(rootPostNo, linkPostNo);
         System.out.println("lp = " + lp);
         boolean flag = mapper.connectPost(lp);

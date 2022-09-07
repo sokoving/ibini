@@ -237,10 +237,9 @@
                                     <!-- 연관 포스트 목록 영역 -->
                                     <ul id="link-container">
 
-                                        <!-- 포스트 검색 영역 -->
-                                        <li class="link-zero-box search-box">
-
-                                            <div class="link-zero-1">연관 포스트를 추가해 보세요. <br> 바로가기 링크가 생깁니다.</div>
+                                        <!-- 포스트 검색 영역 ( + 연관 포스트가 없을 때)-->
+                                        <li class="link-zero-box">
+                                            <div class="search-msg">연관 포스트를 추가해 보세요. <br> 바로가기 링크가 생깁니다.</div>
 
                                             <div class="search-wrap">
                                                 <!-- 검색 유형 선택 -->
@@ -254,22 +253,11 @@
                                                     placeholder="포스트 제목 검색">
                                                 <datalist id="datalistOptions">
                                                     <option data-link-post-no="30" value="화산귀환 1권"> 네이버시리즈 | 비가
-                                                    <option data-link-post-no="31" value="화산귀환 2권"> 네이버시리즈 | 비가
-                                                    <option data-link-post-no="32" value="화산귀환 3권"> 네이버시리즈 | 비가
-                                                    <option data-link-post-no="33" value="내가 키운 S급들 1권"> 리디북스 | 근서
-                                                    <option data-link-post-no="34" value="내가 키운 S급들 2권"> 리디북스 | 근서
                                                 </datalist>
                                                 <!-- 등록버튼 -->
                                                 <button type="button" class="link-reg-btn btn btn-secondary">저장</button>
                                             </div> <!-- // end search wrap -->
                                         </li>
-
-                                        <!-- 연결된 포스트가 없을 경우 -->
-                                        <li class="link-zero-box">
-                                            <div class="link-zero-1">등록된 연관 포스트가 없습니다.</div>
-                                            <div class="link-zero-2">위 토글 버튼을 눌러 새 포스트를 추가해 보세요</div>
-                                        </li>
-
 
                                         <!-- 연결된 포스트가 있는 경우 -->
                                         <li>
@@ -321,7 +309,8 @@
 
             /* ------------------ 연관 포스트 -------------------------- */
             // 요청 URL
-            const linkURL = '/post/api/links';
+            // const linkURL = '/post/api/links';
+            const linkURL = '/api/links';
             // 연관 포스트 목록 보여주기
             showLinklist(linkURL, postNo);
 

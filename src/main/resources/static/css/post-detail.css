@@ -297,10 +297,6 @@ section #remote-etc-wrap {
 #link-post-wrap .search-wrap {
     display: flex;
 }
-.search-wrap .form-select{
-    
-}
-
 
 .link-remove-btn {
     font-size: 1.5em;
@@ -313,21 +309,31 @@ section #remote-etc-wrap {
 }
 
 /* 연관 포스트 */
-/* 포스트 검색창 */
+/* 포스트 검색창 ( + 연관 포스트가 없을 때)*/
+#link-container .link-zero-box {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
 
-#link-container .link-zero-box.search-box {
-    padding: 0 100px;
-    border: none;
+    margin: 30px 0;
+    padding: 0 50px 30px;
+    border-bottom: 1px dashed #787878;
 }
-#link-container .link-zero-1{
-    border-radius: 0.25rem;
+.search-msg {
+    background-color: #fd7e14;
+    border-radius: 0.5rem;
+    padding: 10px 0 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+    opacity: 85%;
 }
+
 .search-wrap {
     display: flex;
     padding: 0;
     justify-content: center;
 
-    padding: 20px 0;
+    padding: 10px 0;
 }
 .search-wrap .form-select{
     width: 20%;
@@ -337,33 +343,9 @@ section #remote-etc-wrap {
 }
 .search-wrap .link-reg-btn{
     width: 13%;
+    margin-left: 10px;
 }
 
-
-/* 연관 포스트 목록 없을 때*/
-#link-container .link-zero-box {
-    display: flex;
-    flex-flow: column;
-    text-align: center;
-
-    border: 1px dotted #888;
-    border-radius: 0.25rem;
-    margin-top: 10px;
-
-}
-
-.link-zero-1 {
-    background-color: #ffca3d;
-    padding: 10px 0 5px;
-    font-size: 1.1em;
-    font-weight: 700;
-    opacity: 70%;
-}
-
-.link-zero-2 {
-    padding: 5px 0 10px;
-    opacity: 70%;
-}
 
 /* 연관 포스트 목록 있을 때 */
 #link-post-wrap #link-container {

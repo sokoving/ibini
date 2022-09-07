@@ -3,27 +3,83 @@
 // 연관 포스트 토글 박스
 const $postToggles = $('#link-post-wrap .toggle-box').children();
 
+// 연관 포스트 목록(검색창, 목록 포함)
+const $linkUl = document.getElementById('link-container');
+
+
+
+// -------------------------- 연관 포스트 관련 함수 정의 --------------------------- //
+
+// 연관포스트 목록을 요청하는 함수
+function showLinklist(linkURL, postNo) {
+    fetch(linkURL + '/' + postNo)
+        .then(res => res.json())
+        .then(linkMap => {
+            makeLinkListDom(linkMap);
+        })
+}
+
 // 연관 포스트 목록 구성하기
 function makeLinkListDom({
     linkList,
     linkSize
 }) {
-    const $linkUl = document.getElementById('link-container');
-
+//    console.log(linkList);
+//    console.log(linkSize);
+    // ul 태그 비우기
     $linkUl.innerHTML = '';
-    // 연관 포스트가 없을 때
+//    console.log(linkList === null || linkSize === 0);
     if (linkList === null || linkSize === 0) {
-        $linkUl.innerHTML += '<li class="link-zero-box"><div class="link-zero-1">등록된 연관 포스트가 없습니다.</div><div class="link-zero-2">위 토글 버튼을 눌러 새 포스트를 추가해 보세요</div></li>';
+        // 검색창 만들기
+        makeSearchLi();
     } else {
-        // 연관 포스트가 있을 때
+        // 연관 포스트가 있을 때 링크 목록 만들기
+        let liTags = '';
         for (let link of linkList) {
-            $linkUl.innerHTML += appendLinkHTML(link);
+            liTags += makeLinkLi(link);
         }
+        $linkUl.innerHTML += liTags;
     }
 }
 
-// 연관포스트 li 내용
-function appendLinkHTML(l) {
+// 포스트 검색창 만들기
+function makeSearchLi() {
+    // 모두 감쌀 li
+    const $linkZeroBox = document.createElement('li');
+    $linkZeroBox.classList.add('link-zero-box');
+
+    // 설명창
+    const $searchMsg = document.createElement('div');
+    $searchMsg.classList.add('search-msg');
+    $searchMsg.innerHTML = '연관 포스트를 추가해 보세요. <br> 바로가기 링크가 생깁니다.';
+
+    // 검색창을 감쌀 div
+    const $searchWrap = document.createElement('div');
+    $searchWrap.classList.add('search-wrap');
+    let tag = '';
+
+
+    tag += "<select class='form-select' id='linkSearchType'>" +
+        "<option value='title' selected>제목</option>" +
+        "<option value='writer'>작가</option>" +
+        "</select>" +
+        "<input class='form-control' list='datalistOptions' id='postSearchList' placeholder='포스트 제목 검색'>" +
+        "<datalist id='datalistOptions'></datalist>" +
+        "<button type='button' class='link-reg-btn btn btn-secondary'>저장</button>";
+
+    $searchWrap.innerHTML = tag;
+
+    // 어펜드
+    $linkZeroBox.append($searchMsg);
+    $linkZeroBox.append($searchWrap);
+    $linkUl.prepend($linkZeroBox);
+
+    // 검색창으로 커서 이동
+    $('#postSearchList').focus();
+}
+
+// 연관포스트 li 태그
+function makeLinkLi(l) {
     // 연재 주기(연재 / 연재주기 / 휴재/ 완결 중 선택)
     let cycle = '';
     if (l.publishStatus <= 1) {
@@ -35,29 +91,41 @@ function appendLinkHTML(l) {
     } else {
         cycle = l.publishStatusName;
     }
+
     // 진행도 퍼센트로
     let epPercent = Math.round(l.curEp / l.totalEp * 100)
 
-    // 연관 포스트 내용
-    let linkHTML = '';
-    linkHTML += '<li>';
-    linkHTML += '<a class="link-a" href="#">';
-    linkHTML += '<div class="link-ca">' + l.caName + '</div>';
-    linkHTML += '<div class="link-post-info">';
-    linkHTML += '<div class="link-title">' + l.postTitle + '</div>';
-    linkHTML += '<div class="link-writer">' + l.postWriter + ' | <span>' + l.platformName +
-        '</span> <span>' + cycle + '</span></div>';
-    linkHTML += '</div>';
-    linkHTML += '<div class="link-post-date">';
-    linkHTML += '<span class="link-percent">' + epPercent + '%</span>';
-    linkHTML += '<span class="link-date">' + l.shortDate.postUpdateDate + '</span>';
-    linkHTML += '</div>';
-    linkHTML += '<i data-del-post-no="' + l.postNo +
-        '" class="fas fa-times-circle link-remove-btn hide"></i>';
-    linkHTML += '</a>';
-    linkHTML += '</li>';
 
-    return linkHTML;
+    // 연관 포스트 내용
+    let tag = '';
+    tag += "<li>" +
+        "<a class='link-a' href='/post/detail/" + l.postNo + "'>" +
+        "<div class='link-percent' style='background-color:" + l.platformBgColor +
+        "; color:" + l.platformFontColor + "'>" + epPercent + "%</div>" +
+        "<div class='link-post-info'>" +
+        "<div class='link-title'>" + l.postTitle + "</div>" +
+        "<div class='link-writer'>" + l.postWriter + " | <span>" + l.platformName +
+        "</span> <span>" + cycle + "</span></div>" +
+        "</div>" +
+        "<div class='link-post-date'>" +
+        "<span class='link-date'>수정일</span>" +
+        "<span class='link-date'>" + l.shortDate.postUpdateDate + "</span>" +
+        "</div>" +
+        "<i data-del-post-no='" + l.postNo + "' class='fas fa-times-circle link-remove-btn hide'></i>" +
+        "</a>" +
+        "</li>";
+
+    return tag;
+}
+
+// 연관 포스트 수정 모드 진입하는 함수
+function setLinkEditMod() {
+    switchToggle($postToggles); // 아이콘 바꾸기
+    makeSearchLi() // 검색창 표시
+    const $removeBtnList = $('.link-remove-btn');
+    for (let $btn of $removeBtnList) {
+        $btn.classList.toggle('hide')
+    }
 }
 
 
@@ -69,17 +137,10 @@ function switchToggle($toggleIcons) {
     $toggleIcons[3].classList.toggle('fff');
 }
 
-function setLinkEditMod() {
-    switchToggle($postToggles); // 아이콘 바꾸기
-    $('.search-wrap').toggleClass('hide') // 검색창 표시
-    const $removeBtnList = $('.link-remove-btn');
-    for (let $btn of $removeBtnList) {
-        $btn.classList.toggle('hide')
-    }
-}
 
 
 
+// -------------------------------------------------------------------- //
 
 // 수정, 삭제, 목록 버튼 클릭 이벤트 핸들러
 function clickPostBtn(target, postNo) {
@@ -103,14 +164,4 @@ function clickPostBtn(target, postNo) {
         //        console.log("목록으로");
         location.href = '/list';
     }
-}
-
-
-// 연관포스트 목록을 보여주는 함수
-function showLinklist(linkURL, postNo) {
-    fetch(linkURL + '/' + postNo)
-        .then(res => res.json())
-        .then(linkMap => {
-            makeLinkListDom(linkMap);
-        })
 }
