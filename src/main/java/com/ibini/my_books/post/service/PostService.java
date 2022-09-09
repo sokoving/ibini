@@ -6,10 +6,12 @@ import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.repository.PostMapper;
 import com.ibini.my_books.postImg.service.PostImgService;
+import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -88,7 +90,7 @@ public class PostService {
 
     // 검색이 적용된 전체 포스트
     public List<PostWithName> searchAllPostWithNameService(SearchPost searchPost){
-        log.info("Post Service :searchAllPostWithName call");
+                log.info("Post Service :searchAllPostWithName call - {}", searchPost);
         List<PostWithName> postList = postMapper.searchAllPostWithName(searchPost);
         for (PostWithName p : postList) {
             p.pubSetting();
