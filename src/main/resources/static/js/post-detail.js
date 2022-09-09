@@ -38,20 +38,16 @@ function disconnectLink(linkURL, linkId) {
 
 
 
-
-
-
-
 // 연관 포스트 목록 구성하기
 function makeLinkListDom({
     linkList,
     linkSize
 }) {
-//    console.log(linkList);
-//    console.log(linkSize);
+    //    console.log(linkList);
+    //    console.log(linkSize);
     // ul 태그 비우기
     $linkUl.innerHTML = '';
-//    console.log(linkList === null || linkSize === 0);
+    //    console.log(linkList === null || linkSize === 0);
     if (linkList === null || linkSize === 0) {
         // 검색창 만들기
         makeSearchLi();
@@ -64,9 +60,21 @@ function makeLinkListDom({
         $linkUl.innerHTML += liTags;
     }
 }
+//검색창이 존재하는지 확인하는 함수
+function isSearchLi() {
+    // 검색창이 존재하면 true, 없으면 false
+    const flag = $linkUl.children[0].classList.contains('link-zero-box');
+    console.log(flag + "(true - 검색창 있음, false - 검색창 없음")
+    return flag;
+}
 
 // 포스트 검색창 만들기
 function makeSearchLi() {
+    // 검색창이 이미 있다면 새로 만들기 않음
+    if (isSearchLi()) {
+        return;
+    }
+
     // 모두 감쌀 li
     const $linkZeroBox = document.createElement('li');
     $linkZeroBox.classList.add('link-zero-box');
@@ -127,8 +135,8 @@ function makeLinkLi(l) {
         "; color:" + l.platformFontColor + "'>" + epPercent + "%</div>" +
         "<div class='link-post-info'>" +
         "<div class='link-title'>" + l.postTitle + "</div>" +
-        "<div class='link-writer'>" + l.postWriter + " | <span>" + l.platformName +
-        "</span> <span>" + cycle + "</span></div>" +
+        "<div class='link-writer'>" + l.postWriter + " | " + l.platformName +
+        " - " + cycle + "</div>" +
         "</div>" +
         "<div class='link-post-date'>" +
         "<span class='link-date'>수정일</span>" +
@@ -144,7 +152,18 @@ function makeLinkLi(l) {
 // 연관 포스트 수정 모드 진입하는 함수
 function setLinkEditMod() {
     switchToggle($postToggles); // 아이콘 바꾸기
-    makeSearchLi() // 검색창 표시
+    // 잠금모드가 풀릴 때 > 검색창 생성
+    if($postToggles[1].classList.contains('hide')){
+        makeSearchLi() 
+    }
+    // 잠금모드가 잠길 때 > 검색창 삭제
+     else if($postToggles[2].classList.contains('hide')){
+        if ($linkUl.children.length > 1 && isSearchLi()) {
+            $linkUl.children[0].remove();
+        }
+     }
+
+    // 삭제 버튼 표시
     const $removeBtnList = $('.link-remove-btn');
     for (let $btn of $removeBtnList) {
         $btn.classList.toggle('hide')

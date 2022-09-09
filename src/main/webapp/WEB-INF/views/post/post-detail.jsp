@@ -266,9 +266,7 @@
 
                                                 <div class="link-post-info">
                                                     <div class="link-title">신기방기 뿡뿡방기 제목이 어디까지 어디까지 늘어나는 거에요?</div>
-                                                    <div class="link-writer">윤정한 | <span>카카오페이지</span> <span>월, 금
-                                                            10시</span>
-                                                    </div>
+                                                    <div class="link-writer">윤정한 | 카카오페이지 - 월, 금 10시</div>
                                                 </div>
 
                                                 <div class="link-post-date">
@@ -309,8 +307,7 @@
 
             /* ------------------ 연관 포스트 -------------------------- */
             // 요청 URL
-            // const linkURL = '/post/api/links';
-            const linkURL = '/api/links';
+            const linkURL = '/post/api/links';
             // 연관 포스트 목록 보여주기
             showLinklist(linkURL, postNo);
 
@@ -354,17 +351,19 @@
             // 연관 포스트 목록 클릭 이벤트
             $('#link-container').click(function (e) {
                 e.preventDefault();
-                // 삭제버튼이 아닌 데 눌렀을 경우
-                const rootPostNo = e.target.parentElement.parentElement.lastElementChild;
-                console.log("??? : " + rootPostNo);
 
-                // 연관 포스트 삭제 요청 보내기
+                // 삭제 버튼 클릭  > 삭제 요청
                 if (e.target.matches('.link-remove-btn')) {
-                    const rootPostNo = e.target.dataset.delPostNo;
+                    const linkPostNo = e.target.dataset.delPostNo;
                     console.log("root post no : " + postNo);
-                    console.log("link post no : " + rootPostNo);
-                } else if (rootPostNo.matches('.link-remove-btn')) {
-                    location.href = '/post/detail/' + rootPostNo.dataset.delPostNo;
+                    console.log("link post no : " + linkPostNo);
+                } 
+
+                // 삭제버튼이 아닌 곳 클릭 > 링크 이동
+                else if (linkPostNo.matches('.link-remove-btn')) {
+                    const linkPostNo = e.target.parentElement.parentElement.lastElementChild;
+                    console.log("??? : " + linkPostNo);
+                    location.href = '/post/detail/' + linkPostNo.dataset.delPostNo;
                 }
 
             });

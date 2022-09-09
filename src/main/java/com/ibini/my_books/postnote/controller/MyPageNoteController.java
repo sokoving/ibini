@@ -1,8 +1,7 @@
 package com.ibini.my_books.postnote.controller;
 
-import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
-import com.ibini.my_books.postnote.common.search.Search;
+import com.ibini.my_books.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
 import com.ibini.my_books.postnote.domain.PostMemo;
 import com.ibini.my_books.postnote.dto.MyPageMark;

@@ -356,7 +356,6 @@
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
             const postNo = 5;
 
-
             // 별 찍기
             const star = 5;
             drawStarsAtDetail(star);
@@ -367,25 +366,7 @@
             })
 
             /* ------------------ 연관 포스트 -------------------------- */
-            // rootPostNo
 
-
-            // 토글, 자물쇠 아이콘 스위치하는 함수
-            function switchToggle($toggleIcons) {
-                $toggleIcons[0].classList.toggle('fff');
-                $toggleIcons[1].classList.toggle('hide');
-                $toggleIcons[2].classList.toggle('hide');
-                $toggleIcons[3].classList.toggle('fff');
-            }
-
-            function setLinkEditMod() {
-                switchToggle($postToggles); // 아이콘 바꾸기
-                $('.search-wrap').toggleClass('hide') // 검색창 표시
-                const $removeBtnList = $('.link-remove-btn');
-                for (let $btn of $removeBtnList) {
-                    $btn.classList.toggle('hide')
-                }
-            }
 
 
             // 연관 포스트 편집모드 열기(등록, 삭제)

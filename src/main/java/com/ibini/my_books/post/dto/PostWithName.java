@@ -70,4 +70,12 @@ public class PostWithName {
         this.shortDate.setDateDTO(regDate, updateDate);
     }
 
+    public void pubSetting(){
+        this.publishStatusName = PublishStatusUtil.PUBLISH_STATUS_MAP.get(this.publishStatus);
+        if(this.publishStatus >= 2){
+            this.publishCycle = "";
+        }
+    }
+
+
 }

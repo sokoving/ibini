@@ -1,4 +1,4 @@
-package com.ibini.my_books.postnote.common.paging;
+package com.ibini.my_books.common.paging;
 
 import lombok.Getter;
 import lombok.Setter;

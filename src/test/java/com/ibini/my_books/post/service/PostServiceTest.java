@@ -1,5 +1,6 @@
 package com.ibini.my_books.post.service;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.util.FileUtils;
 import org.junit.jupiter.api.DisplayName;
@@ -42,6 +43,21 @@ class PostServiceTest {
         System.out.println("s = " + s);
     }
 
+    @Test
+    @DisplayName("검색이 적용되고, 연재 상태가 세팅된 List<PostWithName>가 조회돼야 한다")
+    void searchAllPostWithNameServiceTest(){
+        SearchPost sp = new SearchPost();
+        sp.setAccount("2209080001");
+        sp.setSTitle("세븐틴");
+//        sp.setPageNum(2);
+        sp.setAmount(10);
+        System.out.println("sp = " + sp);
+
+        List<PostWithName> sList = postService.searchAllPostWithNameService(sp);
+        for (PostWithName s : sList) {
+            System.out.println(s);
+        }
+    }
 
 
 }

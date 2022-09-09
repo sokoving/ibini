@@ -1,5 +1,6 @@
 package com.ibini.my_books.post.service;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.hashtag.service.HashTagService;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
@@ -83,6 +84,17 @@ public class PostService {
     public int getTotalCount(String account){
         log.info("Post Service : getTotalCountService call");
         return postMapper.getTotalCount(account);
+    }
+
+    // 검색이 적용된 전체 포스트
+    public List<PostWithName> searchAllPostWithNameService(SearchPost searchPost){
+        log.info("Post Service :searchAllPostWithName call");
+        List<PostWithName> postList = postMapper.searchAllPostWithName(searchPost);
+        for (PostWithName p : postList) {
+            p.pubSetting();
+        }
+
+        return postList;
     }
 
 
