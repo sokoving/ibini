@@ -122,7 +122,17 @@ class LinkPostMapperTest {
         }
         System.out.println("sl.size() = " + sl.size());
         assertEquals(7, sl.size());
+    }
 
+    @Test
+    @DisplayName("루트포스트번호가 포함된 모든 LinkPost를 조회한다")
+    void getLinkForRemoveTest(){
+        Long rootPostNo = 7L;
+        List<LinkPost> linkForRemove = mapper.getLinkForRemove(rootPostNo);
+        for (LinkPost linkPost : linkForRemove) {
+            System.out.println(linkPost);
+        }
+        System.out.println("linkForRemove.size() = " + linkForRemove.size());
     }
 
 

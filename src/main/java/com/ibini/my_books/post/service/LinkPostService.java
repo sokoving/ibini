@@ -7,6 +7,7 @@ import com.ibini.my_books.post.repository.LinkPostMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -97,5 +98,16 @@ public class LinkPostService {
             p.pubSetting();
         }
         return postList;
+    }
+
+    // 포스트가 삭제될 때 관련 LinkPost 전부 삭제
+    @Transactional
+    public void postDeleteService(Long rootPostNo){
+        log.info("Link Post Service : postDeleteService call - {}", rootPostNo);
+
+        List<LinkPost> linkForRemove = mapper.getLinkForRemove(rootPostNo);
+        for (LinkPost linkPost : linkForRemove) {
+            mapper.disconnectPost(linkPost.getLinkId());
+        }
     }
 }

@@ -124,4 +124,10 @@
         <!--        limit #{start}, #{amount}-->
     </select>
 
+    <select id="getLinkForRemove" resultMap="linkPostMap">
+        select *
+        from ibini.prj_link_post
+        where link_id like concat('%', #{rootPostNo}, '%')
+    </select>
+
 </mapper>

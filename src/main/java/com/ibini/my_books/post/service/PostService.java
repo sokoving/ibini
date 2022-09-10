@@ -22,6 +22,7 @@ public class PostService {
     private final PostMapper postMapper;
     private final HashTagService tagService;
     private final PostImgService imgService;
+    private final LinkPostService linkPostService;
 
 
 //    포스트 등록
@@ -69,9 +70,10 @@ public class PostService {
     public boolean removeService(Long postNo){
         log.info("Post Service : removeService call - {}", postNo);
 
-//        포스트 삭제 전 해시태그, 이미지 전부 지우기
+//        포스트 삭제 전 해시태그, 이미지, 링크포스트 전부 지우기
         tagService.removeTagOnPost(postNo);
         imgService.removeByPostNo(postNo);
+        linkPostService.postDeleteService(postNo);
 
         return postMapper.remove(postNo);
     }

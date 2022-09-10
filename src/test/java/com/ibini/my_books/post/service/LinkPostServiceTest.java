@@ -17,12 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class LinkPostServiceTest {
 
-    @Autowired LinkPostService service;
-    @Autowired PostService postService;
+    @Autowired
+    LinkPostService service;
+    @Autowired
+    PostService postService;
 
     @Test
     @DisplayName("링크를 DB에 등록한다")
-    void connectTest(){
+    void connectTest() {
         LinkPost lp = new LinkPost(70L, 61L);
         boolean flag = service.connectPostService(lp);
         assertTrue(flag);
@@ -30,7 +32,7 @@ class LinkPostServiceTest {
 
     @Test
     @DisplayName("중복 링크는 DB에 등록하지 않는다")
-    void connectTest2(){
+    void connectTest2() {
         LinkPost lp = new LinkPost(45L, 50L);
         boolean flag = service.connectPostService(lp);
         assertFalse(flag);
@@ -38,7 +40,7 @@ class LinkPostServiceTest {
 
     @Test
     @DisplayName("링크를 DB에서 삭제한다")
-    void disconnectTest(){
+    void disconnectTest() {
         String linkId = "45_50";
         boolean flag = service.disconnectPostService(linkId);
         assertTrue(flag);
@@ -46,7 +48,7 @@ class LinkPostServiceTest {
 
     @Test
     @DisplayName("루트 포스트 넘버로 연결된 포스트를 조회할 수 있어야 한다")
-    void getListTest(){
+    void getListTest() {
         Long rootPostNo = 2L;
         Map<String, Object> linkMap = service.getLinkListService(rootPostNo);
         System.out.println("----------------------------- check here");
@@ -57,11 +59,10 @@ class LinkPostServiceTest {
     }
 
     @Test
-    @DisplayName("전체 포스트 목록에서 포스트에 연결돼 있는 포스트는 제거하고 조회한다")
-    void getDiffSetList(){
-
-//        }
-
+    @DisplayName("루트포스트번호와 관련된 LinkPost가 DB에서 모두 삭제돼야 한다")
+    void getDiffSetList() {
+        Long rootPostNo = 7L;
+        service.postDeleteService(rootPostNo);
 
     }
 
