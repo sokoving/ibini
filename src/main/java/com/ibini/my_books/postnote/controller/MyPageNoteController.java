@@ -1,6 +1,5 @@
 package com.ibini.my_books.postnote.controller;
 
-import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
 import com.ibini.my_books.postnote.domain.PostMemo;
@@ -30,7 +29,6 @@ public class MyPageNoteController {
 
     private final PostMarkService postMarkService;
     private final PostMemoService postMemoService;
-    private final PostService postService;
 
 
     // 마이페이지 post, postMark 게시물 목록 요청
