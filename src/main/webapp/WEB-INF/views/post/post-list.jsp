@@ -183,6 +183,8 @@
 
 
     <script>
+
+        let oneLineTag;
         // 별 특수문자 채우는 함수
         function drawStarsAtList() {
             const $stars = document.querySelectorAll('.star-rate');

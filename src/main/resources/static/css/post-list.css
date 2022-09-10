@@ -59,7 +59,7 @@ section#list-sec{
 /* 포스트 목록 필터링 제목  */
 .section-h2{
     border: 1px solid #adb5bd;
-    background-color: #ffe3da;
+    background-color: #ffc699;
     border-radius: 0.25rem;
     margin-top: 30px;
     /* padding: 20px 0; */
@@ -93,7 +93,7 @@ section#list-sec{
     margin-bottom: 30px;
 }
 .item-wrap:hover{
-    background-color: #ffe3da;
+    background-color: #ffc69987;
 }
 
 /* ---------- left : 표지, 즐겨찾기 ---------- */
@@ -237,6 +237,7 @@ section#list-sec{
     transform: scale(1.07);
     transition: 0.15s;
     cursor: pointer;
+
 }
 .item-right .ca-ge-wrap .genre-name{
     font-size: 0.95em;
