@@ -11,6 +11,7 @@ import lombok.*;
 public class SearchPost extends Page {
 
     private String account; // 검색자 계정
+    private Long rootPostNo; // 연관 포스트의 포스트 번호
 
     private String sTitle;  // 제목 검색 키워드
     private String sWriter;  // 작가 검색 키워드

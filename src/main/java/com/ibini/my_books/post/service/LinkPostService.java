@@ -1,5 +1,6 @@
 package com.ibini.my_books.post.service;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.post.domain.LinkPost;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.repository.LinkPostMapper;
@@ -86,5 +87,15 @@ public class LinkPostService {
     // 중복 링크인지 확인 (중복이면 true, 아니면 false)
     public boolean isLinked(LinkPost linkPost) {
         return mapper.isLinked(linkPost) >= 1;
+    }
+
+    // 루트포스트와 이미 연결된 링크 포스트를 제외한 포스트 목록 조회(검색)
+    public List<PostWithName> getSearchListService(SearchPost searchPost){
+        log.info("Link Post Service :getSearchListService call - {}", searchPost);
+        List<PostWithName> postList = mapper.getSearchList(searchPost);
+        for (PostWithName p : postList) {
+            p.pubSetting();
+        }
+        return postList;
     }
 }

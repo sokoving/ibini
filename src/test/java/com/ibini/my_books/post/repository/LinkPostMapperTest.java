@@ -1,5 +1,6 @@
 package com.ibini.my_books.post.repository;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.post.domain.LinkPost;
 import com.ibini.my_books.post.dto.PostWithName;
 import org.junit.jupiter.api.DisplayName;
@@ -101,7 +102,26 @@ class LinkPostMapperTest {
         }
         System.out.println("--------------------------------------------------");
         System.out.println("linkDTOLIst.size = " + linkDTOLIst.size());
+    }
 
+    @Test
+    @DisplayName("링크 포스트로 등록할 포스트를 검색할 때 rootPostNo와 이미 등록된 포스트는 제외하고 조회된다")
+    void getSearchListTest(){
+        Long rootPostNo = 1L;
+        SearchPost sp = new SearchPost();
+        sp.setAccount("2209080001");
+        sp.setRootPostNo(rootPostNo);
+//        sp.setSTitle("세븐틴");
+//        sp.setSWriter("세븐");
+        System.out.println("sp = " + sp);
+        List<PostWithName> sl = mapper.getSearchList(sp);
+        for (PostWithName p : sl) {
+            p.pubSetting();
+            System.out.println(p);
+            System.out.println(p.getPublishCycle());
+        }
+        System.out.println("sl.size() = " + sl.size());
+        assertEquals(7, sl.size());
 
     }
 

@@ -328,7 +328,6 @@
                 // 검색창이 이미 있거나 잠금 모드라면 
                 // 만들지 않음 새로 만들기 않음
                 if (isSearchLi()) {
-                    console.log("검색창 안 만드러용");
                     return;
                 }
 
@@ -352,7 +351,7 @@
                     "</select>" +
                     "<input class='form-control' list='datalistOptions' id='postSearchList' placeholder='포스트를 검색해 링크를 추가해 보세요'>" +
                     "<datalist id='datalistOptions'>" +
-                    "<option data-link-post-no='0' value='기억이 안 나면 스페이스바를 눌러보세요'>" +
+                    "<option data-link-post-no='0' value='스페이스바를 누르면 등록된 포스트를 제외한 모든 포스트가 검색됩니다.'>" +
                     "</datalist>" +
                     "<button type='button' class='link-reg-btn btn btn-secondary'>저장</button>";
 
@@ -489,14 +488,14 @@
                         if (msg === 'connect-success') {
                             showLinklist(linkURL, postNo);
                             const flag = confirm('연관 포스트가 등록되었습니다. \n연관 포스트 섹션 편집을 계속하시겠습니까?');
-                            if(flag){
+                            if (flag) {
                                 // 잠금모드라면 풀기
-                                if(!isToggleOn()){
+                                if (!isToggleOn()) {
                                     setLinkEditMod();
                                 }
                             } else {
                                 // 편집모드라면 잠그기
-                                if(isToggleOn()){
+                                if (isToggleOn()) {
                                     setLinkEditMod();
                                 }
                             }
@@ -515,20 +514,45 @@
 
                     // 연관포스트 등록(저장) 
                     if (e.target.matches('.link-reg-btn')) {
-                        // rootPostNO
-                        console.log("rootPostNo : " + postNo);
+                        let linkPostNo = -1;
 
-                        const linkPostNo = changeTitleToNum();
-                        console.log("linkPostNo : " + linkPostNo);
-
-                        if (linkPostNo > 0) {
-                            connectPost(linkPostNo);
-                        } else {
-                            alert("포스트가 존재하지 않습니다.");
-                            return;
+                        // 작가로 검색했을 때
+                        if ($('#linkSearchType').val() === 'sWriter') {
+                            // 새로 검색 요청 보내기
+                            const keyword = $('#postSearchList').val();
+                            const url = linkURL + '/searchPost?rootPostNo=' + postNo + "&sTitle=" +
+                                keyword;
+                            fetch(url)
+                                .then(res => res.json())
+                                .then(searchList => {
+                                    // 검색 결과가 있다면 키워드와 일치하는 제목의 포스트 번호로 등록 요청 보내기
+                                    if (searchList.length > 0) {
+                                        for (let s of searchList) {
+                                            if (s.postTitle === keyword) {
+                                                linkPostNo = s.postNo;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (linkPostNo > 0) {
+                                        connectPost(linkPostNo);
+                                    } else {
+                                        alert("존재하지 않는 포스트입니다. ");
+                                        return;
+                                    }
+                                })
+                        }
+                        // 제목으로 검색했을 때
+                        else {
+                            linkPostNo = changeTitleToNum();
+                            if (linkPostNo > 0) {
+                                connectPost(linkPostNo);
+                            } else {
+                                alert("존재하지 않는 포스트입니다. ");
+                                return;
+                            }
                         }
                     }
-
 
                     // 삭제 버튼 클릭  > 삭제 요청
                     else if (e.target.matches('.link-remove-btn')) {
@@ -561,11 +585,8 @@
                     }
 
                     // 삭제버튼이 아닌 곳 클릭 > 링크 이동
-                    else if (e.target.matches('.link-remove-btn')) {
-                        const linkPostNo = e.target.parentElement.parentElement
-                            .lastElementChild;
-                        console.log("??? : " + linkPostNo);
-                        location.href = '/post/detail/' + linkPostNo.dataset.delPostNo;
+                    else if (e.target.parentElement.parentElement.matches('.link-a')) {
+                        location.href = e.target.parentElement.parentElement;
                     }
                 },
                 keyup: function (e) {
@@ -578,8 +599,9 @@
                         const keyword = e.target.value;
                         // console.log(keyword);
 
-                        // 검색 요청 보내기
-                        const searchUrl = '/post/api/searchPost?' + type + "=" + keyword;
+                        // 검색 요청 보내고 결과로 option 만들기
+                        const searchUrl = linkURL + '/searchPost?rootPostNo=' + postNo + "&" +
+                            type + "=" + keyword;
                         fetch(searchUrl)
                             .then(res => res.json())
                             .then(searchList => {
