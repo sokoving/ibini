@@ -40,13 +40,11 @@ public class PostMarkService {
 
     // 마크 전체 조회 요청 중간 처리
     public Map<String, Object> findAll(Long postNo) {
-
         Map<String, Object> markMap = new HashMap<>();
 
         List<PostMark> markList = postMarkMapper.findAll(postNo);
         convertDateFormat(markList);
 
-//        markMap.put("markList", postMarkMapper.findAll(postNo));
         markMap.put("markList", markList);
         markMap.put("markCnt", postMarkMapper.getPostMarkCount(postNo));
 
@@ -66,21 +64,20 @@ public class PostMarkService {
     // 마크 전체 조회 With Search
     public List<PostMark> findAllWithSearch(Long postNo, Search search) {
         List<PostMark> markList = postMarkMapper.findAllWithSearch(postNo, search);
-
         convertDateFormat(markList);
 
         return markList;
     }
 
     // 마크 전체 조회 Except 2 rows
-    public List<PostMark> findAllWithSearch2(Long postNo, Search search) {
-        List<PostMark> markList = postMarkMapper.findAllWithSearch2(postNo, search);
-
+    public List<PostMark> findAllWithSearchExcept2Rows(Long postNo, Search search) {
+        List<PostMark> markList = postMarkMapper.findAllWithSearchExcept2Rows(postNo, search);
         convertDateFormat(markList);
 
         return markList;
     }
 
+    // 날짜 포맷팅 함수
     private void convertDateFormat(List<PostMark> postMark) {
         for (PostMark m : postMark) {
             Date date = m.getModDatetime();
@@ -89,6 +86,7 @@ public class PostMarkService {
             m.setPrettierDate(newDate.format(date));
         }
     }
+
 
     // 마이페이지 post, img 조회
     public List<MyPagePostDTO> findAllPostWithImg(String account, Search search) {

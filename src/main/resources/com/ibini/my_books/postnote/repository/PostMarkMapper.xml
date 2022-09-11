@@ -64,7 +64,7 @@
     <!-- 마크 개별 조회 기능 -->
     <select id="findOne" resultMap="markMap">
         SELECT
-        *
+            post_no, mark_no, episode_no, content, account, reg_datetime, mod_datetime
         FROM prj_post_mark
         WHERE mark_no = #{markNo}
     </select>
@@ -88,20 +88,20 @@
                 <if test="search.type == 'episodeNo'">AND episode_no = #{search.keyword}</if>
         ) pm
         LEFT OUTER JOIN tbl_post p
-        ON pm.post_no = p.post_no
+            ON pm.post_no = p.post_no
         WHERE pm.post_no = #{postNo}
         ORDER BY pm.episode_no
     </select>
 
-    <!-- 마크 전체 조회 기능 With Search -->
-    <select id="findAllWithSearch2" resultMap="markMap">
+    <!-- 마크 전체 조회 기능 With Search Except 2 Rows -->
+    <select id="findAllWithSearchExcept2Rows" resultMap="markMap">
         SELECT *
         FROM (
         SELECT PM.*, @rownum := @rownum + 1 AS RNUM
         FROM
         (
             SELECT
-            pm.post_no, p.ep_id, pm.mark_no, pm.episode_no, pm.content, pm.account, pm.reg_datetime, pm.mod_datetime
+                pm.post_no, p.ep_id, pm.mark_no, pm.episode_no, pm.content, pm.account, pm.reg_datetime, pm.mod_datetime
             FROM (
                 select * from
                 prj_post_mark
@@ -110,7 +110,7 @@
                 <if test="search.type == 'episodeNo'">AND episode_no = #{search.keyword}</if>
             ) pm
             LEFT OUTER JOIN tbl_post p
-            ON pm.post_no = p.post_no
+                ON pm.post_no = p.post_no
             WHERE pm.post_no = #{postNo}
             ORDER BY pm.episode_no LIMIT 9999999999
         ) AS PM, (select @rownum := 0) AS R
@@ -130,7 +130,7 @@
                 <if test="search.type == 'postTitle'">AND post_title LIKE CONCAT('%', #{search.keyword}, '%')</if>
         ) p
         LEFT OUTER JOIN prj_post_img i
-        ON p.post_no= i.post_no
+            ON p.post_no= i.post_no
         WHERE i.thumbnail = 'true'
             OR i.thumbnail is null
         ORDER BY p.post_title
