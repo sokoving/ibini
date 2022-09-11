@@ -314,7 +314,7 @@ section {
     margin-left: 0.1rem;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking {
-    color: white;
+    color: #fff;
     background-color: #22577E;
 }
 /* .book-wrapper .book-info .my-text .episode-no span.marking.type1 {
@@ -382,6 +382,6 @@ section {
     margin-bottom: 1rem;
 }
 .content-wrapper ul.blank-page strong {
-    color: red;
+    color: #f00;
     font-size: 1.3em;
 }

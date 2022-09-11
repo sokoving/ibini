@@ -328,6 +328,6 @@ section {
     margin-bottom: 1rem;
 }
 .content-wrapper ul.blank-page strong {
-    color: red;
+    color: #f00;
     font-size: 1.3em;
 }
