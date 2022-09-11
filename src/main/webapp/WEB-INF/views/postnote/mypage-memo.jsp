@@ -14,21 +14,14 @@
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
-    <!-- fontawesome css: https://fontawesome.com -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- jQuery 기본 js파일 -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
     <!-- naver font -->
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/mypage-memo.css">
-
 </head>
 
 <body>
@@ -81,7 +74,7 @@
                     <c:forEach var="p" items="${myPageMemoList}">
                         <div class="content" id="${p.postNo}">
                             <div class="book-wrapper flex-fs">
-                                <!-- 책 이미지 -->
+                                <%-- 책 이미지 --%>
                                 <c:choose>
                                     <c:when test="${p.thumbImg != null}">
                                         <div class="book-image w30 noselect">
@@ -93,24 +86,24 @@
                                     </c:otherwise>
                                 </c:choose>
                             
-                                <!-- 책 정보 -->
+                                <%-- 책 정보 --%>
                                 <div class="book-info w70">
-                                    <!-- 책 제목 -->
+                                    <%-- 책 제목 --%>
                                     <div class="book-title">
                                         <a href="/post/detail/${p.postNo}" title="상세보기">${p.postTitle}</a>
                                     </div>
                                     <div class="memo-wrapper">
-                                        <!-- MEMO 내용 -->
+                                        <%-- MEMO 내용 --%>
                                         <div class="memo-list">
                                             <c:forEach var="m" items="${p.memoList}" end="1">
                                                 <div id="${m.memoNo}" class="my-text">
                                                     <textarea class="w100" spellcheck="false" readonly>${m.content}</textarea>
-                                                    <!-- MEMO 날짜 -->
+                                                    <%-- MEMO 날짜 --%>
                                                     <div class="meta-data">
                                                         <span>${m.modDatetime}</span>
                                                     </div>
                                                     <hr>
-                                                </div> <!-- end my-text -->
+                                                </div> <%-- end my-text --%>
                                             </c:forEach>    
                                         </div>
                                         <c:if test="${p.memoList.size() > 2}">
@@ -119,11 +112,11 @@
                                             </div>
                                         </c:if>
                                     </div>
-                                </div> <!-- end book-info -->
-                            </div> <!-- end book-wrapper -->
-                        </div> <!-- end content -->
+                                </div> <%-- end book-info --%>
+                            </div> <%-- end book-wrapper --%>
+                        </div> <%-- end content --%>
                     </c:forEach>
-                </div> <!-- end content-wrapper name="memo" -->
+                </div> <%-- end content-wrapper name="memo" --%>
         </section>
     </div> <!-- end wrap -->
 
@@ -135,24 +128,13 @@
             const $textAreaList = [...document.querySelectorAll('.my-text textarea')];
 
             for ($textArea of $textAreaList) {
-                // console.log($textArea.value);
                 $textArea.style.height = "1px";
-                $textArea.style.height = (12 + $textArea.scrollHeight) + "px";
+                $textArea.style.height = (2 + $textArea.scrollHeight) + "px";
             }
         }
-
         resize_textarea();
-
-        // ... 더보기 클릭
-        function click_viewMore($eventTag) {
-            // fetch() 사용하여 팝업페이지 호출 및 책/회차 등의 변수값 전달
-            // 지금은 샘플html이니 redirect 처리를 하도록 한다.
-            //window.location.href = './detail/detail.html';
-
-            findMemoList($eventTag);
-            $($eventTag).closest('.view-more').css('display', 'none');
-        }
-        
+     
+        // enter keyup Event
         function enterkey() {
             if (window.event.keyCode == 13) {
                 search();
@@ -166,7 +148,6 @@
             if ($("#search-option option:selected").val() == 'postTitle') {     
                 if ($keyword.trim() === '') {
                     alert('검색어를 입력하세요')
-                    // location.href = '/mypostnote/memolist?type=postTitle&keyword=';
                     return;
                 }                       
                 location.href = '/mypostnote/memolist?type=postTitle' + '&keyword=' + $keyword;
@@ -186,6 +167,12 @@
             $("#searchText").val('');   
             $('.blank li').text('');
         });
+
+         // ... 더보기 클릭 Event
+        function click_viewMore($eventTag) {
+            findMemoList($eventTag);
+            $($eventTag).closest('.view-more').css('display', 'none');
+        }
 
         /*======================================================================
             함수 영역
@@ -226,10 +213,6 @@
             context += '</div>';
             return context;
         }
-
-        $(document).ready(function(){
-
-        });
     </script>
 </body>
 </html>
