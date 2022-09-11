@@ -65,6 +65,9 @@ public class PostWithName {
         this.epName2 = EpIdUtil.EP_NAME_MAP.get(epName);
 
         this.publishStatusName = PublishStatusUtil.PUBLISH_STATUS_MAP.get(this.publishStatus);
+        if(this.publishStatus >= 2){
+            this.publishCycle = "";
+        }
 
         this.shortDate = new FormattingDateDTO();
         this.shortDate.setDateDTO(regDate, updateDate);

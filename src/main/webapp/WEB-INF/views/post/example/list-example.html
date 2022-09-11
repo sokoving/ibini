@@ -45,119 +45,144 @@
 <body>
 
 
-<div id="wrap">
+    <div id="wrap">
 
-    <!-- header -->
-    <header>
-        <div id="header-container">
-            <div id="inner-header">
+        <!-- header -->
+        <header>
+            <div id="header-container">
+                <div id="inner-header">
+                    <!-- 
+                    <h1><img src="/main/resources/static/img/ibini_logo_4.png" alt=""></h1>
 
-                <h1><img src="/main/resources/static/img/ibini_logo_4.png" alt=""></h1>
+                    <div class="menu">
+                        <a href="#" class="menu-open">
+                            <span class="user-name">이비니 님</span>
+                            <span class="fas fa-bars"></span>
+                        </a>
+                    </div> -->
+                </div> <!-- // end inner-header -->
+            </div> <!-- // end header-container -->
+        </header> <!-- end header -->
 
-                <a href="#" class="menu-open">
-                    <span class="user-name">이비니 님</span>
-                    <span class="fas fa-bars"></span>
-                </a>
+        <div id="content-wrap">
+            <!-- 새 포스트 등록 섹션 -->
+            <section id="reg-sec">
+                <div class="inner-section">
 
-            </div> <!-- // end inner-header -->
-        </div> <!-- // end header-container -->
-    </header> <!-- end header -->
-
-
-    <!-- 새 포스트 등록 섹션 -->
-    <section id="reg-sec">
-        <div class="inner-section">
-
-            <!-- 새 글 등록 버튼 -->
-            <div class="new-post">
-                <div class="reg-btn">
-                    <span class="fas fa-plus"></span>
-                    <h2>새 포스트를 등록해 보세요</h2>
+                    <!-- 새 글 등록 버튼 -->
+                    <a href="/post/write">
+                        <!-- <div class="new-post">
+                            <div class="reg-btn">
+                                <span class="fas fa-plus"></span>
+                                <h2>새 포스트를 등록해 보세요</h2>
+                            </div>
+                        </div> -->
+                    </a>
+                    <!-- 새 글 등록 메뉴 -->
+                    <!-- <div class="reg-menu on">
+                        <ul>
+                            <li>직접 입력해서 등록하기</li>
+                            <li>검색해서 등록하기</li>
+                        </ul>
+                    </div> -->
                 </div>
-            </div>
-            <!-- 새 글 등록 메뉴 -->
-            <div class="reg-menu on">
-                <ul>
-                    <li>직접 입력해서 등록하기</li>
-                    <li>검색해서 등록하기</li>
-                </ul>
-            </div>
-        </div> <!-- // end reg-sec -->
-    </section> <!-- // end section -->
+                    <!-- // end reg-sec -->
+            </section>
+            <!-- // end section -->
 
 
-    <!-- 포스트 리스트 섹션 -->
-    <section id="list-sec">
-        <div class="inner-section">
-            <!-- 포스트 목록 필터링 제목 -->
-            <div class="section-h2">
-                <h2>전체 포스트</h2>
-            </div>
-
-            <!-- 포스트 개별 영역 -->
-            <div class="item-wrap hover">
-                <!-- left : 표지, 즐겨찾기 -->
-                <div class="item-left">
-                    <div class="thumb-box">
-                        <img class="post-img"
-                             src="http://localhost:8383/loadFile?fileName=/2022/09/06/49c6d617-72ff-4fbc-8239-51a860e3e60f_KakaoTalk_20220831_150920146_13.jpg"
-                             alt="포스트 썸네일">
-                    </div>
-                    <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span></div>
-                </div> <!-- // end item-left -->
-
-                <!-- center : 상세정보 -->
-                <div class="item-center">
-                    <div class="center-top">
-                        <!-- 별점 -->
-                        <div class="star-rate" data-star-rate="3"></div>
-                        <!-- 제목 -->
-                        <div class="post-title">
-                            <h3>신기방기 뿡뿡방기</h3>
-                        </div>
-                        <!-- 작가 -->
-                        <div class="post-writer">윤정한</div>
+            <!-- 포스트 리스트 섹션 -->
+            <section id="list-sec">
+                <div class="inner-section">
+                    <!-- 포스트 목록 필터링 제목 -->
+                    <div class="section-h2">
+                        <h2>전체 포스트</h2>
                     </div>
 
-                    <div class="pl-pu-warp">
-                        <!-- 플랫폼 -->
-                        <span class="plat-name hover"
-                              style="background-color: rgb(3, 199, 90); color:rgb(0, 0, 0)">네이버시리즈</span>
-                        <!-- 연재주기 or 연재상태 -->
-                        <span class="pu-cycle">매월 10일</span>
-                    </div> <!-- // end pl-pu-wrap -->
-                    <!-- 해시태그 -->
-                    <div class="tag-one-line">#세븐틴 #13명 #1004</div>
-                </div> <!-- // end item-center -->
+                    <!-- 포스트 개별 영역 -->
+                    <div class="item-wrap hover">
+                        <!-- left : 표지, 즐겨찾기 -->
+                        <div class="item-left">
+                            <div class="thumb-box">
+                                <img class="post-img"
+                                    src="https://pbs.twimg.com/media/Fb8vCzEaQAAZHt9?format=jpg&name=medium"
+                                    alt="포스트 썸네일">
+                            </div>
+                            <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span></div>
+                        </div> <!-- // end item-left -->
 
-                <!-- right : 분류, 진행도, 날짜 -->
-                <div class="item-right">
-                    <div class="ca-ge-wrap">
-                        <!-- 카테고리 -->
-                        <div class="ca-name">웹소설</div>
-                        <!-- 장르 -->
-                        <div class="genre-name">일이삼사오육...</div>
-                    </div>
-                    <!-- 진행도 -->
-                    <div class="read-percent">80%</div>
-                    <div class="date-wrap">
-                        <!-- 포스트 수정일 -->
-                        <div class="post-reg-date">갱신 2022.08.25</div>
-                        <!-- 포스트 등록일 -->
-                        <div class="post-reg-date">작성 2022.08.01</div>
-                    </div>
-                </div> <!-- // end item-right -->
-            </div> <!-- // end item-wrap -->
+                        <!-- right : 상세정보 -->
+                        <div class="item-right">
+
+                            <!-- right-1 : 별점, 장르 -->
+                            <div class="right-1">
+                                <!-- 별점 -->
+                                <div class="star-rate" data-star-rate="9"></div>
+                                <!-- 장르 -->
+                                <div class="genre-name" data-genre-id="1">판타지</div>
+                            </div> <!-- // end right-1 -->
+
+                            <!-- right-2 : 제목, 작가 -->
+                            <div class="right-2">
+                                <div class="right2-1">
+                                    <!-- 작가 -->
+                                    <div class="post-writer">윤정한</div>
+                                    <!-- 제목 -->
+                                    <div class="post-title">
+                                        <a href="/post/detail/${p.postNo}">
+                                            <h3>신기방기 뿡뿡방기 뿡뿡뿡 신기방기...</h3>
+                                        </a>
+                                    </div>
+                                    <div class="pl-pu-wrap">
+                                        <!-- 플랫폼 -->
+                                        <span class="plat-name" data-platform-id="1"
+                                            style="background-color: rgb(3, 199, 90); color:rgb(0, 0, 0)">네이버시리즈</span>
+                                        <!-- 연재주기 or 연재상태 -->
+                                        <span class="pu-cycle">매월 10일</span>
+                                    </div>
+                                </div>
+
+                                <div class="right2-2">
+                                    <!-- 진행도 -->
+                                    <div class="read-percent">180%</div>
+                                </div>
+                            </div> <!-- // end right-2 -->
+
+                            <!-- 해시태그 -->
+                            <div class="right-3">
+                                <div class="tag-one-line">#세븐틴 #13명 #1004</div>
+                            </div> <!-- // end right-3 -->
+                        </div> <!-- // end item-right -->
+                    </div> <!-- // end item-wrap -->
+                    
 
 
-        </div> <!-- // end  inner-section-->
-    </section> <!-- // end list-section -->
+                </div> <!-- // end  inner-section-->
+            </section> <!-- // end list-section -->
+        </div>
+    </div> <!-- end wrap -->
 
-</div> <!-- end wrap -->
 
+    <script src="/main/resources/static/js/post-list.js"></script>
+    <script>
+        let oneLineTag;
+        // 별 특수문자 채우는 함수
+        function drawStarsAtList() {
+            const $stars = document.querySelectorAll('.star-rate');
+            //    console.log($stars);
 
-<script src="/main/resources/static/js/post-list.js"></script>
-<script>
+            for (let i = 0; i < $stars.length; i++) {
+                const num = $stars[i].dataset.starRate;
+                //    console.log(num);
+                let msg = '';
+                for (let j = 0; j < num; j++) {
+                    msg += '⭐';
+                }
+                $stars[i].textContent = msg;
+            }
+
+        }
+
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
@@ -167,15 +192,9 @@
 
 
 
-
-
-
-
-
         });
         // end jQuery
-
-</script>
+    </script>
 
 
 </body>

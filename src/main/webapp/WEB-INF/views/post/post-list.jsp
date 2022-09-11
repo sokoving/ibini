@@ -94,80 +94,65 @@
                             <div class="item-left">
                                 <div class="thumb-box">
                                     <c:if test="${p.thumbImg != null}">
-                                        <img class="post-img"
-                                        src="/loadFile?fileName=${p.thumbImg}"
-                                        alt="포스트 썸네일">
+                                        <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="포스트 썸네일">
                                     </c:if>
                                 </div>
-
                                 <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
                             </div> <%-- // end item-left --%>
 
-                            <%-- center : 상세정보 --%>
-                            <div class="item-center">
-                                <div class="center-top">
+                            <%-- right : 상세정보 --%>
+                            <div class="item-right">
+
+                                <%-- right-1 : 별점, 장르 --%>
+                                <div class="right-1">
                                     <%-- 별점 --%>
                                     <div class="star-rate" data-star-rate=${p.starRate}></div>
-                                    <%-- 제목 --%>
-                                    <div class="post-title">
-                                        <a href="/post/detail/${p.postNo}">
-                                            <h3>${p.postTitle}</h3>
-                                        </a>
+                                    <%-- 장르 --%>
+                                    <div class="genre-name" data-genre-id="${p.genreId}">${p.genreName}</div>
+                                </div> <%-- // end right-1 --%>
+
+                                <%-- right-2 : 제목, 작가 --%>
+                                <div class="right-2">
+                                    <div class="right2-1">
+                                        <%-- 작가 --%>
+                                        <div class="post-writer">${p.postWriter}</div>
+                                        <%-- 제목 --%>
+                                        <div class="post-title">
+                                            <a href="/post/detail/${p.postNo}">
+                                                <h3>${p.postTitle}</h3>
+                                            </a>
+                                        </div>
+                                        <div class="pl-pu-wrap">
+                                            <%-- 플랫폼 --%>
+                                            <span class="plat-name" data-platform-id="${p.platformId}"
+                                                style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">
+                                                ${p.platformName}
+                                            </span>
+                                            <%-- 연재주기 or 연재상태 --%>
+                                            <span class="pu-cycle">
+                                                <c:choose>
+                                                    <c:when test="${empty p.publishCycle}">${p.publishStatusName}
+                                                    </c:when>
+                                                    <c:otherwise>${p.publishCycle}</c:otherwise>
+                                                </c:choose>
+                                            </span>
+                                        </div> <%-- // end pl-pu-wrap --%>
                                     </div>
-                                    <%-- 작가 --%>
-                                    <div class="post-writer">${p.postWriter}</div>
-                                </div>
 
-                                <div class="pl-pu-warp">
-                                    <%-- 플랫폼 --%>
-                                    <c:set var="bg" value="${p.platformBgColor}" />
-                                    <c:set var="color" value="${p.platformFontColor}" />
-                                    <span class="plat-name hover"
-                                        style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">${p.platformName}</span>
-
-                                    <c:choose>
-                                        <c:when test="${p.publishStatus <= 1}">
-                                            <c:choose>
-                                                <c:when test="${empty p.publishCycle}">
-                                                    <td class="last-td">${p.publishStatusName}</td>
-                                                </c:when>
-
-                                                <c:otherwise>
-                                                    <td class="last-td">${p.publishCycle}</td>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td class="last-td">${p.publishStatusName}</td>
-                                        </c:otherwise>
-                                    </c:choose>
-
-                                </div> <%-- // end pl-pu-wrap --%>
+                                    <div class="right2-2">
+                                        <%-- 진행도 --%>
+                                        <div class="read-percent">
+                                            <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
+                                                integerOnly="true" />
+                                            ${percent}%
+                                        </div>
+                                    </div>
+                                </div> <%-- // end right-2 --%>
 
                                 <%-- 해시태그 --%>
-                                <div class="tag-one-line">${p.oneLineTag}</div>
-                            </div> <%-- // end item-center --%>
-
-                            <%-- right : 분류, 진행도, 날짜 --%>
-                            <div class="item-right">
-                                <div class="ca-ge-wrap">
-                                    <%-- 카테고리 --%>
-                                    <div class="ca-name">${p.caName}</div>
-                                    <%-- 장르 --%>
-                                    <div class="genre-name">${p.genreName}</div>
-                                </div>
-                                <%-- 진행도 --%>
-                                <div class="read-percent">
-                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
-                                        integerOnly="true" />
-                                    ${percent}%
-                                </div>
-                                <div class="date-wrap">
-                                    <%-- 포스트 수정일 --%>
-                                    <div class="post-reg-date">갱신 ${p.shortDate.postUpdateDate}</div>
-                                    <%-- 포스트 등록일 --%>
-                                    <div class="post-reg-date">작성 ${p.shortDate.postRegDate}</div>
-                                </div>
+                                <div class="right-3">
+                                    <div class="tag-one-line">${p.oneLineTag}</div>
+                                </div> <%-- // end right-3 --%>
                             </div> <%-- // end item-right --%>
                         </div> <%-- // end item-wrap --%>
                     </c:forEach>
@@ -183,7 +168,6 @@
 
 
     <script>
-
         let oneLineTag;
         // 별 특수문자 채우는 함수
         function drawStarsAtList() {
