@@ -118,7 +118,8 @@ public class MyPageNoteController {
         return "postnote/mypage-memo";
     }
 
-    // kjh
+
+    // kjy
     @GetMapping("/memolist2")
     @ResponseBody
     public List<MyPageMemo.Memo> viewPostWithMemoList2(@RequestParam(value="postNo") Long postNo) {
