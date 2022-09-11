@@ -23,7 +23,7 @@
     #wrap {
         /* background: rgb(78, 135, 182); */
         display: flex;
-        width: 80%;
+        width: 1000px;
         margin:  0 auto;
         font-family: 'NanumSquareRound';
     }

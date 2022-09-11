@@ -48,11 +48,12 @@
 </head>
 
 <body>
-
+<div class="include-Header">
+    <!-- header -->
+    <%@ include file="../include/change-header.jsp" %>
 
     <div id="wrap">
 
-        <%@ include file="../include/header.jsp" %>
 
         <div id="content-wrap">
             <!-- 새 포스트 등록 섹션 -->
@@ -183,7 +184,7 @@
         </div>
 
     </div> <!-- end wrap -->
-
+</div>
 
 
     <script>

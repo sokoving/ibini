@@ -57,9 +57,10 @@
 
 <body>
 
-    <div id="wrap">
+<!-- header -->
+<%@ include file="../include/change-header.jsp" %>
 
-        <%@ include file="../include/header.jsp" %>
+    <div id="wrap">
 
 
         <!-- 새 포스트 등록 섹션 -->

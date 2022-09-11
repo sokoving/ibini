@@ -127,7 +127,9 @@
 
 <body>
   <div id="wrap">
-    <%@ include file="../include/header.jsp" %>
+    <!-- header -->
+    <%@ include file="../include/change-header.jsp" %>
+
 
     <section id="main-section">
       <img class="wave" src="/img/signin-1.png">
