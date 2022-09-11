@@ -16,13 +16,13 @@
     <insert id="savePlatform">
         INSERT INTO prj_platform
             (
-                platform_id, account, platform_name
+                 account, platform_name
                 <if test="platformBgColor != null"> ,platform_bg_color </if>
                 <if test="platformFontColor != null"> ,platform_font_color </if>
             )
         VALUES
             (
-                seq_prj_platform.nextval, #{account}, #{platformName}
+                 #{account}, #{platformName}
               <if test="platformBgColor != null"> ,#{platformBgColor} </if>
               <if test="platformFontColor != null"> ,#{platformFontColor} </if>
              )

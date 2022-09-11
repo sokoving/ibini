@@ -12,9 +12,9 @@
 
     <insert id="save">
         insert into prj_genre
-        (genre_id, account, genre_name)
+        ( account, genre_name)
         VALUES
-        (seq_prj_genre.nextval, #{account}, #{genreName})
+        ( #{account}, #{genreName})
     </insert>
 
 <!--    <insert id="save">-->
