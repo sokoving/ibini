@@ -24,18 +24,16 @@ import java.util.List;
 @Controller
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/mypostnote")
+@RequestMapping("/myPage")
 public class MyPageNoteController {
 
     private final PostMarkService postMarkService;
     private final PostMemoService postMemoService;
-    private final PostService postService;
-
 
     // 마이페이지 post, postMark 게시물 목록 요청
     @GetMapping("/marklist")
     public String viewPostWithMarkList(Model model, HttpSession session, @ModelAttribute("search") Search search) {
-        log.info("/mypostnote/list GET!");
+        log.info("/myPage/marklist GET!");
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         List<MyPagePostDTO> postList = postMarkService.findAllPostWithImg(account, search);
 
@@ -69,7 +67,6 @@ public class MyPageNoteController {
             myPageMarkList.add(myPageMark);
             }
         }
-
         log.info(myPageMarkList);
 
         model.addAttribute("myPageMarkList", myPageMarkList);
@@ -79,7 +76,7 @@ public class MyPageNoteController {
     // 마이페이지 post, postMemo 게시물 목록 요청
     @GetMapping("/memolist")
     public String viewPostWithMemoList(Model model, HttpSession session, @ModelAttribute("search") Search search) {
-        log.info("/mypostnote/memolist GET!");
+        log.info("/myPage/memolist GET!");
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         List<MyPagePostDTO> postList = postMarkService.findAllPostWithImg(account, search);
 
@@ -111,44 +108,19 @@ public class MyPageNoteController {
                 myPageMemoList.add(myPageMemo);
             }
         }
-
         log.info(myPageMemoList);
 
         model.addAttribute("myPageMemoList", myPageMemoList);
         return "postnote/mypage-memo";
     }
 
-
-    // kjy
-    @GetMapping("/memolist2")
-    @ResponseBody
-    public List<MyPageMemo.Memo> viewPostWithMemoList2(@RequestParam(value="postNo") Long postNo, Search search) {
-        log.info("/mypostnote/memolist2 GET!");
-
-        List<PostMemo> memoList = postMemoService.findAllWithSearch2(postNo, search);
-
-        List<MyPageMemo.Memo> memoDataList = new ArrayList<>();
-
-        if (memoList.size() != 0) {
-            for (PostMemo memo : memoList) {
-                MyPageMemo.Memo memoObject = new MyPageMemo.Memo();
-                memoObject.setMemoNo(memo.getMemoNo());
-                memoObject.setContent(memo.getContent());
-                memoObject.setModDatetime(memo.getPrettierDate());
-
-                memoDataList.add(memoObject);
-            }
-        }
-
-        return memoDataList;
-    }
-
-    @GetMapping("/marklist2")
+    // Mark 더보기 비동기
+    @GetMapping("/plus/marklist")
     @ResponseBody
     public List<MyPageMark.Mark> viewPostWithMarkList2(@RequestParam(value="postNo") Long postNo, Search search) {
-        log.info("/mypostnote/marklist2 GET!");
+        log.info("/myPage/plus/marklist GET!");
 
-        List<PostMark> markList = postMarkService.findAllWithSearch2(postNo, search);
+        List<PostMark> markList = postMarkService.findAllWithSearchExcept2Rows(postNo, search);
 
         List<MyPageMark.Mark> markDataList = new ArrayList<>();
 
@@ -163,7 +135,29 @@ public class MyPageNoteController {
                 markDataList.add(markObject);
             }
         }
-
         return markDataList;
+    }
+
+    // Memo 더보기 비동기
+    @GetMapping("/plus/memolist")
+    @ResponseBody
+    public List<MyPageMemo.Memo> viewPostWithMemoList2(@RequestParam(value="postNo") Long postNo, Search search) {
+        log.info("/myPage/plus/memolist GET!");
+
+        List<PostMemo> memoList = postMemoService.findAllWithSearchExcept2Rows(postNo, search);
+
+        List<MyPageMemo.Memo> memoDataList = new ArrayList<>();
+
+        if (memoList.size() != 0) {
+            for (PostMemo memo : memoList) {
+                MyPageMemo.Memo memoObject = new MyPageMemo.Memo();
+                memoObject.setMemoNo(memo.getMemoNo());
+                memoObject.setContent(memo.getContent());
+                memoObject.setModDatetime(memo.getPrettierDate());
+
+                memoDataList.add(memoObject);
+            }
+        }
+        return memoDataList;
     }
 }
