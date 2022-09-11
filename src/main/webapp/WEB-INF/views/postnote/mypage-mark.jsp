@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Page</title>
+    <%@ include file="../include/static-head.jsp" %>
+
 
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
@@ -33,6 +35,7 @@
 <body>
     <!-- 최상단 wrap 영역 -->
     <div id="wrap">
+        <%@ include file="../include/header.jsp" %>
         <section class="noselect">
             <div class="header-wrapper">
 
