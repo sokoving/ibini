@@ -294,7 +294,6 @@ section {
 }
 .book-wrapper .book-info .my-text .episode-no span {
     padding: 0.55rem 0.8rem;
-    background: #c59c9c;
     border-radius: 20px;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking.type1::after {
