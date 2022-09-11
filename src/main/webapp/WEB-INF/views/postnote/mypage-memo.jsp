@@ -196,8 +196,14 @@
         function findMemoList($eventTag) {
 
             let postNo = $($eventTag).closest('.content').attr('id');
+            let keyword = '';
+            const $keyword = $("#searchText").val();
 
-            fetch('/mypostnote/memolist2/?postNo=' + postNo)
+            if ($("#search-option option:selected").val() == 'content') {
+                keyword = '&type=content' + '&keyword=' + $keyword;
+            } 
+
+            fetch('/mypostnote/memolist2/?postNo=' + postNo + keyword)
                 .then(response => response.json())
                 .then(memoList => {
 

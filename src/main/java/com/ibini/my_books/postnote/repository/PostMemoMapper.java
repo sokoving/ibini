@@ -30,7 +30,7 @@ public interface PostMemoMapper {
     List<PostMemo> findAllWithSearch(@Param("postNo") Long postNo, @Param("search") Search search);
 
     // 메모 전체 조회 기능 Except 2 rows
-    List<PostMemo> findAllWithSearch2(@Param("postNo") Long postNo);
+    List<PostMemo> findAllWithSearch2(@Param("postNo") Long postNo,  @Param("search") Search search);
 
     // 메모 개별 조회 기능
     PostMemo findOne(Long memoNo);

@@ -72,8 +72,8 @@ public class PostMemoService {
     }
 
     // 메모 전체 조회 Except 2 rows
-    public List<PostMemo> findAllWithSearch2(Long postNo) {
-        List<PostMemo> memoList = postMemoMapper.findAllWithSearch2(postNo);
+    public List<PostMemo> findAllWithSearch2(Long postNo, Search search) {
+        List<PostMemo> memoList = postMemoMapper.findAllWithSearch2(postNo, search);
 
         convertDateFormat(memoList);
 

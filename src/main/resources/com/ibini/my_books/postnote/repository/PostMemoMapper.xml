@@ -87,6 +87,7 @@
                 FROM prj_post_memo
                 WHERE 1=1
                 AND post_no = #{postNo}
+                <if test="search.type == 'content'">AND content LIKE CONCAT('%', #{search.keyword}, '%')</if>
                 ORDER BY mod_datetime DESC LIMIT 9999999999
             ) AS PM, (select @rownum := 0) AS R
         ) AS PPM
