@@ -123,12 +123,12 @@
 
     <script>
         // 마크 요청 URL
-        const markURL = '/post/detail/test/mark';
+        const markURL = '/postnote/mark';
         // const episodeNo = 1;
         const account = '2209050001';
         
         // 메모 요청 URL
-        const memoURL = '/post/detail/test/memo';
+        const memoURL = '/postnote/memo';
         const postNo = 3;
 
         /*======================================================================
