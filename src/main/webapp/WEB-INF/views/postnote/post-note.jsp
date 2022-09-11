@@ -129,7 +129,7 @@
         
         // 메모 요청 URL
         const memoURL = '/post/detail/test/memo';
-        const postNo = 1; 
+        const postNo = 3;
 
         /*======================================================================
             이벤트 영역
@@ -503,7 +503,7 @@
                 .then(memoMap => {
                     makeMemoDOM(memoMap);
                     resize_textarea();
-                })    
+                })
         }
 
         // 메모 내용 입력하기
@@ -651,7 +651,7 @@
                     return 'marking-type2 noselect';
                 case 2:
                     return 'marking-type3 noselect';
-                case 4: 
+                case 3:
                     return 'marking-type4 noselect'
                 default : return 'marking-type1 noselect';
             }

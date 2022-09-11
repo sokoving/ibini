@@ -78,7 +78,7 @@
                     </c:if>
                    
                     <c:forEach var="p" items="${myPageMemoList}">
-                        <div class="content">
+                        <div class="content" id="${p.postNo}">
                             <div class="book-wrapper flex-fs">
                                 <!-- 책 이미지 -->
                                 <c:choose>
@@ -101,22 +101,26 @@
                                     <div class="book-title">
                                         <span>${p.postTitle}</span>
                                     </div>
-                                    <!-- MEMO 내용 -->
-                                    <c:forEach var="m" items="${p.memoList}" end="1">
-                                        <div id="memo-info" class="my-text">
-                                            <textarea class="w100" spellcheck="false" readonly>${m.content}</textarea>
-                                            <!-- MEMO 날짜 -->
-                                            <div class="meta-data">
-                                                <span>${m.modDatetime}</span>
-                                            </div>
-                                            <hr>
-                                        </div> <!-- end my-text -->
-                                    </c:forEach>    
-                                    <c:if test="${p.memoList.size() > 2}">
-                                        <div class="view-more">
-                                            <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
+                                    <div class="memo-wrapper">
+                                        <!-- MEMO 내용 -->
+                                        <div class="memo-list">
+                                            <c:forEach var="m" items="${p.memoList}" end="1">
+                                                <div id="${m.memoNo}" class="my-text">
+                                                    <textarea class="w100" spellcheck="false" readonly>${m.content}</textarea>
+                                                    <!-- MEMO 날짜 -->
+                                                    <div class="meta-data">
+                                                        <span>${m.modDatetime}</span>
+                                                    </div>
+                                                    <hr>
+                                                </div> <!-- end my-text -->
+                                            </c:forEach>    
                                         </div>
-                                    </c:if>
+                                        <c:if test="${p.memoList.size() > 2}">
+                                            <div class="view-more">
+                                                <a class="noselect" onclick="click_viewMore(this)">... 더보기</a>
+                                            </div>
+                                        </c:if>
+                                    </div>
                                 </div> <!-- end book-info -->
                             </div> <!-- end book-wrapper -->
                         </div> <!-- end content -->
@@ -145,7 +149,10 @@
         function click_viewMore($eventTag) {
             // fetch() 사용하여 팝업페이지 호출 및 책/회차 등의 변수값 전달
             // 지금은 샘플html이니 redirect 처리를 하도록 한다.
-            window.location.href = './detail/detail.html';
+            //window.location.href = './detail/detail.html';
+
+            findMemoList($eventTag);
+            $($eventTag).closest('.view-more').css('display', 'none');
         }
         
         function enterkey() {
@@ -185,6 +192,37 @@
         /*======================================================================
             함수 영역
         ========================================================================*/
+        // 메모 목록 가져오기
+        function findMemoList($eventTag) {
+
+            let postNo = $($eventTag).closest('.content').attr('id');
+
+            fetch('/mypostnote/memolist2/?postNo=' + postNo)
+                .then(response => response.json())
+                .then(memoList => {
+
+                    let memoInfoList = '';
+                    for( memo of memoList) {
+                        memoInfoList += makeTag_memoInfo(memo);
+                    }
+                    $($eventTag).parent().siblings('.memo-list').append(memoInfoList);
+                    resize_textarea();
+                });
+        }
+
+        // 메모 내용 만들기
+        function makeTag_memoInfo(data) {
+            let context = '';
+            context += '<div id="' + data.memoNo + '" class="my-text">';
+            context += '    <textarea class="w100" spellcheck="false" readonly>' + data.content + '</textarea>';
+            context += '    <div class="meta-data">';
+            context += '	    <span>' + data.modDatetime + '</span>';
+            context += '	</div>';
+            context += '	<hr>';
+            context += '</div>';
+            return context;
+        }
+
         $(document).ready(function(){
 
         });

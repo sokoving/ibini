@@ -15,9 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -118,5 +116,29 @@ public class MyPageNoteController {
 
         model.addAttribute("myPageMemoList", myPageMemoList);
         return "postnote/mypage-memo";
+    }
+
+    // kjh
+    @GetMapping("/memolist2")
+    @ResponseBody
+    public List<MyPageMemo.Memo> viewPostWithMemoList2(@RequestParam(value="postNo") Long postNo) {
+        log.info("/mypostnote/memolist2 GET!");
+
+        List<PostMemo> memoList = postMemoService.findAllWithSearch2(postNo);
+
+        List<MyPageMemo.Memo> memoDataList = new ArrayList<>();
+
+        if (memoList.size() != 0) {
+            for (PostMemo memo : memoList) {
+                MyPageMemo.Memo memoObject = new MyPageMemo.Memo();
+                memoObject.setMemoNo(memo.getMemoNo());
+                memoObject.setContent(memo.getContent());
+                memoObject.setModDatetime(memo.getPrettierDate());
+
+                memoDataList.add(memoObject);
+            }
+        }
+
+        return memoDataList;
     }
 }

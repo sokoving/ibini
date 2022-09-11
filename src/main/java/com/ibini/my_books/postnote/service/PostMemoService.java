@@ -62,9 +62,18 @@ public class PostMemoService {
         return postMemoMapper.getPostMemoCount(postNo);
     }
 
-    // 마크 전체 조회 With Search
+    // 메모 전체 조회 With Search
     public List<PostMemo> findAllWithSearch(Long postNo, Search search) {
         List<PostMemo> memoList = postMemoMapper.findAllWithSearch(postNo, search);
+
+        convertDateFormat(memoList);
+
+        return memoList;
+    }
+
+    // 메모 전체 조회 Except 2 rows
+    public List<PostMemo> findAllWithSearch2(Long postNo) {
+        List<PostMemo> memoList = postMemoMapper.findAllWithSearch2(postNo);
 
         convertDateFormat(memoList);
 
