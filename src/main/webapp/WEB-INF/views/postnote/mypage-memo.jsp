@@ -147,17 +147,17 @@
 
             if ($("#search-option option:selected").val() == 'postTitle') {     
                 if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
+                    alert('검색어를 입력하세요.')
                     return;
                 }                       
-                location.href = '/mypostnote/memolist?type=postTitle' + '&keyword=' + $keyword;
+                location.href = '/myPage/memolist?type=postTitle' + '&keyword=' + $keyword;
 
             } else if ($("#search-option option:selected").val() == 'content') {     
                 if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
+                    alert('검색어를 입력하세요.')
                     return;
                 }                       
-                location.href = '/mypostnote/memolist?type=content' + '&keyword=' + $keyword;
+                location.href = '/myPage/memolist?type=content' + '&keyword=' + $keyword;
 
             }
         };
@@ -188,7 +188,7 @@
                 keyword = '&type=content' + '&keyword=' + $keyword;
             } 
 
-            fetch('/mypostnote/memolist2/?postNo=' + postNo + keyword)
+            fetch('/myPage/plus/memolist/?postNo=' + postNo + keyword)
                 .then(response => response.json())
                 .then(memoList => {
 

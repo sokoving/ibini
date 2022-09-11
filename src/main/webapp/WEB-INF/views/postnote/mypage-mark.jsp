@@ -162,29 +162,29 @@
 
             if ($("#search-option option:selected").val() == 'postTitle') {     
                 if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
-                    // location.href = '/mypostnote/marklist?type=postTitle&keyword=';
+                    alert('검색어를 입력하세요.')
+                    // location.href = '/myPage/marklist?type=postTitle&keyword=';
                     return;
                 }                       
-                location.href = '/mypostnote/marklist?type=postTitle' + '&keyword=' + $keyword;
+                location.href = '/myPage/marklist?type=postTitle' + '&keyword=' + $keyword;
 
             } else if ($("#search-option option:selected").val() == 'content') {     
                 if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
+                    alert('검색어를 입력하세요.')
                     return;
                 }                       
-                location.href = '/mypostnote/marklist?type=content' + '&keyword=' + $keyword;
+                location.href = '/myPage/marklist?type=content' + '&keyword=' + $keyword;
 
             } else if ($("#search-option option:selected").val() == 'episodeNo') {        
                 if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
+                    alert('검색어를 입력하세요.')
                     return;
                 } 
                 if (!$.isNumeric($keyword)) {
-                    alert('숫자만 입력하세요');
+                    alert('숫자만 입력하세요.');
                     return;
                 }   
-                location.href = '/mypostnote/marklist?type=episodeNo' + '&keyword=' + $keyword;
+                location.href = '/myPage/marklist?type=episodeNo' + '&keyword=' + $keyword;
             } 
         };
 
@@ -216,7 +216,7 @@
                 keyword = '&type=content' + '&keyword=' + $keyword;
             } 
 
-            fetch('/mypostnote/marklist2/?postNo=' + postNo + keyword)
+            fetch('/myPage/plus/marklist/?postNo=' + postNo + keyword)
                 .then(response => response.json())
                 .then(markList => {
 
