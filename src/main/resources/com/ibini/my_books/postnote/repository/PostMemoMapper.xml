@@ -24,7 +24,7 @@
     <update id="modify">
         UPDATE prj_post_memo
         SET content = #{content},
-        mod_datetime = current_timestamp
+            mod_datetime = current_timestamp
         WHERE memo_no = #{memoNo}
     </update>
 
@@ -52,7 +52,7 @@
     <!-- 메모 개별 조회 기능 -->
     <select id="findOne" resultMap="memoMap">
         SELECT
-        *
+            post_no, memo_no, content, account, reg_datetime, mod_datetime
         FROM prj_post_memo
         WHERE memo_no = #{memoNo}
     </select>
@@ -76,14 +76,14 @@
     </select>
 
     <!-- 메모 전체 조회 기능 With Search -->
-    <select id="findAllWithSearch2" resultMap="memoMap">
+    <select id="findAllWithSearchExcept2Rows" resultMap="memoMap">
         SELECT *
         FROM (
             SELECT PM.*, @rownum := @rownum + 1 AS RNUM
             FROM
             (
                 SELECT
-                post_no, memo_no, content, account, reg_datetime, mod_datetime
+                    post_no, memo_no, content, account, reg_datetime, mod_datetime
                 FROM prj_post_memo
                 WHERE 1=1
                 AND post_no = #{postNo}

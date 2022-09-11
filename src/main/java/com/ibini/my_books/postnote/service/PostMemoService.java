@@ -41,11 +41,11 @@ public class PostMemoService {
 
     // 메모 전체 조회 요청 중간 처리
     public Map<String, Object> findAll(Long postNo) {
-
         Map<String, Object> memoMap = new HashMap<>();
+
         List<PostMemo> memoList = postMemoMapper.findAll(postNo);
         convertDateFormat(memoList);
-//        memoMap.put("memoList", postMemoMapper.findAll(postNo));
+
         memoMap.put("memoList", memoList);
         memoMap.put("memoCnt", postMemoMapper.getPostMemoCount(postNo));
 
@@ -65,20 +65,20 @@ public class PostMemoService {
     // 메모 전체 조회 With Search
     public List<PostMemo> findAllWithSearch(Long postNo, Search search) {
         List<PostMemo> memoList = postMemoMapper.findAllWithSearch(postNo, search);
-
         convertDateFormat(memoList);
 
         return memoList;
     }
 
     // 메모 전체 조회 Except 2 rows
-    public List<PostMemo> findAllWithSearch2(Long postNo, Search search) {
-        List<PostMemo> memoList = postMemoMapper.findAllWithSearch2(postNo, search);
-
+    public List<PostMemo> findAllWithSearchExcept2Rows(Long postNo, Search search) {
+        List<PostMemo> memoList = postMemoMapper.findAllWithSearchExcept2Rows(postNo, search);
         convertDateFormat(memoList);
 
         return memoList;
     }
+
+    // 날짜 포맷팅
     private void convertDateFormat(List<PostMemo> postMemo) {
         for (PostMemo m : postMemo) {
             Date date = m.getModDatetime();
