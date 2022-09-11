@@ -158,15 +158,16 @@ section {
 
 /* 검색 버튼 */
 .search-wrapper .search-button {
-    border: 1px solid #495057;
+    /* border: 1px solid #495057; */
     border-radius: 0.25rem;
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1rem;
 
     font-size: 16px;
-    background: #f5f9fc;;
+    font-weight: 600;
+    background: #ffca3d;;
 }
 .search-wrapper .search-button:hover {
-    background: #e9ecef;;
+    background: #f9b708;;
 }
 
 
@@ -200,7 +201,7 @@ section {
     overflow-y: auto;
     overflow-x: hidden;
 
-    background: #faf6f7;
+    background: #faf9f6;
 }
 
 /* 스크롤바 디자인 */
@@ -272,9 +273,9 @@ section {
     padding-bottom: 1rem;
     border-bottom: 5px double #6c757d;
 }
-.book-wrapper .book-info .book-title span {
-    background: rgb(250, 207, 211);
-    border-radius: 0.6rem;
+.book-wrapper .book-info .book-title a {
+    background: #B2C8DF;
+    border-radius: 1rem;
     padding: 0.7rem;
 }
 
@@ -312,22 +313,26 @@ section {
     content: '%';
     margin-left: 0.1rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking.type1 {
+.book-wrapper .book-info .my-text .episode-no span.marking {
     color: white;
-    background-color: rgb(191, 142, 142);
+    background-color: #22577E;
+}
+/* .book-wrapper .book-info .my-text .episode-no span.marking.type1 {
+    color: white;
+    background-color: #95bfd1;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking.type2 {
     color: white;
-    background-color: blue;
+    background-color: #5584AC;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking.type3 {
     color: white;
-    background-color: green;
+    background-color: #22577E;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking.type4 {
     color: white;
-    background-color: rgb(117, 63, 96);
-}
+    background-color: #133b58;
+} */
 
 /* MARK content */
 .book-wrapper .book-info .my-text textarea {
@@ -357,5 +362,25 @@ section {
     display: flex;
     flex-direction: row-reverse;
 }
+.book-wrapper .book-info .view-more a {
+    background: #ffe6a2;
+    border-radius: 0.3rem;
+    padding: 7px 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+.book-wrapper .book-info .view-more a:hover {
+    background: #ffca3d;
+}
 
-
+/* 검색 결과값이 없을 때 화면 */
+.content-wrapper ul.blank-page {
+    margin: 2rem;
+}
+.content-wrapper ul.blank-page li:first-child {
+    margin-bottom: 1rem;
+}
+.content-wrapper ul.blank-page strong {
+    color: red;
+    font-size: 1.3em;
+}

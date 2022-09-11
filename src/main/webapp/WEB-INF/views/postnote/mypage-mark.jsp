@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Page</title>
+    
     <%@ include file="../include/static-head.jsp" %>
-
 
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
@@ -19,9 +19,7 @@
 
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- bootstrap js -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script> -->
-
+   
     <!-- jQuery 기본 js파일 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
@@ -72,8 +70,8 @@
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
                     <c:if test="${empty myPageMarkList}">
-                        <ul class="blank-page" style="margin: 2rem;">
-                            <li style="margin-bottom: 1rem;"><strong style="color: red; font-size: 1.3em;">'${search.keyword}'</strong>에 대한 검색결과가 없습니다.</li>
+                        <ul class="blank-page">
+                            <li><strong>'${search.keyword}'</strong>에 대한 검색결과가 없습니다.</li>
                             <li>* 입력하신 값이 정확한지 확인해 보세요.</li>
                             <li>* 검색 옵션을 변경해서 다시 검색해 보세요.</li>
                         </ul>
@@ -97,7 +95,7 @@
                                 <div class="book-info w70">
                                     <!-- 책 제목 -->
                                     <div class="book-title">
-                                        <span>${p.postTitle}</span>
+                                        <a href="/post/detail/${p.postNo}" title="상세보기">${p.postTitle}</a>
                                     </div>
                                     <div class="mark-wrapper">
                                         <!-- MARK 내용 -->
@@ -131,7 +129,7 @@
                                         </div>    
                                         <c:if test="${p.markList.size() > 2}">
                                             <div class="view-more">
-                                                <a class="noselect" onclick="click_viewMore(this)">... 더보기</a>
+                                                <a class="noselect" onclick="click_viewMore(this)">더보기</a>
                                             </div>
                                         </c:if>
                                     </div>
