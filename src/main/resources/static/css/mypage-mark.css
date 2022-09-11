@@ -296,35 +296,35 @@ section {
     background: #c59c9c;
     border-radius: 20px;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type1::after {
+.book-wrapper .book-info .my-text .episode-no span.marking.type1::after {
     content: '화';
     margin-left: 0.1rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type2::before {
+.book-wrapper .book-info .my-text .episode-no span.marking.type2::before {
     content: 'p';
     margin-right: 0.1rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type3::after {
+.book-wrapper .book-info .my-text .episode-no span.marking.type3::after {
     content: '권';
     margin-left: 0.1rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type4::after {
+.book-wrapper .book-info .my-text .episode-no span.marking.type4::after {
     content: '%';
     margin-left: 0.1rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type1 {
+.book-wrapper .book-info .my-text .episode-no span.marking.type1 {
     color: white;
     background-color: rgb(191, 142, 142);
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type2 {
+.book-wrapper .book-info .my-text .episode-no span.marking.type2 {
     color: white;
     background-color: blue;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type3 {
+.book-wrapper .book-info .my-text .episode-no span.marking.type3 {
     color: white;
     background-color: green;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type4 {
+.book-wrapper .book-info .my-text .episode-no span.marking.type4 {
     color: white;
     background-color: rgb(117, 63, 96);
 }
