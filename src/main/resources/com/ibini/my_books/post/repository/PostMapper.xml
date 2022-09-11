@@ -82,9 +82,8 @@
         p.post_title, p.post_writer, p.publish_status, p.publish_cycle,
         p.ep_id, p.cur_ep, p.total_ep, p.reg_date, p.update_date, p.star_rate
         ,pi.file_name ,pi.ORIGINAL_FILE_NAME
-        FROM (
-        select * from tbl_post WHERE account = #{account}
-        )p
+
+        FROM (select * from tbl_post WHERE account = #{account})p
 
         LEFT OUTER JOIN prj_genre g
         ON p.genre_id = g.genre_id
@@ -94,6 +93,7 @@
 
         LEFT OUTER JOIN prj_post_img pi
         ON p.post_no= pi.post_no
+
         where pi.thumbnail = 'true'
         or pi.thumbnail is null
         ORDER BY p.post_no desc
@@ -169,23 +169,32 @@
         <if test="sGenre != null">and p.genre_id = #{sGenre}</if>
         <if test="sPlatform != null">and p.platform_id = #{sPlatform}</if>
         <if test="sPublishStatus != null">and p.publish_status = #{sPublishStatus}</if>
+        <if test="sStarRate != null">and p.star_rate = #{sStarRate}</if>
+
     </sql>
 
     <select id="searchAllPostWithName" resultMap="postWithNameMap">
-
         SELECT
-        p.post_no, p.post_title , p.post_writer
-        , p.genre_id, g.genre_name
-        , p.platform_id, pf.platform_name, pf.platform_bg_color, pf.platform_font_color
-        , p.publish_status , p.publish_cycle
-        , p.cur_ep , p.total_ep,  p.update_date
-        FROM ibini.tbl_post p
-        left outer join ibini.prj_genre g
+        p.post_no, p.account, p.genre_id, g.genre_name,
+        p.ca_id, p.platform_id, pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
+        p.post_title, p.post_writer, p.publish_status, p.publish_cycle,
+        p.ep_id, p.cur_ep, p.total_ep, p.reg_date, p.update_date, p.star_rate
+        ,pi.file_name ,pi.ORIGINAL_FILE_NAME
+
+        FROM  (select * from tbl_post WHERE account = #{account})p
+
+        LEFT OUTER JOIN ibini.prj_genre g
         on p.genre_id = g.genre_id
-        left outer join ibini.prj_platform pf
+
+        LEFT OUTER JOIN ibini.prj_platform pf
         on p.platform_id = pf.platform_id
-        where p.account = #{account}
+
+        LEFT OUTER JOIN prj_post_img pi
+        ON p.post_no= pi.post_no
+
+        where (pi.thumbnail = 'true' or pi.thumbnail is null)
         <include refid="search"/>
+
         order by post_no desc
 <!--        limit #{start}, #{amount}-->
     </select>

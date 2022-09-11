@@ -127,14 +127,16 @@ class PostMapperTest {
     void findAllWithSearch(){
         SearchPost sp = new SearchPost();
         sp.setAccount("2209080001");
-        sp.setSTitle("세븐틴");
+//        sp.setSTitle("세븐틴");
+        sp.setSStarRate(1);
+//        sp.setSGenre(4);
 //        sp.setPageNum(2);
 //        sp.setAmount(10);
         System.out.println("sp = " + sp);
 
         List<PostWithName> sList = mapper.searchAllPostWithName(sp);
         for (PostWithName s : sList) {
-            s.pubSetting();
+            s.setting();
             System.out.println(s);
         }
     }

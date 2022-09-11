@@ -106,30 +106,31 @@
                                 <%-- right-1 : 별점, 장르 --%>
                                 <div class="right-1">
                                     <%-- 별점 --%>
-                                    <div class="star-rate" data-star-rate=${p.starRate}></div>
+                                    <div class="star-rate" data-type="sStarRate" data-key="${p.starRate}"></div>
                                     <%-- 장르 --%>
-                                    <div class="genre-name" data-genre-id="${p.genreId}">${p.genreName}</div>
+                                    <div class="genre-name" data-type="sGenre" data-key="${p.genreId}">${p.genreName}
+                                    </div>
                                 </div> <%-- // end right-1 --%>
 
                                 <%-- right-2 : 제목, 작가 --%>
                                 <div class="right-2">
                                     <div class="right2-1">
                                         <%-- 작가 --%>
-                                        <div class="post-writer">${p.postWriter}</div>
+                                        <div class="post-writer" data-type="sWriter" data-key="${p.postWriter}">
+                                            ${p.postWriter}</div>
                                         <%-- 제목 --%>
                                         <div class="post-title">
-                                            <a href="/post/detail/${p.postNo}">
-                                                <h3>${p.postTitle}</h3>
-                                            </a>
+                                            <h3 data-key="${p.postNo}">${p.postTitle}</h3>
                                         </div>
                                         <div class="pl-pu-wrap">
                                             <%-- 플랫폼 --%>
-                                            <span class="plat-name" data-platform-id="${p.platformId}"
+                                            <span class="plat-name" data-type="sPlatform" data-key="${p.platformId}"
                                                 style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">
                                                 ${p.platformName}
                                             </span>
                                             <%-- 연재주기 or 연재상태 --%>
-                                            <span class="pu-cycle">
+                                            <span class="pu-cycle" data-type="sPublishStatus"
+                                                data-key="${p.publishStatus}">
                                                 <c:choose>
                                                     <c:when test="${empty p.publishCycle}">${p.publishStatusName}
                                                     </c:when>
@@ -141,7 +142,8 @@
 
                                     <div class="right2-2">
                                         <%-- 진행도 --%>
-                                        <div class="read-percent">
+                                        <div class="read-percent" data-cur="${p.curEp}" data-total="${p.totalEp}"
+                                            data-name="${p.epName2}">
                                             <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
                                                 integerOnly="true" />
                                             ${percent}%
@@ -151,7 +153,14 @@
 
                                 <%-- 해시태그 --%>
                                 <div class="right-3">
-                                    <div class="tag-one-line">${p.oneLineTag}</div>
+                                    <div class="tag-one-line">
+                                        <c:choose>
+                                            <c:when test="${empty p.oneLineTag}">#등록된 해시태그가 없습니다.
+                                            </c:when>
+                                            <c:otherwise>${p.oneLineTag}</c:otherwise>
+                                        </c:choose>
+                                        
+                                    </div>
                                 </div> <%-- // end right-3 --%>
                             </div> <%-- // end item-right --%>
                         </div> <%-- // end item-wrap --%>
@@ -175,23 +184,61 @@
             //    console.log($stars);
 
             for (let i = 0; i < $stars.length; i++) {
-                const num = $stars[i].dataset.starRate;
-                //    console.log(num);
-                let msg = '';
-                for (let j = 0; j < num; j++) {
+                const num = $stars[i].dataset.key;
+                // console.log(num);
+                let msg = '⭐';
+                if (num === '0') {
+                    msg = '😎😎😎'
+                }
+                for (let j = 1; j < num; j++) {
                     msg += '⭐';
                 }
                 $stars[i].textContent = msg;
             }
-
         }
+
+
 
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
 
-            // 별점에 따른 별 찍기
+            // 별점에 따라 별 찍기
             drawStarsAtList();
+
+            // 포스트 클릭 이벤트
+            $('.inner-section').click(function (e) {
+                e.preventDefault();
+                // console.log(e.target);
+                const type = e.target.dataset.type;
+                const key = e.target.dataset.key;
+
+                // 선택한 노드에 data-type과 data-key 값이 모두 있다면 검색해서 재정렬
+                if (type != undefined && key != undefined) {
+                    const url = '/post/api/searchPost?' +
+                        type + '=' + key;
+                    // console.log("타입 : " + type);
+                    // console.log("키 : " + key);
+                    // console.log("URL : " + url);
+                    fetchAndMakeDom(url, makeSearchedList);
+                }
+            });
+
+            // 검색 요청 보낸 후 돔 만드는 함수 호출
+            function fetchAndMakeDom(url, makeFuntion) {
+                fetch(url)
+                    .then(res => res.json())
+                    .then(resList => {
+                        // console.log(resList);
+                        makeFuntion(resList);
+                    })
+            }
+
+            function makeSearchedList(list) {
+                console.log(list);
+            }
+
+
 
 
 

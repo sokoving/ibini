@@ -120,7 +120,7 @@ section#list-sec{
     border-radius: 0.25rem;
     border: 1px solid #ffc69987;
     background-color: #ffc69987;
-    height: 155px;
+    height: 165px;
     overflow: hidden;
     flex: 1;
 
@@ -162,10 +162,10 @@ section#list-sec{
 /* 별점 */
 .right-1 .star-rate{
     font-size: 1.15em;
+    text-shadow: 2px 2px 2px #555;
 }
 .right-1 .star-rate:hover{
-    transform: scale(1.03);
-    text-shadow: 2px 2px 2px #555;
+    transform: scale(1.05);
     transition: 0.2s;
 }
 /* 장르 */
