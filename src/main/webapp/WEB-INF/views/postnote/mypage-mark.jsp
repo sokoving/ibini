@@ -8,20 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Page</title>
-    
+
     <%@ include file="../include/static-head.jsp" %>
 
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
-    <!-- fontawesome css: https://fontawesome.com -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-   
-    <!-- jQuery 기본 js파일 -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
     <!-- naver font -->
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
@@ -79,7 +73,7 @@
                     <c:forEach var="p" items="${myPageMarkList}">
                         <div class="content" id="${p.postNo}">
                             <div class="book-wrapper flex-fs">
-                                <!-- 책 이미지 -->
+                                <%-- 책 이미지 --%>
                                 <c:choose>
                                     <c:when test="${p.thumbImg != null}">
                                         <div class="book-image w30 noselect">
@@ -91,14 +85,14 @@
                                     </c:otherwise>
                                 </c:choose>
                                 
-                                <!-- 책 정보 -->
+                                <%-- 책 정보 --%>
                                 <div class="book-info w70">
-                                    <!-- 책 제목 -->
+                                    <%-- 책 제목 --%>
                                     <div class="book-title">
                                         <a href="/post/detail/${p.postNo}" title="상세보기">${p.postTitle}</a>
                                     </div>
                                     <div class="mark-wrapper">
-                                        <!-- MARK 내용 -->
+                                        <%-- MARK 내용 --%>
                                         <div class="mark-list">
                                             <c:forEach var="m" items="${p.markList}" end="1">
                                                 <div id="${m.markNo}" class="my-text">
@@ -119,12 +113,12 @@
                                                         </c:choose>
                                                     </div>
                                                     <textarea class="w100" spellcheck="false" readonly >${m.content}</textarea>
-                                                    <!-- Mark 날짜 -->
+                                                    <%-- MARK 날짜 --%>
                                                     <div class="meta-data">
                                                         <span>${m.modDatetime}</span>
                                                     </div>
                                                     <hr>
-                                                </div> <!-- end my-text -->
+                                                </div> <%-- end my-text --%> 
                                             </c:forEach>
                                         </div>    
                                         <c:if test="${p.markList.size() > 2}">
@@ -133,11 +127,11 @@
                                             </div>
                                         </c:if>
                                     </div>
-                                </div> <!-- end book-info -->
-                            </div> <!-- end book-wrapper -->
-                        </div> <!-- end content -->
+                                </div> <%-- end book-info --%>
+                            </div> <%-- end book-wrapper --%>
+                        </div> <%-- end content --%>
                     </c:forEach>
-                </div> <!-- end content-wrapper name="mark" -->
+                </div> <%-- end content-wrapper name="mark" --%>
         </section>
     </div> <!-- end wrap -->
 
@@ -149,27 +143,13 @@
             const $textAreaList = [...document.querySelectorAll('.my-text textarea')];
 
             for ($textArea of $textAreaList) {
-                // console.log($textArea.value);
                 $textArea.style.height = "1px";
-                $textArea.style.height = (12 + $textArea.scrollHeight) + "px";
+                $textArea.style.height = (2 + $textArea.scrollHeight) + "px";
             }
         }
-
         resize_textarea();
-
-        // ... 더보기 클릭
-        function click_viewMore($eventTag) {
-
-            // const $postNo = $eventTag.parentElement.nextElementSibling.textContent;
-            // console.log($postNo);
-            // fetch() 사용하여 팝업페이지 호출 및 책/회차 등의 변수값 전달
-            // 지금은 샘플html이니 redirect 처리를 하도록 한다.
-            // location.href = '/test/page2/'+ $postNo;
-
-            findMarkList($eventTag);
-            $($eventTag).closest('.view-more').css('display', 'none');
-        }
         
+        // enter keyup Event
         function enterkey() {
             if (window.event.keyCode == 13) {
                 search();
@@ -214,6 +194,12 @@
             $('.blank li').text('');
         });
 
+        // ... 더보기 클릭 Event
+        function click_viewMore($eventTag) {
+            findMarkList($eventTag);
+            $($eventTag).closest('.view-more').css('display', 'none');
+        }
+
         /*======================================================================
             함수 영역
         ========================================================================*/
@@ -224,7 +210,7 @@
 
             let postNo = $($eventTag).closest('.content').attr('id');
             let keyword = '';
-            const $keyword = $("#searchText").val();
+            let $keyword = $("#searchText").val();
 
             if ($("#search-option option:selected").val() == 'content') {
                 keyword = '&type=content' + '&keyword=' + $keyword;
@@ -262,11 +248,6 @@
                     resize_textarea();
                 });
         }
-
-       
-        $(document).ready(function(){
-            
-        });
     </script>
 </body>
 </html>
