@@ -298,19 +298,19 @@ section {
 }
 .book-wrapper .book-info .my-text .episode-no span.marking.type1::after {
     content: '화';
-    margin-left: 0.1rem;
+    margin-left: 0.15rem;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking.type2::before {
     content: 'p';
-    margin-right: 0.1rem;
+    margin-right: 0.15rem;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking.type3::after {
     content: '권';
-    margin-left: 0.1rem;
+    margin-left: 0.15rem;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking.type4::after {
     content: '%';
-    margin-left: 0.1rem;
+    margin-left: 0.15rem;
 }
 .book-wrapper .book-info .my-text .episode-no span.marking {
     color: #fff;
