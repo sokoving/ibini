@@ -166,14 +166,14 @@
                     // location.href = '/myPage/marklist?type=postTitle&keyword=';
                     return;
                 }                       
-                location.href = '/myPage/marklist?type=postTitle' + '&keyword=' + $keyword;
+                location.href = '/myPage/marklist?type=postTitle' + '&keyword=' + encodeURIComponent($keyword);
 
             } else if ($("#search-option option:selected").val() == 'content') {     
                 if ($keyword.trim() === '') {
                     alert('검색어를 입력하세요.')
                     return;
                 }                       
-                location.href = '/myPage/marklist?type=content' + '&keyword=' + $keyword;
+                location.href = '/myPage/marklist?type=content' + '&keyword=' + encodeURIComponent($keyword);
 
             } else if ($("#search-option option:selected").val() == 'episodeNo') {        
                 if ($keyword.trim() === '') {
@@ -213,7 +213,7 @@
             let $keyword = $("#searchText").val();
 
             if ($("#search-option option:selected").val() == 'content') {
-                keyword = '&type=content' + '&keyword=' + $keyword;
+                keyword = '&type=content' + '&keyword=' + encodeURIComponent($keyword);
             } 
 
             fetch('/myPage/plus/marklist/?postNo=' + postNo + keyword)
