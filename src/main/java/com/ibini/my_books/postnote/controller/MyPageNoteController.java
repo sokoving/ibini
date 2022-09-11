@@ -122,10 +122,10 @@ public class MyPageNoteController {
     // kjy
     @GetMapping("/memolist2")
     @ResponseBody
-    public List<MyPageMemo.Memo> viewPostWithMemoList2(@RequestParam(value="postNo") Long postNo) {
+    public List<MyPageMemo.Memo> viewPostWithMemoList2(@RequestParam(value="postNo") Long postNo, Search search) {
         log.info("/mypostnote/memolist2 GET!");
 
-        List<PostMemo> memoList = postMemoService.findAllWithSearch2(postNo);
+        List<PostMemo> memoList = postMemoService.findAllWithSearch2(postNo, search);
 
         List<MyPageMemo.Memo> memoDataList = new ArrayList<>();
 
@@ -141,5 +141,29 @@ public class MyPageNoteController {
         }
 
         return memoDataList;
+    }
+
+    @GetMapping("/marklist2")
+    @ResponseBody
+    public List<MyPageMark.Mark> viewPostWithMarkList2(@RequestParam(value="postNo") Long postNo, Search search) {
+        log.info("/mypostnote/marklist2 GET!");
+
+        List<PostMark> markList = postMarkService.findAllWithSearch2(postNo, search);
+
+        List<MyPageMark.Mark> markDataList = new ArrayList<>();
+
+        if (markList.size() != 0) {
+            for (PostMark mark : markList) {
+                MyPageMark.Mark markObject = new MyPageMark.Mark();
+                markObject.setMarkNo(mark.getMarkNo());
+                markObject.setEpisodeNo(mark.getEpisodeNo());
+                markObject.setContent(mark.getContent());
+                markObject.setModDatetime(mark.getPrettierDate());
+
+                markDataList.add(markObject);
+            }
+        }
+
+        return markDataList;
     }
 }

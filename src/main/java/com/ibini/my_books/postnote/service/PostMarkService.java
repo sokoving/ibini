@@ -2,6 +2,7 @@ package com.ibini.my_books.postnote.service;
 
 import com.ibini.my_books.postnote.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
+import com.ibini.my_books.postnote.domain.PostMemo;
 import com.ibini.my_books.postnote.dto.MyPagePostDTO;
 import com.ibini.my_books.postnote.repository.PostMarkMapper;
 import lombok.RequiredArgsConstructor;
@@ -70,6 +71,16 @@ public class PostMarkService {
 
         return markList;
     }
+
+    // 마크 전체 조회 Except 2 rows
+    public List<PostMark> findAllWithSearch2(Long postNo, Search search) {
+        List<PostMark> markList = postMarkMapper.findAllWithSearch2(postNo, search);
+
+        convertDateFormat(markList);
+
+        return markList;
+    }
+
     private void convertDateFormat(List<PostMark> postMark) {
         for (PostMark m : postMark) {
             Date date = m.getModDatetime();

@@ -79,7 +79,7 @@
                         </ul>
                     </c:if>
                     <c:forEach var="p" items="${myPageMarkList}">
-                        <div class="content">
+                        <div class="content" id="${p.postNo}">
                             <div class="book-wrapper flex-fs">
                                 <!-- 책 이미지 -->
                                 <c:choose>
@@ -92,10 +92,6 @@
                                         <div class="book-image w30 noselect"></div>
                                     </c:otherwise>
                                 </c:choose>
-                            
-                                
-                                <!-- epId (0:회차 1:페이지 2:권수 3:퍼센트) -->
-                                <span id="epId" class="hidden">${p.epId}</span>
                                 
                                 <!-- 책 정보 -->
                                 <div class="book-info w70">
@@ -103,40 +99,42 @@
                                     <div class="book-title">
                                         <span>${p.postTitle}</span>
                                     </div>
-                                    <!-- MARK 내용 -->
-                                    <c:forEach var="m" items="${p.markList}" end="1">
-                                        <div id="mark-info" class="my-text">
-                                            <div class="episode-no">
-                                                <c:choose>
-                                                    <c:when test="${p.epId == 0}">
-                                                        <span class="marking-type1">${m.episodeNo}</span>
-                                                    </c:when>
-                                                    <c:when test="${p.epId == 1}">
-                                                        <span class="marking-type2">${m.episodeNo}</span>
-                                                    </c:when>
-                                                    <c:when test="${p.epId == 2}">
-                                                        <span class="marking-type3">${m.episodeNo}</span>
-                                                    </c:when>
-                                                    <c:when test="${p.epId == 3}">
-                                                        <span class="marking-type4">${m.episodeNo}</span>
-                                                    </c:when>
-                                                </c:choose>
+                                    <div class="mark-wrapper">
+                                        <!-- MARK 내용 -->
+                                        <div class="mark-list">
+                                            <c:forEach var="m" items="${p.markList}" end="1">
+                                                <div id="${m.markNo}" class="my-text">
+                                                    <div class="episode-no">
+                                                        <c:choose>
+                                                            <c:when test="${p.epId == 0}">
+                                                                <span id="${p.epId}" class="marking type1">${m.episodeNo}</span>
+                                                            </c:when>
+                                                            <c:when test="${p.epId == 1}">
+                                                                <span id="${p.epId}" class="marking type2">${m.episodeNo}</span>
+                                                            </c:when>
+                                                            <c:when test="${p.epId == 2}">
+                                                                <span id="${p.epId}" class="marking type3">${m.episodeNo}</span>
+                                                            </c:when>
+                                                            <c:when test="${p.epId == 3}">
+                                                                <span id="${p.epId}" class="marking type4">${m.episodeNo}</span>
+                                                            </c:when>
+                                                        </c:choose>
+                                                    </div>
+                                                    <textarea class="w100" spellcheck="false" readonly >${m.content}</textarea>
+                                                    <!-- Mark 날짜 -->
+                                                    <div class="meta-data">
+                                                        <span>${m.modDatetime}</span>
+                                                    </div>
+                                                    <hr>
+                                                </div> <!-- end my-text -->
+                                            </c:forEach>
+                                        </div>    
+                                        <c:if test="${p.markList.size() > 2}">
+                                            <div class="view-more">
+                                                <a class="noselect" onclick="click_viewMore(this)">... 더보기</a>
                                             </div>
-                                            <textarea class="w100" spellcheck="false" readonly >${m.content}</textarea>
-                                            <!-- Mark 날짜 -->
-                                            <div class="meta-data">
-                                                <span>${m.modDatetime}</span>
-                                            </div>
-                                            <hr>
-                                        </div> <!-- end my-text -->
-                                    </c:forEach>    
-                                    <%--<c:if test="${p.markList.size() > 2}">--%>
-                                        <div class="view-more">
-                                            <a class="noselect" onclick="click_viewMore(this)">... 더보기</a>
-                                        </div>
-                                        <!-- 포스트 번호 -->
-                                        <span id="postNo" style="display: none;">${p.postNo}</span>
-                                    <%--</c:if>--%>
+                                        </c:if>
+                                    </div>
                                 </div> <!-- end book-info -->
                             </div> <!-- end book-wrapper -->
                         </div> <!-- end content -->
@@ -164,11 +162,14 @@
         // ... 더보기 클릭
         function click_viewMore($eventTag) {
 
-            const $postNo = $eventTag.parentElement.nextElementSibling.textContent;
-            console.log($postNo);
+            // const $postNo = $eventTag.parentElement.nextElementSibling.textContent;
+            // console.log($postNo);
             // fetch() 사용하여 팝업페이지 호출 및 책/회차 등의 변수값 전달
             // 지금은 샘플html이니 redirect 처리를 하도록 한다.
-            location.href = '/test/page2/'+ $postNo;
+            // location.href = '/test/page2/'+ $postNo;
+
+            findMarkList($eventTag);
+            $($eventTag).closest('.view-more').css('display', 'none');
         }
         
         function enterkey() {
@@ -218,6 +219,53 @@
         /*======================================================================
             함수 영역
         ========================================================================*/
+        // 마크 목록 가져오기
+        function findMarkList($eventTag) {
+
+            let epId = $($eventTag).parent().siblings('.mark-list').find('.marking').attr('id');
+
+            let postNo = $($eventTag).closest('.content').attr('id');
+            let keyword = '';
+            const $keyword = $("#searchText").val();
+
+            if ($("#search-option option:selected").val() == 'content') {
+                keyword = '&type=content' + '&keyword=' + $keyword;
+            } 
+
+            fetch('/mypostnote/marklist2/?postNo=' + postNo + keyword)
+                .then(response => response.json())
+                .then(markList => {
+
+                    let markInfoList = '';
+                    for (mark of markList) {
+                        markInfoList +=  '<div id="' + mark.markNo + '" class="my-text">';
+                        markInfoList += '    <div class="episode-no">';
+           
+                            if (epId == 0) {
+                                markInfoList += '       <span class="marking type1">' + mark.episodeNo + '</span>';
+                            } else if (epId == 1) {
+                                markInfoList += '       <span class="marking type2">' + mark.episodeNo + '</span>';
+                            } else if (epId == 2) {
+                                markInfoList += '       <span class="marking type3">' + mark.episodeNo + '</span>';
+                            } else if (epId == 3) {
+                                markInfoList += '       <span class="marking type4">' + mark.episodeNo + '</span>';
+                            }
+
+                        markInfoList += '   </div>';
+                        markInfoList += '   <textarea class="w100" spellcheck="false" readonly>' + mark.content + '</textarea>' +
+                                        '       <div class="meta-data">' +
+                                        '           <span>' + mark.modDatetime + '</span>' +
+                                        '       </div>' +
+                                        '       <hr>' +
+                                        '   </div>';
+                    }
+
+                    $($eventTag).parent().siblings('.mark-list').append(markInfoList);
+                    resize_textarea();
+                });
+        }
+
+       
         $(document).ready(function(){
             
         });
