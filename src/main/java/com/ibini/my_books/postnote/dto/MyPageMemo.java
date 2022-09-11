@@ -19,7 +19,7 @@ public class MyPageMemo {
     // prj_post_img
     private String thumbImg;          // 썸네일 이미지 경로
 
-    private List<MyPageMemo.Memo> memoList;
+    private List<Memo> memoList;
 
     @Setter
     @Getter
