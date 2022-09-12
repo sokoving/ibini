@@ -82,10 +82,11 @@
             <!-- 포스트 리스트 섹션 -->
             <section id="list-sec">
                 <div class="inner-section">
-                    <!-- 포스트 목록 필터링 제목 -->
+                    <!-- 포스트 목록 제목 -->
                     <div class="section-h2">
                         <h2>전체 포스트(총 ${pm.totalCount}건)</h2>
                     </div>
+                    <!-- 포스트 리스트 영역 -->
                     <div class="post-list-box">
                         <c:forEach var="p" items="${pl}">
                             <%-- 포스트 개별 영역 --%>
@@ -170,8 +171,15 @@
                                 </div> <%-- // end item-right --%>
                             </div> <%-- // end item-wrap --%>
                         </c:forEach>
-                    </div>
+                    </div> <!-- // end post-list-box -->
 
+                    <!-- 포스트 목록 하단부(페이징) -->
+                    <div class="list-bottom">
+                        <c:if test="${!pm.next && pm.finalPage != pm.page.pageNum}">
+                            <div class="show-more" data-page-num="1">더보기</div>
+                        </c:if>
+                        <div class="list-end"> ${pm.beginPage}/${pm.endPage} <i class="fas fa-arrow-up"></i></div>
+                    </div>
 
                 </div> <!-- // end  inner-section-->
             </section> <!-- // end section -->
@@ -184,42 +192,59 @@
     <script>
         let oneLineTag;
         // 별 특수문자 채우는 함수
-        function drawStarsAtList() {
-            const $stars = document.querySelectorAll('.star-rate');
-            //    console.log($stars);
 
-            for (let i = 0; i < $stars.length; i++) {
-                const num = $stars[i].dataset.key;
-                // console.log(num);
-                let msg = '⭐';
-                if (num === '0') {
-                    msg = '😎😎😎'
-                }
-                for (let j = 1; j < num; j++) {
-                    msg += '⭐';
-                }
-                $stars[i].textContent = msg;
-            }
-        }
-
-        // 해시태그 글자 자르는 함수
-        function setShortTag() {
-            const tagList = $('.tag-one-line');
-            // console.log(tagList);
-            for (let tag of tagList) {
-                let text = tag.textContent.trim();
-                // console.log(text);
-                if (text.length > 30) {
-                    tag.textContent = text.substr(0, 30) + "...";
-                    // console.log("자름 : " + text);
-                }
-            }
-        }
 
 
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
+            function drawStarsAtList() {
+                // 전체 포스트에서 더보기 요청
+                $('.show-more').click(function (e) {
+                    const pageNum = e.target.dataset.pageNum + 1;
+                    console.log(pageNum);
+                    const url = "/post/api/searchPost?pageNum" + pageNum
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(resList => {
+                            console.log("----------------------");
+                            console.log(resList);
+                            makeSearchedList(resList, "more");
+                        })
+                })
+
+
+
+                const $stars = document.querySelectorAll('.star-rate');
+                //    console.log($stars);
+
+                for (let i = 0; i < $stars.length; i++) {
+                    const num = $stars[i].dataset.key;
+                    // console.log(num);
+                    let msg = '⭐';
+                    if (num === '0') {
+                        msg = '😎😎😎'
+                    }
+                    for (let j = 1; j < num; j++) {
+                        msg += '⭐';
+                    }
+                    $stars[i].textContent = msg;
+                }
+            }
+
+            // 해시태그 글자 자르는 함수
+            function setShortTag() {
+                const tagList = $('.tag-one-line');
+                // console.log(tagList);
+                for (let tag of tagList) {
+                    let text = tag.textContent.trim();
+                    // console.log(text);
+                    if (text.length > 30) {
+                        tag.textContent = text.substr(0, 30) + "...";
+                        // console.log("자름 : " + text);
+                    }
+                }
+            }
 
             // 별점에 따라 별 찍기
             drawStarsAtList();
@@ -263,7 +288,7 @@
                 // 선택한 노드에 data-type과 data-key 값이 모두 있다면 검색해서 재정렬
                 if (type != undefined && key != undefined) {
                     const url = '/post/api/searchPost?' + type + '=' + key;
-                    searchAndMakeList(url, makeSearchedList, text);
+                    searchAndMakeList(url, text);
                 }
 
                 // 검색 영역이 아니라면 해당 상세 페이지로 이동
@@ -311,8 +336,9 @@
                 document.querySelector('.section-h2').innerHTML = tag;
             }
 
-
-            function makeSearchedList(list) {
+            // flag = new > 포스트 영역 비우고 새로 만들기
+            // flag = more > 기존 있는 포스트 영역 밑에 더 붙여 만들기
+            function makeSearchedList(list, flag = 'new') {
                 console.log(list);
                 if (list.length <= 0) {
                     alert("검색된 포스트가 없습니다.");
@@ -360,12 +386,13 @@
                         "</div>" +
                         "</div>" +
                         "<div class='right-2'>" +
-                        "<div class='right2-1'>" +                       
+                        "<div class='right2-1'>" +
                         "<div class='post-title'>" +
-                        "<h3 data-key='" + l.postNo + "' title='" + l.postTitle + "'>" + l.shortTitle + "</h3>" +
+                        "<h3 data-key='" + l.postNo + "' title='" + l.postTitle + "'>" + l.shortTitle +
+                        "</h3>" +
                         "</div>" +
                         "<div class='post-writer' data-type='sWriter' data-key='" + l.postWriter +
-                        "' + title='" + l.postWriter + "'>" + l.shortWriter + "</div> <br>" + 
+                        "' + title='" + l.postWriter + "'>" + l.shortWriter + "</div> <br>" +
                         "<div class='star-rate' data-type='sStarRate' data-key='" + l.starRate +
                         "' title='별 " + l.starRate + "개'></div>" +
                         "</div>" +
@@ -378,7 +405,12 @@
                         "<div class='tag-one-line' title='" + hashtag + "'>" + hashtag +
                         "</div></div></div></div>";
                 }
-                document.querySelector(".post-list-box").innerHTML = tag;
+                if (flag = "new") {
+                    document.querySelector(".post-list-box").innerHTML = tag;
+                } else if (flag = "more") {
+                    console.log("모어");
+                    document.querySelector(".post-list-box").innerHTML += tag;
+                }
                 drawStarsAtList();
                 setShortTag();
                 window.scrollTo(500, 300);
