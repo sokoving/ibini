@@ -30,6 +30,12 @@
 
     <!-- post-note CSS -->
     <link rel="stylesheet" href="/css/post-note.css">
+
+    <style>
+        #episode-no::placeholder {
+            font-size: 0.85em;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,11 +54,11 @@
                 <div class="episode-no">
                     <label for="episode-no">회차
                         <!-- <input type="number" id="episode-no" name="episodeNo" min="1" max="9999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> -->
-                        <input type="text" id="episode-no" name="episodeNo" maxlength="10" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                        <input type="text" id="episode-no" name="episodeNo" maxlength="9" autocomplete="off" placeholder="회차를 입력하세요 " oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                     </label>
                 </div>
                 <div class="text-area">
-                    <textarea id="mark-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
+                    <textarea id="mark-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력하세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
                 </div>
                 <div class="submit-area">
                     <div class="info">
@@ -65,7 +71,7 @@
             </div>
             <div class="hidden" name="memo">
                 <div class="text-area">
-                    <textarea id="memo-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
+                    <textarea id="memo-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력하세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
                 </div>
                 <div class="submit-area">
                     <div class="info">
@@ -88,7 +94,7 @@
                 <!-- <div class="content-area">
                     <div class="flex-sb">
                         <div>
-                            <i class="marking-type1 noselect">121</i>
+                            <i class="marking type1 noselect">121</i>
                             |
                             <span class="noselect">2022.08.15 13:22:34</span>
                         </div>
@@ -126,10 +132,12 @@
         const markURL = '/postnote/mark';
         // const episodeNo = 1;
         const account = '2209050001';
+        // const account = '${p.account}';
         
         // 메모 요청 URL
         const memoURL = '/postnote/memo';
         const postNo = 3;
+        // const postNo = document.getElementById('postNo').textContent;
 
         /*======================================================================
             이벤트 영역
@@ -545,12 +553,12 @@
             iconArea +=         `<span class="noselect">` + data.prettierDate + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area memo-initMode">';
-            iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
-            iconArea +=         '<i class="fas fa-trash-alt button" onclick="btnDelete_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-edit button" title="수정" onclick="btnModify_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-trash-alt button" title="삭제" onclick="btnDelete_onclick(this)"></i>';
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area memo-modifyMode button-hidden">';
-            iconArea +=         '<i class="fas fa-check-square button" onclick="btnModifySave_onclick(this)"></i>';
-            iconArea +=         '<i class="fas fa-times button" onclick="btnCancle_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-check-square button" title="수정" onclick="btnModifySave_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-times button" title="취소" onclick="btnCancle_onclick(this)"></i>';
             iconArea +=     '</div>';
             iconArea += '</div>';
             return iconArea;
@@ -558,7 +566,7 @@
 
         // 메모 내용 입력
         function appendMemoContent(data) {
-            return '<textarea class="content" readonly data-initvalue="' + data.content + '">'
+            return '<textarea class="content" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
                 + data.content
                 + '</textarea>'
             ;
@@ -630,12 +638,12 @@
             iconArea +=         `<span class="noselect mark-date">` +data.prettierDate + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-initMode">';
-            iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
-            iconArea +=         '<i class="fas fa-trash-alt button" onclick="btnDelete_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-edit button" title="수정" onclick="btnModify_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-trash-alt button" title="삭제" onclick="btnDelete_onclick(this)"></i>';
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-modifyMode button-hidden">';
-            iconArea +=         '<i class="fas fa-check-square button" onclick="btnModifySave_onclick(this)"></i>';
-            iconArea +=         '<i class="fas fa-times button" onclick="btnCancle_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-check-square button" title="수정" onclick="btnModifySave_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-times button" title="취소" onclick="btnCancle_onclick(this)"></i>';
             iconArea +=     '</div>';
             iconArea += '</div>';
             return iconArea;
@@ -646,14 +654,14 @@
             // (고정) 0:회차, 1:페이지, 2:권수, 3:퍼센트
             switch(epId) {
                 case 0:
-                    return 'marking-type1 noselect';
+                    return 'marking type1 noselect';
                 case 1:
-                    return 'marking-type2 noselect';
+                    return 'marking type2 noselect';
                 case 2:
-                    return 'marking-type3 noselect';
+                    return 'marking type3 noselect';
                 case 3:
-                    return 'marking-type4 noselect'
-                default : return 'marking-type1 noselect';
+                    return 'marking type4 noselect'
+                default : return 'marking type1 noselect';
             }
         }
 

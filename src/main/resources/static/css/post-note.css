@@ -278,11 +278,11 @@ textarea {
 
 /* 회차구분 icon 설정 */
 #postnote .content-wrapper div[name='mark'] .content-area i.noselect {
-    border: 1px solid rgba(0,0,0,0.21);
-    border-radius: 0.5rem;
+    /* border: 1px solid rgba(0,0,0,0.21); */
+    border-radius: 20px;
 
     min-width: 50px;
-    padding: 0.3em;
+    padding: 0.4rem 0.6rem;
     margin: 0 0.6em 0.4em 0.4em;
 
     display: inline-block;
@@ -291,35 +291,44 @@ textarea {
 }
 #postnote .content-wrapper div[name='mark'] .content-area span.mark-date {
     margin-left: 0.5em;
+    font-weight: 600;
 }
-#postnote .content-wrapper .content-area i.marking-type1::after {
+#postnote .content-wrapper .content-area i.marking.type1::after {
     content: '화';
+    margin-left: 0.15rem;
 }
-#postnote .content-wrapper .content-area i.marking-type2::before {
+#postnote .content-wrapper .content-area i.marking.type2::before {
     content: 'p';
+    margin-right: 0.15rem;
 }
-#postnote .content-wrapper .content-area i.marking-type3::after {
+#postnote .content-wrapper .content-area i.marking.type3::after {
     content: '권';
+    margin-left: 0.15rem;
 }
-#postnote .content-wrapper .content-area i.marking-type4::after {
+#postnote .content-wrapper .content-area i.marking.type4::after {
     content: '%';
+    margin-left: 0.15rem;
 }
-#postnote .content-wrapper .content-area i.marking-type1 {
+#postnote .content-wrapper .content-area i.marking {
+    color: #fff;
+    background-color: #22577E;
+}
+/* #postnote .content-wrapper .content-area i.marking.type1 {
     color: white;
     background-color: rgb(191, 142, 142);
 }
-#postnote .content-wrapper .content-area i.marking-type2 {
+#postnote .content-wrapper .content-area i.marking.type2 {
     color: white;
     background-color: blue;
 }
-#postnote .content-wrapper .content-area i.marking-type3 {
+#postnote .content-wrapper .content-area i.marking.type3 {
     color: white;
     background-color: green;
 }
-#postnote .content-wrapper .content-area i.marking-type4 {
+#postnote .content-wrapper .content-area i.marking.type4 {
     color: white;
     background-color: rgb(90, 187, 90);
-}
+} */
 
 /* 아이콘 버튼 설정 */
 .button-area i.fas {
