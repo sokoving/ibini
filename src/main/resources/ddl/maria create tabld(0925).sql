@@ -190,5 +190,9 @@ CREATE TABLE login_list(
      PRIMARY KEY (login_num)
 );
 
+DROP SEQUENCE seq_login_list;
+CREATE SEQUENCE seq_login_list START WITH 1 INCREMENT BY 1;
+SELECT NEXTVAL(seq_login_list);
+
 -- 관리자 권한 주기
 UPDATE tbl_member SET auth = 'ADMIN' WHERE user_id = 'admin';

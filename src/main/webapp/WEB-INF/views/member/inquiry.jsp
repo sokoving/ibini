@@ -5,7 +5,7 @@
 
         <head>
             <%@ include file="../include/static-head.jsp" %>
-                <link rel="stylesheet" href="/css/inquiry.css">
+                <link rel="stylesheet" href="/css/member-inquiry.css">
         </head>
 
 
@@ -178,15 +178,15 @@
                     $userIdInput = document.getElementById('user-id');
                     $inquiryTitleInput = document.getElementById('inquirytitle');
                     $contentTextInput = document.getElementById('message-text');
-                    console.log($contentTextInput);
+                    // console.log($contentTextInput);
 
                 })
 
                   //문의사항 등록 비동기 처리 이벤트
                             document.getElementById('register-success').onclick = e => {
-                            console.log(e.target);
+                            // console.log(e.target);
                             const userId = '${loginUser.userId}';
-                            console.log(userId);
+                            // console.log(userId);
 
                             //서버로 전송할 데이터들
                             const inquiryData = {
@@ -205,7 +205,7 @@
                                 return;
                             }
                             
-                            console.log('검증 : ',inquiryData.inquiryTitle);
+                            // console.log('검증 : ',inquiryData.inquiryTitle);
 
 
                             // POST요청을 위한 요청 정보 객체
@@ -217,10 +217,10 @@
                                 body: JSON.stringify(inquiryData)
                             };
 
-                            console.log(reqInfo);
+                            // console.log(reqInfo);
 
                             const $modal = document.querySelector('.modal');
-                            console.log('modal?:', $modal);
+                            // console.log('modal?:', $modal);
 
                             fetch('http://localhost:8383/member/inquiry-register/', reqInfo)
                                 .then(res => res.text())
@@ -256,7 +256,7 @@
                     // 페이지 li태그들을 전부 확인해서 
                     // 현재 위치한 페이지 넘버와 텍스트컨텐츠가 일치하는 li를 찾아서 class active 부여
                     const $ul = document.querySelector('.pagination');
-                    console.log($ul);
+                    // console.log($ul);
 
                     for (let $li of [...$ul.children]) {
                         console.log(curPageNum);
@@ -428,7 +428,7 @@
                     fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
                         .then(res => res.json())
                         .then(oneInquiry => {
-                            console.log(e.target.parentElement.parentElement.parentElement.lastElementChild);
+                            // console.log(e.target.parentElement.parentElement.parentElement.lastElementChild);
                             if (e.target.parentElement.parentElement.lastElementChild.dataset.serialNumber == oneInquiry.serialNumber) {
                                 return;
                             };

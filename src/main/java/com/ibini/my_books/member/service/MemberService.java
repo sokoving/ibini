@@ -373,7 +373,10 @@ public class MemberService {
         return memberMapper.findAllOutReason();
     }
 
-
+// 로그인 로그 남기기
+    public boolean insertLoginLog(String account){
+        return memberMapper.loginLogInsert(account);
+    }
 
 
 }//end class

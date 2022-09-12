@@ -123,4 +123,7 @@ public interface MemberMapper {
 //<!-- kakao 로그인 유저인지 확인 -->
     int findVerificationKakao(String email);
 
+//    로그인 기록 남기기
+    boolean loginLogInsert(String account);
+
 }

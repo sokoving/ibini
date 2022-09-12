@@ -339,5 +339,14 @@
 
     </select>
 
+<!--  로그인 기록 남기기   -->
+    <insert id="loginLogInsert">
+        INSERT INTO login_list
+        (login_num, account)
+        VALUES
+        ( NEXTVAL(seq_login_list), #{account} )
+
+    </insert>
+
 
 </mapper>

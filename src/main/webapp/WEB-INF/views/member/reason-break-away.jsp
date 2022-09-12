@@ -5,7 +5,7 @@
 
         <head>
             <%@ include file="../include/static-head.jsp" %>
-            <link rel="stylesheet" href="/css/findAll-manageMember.css">
+            <link rel="stylesheet" href="/css/member-findAll-manageMember.css">
 
         </head>
 

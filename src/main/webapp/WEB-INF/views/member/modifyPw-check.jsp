@@ -265,7 +265,7 @@
       });
 
 
-      //회원가입 양식 서버로 전송하는 클릭 이벤트
+      //비밀번호 변경 서버로 전송하는 클릭 이벤트
       const $regForm = $('#pWmodifyForm');
 
       $('#pWmodify-btn').on('click', e => {

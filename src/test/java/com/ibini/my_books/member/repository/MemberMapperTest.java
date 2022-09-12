@@ -177,6 +177,13 @@ class MemberMapperTest {
         }
     }
 
+    @Test
+    @DisplayName("로그인 기록 남기기")
+    void loginLogInsertTest(){
+        String account = "2209130005";
+        mapper.loginLogInsert(account);
+    }
+
 
 //    ==================================
 

@@ -5,7 +5,7 @@
 
         <head>
             <%@ include file="../include/static-head.jsp" %>
-                <link rel="stylesheet" href="/css/inquiry-all.css">
+                <link rel="stylesheet" href="/css/member-inquiry-all.css">
         </head>
 
 
@@ -160,7 +160,7 @@
                             // 페이지 li태그들을 전부 확인해서 
                             // 현재 위치한 페이지 넘버와 텍스트컨텐츠가 일치하는 li를 찾아서 class active 부여
                             const $ul = document.querySelector('.pagination');
-                            console.log($ul);
+                            // console.log($ul);
 
                             for (let $li of [...$ul.children]) {
                                 console.log(curPageNum);
@@ -188,48 +188,48 @@
 
                             // Button that triggered the modal
                             var button = event.relatedTarget
-                            console.log('button :', button); // 클릭된 버튼 태그
+                            // console.log('button :', button); // 클릭된 버튼 태그
 
                             
 
                             // Extract info from data-bs-* attributes
                             var recipient = button.getAttribute('data-bs-whatever')
-                            console.log('recipient## :', recipient); // 클릭된 버튼 태그의 데이터 속성
+                            // console.log('recipient## :', recipient); // 클릭된 버튼 태그의 데이터 속성
 
                             // console.log('모달 클릭시 해당영역의 제목:',button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent);
                             const titleContent = button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.lastElementChild.textContent;
-                            console.log('타이틀내용 :', titleContent); // 클릭된 버튼으로 부터 제목태그 가지고 오기  
+                            // console.log('타이틀내용 :', titleContent); // 클릭된 버튼으로 부터 제목태그 가지고 오기  
                             
                             //문의글 제목 모달창 출력시 순수 제목만 나오게 split으로 문자 추출
                             const finalTitle = titleContent.split(':')[1];
-                            console.log(finalTitle);
+                            // console.log(finalTitle);
 
                             console.log('모달 클릭시 해당영역의 문의내용:', button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling);
 
                             document.getElementById('recipient-name').textContent = finalTitle;
-                            console.log('recipient-name:', document.getElementById('recipient-name'));
+                            // console.log('recipient-name:', document.getElementById('recipient-name'));
                             // 제목이 들어가는 div 태그
 
                             const $modalDetail = document.getElementById('recipient-context');
-                            console.log('recipient-context :', document.getElementById('recipient-context'));
+                            // console.log('recipient-context :', document.getElementById('recipient-context'));
                             //문의 내용이 들어가는 div 태그 // 삭제 대상의 부모노드
 
                             // ----------------------------------------------------------------------
                             // Update the modal's content.
                             var modalTitle = answerregisterModal.querySelector('.modal-title')
-                            console.log('modalTitle :', modalTitle); //<h5> 태그 타이틀 ex)[문의번호 답변 작성]
+                            // console.log('modalTitle :', modalTitle); //<h5> 태그 타이틀 ex)[문의번호 답변 작성]
 
                             var modalBodyInput = answerregisterModal.querySelector('.modal-body input')
-                            console.log('modalBodyInput :', modalBodyInput); // 모달 폼안에있는 input데이터
+                            // console.log('modalBodyInput :', modalBodyInput); // 모달 폼안에있는 input데이터
 
 
                             modalTitle.textContent = '[답변 작성] - 문의 번호 [' + recipient + ']';
                             modalBodyInput.value = recipient //hidden 으로 숨겨놓은 serialNumber의 값을 넣기
 
                             $serialNumInput = document.getElementById('hidden-serialNumber');                            
-                            console.log($serialNumInput);
-                            console.log('시리얼넘버:', $serialNumInput.value)
-                            console.log('답변 : ', $contentInput.value);
+                            // console.log($serialNumInput);
+                            // console.log('시리얼넘버:', $serialNumInput.value)
+                            // console.log('답변 : ', $contentInput.value);
 
                             // 모달을 띄울 때 다음 작업(수정완료처리)을 위해 댓글번호를 모달에 달아두자.
                             // -----------------------------------------------------------------
@@ -259,7 +259,7 @@
 
                         //답글 달기 비동기 처리 이벤트
                         document.getElementById('register-success').onclick = e => {
-                            console.log(e.target);
+                            // console.log(e.target);
                             // const serialNumber = e.target.closest('.table1').firstElementChild.dataset.serialNum;
 
                             //서버로 전송할 데이터들
@@ -273,7 +273,7 @@
                                 return;
                             }
 
-                            console.log('answerDate:', answerDate);
+                            // console.log('answerDate:', answerDate);
 
 
                             // POST요청을 위한 요청 정보 객체
@@ -285,10 +285,10 @@
                                 body: JSON.stringify(answerDate)
                             };
 
-                            console.log(reqInfo);
+                            // console.log(reqInfo);
 
                             const $modal = document.querySelector('.modal');
-                            console.log('modal?:', $modal);
+                            // console.log('modal?:', $modal);
 
                             fetch('http://localhost:8383/member/admin/answer-register/', reqInfo)
                                 .then(res => res.text())
@@ -409,9 +409,9 @@
 
                     };
 
-                    console.log('if문 돌기전', $removeTargetAC.classList.contains('answer'))
+                    // console.log('if문 돌기전', $removeTargetAC.classList.contains('answer'))
                     if ($removeTargetAC.classList.contains('answer')) {
-                        console.log('if문 돌고', $removeTargetAC.classList.contains('answer'))
+                        // console.log('if문 돌고', $removeTargetAC.classList.contains('answer'))
                         $parentNodeA.removeChild($removeTargetAT);
                         $parentNodeA.removeChild($removeTargetAC);
                         $closeBtn.classList.add('hidden');

@@ -95,6 +95,12 @@ public class MemberController {
         if (flag == SUCCESS) {
             log.info("login success!");
             log.info("loginUser:{}", session.getAttribute("loginUser"));
+            Member member = memberService.getMember(inputData.getUserId());
+
+            // 로그인 로그 남기기
+            memberService.insertLoginLog(member.getAccount());
+            log.info("로그 남기기 account : {}",member.getAccount());
+
             return "redirect:/";
         }
         ra.addFlashAttribute("loginMsg", flag);
