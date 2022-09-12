@@ -169,6 +169,7 @@ section {
     font-size: 16px;
     font-weight: 600;
     background: #ffca3d;;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
 }
 .search-wrapper .search-button:hover {
     background: #f9b708;
@@ -281,6 +282,7 @@ section {
     background: #B2C8DF;
     border-radius: 1rem;
     padding: 0.7rem;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
 }
 
 /* MEMO 내용 영역 */
@@ -314,6 +316,7 @@ section {
 }
 .book-wrapper .book-info .view-more a {
     background: #ffe6a2;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
     border-radius: 0.3rem;
     padding: 7px 10px;
     font-size: 0.9em;
