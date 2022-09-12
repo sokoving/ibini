@@ -103,45 +103,47 @@
                                 <%-- right : 상세정보 --%>
                                 <div class="item-right">
 
-                                    <%-- right-1 : 별점, 장르 --%>
+                                    <%-- right-1 : 장르, 플랫폼, 연재 정보 --%>
                                     <div class="right-1">
-                                        <%-- 별점 --%>
-                                        <div class="star-rate" data-type="sStarRate" data-key="${p.starRate}"
-                                            title="별 ${p.starRate}개"></div>
                                         <%-- 장르 --%>
-                                        <div class="genre-name" data-type="sGenre" data-key="${p.genreId}" title="${p.genreName}">
-                                            ${p.genreName}
+                                        <div class="genre-name" data-type="sGenre" data-key="${p.genreId}"
+                                            title="${p.genreName}">
+                                            ${p.shortGenre}
                                         </div>
+
+                                        <div class="pl-pu-wrap">
+                                            <%-- 플랫폼 --%>
+                                            <span class="plat-name" data-type="sPlatform" data-key="${p.platformId}"
+                                                style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}"
+                                                title="${p.platformName}">
+                                                ${p.shortPlatform}
+                                            </span>
+                                            <%-- 연재주기 or 연재상태 --%>
+                                            <span class="pu-cycle" data-type="sPublishStatus"
+                                                data-key="${p.publishStatus}" title="${p.publishStatusName}">
+                                                <c:choose>
+                                                    <c:when test="${empty p.publishCycle}">${p.publishStatusName}
+                                                    </c:when>
+                                                    <c:otherwise>${p.shortCycle}</c:otherwise>
+                                                </c:choose>
+                                            </span>
+                                        </div> <%-- // end pl-pu-wrap --%>
                                     </div> <%-- // end right-1 --%>
 
-                                    <%-- right-2 : 제목, 작가 --%>
+                                    <%-- right-2-1 : 제목, 작가, 별점 / right 2-2 : 진행도 --%>
                                     <div class="right-2">
                                         <div class="right2-1">
-                                            <%-- 작가 --%>
-                                            <div class="post-writer" data-type="sWriter" data-key="${p.postWriter}"
-                                            title="${p.postWriter}">
-                                                ${p.postWriter}</div>
                                             <%-- 제목 --%>
                                             <div class="post-title">
-                                                <h3 data-key="${p.postNo}" title="${p.postTitle}">${p.postTitle}</h3>
+                                                <h3 data-key="${p.postNo}" title="${p.postTitle}">${p.shortTitle}</h3>
                                             </div>
-                                            <div class="pl-pu-wrap">
-                                                <%-- 플랫폼 --%>
-                                                <span class="plat-name" data-type="sPlatform" data-key="${p.platformId}"
-                                                    style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}"
-                                                    title="${p.platformName}">
-                                                    ${p.platformName}
-                                                </span>
-                                                <%-- 연재주기 or 연재상태 --%>
-                                                <span class="pu-cycle" data-type="sPublishStatus"
-                                                    data-key="${p.publishStatus}" title="${p.publishStatusName}">
-                                                    <c:choose>
-                                                        <c:when test="${empty p.publishCycle}">${p.publishStatusName}
-                                                        </c:when>
-                                                        <c:otherwise>${p.publishCycle}</c:otherwise>
-                                                    </c:choose>
-                                                </span>
-                                            </div> <%-- // end pl-pu-wrap --%>
+                                            <%-- 작가 --%>
+                                            <div class="post-writer" data-type="sWriter" data-key="${p.postWriter}"
+                                                title="${p.postWriter}">
+                                                ${p.shortWriter}</div> <br>
+                                            <%-- 별점 --%>
+                                            <div class="star-rate" data-type="sStarRate" data-key="${p.starRate}"
+                                                title="별 ${p.starRate}개"></div>
                                         </div>
 
                                         <div class="right2-2">
@@ -163,7 +165,6 @@
                                                 </c:when>
                                                 <c:otherwise>${p.oneLineTag}</c:otherwise>
                                             </c:choose>
-
                                         </div>
                                     </div> <%-- // end right-3 --%>
                                 </div> <%-- // end item-right --%>
@@ -201,6 +202,19 @@
             }
         }
 
+        // 해시태그 글자 자르는 함수
+        function setShortTag() {
+            const tagList = $('.tag-one-line');
+            console.log(tagList);
+            for (let tag of tagList) {
+                let text = tag.textContent.trim();
+                console.log(text);
+                if (text.length > 30) {
+                    tag.textContent = text.substr(0, 30) + "...";
+                    // console.log("자름 : " + text);
+                }
+            }
+        }
 
 
         // start jQuery
@@ -209,17 +223,18 @@
 
             // 별점에 따라 별 찍기
             drawStarsAtList();
+            setShortTag();
 
             // 검색 초기화
             $('.section-h2').click(function (e) {
                 if (e.target.matches('.fa-undo-alt')) {
                     fetch("/post/api/searchPost")
-                    .then(res => res.json())
-                    .then(resList => {
-                        document.querySelector('.section-h2').innerHTML = "<h2>전체 포스트</h2>";
-                        makeSearchedList(resList);
-                        alert("검색이 초기화됩니다.");
-                    })
+                        .then(res => res.json())
+                        .then(resList => {
+                            document.querySelector('.section-h2').innerHTML = "<h2>전체 포스트</h2>";
+                            makeSearchedList(resList);
+                            alert("검색이 초기화됩니다.");
+                        })
                 }
             })
 
@@ -287,7 +302,7 @@
 
             function makeSectionH2(text, size) {
                 let tag =
-                    "<h2>검색 : " + text + "(" + size + "건)</h2>" +
+                    "<h2 class='h2-search'>검색 : " + text + "(" + size + "건)</h2>" +
                     "<span class='h2-icon list-reset'>" +
                     "<i class='fas fa-undo-alt' title='검색 초기화'></i>" +
                     "</span>"
@@ -312,7 +327,7 @@
 
                     // 연재 주기
                     const cycle = l.publishCycle === null || l.publishCycle === '' ? l.publishStatusName : l
-                        .publishCycle;
+                        .shortCycle;
 
                     // 진행도
                     const epPercent = Math.round(l.curEp / l.totalEp * 100)
@@ -328,30 +343,30 @@
                         "</div>" +
                         "<div class='item-right'>" +
                         "<div class='right-1'>" +
-                        "<div class='star-rate' data-type='sStarRate' data-key='" + l.starRate +
-                        "' title='별 " + l.starRate + "개'></div>" +
                         "<div class='genre-name' data-type='sGenre' data-key='" + l.genreId +
-                         "' title='"+ l.genreName +"'>" +
-                        l.genreName +
-                        "</div>" +
-                        "</div>" +
-                        "<div class='right-2'>" +
-                        "<div class='right2-1'>" +
-                        "<div class='post-writer' data-type='sWriter' data-key='" + l.postWriter + 
-                        "' + title='"+ l.postWriter +"'>" + l.postWriter + "</div>" +
-                        "<div class='post-title'>" +
-                        "<h3 data-key='" + l.postNo + "' title='"+ l.postTitle +"'>" + l.postTitle + "</h3>" +
+                        "' title='" + l.genreName + "'>" +
+                        l.shortGenre +
                         "</div>" +
                         "<div class='pl-pu-wrap'>" +
                         "<span class='plat-name' data-type='sPlatform' data-key='" + l.platformId + "'" +
                         "style='background-color: " + l.platformBgColor + "; color:" + l.platformFontColor +
-                        "' title='"+ l.platformName +"'>" +
-                        l.platformName +
+                        "' title='" + l.platformName + "'>" +
+                        l.shortPlatform +
                         "</span>" +
                         "<span class='pu-cycle' data-type='sPublishStatus' data-key='" + l.publishStatus +
-                        "' title='"+ l.publishStatusName +"'>" +
+                        "' title='" + l.publishStatusName + "'>" +
                         cycle + "</span>" +
                         "</div>" +
+                        "</div>" +
+                        "<div class='right-2'>" +
+                        "<div class='right2-1'>" +                       
+                        "<div class='post-title'>" +
+                        "<h3 data-key='" + l.postNo + "' title='" + l.postTitle + "'>" + l.shortTitle + "</h3>" +
+                        "</div>" +
+                        "<div class='post-writer' data-type='sWriter' data-key='" + l.postWriter +
+                        "' + title='" + l.postWriter + "'>" + l.shortWriter + "</div> <br>" + 
+                        "<div class='star-rate' data-type='sStarRate' data-key='" + l.starRate +
+                        "' title='별 " + l.starRate + "개'></div>" +
                         "</div>" +
                         "<div class='right2-2'>" +
                         "<div class='read-percent' data-cur='" + l.curEp + "' data-total='" + l.totalEp + "'" +
@@ -359,10 +374,12 @@
                         "</div>" +
                         "</div>" +
                         "<div class='right-3'>" +
-                        "<div class='tag-one-line' title='"+hashtag+"'>" + hashtag + "</div></div></div></div>";
+                        "<div class='tag-one-line' title='" + hashtag + "'>" + hashtag +
+                        "</div></div></div></div>";
                 }
                 document.querySelector(".post-list-box").innerHTML = tag;
                 drawStarsAtList();
+                setShortTag();
                 window.scrollTo(500, 300);
             }
 

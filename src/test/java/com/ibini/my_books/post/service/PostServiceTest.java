@@ -1,6 +1,7 @@
 package com.ibini.my_books.post.service;
 
 import com.ibini.my_books.common.search.SearchPost;
+import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.util.FileUtils;
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @SpringBootTest
@@ -59,5 +61,13 @@ class PostServiceTest {
         }
     }
 
+    @Test
+    @DisplayName("긴 글자는 잘라서 shot 필드에 담는다")
+    void cutCharTest(){
+
+        PostWithName p = postService.fineOnePostWithName(10L);
+
+
+    }
 
 }

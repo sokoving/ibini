@@ -41,7 +41,7 @@ public class PostWithName {
     private String epName2;   // 회차 구분명 (ex. p)
 
     FormattingDateDTO shortDate;    // 포매팅한 날짜 DTO (yyyy.MM.dd)
-                                        //  등록일 - String postRegDate 수정일 - postUpdateDate;
+    //  등록일 - String postRegDate 수정일 - postUpdateDate;
     private String oneLineTag;      // 포스트의 해시태그 한 줄로(PostService에서 세팅할 것)
 
     //  prj_genre
@@ -57,35 +57,52 @@ public class PostWithName {
     private String originalThumbName; // 썸네일 원본 이름
 
     private String shortGenre;
-    private String shortWriter;
     private String shortTitle;
+    private String shortWriter;
     private String shortPlatform;
     private String shortCycle;
-    private String shortTag;
 
 
-//   아이디로 이름을 세팅해주는 메서드
-    public void setting(){
+    //   아이디로 이름을 세팅해주는 메서드
+    public void setting() {
         this.caName = CategoryUtil.CATEGORY_MAP.get(this.caId);
 
         this.epName = EpIdUtil.EP_ID_MAP.get(this.epId);
         this.epName2 = EpIdUtil.EP_NAME_MAP.get(epName);
 
-        pubSetting();
-
         this.shortDate = new FormattingDateDTO();
         this.shortDate.setDateDTO(regDate, updateDate);
+
+        pubSetting();
+        shortSetting();
+
     }
 
-    public void pubSetting(){
+    public void pubSetting() {
         this.publishStatusName = PublishStatusUtil.PUBLISH_STATUS_MAP.get(this.publishStatus);
-        if(this.publishStatus >= 2){
+        if (this.publishStatus >= 2) {
             this.publishCycle = "";
         }
     }
 
-    public void shortSetting(){
+    //    일정 글자 수 넘으면 자르고 생략 기호 ... 붙이기
+    public void shortSetting() {
+//        제목, 작가 20글자 이후로 ...
+        this.shortTitle = charCutter(this.postTitle, 20);
+        this.shortWriter = charCutter(this.postWriter, 20);
+        this.shortGenre = charCutter(this.genreName, 7);
+        this.shortPlatform = charCutter(this.platformName, 7);
+        this.shortCycle = charCutter(this.publishCycle, 10);
+    }
 
+    public static String charCutter(String originStr, int num) {
+        if (originStr != null) {
+            return originStr.length() > num
+                    ? originStr.substring(0, num) + "..."
+                    : originStr;
+        } else {
+            return "";
+        }
     }
 
 
