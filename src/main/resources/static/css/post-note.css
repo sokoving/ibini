@@ -192,7 +192,8 @@ textarea {
     width: 60%;
     text-align: center;
 
-    border: 1px solid #6c757d;
+    /* border: 1px solid #6c757d; */
+    border: 1px solid #adb5bd;
     border-radius: 0.25rem;
     background: #fff;
 
@@ -212,7 +213,8 @@ textarea {
     padding: 1rem;
     font-size: 18px;
 
-    border: 1px solid #6c757d;
+    /* border: 1px solid #6c757d; */
+    border: 1px solid #adb5bd;
     border-radius: 0.25rem;
 
     resize: both;
@@ -312,6 +314,7 @@ textarea {
 #postnote .content-wrapper div[name='mark'] .content-area i.noselect {
     /* border: 1px solid rgba(0,0,0,0.21); */
     border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 
     min-width: 50px;
     padding: 0.4rem 0.6rem;
@@ -391,8 +394,8 @@ textarea {
     padding: 0.8em;
     word-break: break-all;
     font-size: 17px;
-    /* border: 1px solid; */
-    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.3rem;
     width: 100%;
 }
 
