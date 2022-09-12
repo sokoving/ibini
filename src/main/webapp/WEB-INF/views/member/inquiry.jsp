@@ -17,7 +17,8 @@
                         <!-- 모달 버튼 -->
                         <div class="inquiry-register"> <a id="registerBtn" type="button" class="btn btn-primary"
                                 data-bs-toggle="modal" data-bs-target="#inquiryregisterModal"
-                                data-bs-whatever="" href="#">
+                                data-bs-whatever="" href="#" style="background-color: #ffd668; ">
+
                                 [문의글 등록하기] </a> </div>
 
                         <!-- 모달 팝업 모달 문의글 쓰기 -->
@@ -77,10 +78,13 @@
                                             <li class="inquiry-title" data-serial-num="${list.serialNumber}">
                                                 [문의]&nbsp;${list.userId}</li>
                                             <div class="newMark inquirynewmark">
-                                                <c:if test="${list.newInquiryArticle}">
+
+                                                <li class="title">                                                 
+                                                    <c:if test="${list.newInquiryArticle}">
                                                     <span class="badge rounded-pill bg-danger">new</span>
-                                                </c:if>
-                                                <li class="title"> 제목 : ${list.inquiryTitle}</li>
+                                                    </c:if>
+                                                    제목 : ${list.inquiryTitle}
+                                                </li>
                                             </div>
                                         </ul>
                                         <ul class="table1-secondchild detailAnswerclick"></ul>
@@ -97,7 +101,7 @@
                                         <c:if test="${list.answer != null}">
                                             <div class="newMark answernewmark">
                                                 <c:if test="${list.newAnswerArticle}">
-                                                    <span class="badge rounded-pill bg-danger">new</span>
+                                                    <span class="badge rounded-pill bg-danger" style="line-height: 1.3; height: 27px; margin-right: 3px;">new</span>
                                                 </c:if>
                                                 <li class="detail">[답변완료]</li>
 

@@ -199,6 +199,7 @@
       cursor: pointer;
       transition: .5s;
       text-align: center;
+      padding-top: 10px;
     }
 
     .btn:hover {
@@ -328,8 +329,8 @@
           </div>
           
 
-          <!-- 인증번호 버튼 -->
-          <input type="submit" class="btn" value="아이디 찾기">
+          <!-- 아이디 찾기 버튼 -->
+          <input type="submit" class="btn" style="padding: 0;" value="아이디 찾기">
 
         </form>
       </c:if>
@@ -344,7 +345,7 @@
               <!-- <i class="fas fa-user"></i> -->
             </div>
             <div class="div">
-              <h5>회원님의 아이디는 [ ${userid} ] 입니다.</h5>
+              <h5>회원님의 아이디 : "${userid}" </h5>
             </div>
           </div>
 

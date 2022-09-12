@@ -107,6 +107,9 @@ public interface MemberMapper {
     //회원관리를 위한 전체회원 조회(탈퇴한 회원 포함) -> tbl_manage_member
     List<ManageMember> findAllManageMember();
 
+    //회원의 탈퇴내용 조회
+    List<OutReasonManageDTO> findAllOutReason();
+
     //    <!--  가입한 회원수 구하기  -->
     int getTotalCurrentMemberCount();
 

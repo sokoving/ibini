@@ -137,6 +137,17 @@ CREATE TABLE tbl_manage_break_away
 	DROP SEQUENCE seq_tbl_reason_break_away;
     CREATE SEQUENCE seq_tbl_reason_break_away START WITH 1 INCREMENT BY 1;
 
+    -- tbl_reason_break_away 시퀀스 생성후 꼭 기본 탈퇴사유 3개 넣어야 함. 안그러면 시퀀스 때문에 오류 발생.
+     	INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away), '서비스 이용 불편');
+
+        INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away),'관리 및 피드백이 잘 안됨');
+
+        INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away),'에러가 많음');
+
+
 
 -- =========== login_list
 

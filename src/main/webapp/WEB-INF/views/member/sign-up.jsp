@@ -268,11 +268,13 @@
 
 
     .c-red {
-      color: red;
+      color: rgb(209 69 69);
+    font-weight: 700;
     }
 
     .c-blue {
-      color: blue;
+      color: #3ad338;
+      font-weight: 700;
     }
   </style>
 </head>
@@ -420,7 +422,7 @@
               } // 정상적으로 입력한 경우
               else {
                 $idInput.css('border-color', 'skyblue');
-                $('#idChk').html('<b class = "c-blue">[허용 가능한 아이디 입니다.]</b>')
+                $('#idChk').html('<b class = "c-blue">[사용 가능한 아이디 입니다.]</b>')
                 checkArr[0] = true;
               }
             });
@@ -444,7 +446,7 @@
           checkArr[1] = false;
         } else {
           $('#password').css('border-color', 'skyblue');
-          $('#pwChk').html('<b class="c-blue">[참 잘했어요]</b>');
+          $('#pwChk').html('<b class="c-blue">[사용 가능한 패스워드 입니다.]</b>');
           checkArr[1] = true;
         }
 
@@ -461,11 +463,11 @@
         //비밀번호 확인란 유효성검사
         else if ($("#password").val() !== $("#password_check").val()) {
           $('#password_check').css('border-color', 'red');
-          $('#pwChk2').html('<b class="c-red">[위에랑 똑같이!!]</b>');
+          $('#pwChk2').html('<b class="c-red">[입력하신 패스워드와 동일하게 작성해주세요.]</b>');
           checkArr[2] = false;
         } else {
           $('#password_check').css('border-color', 'skyblue');
-          $('#pwChk2').html('<b class="c-blue">[참 잘했어요]</b>');
+          $('#pwChk2').html('<b class="c-blue">[입력하신 패스워드와 일치 합니다.]</b>');
           checkArr[2] = true;
         }
 
@@ -476,17 +478,17 @@
         //이름값 공백 확인
         if ($("#user_name").val() === "") {
           $('#user_name').css('border-color', 'red');
-          $('#nameChk').html('<b class="c-red">[이름은 필수정보!]</b>');
+          $('#nameChk').html('<b class="c-red">[이름은 필수정보 입니다!]</b>');
           checkArr[3] = false;
         }
         //이름값 유효성검사
         else if (!getName.test($("#user_name").val())) {
           $('#user_name').css('border-color', 'red');
-          $('#nameChk').html('<b class="c-red">[이름은 한글로 ~]</b>');
+          $('#nameChk').html('<b class="c-red">[이름은 한글로 작성해주세요.]</b>');
           checkArr[3] = false;
         } else {
           $('#user_name').css('border-color', 'skyblue');
-          $('#nameChk').html('<b class="c-blue">[참 잘했어요]</b>');
+          $('#nameChk').html('<b class="c-blue">[입력 완료]</b>');
           checkArr[3] = true;
         }
 
@@ -504,7 +506,7 @@
         //이메일값 유효성검사
         else if (!getMail.test($emailInput.val())) {
           $emailInput.css('border-color', 'red');
-          $('#emailChk').html('<b class="c-red">[이메일 형식 몰라?]</b>');
+          $('#emailChk').html('<b class="c-red">[이메일 형식에 맞지 않습니다.]</b>');
           checkArr[4] = false;
         } else {
 

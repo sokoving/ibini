@@ -56,7 +56,7 @@ public class MemberController {
         log.info("/member/sign-up POST ! - {}", member);
         boolean flag = memberService.signUp(member);
         ra.addFlashAttribute("msg", "reg-success");
-        return flag ? "redirect:/" : "redirect:/member/sign-up";
+        return flag ? "redirect:/member/sign-in" : "redirect:/member/sign-up";
     }
 
     //아이디, 이메일 중복확인 비동기 요청 처리
@@ -535,6 +535,22 @@ public class MemberController {
         log.info("현재 회원과 탈퇴한 회원 배열 : {}", ints);
         model.addAttribute("mmList", allManageMember);
         model.addAttribute("ints", ints);
+
+    }
+
+    //     ========== 탈퇴사유관리 ================
+    @GetMapping("/reason-break-away")
+    public void breakReasonAway(Model model){
+        log.info("/member/break-reason-away GET 요청!!");
+        List<OutReasonManageDTO> allOutReason = memberService.findAllOutReason();
+        model.addAttribute("outReasonList",allOutReason);
+        log.info("outReasonList : {}", allOutReason);
+
+
+        int[] ints = memberService.currentInOutMember();
+        log.info("현재 회원과 탈퇴한 회원 배열 : {}", ints);
+        model.addAttribute("ints", ints);
+
 
     }
 

@@ -9,6 +9,6 @@ import lombok.*;
 public class ManageMember {
     private String userId;
     private String email;
-    private boolean userCondition;
+    private String userCondition;
 
 }

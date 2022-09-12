@@ -111,11 +111,13 @@
     }
 
     .c-red {
-      color: red;
+      color: rgb(209 69 69);
+    font-weight: 700;
     }
 
     .c-blue {
-      color: blue;
+      color: #3ad338;
+      font-weight: 700;
     }
 
     #user_name {

@@ -19,7 +19,8 @@
 .btn {
     cursor: pointer;
     border: 2px solid;
-    background: rgb(138 200 231 / 36%)
+    background: rgba(23, 99, 137, 0.36);
+    margin-bottom: 20px;
 }
 
 .add-btn {
@@ -40,7 +41,7 @@
 .inquiryTable {
     width: 100%;
     margin: 0 auto 0;
-    background: #f8f3868c;
+    /* background: #f8f3868c; */
     display: flex;
     border-bottom: 2px solid;
     margin-bottom: 5px;
@@ -78,6 +79,18 @@
     margin-bottom: 5px;
 }
 
+/* =========== 미응답 / 답변완료  =========== */
+.answer-register{
+    font-weight: 700;
+    color: #dc3545;
+}
+
+li.detail {
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+
 /* ========== 문의 - 아이디 - 제목 - 내용 - 답변 ========== */
 /* 문의/아이디 표시 li 태그 */
 .inquiry-title {}
@@ -90,7 +103,7 @@
     /* border: 1px solid; */
     border-radius: 10px 10px 10px 10px /10px 10px 10px 10px;
     padding: 15px;
-    background: white;
+    background: rgb(0 0 0 / 3%);
 
 }
 
@@ -104,7 +117,7 @@
     margin-left: 110px;
     /* border: 1px solid; */
     width: 820px;
-    background: white;
+    background: rgb(0 0 0 / 3%);
     border-radius: 10px 10px 10px 10px /10px 10px 10px 10px;
 }
 
@@ -176,3 +189,5 @@
     margin-bottom: 5px;
     /* background: rgb(138 200 231 / 36%); */
 }
+
+

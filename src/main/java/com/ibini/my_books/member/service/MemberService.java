@@ -368,6 +368,11 @@ public class MemberService {
         return memberArray;
     }
 
+//    탈퇴사유 조회
+    public List<OutReasonManageDTO> findAllOutReason(){
+        return memberMapper.findAllOutReason();
+    }
+
 
 
 

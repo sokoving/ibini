@@ -168,14 +168,19 @@ CREATE TABLE tbl_manage_break_away
  	     PRIMARY KEY (reason_num)
  	);
 
- 	INSERT INTO tbl_reason_break_away
-    (out_reason)VALUES ( '서비스 이용 불편');
+ 	DROP SEQUENCE seq_tbl_reason_break_away;
+    CREATE SEQUENCE seq_tbl_reason_break_away START WITH 1 INCREMENT BY 1;
 
-    INSERT INTO tbl_reason_break_away
-    (out_reason)VALUES ('관리 및 피드백이 잘 안됨');
 
-    INSERT INTO tbl_reason_break_away
-    (out_reason)VALUES ('에러가 많음');
+    -- tbl_reason_break_away 시퀀스 생성후 꼭 기본 탈퇴사유 3개 넣어야 함. 안그러면 시퀀스 때문에 오류 발생.
+     	INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away), '서비스 이용 불편');
+
+        INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away),'관리 및 피드백이 잘 안됨');
+
+        INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away),'에러가 많음');
 
 
 CREATE TABLE login_list(
@@ -184,3 +189,6 @@ CREATE TABLE login_list(
    login_log     DATETIME    DEFAULT current_timestamp,   -- 로그인이력
      PRIMARY KEY (login_num)
 );
+
+-- 관리자 권한 주기
+UPDATE tbl_member SET auth = 'ADMIN' WHERE user_id = 'admin';

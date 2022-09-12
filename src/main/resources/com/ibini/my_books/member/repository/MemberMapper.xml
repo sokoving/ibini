@@ -308,17 +308,35 @@
 
     </resultMap>
     <select id="findAllManageMember" resultMap="manageMemberMap">
-        SELECT * FROM tbl_manage_member
+        SELECT * FROM tbl_manage_member WHERE user_id != 'admin';
     </select>
 
 <!--  가입한 회원수 구하기  -->
     <select id="getTotalCurrentMemberCount" resultType="int">
-        SELECT COUNT(*) FROM tbl_manage_member WHERE user_condition = 'true'
+        SELECT COUNT(*) FROM tbl_manage_member WHERE user_id != 'admin' AND user_condition = 'true';
     </select>
 
 <!--   탈퇴한 회원수 구하기 -->
     <select id="getTotalOutMemberCount" resultType="int">
-        SELECT COUNT(*) FROM tbl_manage_member WHERE user_condition = 'false'
+        SELECT COUNT(*) FROM tbl_manage_member WHERE user_id != 'admin' AND user_condition = 'false'
+    </select>
+
+    <resultMap id="outReasonMap" type="com.ibini.my_books.member.dto.OutReasonManageDTO">
+
+        <result column="user_id" property="userId"/>
+        <result column="out_reason" property="outReason"/>
+
+    </resultMap>
+<!--        //회원의 탈퇴내용 조회    -->
+    <select id="findAllOutReason" resultMap="outReasonMap">
+        SELECT
+             A.user_id,
+             B.out_reason AS out_reason
+        FROM
+             tbl_manage_break_away A
+            ,tbl_reason_break_away B
+        WHERE A.reason_num = B.reason_num;
+
     </select>
 
 

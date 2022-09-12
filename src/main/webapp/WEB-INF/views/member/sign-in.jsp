@@ -251,12 +251,16 @@
 
         #auto-login {
           font-family: 'Poppins', sans-serif;
-          margin-right: 20px;
+          /* margin-right: 20px; */
         }
 
         #forgotPw {
-          margin-right: 30px;
+          /* margin-right: 30px; */
         }
+
+        a#forgotId {
+    margin-left: 80px;
+}
 
         .sign-up-btn {
           display: block;
@@ -434,7 +438,7 @@
 
         const msg = '${msg}';
         if (msg === 'reg-success') {
-          alert('축하합니다. 회원가입에 성공했습니다.');
+          alert('회원가입에 성공했습니다. \nibini에 오신걸 환영 합니다.');
         }
 
         const loginMsg = '${loginMsg}';
