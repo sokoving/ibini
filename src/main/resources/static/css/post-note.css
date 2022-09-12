@@ -178,7 +178,8 @@ textarea {
     border-top: none;
     border-bottom-left-radius: 0.4rem;
     border-bottom-right-radius: 0.4rem;
-    background: #fefbf1;
+    /* background: #fefbf1; */
+    background: #fcfaf5;
 
     padding: 20px 25px;
 }
@@ -196,6 +197,7 @@ textarea {
     border: 1px solid #adb5bd;
     border-radius: 0.25rem;
     background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 
     margin-left: 0.3rem;
     padding: 0.1rem;
@@ -211,11 +213,12 @@ textarea {
 /* Mark / Memo 내용 입력 부분 */
 #postnote .submit-wrapper .text-area textarea {
     padding: 1rem;
-    font-size: 18px;
+    font-size: 17px;
 
     /* border: 1px solid #6c757d; */
     border: 1px solid #adb5bd;
     border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 
     resize: both;
 }
@@ -269,7 +272,8 @@ textarea {
     /* border: 1px solid #adb5bd; */
     border-bottom-left-radius: 0.4rem;
     border-bottom-right-radius: 0.4rem;
-    background: #fefbf1;
+    /* background: #fefbf1; */
+    background: #fcfaf5;
 
     padding: 1em 0.7em 0.7em;
 
@@ -323,6 +327,8 @@ textarea {
     display: inline-block;
 	text-decoration: none;
     cursor: default;
+
+    font-size: 15px;
 }
 #postnote .content-wrapper div[name='mark'] .content-area span.mark-date {
     margin-left: 0.5em;
@@ -396,6 +402,8 @@ textarea {
     font-size: 17px;
     border: 1px solid #ced4da;
     border-radius: 0.3rem;
+    box-shadow: rgba(0, 0, 0, 0.08) 1.95px 1.95px 2.6px;
+
     width: 100%;
 }
 

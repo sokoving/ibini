@@ -132,10 +132,10 @@ section {
 /* search-title 영역 */
 .search-wrapper select {
     width: 15%;
-    padding: 0.5rem;
+    padding: 0.55rem;
     border-radius: 0.25rem;
     outline: none;
-    vertical-align: bottom;
+    vertical-align: middle;
 
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
@@ -292,6 +292,8 @@ section {
     /* border: 1px solid #e9ecef; */
     border: 1px solid #dee2e6;
     border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.08) 1.95px 1.95px 2.6px;
+
     outline-color: #4a4a4a4f;
     margin-top: 0.9rem;
     padding: 15px;
