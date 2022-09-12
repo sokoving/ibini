@@ -84,7 +84,7 @@
                 <div class="inner-section">
                     <!-- 포스트 목록 필터링 제목 -->
                     <div class="section-h2">
-                        <h2>전체 포스트</h2>
+                        <h2>전체 포스트(총 ${pm.totalCount}건)</h2>
                     </div>
                     <div class="post-list-box">
                         <c:forEach var="p" items="${pl}">
@@ -205,10 +205,10 @@
         // 해시태그 글자 자르는 함수
         function setShortTag() {
             const tagList = $('.tag-one-line');
-            console.log(tagList);
+            // console.log(tagList);
             for (let tag of tagList) {
                 let text = tag.textContent.trim();
-                console.log(text);
+                // console.log(text);
                 if (text.length > 30) {
                     tag.textContent = text.substr(0, 30) + "...";
                     // console.log("자름 : " + text);
@@ -291,11 +291,12 @@
                 fetch(url)
                     .then(res => res.json())
                     .then(resList => {
-                        // console.log(resList);
-                        makeSectionH2(text, resList.length)
+                        console.log("----------------------");
+                        console.log(resList);
+                        makeSectionH2(text, resList.tc)
                         makeFuntion(resList);
                         if (text != undefined) {
-                            alert("키워드 " + text + "로 " + resList.length + "건이 검색되었습니다.");
+                            alert("키워드 " + text + "로 " + resList.tc + "건이 검색되었습니다.");
                         }
                     })
             }
@@ -319,7 +320,7 @@
                 }
 
                 let tag = '';
-                for (let l of list) {
+                for (let l of list.pl) {
                     // 썸네일 
                     const thumb = l.thumbImg === null || l.thumbImg === '' ?
                         '' :

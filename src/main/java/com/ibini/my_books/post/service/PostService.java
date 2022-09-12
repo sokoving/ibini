@@ -12,7 +12,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Log4j2
@@ -91,16 +93,22 @@ public class PostService {
     }
 
     // 검색이 적용된 전체 포스트
-    public List<PostWithName> searchAllPostWithNameService(SearchPost searchPost) {
+    public Map<String, Object> searchAllPostWithNameService(SearchPost searchPost) {
         log.info("Post Service :searchAllPostWithName call - {}", searchPost);
+
+        HashMap<String, Object> searchMap = new HashMap<>();
+
         List<PostWithName> postList = postMapper.searchAllPostWithName(searchPost);
         for (PostWithName p : postList) {
             p.setOneLineTag(tagService.mergeTag(p.getPostNo()));
             p.setting();
         }
+        searchMap.put("pl", postList);
+        searchMap.put("tc", postMapper.getTotalCountWithSearch(searchPost));
 
-        return postList;
+        return searchMap;
     }
+
 
 
 }

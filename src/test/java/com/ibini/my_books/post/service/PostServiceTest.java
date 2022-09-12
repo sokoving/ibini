@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class PostServiceTest {
@@ -51,14 +52,18 @@ class PostServiceTest {
         SearchPost sp = new SearchPost();
         sp.setAccount("2209080001");
         sp.setSTitle("세븐틴");
-//        sp.setPageNum(2);
-        sp.setAmount(10);
+        sp.setPageNum(2);
+//        sp.setAmount(2);
         System.out.println("sp = " + sp);
 
-        List<PostWithName> sList = postService.searchAllPostWithNameService(sp);
-        for (PostWithName s : sList) {
-            System.out.println(s);
-        }
+        Map<String, Object> searchMap = postService.searchAllPostWithNameService(sp);
+        Object pl = searchMap.get("pl");
+        System.out.println("-------------------------- pl");
+        System.out.println(pl);
+
+        System.out.println("-------------------------- tc");
+        Object tc = searchMap.get("tc");
+        System.out.println(tc);
     }
 
     @Test
@@ -66,8 +71,8 @@ class PostServiceTest {
     void cutCharTest(){
 
         PostWithName p = postService.fineOnePostWithName(10L);
-
-
     }
+
+
 
 }

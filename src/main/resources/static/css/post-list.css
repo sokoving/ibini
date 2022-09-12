@@ -111,7 +111,7 @@ section#list-sec{
     justify-content: start;
 }
 .item-wrap:last-child{
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 }
 .item-wrap:hover{
     background-color: #ffc69987;
@@ -279,7 +279,7 @@ section#list-sec{
     text-align: center;
     color: #ffca3d;
     text-shadow: -1px 0 #555, 0 1px #555, 2px 0 #555, 0 -1px #555;
-    font-size: 1.7em;
+    font-size: 1.9em;
     font-family: 'NanumBarunGothicBold';
 }
 
@@ -288,3 +288,33 @@ section#list-sec{
     color: #555;
 }
 
+/* ---------목록 하단부 페이징 영역 ---------*/
+.list-bottom{
+    text-align: center;
+    padding: 5px;
+    color: #666;
+    font-weight: 700;
+}
+
+.show-more{
+    border: 1px dashed #a5a197;
+    background-color: #eeedeb;
+    border-radius: 50em;
+    padding: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    cursor: pointer;
+}
+.show-more:hover{
+    box-shadow: none;
+    transition: 0.2s;
+}
+.list-end{
+    border: 1px solid #adb5bd;
+    background-color: #ffc699;
+    border-radius: 0.25rem;
+    padding: 15px;
+    margin: 10px 0;
+}
+.list-end i{
+    margin: 0 5px;
+}

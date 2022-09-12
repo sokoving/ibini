@@ -170,7 +170,6 @@
         <if test="sPlatform != null">and p.platform_id = #{sPlatform}</if>
         <if test="sPublishStatus != null">and p.publish_status = #{sPublishStatus}</if>
         <if test="sStarRate != null">and p.star_rate = #{sStarRate}</if>
-
     </sql>
 
     <select id="searchAllPostWithName" resultMap="postWithNameMap">
@@ -196,7 +195,7 @@
         <include refid="search"/>
 
         order by post_no desc
-<!--        limit #{start}, #{amount}-->
+        limit #{start}, #{amount}
     </select>
 
     <select id="getTotalCountWithSearch" resultType="Integer">
