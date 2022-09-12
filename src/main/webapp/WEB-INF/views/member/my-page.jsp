@@ -168,7 +168,8 @@
 
 </style>
 <body>
-
+<!-- header -->
+<%@ include file="../include/change-header.jsp" %>
 <div id="wrap">
     <div id="sideBar">
         <h2>MyPage</h2>

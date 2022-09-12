@@ -25,7 +25,7 @@
                     </c:if>
 
                     <c:if test="${loginUser != null}">
-                        <span class="logIn" onclick="location.href='/member/my-info'">MyPage</span>
+                        <span class="logIn" onclick="location.href='/member/my-page'">MyPage</span>
                         <span class="myPage" onclick="location.href='/member/sign-out'">Log-out</span>
                     </c:if>
             </c:if>
@@ -46,12 +46,20 @@
     </div>
 </header> <!-- end header -->
 <style>
+    @font-face {
+        font-family: 'NanumSquareRound';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
     header{
         height: 40px;
         /*border-bottom: 1px solid #ffca3d;*/
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.078) 0px 1px 2px 0px;
         background-color: black;
         /*background-color: #ffca3d;*/
+        font-family: 'NanumSquareRound', sans-serif;
     }
     #headerWrap{
         display: flex;

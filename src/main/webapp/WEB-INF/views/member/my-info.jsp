@@ -126,9 +126,11 @@
 </head>
 
 <body>
+<!-- header -->
+<%@ include file="../include/change-header.jsp" %>
+
   <div id="wrap">
-    <!-- header -->
-    <%@ include file="../include/change-header.jsp" %>
+
 
 
     <section id="main-section">
