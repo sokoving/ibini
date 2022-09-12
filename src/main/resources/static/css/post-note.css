@@ -179,12 +179,13 @@ textarea {
     border-bottom-right-radius: 0.4rem;
     background: #fefbf1;
 
-    padding: 1rem;
+    padding: 20px 25px;
 }
 
 /* episode-no 입력 부분 */
 #postnote .submit-wrapper .episode-no {
     margin: 0.5em;
+    font-weight: 600;
 }
 #postnote .submit-wrapper .episode-no input {
     width: 60%;
@@ -236,6 +237,8 @@ textarea {
     border-radius: 0.25rem;
     text-align: center;
     padding: 0.4rem 0.8rem;
+
+    font-weight: 600;
 }
 
 /*================================================
@@ -291,7 +294,7 @@ textarea {
 /* 데이터 출력단 설정 */
 #postnote .content-wrapper .content-area{
     text-align: left;
-    padding: 0px 10px;
+    padding: 0px 20px;
 }
 #postnote .content-wrapper .content-area .flex-sb {
     margin-bottom: 0.3em;
