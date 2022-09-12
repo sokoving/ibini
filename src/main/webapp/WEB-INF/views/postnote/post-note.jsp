@@ -124,13 +124,12 @@
     <script>
         // 마크 요청 URL
         const markURL = '/postnote/mark';
-        // const episodeNo = 1;
-        const account = '2209050001';
-        // const account = '${p.account}';
-        
         // 메모 요청 URL
         const memoURL = '/postnote/memo';
-        const postNo = 3;
+
+        const account = '2209050001';
+        // const account = '${p.account}';        
+        const postNo = 5;
         // const postNo = document.getElementById('postNo').textContent;
 
         /*======================================================================
@@ -402,10 +401,10 @@
 
             let flag = false;
             if ($episodeNo.value.trim() === '') {
-                alert('회차는 필수 입력값입니다');
+                alert('회차는 필수 입력값입니다.');
 
             } else if ($markContent.value.trim() === '') {
-                alert('내용은 필수 입력값입니다');
+                alert('내용은 필수 입력값입니다.');
 
             } else {
                 flag = true;
@@ -420,7 +419,7 @@
 
             let flag = false;
             if ($memoContent.value.trim() === '') {
-                alert('내용은 필수 입력값입니다');
+                alert('내용은 필수 입력값입니다.');
 
             } else {
                 flag = true;
@@ -435,7 +434,7 @@
 
             let flag = false;
             if ($markContent.value.trim() === '') {
-                alert('내용은 필수 입력값입니다');
+                alert('내용은 필수 입력값입니다.');
 
             } else {
                 flag = true;
@@ -450,7 +449,7 @@
 
             let flag = false;
             if ($memoContent.value.trim() === '') {
-                alert('내용은 필수 입력값입니다');
+                alert('내용은 필수 입력값입니다.');
 
             } else {
                 flag = true;
@@ -482,7 +481,7 @@
             $memoContentList.innerHTML = '';
 
             if (memoList === null || memoList.length === 0 ) { // 메모가 하나도 없을 때               
-                $memoContentList.innerHTML += "<div>작성한 메모가 없습니다</div>"
+                $memoContentList.innerHTML += "<div class='blank'>작성한 메모가 없습니다</div>"
             
             } else { 
                 for (let memo of memoList) {
@@ -565,7 +564,7 @@
             $markContentList.innerHTML = '';
 
             if (markList === null || markList.length === 0 ) { // 마크가 하나도 없을 때               
-                $markContentList.innerHTML += "<div>작성한 북마크가 없습니다</div>"
+                $markContentList.innerHTML += "<div class='blank'>작성한 북마크가 없습니다</div>"
             
             } else { 
                 for (let mark of markList) {

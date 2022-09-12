@@ -271,6 +271,7 @@ textarea {
 
     max-height: 50vh;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* 스크롤바 디자인 */
@@ -397,3 +398,11 @@ textarea {
 #postnote .content-wrapper>div>div>div:nth-child(2) {
     margin-top: 0.2em;
 }
+
+/* 마크, 메모가 없을 때 표시 */
+#postnote .content-wrapper div div.blank {
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
