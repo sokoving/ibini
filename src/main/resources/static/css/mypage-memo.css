@@ -123,7 +123,7 @@ section {
 ==================================================*/
 .search-wrapper {
     border: 1px solid #adb5bd;
-    border-radius: 0.25rem;
+    border-radius: 0.4rem;
     padding: 1.5rem;
 
     font-size: 17px;       
@@ -136,6 +136,8 @@ section {
     border-radius: 0.25rem;
     outline: none;
     vertical-align: bottom;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .search-wrapper select:hover {
     outline: 2px solid #495057;;
@@ -149,6 +151,8 @@ section {
     border-radius: 0.25rem;
     margin-right: 0.5rem;
     padding: 0.35rem 0.7rem;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .search-wrapper input[name="keyword"]:hover,
 .search-wrapper input[name="keyword"]:focus {
