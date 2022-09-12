@@ -82,101 +82,104 @@
             <!-- 포스트 리스트 섹션 -->
             <section id="list-sec">
                 <div class="inner-section">
-                    <!-- 포스트 목록 필터링 제목 -->
+                    <!-- 포스트 목록 제목 -->
                     <div class="section-h2">
-                        <h2>전체 포스트</h2>
+                        <h2>전체 포스트(총 ${pm.totalCount}건)</h2>
                     </div>
-
-                    <c:forEach var="p" items="${pl}">
-                        <%-- 포스트 개별 영역 --%>
-                        <div class="item-wrap hover">
-                            <%-- left : 표지, 즐겨찾기 --%>
-                            <div class="item-left">
-                                <c:choose>
-                                    <c:when test="${p.thumbImg != null}">
-                                        <div class="thumb-box">
-                                            <img class="thumb-img hover" src="/loadFile?fileName=${p.thumbImg}"
-                                                alt="포스트 썸네일">
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="thumb-box"></div>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
-                            </div> <%-- // end item-left --%>
-
-                            <%-- center : 상세정보 --%>
-                            <div class="item-center">
-                                <div class="center-top">
-                                    <%-- 별점 --%>
-                                    <div class="star-rate" data-star-rate=${p.starRate}></div>
-                                    <%-- 제목 --%>
-                                    <div class="post-title">
-                                        <a href="/post/detail/${p.postNo}">
-                                            <h3>${p.postTitle}</h3>
-                                        </a>
+                    <!-- 포스트 리스트 영역 -->
+                    <div class="post-list-box">
+                        <c:forEach var="p" items="${pl}">
+                            <%-- 포스트 개별 영역 --%>
+                            <div class="item-wrap hover" data-post-no="${p.postNo}">
+                                <%-- left : 표지, 즐겨찾기 --%>
+                                <div class="item-left">
+                                    <div class="thumb-box">
+                                        <c:if test="${p.thumbImg != null}">
+                                            <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="포스트 썸네일">
+                                        </c:if>
                                     </div>
-                                    <%-- 작가 --%>
-                                    <div class="post-writer">${p.postWriter}</div>
-                                </div>
+                                    <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
+                                </div> <%-- // end item-left --%>
 
-                                <div class="pl-pu-warp">
-                                    <%-- 플랫폼 --%>
-                                    <c:set var="bg" value="${p.platformBgColor}" />
-                                    <c:set var="color" value="${p.platformFontColor}" />
-                                    <span class="plat-name hover"
-                                        style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">${p.platformName}</span>
+                                <%-- right : 상세정보 --%>
+                                <div class="item-right">
 
-                                        <c:choose>
-                                            <c:when test="${p.publishStatus <= 1}">
+                                    <%-- right-1 : 장르, 플랫폼, 연재 정보 --%>
+                                    <div class="right-1">
+                                        <%-- 장르 --%>
+                                        <div class="genre-name" data-type="sGenre" data-key="${p.genreId}"
+                                            title="${p.genreName}">
+                                            ${p.shortGenre}
+                                        </div>
+
+                                        <div class="pl-pu-wrap">
+                                            <%-- 플랫폼 --%>
+                                            <span class="plat-name" data-type="sPlatform" data-key="${p.platformId}"
+                                                style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}"
+                                                title="${p.platformName}">
+                                                ${p.shortPlatform}
+                                            </span>
+                                            <%-- 연재주기 or 연재상태 --%>
+                                            <span class="pu-cycle" data-type="sPublishStatus"
+                                                data-key="${p.publishStatus}" title="${p.publishStatusName}">
                                                 <c:choose>
-                                                    <c:when test="${empty p.publishCycle}">
-                                                        <td class="last-td">${p.publishStatusName}</td>
+                                                    <c:when test="${empty p.publishCycle}">${p.publishStatusName}
                                                     </c:when>
-
-                                                    <c:otherwise>
-                                                        <td class="last-td">${p.publishCycle}</td>
-                                                    </c:otherwise>
+                                                    <c:otherwise>${p.shortCycle}</c:otherwise>
                                                 </c:choose>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <td class="last-td">${p.publishStatusName}</td>
-                                            </c:otherwise>
-                                        </c:choose>
+                                            </span>
+                                        </div> <%-- // end pl-pu-wrap --%>
+                                    </div> <%-- // end right-1 --%>
 
-                                </div> <%-- // end pl-pu-wrap --%>
+                                    <%-- right-2-1 : 제목, 작가, 별점 / right 2-2 : 진행도 --%>
+                                    <div class="right-2">
+                                        <div class="right2-1">
+                                            <%-- 제목 --%>
+                                            <div class="post-title">
+                                                <h3 data-key="${p.postNo}" title="${p.postTitle}">${p.shortTitle}</h3>
+                                            </div>
+                                            <%-- 작가 --%>
+                                            <div class="post-writer" data-type="sWriter" data-key="${p.postWriter}"
+                                                title="${p.postWriter}">
+                                                ${p.shortWriter}</div> <br>
+                                            <%-- 별점 --%>
+                                            <div class="star-rate" data-type="sStarRate" data-key="${p.starRate}"
+                                                title="별 ${p.starRate}개"></div>
+                                        </div>
 
-                                <%-- 해시태그 --%>
-                                <div class="tag-one-line">${p.oneLineTag}</div>
-                            </div> <%-- // end item-center --%>
+                                        <div class="right2-2">
+                                            <%-- 진행도 --%>
+                                            <div class="read-percent" data-cur="${p.curEp}" data-total="${p.totalEp}"
+                                                data-name="${p.epName2}">
+                                                <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
+                                                    integerOnly="true" />
+                                                ${percent}%
+                                            </div>
+                                        </div>
+                                    </div> <%-- // end right-2 --%>
 
-                            <%-- right : 분류, 진행도, 날짜 --%>
-                            <div class="item-right">
-                                <div class="ca-ge-wrap">
-                                    <%-- 카테고리 --%>
-                                    <div class="ca-name">${p.caName}</div>
-                                    <%-- 장르 --%>
-                                    <div class="genre-name">${p.genreName}</div>
-                                </div>
-                                <%-- 진행도 --%>
-                                <div class="read-percent">
-                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
-                                        integerOnly="true" />
-                                    ${percent}%
-                                </div>
-                                <div class="date-wrap">
-                                    <%-- 포스트 수정일 --%>
-                                    <div class="post-reg-date">갱신 ${p.shortDate.postUpdateDate}</div>
-                                    <%-- 포스트 등록일 --%>
-                                    <div class="post-reg-date">작성 ${p.shortDate.postRegDate}</div>
-                                </div>
-                            </div> <%-- // end item-right --%>
-                        </div> <%-- // end item-wrap --%>
-                    </c:forEach>
+                                    <%-- 해시태그 --%>
+                                    <div class="right-3">
+                                        <div class="tag-one-line" title="${p.oneLineTag}">
+                                            <c:choose>
+                                                <c:when test="${empty p.oneLineTag}">#등록된 해시태그가 없습니다.
+                                                </c:when>
+                                                <c:otherwise>${p.oneLineTag}</c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div> <%-- // end right-3 --%>
+                                </div> <%-- // end item-right --%>
+                            </div> <%-- // end item-wrap --%>
+                        </c:forEach>
+                    </div> <!-- // end post-list-box -->
 
-
+                    <!-- 포스트 목록 하단부(페이징) -->
+                    <div class="list-bottom">
+                        <c:if test="${!pm.next && pm.finalPage != pm.page.pageNum}">
+                            <div class="show-more" data-page-num="1">더보기</div>
+                        </c:if>
+                        <div class="list-end"> ${pm.beginPage}/${pm.endPage} <i class="fas fa-arrow-up"></i></div>
+                    </div>
 
                 </div> <!-- // end  inner-section-->
             </section> <!-- // end section -->
@@ -187,29 +190,233 @@
 
 
     <script>
+        let oneLineTag;
         // 별 특수문자 채우는 함수
-        function drawStarsAtList() {
-            const $stars = document.querySelectorAll('.star-rate');
-            //    console.log($stars);
 
-            for (let i = 0; i < $stars.length; i++) {
-                const num = $stars[i].dataset.starRate;
-                //    console.log(num);
-                let msg = '';
-                for (let j = 0; j < num; j++) {
-                    msg += '⭐';
-                }
-                $stars[i].textContent = msg;
-            }
 
-        }
 
         // start jQuery
         $(document).ready(function () {
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
+            function drawStarsAtList() {
+                // 전체 포스트에서 더보기 요청
+                $('.show-more').click(function (e) {
+                    const pageNum = e.target.dataset.pageNum + 1;
+                    console.log(pageNum);
+                    const url = "/post/api/searchPost?pageNum" + pageNum
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(resList => {
+                            console.log("----------------------");
+                            console.log(resList);
+                            makeSearchedList(resList, "more");
+                        })
+                })
 
-            // 별점에 따른 별 찍기
+
+
+                const $stars = document.querySelectorAll('.star-rate');
+                //    console.log($stars);
+
+                for (let i = 0; i < $stars.length; i++) {
+                    const num = $stars[i].dataset.key;
+                    // console.log(num);
+                    let msg = '⭐';
+                    if (num === '0') {
+                        msg = '😎😎😎'
+                    }
+                    for (let j = 1; j < num; j++) {
+                        msg += '⭐';
+                    }
+                    $stars[i].textContent = msg;
+                }
+            }
+
+            // 해시태그 글자 자르는 함수
+            function setShortTag() {
+                const tagList = $('.tag-one-line');
+                // console.log(tagList);
+                for (let tag of tagList) {
+                    let text = tag.textContent.trim();
+                    // console.log(text);
+                    if (text.length > 30) {
+                        tag.textContent = text.substr(0, 30) + "...";
+                        // console.log("자름 : " + text);
+                    }
+                }
+            }
+
+            // 별점에 따라 별 찍기
             drawStarsAtList();
+            setShortTag();
+
+            // 검색 초기화
+            $('.section-h2').click(function (e) {
+                if (e.target.matches('.fa-undo-alt')) {
+                    fetch("/post/api/searchPost")
+                        .then(res => res.json())
+                        .then(resList => {
+                            document.querySelector('.section-h2').innerHTML = "<h2>전체 포스트</h2>";
+                            makeSearchedList(resList);
+                            alert("검색이 초기화됩니다.");
+                        })
+                }
+            })
+
+
+            // 포스트 클릭 이벤트
+            $('.post-list-box').click(function (e) {
+                e.preventDefault();
+                // console.log(e.target.classList.contains('item-wrap'));
+
+                // 포스트 목록 내부 클릭으로 검색
+                const type = e.target.dataset.type;
+                const key = e.target.dataset.key;
+                let text;
+                switch (type) {
+                    case 'sPublishStatus':
+                        if (key === '1') text = "연재";
+                        break;
+                    case 'sStarRate':
+                        text = e.target.getAttribute('title');
+                        break;
+                    default:
+                        text = e.target.textContent.trim();
+                        break;
+                }
+
+                // 선택한 노드에 data-type과 data-key 값이 모두 있다면 검색해서 재정렬
+                if (type != undefined && key != undefined) {
+                    const url = '/post/api/searchPost?' + type + '=' + key;
+                    searchAndMakeList(url, text);
+                }
+
+                // 검색 영역이 아니라면 해당 상세 페이지로 이동
+                else {
+                    extractPostNoAndGo(e.target);
+                }
+            });
+
+
+            // data-post-no를 탐색해서 상세 페이지로 이동하는 함수
+            function extractPostNoAndGo($node) {
+                let flag = $node.classList.contains('item-wrap');
+                if (flag) {
+                    const postNo = $node.dataset.postNo;
+                    location.href = '/post/detail/' + postNo;
+                } else {
+                    extractPostNoAndGo($node.parentElement);
+                }
+            }
+
+
+
+            // 검색 요청 보낸 후 돔 만드는 함수 호출
+            function searchAndMakeList(url, makeFuntion, text) {
+                fetch(url)
+                    .then(res => res.json())
+                    .then(resList => {
+                        console.log("----------------------");
+                        console.log(resList);
+                        makeSectionH2(text, resList.tc)
+                        makeFuntion(resList);
+                        if (text != undefined) {
+                            alert("키워드 " + text + "로 " + resList.tc + "건이 검색되었습니다.");
+                        }
+                    })
+            }
+
+            function makeSectionH2(text, size) {
+                let tag =
+                    "<h2 class='h2-search'>검색 : " + text + "(" + size + "건)</h2>" +
+                    "<span class='h2-icon list-reset'>" +
+                    "<i class='fas fa-undo-alt' title='검색 초기화'></i>" +
+                    "</span>"
+
+                document.querySelector('.section-h2').innerHTML = tag;
+            }
+
+            // flag = new > 포스트 영역 비우고 새로 만들기
+            // flag = more > 기존 있는 포스트 영역 밑에 더 붙여 만들기
+            function makeSearchedList(list, flag = 'new') {
+                console.log(list);
+                if (list.length <= 0) {
+                    alert("검색된 포스트가 없습니다.");
+                    return
+                }
+
+                let tag = '';
+                for (let l of list.pl) {
+                    // 썸네일 
+                    const thumb = l.thumbImg === null || l.thumbImg === '' ?
+                        '' :
+                        "<img class='post-img' src='/loadFile?fileName=" + l.thumbImg + "' alt='포스트 썸네일'>";
+
+                    // 연재 주기
+                    const cycle = l.publishCycle === null || l.publishCycle === '' ? l.publishStatusName : l
+                        .shortCycle;
+
+                    // 진행도
+                    const epPercent = Math.round(l.curEp / l.totalEp * 100)
+
+                    // 해시태그
+                    const hashtag = l.oneLineTag == null || l.oneLineTag == '' ? "#등록된 해시태그가 없습니다." : l
+                        .oneLineTag;
+
+                    tag += "<div class='item-wrap hover' data-post-no='" + l.postNo + "'>" +
+                        "<div class='item-left'>" +
+                        "<div class='thumb-box'>" + thumb + "</div>" +
+                        "<div class='favorite-btn'>즐겨찾기 <span class='fas fa-plus'></span> </div>" +
+                        "</div>" +
+                        "<div class='item-right'>" +
+                        "<div class='right-1'>" +
+                        "<div class='genre-name' data-type='sGenre' data-key='" + l.genreId +
+                        "' title='" + l.genreName + "'>" +
+                        l.shortGenre +
+                        "</div>" +
+                        "<div class='pl-pu-wrap'>" +
+                        "<span class='plat-name' data-type='sPlatform' data-key='" + l.platformId + "'" +
+                        "style='background-color: " + l.platformBgColor + "; color:" + l.platformFontColor +
+                        "' title='" + l.platformName + "'>" +
+                        l.shortPlatform +
+                        "</span>" +
+                        "<span class='pu-cycle' data-type='sPublishStatus' data-key='" + l.publishStatus +
+                        "' title='" + l.publishStatusName + "'>" +
+                        cycle + "</span>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='right-2'>" +
+                        "<div class='right2-1'>" +
+                        "<div class='post-title'>" +
+                        "<h3 data-key='" + l.postNo + "' title='" + l.postTitle + "'>" + l.shortTitle +
+                        "</h3>" +
+                        "</div>" +
+                        "<div class='post-writer' data-type='sWriter' data-key='" + l.postWriter +
+                        "' + title='" + l.postWriter + "'>" + l.shortWriter + "</div> <br>" +
+                        "<div class='star-rate' data-type='sStarRate' data-key='" + l.starRate +
+                        "' title='별 " + l.starRate + "개'></div>" +
+                        "</div>" +
+                        "<div class='right2-2'>" +
+                        "<div class='read-percent' data-cur='" + l.curEp + "' data-total='" + l.totalEp + "'" +
+                        "data-name='" + l.epName2 + "'>" + epPercent + "%</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='right-3'>" +
+                        "<div class='tag-one-line' title='" + hashtag + "'>" + hashtag +
+                        "</div></div></div></div>";
+                }
+                if (flag = "new") {
+                    document.querySelector(".post-list-box").innerHTML = tag;
+                } else if (flag = "more") {
+                    console.log("모어");
+                    document.querySelector(".post-list-box").innerHTML += tag;
+                }
+                drawStarsAtList();
+                setShortTag();
+                window.scrollTo(500, 300);
+            }
+
+
 
 
 

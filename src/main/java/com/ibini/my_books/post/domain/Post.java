@@ -28,5 +28,7 @@ public class Post {
     private Date regDate;          // 등록일자   DATE  DEFAULT SYSDATE,
     private Date updateDate;       // 수정일자    DATE               DEFAULT SYSDATE ,
     private int starRate;          // 별점   NUMBER(1)          NULL,
+    private int favorite;           // 즐겨찾기 순서
+
 
 }

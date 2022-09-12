@@ -2,16 +2,12 @@ DROP TABLE prj_post_memo;
 DROP TABLE prj_post_mark;
 DROP TABLE prj_hashtag;
 DROP TABLE prj_link_post;
+DROP TABLE login_list;
 DROP TABLE prj_post_img;
 DROP TABLE tbl_post;
 DROP TABLE prj_genre;
 DROP TABLE prj_platform;
-DROP TABLE login_list;
 DROP TABLE tbl_member;
-DROP TABLE tbl_manage_member;
-DROP TABLE tbl_manage_break_away;
-DROP TABLE tbl_manage_inquiry;
-DROP TABLE tbl_reason_break_away;
 
 CREATE TABLE tbl_post
 (
@@ -107,9 +103,13 @@ CREATE TABLE prj_platform
 );
 select * FROM prj_platform;
 
+
+-- =========== tbl_member ===== mariaDB
+DROP TABLE tbl_member;
+-- 마리아 디비
 CREATE TABLE tbl_member
 (
-    account             VARCHAR(50)     NOT NULL,          -- 회원 관리 번호(수정X, 시스템 입력)
+    account             VARCHAR(50)     NOT NULL,         	-- 회원 관리 번호(수정X, 시스템 입력)
     user_id             VARCHAR(50)     NOT NULL UNIQUE,   -- 회원 아이디(수정X, 회원 입력)
     password            VARCHAR(150)    NOT NULL,          -- 비밀번호
     user_name           VARCHAR(20)     NOT NULL,          -- 닉네임(수정O, 회원 입력)
@@ -128,7 +128,11 @@ CREATE TABLE tbl_member
 DROP SEQUENCE seq_tbl_member;
 CREATE SEQUENCE seq_tbl_member START WITH 1 INCREMENT BY 1;
 
+
+-- =========== tbl_manage_member
+-- TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0')
 -- 마리아 회원 관리 테이블
+DROP TABLE tbl_manage_member;
     	CREATE TABLE tbl_manage_member
     	(
     	    user_id             VARCHAR(50)     NOT NULL,   -- 회원 아이디
@@ -137,7 +141,9 @@ CREATE SEQUENCE seq_tbl_member START WITH 1 INCREMENT BY 1;
     	     PRIMARY KEY (user_id)
     	);
 
+-- =========== tbl_manage_break_away
 -- 마리아 회원 탈퇴 사유 관리 테이블
+DROP TABLE tbl_manage_break_away;
 CREATE TABLE tbl_manage_break_away
 	(
 	    user_id             VARCHAR(50)     NOT NULL,   -- 회원 아이디
@@ -145,7 +151,12 @@ CREATE TABLE tbl_manage_break_away
 	     PRIMARY KEY (user_id)
 	);
 
+-- =========== tbl_manage_inquiry
+
+-- sql 회원 문의사항 관리 테이블
+
 --  마리아 회원 문의사항 관리 테이블
+DROP TABLE tbl_manage_inquiry;
 	CREATE TABLE tbl_manage_inquiry
 	(
 	serial_number       VARCHAR(50)     NOT NULL,          -- 회원 관리 번호(수정X, 시스템 입력)
@@ -158,41 +169,28 @@ CREATE TABLE tbl_manage_break_away
 	 PRIMARY KEY (serial_number)
 	);
 
-	DROP SEQUENCE seq_manage_inquiry;
-    CREATE SEQUENCE seq_manage_inquiry START WITH 1 INCREMENT BY 1;
+-- =========== tbl_reason_break_away
 
- 	CREATE TABLE tbl_reason_break_away
- 	(
- 	    reason_num       INT(9)    AUTO_INCREMENT,          -- 탈퇴사유 번호
- 	    out_reason      VARCHAR(1000)     NOT NULL ,   -- 탈퇴 이유
- 	     PRIMARY KEY (reason_num)
- 	);
+-- 마리아 탈퇴사유 내용 관리 테이블
+DROP TABLE tbl_reason_break_away;
+	CREATE TABLE tbl_reason_break_away
+	(
+	    reason_num       INT(9)    NOT NULL,          -- 탈퇴사유 번호
+	    out_reason      VARCHAR(1000)     NOT NULL ,   -- 탈퇴 이유
+	     PRIMARY KEY (reason_num)
+	);
 
- 	DROP SEQUENCE seq_tbl_reason_break_away;
-    CREATE SEQUENCE seq_tbl_reason_break_away START WITH 1 INCREMENT BY 1;
-
-
-    -- tbl_reason_break_away 시퀀스 생성후 꼭 기본 탈퇴사유 3개 넣어야 함. 안그러면 시퀀스 때문에 오류 발생.
-     	INSERT INTO tbl_reason_break_away
-        VALUES (NEXTVAL(seq_tbl_reason_break_away), '서비스 이용 불편');
-
-        INSERT INTO tbl_reason_break_away
-        VALUES (NEXTVAL(seq_tbl_reason_break_away),'관리 및 피드백이 잘 안됨');
-
-        INSERT INTO tbl_reason_break_away
-        VALUES (NEXTVAL(seq_tbl_reason_break_away),'에러가 많음');
+DROP SEQUENCE seq_tbl_reason_break_away;
+CREATE SEQUENCE seq_tbl_reason_break_away START WITH 1 INCREMENT BY 1;
 
 
+-- =========== login_list
+
+-- 마리아 로그인 기록
+DROP table login_list;
 CREATE TABLE login_list(
-   login_num      INT(10),       --일련번호
-   account       VARCHAR(50),      --회원 관리 번호
+   login_num      INT(10),       -- 일련번호
+   account       VARCHAR(50),      -- 회원 관리 번호
    login_log     DATETIME    DEFAULT current_timestamp,   -- 로그인이력
      PRIMARY KEY (login_num)
 );
-
-DROP SEQUENCE seq_login_list;
-CREATE SEQUENCE seq_login_list START WITH 1 INCREMENT BY 1;
-SELECT NEXTVAL(seq_login_list);
-
--- 관리자 권한 주기
-UPDATE tbl_member SET auth = 'ADMIN' WHERE user_id = 'admin';

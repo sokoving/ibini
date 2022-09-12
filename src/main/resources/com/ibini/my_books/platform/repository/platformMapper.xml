@@ -12,7 +12,7 @@
         <result property="platformFontColor" column="platform_font_color" />
     </resultMap>
 
-<!--    저장 -->
+<!--    저장-->
 <!--    <insert id="savePlatform">-->
 <!--        INSERT INTO prj_platform-->
 <!--            (-->

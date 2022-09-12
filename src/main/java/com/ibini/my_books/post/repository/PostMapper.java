@@ -1,5 +1,6 @@
 package com.ibini.my_books.post.repository;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,10 +18,8 @@ public interface PostMapper {
     List<Post> findAllPost(String account);
     List<PostWithName> findAllPostWithName(String account);
 
-    // 게시글 전체 조회 with paging
-//    List<Post> findAll(Page page);
-    // 게시글 전체 조회 with searching
-//    List<Board> findAll2(Search search);
+//     게시글 전체 조회 with searching
+    List<PostWithName> searchAllPostWithName(SearchPost searchPost);
 
     // 게시글 상세 조회
     Post findOnePost(Long postNo);
@@ -35,7 +34,7 @@ public interface PostMapper {
 
     // 전체 게시물 수 조회
     int getTotalCount(String account);
-//    int getTotalCount2(Search search);
+    int getTotalCountWithSearch(SearchPost searchPost);
 
 
 }

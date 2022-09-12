@@ -46,8 +46,8 @@
 
 /* 포스트 리스트 영역 */
 section#list-sec{
-    padding: 0 100px;
-    margin-top: 100px;
+    width: 70%;
+    margin-top: 10px;
     border: none;
 }
 
@@ -59,7 +59,7 @@ section#list-sec{
 /* 포스트 목록 필터링 제목  */
 .section-h2{
     border: 1px solid #adb5bd;
-    background-color: #ffe3da;
+    background-color: #ffc699;
     border-radius: 0.25rem;
     margin-top: 30px;
     /* padding: 20px 0; */
@@ -74,6 +74,27 @@ section#list-sec{
     margin: 15px 0 10px;
     line-height: 1.5;
 }
+.section-h2 .h2-search{
+    font-size: 1.3em;
+}
+.section-h2 .h2-icon{
+    margin-left: 10px;
+    font-size: 1.2em;
+    padding-top: 5px;
+    cursor: pointer;
+}
+.list-reset i:hover{
+    animation: rotate 1.5s ease 0.1s 5;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(360deg) scale(1.1);
+    }
+    
+}
 
 
 
@@ -83,54 +104,66 @@ section#list-sec{
 .item-wrap{
     border: 1px solid #adb5bd;
     border-radius: 0.25rem;
-    padding: 30px 15px;
-    margin-top: 30px;
+    padding: 25px 15px;
+    margin-top: 5px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
 }
 .item-wrap:last-child{
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 }
 .item-wrap:hover{
-    background-color: #ffe3da;
+    background-color: #ffc69987;
 }
 
-/* ---------- left : 표지, 즐겨찾기 ---------- */
 .item-wrap .item-left{
     flex: 0 1 20%;
     border-radius: 0.25rem;
+    margin-right: 15px;
     overflow: hidden;
 
     display: flex;
     flex-flow: column;
+    justify-content: center;
+}
+
+.item-wrap .item-right{
+    flex: 1;
+    display: flex;
+    flex-flow: column;
     justify-content: space-between;
 }
+
+/* ---------- left : 표지, 즐겨찾기 ---------- */
 /* 표지 */
 .item-left .thumb-box{
     border-radius: 0.25rem;
-    /* background-color: #fff7e3; */
+    border: 1px solid #ffc69987;
+    background-color: #ffc69987;
+    height: 165px;
     overflow: hidden;
-    flex: 1;
+    flex: 0 1 165px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.item-left .thumb-box img{
-    width: 100%;
+.item-left .thumb-box .post-img{
+    height: inherit;
+    border-radius: 0.25rem;
 }
 /* 즐겨찾기 버튼 */
 .item-left .favorite-btn{
-    border: 2px dotted #555;
-    border-radius: 0.25rem;
+    border: 1px dashed #555;
+    border-radius: 50em;
     background-color: #777;
     color: #fff;
     font-weight: 700;
     text-align: center;
     margin-top: 10px;
-    padding: 5px;
-    font-size: 0.9em;
+    padding: 3px;
+    font-size: 0.8em;
 }
 .item-left .favorite-btn:hover{
     background-color: #ffca3d;
@@ -140,124 +173,148 @@ section#list-sec{
 }
 
 
-
-/* ---------- center : 상세정보 ---------- */
-.item-wrap .item-center{
-    flex-grow: 1;
-    margin-left: 20px;
-    box-sizing: border-box;
-    color: #555;
-
+/* ---------- right : 상세정보 ---------- */
+/* right-1 : 장르, 플랫폼, 연재 정보  */
+.item-right .right-1{
     display: flex;
-    flex-flow: column;
     justify-content: space-between;
-
-    /* background-color: aquamarine; */
-}
-/* 별점 */
-.item-center .star-rate{
-    margin-bottom: 5px;
-}
-/* 제목 */
-.item-center .post-title h3{
-    color: #444;
-    font-family: 'NanumBarunGothicBold';
-    margin: 0;
-
-}
-.item-center .post-title:hover{
-    transform: scale(1.05);
-    transition: 0.2s;
-}
-/* 작가 */
-.item-center .post-writer{
-    font-weight: 700;
-}
-.item-center .post-writer:hover{
-    transform: scale(1.05);
-    transition: 0.2s;
-}
-/* 플랫폼, 연재 상태 */
-.item-center .pl-pu-warp{
-    margin: 5px 0;
-    display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
-/* 플랫폼 */
-.plat-name{
-    background-color: #ffca3d;
-    border-radius: 0.25rem;
-    line-height: 1.5em;
-    font-weight: 700;
-    padding: 0.2em 0.35em 0.15em;
-    word-break: keep-all; 
-    margin-right: 5px;
-}
-
-/* 해시태그 */
-.item-center .tag-one-line{
-    margin-top: 10px;
-    color: #555;
-}
-
-
-/* ---------- right : 분류, 날짜 ---------- */
-.item-wrap .item-right{
-    flex: 0 0 20%;
-    line-height: 1.2;
-
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-
-    /* background-color: cadetblue; */
-}
-/* 장르, 카테고리 */
-.item-right .ca-ge-wrap{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: end;
-    width: 100%;
-}
-.item-right .ca-ge-wrap div{
-    border-radius: 0.25em;
+/* 장르 */
+.genre-name{
     border: 1px dotted #555;
-    padding: 0.4em 0.2em;
-    margin: 0 0 5px 5px;
+    border-radius: 50em;
+    padding: 0.25em 1em 0.15em;
     text-align: center;
-    font-weight: 700;
-    line-height: 1em;
+    display: inline-block;
 }
-.item-right .ca-ge-wrap div:hover{
+.genre-name:hover{
     background-color: #ffca3d;
     border: 1px solid #444;
     transform: scale(1.07);
     transition: 0.15s;
     cursor: pointer;
 }
-.item-right .ca-ge-wrap .genre-name{
-    font-size: 0.95em;
-    line-height: 1em;
+
+/* 플랫폼, 연재 정보 */
+.pl-pu-wrap{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
 }
+.plat-name{
+    background-color: #ffca3d;
+    border-radius: 50em 0em 0em 50em;
+    font-weight: 700;
+    padding: 0.3em 0.5em 0.2em 1em;
+    text-align: center;
+    display: inline-block;
+}
+.pu-cycle{
+    background-color: #e9ecef;
+    border-radius: 0em 50em 50em 00em;
+    font-weight: 700;
+    padding: 0.3em 1em 0.2em 0.5em;
+}
+
+.plat-name:hover,
+.pu-cycle:hover{
+    transform: scale(1.03);
+    transition: 0.2s;
+    border: 1px dashed #555;
+}
+
+/* right-2-1 : 제목, 작가, 별점 / right 2-2 : 진행도  */
+.item-right .right-2{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+    font-size: 0.9em;
+}
+.right-2 .right2-1{
+    margin: 10px 0;
+}
+.right-2 .right2-2{
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+/* 제목 */
+.post-title h3{
+    color: #444;
+    font-family: 'NanumBarunGothicBold';
+    margin: 10px 0;
+    font-size: 1.45em;
+    word-break: break-all;
+}
+.post-title:hover{
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+/* 작가 */
+.post-writer{
+    font-weight: 700;
+    color: #555;
+    display: inline-block;
+}
+.post-writer:hover{
+    transform: scale(1.2);
+    transition: 0.25s;
+}
+/* 별점 */
+.star-rate{
+    font-size: 1.15em;
+    text-shadow: 2px 2px 2px #555;
+    display:inline-block;
+}
+.star-rate:hover{
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+
 /* 진행도(퍼센티지) */
-.item-right .read-percent{
+.read-percent{
     text-align: center;
     color: #ffca3d;
     text-shadow: -1px 0 #555, 0 1px #555, 2px 0 #555, 0 -1px #555;
-    font-size: 1.7em;
+    font-size: 1.9em;
     font-family: 'NanumBarunGothicBold';
-    margin: 30px 0;
-    
-    /* opacity: 65%; */
 }
-/* 날짜 */
-.item-right .date-wrap{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: end;
-    width: 100%;
-    font-size: 0.9em;
-    line-height: 1.1;
+
+/* 해시태그 */
+.tag-one-line{
     color: #555;
+}
+
+/* ---------목록 하단부 페이징 영역 ---------*/
+.list-bottom{
+    text-align: center;
+    padding: 5px;
+    color: #666;
+    font-weight: 700;
+}
+
+.show-more{
+    border: 1px dashed #a5a197;
+    background-color: #eeedeb;
+    border-radius: 0.25em;
+    padding: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    cursor: pointer;
+}
+.show-more:hover{
+    box-shadow: none;
+    transition: 0.2s;
+}
+.list-end{
+    border: 1px solid #adb5bd;
+    background-color: #ffc699;
+    border-radius: 0.25rem;
+    padding: 15px;
+    margin: 10px 0;
+}
+.list-end i{
+    margin: 0 5px;
 }

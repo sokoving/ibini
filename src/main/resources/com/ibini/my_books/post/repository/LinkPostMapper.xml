@@ -95,4 +95,39 @@
             and link_post_no = #{linkPostNo}
     </select>
 
+    <sql id="search">
+        <if test="sTitle != null">and p.post_title like CONCAT('%', #{sTitle}, '%')</if>
+        <if test="sWriter != null">and p.post_writer like concat('%', #{sWriter}, '%' )</if>
+    </sql>
+
+    <select id="getSearchList" resultMap="postWithNameMap">
+        SELECT
+        p.post_no, p.post_title , p.post_writer
+        , p.genre_id, g.genre_name
+        , p.platform_id, pf.platform_name, pf.platform_bg_color, pf.platform_font_color
+        , p.publish_status , p.publish_cycle
+        , p.cur_ep , p.total_ep,  p.update_date
+        FROM ibini.tbl_post p
+        left outer join ibini.prj_genre g
+        on p.genre_id = g.genre_id
+        left outer join ibini.prj_platform pf
+        on p.platform_id = pf.platform_id
+        left outer join (
+                        select * from prj_link_post where root_post_no = #{rootPostNo}
+                        ) l
+        on p.post_no = l.link_post_no
+        where p.account = #{account}
+        and p.post_no != #{rootPostNo}
+        and l.link_post_no is null
+        <include refid="search"/>
+        order by post_no desc
+        <!--        limit #{start}, #{amount}-->
+    </select>
+
+    <select id="getLinkForRemove" resultMap="linkPostMap">
+        select *
+        from ibini.prj_link_post
+        where link_id like concat('%', #{rootPostNo}, '%')
+    </select>
+
 </mapper>

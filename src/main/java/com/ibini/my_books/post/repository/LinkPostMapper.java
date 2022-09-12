@@ -1,5 +1,6 @@
 package com.ibini.my_books.post.repository;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.post.domain.LinkPost;
 import com.ibini.my_books.post.dto.PostWithName;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,4 +26,11 @@ public interface LinkPostMapper {
 
     // 중복 링크인지 확인 (중복이면 true, 아니면 false)
     int isLinked(LinkPost linkPost);
+
+    //  연관 포스트 등록을 위한 검색 결과 조회
+    List<PostWithName> getSearchList(SearchPost searchPost);
+
+    // 루트 포스트가 들어가 있는 모든 LinkPost 불러오기(포스트 삭제 시 같이 삭제 해 준다)
+    List<LinkPost> getLinkForRemove(Long rootPostNo);
+
 }

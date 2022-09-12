@@ -1,13 +1,12 @@
 package com.ibini.my_books.post.repository;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -54,7 +53,7 @@ class PostMapperTest {
     @Test
     @DisplayName("포스트, 장르, 플랫폼 테이블이 조인돼서 모두 조회돼야 한다")
     void findAllPostWithNameTest(){
-        String account = "ibini";
+        String account = "2208310001";
         List<PostWithName> all = mapper.findAllPostWithName(account);
         for (PostWithName p : all) {
             System.out.println(p);
@@ -122,4 +121,41 @@ class PostMapperTest {
         System.out.println("cnt = " + cnt);
         assertEquals(7, cnt);
     }
+
+    @Test
+    @DisplayName("포스트 조회할 때 검색과 페이징이 적용돼야 한다")
+    void findAllWithSearch(){
+        SearchPost sp = new SearchPost();
+        sp.setAccount("2209080001");
+//        sp.setSTitle("세븐틴");
+        sp.setSStarRate(1);
+//        sp.setSGenre(4);
+//        sp.setPageNum(2);
+//        sp.setAmount(10);
+        System.out.println("sp = " + sp);
+
+        List<PostWithName> sList = mapper.searchAllPostWithName(sp);
+        for (PostWithName s : sList) {
+            s.setting();
+            System.out.println(s);
+        }
+    }
+
+    @Test
+    @DisplayName("검색이 적용된 총 포스트 수를 조회한다")
+    void getTotalCountWithSearch(){
+        SearchPost sp = new SearchPost();
+        sp.setAccount("2209080001");
+        sp.setSTitle("세븐틴");
+        sp.setAmount(10);
+        System.out.println("sp = " + sp);
+
+        int tc = mapper.getTotalCountWithSearch(sp);
+        System.out.println("tc = " + tc);
+        List<PostWithName> sList = mapper.searchAllPostWithName(sp);
+        System.out.println("sList.size= " + sList.size());
+
+        assertEquals(sList.size(), tc);
+    }
+
 }

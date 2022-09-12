@@ -1,11 +1,13 @@
 package com.ibini.my_books.post.service;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.post.domain.LinkPost;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.repository.LinkPostMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,6 +67,18 @@ public class LinkPostService {
         return linkMap;
     }
 
+//    루트 포스트에 연결된 링크 포스트를  List<PostWithName>로 리턴
+    public  List<PostWithName> getLinkListByPostNo(Long rootPostNo){
+        log.info("LinkPostService getLinkListByPostNo CALL - {} ", rootPostNo);
+
+        List<PostWithName> linkList = mapper.getLinkDTOList(rootPostNo);
+        for (PostWithName pn : linkList) {
+            pn.setting();
+//            System.out.println(pn);
+        }
+        return linkList;
+    }
+
 
     // 루트 포스트에 연결된 포스트 수 조회
     public int getCount(Long rootPostNo) {
@@ -74,5 +88,26 @@ public class LinkPostService {
     // 중복 링크인지 확인 (중복이면 true, 아니면 false)
     public boolean isLinked(LinkPost linkPost) {
         return mapper.isLinked(linkPost) >= 1;
+    }
+
+    // 루트포스트와 이미 연결된 링크 포스트를 제외한 포스트 목록 조회(검색)
+    public List<PostWithName> getSearchListService(SearchPost searchPost){
+        log.info("Link Post Service :getSearchListService call - {}", searchPost);
+        List<PostWithName> postList = mapper.getSearchList(searchPost);
+        for (PostWithName p : postList) {
+            p.pubSetting();
+        }
+        return postList;
+    }
+
+    // 포스트가 삭제될 때 관련 LinkPost 전부 삭제
+    @Transactional
+    public void postDeleteService(Long rootPostNo){
+        log.info("Link Post Service : postDeleteService call - {}", rootPostNo);
+
+        List<LinkPost> linkForRemove = mapper.getLinkForRemove(rootPostNo);
+        for (LinkPost linkPost : linkForRemove) {
+            mapper.disconnectPost(linkPost.getLinkId());
+        }
     }
 }

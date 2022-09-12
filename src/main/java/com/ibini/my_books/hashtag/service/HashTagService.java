@@ -1,6 +1,7 @@
 package com.ibini.my_books.hashtag.service;
 
 import com.ibini.my_books.hashtag.domain.HashtagDomain;
+import com.ibini.my_books.hashtag.dto.HashtagDto;
 import com.ibini.my_books.hashtag.repository.HashtagMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -29,7 +30,7 @@ public class HashTagService {
         }
         // 저장하기 전에 쪼개주기
         String[] cutHashtag = cutHashtag(hashtagDomain);
-        log.info(Arrays.toString(cutHashtag));
+        log.info("Arrays.toString -{} ", Arrays.toString(cutHashtag));
 
         for (String tag : cutHashtag) {
             hashtagDomain.setTagName(tag.trim());
@@ -54,10 +55,10 @@ public class HashTagService {
 
 
     // 태그 하나만 삭제
-    public void deleteHashTag(int tagNo) {
+    public boolean deleteHashTag(String account, int tagNo) {
         log.info(" HashTagService delete - {} ", tagNo);
-        boolean b = hashtagMapper.deleteHashtag(tagNo);
-
+        boolean b = hashtagMapper.deleteHashtag( account , tagNo);
+        return b;
     }
 
     // 태그 하나만 조회
@@ -116,6 +117,25 @@ public class HashTagService {
     public boolean removeTagOnPost(Long postNo) {
         log.info("HashTag Service : removeTagOnPost call - {}", postNo);
         return hashtagMapper.removeTagOnPost(postNo);
+    }
+
+    // hashtag 이름으로 hashtag 찾기
+    public List<HashtagDto> findOneTagName(String account, String tagName){
+        log.info("HashTag Service findOneTagName -{}, -{} ", account, tagName);
+        return hashtagMapper.findTagName(account, tagName);
+    }
+
+    // 계정에 저장된 모든 hashtag 정보 찾기
+    public int totalHashtag(String account){
+
+        log.info("HashTag Service totalHashtag - {}",account);
+        return hashtagMapper.totalTag(account);
+
+    }
+
+    public int totalHashtagName(String account, String tagName){
+        log.info("Hashtag Service totalhashtagName -{}", account, tagName);
+        return hashtagMapper.totalTagName(account, tagName);
     }
 
 

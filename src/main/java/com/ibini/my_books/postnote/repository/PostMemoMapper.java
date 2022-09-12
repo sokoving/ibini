@@ -1,7 +1,6 @@
 package com.ibini.my_books.postnote.repository;
 
-import com.ibini.my_books.postnote.common.search.Search;
-import com.ibini.my_books.postnote.domain.PostMark;
+import com.ibini.my_books.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMemo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

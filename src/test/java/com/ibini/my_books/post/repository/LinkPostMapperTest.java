@@ -1,5 +1,6 @@
 package com.ibini.my_books.post.repository;
 
+import com.ibini.my_books.common.search.SearchPost;
 import com.ibini.my_books.post.domain.LinkPost;
 import com.ibini.my_books.post.dto.PostWithName;
 import org.junit.jupiter.api.DisplayName;
@@ -22,8 +23,8 @@ class LinkPostMapperTest {
     @DisplayName("링크 연결돼야 함(데이터 저장)")
     void connectPostTest() {
 //    boolean connectPost(LinkPost linkPost);
-        Long rootPostNo = 46L;
-        Long linkPostNo = 4L;
+        Long rootPostNo = 18L;
+        Long linkPostNo = 17L;
         LinkPost lp = new LinkPost(rootPostNo, linkPostNo);
         System.out.println("lp = " + lp);
         boolean flag = mapper.connectPost(lp);
@@ -101,8 +102,37 @@ class LinkPostMapperTest {
         }
         System.out.println("--------------------------------------------------");
         System.out.println("linkDTOLIst.size = " + linkDTOLIst.size());
+    }
 
+    @Test
+    @DisplayName("링크 포스트로 등록할 포스트를 검색할 때 rootPostNo와 이미 등록된 포스트는 제외하고 조회된다")
+    void getSearchListTest(){
+        Long rootPostNo = 1L;
+        SearchPost sp = new SearchPost();
+        sp.setAccount("2209080001");
+        sp.setRootPostNo(rootPostNo);
+//        sp.setSTitle("세븐틴");
+//        sp.setSWriter("세븐");
+        System.out.println("sp = " + sp);
+        List<PostWithName> sl = mapper.getSearchList(sp);
+        for (PostWithName p : sl) {
+            p.pubSetting();
+            System.out.println(p);
+            System.out.println(p.getPublishCycle());
+        }
+        System.out.println("sl.size() = " + sl.size());
+        assertEquals(7, sl.size());
+    }
 
+    @Test
+    @DisplayName("루트포스트번호가 포함된 모든 LinkPost를 조회한다")
+    void getLinkForRemoveTest(){
+        Long rootPostNo = 7L;
+        List<LinkPost> linkForRemove = mapper.getLinkForRemove(rootPostNo);
+        for (LinkPost linkPost : linkForRemove) {
+            System.out.println(linkPost);
+        }
+        System.out.println("linkForRemove.size() = " + linkForRemove.size());
     }
 
 
