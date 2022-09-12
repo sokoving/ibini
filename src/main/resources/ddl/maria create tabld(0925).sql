@@ -72,7 +72,7 @@ CREATE TABLE prj_post_memo
     reg_datetime    DATETIME        DEFAULT current_timestamp,  -- 작성일자
     mod_datetime    DATETIME        DEFAULT current_timestamp,  -- 수정일자
     account   		VARCHAR(50)     NOT NULL,                   -- 작성자 계정(회원관리번호)
-    CONSTRAINT prj_post_memo PRIMARY KEY (memo_no)
+    PRIMARY KEY (memo_no)
 );
 
 CREATE TABLE prj_post_mark
@@ -84,7 +84,7 @@ CREATE TABLE prj_post_mark
     reg_datetime    DATETIME        DEFAULT current_timestamp,  -- 작성일자
     mod_datetime    DATETIME        DEFAULT current_timestamp,  -- 수정일자
     account         VARCHAR(50)     NOT NULL,                   -- 작성자 계정(회원관리번호)
-    CONSTRAINT prj_post_mark PRIMARY KEY (mark_no)
+    PRIMARY KEY (mark_no)
 );
 
 CREATE TABLE prj_genre
