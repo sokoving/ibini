@@ -108,7 +108,7 @@
                                         </div>
                                         <c:if test="${p.memoList.size() > 2}">
                                             <div class="view-more">
-                                                <a class="noselect" onclick="click_viewMore(this)">... 더보기</a>
+                                                <a class="noselect" onclick="click_viewMore(this)">더보기</a>
                                             </div>
                                         </c:if>
                                     </div>
