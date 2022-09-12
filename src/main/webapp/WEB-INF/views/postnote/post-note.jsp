@@ -30,12 +30,6 @@
 
     <!-- post-note CSS -->
     <link rel="stylesheet" href="/css/post-note.css">
-
-    <style>
-        #episode-no::placeholder {
-            font-size: 0.85em;
-        }
-    </style>
 </head>
 
 <body>
@@ -89,7 +83,7 @@
             <div class="accodian-button hidden"><span>MEMO LIST</span></div>
         </div>
         <!-- MARK/MEMO 데이터 목록 영역 -->
-        <div class="content-wrapper">
+        <div class="content-wrapper scroll-bar">
             <div name="mark">
                 <!-- <div class="content-area">
                     <div class="flex-sb">
@@ -401,39 +395,6 @@
             $contents.forEach($content => $content.classList.toggle('hidden'));
         }
 
-        // datetime 포맷 변환 함수
-        function formatDateTime(datetime) {
-            // 문자열 날짜 데이터를 날짜객체로 변환
-            const today = new Date(datetime);
-
-            let year = today.getFullYear();
-            let month = today.getMonth() + 1;
-            let day = today.getDate();
-            let hour = today.getHours();
-            let minute = today.getMinutes();
-
-            // 오전, 오후 시간체크
-            let ampm = '';
-            if (hour < 12 && hour >= 0) {
-                ampm = 'AM';
-
-            } else if (hour >= 12 && hour < 24) {
-                ampm = 'PM';
-
-                if (hour !== 12) {
-                    hour -= 12;                    
-                }
-            } 
-
-            // 숫자가 1자리일 경우 2자리로 변환
-            (month < 10) ? month = '0' + month : month;
-            (day < 10) ? day = '0' + day : day;
-            (hour < 10) ? hour = '0' + hour : hour;
-            (minute < 10) ? minute = '0' + minute : minute;
-
-            return year + "." + month + "." + day + "  " + ampm + hour + ":" + minute;
-        }
-
         // 마크 episodeNo, content 등록 할 때 필수값 체크 method
         function validateMarkEpAndContent() {
             const $episodeNo = document.getElementById('episode-no');
@@ -550,7 +511,7 @@
             let iconArea = '';
             iconArea += '<div class="flex-sb">';
             iconArea +=     '<div class="datetime">';
-            iconArea +=         `<span class="noselect">` + data.prettierDate + `</span>`;
+            iconArea +=         `<span class="noselect memo-date">` + data.prettierDate + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area memo-initMode">';
             iconArea +=         '<i class="fas fa-edit button" title="수정" onclick="btnModify_onclick(this)"></i>';
