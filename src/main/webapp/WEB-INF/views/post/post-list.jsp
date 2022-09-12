@@ -86,86 +86,90 @@
                     <div class="section-h2">
                         <h2>전체 포스트</h2>
                     </div>
-
-                    <c:forEach var="p" items="${pl}">
-                        <%-- 포스트 개별 영역 --%>
-                        <div class="item-wrap hover">
-                            <%-- left : 표지, 즐겨찾기 --%>
-                            <div class="item-left">
-                                <div class="thumb-box">
-                                    <c:if test="${p.thumbImg != null}">
-                                        <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="포스트 썸네일">
-                                    </c:if>
-                                </div>
-                                <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
-                            </div> <%-- // end item-left --%>
-
-                            <%-- right : 상세정보 --%>
-                            <div class="item-right">
-
-                                <%-- right-1 : 별점, 장르 --%>
-                                <div class="right-1">
-                                    <%-- 별점 --%>
-                                    <div class="star-rate" data-type="sStarRate" data-key="${p.starRate}"></div>
-                                    <%-- 장르 --%>
-                                    <div class="genre-name" data-type="sGenre" data-key="${p.genreId}">${p.genreName}
+                    <div class="post-list-box">
+                        <c:forEach var="p" items="${pl}">
+                            <%-- 포스트 개별 영역 --%>
+                            <div class="item-wrap hover" data-post-no="${p.postNo}">
+                                <%-- left : 표지, 즐겨찾기 --%>
+                                <div class="item-left">
+                                    <div class="thumb-box">
+                                        <c:if test="${p.thumbImg != null}">
+                                            <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="포스트 썸네일">
+                                        </c:if>
                                     </div>
-                                </div> <%-- // end right-1 --%>
+                                    <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
+                                </div> <%-- // end item-left --%>
 
-                                <%-- right-2 : 제목, 작가 --%>
-                                <div class="right-2">
-                                    <div class="right2-1">
-                                        <%-- 작가 --%>
-                                        <div class="post-writer" data-type="sWriter" data-key="${p.postWriter}">
-                                            ${p.postWriter}</div>
-                                        <%-- 제목 --%>
-                                        <div class="post-title">
-                                            <h3 data-key="${p.postNo}">${p.postTitle}</h3>
+                                <%-- right : 상세정보 --%>
+                                <div class="item-right">
+
+                                    <%-- right-1 : 별점, 장르 --%>
+                                    <div class="right-1">
+                                        <%-- 별점 --%>
+                                        <div class="star-rate" data-type="sStarRate" data-key="${p.starRate}"
+                                            title="별 ${p.starRate}개"></div>
+                                        <%-- 장르 --%>
+                                        <div class="genre-name" data-type="sGenre" data-key="${p.genreId}" title="${p.genreName}">
+                                            ${p.genreName}
                                         </div>
-                                        <div class="pl-pu-wrap">
-                                            <%-- 플랫폼 --%>
-                                            <span class="plat-name" data-type="sPlatform" data-key="${p.platformId}"
-                                                style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">
-                                                ${p.platformName}
-                                            </span>
-                                            <%-- 연재주기 or 연재상태 --%>
-                                            <span class="pu-cycle" data-type="sPublishStatus"
-                                                data-key="${p.publishStatus}">
-                                                <c:choose>
-                                                    <c:when test="${empty p.publishCycle}">${p.publishStatusName}
-                                                    </c:when>
-                                                    <c:otherwise>${p.publishCycle}</c:otherwise>
-                                                </c:choose>
-                                            </span>
-                                        </div> <%-- // end pl-pu-wrap --%>
-                                    </div>
+                                    </div> <%-- // end right-1 --%>
 
-                                    <div class="right2-2">
-                                        <%-- 진행도 --%>
-                                        <div class="read-percent" data-cur="${p.curEp}" data-total="${p.totalEp}"
-                                            data-name="${p.epName2}">
-                                            <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
-                                                integerOnly="true" />
-                                            ${percent}%
+                                    <%-- right-2 : 제목, 작가 --%>
+                                    <div class="right-2">
+                                        <div class="right2-1">
+                                            <%-- 작가 --%>
+                                            <div class="post-writer" data-type="sWriter" data-key="${p.postWriter}"
+                                            title="${p.postWriter}">
+                                                ${p.postWriter}</div>
+                                            <%-- 제목 --%>
+                                            <div class="post-title">
+                                                <h3 data-key="${p.postNo}" title="${p.postTitle}">${p.postTitle}</h3>
+                                            </div>
+                                            <div class="pl-pu-wrap">
+                                                <%-- 플랫폼 --%>
+                                                <span class="plat-name" data-type="sPlatform" data-key="${p.platformId}"
+                                                    style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}"
+                                                    title="${p.platformName}">
+                                                    ${p.platformName}
+                                                </span>
+                                                <%-- 연재주기 or 연재상태 --%>
+                                                <span class="pu-cycle" data-type="sPublishStatus"
+                                                    data-key="${p.publishStatus}" title="${p.publishStatusName}">
+                                                    <c:choose>
+                                                        <c:when test="${empty p.publishCycle}">${p.publishStatusName}
+                                                        </c:when>
+                                                        <c:otherwise>${p.publishCycle}</c:otherwise>
+                                                    </c:choose>
+                                                </span>
+                                            </div> <%-- // end pl-pu-wrap --%>
                                         </div>
-                                    </div>
-                                </div> <%-- // end right-2 --%>
 
-                                <%-- 해시태그 --%>
-                                <div class="right-3">
-                                    <div class="tag-one-line">
-                                        <c:choose>
-                                            <c:when test="${empty p.oneLineTag}">#등록된 해시태그가 없습니다.
-                                            </c:when>
-                                            <c:otherwise>${p.oneLineTag}</c:otherwise>
-                                        </c:choose>
-                                        
-                                    </div>
-                                </div> <%-- // end right-3 --%>
-                            </div> <%-- // end item-right --%>
-                        </div> <%-- // end item-wrap --%>
-                    </c:forEach>
+                                        <div class="right2-2">
+                                            <%-- 진행도 --%>
+                                            <div class="read-percent" data-cur="${p.curEp}" data-total="${p.totalEp}"
+                                                data-name="${p.epName2}">
+                                                <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
+                                                    integerOnly="true" />
+                                                ${percent}%
+                                            </div>
+                                        </div>
+                                    </div> <%-- // end right-2 --%>
 
+                                    <%-- 해시태그 --%>
+                                    <div class="right-3">
+                                        <div class="tag-one-line" title="${p.oneLineTag}">
+                                            <c:choose>
+                                                <c:when test="${empty p.oneLineTag}">#등록된 해시태그가 없습니다.
+                                                </c:when>
+                                                <c:otherwise>${p.oneLineTag}</c:otherwise>
+                                            </c:choose>
+
+                                        </div>
+                                    </div> <%-- // end right-3 --%>
+                                </div> <%-- // end item-right --%>
+                            </div> <%-- // end item-wrap --%>
+                        </c:forEach>
+                    </div>
 
 
                 </div> <!-- // end  inner-section-->
@@ -206,36 +210,160 @@
             // 별점에 따라 별 찍기
             drawStarsAtList();
 
+            // 검색 초기화
+            $('.section-h2').click(function (e) {
+                if (e.target.matches('.fa-undo-alt')) {
+                    fetch("/post/api/searchPost")
+                    .then(res => res.json())
+                    .then(resList => {
+                        document.querySelector('.section-h2').innerHTML = "<h2>전체 포스트</h2>";
+                        makeSearchedList(resList);
+                        alert("검색이 초기화됩니다.");
+                    })
+                }
+            })
+
+
             // 포스트 클릭 이벤트
-            $('.inner-section').click(function (e) {
+            $('.post-list-box').click(function (e) {
                 e.preventDefault();
-                // console.log(e.target);
+                // console.log(e.target.classList.contains('item-wrap'));
+
+                // 포스트 목록 내부 클릭으로 검색
                 const type = e.target.dataset.type;
                 const key = e.target.dataset.key;
+                let text;
+                switch (type) {
+                    case 'sPublishStatus':
+                        if (key === '1') text = "연재";
+                        break;
+                    case 'sStarRate':
+                        text = e.target.getAttribute('title');
+                        break;
+                    default:
+                        text = e.target.textContent.trim();
+                        break;
+                }
 
                 // 선택한 노드에 data-type과 data-key 값이 모두 있다면 검색해서 재정렬
                 if (type != undefined && key != undefined) {
-                    const url = '/post/api/searchPost?' +
-                        type + '=' + key;
-                    // console.log("타입 : " + type);
-                    // console.log("키 : " + key);
-                    // console.log("URL : " + url);
-                    fetchAndMakeDom(url, makeSearchedList);
+                    const url = '/post/api/searchPost?' + type + '=' + key;
+                    searchAndMakeList(url, makeSearchedList, text);
+                }
+
+                // 검색 영역이 아니라면 해당 상세 페이지로 이동
+                else {
+                    extractPostNoAndGo(e.target);
                 }
             });
 
+
+            // data-post-no를 탐색해서 상세 페이지로 이동하는 함수
+            function extractPostNoAndGo($node) {
+                let flag = $node.classList.contains('item-wrap');
+                if (flag) {
+                    const postNo = $node.dataset.postNo;
+                    location.href = '/post/detail/' + postNo;
+                } else {
+                    extractPostNoAndGo($node.parentElement);
+                }
+            }
+
+
+
             // 검색 요청 보낸 후 돔 만드는 함수 호출
-            function fetchAndMakeDom(url, makeFuntion) {
+            function searchAndMakeList(url, makeFuntion, text) {
                 fetch(url)
                     .then(res => res.json())
                     .then(resList => {
                         // console.log(resList);
+                        makeSectionH2(text, resList.length)
                         makeFuntion(resList);
+                        if (text != undefined) {
+                            alert("키워드 " + text + "로 " + resList.length + "건이 검색되었습니다.");
+                        }
                     })
             }
 
+            function makeSectionH2(text, size) {
+                let tag =
+                    "<h2>검색 : " + text + "(" + size + "건)</h2>" +
+                    "<span class='h2-icon list-reset'>" +
+                    "<i class='fas fa-undo-alt' title='검색 초기화'></i>" +
+                    "</span>"
+
+                document.querySelector('.section-h2').innerHTML = tag;
+            }
+
+
             function makeSearchedList(list) {
                 console.log(list);
+                if (list.length <= 0) {
+                    alert("검색된 포스트가 없습니다.");
+                    return
+                }
+
+                let tag = '';
+                for (let l of list) {
+                    // 썸네일 
+                    const thumb = l.thumbImg === null || l.thumbImg === '' ?
+                        '' :
+                        "<img class='post-img' src='/loadFile?fileName=" + l.thumbImg + "' alt='포스트 썸네일'>";
+
+                    // 연재 주기
+                    const cycle = l.publishCycle === null || l.publishCycle === '' ? l.publishStatusName : l
+                        .publishCycle;
+
+                    // 진행도
+                    const epPercent = Math.round(l.curEp / l.totalEp * 100)
+
+                    // 해시태그
+                    const hashtag = l.oneLineTag == null || l.oneLineTag == '' ? "#등록된 해시태그가 없습니다." : l
+                        .oneLineTag;
+
+                    tag += "<div class='item-wrap hover' data-post-no='" + l.postNo + "'>" +
+                        "<div class='item-left'>" +
+                        "<div class='thumb-box'>" + thumb + "</div>" +
+                        "<div class='favorite-btn'>즐겨찾기 <span class='fas fa-plus'></span> </div>" +
+                        "</div>" +
+                        "<div class='item-right'>" +
+                        "<div class='right-1'>" +
+                        "<div class='star-rate' data-type='sStarRate' data-key='" + l.starRate +
+                        "' title='별 " + l.starRate + "개'></div>" +
+                        "<div class='genre-name' data-type='sGenre' data-key='" + l.genreId +
+                         "' title='"+ l.genreName +"'>" +
+                        l.genreName +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='right-2'>" +
+                        "<div class='right2-1'>" +
+                        "<div class='post-writer' data-type='sWriter' data-key='" + l.postWriter + 
+                        "' + title='"+ l.postWriter +"'>" + l.postWriter + "</div>" +
+                        "<div class='post-title'>" +
+                        "<h3 data-key='" + l.postNo + "' title='"+ l.postTitle +"'>" + l.postTitle + "</h3>" +
+                        "</div>" +
+                        "<div class='pl-pu-wrap'>" +
+                        "<span class='plat-name' data-type='sPlatform' data-key='" + l.platformId + "'" +
+                        "style='background-color: " + l.platformBgColor + "; color:" + l.platformFontColor +
+                        "' title='"+ l.platformName +"'>" +
+                        l.platformName +
+                        "</span>" +
+                        "<span class='pu-cycle' data-type='sPublishStatus' data-key='" + l.publishStatus +
+                        "' title='"+ l.publishStatusName +"'>" +
+                        cycle + "</span>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='right2-2'>" +
+                        "<div class='read-percent' data-cur='" + l.curEp + "' data-total='" + l.totalEp + "'" +
+                        "data-name='" + l.epName2 + "'>" + epPercent + "%</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='right-3'>" +
+                        "<div class='tag-one-line' title='"+hashtag+"'>" + hashtag + "</div></div></div></div>";
+                }
+                document.querySelector(".post-list-box").innerHTML = tag;
+                drawStarsAtList();
+                window.scrollTo(500, 300);
             }
 
 

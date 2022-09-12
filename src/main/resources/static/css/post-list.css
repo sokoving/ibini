@@ -74,6 +74,24 @@ section#list-sec{
     margin: 15px 0 10px;
     line-height: 1.5;
 }
+.section-h2 .h2-icon{
+    margin-left: 10px;
+    font-size: 1.2em;
+    padding-top: 5px;
+    cursor: pointer;
+}
+.list-reset i:hover{
+    animation: rotate 1.5s ease 0.1s 5;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(360deg) scale(1.1);
+    }
+    
+}
 
 
 
@@ -165,7 +183,7 @@ section#list-sec{
     text-shadow: 2px 2px 2px #555;
 }
 .right-1 .star-rate:hover{
-    transform: scale(1.05);
+    transform: scale(1.1);
     transition: 0.2s;
 }
 /* 장르 */
@@ -198,7 +216,7 @@ section#list-sec{
     font-size: 1.45em;
 }
 .post-title:hover{
-    transform: scale(1.05);
+    transform: scale(1.1);
     transition: 0.2s;
 }
 /* 작가 */
@@ -227,17 +245,18 @@ section#list-sec{
     text-align: center;
     display: inline-block;
 }
-
-.plat-name:hover{
-    transform: scale(1.03);
-    transition: 0.2s;
-    border: 1px dashed #555;
-}
 .pu-cycle{
     background-color: #e9ecef;
     border-radius: 0em 50em 50em 00em;
     font-weight: 700;
     padding: 0.3em 1em 0.2em 0.5em;
+}
+
+.plat-name:hover,
+.pu-cycle:hover{
+    transform: scale(1.03);
+    transition: 0.2s;
+    border: 1px dashed #555;
 }
 
 /* 진행도(퍼센티지) */

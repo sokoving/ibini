@@ -96,6 +96,7 @@ public class PostService {
         List<PostWithName> postList = postMapper.searchAllPostWithName(searchPost);
         for (PostWithName p : postList) {
             p.setting();
+            p.setOneLineTag(tagService.mergeTag(p.getPostNo()));
         }
 
         return postList;

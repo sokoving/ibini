@@ -56,6 +56,13 @@ public class PostWithName {
     private String thumbImg;        // 썸네일 이미지 경로(표지)
     private String originalThumbName; // 썸네일 원본 이름
 
+    private String shortGenre;
+    private String shortWriter;
+    private String shortTitle;
+    private String shortPlatform;
+    private String shortCycle;
+    private String shortTag;
+
 
 //   아이디로 이름을 세팅해주는 메서드
     public void setting(){
@@ -64,10 +71,7 @@ public class PostWithName {
         this.epName = EpIdUtil.EP_ID_MAP.get(this.epId);
         this.epName2 = EpIdUtil.EP_NAME_MAP.get(epName);
 
-        this.publishStatusName = PublishStatusUtil.PUBLISH_STATUS_MAP.get(this.publishStatus);
-        if(this.publishStatus >= 2){
-            this.publishCycle = "";
-        }
+        pubSetting();
 
         this.shortDate = new FormattingDateDTO();
         this.shortDate.setDateDTO(regDate, updateDate);
@@ -78,6 +82,10 @@ public class PostWithName {
         if(this.publishStatus >= 2){
             this.publishCycle = "";
         }
+    }
+
+    public void shortSetting(){
+
     }
 
 
