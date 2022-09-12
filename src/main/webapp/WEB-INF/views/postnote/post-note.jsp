@@ -127,10 +127,10 @@
         // 메모 요청 URL
         const memoURL = '/postnote/memo';
 
-        const account = '2209050001';
-        // const account = '${p.account}';        
-        const postNo = 5;
-        // const postNo = document.getElementById('postNo').textContent;
+        //  const account = '2209050001';
+        //  const account = '${p.account}';        
+        //  const postNo = 5;
+        //  const postNo = '${p.postNo}';
 
         /*======================================================================
             이벤트 영역
@@ -322,13 +322,14 @@
         // 삭제 버튼 onclick Event
         function btnDelete_onclick($eventTag) {
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
+                if (!confirm('삭제하시겠습니까?')) return;
+
                 const memoNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-memo-no');
 
                 fetch(memoURL + '/' + memoNo, {method : 'DELETE'})
                     .then(response => response.text())
                     .then(message => {
                         if (message === 'delete-success') {
-                            alert('메모 삭제!');
                             showMemoList();
 
                         } else {
@@ -337,13 +338,14 @@
                 });
 
             } else {
+                if (!confirm('삭제하시겠습니까?')) return;
+
                 const markNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-mark-no');
 
                 fetch(markURL + '/' + markNo, {method : 'DELETE'})
                     .then(response => response.text())
                     .then(message => {
                         if (message === 'delete-success') {
-                            alert('마크 삭제!');
                             showMarkList();
 
                         } else {
@@ -657,8 +659,10 @@
             }
         }
         
-        showMarkList();
-        showMemoList(); 
+        (function (){
+            showMarkList();
+            showMemoList(); 
+        })();
     </script>
 </body>
 </html>
