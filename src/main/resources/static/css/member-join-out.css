@@ -1,0 +1,165 @@
+.wave {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    z-index: -1;
+}
+
+section {
+    border: none;
+}
+
+.img {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.img img {
+    width: 300px;
+}
+
+
+.btn {
+    display: block;
+    width: 35%;
+    height: 50px;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+    background-size: 200%;
+    /* font-size: 1.2rem; */
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    /* margin: 1rem 0; */
+    cursor: pointer;
+    transition: .5s;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.btn:hover {
+    background-position: right;
+}
+
+h2 {
+    border-bottom: 2px solid;
+    width: 400px;
+    text-align: center;
+    font-family: 'poppins', sans-serif;
+}
+
+h5 {
+    /* border-bottom: 2px solid; */
+    width: 440px;
+    height: 40px;
+    /* margin-bottom: 30px; */
+    font-family: 'poppins', sans-serif;
+    padding-top: 20px;
+}
+
+/* #nickmodify-btn {
+    display: inline;
+    margin-left: 15px;
+    height: 35px;
+    width: 120px;
+    padding-bottom: 20px;
+  } */
+
+#main-section {
+    margin: 200px auto 0;
+}
+
+#content-box {
+    display: flex;
+    margin-top: 0;
+    border: none;
+    padding: 0px;
+}
+
+#content {
+    margin-top: 100px;
+    margin-left: 130px;
+}
+
+.thank-msg {
+    margin-top: 30px;
+    font-family: 'poppins', sans-serif;
+    font-weight: 700;
+    font-size: 38px;
+}
+
+#main-btn {
+    width: 200px;
+}
+
+.c-red {
+    color: red;
+}
+
+.c-blue {
+    color: blue;
+}
+
+#user_name {
+    border: 2px solid;
+    border-radius: 10px;
+    width: 400px;
+    height: 40px;
+    font-family: 'poppins', sans-serif;
+}
+
+#joinout-btn {
+    margin-right: 5px;
+    width: 200px;
+}
+
+#password {
+    border: 2px solid;
+    border-radius: 10px;
+    width: 400px;
+    height: 40px;
+    font-family: 'poppins', sans-serif;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select {
+
+    width: 150px;
+    height: 35px;
+    background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+    background-size: 20px;
+    padding: 5px 30px 5px 10px;
+    border-radius: 4px;
+    outline: 0 none;
+}
+
+select option {
+    background: black;
+    color: #fff;
+    padding: 3px 0;
+}
+
+select#selbox {
+    margin-top: 5px;
+    width: 400px;
+}
+
+textarea {
+    width: 400px;
+    resize: vertical;
+    margin-top: 5PX;
+}
