@@ -1,0 +1,58 @@
+
+/* header section 초기화 */
+/* 회원관리 테이블 findAll-manageMember*/
+section {
+    width: 0;
+    border: none;
+    border-radius: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: none;
+}
+
+
+.sub-title{
+    display: flex;
+}
+
+.sub-title2{
+    margin-left: 35px;
+}
+
+.sub-title3{
+}
+
+a.btn {
+    border: 1px solid;
+    margin-left: 520px;
+    background: beige;
+}
+
+h5.sub-title1 {
+    color: #0d6efd;
+    font-weight: 700;
+    width: 170px;
+}
+
+.sub-title2 {
+    margin-left: 20px;
+    color: #d11b1ba3;
+    font-weight: 700;
+    width: 170px;
+}
+
+/* 탈퇴 사유 관리 테이블 reason-break-away*/
+.title-2 {
+    text-align: center;
+    border: 11px double;
+    width: 80%;
+    font-weight: 700;
+    font-size: 2.5em;
+    margin: 100px auto;
+    padding: 100px;
+    background: floralwhite;
+}
+
+tr{
+    border-color: black;
+}

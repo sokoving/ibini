@@ -13,8 +13,8 @@
                             <span class="user-name">${loginUser.userName} 님</span>
                         </c:if>
                         <c:if test="${loginUser.auth == 'ADMIN'}">
-                            <span style="text-align: center;">관리자 페이지 입니다.</span>
-                            <span class="user-name">[${loginUser.userName}] 님</span>
+                            <div style="text-align: center;">관리자 권한 계정 입니다.</div>
+                            <span style="margin-left: 90px;" class="user-name">[${loginUser.userName}] 님</span>
                         </c:if>
                         <span class="fas fa-bars"></span>
                     </a>
@@ -49,7 +49,8 @@
                             <c:if test="${loginUser.auth == 'ADMIN'}">
                                 <ul>
                                     <li><a href="#">관리자메뉴</a></li>
-                                    <li><a href="/member/admin/findall-inquiry">문의하기</a></li>
+                                    <li><a href="/member/findAll-ManageMember">회원관리</a></li>                                    
+                                    <li><a href="/member/admin/findall-inquiry">문의글 관리</a></li>                                    
 
                                     <c:if test="${loginUser != null}">
                                         <li><a href="/member/sign-out">로그아웃</a></li>

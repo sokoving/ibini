@@ -8,6 +8,7 @@ import lombok.*;
 //회원관리 테이블
 public class ManageMember {
     private String userId;
-    private boolean userCondition;
+    private String email;
+    private String userCondition;
 
 }

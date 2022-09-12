@@ -13,7 +13,7 @@
   <title>sign-in</title>
   <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-  <link rel="stylesheet" href="/css/member-findpw.css">
+  <link rel="stylesheet" href="/css/member-findid.css">
 
 
 
@@ -31,61 +31,48 @@
     <div class="login-content">
 
 
-      <!-- 인증코드가 없는 경우 보여지는 웹브라우저 -->
-      <c:if test="${empty code}">
-        <form action="/member/findpw" name="findpw" method="post" id="findpw">
+      <!-- 등록된 eamil로 아이디 찾기 -->
+      <c:if test="${userid == null}">
+        <form action="/member/findid" name="findid" method="post" id="findid">
           <img src="/img/ibini_logo_4.png">
           <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg -->
-          <h2 class="title"> 비밀번호 찾기</h2>
+          <h2 class="title"> 아이디 찾기</h2>
           <div class="input-div one">
             <div class="i">
               <!-- <i class="fas fa-user"></i> -->
             </div>
             <div class="div">
-              <h5>userId</h5>
-              <input type="text" name="userId" id="userId" class="input" maxlength="14">
+              <h5>e-mail</h5>
+              <input type="text" name="email" id="email" class="input" maxlength="30">
             </div>
           </div>
-          <div class="input-div pass">
-            <div class="i">
-              <!-- <i class="fas fa-lock"></i> -->
-            </div>
-            <div class="div">
-              <h5>email</h5>
-              <input type="text" class="input" id="email" name="email">
-            </div>
-          </div>
+          
 
-          <!-- 인증번호 버튼 -->
-          <input type="submit" class="btn" value="인증번호 받기">
+          <!-- 아이디 찾기 버튼 -->
+          <input type="submit" class="btn" style="padding: 0;" value="아이디 찾기">
 
         </form>
       </c:if>
 
-      <!-- 인증코드가 있는 경우 보여지는 웹브라우저 화면 -->
-      <c:if test="${not empty code}">
-        <form action="/member/checkcode" method="post">
+
+      <!-- id찾기 성공시 출력되는 화면 -->
+      <c:if test="${userid != null}">
+        <div>
           <img src="/img/ibini_logo_4.png">
-          <input type="hidden" name="code" id="code" value="${code}">
-          <input type="hidden" name="userId" value="${userId}">
           <div class="input-div two">
             <div class="i">
               <!-- <i class="fas fa-user"></i> -->
             </div>
             <div class="div">
-              <h5>인증코드를 입력해주세요.</h5>
-              <input type="text" class="input" name="inputcode" id="inputcode" class="inputcode" maxlength="8">
+              <h5>회원님의 아이디 : "${userid}" </h5>
             </div>
           </div>
 
-          <!-- 인증번호 버튼 -->
-          <input type="submit" class="btn" value="인증코드 확인">
-        </form>
-
-
-      </c:if>
-
-
+          <!-- 로그인 페이지로 이동 -->
+          <a href="/member/sign-in" class="btn"> 로그인 </a>
+          <a href="/member/findpw" class="btn"> 비밀번호 찾기 </a>
+        </div>
+        </c:if>
     </div>
   </div>
 
@@ -93,8 +80,8 @@
 
 
   <script>
-    const code = '${code}';
-    // console.log(code);
+    const userid = '${userid}';
+    // console.log(userid);
 
     const inputs = document.querySelectorAll(".input");
 
@@ -120,17 +107,10 @@
     //Source :- https://github.com/sefyudem/Responsive-Login-Form/blob/master/img/avatar.svg
 
     const msg = '${msg}';
-    if (msg === 'not-find-userId') {
-      alert('존재하지 않는 회원 입니다.');
+    if (msg === 'not-found-userid') {
+      alert('입력하신 e-mail과 일치하는 id를 찾지 못했습니다. 확인후 다시 입력해주세요.');
     }
 
-    if (msg === 'email-discord') {
-      alert('회원가입된 이메일과 일치하지 않습니다.');
-    }
-
-    if (msg === 'discord-code') {
-      alert('인증코드가 일치하지 않습니다. 확인 후 다시 입력해주세요.');
-    }
   </script>
 
 

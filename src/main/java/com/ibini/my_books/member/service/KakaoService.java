@@ -3,8 +3,11 @@ package com.ibini.my_books.member.service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.ibini.my_books.member.domain.Member;
 import com.ibini.my_books.member.dto.KakaoUserInfoDTO;
 import com.ibini.my_books.member.domain.OauthValue;
+import com.ibini.my_books.member.repository.MemberMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,11 @@ import java.net.URL;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class KakaoService implements OauthService, OauthValue {
+
+    private final MemberMapper memberMapper;
+
     @Override
     public String getAccessToken(String authCode) throws Exception {
         //1. 액세스 토큰을 발급 요청할 URI
@@ -90,7 +97,17 @@ public class KakaoService implements OauthService, OauthValue {
             e.printStackTrace();
         }
     }
+//     카카오 계정 이메일과 일치하는 회원이 있는지 확인
+    public boolean kakaoEmailConfirm(KakaoUserInfoDTO dto){
+        Member foundUserId = memberMapper.findUserId(dto.getEmail());
+        if(foundUserId != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+//    카카오 계정 정보 얻어오기
     public KakaoUserInfoDTO getkakaoUserInfo(String accessToken) throws Exception {
         String reqUri = "https://kapi.kakao.com/v2/user/me";
 

@@ -2,7 +2,9 @@ package com.ibini.my_books.member.repository;
 
 import com.ibini.my_books.member.common.paging.Page;
 import com.ibini.my_books.member.domain.InquiryTable;
+import com.ibini.my_books.member.domain.ManageMember;
 import com.ibini.my_books.member.domain.Member;
+import com.ibini.my_books.member.dto.OutReasonManageDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,6 +114,74 @@ class MemberMapperTest {
             }
 
 
+    }
+
+//    현재 회원탈퇴관리 테이블의 마지막 reasonNum 구하기
+    @Test
+    @DisplayName("회원관리 테이블의 마지막 번호")
+    void getReasonNum(){
+        int currentReasonNum = mapper.getCurrentReasonNum();
+        System.out.println(currentReasonNum);
+    }
+
+    @Test
+    @DisplayName("관리자의 회원전체조회(탈퇴회원포함)")
+    void findAllManageMember(){
+        List<ManageMember> allManageMember = mapper.findAllManageMember();
+        for (ManageMember manageMember : allManageMember) {
+            System.out.println(manageMember);
+        }
+    }
+
+    @Test
+    @DisplayName("현재 가입한 회원의 수")
+    void getTotalCurrentMemberCount(){
+
+        int totalCurrentMemberCount = mapper.getTotalCurrentMemberCount();
+        System.out.println(totalCurrentMemberCount);
+
+    }
+
+    @Test
+    @DisplayName("현재 탈퇴한 회원 수")
+    void getTotalOutMemberCount(){
+
+        int totalOutMemberCount = mapper.getTotalOutMemberCount();
+        System.out.println(totalOutMemberCount);
+
+    }
+
+    @Test
+    @DisplayName("현재 탈퇴한 회원 수")
+    void verificationKakaoChange(){
+        String email = "rodrodzzang@naver.com";
+
+        mapper.verificationKakaoChange(email);
+
+    }
+
+    @Test
+    @DisplayName("암호화된 비밀번호 끼리 동등비교 가능여부 확인")
+    void test(){
+        Member rodrodzzang = mapper.findUserId("rodrodzzang");
+        boolean b = rodrodzzang.getPassword().equals(rodrodzzang.getPassword());
+        System.out.println(b);
+    }
+
+    @Test
+    @DisplayName("탈퇴 회원의 탈퇴사유 조회")
+    void outReasonTest(){
+        List<OutReasonManageDTO> allOutReason = mapper.findAllOutReason();
+        for (OutReasonManageDTO outReasonManageDTO : allOutReason) {
+            System.out.println(outReasonManageDTO);
+        }
+    }
+
+    @Test
+    @DisplayName("로그인 기록 남기기")
+    void loginLogInsertTest(){
+        String account = "2209130005";
+        mapper.loginLogInsert(account);
     }
 
 
