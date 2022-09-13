@@ -42,8 +42,6 @@ public class PlatformService {
     }
 
     // 삭제
-    // 수정
-
     public boolean deletePlatform(int platformId) {
 
         // 삭제 대항 platform_id 가진 post 찾아 미분류로 변경
@@ -66,6 +64,9 @@ public class PlatformService {
         boolean dflag = platformMapper.deletePlatform(platformId);
         return dflag;
     }
+
+
+    // 수정
     public boolean modifyPlatform(PlatformDomain platformDomain) {
         boolean mflag = platformMapper.modifyPlatform(platformDomain);
         return mflag;
