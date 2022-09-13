@@ -24,16 +24,17 @@ function makeGenreDom(genreList){
         
         let genreId = genreList[key].genreId;
         let genreName = genreList[key].genreName;
+        let rowNum = genreList[key].rowNum;
 
         console.log(genreId);
         console.log(genreName);
-
+        console.log('rowNum : ', rowNum);
         
         // 태그생성
 
         tag += `<div id="genList">
                     <div class="genreId" id="genreId` + genreId +`">
-                        <span>` + genreId + `</span>
+                        <span>` + rowNum + `</span>
                     </div>
                     <div class="genreName" id="genreName">
                         <span>` + genreName + `</span>
