@@ -83,6 +83,7 @@
             <section id="list-sec">
                 <div class="inner-section">
                     <!-- 포스트 목록 제목 -->
+                    <a name="list-title"></a>
                     <div class="section-h2">
                         <h2>전체 포스트(총 ${pm.totalCount}건)</h2>
                     </div>
@@ -175,10 +176,8 @@
 
                     <!-- 포스트 목록 하단부(페이징) -->
                     <div class="list-bottom">
-                        <c:if test="${!pm.next && pm.finalPage != pm.page.pageNum}">
-                            <div class="show-more" data-page-num="1">더보기</div>
-                        </c:if>
-                        <div class="list-end"> ${pm.beginPage}/${pm.endPage} <i class="fas fa-arrow-up"></i></div>
+                        <div class="show-more" data-page-num="1">더보기</div>
+                        <div class="list-end"></div>
                     </div>
 
                 </div> <!-- // end  inner-section-->
@@ -190,31 +189,29 @@
 
 
     <script>
+        // 전역변수
+        const $h2 = $('.section-h2');
+        const apiURL = "/post/api/searchPost?"
+        let searchURL = "";
+        let pageNum = "${pm.beginPage}";
+        let endPage = "${pm.endPage}";
+
         let oneLineTag;
-        // 별 특수문자 채우는 함수
-
-
 
         // start jQuery
         $(document).ready(function () {
-            // jQueryTagTest("태그 잡기 테스트", $('h1'));
+
+            // --------------------- 기본 세팅 ------------------- //
+            setting(); // list 페이지 초기 로딩 시 세팅
+
+            function setting() {
+                drawStarsAtList(); // 별점에 따라 별 찍기
+                setShortTag(); // 해시태그 자르기
+                makeListBottom(); // 리스트 하단부 페이징 영역 세팅
+            }
+
+            // 별 특수문자 채우기
             function drawStarsAtList() {
-                // 전체 포스트에서 더보기 요청
-                $('.show-more').click(function (e) {
-                    const pageNum = e.target.dataset.pageNum + 1;
-                    console.log(pageNum);
-                    const url = "/post/api/searchPost?pageNum" + pageNum
-                    fetch(url)
-                        .then(res => res.json())
-                        .then(resList => {
-                            console.log("----------------------");
-                            console.log(resList);
-                            makeSearchedList(resList, "more");
-                        })
-                })
-
-
-
                 const $stars = document.querySelectorAll('.star-rate');
                 //    console.log($stars);
 
@@ -232,7 +229,7 @@
                 }
             }
 
-            // 해시태그 글자 자르는 함수
+            // 해시태그 글자 자르기
             function setShortTag() {
                 const tagList = $('.tag-one-line');
                 // console.log(tagList);
@@ -246,26 +243,94 @@
                 }
             }
 
-            // 별점에 따라 별 찍기
-            drawStarsAtList();
-            setShortTag();
+            // 목록 하단부 갱신하기
+            function makeListBottom() {
+                // 마지막 포스트까지 보여줬다면 더보기 감추기
+                const $showBtn = $('.show-more')[0];
+                console.log($showBtn);
+                console.log("하단부 갱신");
+                console.log(pageNum + " / " + endPage);
+                if (pageNum >= endPage) {
+                    if (!$showBtn.classList.contains('hide')) {
+                        $showBtn.classList.add('hide');
+                    }
+                } else {
+                    if ($showBtn.classList.contains('hide')) {
+                        $showBtn.classList.remove('hide');
+                    }
+                }
+
+                // list-end 텍스트 수정
+                const $listEnd = $('.list-end')[0];
+                const str = pageNum + "/" + endPage +
+                    "<a href='#list-title'><i class='fas fa-arrow-up'></i></a>";
+                $listEnd.innerHTML = str;
+            }
+
+            // 목록 상단부 갱신하기
+            // 검색 : text(size건)
+            function makeSectionH2(text, size) {
+                let tag =
+                    "<h2 class='h2-search'>검색 : " + text + "(" + size + "건)</h2>" +
+                    "<span class='h2-icon list-reset'>" +
+                    "<i class='fas fa-undo-alt' title='검색 초기화'></i>" +
+                    "</span>"
+                $h2[0].innerHTML = tag;
+            }
+
+
+
+            // --------------------- 요청 클릭 이벤트 ------------------- //
+
+            // 전체 포스트에서 더보기 요청
+            $('.show-more').off().click(function (e) {
+                // 요청 url 만들기
+                // 1. section-h2에서 기존 url 가져오기
+                let url = apiURL;
+                console.log("1. url : " + url);
+
+                // 2. 타깃(show-more)에서 페이지번호 가져와 url에 붙이기
+                // page-num 하나 올려주기
+                pageNum++;
+
+                url += (searchURL === "") ? "pageNum=" + pageNum : searchURL + "&pageNum=" +
+                    pageNum;
+                console.log("2. url : " + url);
+
+                // 다음 페이지 조회 요청 보내기
+                fetch(url)
+                    .then(res => res.json())
+                    .then(resList => {
+                        console.log("----------------------");
+                        // 추가로 받아온 포스트 넣어주기
+                        makeSearchedList(resList, false);
+                        makeListBottom();
+                    })
+
+            })
+
 
             // 검색 초기화
-            $('.section-h2').click(function (e) {
+            $h2.off().click(function (e) {
                 if (e.target.matches('.fa-undo-alt')) {
                     fetch("/post/api/searchPost")
                         .then(res => res.json())
                         .then(resList => {
-                            document.querySelector('.section-h2').innerHTML = "<h2>전체 포스트</h2>";
+                            $h2[0].innerHTML = "<h2>전체 포스트</h2>";
                             makeSearchedList(resList);
+                            searchURL = "";
+                            pageNum = "${pm.beginPage}";
+                            endPage = "${pm.endPage}";
+                            makeListBottom();
+
                             alert("검색이 초기화됩니다.");
                         })
                 }
             })
 
 
-            // 포스트 클릭 이벤트
-            $('.post-list-box').click(function (e) {
+            // 항목 클릭으로 검색 / 상세 페이지 이동
+            $('.post-list-box').off().click(function (e) {
                 e.preventDefault();
                 // console.log(e.target.classList.contains('item-wrap'));
 
@@ -287,8 +352,12 @@
 
                 // 선택한 노드에 data-type과 data-key 값이 모두 있다면 검색해서 재정렬
                 if (type != undefined && key != undefined) {
-                    const url = '/post/api/searchPost?' + type + '=' + key;
-                    searchAndMakeList(url, text);
+                    console.log("변경전 searchURl : " + searchURL);
+                    searchURL = type + '=' + key;
+                    let url = apiURL + searchURL;
+                    console.log("포스트 클릭 검색 url : " + url);
+                    console.log("변경된 searchURl : " + searchURL);
+                    searchAndMakeList(url, makeSearchedList, text);
                 }
 
                 // 검색 영역이 아니라면 해당 상세 페이지로 이동
@@ -316,29 +385,32 @@
                 fetch(url)
                     .then(res => res.json())
                     .then(resList => {
-                        console.log("----------------------");
-                        console.log(resList);
-                        makeSectionH2(text, resList.tc)
+                        console.log("---------- 검색 요청 ------------");
+
+                        // 상단부 세팅
                         makeFuntion(resList);
+
+                        // 포스트 목록 부분 세팅
+                        makeSectionH2(text, resList.tc);
+
+                        // 하단부 세팅
+                        pageNum = "1";
+                        endPage = resList.pm.finalPage;
+                        makeListBottom();
+
+                        // 알람
                         if (text != undefined) {
                             alert("키워드 " + text + "로 " + resList.tc + "건이 검색되었습니다.");
                         }
+
                     })
             }
 
-            function makeSectionH2(text, size) {
-                let tag =
-                    "<h2 class='h2-search'>검색 : " + text + "(" + size + "건)</h2>" +
-                    "<span class='h2-icon list-reset'>" +
-                    "<i class='fas fa-undo-alt' title='검색 초기화'></i>" +
-                    "</span>"
 
-                document.querySelector('.section-h2').innerHTML = tag;
-            }
 
-            // flag = new > 포스트 영역 비우고 새로 만들기
-            // flag = more > 기존 있는 포스트 영역 밑에 더 붙여 만들기
-            function makeSearchedList(list, flag = 'new') {
+            // flag = true > 포스트 영역 비우고 새로 만들기
+            // flag = false > 기존 있는 포스트 영역 밑에 더 붙여 만들기
+            function makeSearchedList(list, flag = true) {
                 console.log(list);
                 if (list.length <= 0) {
                     alert("검색된 포스트가 없습니다.");
@@ -405,15 +477,13 @@
                         "<div class='tag-one-line' title='" + hashtag + "'>" + hashtag +
                         "</div></div></div></div>";
                 }
-                if (flag = "new") {
+                if (flag) {
                     document.querySelector(".post-list-box").innerHTML = tag;
-                } else if (flag = "more") {
-                    console.log("모어");
+                } else {
                     document.querySelector(".post-list-box").innerHTML += tag;
                 }
                 drawStarsAtList();
                 setShortTag();
-                window.scrollTo(500, 300);
             }
 
 

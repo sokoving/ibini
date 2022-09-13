@@ -3,7 +3,6 @@ package com.ibini.my_books.post.api;
 import com.ibini.my_books.common.paging.Page;
 import com.ibini.my_books.common.paging.PageMaker;
 import com.ibini.my_books.common.search.SearchPost;
-import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.service.PostService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Map;
 
 @RestController
