@@ -34,6 +34,7 @@ function makeGenreDom(genreList){
 
         tag += `<div id="genList">
                     <div class="genreId" id="genreId` + genreId +`">
+                        <input type="hidden" value="` + genreId+ `">
                         <span>` + rowNum + `</span>
                     </div>
                     <div class="genreName" id="genreName">
@@ -82,8 +83,9 @@ function ModifyAndRemoveEvent() {
 function clickeventHandler(e){
 
     e.preventDefault();
-    const genreId = e.target.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
-    
+    const genreId = e.target.parentElement.parentElement.firstElementChild.firstElementChild.value;
+    // const genreId = e.target.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
+
     console.log('장르 수정 - genreId: ', genreId);
     // console.log(event);
     
