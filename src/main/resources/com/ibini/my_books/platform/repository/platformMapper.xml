@@ -66,12 +66,27 @@
         WHERE platform_id = #{platform_id}
     </select>
 
-<!--    전체 조회 -->
+<!--    전체 조회 + 로우넘 -->
     <select id="findAllPlatform" resultMap="platformMap">
-        SELECT * FROM prj_platform
-        WHERE account = #{account}
-        ORDER BY platform_id
+        SELECT
+            @ROWNUM:=@ROWNUM+1 AS ROWNUM
+	, account
+	, platform_id
+	, platform_name
+    , platform_bg_color
+    , platform_font_color
+        FROM
+            prj_platform
+        WHERE
+            (SELECT @ROWNUM:=0)=0 and
+            account = #{account}
     </select>
+
+<!--    <select id="findAllPlatform" resultMap="platformMap">-->
+<!--        SELECT * FROM prj_platform-->
+<!--        WHERE account = #{account}-->
+<!--        ORDER BY platform_id-->
+<!--    </select>-->
 
 <!--  계정에 있는 플랫폼 수 조회  -->
     <select id="getTotalCount" resultType="int">

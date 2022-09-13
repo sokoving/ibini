@@ -24,16 +24,18 @@ function makeGenreDom(genreList){
         
         let genreId = genreList[key].genreId;
         let genreName = genreList[key].genreName;
+        let rowNum = genreList[key].rowNum;
 
         console.log(genreId);
         console.log(genreName);
-
+        console.log('rowNum : ', rowNum);
         
         // 태그생성
 
         tag += `<div id="genList">
                     <div class="genreId" id="genreId` + genreId +`">
-                        <span>` + genreId + `</span>
+                        <input type="hidden" value="` + genreId+ `">
+                        <span>` + rowNum + `</span>
                     </div>
                     <div class="genreName" id="genreName">
                         <span>` + genreName + `</span>
@@ -81,8 +83,9 @@ function ModifyAndRemoveEvent() {
 function clickeventHandler(e){
 
     e.preventDefault();
-    const genreId = e.target.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
-    
+    const genreId = e.target.parentElement.parentElement.firstElementChild.firstElementChild.value;
+    // const genreId = e.target.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
+
     console.log('장르 수정 - genreId: ', genreId);
     // console.log(event);
     

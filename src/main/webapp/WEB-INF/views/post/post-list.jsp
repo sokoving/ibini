@@ -59,22 +59,27 @@
             <!-- 새 포스트 등록 섹션 -->
             <section id="reg-sec">
                 <div class="inner-section">
+                    <h2>새 글 등록하기</h2>
+                    <div class="post-write-Btn">
 
-                    <!-- 새 글 등록 버튼 -->
-                    <a href="/post/write">
-                        <div class="new-post">
-                            <div class="reg-btn">
-                                <span class="fas fa-plus"></span>
-                                <h2>새 포스트를 등록해 보세요</h2>
+                        <!-- 새 글 등록 버튼 -->
+                        <a href="/post/write">
+                            <div class="new-post">
+                                <div class="reg-btn">
+                                    <span class="fas fa-plus"></span>
+                                    <h2>직접 입력해서 등록하기</h2>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <!-- 새 글 등록 메뉴 -->
-                    <div class="reg-menu on">
-                        <ul>
-                            <li>직접 입력해서 등록하기</li>
-                            <li>검색해서 등록하기</li>
-                        </ul>
+                        </a>
+
+                        <a href="/api/findtitle">
+                            <div class="new-post">
+                                <div class="reg-btn">
+                                    <span class="fas fa-plus"></span>
+                                    <h2>검색해서 등록하기</h2>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div> <!-- // end reg-sec -->
             </section> <!-- // end section -->

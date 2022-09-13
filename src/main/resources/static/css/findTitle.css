@@ -12,12 +12,16 @@
     text-shadow: #e90404 1px 1px 40px;
     font-family: 'PyeongChangPeace-Light';
 }
+#content-wrap h2{
+    font-family: 'PyeongChangPeace-Light', sans-serif;
+    padding: 10px 20px;
+}
 #content-wrap br {
     width: 100%;
     color: black;
 }
 #content-wrap #search {
-    background: #f9f8f6;
+    background: #eeedeb;
     height: 50px;
     border-radius: 10px;
     margin-bottom: 20px;

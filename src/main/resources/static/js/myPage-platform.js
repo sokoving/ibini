@@ -172,13 +172,16 @@ function makePlatformDom(domainList) {
         let platformId = domainList[key].platformId;
         let platformBgColor  = domainList[key].platformBgColor;
         let platformFontColor = domainList[key].platformFontColor;
+        let rowNum = domainList[key].rowNum;
+        console.log('rowNum : ', rowNum);
 
         // option 생성할 필요가 없다 -> select 아래에 넣어주니까!!
         // var option = document.createElement("option");
         // tag 더해주기
         tag += `<div id="selList">
-                    <div class="platformNo">`
-                        + platformId + `
+                    <div class="platformNo">
+                        <input type="hidden" value="`+ platformId+`">
+                        `+ rowNum + `
                     </div>
                     <div class="platformName">
                         <span>` + platformName + `</span>
@@ -214,7 +217,7 @@ function openModifyModalAndRemoveEvent() {
 
     $SelectSetting.addEventListener('click', function(e){
         // alert('selectSetting');
-        console.log(e.target);
+        console.log('e : ', e.target);
         platformModAndDelHandler(e);
     });
 }
@@ -325,7 +328,7 @@ function platformModifyEvent(pickerHTML) {
 // 플랫폼 수정/삭제 핸들러
 function platformModAndDelHandler(e) {
     //textcontent를 innerText로 바꿈
-    const no = e.target.parentElement.parentElement.firstElementChild.innerText;
+    const no = e.target.parentElement.parentElement.firstElementChild.firstElementChild.value;
     // const noo = e.target.parentElement;
 
     console.log('no:', no);

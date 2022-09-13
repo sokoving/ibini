@@ -1,14 +1,26 @@
 /* 새 글 등록 영역 */
 #reg-sec .inner-section {
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     align-items: center;
+}
+
+#reg-sec .inner-section h2{
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#reg-sec .inner-section .post-write-Btn{
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .new-post .reg-btn{
     border: 1px dotted #555;
     border-radius: 0 1rem 0 1rem ;
-    padding: 50px 30px;
+    /*padding: 50px 30px;*/
+    padding: 30px;
     background-color: #e9ecef;
     color: #555;
     cursor: pointer;
