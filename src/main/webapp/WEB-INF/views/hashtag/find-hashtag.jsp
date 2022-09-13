@@ -80,6 +80,10 @@
         padding: 3px 20px;
         border-radius: 5px;
     }
+    .tagInfo:hover{
+        transition: 1s;
+        background-color: #fff0c6 ;
+    }
 
     .tagInfo .titleAndNo {
         font-size: 25px;
@@ -123,7 +127,7 @@
                             <!-- <span># </span><span class="tagName">${tag.tagName}</span> -->
                             <span class="postNo">PostNo. </span><span class="postNo">${tag.postNo}</span>
                         </div>
-                        <div class="tagInfo">
+                        <div class="tagInfo" onclick="location.href='/post/detail/${tag.postNo}'">
                             <div class="titleAndNo">
                                 <span class="postTitle">${tag.postTitle}</span>
                             </div>

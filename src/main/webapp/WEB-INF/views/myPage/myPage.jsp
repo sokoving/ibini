@@ -92,7 +92,7 @@
         margin-bottom: 20px;
     }
     /* 닉네임 BtnCss */
-    #nickBtn{
+    #nickmodify-btn ,#modify-btn ,#main-btn ,#joinOut-btn{
         background-color: rgb(0, 0, 0);
         border-radius: 10px;
         border: 0px;
@@ -101,12 +101,38 @@
         font-weight: 700;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
     }
-    #nickBtn:hover{
+
+    /* hover */
+    #nickmodify-btn:hover{
         background-color: #ffca3d;
+        transition: 1s;
         color: #000;
         border: 0px;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
     }
+    #modify-btn:hover{
+        background-color: #ffca3d;
+        transition: 1s;
+        color: #000;
+        border: 0px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    }
+    #joinOut-btn:hover{
+        background-color: #ffca3d;
+        transition: 1s;
+        color: #000;
+        border: 0px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    }
+    #main-btn:hover{
+        background-color: #ffca3d;
+        transition: 1s;
+        color: #000;
+        border: 0px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    }
+
+
     #wrap .nickName .comment span{
         margin-right: 20px;
     }
