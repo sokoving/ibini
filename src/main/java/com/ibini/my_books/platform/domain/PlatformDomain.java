@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 public class PlatformDomain {
 
+    private int rowNum;
     private int platformId;
     private String account; // == userId
     private String platformName;

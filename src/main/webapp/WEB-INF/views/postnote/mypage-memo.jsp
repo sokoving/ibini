@@ -22,12 +22,24 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/mypage-memo.css">
+    <link rel="stylesheet" href="/css/myPageSetting.css" />
 </head>
 
 <body>
     <!-- 최상단 wrap 영역 -->
+    <%@ include file="../include/change-header.jsp" %>
     <div id="wrap">
-        <%@ include file="../include/header.jsp" %>
+        <div id="sideBar">
+            <h2>MyPage</h2>
+            <a href="/myPage">User-Info</a>
+            <a href="">Help</a>
+            <h3>Setting</h3>
+            <a href="/myPage/platform">Platform</a>
+            <a href="/myPage/genre">Genre</a>
+            <a href="/myPage/marklist">BookMark</a>
+            <a href="/myPage/memolist">BookMemo</a>
+        </div>
+    
         <section class="noselect">
             <div class="header-wrapper">
 
@@ -164,7 +176,7 @@
 
         // 옵션이 바뀌면 검색창 / 내용창 메시지를 초기화시켜주는 Event
         $("#search-option").on("change",function(){
-            $("#searchText").val('');   
+            // $("#searchText").val('');   
             $('.blank li').text('');
         });
 
