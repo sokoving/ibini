@@ -11,11 +11,12 @@
 
 
         <body>
+              <!-- header -->
+            <%@ include file="../include/change-header.jsp" %>
             <div id="wrap">
-                <%@ include file="../include/header.jsp" %>
                     <section>
                     </section>
-                    <h1 style="margin-top: 20px;"> 회원 탈퇴사유 관리  </h1>
+                    <h1 style="margin-top: 100px;"> 회원 탈퇴사유 관리  </h1>
                     <div class="sub-title">
                     <h5 class="sub-title1"> 현재 회원 : ${ints[0]} </h5>
                     <h5 class="sub-title2"> 탈퇴한 회원 : ${ints[1]}</h5>

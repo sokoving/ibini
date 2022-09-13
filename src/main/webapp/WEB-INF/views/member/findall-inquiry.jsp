@@ -10,11 +10,12 @@
 
 
         <body>
+              <!-- header -->
+            <%@ include file="../include/change-header.jsp" %>
             <div id="wrap">
-                <%@ include file="../include/header.jsp" %>
                     <section>
                     </section>
-                    <h1 style="margin-top: 20px; margin-bottom: 20px;"> 문의사항 관리페이지 </h1>
+                    <h1 style="margin-top: 100px; margin-bottom: 20px;"> 문의사항 관리페이지 </h1>
                     <!-- <div class="register-btn btn"> 문의글 등록하기</div> -->
 
                     <c:if test="${empty list}">

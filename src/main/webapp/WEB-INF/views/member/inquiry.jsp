@@ -10,19 +10,21 @@
 
 
         <body>
+        <!-- header -->
+       <%@ include file="../include/change-header.jsp" %>
             <div id="wrap">
-                <%@ include file="../include/header.jsp" %>
                     <section>
-                        <h1> 문의하기 </h1>
+                        <h1 style="margin-top: 100px;"> 문의하기 </h1>
                         <!-- 모달 버튼 -->
-                        <div class="inquiry-register"> <a id="registerBtn" type="button" class="btn btn-primary"
+                        <div class="inquiry-register"> 
+                            <a id="registerBtn" type="button" class="btn btn-primary"
                                 data-bs-toggle="modal" data-bs-target="#inquiryregisterModal"
-                                data-bs-whatever="" href="#" style="background-color: #ffd668; ">
+                                data-bs-whatever="" href="#" style="background-color: #ffd668;">
 
                                 [문의글 등록하기] </a> </div>
 
                         <!-- 모달 팝업 모달 문의글 쓰기 -->
-                        <div class="modal fade" id="inquiryregisterModal" tabindex="-1"
+                        <div class= "modal fade" id="inquiryregisterModal" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
