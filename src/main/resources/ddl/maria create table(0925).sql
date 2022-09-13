@@ -194,3 +194,5 @@ CREATE TABLE login_list(
    login_log     DATETIME    DEFAULT current_timestamp,   -- 로그인이력
      PRIMARY KEY (login_num)
 );
+DROP SEQUENCE seq_login_list;
+CREATE SEQUENCE seq_login_list;
