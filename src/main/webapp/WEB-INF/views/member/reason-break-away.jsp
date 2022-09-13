@@ -11,8 +11,8 @@
 
 
         <body>
+            <%@ include file="../include/change-header.jsp" %>
             <div id="wrap">
-                <%@ include file="../include/header.jsp" %>
                     <section>
                     </section>
                     <h1 style="margin-top: 20px;"> 회원 탈퇴사유 관리  </h1>
