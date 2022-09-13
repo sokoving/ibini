@@ -186,9 +186,10 @@ section {
 ==================================================*/
 .list-wrapper {
     /* border: 1px solid #ced4da; */
-    border-top-left-radius: 0.4rem;
-    border-top-right-radius: 0.4rem;
+    /* border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem; */
     /* margin-top: 50px; */
+    border-radius: 1rem;
     padding: 8px 0px;
 
     text-align: center;
@@ -198,7 +199,7 @@ section {
     cursor: default;
     background-color: #ffca3d;
     width: 97%;
-    margin: 50px auto 0;
+    margin: 50px auto 8px;
 }
 
 /*================================================
@@ -215,7 +216,7 @@ section {
 
     background: #faf9f6;
     width: 97%;
-    margin: 0 auto;
+    margin: 0 auto 10px;
 }
 
 /* 스크롤바 디자인 */
