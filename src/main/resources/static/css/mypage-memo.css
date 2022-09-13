@@ -141,7 +141,7 @@ section {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .search-wrapper select:hover {
-    outline: 2px solid #495057;;
+    outline: 2px solid #495057;
     border: none;
 }
 
@@ -169,7 +169,7 @@ section {
 
     font-size: 16px;
     font-weight: 600;
-    background: #ffca3d;;
+    background: #ffca3d;
     box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
 }
 .search-wrapper .search-button:hover {

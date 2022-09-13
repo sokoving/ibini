@@ -52,6 +52,7 @@
             <div class="accodian-button hidden"><span>MEMO LIST</span></div>
         </div>
         <!-- MARK/MEMO 데이터 목록 영역 -->
+        <a name="post-note"></a> <!-- 리모컨 영역 -->
         <div class="content-wrapper scroll-bar">
             <div name="mark">
                 <!-- <div class="content-area">

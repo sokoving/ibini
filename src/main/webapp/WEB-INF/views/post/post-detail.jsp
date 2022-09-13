@@ -20,6 +20,8 @@
     <%@ include file="../include/change-header.jsp" %>
 
     <div id="wrap">
+        <a name="go-top"></a>
+        <%@ include file="../include/header.jsp" %>
 
 
         <div id="content-wrap">
@@ -179,30 +181,31 @@
                         <!-- 사이드 리모컨 영역 -->
                         <div id="remote-controller">
                             <div id="inner-remote">
-                                리모컨
+                                <div class="remote-title">리모컨</div>
                                 <div id="go-to-controller">
-                                    <!-- <select>
-                                    <option value="">최상단</option>
-                                    <option value="">해시태그</option>
-                                    <option value="">관련 포스트</option>
-                                    <option value="">포스트 노트</option>
-                                    <option value="">최하단</option>
-                                    <option value="">포스트 목록</option>
-                                    <option value="">마이페이지</option>
-                                </select> -->
-                                    <button>이동</button>
+                                    <select id="select-remote-option">
+                                        <option value="#hash-tag">해시태그</option>
+                                        <option value="#link-post">연관 포스트</option>
+                                        <option value="#post-note">포스트 노트</option>
+                                    </select>
+                                    <button id="move-scroll-btn">이동</button>
                                 </div>
-
-                                <div id="search-controller">
-                                    <!-- <input type="text" name="" id=""> -->
+                                <div id="go-down-list">
+                                    <a href="#go-top" class="go-top"><i class="fas fa-arrow-up"></i>위로</a>
+                                    <a href="#go-down" class="go-down"><i class="fas fa-arrow-down"></i>아래로</a>
+                                    <a href="/list" class="go-list"><i class="fas fa-list"></i>목록</a>
+                                </div>
+                                <!-- <div id="search-controller">
+                                    <input type="text" name="" id="">
                                     <button>검색</button>
-                                </div>
+                                </div> -->
                             </div> <!-- // end inner-remote -->
                         </div> <!-- // end remote-conroller -->
 
                         <div id="etc-wrap">
 
                             <!-- 해시태그 영역 -->
+                            <a name="hash-tag"></a>
                             <div id="hash-wrap">
 
                                 <div class="h3-wrap">
@@ -237,6 +240,7 @@
                             </div> <!-- // end hash-wrap -->
 
                             <!-- 연관 포스트 영역 -->
+                            <a name="link-post"></a>
                             <div id="link-post-wrap">
                                 <div class="h3-wrap">
                                     <h3>연관 포스트</h3>
@@ -260,13 +264,13 @@
 
                     </div> <!-- // end remote-etc-wrap -->
 
+                    <!-- 포스트 노트 영역 -->
+                    <%@ include file="../postnote/post-detail-note.jsp" %>
+
                 </div> <!-- // end inner-section -->
             </section> <!-- // end section -->
-
-            <!-- 포스트 노트 영역 -->
-            <%@ include file="../postnote/post-detail-note.jsp" %>
-
         </div>
+        <a name="go-down"></a>
     </div> <!-- end wrap -->
 
     <script src="/js/post-detail.js"></script>
@@ -568,6 +572,12 @@
             })
 
 
+            // 리모컨 이벤트
+            $('#move-scroll-btn').click(function() {
+                // 현재 선택된 select box
+                let selectOption = $("#select-remote-option option:selected").val();
+                location.href = selectOption;
+            })
         });
         // end jQuery
     </script>
