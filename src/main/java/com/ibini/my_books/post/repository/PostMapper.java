@@ -36,5 +36,9 @@ public interface PostMapper {
     int getTotalCount(String account);
     int getTotalCountWithSearch(SearchPost searchPost);
 
+    // 특정 장르 아이디를 가진 포스트의 post_no 모두 조회
+    List<Post> getPostByGenreId(int genreId);
 
+    // 특정 플랫폼 아이디를 가진 포스트의 post_no 모두 조회
+    List<Post> getPostByPlateId(int platformId);
 }

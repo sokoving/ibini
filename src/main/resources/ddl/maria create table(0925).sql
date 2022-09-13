@@ -90,6 +90,7 @@ CREATE TABLE prj_genre
     genre_name    VARCHAR(100)    NOT NULL,    -- 장르명
     PRIMARY KEY (genre_id)
 );
+insert into prj_genre (account, genre_name) VALUES ('admin', '미분류'); -- 관리용 항목(테이블 만들 때 넣어주세요)
 select * FROM prj_genre;
 
 CREATE TABLE prj_platform
@@ -101,6 +102,7 @@ CREATE TABLE prj_platform
     platform_font_color  VARCHAR(50)      DEFAULT 'rgb(255,255,255)',   -- 플랫폼 배지 글자색
     PRIMARY KEY (platform_id)
 );
+insert into prj_platform (account, platform_name) VALUES ('admin', '미분류');  -- 관리용 항목(테이블 만들 때 넣어주세요)
 select * FROM prj_platform;
 
 
