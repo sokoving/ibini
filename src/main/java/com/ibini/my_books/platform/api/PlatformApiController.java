@@ -30,7 +30,7 @@ public class PlatformApiController {
                 const genreURL = "http://localhost:8383/genre/c1?account=" + account;
      */
 
-    @GetMapping("")
+    @GetMapping("/{account}")
     public List<PlatformDomain> list(HttpSession session, Model model){
         // 로그인 정보 가져오기
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
