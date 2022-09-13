@@ -108,7 +108,7 @@ section {
     width: 90%;
     /* border: 1px solid #adb5bd; */
     /* border-radius: 0.25rem; */
-    margin: 10px auto 0;
+    margin: 50px auto 0;
     /* padding: 24px; */
     box-sizing: border-box;
 }
@@ -122,9 +122,10 @@ section {
     search-wrapper      / 검색 영역
 ==================================================*/
 .search-wrapper {
-    border: 1px solid #adb5bd;
-    border-radius: 0.4rem;
-    padding: 1.5rem;
+    /* border: 1px solid #adb5bd; */
+    /* border-radius: 0.4rem; */
+    /* padding: 1.5rem; */
+    margin-left: 25px;
 
     font-size: 17px;       
 }
@@ -183,7 +184,7 @@ section {
     /* border: 1px solid #ced4da; */
     border-top-left-radius: 0.4rem;
     border-top-right-radius: 0.4rem;
-    margin-top: 25px;
+    margin-top: 50px;
     padding: 8px 0px;
 
     text-align: center;
