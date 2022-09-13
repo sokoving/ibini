@@ -6,6 +6,8 @@ import com.ibini.my_books.post.domain.Post;
 import com.ibini.my_books.post.dto.PostWithName;
 import com.ibini.my_books.post.repository.PostMapper;
 import com.ibini.my_books.postImg.service.PostImgService;
+import com.ibini.my_books.postnote.service.PostMarkService;
+import com.ibini.my_books.postnote.service.PostMemoService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -25,6 +27,8 @@ public class PostService {
     private final HashTagService tagService;
     private final PostImgService imgService;
     private final LinkPostService linkPostService;
+    private final PostMarkService postMarkService;
+    private final PostMemoService postMemoService;
 
 
     //    포스트 등록
@@ -72,10 +76,12 @@ public class PostService {
     public boolean removeService(Long postNo) {
         log.info("Post Service : removeService call - {}", postNo);
 
-//        포스트 삭제 전 해시태그, 이미지, 링크포스트 전부 지우기
+//        포스트 삭제 전 해시태그, 이미지, 링크포스트, 마크, 메모 전부 지우기
         tagService.removeTagOnPost(postNo);
         imgService.removeByPostNo(postNo);
         linkPostService.postDeleteService(postNo);
+        postMarkService.removeAll(postNo);
+        postMemoService.removeAll(postNo);
 
         return postMapper.remove(postNo);
     }
