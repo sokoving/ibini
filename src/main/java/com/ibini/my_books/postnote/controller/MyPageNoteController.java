@@ -65,7 +65,7 @@ public class MyPageNoteController {
             myPageMarkList.add(myPageMark);
             }
         }
-        log.info(myPageMarkList);
+//        log.info(myPageMarkList);
 
         model.addAttribute("myPageMarkList", myPageMarkList);
         return "postnote/mypage-mark";
@@ -106,17 +106,17 @@ public class MyPageNoteController {
                 myPageMemoList.add(myPageMemo);
             }
         }
-        log.info(myPageMemoList);
+//        log.info(myPageMemoList);
 
         model.addAttribute("myPageMemoList", myPageMemoList);
         return "postnote/mypage-memo";
     }
 
     // Mark 더보기 비동기
-    @GetMapping("/plus/marklist")
+    @GetMapping("/viewMore/marklist")
     @ResponseBody
     public List<MyPageMark.Mark> viewPostWithMarkList2(@RequestParam(value="postNo") Long postNo, Search search) {
-        log.info("/myPage/plus/marklist GET!");
+        log.info("/myPage/viewMore/marklist GET!");
 
         List<PostMark> markList = postMarkService.findAllWithSearchExcept2Rows(postNo, search);
 
@@ -137,10 +137,10 @@ public class MyPageNoteController {
     }
 
     // Memo 더보기 비동기
-    @GetMapping("/plus/memolist")
+    @GetMapping("/viewMore/memolist")
     @ResponseBody
     public List<MyPageMemo.Memo> viewPostWithMemoList2(@RequestParam(value="postNo") Long postNo, Search search) {
-        log.info("/myPage/plus/memolist GET!");
+        log.info("/myPage/viewMore/memolist GET!");
 
         List<PostMemo> memoList = postMemoService.findAllWithSearchExcept2Rows(postNo, search);
 

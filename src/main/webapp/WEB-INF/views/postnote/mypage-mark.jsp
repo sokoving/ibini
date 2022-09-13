@@ -216,7 +216,7 @@
                 keyword = '&type=content' + '&keyword=' + encodeURIComponent($keyword);
             } 
 
-            fetch('/myPage/plus/marklist/?postNo=' + postNo + keyword)
+            fetch('/myPage/viewMore/marklist/?postNo=' + postNo + keyword)
                 .then(response => response.json())
                 .then(markList => {
 

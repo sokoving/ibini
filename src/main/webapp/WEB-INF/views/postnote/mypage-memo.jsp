@@ -188,7 +188,7 @@
                 keyword = '&type=content' + '&keyword=' + encodeURIComponent($keyword);
             } 
 
-            fetch('/myPage/plus/memolist/?postNo=' + postNo + keyword)
+            fetch('/myPage/viewMore/memolist/?postNo=' + postNo + keyword)
                 .then(response => response.json())
                 .then(memoList => {
 
