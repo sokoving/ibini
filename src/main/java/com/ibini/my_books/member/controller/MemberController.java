@@ -197,7 +197,7 @@ public class MemberController {
         if (flag) {
             ra.addFlashAttribute("msg", "nickModify-success");
             ra.addFlashAttribute("modifyUserName", userName);
-            return "redirect:/member/my-info";
+            return "redirect:/myPage/myPage";
         }
         ra.addFlashAttribute("msg", "nickModify-fail");
         return "redirect:/member/modifyNick-check";

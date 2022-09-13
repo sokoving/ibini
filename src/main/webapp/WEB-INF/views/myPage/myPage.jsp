@@ -32,47 +32,7 @@
         font-family: 'NanumSquareRound';
         /*padding: 50px 0;*/
     }
-    /* side Bar CSS */
-    #wrap #sideBar{
-        width: 20%;
-        background-color: #000;
-        /* display: flex; */
-        /* flex-wrap: wrap; */
-        margin-right: 20px;
-        border-radius: 10px;
-        padding: 20px;
 
-    }
-    #wrap #sideBar h2{
-        color: #fffaee;
-        font-size: 30px;
-        font-weight: 600;
-
-        padding: 10px 0;
-        border-bottom: 2px solid #eeedeb;
-        margin-bottom: 30px;
-    }
-    #wrap #sideBar h3{
-        color: #fffaee;
-        font-size: 30px;
-        font-weight: 600;
-
-        padding: 10px 0;
-        border-bottom: 2px solid #eeedeb;
-        margin: 30px 0;
-    }
-    #wrap #sideBar a{
-        display: inline-block;
-        width: 100%;
-        font-size: 25px;
-        font-weight: 700;
-        padding: 5px 5px;
-        text-decoration: none;
-        color: #fffaee;
-    }
-    #wrap #sideBar a:hover{
-        color: #ffca3d;
-    }
     #wrap #user-Info{
         background-color: #eeedeb;
         width: 80%;
@@ -244,10 +204,9 @@
     </div>
     <script>
 
+        let date = '${loginUser.prettierDate}';
+        console.log('date : ', date);
 
-
-        const date = '${loginUser.prettierDate}';
-        console.log(date);
         let elementById = document.getElementById('nickmodify-btn');
         console.log(elementById);
         const $nickModifyBtn = document.getElementById('nickmodify-btn');

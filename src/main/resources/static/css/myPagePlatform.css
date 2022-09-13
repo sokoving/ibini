@@ -8,7 +8,10 @@
 
 .myPage-wrap {
     font-family: 'PyeongChangPeace-Light', sans-serif;
-    /*background: #fffaee;*/
+    background: #fffaee;
+    border-radius: 10px;
+    width: 80%;
+    height: 100vh;
 }
 
 .myPage-wrap h1{
@@ -61,7 +64,7 @@
 /* 플랫폼 이름 */
 .myPage-wrap .platform-wrap #selectSetting #selList .platformName{
     background: #fff;
-    width: 33%;
+    width: 30%;
     padding: 0 20px;
 }
 
@@ -110,7 +113,7 @@
 .myPage-wrap .platform-wrap #selectSetting #selList .modiAndDel{
     /*background: rgb(171, 116, 168);*/
     padding-left: 30px;
-    width: 20%;
+    width: 23%;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .modiAndDel #delBtn{

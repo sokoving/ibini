@@ -8,12 +8,14 @@
 .myPage-wrap{
     font-family: 'PyeongChangPeace-Light', sans-serif;
     background: #fffaee;
-    height: 500vh;
+    height: 100vh;
+    width: 80%;
+    border-radius: 10px;
 }
 
 .myPage-wrap h1{
     width: 70%;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     padding: 30px;
     font-size: 50px;
     text-shadow: #e90404 1px 1px 25px;
@@ -74,7 +76,7 @@
 
 .myPage-wrap .genre-wrap #genreSetting #genList .modiNdel{
     width: 20%;
-    padding-left: 30px;
+    /*padding-left: 30px;*/
 }
 
 .myPage-wrap .genre-wrap #genreSetting #genList .modiNdel #gendel{

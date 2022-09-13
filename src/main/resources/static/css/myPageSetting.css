@@ -5,7 +5,7 @@
   margin: 50px auto;
   font-family: 'NanumSquareRound';
   /*padding: 50px 0;*/
-  background: #fffaee;
+  /*background: #fffaee;*/
 }
 /* side Bar CSS */
 #wrap #sideBar{
@@ -47,10 +47,4 @@
 }
 #wrap #sideBar a:hover{
   color: #ffca3d;
-}
-#wrap #user-Info{
-  background-color: #eeedeb;
-  width: 80%;
-  padding: 30px;
-  border-radius: 10px;
 }
