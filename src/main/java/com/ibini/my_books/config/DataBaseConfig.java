@@ -27,8 +27,8 @@ public class DataBaseConfig {
 
         // 현정 노트북 설정
 //        config.setUsername("root");
-//        config.setPassword("mariadb");
-//        config.setJdbcUrl("jdbc:mariadb://localhost:3306/spring4");
+//        config.setPassword("mariadb1234");
+//        config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini");
 //        config.setDriverClassName("org.mariadb.jdbc.Driver");
 
 
