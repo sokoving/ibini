@@ -344,6 +344,23 @@
             console.log("postNo : " + postNo);
 
 
+            // selected할 원본 포스트의 플랫폼, 장르 아이디 
+            const platformId = "${p.platformId}",
+                genreId = "${p.genreId}";
+
+            // 플랫폼, 장르 선택창 불러오기
+            showdomainList(platformId);
+            savePlatformClickEvent();
+            showGenreList(genreId);
+            saveGenreClickEvent();
+
+
+            // 원본 포스트의 연재, 회차 아이디로 checked
+            const pubId = "${p.publishStatus}",
+                epId = "${p.epId}";
+            setModiRadio(pubId, epId);
+
+
             // 첨부파일 선택창 메세지 세팅
             setUploadCount();
 
@@ -358,16 +375,6 @@
                     checkKeyup(e);
                 }
             });
-
-            // 불러온 플랫폼, 장르 아이디 selected
-            const platformId = "${p.platformId}",
-                genreId = "${p.genreId}";
-            setModiSelect(platformId, genreId);
-
-            // 불러온 연재, 회차 아이디로 checked
-            const pubId = "${p.publishStatus}",
-                epId = "${p.epId}";
-            setModiRadio(pubId, epId);
 
 
             // 포스트 입력 폼 제출 이벤트

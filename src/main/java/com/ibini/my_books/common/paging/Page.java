@@ -1,4 +1,4 @@
-package com.ibini.my_books.postnote.common.paging;
+package com.ibini.my_books.common.paging;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,5 +32,10 @@ public class Page {
             return;
         }
         this.amount = amount;
+    }
+
+//    limit의 첫 번째 파라메터(가져오기 시작할 포스트 순서)
+    public int getStart(){
+        return (pageNum-1)*amount;
     }
 }

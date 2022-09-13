@@ -42,7 +42,8 @@
 <!--        <if test="platformFontColor != null"> ,#{platformFontColor} </if>-->
 <!--        )-->
 <!--    </insert>-->
-    
+
+
 <!--    삭제-->
     <delete id="deletePlatform">
         DELETE FROM prj_platform

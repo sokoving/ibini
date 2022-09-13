@@ -3,6 +3,7 @@
 -- 폴더 이동
 cd "C:\Program Files\MariaDB 10.7\bin"
 -- mysql 구동, 패스워드 입력
+mysql -u root -p
 Enter password: mariadb
 -- 성공 메세지
 Welcome to the MariaDb monitor.
