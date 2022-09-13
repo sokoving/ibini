@@ -13,6 +13,7 @@
     <!-- post-note CSS -->
     <link rel="stylesheet" href="/css/post-note.css">
 
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -575,6 +576,10 @@
                 let selectOption = $("#select-remote-option option:selected").val();
                 location.href = selectOption;
             })
+
+            $(function(){
+                $('#remote-controller').draggable({'cancel':'#go-to-controller, #go-down-list', containment:'body', scroll:false});
+            });
         });
         // end jQuery
     </script>
