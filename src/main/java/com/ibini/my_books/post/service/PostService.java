@@ -109,6 +109,17 @@ public class PostService {
         return searchMap;
     }
 
+    // 특정 장르 아이디를 가진 포스트의 post_no 모두 조회
+    public List<Post> getPostByGenreId(int genreId){
+        log.info("PostService getPostByGenreId Call - {}", genreId);
+        return postMapper.getPostByGenreId(genreId);
+    }
+
+    // 특정 플랫폼 아이디를 가진 포스트의 post_no 모두 조회
+    public List<Post> getPostByPlateId(int platformId){
+        log.info("PostService getPostByPlateId Call - {}", platformId);
+        return postMapper.getPostByPlateId(platformId);
+    }
 
 
 }
