@@ -5,7 +5,13 @@
 <header>
     <div id="headerWrap">
         <div class="logo">
-            <span class="logo-font" onclick="location.href='/'">IBINI BOOKS</span>
+            <c:if test="${loginUser.auth == 'COMMON'}">
+                <span class="logo-font" onclick="location.href='/'">IBINI BOOKS</span>
+            </c:if>
+
+            <c:if test="${loginUser.auth == 'ADMIN'}">
+                <span class="logo-font" onclick="location.href='/'">IBINI BOOKS ADNIM PAGE</span>
+            </c:if>
         </div>
         <div class="infoBar">
 <%--            이름 --%>
@@ -32,12 +38,11 @@
 
             <!-- 관리자가 보는 헤드 메뉴 -->
             <c:if test="${loginUser.auth == 'ADMIN'}">
-                <ul>
-                    <li><a href="#">관리자메뉴</a></li>
-                    <li><a href="/member/admin/findall-inquiry">문의하기</a></li>
+
+                    <span class="logIn" onclick="location.href='/member/admin/findall-inquiry'">문의하기</span>
 
                     <c:if test="${loginUser != null}">
-                        <li><a href="/member/sign-out">로그아웃</a></li>
+                        <span class="myPage" onclick="location.href='/member/sign-out'">log-out</span>
                     </c:if>
                 </ul>
             </c:if>
