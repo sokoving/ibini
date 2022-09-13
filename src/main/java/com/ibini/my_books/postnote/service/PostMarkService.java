@@ -2,6 +2,7 @@ package com.ibini.my_books.postnote.service;
 
 import com.ibini.my_books.common.search.Search;
 import com.ibini.my_books.postnote.domain.PostMark;
+import com.ibini.my_books.postnote.domain.PostMemo;
 import com.ibini.my_books.postnote.dto.MyPagePostDTO;
 import com.ibini.my_books.postnote.repository.PostMarkMapper;
 import lombok.RequiredArgsConstructor;
@@ -39,9 +40,12 @@ public class PostMarkService {
 
     // 마크 전체 조회 요청 중간 처리
     public Map<String, Object> findAll(Long postNo) {
-
         Map<String, Object> markMap = new HashMap<>();
-        markMap.put("markList", postMarkMapper.findAll(postNo));
+
+        List<PostMark> markList = postMarkMapper.findAll(postNo);
+        convertDateFormat(markList);
+
+        markMap.put("markList", markList);
         markMap.put("markCnt", postMarkMapper.getPostMarkCount(postNo));
 
         return markMap;
@@ -60,11 +64,20 @@ public class PostMarkService {
     // 마크 전체 조회 With Search
     public List<PostMark> findAllWithSearch(Long postNo, Search search) {
         List<PostMark> markList = postMarkMapper.findAllWithSearch(postNo, search);
-
         convertDateFormat(markList);
 
         return markList;
     }
+
+    // 마크 전체 조회 Except 2 rows
+    public List<PostMark> findAllWithSearchExcept2Rows(Long postNo, Search search) {
+        List<PostMark> markList = postMarkMapper.findAllWithSearchExcept2Rows(postNo, search);
+        convertDateFormat(markList);
+
+        return markList;
+    }
+
+    // 날짜 포맷팅 함수
     private void convertDateFormat(List<PostMark> postMark) {
         for (PostMark m : postMark) {
             Date date = m.getModDatetime();
@@ -73,6 +86,7 @@ public class PostMarkService {
             m.setPrettierDate(newDate.format(date));
         }
     }
+
 
     // 마이페이지 post, img 조회
     public List<MyPagePostDTO> findAllPostWithImg(String account, Search search) {

@@ -89,7 +89,7 @@ textarea {
 .button-area {
     text-align: right;
     display: inline-block;
-    margin-right: 0.8em;
+    margin-right: 1.5em;
 
     flex: 1;
 }
@@ -108,17 +108,18 @@ textarea {
 #postnote {
     box-sizing: border-box;
     background: #fff;
-    width: 1000px;
+    /* width: 1000px; */
+    width: 90%;
     /* min-width: 500px; */
-    border: 1px solid #adb5bd;
+    /* border: 1px solid #adb5bd; */
     border-radius: 0.25rem;
 
     font-family: 'NanumSquareRound', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     color: #000;
 
-    padding: 0.5em;
-    margin: 0 auto;
+    /* padding: 0.5em; */
+    margin: 50px auto 0;
 }
 #postnote div {
     width: 100%;
@@ -133,8 +134,8 @@ textarea {
 #postnote .title-wrapper {
     text-align: center;
     border: 1px solid #ced4da;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
     border-bottom-left-radius: none;
     border-bottom-right-radius: none;
 
@@ -151,10 +152,10 @@ textarea {
     width: 60%;
 } */
 #postnote .title-wrapper div[name="mark"] {
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: 0.4rem;
 }
 #postnote .title-wrapper div[name="memo"] {
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: 0.4rem;
 }
 #postnote .title-wrapper>div {
     padding: 5px 0px;
@@ -174,23 +175,35 @@ textarea {
 #postnote .submit-wrapper {
     text-align: left;
     border: 1px solid #ced4da;
+    border-top: none;
+    border-bottom-left-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+    /* background: #fefbf1; */
+    background: #fcfaf5;
 
-    padding: 1rem;
+    padding: 20px 25px;
 }
 
 /* episode-no 입력 부분 */
 #postnote .submit-wrapper .episode-no {
     margin: 0.5em;
+    font-weight: 600;
 }
 #postnote .submit-wrapper .episode-no input {
     width: 60%;
     text-align: center;
 
-    border: 1px solid #6c757d;
+    /* border: 1px solid #6c757d; */
+    border: 1px solid #adb5bd;
     border-radius: 0.25rem;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 
     margin-left: 0.3rem;
     padding: 0.1rem;
+}
+#episode-no::placeholder {
+    font-size: 0.85em;
 }
 /* #postnote .submit-wrapper .episode-no input:hover {
     outline: 1px solid #495057;;
@@ -199,10 +212,13 @@ textarea {
 
 /* Mark / Memo 내용 입력 부분 */
 #postnote .submit-wrapper .text-area textarea {
-    padding: 0.8rem;
+    padding: 1rem;
+    font-size: 17px;
 
-    border: 1px solid #6c757d;
+    /* border: 1px solid #6c757d; */
+    border: 1px solid #adb5bd;
     border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 
     resize: both;
 }
@@ -228,15 +244,18 @@ textarea {
     border-radius: 0.25rem;
     text-align: center;
     padding: 0.4rem 0.8rem;
+
+    font-weight: 600;
 }
 
 /*================================================
     postnote->accodian-wrapper / 아코디언 영역
 ==================================================*/
 #postnote .accodian-wrapper {
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    margin-top: 10px;
+    /* border: 1px solid #ced4da; */
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
+    margin-top: 25px;
     cursor: pointer;
     font-weight: bold;
     text-align: center;
@@ -250,8 +269,12 @@ textarea {
     postnote->content-wrapper / 데이터 목록 영역
 ==================================================*/
 #postnote .content-wrapper {
-    border: 1px solid #adb5bd;
-    border-radius: 5px;
+    /* border: 1px solid #adb5bd; */
+    border-bottom-left-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+    /* background: #fefbf1; */
+    background: #fcfaf5;
+
     padding: 1em 0.7em 0.7em;
 
     font-size: 0.8em;
@@ -259,12 +282,27 @@ textarea {
 
     max-height: 50vh;
     overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 스크롤바 디자인 */
+.scroll-bar::-webkit-scrollbar {
+    width: 15px;  /* 스크롤바의 너비 */
+}
+.scroll-bar::-webkit-scrollbar-thumb {
+    height: 20%; /* 스크롤바의 길이 */
+    background: #ffca3d; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+.scroll-bar::-webkit-scrollbar-track {
+    background: #ffe6a2;  /*스크롤바 뒷 배경 색상*/
 }
 
 /* 데이터 출력단 설정 */
 #postnote .content-wrapper .content-area{
     text-align: left;
-    padding: 0px 10px;
+    padding: 0px 20px;
 }
 #postnote .content-wrapper .content-area .flex-sb {
     margin-bottom: 0.3em;
@@ -278,45 +316,69 @@ textarea {
 
 /* 회차구분 icon 설정 */
 #postnote .content-wrapper div[name='mark'] .content-area i.noselect {
-    border: 1px solid rgba(0,0,0,0.21);
-    border-radius: 0.5rem;
+    /* border: 1px solid rgba(0,0,0,0.21); */
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 
     min-width: 50px;
-    padding: 0.3em;
+    padding: 0.4rem 0.6rem;
     margin: 0 0.6em 0.4em 0.4em;
 
     display: inline-block;
 	text-decoration: none;
     cursor: default;
+
+    font-size: 15px;
 }
 #postnote .content-wrapper div[name='mark'] .content-area span.mark-date {
     margin-left: 0.5em;
+    font-weight: 600;
 }
-#postnote .content-wrapper .content-area i.marking-type1::before {
-    content: 'ep.';
+#postnote .content-wrapper div[name='memo'] .content-area span.memo-date {
+    margin-left: 0.5em;
+    font-weight: 600;
 }
-#postnote .content-wrapper .content-area i.marking-type2::before {
-    content: 'page.';
+
+#postnote .content-wrapper .content-area i.marking.type1::after {
+    content: '화';
+    margin-left: 0.15rem;
 }
-#postnote .content-wrapper .content-area i.marking-type3::before {
-    content: 'chap.';
+#postnote .content-wrapper .content-area i.marking.type2::before {
+    content: 'p';
+    margin-right: 0.15rem;
 }
-#postnote .content-wrapper .content-area i.marking-type1 {
+#postnote .content-wrapper .content-area i.marking.type3::after {
+    content: '권';
+    margin-left: 0.15rem;
+}
+#postnote .content-wrapper .content-area i.marking.type4::after {
+    content: '%';
+    margin-left: 0.15rem;
+}
+#postnote .content-wrapper .content-area i.marking {
+    color: #fff;
+    background-color: #22577E;
+}
+/* #postnote .content-wrapper .content-area i.marking.type1 {
     color: white;
     background-color: rgb(191, 142, 142);
 }
-#postnote .content-wrapper .content-area i.marking-type2 {
+#postnote .content-wrapper .content-area i.marking.type2 {
     color: white;
     background-color: blue;
 }
-#postnote .content-wrapper .content-area i.marking-type3 {
+#postnote .content-wrapper .content-area i.marking.type3 {
     color: white;
     background-color: green;
 }
+#postnote .content-wrapper .content-area i.marking.type4 {
+    color: white;
+    background-color: rgb(90, 187, 90);
+} */
 
 /* 아이콘 버튼 설정 */
 .button-area i.fas {
-    font-size: 1.4em;
+    font-size: 1.3em;
     color: #343a40;
 }
 .button-area i.fas:hover {
@@ -337,8 +399,11 @@ textarea {
 #postnote .content-wrapper .content{
     padding: 0.8em;
     word-break: break-all;
-    /* border: 1px solid; */
-    border-radius: 0.25rem;
+    font-size: 17px;
+    border: 1px solid #ced4da;
+    border-radius: 0.3rem;
+    box-shadow: rgba(0, 0, 0, 0.08) 1.95px 1.95px 2.6px;
+
     width: 100%;
 }
 
@@ -350,3 +415,11 @@ textarea {
 #postnote .content-wrapper>div>div>div:nth-child(2) {
     margin-top: 0.2em;
 }
+
+/* 마크, 메모가 없을 때 표시 */
+#postnote .content-wrapper div div.blank {
+    text-align: center;
+    font-weight: 600;
+    font-size: 17px;
+}
+

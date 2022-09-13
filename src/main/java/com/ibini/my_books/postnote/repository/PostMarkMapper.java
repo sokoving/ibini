@@ -29,12 +29,15 @@ public interface PostMarkMapper {
     // 마크 전체 조회 기능 With Search
     List<PostMark> findAllWithSearch(@Param("postNo") Long postNo, @Param("search") Search search);
 
+    // 마크 전체 조회 기능 Except 2 rows
+    List<PostMark> findAllWithSearchExcept2Rows(@Param("postNo") Long postNo, @Param("search") Search search);
+
     // 마크 개별 조회 기능
     PostMark findOne(Long markNo);
 
     // 전체 마크 수 조회
     int getPostMarkCount(Long postNo);
 
-    // MyPagePostDTO post 조회(썸네일 포함)
+    // MyPagePostDTO post 조회 (썸네일 포함)
     List<MyPagePostDTO> findAllPostWithImg(@Param("account") String account, @Param("search") Search search);
 }

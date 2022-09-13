@@ -28,6 +28,9 @@ public interface PostMemoMapper {
     // 메모 전체 조회 기능 With Search
     List<PostMemo> findAllWithSearch(@Param("postNo") Long postNo, @Param("search") Search search);
 
+    // 메모 전체 조회 기능 Except 2 rows
+    List<PostMemo> findAllWithSearchExcept2Rows(@Param("postNo") Long postNo,  @Param("search") Search search);
+
     // 메모 개별 조회 기능
     PostMemo findOne(Long memoNo);
 

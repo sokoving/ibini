@@ -5,7 +5,7 @@
 
         <head>
             <%@ include file="../include/static-head.jsp" %>
-            <link rel="stylesheet" href="/css/inquiry-all.css">
+                <link rel="stylesheet" href="/css/member-inquiry-all.css">
         </head>
 
 
@@ -14,7 +14,7 @@
                 <%@ include file="../include/header.jsp" %>
                     <section>
                     </section>
-                    <h1 style="margin-top: 20px;"> 문의사항 관리페이지 </h1>
+                    <h1 style="margin-top: 20px; margin-bottom: 20px;"> 문의사항 관리페이지 </h1>
                     <!-- <div class="register-btn btn"> 문의글 등록하기</div> -->
 
                     <c:if test="${empty list}">
@@ -32,10 +32,14 @@
                                             <li class="inquiry-title" data-serial-num="${list.serialNumber}">
                                                 [문의]&nbsp;${list.userId}</li>
                                             <div class="newMark inquirynewmark">
-                                                <c:if test="${list.newInquiryArticle}">
-                                                    <span class="badge rounded-pill bg-danger">new</span>
-                                                </c:if>
-                                                <li class="title"> 제목 : ${list.inquiryTitle}</li>
+
+                                                <li class="title">
+                                                    <c:if test="${list.newInquiryArticle}">
+                                                        <span class="badge rounded-pill bg-danger">new</span>
+                                                    </c:if>
+                                                    제목 : ${list.inquiryTitle}
+                                                </li>
+
                                             </div>
                                         </ul>
                                         <ul class="table1-secondchild detailAnswerclick"></ul>
@@ -44,7 +48,7 @@
                                     <ul class="inner-inquiryTable table2">
                                         <li data-serial-num="${list.serialNumber}">${list.inquiryPrettierDate}</li>
                                         <c:if test="${list.answer == null}">
-                                            
+
                                             <!-- 모달 버튼 -->
                                             <li class="answer-register"> <a id="registerBtn" type="button"
                                                     class="btn btn-primary" data-bs-toggle="modal"
@@ -54,10 +58,13 @@
                                         </c:if>
                                         <c:if test="${list.answer != null}">
                                             <div class="newMark answernewmark">
-                                                <c:if test="${list.newAnswerArticle}">
-                                                    <span class="badge rounded-pill bg-danger">new</span>
-                                                </c:if>
-                                                <li class="detail">[답변완료]</li>
+
+                                                <li class="detail">
+                                                    <c:if test="${list.newAnswerArticle}">
+                                                        <span class="badge rounded-pill bg-danger" style="line-height: 1.3; height: 27px; margin-right: 3px;">new</span>
+                                                    </c:if>
+                                                    [답변완료]
+                                                </li>
 
                                             </div>
                                         </c:if>
@@ -117,6 +124,10 @@
                                             <label for="recipient-name" class="col-form-label">문의글 제목:</label>
                                             <div class="form-control" id="recipient-name"></div>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="recipient-context" class="col-form-label">문의 내용:</label>
+                                            <div class="form-control" id="recipient-context"></div>
+                                        </div>
                                         <input type="hidden" id="hidden-serialNumber" name="serialNumber">
                                         <div class="mb-3">
                                             <label for="message-text" class="col-form-label">답글 작성:</label>
@@ -136,6 +147,7 @@
 
 
                     <!--================== script =================================-->
+
                     <!-- page script -->
                     <script>
                         // 현재 위치한 페이지에 active 스타일 부여하기
@@ -148,7 +160,7 @@
                             // 페이지 li태그들을 전부 확인해서 
                             // 현재 위치한 페이지 넘버와 텍스트컨텐츠가 일치하는 li를 찾아서 class active 부여
                             const $ul = document.querySelector('.pagination');
-                            console.log($ul);
+                            // console.log($ul);
 
                             for (let $li of [...$ul.children]) {
                                 console.log(curPageNum);
@@ -170,46 +182,84 @@
 
                         answerregisterModal.addEventListener('show.bs.modal', function (event) {
 
+                            //리다이렉트 되지 않으면 답변에 작성되었던 내용이 남아있는 문제 해결을 위한 초기화 [답변 input.value]
+                            $contentInput = document.getElementById('message-text');
+                            $contentInput.value = '';
+
                             // Button that triggered the modal
                             var button = event.relatedTarget
-                            console.log('button :',button); // 클릭된 버튼 태그
+                            // console.log('button :', button); // 클릭된 버튼 태그
+
                             
+
                             // Extract info from data-bs-* attributes
                             var recipient = button.getAttribute('data-bs-whatever')
-                            console.log('recipient :',recipient); // 클릭된 버튼 태그의 데이터 속성
+                            // console.log('recipient## :', recipient); // 클릭된 버튼 태그의 데이터 속성
 
                             // console.log('모달 클릭시 해당영역의 제목:',button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent);
-                            const titleContent = button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent;
-                            console.log('타이틀내용 :',titleContent); // 클릭된 버튼으로 부터 제목태그 가지고 오기  
-                        
-                            document.getElementById('recipient-name').textContent = titleContent;
-                            console.log('recipient-name:',document.getElementById('recipient-name'));
+                            const titleContent = button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.lastElementChild.textContent;
+                            // console.log('타이틀내용 :', titleContent); // 클릭된 버튼으로 부터 제목태그 가지고 오기  
+                            
+                            //문의글 제목 모달창 출력시 순수 제목만 나오게 split으로 문자 추출
+                            const finalTitle = titleContent.split(':')[1];
+                            // console.log(finalTitle);
+
+                            console.log('모달 클릭시 해당영역의 문의내용:', button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling);
+
+                            document.getElementById('recipient-name').textContent = finalTitle;
+                            // console.log('recipient-name:', document.getElementById('recipient-name'));
                             // 제목이 들어가는 div 태그
 
-                            // If necessary, you could initiate an AJAX request here
-                            // and then do the updating in a callback.
+                            const $modalDetail = document.getElementById('recipient-context');
+                            // console.log('recipient-context :', document.getElementById('recipient-context'));
+                            //문의 내용이 들어가는 div 태그 // 삭제 대상의 부모노드
 
+                            // ----------------------------------------------------------------------
                             // Update the modal's content.
                             var modalTitle = answerregisterModal.querySelector('.modal-title')
-                            console.log('modalTitle :',modalTitle); //<h5> 태그 타이틀 ex)[문의번호 답변 작성]
+                            // console.log('modalTitle :', modalTitle); //<h5> 태그 타이틀 ex)[문의번호 답변 작성]
 
                             var modalBodyInput = answerregisterModal.querySelector('.modal-body input')
-                            console.log('modalBodyInput :',modalBodyInput); // 모달 폼안에있는 input데이터
+                            // console.log('modalBodyInput :', modalBodyInput); // 모달 폼안에있는 input데이터
 
 
                             modalTitle.textContent = '[답변 작성] - 문의 번호 [' + recipient + ']';
                             modalBodyInput.value = recipient //hidden 으로 숨겨놓은 serialNumber의 값을 넣기
 
-                            $serialNumInput = document.getElementById('hidden-serialNumber');
-                            $contentInput = document.getElementById('message-text');
-                            console.log($contentInput);
+                            $serialNumInput = document.getElementById('hidden-serialNumber');                            
+                            // console.log($serialNumInput);
+                            // console.log('시리얼넘버:', $serialNumInput.value)
+                            // console.log('답변 : ', $contentInput.value);
 
                             // 모달을 띄울 때 다음 작업(수정완료처리)을 위해 댓글번호를 모달에 달아두자.
+                            // -----------------------------------------------------------------
+
+                            //비동기로 문의글 상세정보 가지고 오기              
+                            fetch('http://localhost:8383/member/findone-inquiry/' + recipient)
+                                .then(res => res.json())
+                                .then(oneInquiry => {
+                                    const $p = document.createElement('p');
+                                    $p.textContent = oneInquiry.inquiry;
+                                    $p.id = 'modal-detail';
+                                    $p.classList.add("answer-inquiry-content");
+                                    $modalDetail.append($p);
+                                });
+
+                            // 삭제할 노드 선택 [문의글만 있는 경우 - 문의 제목]
+                            // const $removeTargetT =  button.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.nextElementSibling;
+                            // console.log('???:',$removeTargetT);
+                            // if($removeTargetT.classList.contains('answer-inquiry-content')) {
+                            const $removeTargetT = document.getElementById('modal-detail');
+                            $modalDetail.removeChild($removeTargetT);
+
+                            // If necessary, you could initiate an AJAX request here
+                            // and then do the updating in a callback.
+
                         })
 
                         //답글 달기 비동기 처리 이벤트
                         document.getElementById('register-success').onclick = e => {
-                            console.log(e.target);
+                            // console.log(e.target);
                             // const serialNumber = e.target.closest('.table1').firstElementChild.dataset.serialNum;
 
                             //서버로 전송할 데이터들
@@ -218,12 +268,12 @@
                                 answer: $contentInput.value
                             };
 
-                            if(answerDate.answer.trim() === ''){
+                            if (answerDate.answer.trim() === '') {
                                 alert('답변을 입력해주세요');
                                 return;
                             }
 
-                            console.log('answerDate:',answerDate);
+                            // console.log('answerDate:', answerDate);
 
 
                             // POST요청을 위한 요청 정보 객체
@@ -235,10 +285,10 @@
                                 body: JSON.stringify(answerDate)
                             };
 
-                            console.log(reqInfo);
+                            // console.log(reqInfo);
 
                             const $modal = document.querySelector('.modal');
-                            console.log('modal?:', $modal);
+                            // console.log('modal?:', $modal);
 
                             fetch('http://localhost:8383/member/admin/answer-register/', reqInfo)
                                 .then(res => res.text())
@@ -249,7 +299,7 @@
                                         // showReplies(); // 댓글 새로불러오기
                                         location.href = '/member/admin/findall-inquiry';
                                     } else {
-                                        alert('답변 등록 실패 실패!!');
+                                        alert('답변 등록 실패!!');
                                     }
                                 });
                         }
@@ -359,9 +409,9 @@
 
                     };
 
-                    console.log('if문 돌기전', $removeTargetAC.classList.contains('answer'))
+                    // console.log('if문 돌기전', $removeTargetAC.classList.contains('answer'))
                     if ($removeTargetAC.classList.contains('answer')) {
-                        console.log('if문 돌고', $removeTargetAC.classList.contains('answer'))
+                        // console.log('if문 돌고', $removeTargetAC.classList.contains('answer'))
                         $parentNodeA.removeChild($removeTargetAT);
                         $parentNodeA.removeChild($removeTargetAC);
                         $closeBtn.classList.add('hidden');

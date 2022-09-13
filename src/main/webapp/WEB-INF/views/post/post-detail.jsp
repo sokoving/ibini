@@ -10,6 +10,9 @@
     <%@ include file="../include/static-head.jsp" %>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 
+    <!-- post-note CSS -->
+    <link rel="stylesheet" href="/css/post-note.css">
+
 </head>
 
 <body>
@@ -257,15 +260,23 @@
 
                     </div> <!-- // end remote-etc-wrap -->
 
-                    <!-- 포스트 노트 영역 -->
-
-
                 </div> <!-- // end inner-section -->
             </section> <!-- // end section -->
+
+            <!-- 포스트 노트 영역 -->
+            <%@ include file="../postnote/post-detail-note.jsp" %>
+
         </div>
     </div> <!-- end wrap -->
 
     <script src="/js/post-detail.js"></script>
+    <script src="/js/post-note.js" defer></script>
+
+    <script>
+        // post-note.js
+        const account = '${p.account}';        
+        const postNo = '${p.postNo}';
+    </script>
 
     <script>
         // start jQuery

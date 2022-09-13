@@ -16,7 +16,7 @@ import java.util.Map;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/post/detail/test")
+@RequestMapping("/postnote")
 public class PostNoteController {
 
     private final PostMarkService postMarkService;
@@ -30,20 +30,19 @@ public class PostNoteController {
         boolean flag = postMarkService.save(postMark);
 
         return flag ? new ResponseEntity<>("insert-success", HttpStatus.OK)
-                : new ResponseEntity<>("insert-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                    : new ResponseEntity<>("insert-fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // 마크 수정
     @PutMapping("/mark/{markNo}")
     public ResponseEntity<String> modifyMark(@PathVariable Long markNo, @RequestBody PostMark postMark) {
         postMark.setMarkNo(markNo);
-
         log.info("/mark/{} PUT! - {}", markNo, postMark);
 
         boolean flag = postMarkService.modify(postMark);
 
         return flag ? new ResponseEntity<>("modify-success", HttpStatus.OK)
-                : new ResponseEntity<>("modify-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                    : new ResponseEntity<>("modify-fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // 마크 삭제
@@ -54,7 +53,7 @@ public class PostNoteController {
         boolean flag = postMarkService.remove(markNo);
 
         return flag ? new ResponseEntity<>("delete-success", HttpStatus.OK)
-                : new ResponseEntity<>("delete-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                    : new ResponseEntity<>("delete-fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
     // 마크 전체 목록
@@ -77,20 +76,19 @@ public class PostNoteController {
         boolean flag = postMemoService.save(postMemo);
 
         return flag ? new ResponseEntity<>("insert-success", HttpStatus.OK)
-                : new ResponseEntity<>("insert-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                    : new ResponseEntity<>("insert-fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // 메모 수정
     @PutMapping("/memo/{memoNo}")
     public ResponseEntity<String> modifyMemo(@PathVariable Long memoNo, @RequestBody PostMemo postMemo) {
         postMemo.setMemoNo(memoNo);
-
         log.info("/memo/{} PUT! - {}", memoNo, postMemo);
 
         boolean flag = postMemoService.modify(postMemo);
 
         return flag ? new ResponseEntity<>("modify-success", HttpStatus.OK)
-                : new ResponseEntity<>("modify-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                    : new ResponseEntity<>("modify-fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // 메모 삭제
@@ -101,7 +99,7 @@ public class PostNoteController {
         boolean flag = postMemoService.remove(memoNo);
 
         return flag ? new ResponseEntity<>("delete-success", HttpStatus.OK)
-                : new ResponseEntity<>("delete-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                    : new ResponseEntity<>("delete-fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // 메모 전체 목록

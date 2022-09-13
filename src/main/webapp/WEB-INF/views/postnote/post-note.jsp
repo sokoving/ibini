@@ -48,11 +48,11 @@
                 <div class="episode-no">
                     <label for="episode-no">회차
                         <!-- <input type="number" id="episode-no" name="episodeNo" min="1" max="9999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> -->
-                        <input type="text" id="episode-no" name="episodeNo" maxlength="10" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                        <input type="text" id="episode-no" name="episodeNo" maxlength="9" autocomplete="off" placeholder="회차를 입력하세요 " oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                     </label>
                 </div>
                 <div class="text-area">
-                    <textarea id="mark-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
+                    <textarea id="mark-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력하세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
                 </div>
                 <div class="submit-area">
                     <div class="info">
@@ -65,7 +65,7 @@
             </div>
             <div class="hidden" name="memo">
                 <div class="text-area">
-                    <textarea id="memo-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력해 주세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
+                    <textarea id="memo-content" class="w100" cols="20" rows="5" maxlength="300" placeholder="새로운 글을 입력하세요." onkeyup="textArea_onkeyup_down(this)" onkeydown="textArea_onkeyup_down(this)" spellcheck="false"></textarea>
                 </div>
                 <div class="submit-area">
                     <div class="info">
@@ -83,12 +83,12 @@
             <div class="accodian-button hidden"><span>MEMO LIST</span></div>
         </div>
         <!-- MARK/MEMO 데이터 목록 영역 -->
-        <div class="content-wrapper">
+        <div class="content-wrapper scroll-bar">
             <div name="mark">
                 <!-- <div class="content-area">
                     <div class="flex-sb">
                         <div>
-                            <i class="marking-type1 noselect">121</i>
+                            <i class="marking type1 noselect">121</i>
                             |
                             <span class="noselect">2022.08.15 13:22:34</span>
                         </div>
@@ -123,14 +123,14 @@
 
     <script>
         // 마크 요청 URL
-        const markURL = '/post/detail/test/mark';
-        // const episodeNo = 1;
-        const regAccount = '김지연';
-        const modAccount = '김지연';
-        
+        const markURL = '/postnote/mark';
         // 메모 요청 URL
-        const memoURL = '/post/detail/test/memo';
-        const postNo = 1; 
+        const memoURL = '/postnote/memo';
+
+        //  const account = '2209050001';
+        //  const account = '${p.account}';        
+        //  const postNo = 5;
+        //  const postNo = '${p.postNo}';
 
         /*======================================================================
             이벤트 영역
@@ -145,10 +145,12 @@
 
         // 등록 버튼 onclick Event
         function btnAdd_onclick($eventTag) {
-
             if ($eventTag.getAttribute('name') == 'memo') {
-
                 const $memoContent = document.getElementById('memo-content');
+                
+                if (!validateMemoContent()) {
+                    return;
+                }
 
                 fetch(memoURL, {
                         method: "POST",
@@ -158,8 +160,7 @@
                         body: JSON.stringify({
                             "postNo": postNo,
                             "content": $memoContent.value,
-                            "regAccount": regAccount,
-                            "modAccount": modAccount
+                            "account": account
                         })
                     }) 
                     .then(response => response.text())
@@ -178,10 +179,13 @@
                 })
                 
             } else {
-
                 const $episodeNo = document.getElementById('episode-no');
                 const $markContent = document.getElementById('mark-content');
-
+                
+                if (!validateMarkEpAndContent()) {
+                    return;
+                }
+                
                 fetch(markURL, {
                         method: "POST",
                         headers: {
@@ -191,12 +195,12 @@
                             "postNo": postNo,
                             "episodeNo": $episodeNo.value,
                             "content": $markContent.value,
-                            "regAccount": regAccount,
-                            "modAccount": modAccount
+                            "account": account
                         })
                     }) 
                     .then(response => response.text())
                     .then(message => {
+
                         if (message === 'insert-success') {
                             alert('마크 등록!');
 
@@ -215,7 +219,6 @@
 
         // 수정 버튼 onclick event
         function btnModify_onclick($eventTag) {
-
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
                 
@@ -233,7 +236,6 @@
 
         // 수정 취소 버튼 onclick event 
         function btnCancle_onclick($eventTag) {
-
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
                 
@@ -257,11 +259,13 @@
 
         // 수정 저장 버튼 onclick Event
         function btnModifySave_onclick($eventTag) {
-
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo'){
-
                 const memoNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-memo-no');
                 const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');            
+
+                if (!validateMemoContent_modify($eventTag)) {
+                    return;
+                }
 
                 fetch(memoURL + '/' + memoNo, {
                         method: "PUT",
@@ -288,6 +292,10 @@
                 const markNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-mark-no');
                 const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');
                 
+                if (!validateMarkEpAndContent_modify($eventTag)) {
+                    return;
+                }
+
                 fetch(markURL + '/' + markNo, {
                         method: "PUT",
                         headers: {
@@ -313,8 +321,8 @@
 
         // 삭제 버튼 onclick Event
         function btnDelete_onclick($eventTag) {
-
             if ($eventTag.parentElement.parentElement.parentElement.parentElement.getAttribute('name') == 'memo') {
+                if (!confirm('삭제하시겠습니까?')) return;
 
                 const memoNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-memo-no');
 
@@ -322,7 +330,6 @@
                     .then(response => response.text())
                     .then(message => {
                         if (message === 'delete-success') {
-                            alert('메모 삭제!');
                             showMemoList();
 
                         } else {
@@ -331,13 +338,14 @@
                 });
 
             } else {
+                if (!confirm('삭제하시겠습니까?')) return;
+
                 const markNo = $eventTag.parentElement.parentElement.parentElement.getAttribute('data-mark-no');
 
                 fetch(markURL + '/' + markNo, {method : 'DELETE'})
                     .then(response => response.text())
                     .then(message => {
                         if (message === 'delete-success') {
-                            alert('마크 삭제!');
                             showMarkList();
 
                         } else {
@@ -358,7 +366,6 @@
         ========================================================================*/
         // MARK or MEMO 선택처리
         function toggleSelected($eventTag) {
-
             // selected 클래스 toggle 처리
             toggleSelectedClass($eventTag);
 
@@ -389,38 +396,70 @@
             $contents.forEach($content => $content.classList.toggle('hidden'));
         }
 
-        // datetime 포맷 변환 함수
-        function formatDateTime(datetime) {
-            // 문자열 날짜 데이터를 날짜객체로 변환
-            const today = new Date(datetime);
+        // 마크 episodeNo, content 등록 할 때 필수값 체크 method
+        function validateMarkEpAndContent() {
+            const $episodeNo = document.getElementById('episode-no');
+            const $markContent = document.getElementById('mark-content');
 
-            let year = today.getFullYear();
-            let month = today.getMonth() + 1;
-            let day = today.getDate();
-            let hour = today.getHours();
-            let minute = today.getMinutes();
+            let flag = false;
+            if ($episodeNo.value.trim() === '') {
+                alert('회차는 필수 입력값입니다.');
 
-            // 오전, 오후 시간체크
-            let ampm = '';
-            if (hour < 12 && hour >= 0) {
-                ampm = 'AM';
+            } else if ($markContent.value.trim() === '') {
+                alert('내용은 필수 입력값입니다.');
 
-            } else if (hour >= 12 && hour < 24) {
-                ampm = 'PM';
+            } else {
+                flag = true;
 
-                if (hour !== 12) {
-                    hour -= 12;                    
-                }
-            } 
-
-            // 숫자가 1자리일 경우 2자리로 변환
-            (month < 10) ? month = '0' + month : month;
-            (day < 10) ? day = '0' + day : day;
-            (hour < 10) ? hour = '0' + hour : hour;
-            (minute < 10) ? minute = '0' + minute : minute;
-
-            return year + "." + month + "." + day + "  " + ampm + hour + ":" + minute;
+            }
+            return flag;
         }
+        
+        // 메모 content 등록 할 때 필수값 체크 method
+        function validateMemoContent() {
+            const $memoContent = document.getElementById('memo-content');
+
+            let flag = false;
+            if ($memoContent.value.trim() === '') {
+                alert('내용은 필수 입력값입니다.');
+
+            } else {
+                flag = true;
+
+            }
+            return flag;
+        }
+
+        // 마크 content 수정 할 때 필수값 체크 method
+        function validateMarkEpAndContent_modify($eventTag) {
+            const $markContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content');  
+
+            let flag = false;
+            if ($markContent.value.trim() === '') {
+                alert('내용은 필수 입력값입니다.');
+
+            } else {
+                flag = true;
+
+            }
+            return flag;
+        }
+
+        // 메모 content 수정 할 때 필수값 체크 method
+        function validateMemoContent_modify($eventTag) {
+            const $memoContent = $eventTag.parentElement.parentElement.parentElement.querySelector('.content'); 
+
+            let flag = false;
+            if ($memoContent.value.trim() === '') {
+                alert('내용은 필수 입력값입니다.');
+
+            } else {
+                flag = true;
+
+            }
+            return flag;
+        }
+
 
         /*======================================================================
             마크, 메모 리스트 영역
@@ -429,13 +468,12 @@
 
         // 메모 목록 보여주는 함수
         function showMemoList() {
-
             fetch(memoURL + '?postNo=' + postNo)
                 .then(response => response.json())
                 .then(memoMap => {
                     makeMemoDOM(memoMap);
-                    testCall();
-                })    
+                    resize_textarea();
+                })
         }
 
         // 메모 내용 입력하기
@@ -445,7 +483,7 @@
             $memoContentList.innerHTML = '';
 
             if (memoList === null || memoList.length === 0 ) { // 메모가 하나도 없을 때               
-                $memoContentList.innerHTML += "<div>작성한 메모가 없습니다</div>"
+                $memoContentList.innerHTML += "<div class='blank'>작성한 메모가 없습니다</div>"
             
             } else { 
                 for (let memo of memoList) {
@@ -474,15 +512,15 @@
             let iconArea = '';
             iconArea += '<div class="flex-sb">';
             iconArea +=     '<div class="datetime">';
-            iconArea +=         `<span class="noselect">` + formatDateTime(data.modDatetime) + `</span>`;
+            iconArea +=         `<span class="noselect memo-date">` + data.prettierDate + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area memo-initMode">';
-            iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
-            iconArea +=         '<i class="fas fa-trash-alt button" onclick="btnDelete_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-edit button" title="수정" onclick="btnModify_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-trash-alt button" title="삭제" onclick="btnDelete_onclick(this)"></i>';
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area memo-modifyMode button-hidden">';
-            iconArea +=         '<i class="fas fa-check-square button" onclick="btnModifySave_onclick(this)"></i>';
-            iconArea +=         '<i class="fas fa-times button" onclick="btnCancle_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-check-square button" title="수정" onclick="btnModifySave_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-times button" title="취소" onclick="btnCancle_onclick(this)"></i>';
             iconArea +=     '</div>';
             iconArea += '</div>';
             return iconArea;
@@ -490,7 +528,7 @@
 
         // 메모 내용 입력
         function appendMemoContent(data) {
-            return '<textarea class="content" readonly data-initvalue="' + data.content + '">'
+            return '<textarea class="content" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
                 + data.content
                 + '</textarea>'
             ;
@@ -513,12 +551,11 @@
 
         // 마크 목록 보여주는 함수
         function showMarkList() {
-
             fetch(markURL + '?postNo=' + postNo)
                 .then(response => response.json())
                 .then(markMap => {
                     makeMarkDOM(markMap);
-                    testCall();
+                    resize_textarea();
                 })    
         }
 
@@ -529,7 +566,7 @@
             $markContentList.innerHTML = '';
 
             if (markList === null || markList.length === 0 ) { // 마크가 하나도 없을 때               
-                $markContentList.innerHTML += "<div>작성한 북마크가 없습니다</div>"
+                $markContentList.innerHTML += "<div class='blank'>작성한 북마크가 없습니다</div>"
             
             } else { 
                 for (let mark of markList) {
@@ -560,15 +597,15 @@
             iconArea +=     '<div class="datetime">';
             iconArea +=         '<i class="' + classifyMarkIconType(data.epId) + `">` + data.episodeNo + `</i>`;
             iconArea +=         ' | ';
-            iconArea +=         `<span class="noselect mark-date">` + formatDateTime(data.modDatetime) + `</span>`;
+            iconArea +=         `<span class="noselect mark-date">` +data.prettierDate + `</span>`;
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-initMode">';
-            iconArea +=         '<i class="fas fa-edit button" onclick="btnModify_onclick(this)"></i>';
-            iconArea +=         '<i class="fas fa-trash-alt button" onclick="btnDelete_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-edit button" title="수정" onclick="btnModify_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-trash-alt button" title="삭제" onclick="btnDelete_onclick(this)"></i>';
             iconArea +=     '</div>';
             iconArea +=     '<div class="button-area mark-modifyMode button-hidden">';
-            iconArea +=         '<i class="fas fa-check-square button" onclick="btnModifySave_onclick(this)"></i>';
-            iconArea +=         '<i class="fas fa-times button" onclick="btnCancle_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-check-square button" title="수정" onclick="btnModifySave_onclick(this)"></i>';
+            iconArea +=         '<i class="fas fa-times button" title="취소" onclick="btnCancle_onclick(this)"></i>';
             iconArea +=     '</div>';
             iconArea += '</div>';
             return iconArea;
@@ -579,14 +616,14 @@
             // (고정) 0:회차, 1:페이지, 2:권수, 3:퍼센트
             switch(epId) {
                 case 0:
-                    return 'marking-type1 noselect';
+                    return 'marking type1 noselect';
                 case 1:
-                    return 'marking-type2 noselect';
+                    return 'marking type2 noselect';
                 case 2:
-                    return 'marking-type3 noselect';
-                case 4: 
-                    return 'marking-type3 noselect'
-                default : return 'marking-type1 noselect';
+                    return 'marking type3 noselect';
+                case 3:
+                    return 'marking type4 noselect'
+                default : return 'marking type1 noselect';
             }
         }
 
@@ -611,31 +648,21 @@
             $markContent.toggleAttribute('readonly');
         }
 
-
-        showMarkList();
-        showMemoList(); 
-           
-        
-
         // textarea 높이 자동조절
-        function resize_textarea($eventTag) {
-            console.log($eventTag.value);
-            $eventTag.style.height = "1px";
-            $eventTag.style.height = (12 + $eventTag.scrollHeight) + "px";
-        }
-
-        function testCall() {
+        function resize_textarea() {
             const $textAreaList = [...document.querySelectorAll('.content-area .content')];
-
+            
             for ($textArea of $textAreaList) {
                 // console.log($textArea.value);
                 $textArea.style.height = "1px";
                 $textArea.style.height = (12 + $textArea.scrollHeight) + "px";
             }
         }
-
-       
-
+        
+        (function (){
+            showMarkList();
+            showMemoList(); 
+        })();
     </script>
 </body>
 </html>

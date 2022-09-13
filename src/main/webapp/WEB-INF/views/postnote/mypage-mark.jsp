@@ -9,19 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Page</title>
 
+    <%@ include file="../include/static-head.jsp" %>
+
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
-    <!-- fontawesome css: https://fontawesome.com -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- bootstrap js -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script> -->
-
-    <!-- jQuery 기본 js파일 -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
     <!-- naver font -->
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
@@ -33,6 +27,7 @@
 <body>
     <!-- 최상단 wrap 영역 -->
     <div id="wrap">
+        <%@ include file="../include/header.jsp" %>
         <section class="noselect">
             <div class="header-wrapper">
 
@@ -46,9 +41,9 @@
                                 <option value="episodeNo" ${search.type == 'episodeNo' ? 'selected="selected"' : '' }>회차</option>
                             </select>
                            
-                            <input id="searchText" type="text" name="keyword" value="${search.keyword}" placeholder="검색어를 입력하세요" autocomplete="off">
+                            <input id="searchText" type="text" name="keyword" value="${search.keyword}" onkeyup="enterkey()" placeholder="검색어를 입력하세요" autocomplete="off">
 
-                            <button id="submit" class="search-button" type="button">
+                            <button id="submit" class="search-button" type="button" onclick="search()">
                                 검색
                             </button>
                         </div>
@@ -65,20 +60,20 @@
             
             
             <!-- body 영역 -->
-            <div class="body-wrapper">
+            <div class="body-wrapper scroll-bar">
                 <!-- content 영역 -->
                 <div class="content-wrapper" name="mark">
                     <c:if test="${empty myPageMarkList}">
-                        <ul class="blank-page" style="margin: 2rem;">
-                            <li style="margin-bottom: 1rem;"><strong style="color: red; font-size: 1.3em;">'${search.keyword}'</strong>에 대한 검색결과가 없습니다.</li>
+                        <ul class="blank-page">
+                            <li><strong>'${search.keyword}'</strong>에 대한 검색결과가 없습니다.</li>
                             <li>* 입력하신 값이 정확한지 확인해 보세요.</li>
                             <li>* 검색 옵션을 변경해서 다시 검색해 보세요.</li>
                         </ul>
                     </c:if>
                     <c:forEach var="p" items="${myPageMarkList}">
-                        <div class="content">
+                        <div class="content" id="${p.postNo}">
                             <div class="book-wrapper flex-fs">
-                                <!-- 책 이미지 -->
+                                <%-- 책 이미지 --%>
                                 <c:choose>
                                     <c:when test="${p.thumbImg != null}">
                                         <div class="book-image w30 noselect">
@@ -89,55 +84,54 @@
                                         <div class="book-image w30 noselect"></div>
                                     </c:otherwise>
                                 </c:choose>
-                            
-                                <!-- 포스트 번호 -->
-                                <!-- <span id="postNo" style="display: none;">${p.postNo}</span> -->
-                                <!-- epId (0:회차 1:페이지 2:권수 3:퍼센트) -->
-                                <span id="epId" class="hidden">${p.epId}</span>
                                 
-                                <!-- 책 정보 -->
+                                <%-- 책 정보 --%>
                                 <div class="book-info w70">
-                                    <!-- 책 제목 -->
+                                    <%-- 책 제목 --%>
                                     <div class="book-title">
-                                        <span>${p.postTitle}</span>
+                                        <a href="/post/detail/${p.postNo}" title="상세보기">${p.postTitle}</a>
                                     </div>
-                                    <!-- MARK 내용 -->
-                                    <c:forEach var="m" items="${p.markList}" end="1">
-                                        <div id="mark-info" class="my-text">
-                                            <div class="episode-no">
-                                                <c:choose>
-                                                    <c:when test="${p.epId == 0}">
-                                                        <span class="marking-type1">${m.episodeNo}</span>
-                                                    </c:when>
-                                                    <c:when test="${p.epId == 1}">
-                                                        <span class="marking-type2">${m.episodeNo}</span>
-                                                    </c:when>
-                                                    <c:when test="${p.epId == 2}">
-                                                        <span class="marking-type3">${m.episodeNo}</span>
-                                                    </c:when>
-                                                    <c:when test="${p.epId == 3}">
-                                                        <span class="marking-type4">${m.episodeNo}</span>
-                                                    </c:when>
-                                                </c:choose>
+                                    <div class="mark-wrapper">
+                                        <%-- MARK 내용 --%>
+                                        <div class="mark-list">
+                                            <c:forEach var="m" items="${p.markList}" end="1">
+                                                <div id="${m.markNo}" class="my-text">
+                                                    <div class="episode-no">
+                                                        <c:choose>
+                                                            <c:when test="${p.epId == 0}">
+                                                                <span id="${p.epId}" class="marking type1">${m.episodeNo}</span>
+                                                            </c:when>
+                                                            <c:when test="${p.epId == 1}">
+                                                                <span id="${p.epId}" class="marking type2">${m.episodeNo}</span>
+                                                            </c:when>
+                                                            <c:when test="${p.epId == 2}">
+                                                                <span id="${p.epId}" class="marking type3">${m.episodeNo}</span>
+                                                            </c:when>
+                                                            <c:when test="${p.epId == 3}">
+                                                                <span id="${p.epId}" class="marking type4">${m.episodeNo}</span>
+                                                            </c:when>
+                                                        </c:choose>
+                                                    </div>
+                                                    <textarea class="w100" spellcheck="false" readonly >${m.content}</textarea>
+                                                    <%-- MARK 날짜 --%>
+                                                    <div class="meta-data">
+                                                        <span>${m.modDatetime}</span>
+                                                    </div>
+                                                    <hr>
+                                                </div> <%-- end my-text --%> 
+                                            </c:forEach>
+                                        </div>    
+                                        <c:if test="${p.markList.size() > 2}">
+                                            <div class="view-more">
+                                                <a class="noselect" onclick="click_viewMore(this)">더보기</a>
                                             </div>
-                                            <textarea class="w100" spellcheck="false" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)">${m.content}</textarea>
-                                            <!-- Mark 날짜 -->
-                                            <div class="meta-data">
-                                                <span>${m.modDatetime}</span>
-                                            </div>
-                                            <hr>
-                                        </div> <!-- end my-text -->
-                                    </c:forEach>    
-                                    <c:if test="${p.markList.size() > 2}">
-                                        <div class="view-more">
-                                            <a class="noselect" href="javascript:click_viewMore(this)">... 더보기</a>
-                                        </div>
-                                    </c:if>
-                                </div> <!-- end book-info -->
-                            </div> <!-- end book-wrapper -->
-                        </div> <!-- end content -->
+                                        </c:if>
+                                    </div>
+                                </div> <%-- end book-info --%>
+                            </div> <%-- end book-wrapper --%>
+                        </div> <%-- end content --%>
                     </c:forEach>
-                </div> <!-- end content-wrapper name="mark" -->
+                </div> <%-- end content-wrapper name="mark" --%>
         </section>
     </div> <!-- end wrap -->
 
@@ -145,90 +139,115 @@
         /*======================================================================
             이벤트 영역
         ========================================================================*/
-        // textarea 높이 자동조절
-        // function resize_textarea($eventTag) {
-        //     console.log($eventTag.value);
-        //     $eventTag.style.height = "1px";
-        //     $eventTag.style.height = (12 + $eventTag.scrollHeight) + "px";
-        // }
+        function resize_textarea() {
+            const $textAreaList = [...document.querySelectorAll('.my-text textarea')];
 
-        // ... 더보기 클릭
-        function click_viewMore($eventTag) {
-            // fetch() 사용하여 팝업페이지 호출 및 책/회차 등의 변수값 전달
-            // 지금은 샘플html이니 redirect 처리를 하도록 한다.
-            window.location.href = './detail/detail.html';
+            for ($textArea of $textAreaList) {
+                $textArea.style.height = "1px";
+                $textArea.style.height = (2 + $textArea.scrollHeight) + "px";
+            }
+        }
+        resize_textarea();
+        
+        // enter keyup Event
+        function enterkey() {
+            if (window.event.keyCode == 13) {
+                search();
+            }
         }
 
+        // 검색 Event
+        function search() {
+            const $keyword = $("#searchText").val();
+
+            if ($("#search-option option:selected").val() == 'postTitle') {     
+                if ($keyword.trim() === '') {
+                    alert('검색어를 입력하세요.')
+                    // location.href = '/myPage/marklist?type=postTitle&keyword=';
+                    return;
+                }                       
+                location.href = '/myPage/marklist?type=postTitle' + '&keyword=' + encodeURIComponent($keyword);
+
+            } else if ($("#search-option option:selected").val() == 'content') {     
+                if ($keyword.trim() === '') {
+                    alert('검색어를 입력하세요.')
+                    return;
+                }                       
+                location.href = '/myPage/marklist?type=content' + '&keyword=' + encodeURIComponent($keyword);
+
+            } else if ($("#search-option option:selected").val() == 'episodeNo') {        
+                if ($keyword.trim() === '') {
+                    alert('검색어를 입력하세요.')
+                    return;
+                } 
+                if (!$.isNumeric($keyword)) {
+                    alert('숫자만 입력하세요.');
+                    return;
+                }   
+                location.href = '/myPage/marklist?type=episodeNo' + '&keyword=' + $keyword;
+            } 
+        };
+
+        // 옵션이 바뀌면 검색창 / 내용창 메시지를 초기화시켜주는 Event
+        $("#search-option").on("change",function(){
+            // $("#searchText").val('');   
+            $('.blank-page li').text('');
+        });
+
+        // ... 더보기 클릭 Event
+        function click_viewMore($eventTag) {
+            findMarkList($eventTag);
+            $($eventTag).closest('.view-more').css('display', 'none');
+        }
 
         /*======================================================================
             함수 영역
         ========================================================================*/
+        // 마크 목록 가져오기
+        function findMarkList($eventTag) {
 
+            let epId = $($eventTag).parent().siblings('.mark-list').find('.marking').attr('id');
 
-        /*======================================================================
-            테스트 영역
-        ========================================================================*/
-        function testCall() {
-            const $textAreaList = [...document.querySelectorAll('.my-text textarea')];
+            let postNo = $($eventTag).closest('.content').attr('id');
+            let keyword = '';
+            let $keyword = $("#searchText").val();
 
-            for ($textArea of $textAreaList) {
-                // console.log($textArea.value);
-                $textArea.style.height = "1px";
-                $textArea.style.height = (12 + $textArea.scrollHeight) + "px";
-            }
-        }
-        testCall();
-
-    </script>
-        
-    <script>
-        // 검색 Event
-        $("#submit").on("click",function(){
-
-            const $keyword = $("#searchText").val();
-
-            
-            if ($("#search-option option:selected").val() == 'postTitle') {     
-                if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
-                    // location.href = '/mypostnote/list?type=postTitle&keyword=';
-                    return;
-                }   
-                     
-                location.href = '/mypostnote/marklist?type=postTitle' + '&keyword=' + $keyword;
-    
-            } else if ($("#search-option option:selected").val() == 'content') {     
-                if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
-                    // location.href = '/mypostnote/list?type=content&keyword=';
-                    return;
-                }   
-                     
-                location.href = '/mypostnote/marklist?type=content' + '&keyword=' + $keyword;
-    
-            } else if ($("#search-option option:selected").val() == 'episodeNo') {        
-                if ($keyword.trim() === '') {
-                    alert('검색어를 입력하세요')
-                    // location.href = '/mypostnote/list?type=episode&keyword=';
-                    return;
-                } 
-                if (!$.isNumeric($keyword)) {
-                    alert('숫자만 입력하세요');
-                    return;
-                }        
-
-                location.href = '/mypostnote/marklist?type=episodeNo' + '&keyword=' + $keyword;
+            if ($("#search-option option:selected").val() == 'content') {
+                keyword = '&type=content' + '&keyword=' + encodeURIComponent($keyword);
             } 
-        });
 
-        // 옵션이 바뀌면 검색창 / 내용창 메시지를 초기화시켜주는 Event
-        $("#search-option").on("change",function(){
-            $("#searchText").val('');   
-            $('.blank li').text('');
-        });
+            fetch('/myPage/viewMore/marklist/?postNo=' + postNo + keyword)
+                .then(response => response.json())
+                .then(markList => {
+
+                    let markInfoList = '';
+                    for (mark of markList) {
+                        markInfoList +=  '<div id="' + mark.markNo + '" class="my-text">';
+                        markInfoList += '    <div class="episode-no">';
+           
+                            if (epId == 0) {
+                                markInfoList += '       <span class="marking type1">' + mark.episodeNo + '</span>';
+                            } else if (epId == 1) {
+                                markInfoList += '       <span class="marking type2">' + mark.episodeNo + '</span>';
+                            } else if (epId == 2) {
+                                markInfoList += '       <span class="marking type3">' + mark.episodeNo + '</span>';
+                            } else if (epId == 3) {
+                                markInfoList += '       <span class="marking type4">' + mark.episodeNo + '</span>';
+                            }
+
+                        markInfoList += '   </div>';
+                        markInfoList += '   <textarea class="w100" spellcheck="false" readonly>' + mark.content + '</textarea>' +
+                                        '       <div class="meta-data">' +
+                                        '           <span>' + mark.modDatetime + '</span>' +
+                                        '       </div>' +
+                                        '       <hr>' +
+                                        '   </div>';
+                    }
+
+                    $($eventTag).parent().siblings('.mark-list').append(markInfoList);
+                    resize_textarea();
+                });
+        }
     </script>
-
-   
 </body>
-
 </html>

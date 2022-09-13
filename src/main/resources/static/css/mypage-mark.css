@@ -108,7 +108,7 @@ section {
     width: 90%;
     /* border: 1px solid #adb5bd; */
     /* border-radius: 0.25rem; */
-    margin: 10px auto 0;
+    margin: 50px auto 0;
     /* padding: 24px; */
     box-sizing: border-box;
 }
@@ -122,9 +122,10 @@ section {
     search-wrapper      / 검색 영역
 ==================================================*/
 .search-wrapper {
-    border: 1px solid #adb5bd;
-    border-radius: 0.25rem;
-    padding: 1.5rem;
+    /* border: 1px solid #adb5bd; */
+    /* border-radius: 0.4rem; */
+    /* padding: 1.5rem; */
+    margin-left: 25px;
 
     font-size: 17px;       
 }
@@ -132,10 +133,12 @@ section {
 /* search-title 영역 */
 .search-wrapper select {
     width: 15%;
-    padding: 0.5rem;
+    padding: 0.55rem;
     border-radius: 0.25rem;
     outline: none;
-    vertical-align: bottom;
+    vertical-align: middle;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .search-wrapper select:hover {
     outline: 2px solid #495057;;
@@ -149,6 +152,8 @@ section {
     border-radius: 0.25rem;
     margin-right: 0.5rem;
     padding: 0.35rem 0.7rem;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .search-wrapper input[name="keyword"]:hover,
 .search-wrapper input[name="keyword"]:focus {
@@ -158,15 +163,17 @@ section {
 
 /* 검색 버튼 */
 .search-wrapper .search-button {
-    border: 1px solid #495057;
+    /* border: 1px solid #495057; */
     border-radius: 0.25rem;
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1rem;
 
     font-size: 16px;
-    background: #f5f9fc;;
+    font-weight: 600;
+    background: #ffca3d;;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
 }
 .search-wrapper .search-button:hover {
-    background: #e9ecef;;
+    background: #f9b708;;
 }
 
 
@@ -174,9 +181,10 @@ section {
     list-wrapper        / LIST 영역
 ==================================================*/
 .list-wrapper {
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    margin-top: 25px;
+    /* border: 1px solid #ced4da; */
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
+    margin-top: 50px;
     padding: 8px 0px;
 
     text-align: center;
@@ -192,11 +200,28 @@ section {
 ==================================================*/
 .body-wrapper {
     height: 65vh;
-    border: 1px solid #adb5bd;
-    border-radius: 0.25rem;
+    border-bottom: 1px solid #e9ecef;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
     padding: 20px;
     overflow-y: auto;
     overflow-x: hidden;
+
+    background: #faf9f6;
+}
+
+/* 스크롤바 디자인 */
+.scroll-bar::-webkit-scrollbar {
+    width: 15px;  /* 스크롤바의 너비 */
+}
+.scroll-bar::-webkit-scrollbar-thumb {
+    height: 20%; /* 스크롤바의 길이 */
+    background: #ffca3d; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+.scroll-bar::-webkit-scrollbar-track {
+    background: #ffe6a2;  /*스크롤바 뒷 배경 색상*/
 }
 
 /*================================================
@@ -204,9 +229,11 @@ section {
 ==================================================*/
 /* content 영역 */
 .body-wrapper .content-wrapper .content{
-    border: 1px solid #6c757d;
-    border-radius: 0.25rem;
-    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    padding: 30px;
+
+    background: #fff;
 }
 .body-wrapper .content-wrapper .content:nth-child(n+2){
     margin-top: 50px;
@@ -223,6 +250,7 @@ section {
     border-radius: 0.1rem;
 }
 .book-wrapper div.book-image {
+    border-radius: 20px;
     text-align: center;
     min-height: 250px;
     margin-right: 2rem;
@@ -247,14 +275,20 @@ section {
     font-size: 19px;
 
     margin-top: 0.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 5px double #6c757d;
 }
-.book-wrapper .book-info .book-title span {
-    background: rgb(250, 207, 211);
-    border-radius: 0.3rem;
-    padding: 0.6rem;
+.book-wrapper .book-info .book-title a {
+    background: #B2C8DF;
+    border-radius: 1rem;
+    padding: 0.7rem;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+}
+
+/* Mark / Memo 내용 영역 */
+#mark-info, #memo-info {
+    padding: 0 0.3rem;
 }
 
 /* MARK 내용 영역 */
@@ -266,46 +300,58 @@ section {
     font-weight: bold;
 }
 .book-wrapper .book-info .my-text .episode-no span {
-    padding: 0.4rem;
-    background: #c59c9c;
-    border-radius: 0.3rem;
+    padding: 0.55rem 0.8rem;
+    border-radius: 20px;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type1::after {
+.book-wrapper .book-info .my-text .episode-no span.marking.type1::after {
     content: '화';
+    margin-left: 0.15rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type2::after {
+.book-wrapper .book-info .my-text .episode-no span.marking.type2::before {
     content: 'p';
+    margin-right: 0.15rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type3::after {
+.book-wrapper .book-info .my-text .episode-no span.marking.type3::after {
     content: '권';
+    margin-left: 0.15rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type4::after {
+.book-wrapper .book-info .my-text .episode-no span.marking.type4::after {
     content: '%';
+    margin-left: 0.15rem;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type1 {
+.book-wrapper .book-info .my-text .episode-no span.marking {
+    color: #fff;
+    background-color: #22577E;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+/* .book-wrapper .book-info .my-text .episode-no span.marking.type1 {
     color: white;
-    background-color: rgb(191, 142, 142);
+    background-color: #95bfd1;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type2 {
+.book-wrapper .book-info .my-text .episode-no span.marking.type2 {
     color: white;
-    background-color: blue;
+    background-color: #5584AC;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type3 {
+.book-wrapper .book-info .my-text .episode-no span.marking.type3 {
     color: white;
-    background-color: green;
+    background-color: #22577E;
 }
-.book-wrapper .book-info .my-text .episode-no span.marking-type4 {
+.book-wrapper .book-info .my-text .episode-no span.marking.type4 {
     color: white;
-    background-color: rgb(117, 63, 96);
-}
+    background-color: #133b58;
+} */
 
 /* MARK content */
 .book-wrapper .book-info .my-text textarea {
-    border: 1px solid #e9ecef;
+    font-size: 17px;
+    /* border: 1px solid #e9ecef; */
+    border: 1px solid #dee2e6;
     border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.08) 1.95px 1.95px 2.6px;
+    
     outline-color: #4a4a4a4f;
     margin-top: 0.9rem;
-    font-size: 17px;
+    padding: 15px;
 }
 /* .book-wrapper .book-info .my-text textarea:first-child {
     margin-top: 1rem;
@@ -326,7 +372,27 @@ section {
     display: flex;
     flex-direction: row-reverse;
 }
+.book-wrapper .book-info .view-more a {
+    background: #ffe6a2;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    border-radius: 0.3rem;
+    padding: 7px 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+.book-wrapper .book-info .view-more a:hover {
+    background: #ffca3d;
+}
 
 
-
-
+/* 검색 결과값이 없을 때 화면 */
+.content-wrapper ul.blank-page {
+    margin: 2rem;
+}
+.content-wrapper ul.blank-page li:first-child {
+    margin-bottom: 1rem;
+}
+.content-wrapper ul.blank-page strong {
+    color: #f00;
+    font-size: 1.3em;
+}

@@ -164,8 +164,10 @@
             <!-- 비밀번호 수정 -->
             <input type="button" id="modify-btn" class="btn" value="비밀번호 수정">
 
+            <c:if test="${loginMethod != 'KAKAO'}">
             <!-- 회원 탈퇴 -->
             <input type="button" id="joinOut-btn" class="btn" value="회원 탈퇴">
+            </c:if>
 
             <!-- 돌아가기 버튼 -->
             <input type="button" id="main-btn" class="btn" value="main">
@@ -180,6 +182,7 @@
   </div>
 
   <script>
+    console.log('${loginMethod}');
     const date = '${loginUser.prettierDate}';
     console.log(date);
 
@@ -188,9 +191,6 @@
 
     const $modifyBtn = document.getElementById('modify-btn');
     console.log($modifyBtn);
-
-    const $joinOutBtn = document.getElementById('joinOut-btn');
-    console.log($joinOutBtn);
 
     const $mainBtn = document.getElementById('main-btn');
     console.log($mainBtn);
@@ -203,9 +203,13 @@
       location.href = '/member/modifyPw-check';
     }
 
+    if('${loginMethod}' != 'KAKAO'){ 
+    const $joinOutBtn = document.getElementById('joinOut-btn');
+    console.log($joinOutBtn);
     $joinOutBtn.onclick = e => {
       location.href = '/member/join-out';
     }
+  }
 
     $mainBtn.onclick = e => {
       location.href = '/';

@@ -97,6 +97,33 @@
 
     </update>
 
+<!--    email로 회원 아이디 찾기 -->
+
+    <select id="findUserId" resultMap="MemberMap">
+
+        SELECT *
+        FROM tbl_member
+        WHERE email = #{email}
+
+    </select>
+
+<!--   email_verification kakao 변경 -->
+<update id="verificationKakaoChange">
+    UPDATE tbl_member
+    SET email_verification = 'kakao'
+    WHERE email = #{email}
+</update>
+
+<!-- kakao 로그인 유저인지 확인 -->
+<select id="findVerificationKakao" resultType="int">
+
+        SELECT COUNT(*)
+        FROM tbl_member
+        WHERE email_verification = 'kakao' AND email = #{email}
+
+</select>
+
+
 <!--  회원 탈퇴  -->
     <delete id="memberDelete">
         DELETE FROM tbl_member
@@ -267,6 +294,59 @@
         SELECT COUNT(*) FROM tbl_manage_inquiry
 
     </select>
+
+<!--  탈퇴사유 관리 테이블의 마지막 reasonNum 구하기  -->
+    <select id="getCurrentReasonNum" resultType="int">
+        SELECT COUNT(*) FROM tbl_reason_break_away
+    </select>
+
+<!--  관리자의 회원관리 탈퇴/가입 전체 회원 조회 findAllManageMember  -->
+    <resultMap id="manageMemberMap" type="com.ibini.my_books.member.domain.ManageMember">
+
+        <result column="user_id" property="userId"/>
+        <result column="user_condition" property="userCondition"/>
+
+    </resultMap>
+    <select id="findAllManageMember" resultMap="manageMemberMap">
+        SELECT * FROM tbl_manage_member WHERE user_id != 'admin';
+    </select>
+
+<!--  가입한 회원수 구하기  -->
+    <select id="getTotalCurrentMemberCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_manage_member WHERE user_id != 'admin' AND user_condition = 'true';
+    </select>
+
+<!--   탈퇴한 회원수 구하기 -->
+    <select id="getTotalOutMemberCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_manage_member WHERE user_id != 'admin' AND user_condition = 'false'
+    </select>
+
+    <resultMap id="outReasonMap" type="com.ibini.my_books.member.dto.OutReasonManageDTO">
+
+        <result column="user_id" property="userId"/>
+        <result column="out_reason" property="outReason"/>
+
+    </resultMap>
+<!--        //회원의 탈퇴내용 조회    -->
+    <select id="findAllOutReason" resultMap="outReasonMap">
+        SELECT
+             A.user_id,
+             B.out_reason AS out_reason
+        FROM
+             tbl_manage_break_away A
+            ,tbl_reason_break_away B
+        WHERE A.reason_num = B.reason_num;
+
+    </select>
+
+<!--  로그인 기록 남기기   -->
+    <insert id="loginLogInsert">
+        INSERT INTO login_list
+        (login_num, account)
+        VALUES
+        ( NEXTVAL(seq_login_list), #{account} )
+
+    </insert>
 
 
 </mapper>
