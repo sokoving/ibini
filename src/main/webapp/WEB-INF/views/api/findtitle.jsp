@@ -22,6 +22,7 @@
 
         <div id="content-wrap">
             <h1>검색해서 책 등록하기</h1>
+            <h2>책 제목을 검색해서 원하는 책을 찾아보세요!</h2>
             <br>
             <div id="search">
                 <!-- keyup event -->
