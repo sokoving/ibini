@@ -181,6 +181,10 @@
         if (msg == 'verification-success') {
           alert('카카오계정과 연동에 성공 하였습니다. 로그인 후 서비스를 이용해주세요.')
         }
+
+        if (msg == 'modify-success') {
+          alert('비밀번호 변경에 성공하였습니다.')
+        }
       </script>
 
 

@@ -15,8 +15,10 @@
 </head>
 
 <body>
-<%@ include file="../include/change-header.jsp" %>
+ <!-- header -->
+ <%@ include file="../include/change-header.jsp" %>
   <div id="wrap">
+
 
     <section id="main-section">
       <img class="wave" src="/img/signin-1.png">

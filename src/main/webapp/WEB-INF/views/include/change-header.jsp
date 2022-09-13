@@ -39,6 +39,8 @@
             <!-- 관리자가 보는 헤드 메뉴 -->
             <c:if test="${loginUser.auth == 'ADMIN'}">
 
+                    <span class="logIn" onclick="location.href='/member/findAll-ManageMember'">회원관리</span>
+
                     <span class="logIn" onclick="location.href='/member/admin/findall-inquiry'">문의하기</span>
 
                     <c:if test="${loginUser != null}">
@@ -106,6 +108,10 @@
         margin: auto 0;
         font-weight: 700;
         color: #ffca3d;
+    }
+
+    span{
+        cursor: pointer;
     }
 
 </style>
