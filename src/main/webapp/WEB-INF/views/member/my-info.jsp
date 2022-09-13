@@ -168,7 +168,7 @@
             <input type="button" id="joinOut-btn" class="btn" value="회원 탈퇴">
 
             <!-- 돌아가기 버튼 -->
-            <input type="button" id="main-btn" class="btn" value="main"></a>
+            <input type="button" id="main-btn" class="btn" value="main">
             <!-- main-back-btn -->
           </div>
 

@@ -5,7 +5,7 @@
 <header>
     <div id="headerWrap">
         <div class="logo">
-            <span class="logo-font">IBINI BOOKS</span>
+            <span class="logo-font" onclick="location.href='/'">IBINI BOOKS</span>
         </div>
         <div class="infoBar">
 <%--            이름 --%>

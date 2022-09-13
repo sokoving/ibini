@@ -92,10 +92,9 @@
 </style>
 
 <body>
-
+    <%@ include file="../include/change-header.jsp" %>
     <div id="wrap">
 
-        <%@ include file="../include/header.jsp" %>
 
         <div id="content-wrap">
             <!-- tagName -->

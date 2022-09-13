@@ -203,7 +203,7 @@
 
     </div>
     <script>
-
+        console.log('loginUser : ', loginUser);
         let date = '${loginUser.prettierDate}';
         console.log('date : ', date);
 
