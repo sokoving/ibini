@@ -176,7 +176,7 @@
 
         // 옵션이 바뀌면 검색창 / 내용창 메시지를 초기화시켜주는 Event
         $("#search-option").on("change",function(){
-            $("#searchText").val('');   
+            // $("#searchText").val('');   
             $('.blank li').text('');
         });
 
