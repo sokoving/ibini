@@ -137,9 +137,10 @@
 </head>
 
 <body>
-<%@ include file="../include/change-header.jsp" %>
-
+ <!-- header -->
+ <%@ include file="../include/change-header.jsp" %>
   <div id="wrap">
+
 
     <section id="main-section">
       <img class="wave" src="/img/signin-1.png">
@@ -222,17 +223,17 @@
         //비밀번호 공백 확인
         if ($("#password").val() === "") {
           $('#password').css('border-color', 'red');
-          $('#pwChk').html('<b class="c-red">[패스워드는 필수정보!]</b>');
+          $('#pwChk').html('<b class="c-red">[패스워드는 필수정보 입니다.]</b>');
           checkArr[0] = false;
         }
         //비밀번호 유효성검사
         else if (!getPwCheck.test($("#password").val()) || $("#password").val().length < 8) {
           $('#password').css('border-color', 'red');
-          $('#pwChk').html('<b class="c-red">[특수문자 포함 8자이상]</b>');
+          $('#pwChk').html('<b class="c-red">[특수문자 포함 8자이상으로 작성해주세요.]</b>');
           checkArr[0] = false;
         } else {
           $('#password').css('border-color', 'skyblue');
-          $('#pwChk').html('<b class="c-blue">[참 잘했어요]</b>');
+          $('#pwChk').html('<b class="c-blue">[올바르게 입력하셨습니다.]</b>');
           checkArr[0] = true;
         }
 
@@ -243,17 +244,17 @@
         //비밀번호 확인란 공백 확인
         if ($("#password_check").val() === "") {
           $('#password_check').css('border-color', 'red');
-          $('#pwChk2').html('<b class="c-red">[패스워드확인은 필수정보!]</b>');
+          $('#pwChk2').html('<b class="c-red">[패스워드확인은 필수정보 입니다.]</b>');
           checkArr[1] = false;
         }
         //비밀번호 확인란 유효성검사
         else if ($("#password").val() !== $("#password_check").val()) {
           $('#password_check').css('border-color', 'red');
-          $('#pwChk2').html('<b class="c-red">[위에랑 똑같이!!]</b>');
+          $('#pwChk2').html('<b class="c-red">[위에 작성하신 패스워드와 동일하게 작성해주세요.]</b>');
           checkArr[1] = false;
         } else {
           $('#password_check').css('border-color', 'skyblue');
-          $('#pwChk2').html('<b class="c-blue">[참 잘했어요]</b>');
+          $('#pwChk2').html('<b class="c-blue">[위에 작성하신 패스워드와 일치합니다.]</b>');
           checkArr[1] = true;
         }
 

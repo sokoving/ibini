@@ -330,20 +330,33 @@ function platformModAndDelHandler(e) {
     //textcontent를 innerText로 바꿈
     const no = e.target.parentElement.parentElement.firstElementChild.firstElementChild.value;
     // const noo = e.target.parentElement;
-
     console.log('no:', no);
     // console.log('noo', noo);
+    console.log('플랫폼 수정/삭제 핸들러');
+    let b = +no === +1;
+    console.log('1', 21);
+    console.log('b: ', b)
+    if (+no === +1){
+        e.preventDefault();
+        alert('삭제할 수 없는 값 입니다.');
+        return;
 
-    e.preventDefault();
+    } else {
+        console.log('else')
+        e.preventDefault();
 
-    // console.log('수정버튼 클릭함!! before');
-    if (e.target.matches('#modalBtn')) {
-        console.log('modalBtn');
-        processModifyShow(e, no);
-    } else if (e.target.matches('#delBtn')) {
-        processRemove(no);
-        console.log('delBtn: ', no);
+        // console.log('수정버튼 클릭함!! before');
+        if (e.target.matches('#modalBtn')) {
+            console.log('modalBtn');
+            processModifyShow(e, no);
+        } else if (e.target.matches('#delBtn')) {
+            processRemove(no);
+            console.log('delBtn: ', no);
+        }
     }
+
+
+
 }
 
 

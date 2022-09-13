@@ -5,13 +5,14 @@
 <header>
     <div id="headerWrap">
         <div class="logo">
-            <c:if test="${loginUser.auth == 'COMMON'}">
-                <span class="logo-font" onclick="location.href='/'">IBINI BOOKS</span>
-            </c:if>
-
-            <c:if test="${loginUser.auth == 'ADMIN'}">
-                <span class="logo-font" onclick="location.href='/'">IBINI BOOKS ADNIM PAGE</span>
-            </c:if>
+            <c:choose>
+                <c:when test="${loginUser.auth == 'ADMIN'}">
+                    <span class="logo-font" onclick="location.href='/'">IBINI BOOKS (ADNIM ver.)</span>
+                </c:when>
+                <c:otherwise>
+                    <span class="logo-font" onclick="location.href='/'">IBINI BOOKS</span>
+                </c:otherwise>
+            </c:choose>
         </div>
         <div class="infoBar">
 <%--            이름 --%>
@@ -38,6 +39,8 @@
 
             <!-- 관리자가 보는 헤드 메뉴 -->
             <c:if test="${loginUser.auth == 'ADMIN'}">
+
+                    <span class="logIn" onclick="location.href='/member/findAll-ManageMember'">회원관리</span>
 
                     <span class="logIn" onclick="location.href='/member/admin/findall-inquiry'">문의하기</span>
 
@@ -106,6 +109,10 @@
         margin: auto 0;
         font-weight: 700;
         color: #ffca3d;
+    }
+
+    span{
+        cursor: pointer;
     }
 
 </style>

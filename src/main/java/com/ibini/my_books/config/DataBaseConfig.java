@@ -19,18 +19,17 @@ public class DataBaseConfig {
 
         HikariConfig config = new HikariConfig();
 
-        // 공용 설정
+//        // 현정 노트북 설정
+//        config.setUsername("root");
+//        config.setPassword("mariadb1234");
+//        config.setJdbcUrl("jdbc:mariadb://localhost:3306/spring4");
+//        config.setDriverClassName("org.mariadb.jdbc.Driver");
+
+
         config.setUsername("root");
         config.setPassword("mariadb");
         config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini");
         config.setDriverClassName("org.mariadb.jdbc.Driver");
-
-        // 현정 노트북 설정
-//        config.setUsername("root");
-//        config.setPassword("mariadb");
-//        config.setJdbcUrl("jdbc:mariadb://localhost:3306/spring4");
-//        config.setDriverClassName("org.mariadb.jdbc.Driver");
-
 
         return new HikariDataSource(config);
     }

@@ -224,6 +224,8 @@ section #remote-etc-wrap {
     position: fixed;
     right: 70px;
     bottom: 70px;
+
+    width: 150px;
 }
 
 #remote-controller #inner-remote {
@@ -236,6 +238,7 @@ section #remote-etc-wrap {
     border: 1.5px solid #adb5bd;
     border-radius: 0.3rem;
     text-align: center;
+    background: #f8f9fa;
 }
 
 /* 리모컨 타이틀 */
@@ -243,12 +246,14 @@ section #remote-etc-wrap {
     margin-top: 5px;
     border-bottom: 1.5px solid #adb5bd;
     font-weight: 600;
+    cursor: move;
 }
 
 #go-to-controller {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: #fff;
 }
 
 /* 리모컨 옵션박스 */

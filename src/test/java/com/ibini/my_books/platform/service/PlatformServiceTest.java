@@ -2,12 +2,15 @@ package com.ibini.my_books.platform.service;
 
 import com.ibini.my_books.platform.domain.PlatformDomain;
 import com.ibini.my_books.platform.repository.PlatformMapper;
+import com.ibini.my_books.post.domain.Post;
+import com.ibini.my_books.post.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +21,8 @@ class PlatformServiceTest {
     PlatformMapper platformMapper;
     @Autowired
     PlatformService platformService;
+    @Autowired
+    PostService postService;
     
     @Test
     @DisplayName("수정이 성공해야 한다")
@@ -53,5 +58,27 @@ class PlatformServiceTest {
         String account = "2208260002";
         boolean flag = platformService.removePlatformForOutMember(account);
         assertTrue(flag);
+    }
+
+    @Test
+    @DisplayName("플랫폼이 삭제되기 전 해당 플랫폼아이디를 가진 포스트의 플랫폼 아이디를 변경한다")
+    void removeTest(){
+        int platId = 3;
+        boolean flag = platformService.deletePlatform(platId);
+        assertTrue(flag);
+
+//        //        특정 장르 아이디를 가진 post 조회
+//        List<Post> pl = postService.getPostByPlateId(platId);
+////        account = admin인 장르 조회
+//        String account = "admin";
+//        List<PlatformDomain> pfl = platformService.findAllPlatform(account);
+//        for (PlatformDomain p : pfl) {
+//            if(p.getPlatformName().equals("미분류")){
+//                for (Post post : pl) {
+//                    post.setPlatformId(p.getPlatformId());
+//                    postService.modifyService(post);
+//                }
+//            }
+//        }
     }
 }

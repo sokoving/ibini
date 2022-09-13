@@ -158,4 +158,24 @@ class PostMapperTest {
         assertEquals(sList.size(), tc);
     }
 
+    @Test
+    @DisplayName("특정 장르 아이디를 가진 모든 포스트 번호를 조회한다")
+    void getPostByGenreIdTest() {
+        int genreId = 9;
+        List<Post> pl = mapper.getPostByGenreId(genreId);
+        for (Post p : pl) {
+            System.out.println(p.getPostNo());
+        }
+    }
+
+
+    @Test
+    @DisplayName("특정 플랫폼 아이디를 가진 모든 포스트 번호를 조회한다")
+    void getPostByPlateIdTest() {
+        int c = 10;
+        List<Post> pl = mapper.getPostByPlateId(c);
+        for (Post p : pl) {
+            System.out.println(p.getPlatformId());
+        }
+    }
 }
