@@ -21,21 +21,25 @@ public class MyPageController {
     // account 정보 추가하기!!!
     // http://localhost:8383/myPage/{account}/platform
 
-    @GetMapping
+    @GetMapping("")
     public String showMyPage(HttpSession session, Model model){
         // account 정보
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         model.addAttribute("account", account);
         return "myPage/myPage";
     }
-    @GetMapping("/{account}/platform")
-    public String showPlatform(@PathVariable String account, Model model){
+    @GetMapping("/platform")
+    public String showPlatform(HttpSession session, Model model){
+        // account 정보
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
         model.addAttribute("account", account);
         return "myPage/myPage-platform";
     }
 
-    @GetMapping("/{account}/genre")
-    public String showGenre(@PathVariable String account, Model model){
+    @GetMapping("/genre")
+    public String showGenre(HttpSession session, Model model){
+        // account 정보
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
         model.addAttribute("account", account);
         return "myPage/myPage-genre";
     }

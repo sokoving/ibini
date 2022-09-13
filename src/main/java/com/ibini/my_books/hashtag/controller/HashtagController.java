@@ -35,7 +35,7 @@ public class HashtagController {
 
         // 로그인 정보 가져오기
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
-        log.info("HashTag Controller tagNmae - {}, account - {}", account, tagName);
+        log.info("HashTag Controller tagName - {}, account - {}", account, tagName);
 
         // hashtag List 가져오기
         String searchTag = tagName;

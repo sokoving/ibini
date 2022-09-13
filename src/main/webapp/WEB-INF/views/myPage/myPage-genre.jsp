@@ -24,46 +24,44 @@
 </head>
 <body>
 
-        <!-- sideBar account 정보 수정-->
-        <div class="sidenav">
-            <a href="http://localhost:8383/myPage/${account}">MY PAGE</a>
-            <a href=""></a>
-            
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Setting</a>
-            <a href="http://localhost:8383/myPage/${account}/platform">Platform</a>
-            <a href="http://localhost:8383/myPage/${account}/genre">Genre</a>
-        </div>
-
-
-
     <!-- main -->
-    <div class="myPage-wrap">
-        <h1>MyPage</h1>
-            <div class="genre-wrap">
-                <h2>Genre Setting</h2>
-
-                <div id="genreSetting">
-                    <!-- dom 생성해서 넣어주기 -->
-                    <!-- <div id="genList">
-                        <div class="genreNo" id="genreNo">
-                            <span>genreNo</span>
-                        </div>
-                        <div class="genreName" id="genreName">
-                            <span>genreName</span>
-                        </div>
-                        <div class="modiNdel">
-                            <button class="genModi">수정</button>
-                            <button class="gendel">삭제</button>
-                        </div>
-                    </div> -->
-                </div>
-                
-
+        <%@ include file="../include/change-header.jsp" %>
+        <div id="wrap">
+            <div id="sideBar">
+                <h2>MyPage</h2>
+                <a href="/myPage">User-Info</a>
+                <a href="">Help</a>
+                <h3>Setting</h3>
+                <a href="/myPage/platform">Platform</a>
+                <a href="/myPage/genre">Genre</a>
+                <a href="">BookMark</a>
+                <a href="">BookMemo</a>
             </div>
-    </div>
+            <div class="myPage-wrap">
+                <h1>MyPage</h1>
+                    <div class="genre-wrap">
+                        <h2>Genre Setting</h2>
+
+                        <div id="genreSetting">
+                            <!-- dom 생성해서 넣어주기 -->
+                            <!-- <div id="genList">
+                                <div class="genreNo" id="genreNo">
+                                    <span>genreNo</span>
+                                </div>
+                                <div class="genreName" id="genreName">
+                                    <span>genreName</span>
+                                </div>
+                                <div class="modiNdel">
+                                    <button class="genModi">수정</button>
+                                    <button class="gendel">삭제</button>
+                                </div>
+                            </div> -->
+                        </div>
+
+
+                    </div>
+            </div>
+        </div>
     
 
     <script>

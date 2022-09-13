@@ -11,6 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <%@ include file="../include/static-head.jsp" %>
 </head>
 <style>
     @font-face {
@@ -24,7 +25,7 @@
         /* background: rgb(78, 135, 182); */
         display: flex;
         width: 1000px;
-        margin:  0 auto;
+        margin:  50px auto;
         font-family: 'NanumSquareRound';
     }
     /* side Bar CSS */
@@ -176,7 +177,7 @@
         <a href="">User-Info</a>
         <a href="">Help</a>
         <h3>Setting</h3>
-        <a href="http://localhost:8383/myPage/${account}/platform">Platform</a>
+        <a href="/platform/c1">Platform</a>
         <a href="http://localhost:8383/myPage/${account}/genre">Genre</a>
         <a href="">BookMark</a>
         <a href="">BookMemo</a>
@@ -184,7 +185,7 @@
     <section id="user-Info">
 
         <div class="img">
-            <img src="../../../resources/static/img/ibini-WideLogo.png" alt="logo" style="width: 25vw; min-width: 140px;">
+            <img src="../../../../" alt="logo" style="width: 25vw; min-width: 140px;">
         </div>
         <div class="Info-comment">
             <span class="nickName-Info"><span class="name">${loginUser.userName}</span> 님의 회원정보</span>

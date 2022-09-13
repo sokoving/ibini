@@ -31,22 +31,23 @@
 
 <body>
 
+
     <!-- const account = "ibini"
     const sideBarURL = http://localhost:8383/myPage/account/platform -->
-        
         <!-- sideBar account 정보 수정-->
-        <div class="sidenav">
-            <a href="http://localhost:8383/myPage/${account}">MY PAGE</a>
-            <a href="#"></a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Setting</a>
-            <a href="http://localhost:8383/myPage/${account}/platform">Platform</a>
-            <a href="http://localhost:8383/myPage/${account}/genre">Genre</a>
+
+    <%@ include file="../include/change-header.jsp" %>
+    <div id="wrap">
+        <div id="sideBar">
+            <h2>MyPage</h2>
+            <a href="/myPage">User-Info</a>
+            <a href="">Help</a>
+            <h3>Setting</h3>
+            <a href="/myPage/platform">Platform</a>
+            <a href="/myPage/genre">Genre</a>
+            <a href="">BookMark</a>
+            <a href="">BookMemo</a>
         </div>
-
-
 
         <div class="myPage-wrap">
             <h1>MyPage</h1>
@@ -78,6 +79,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- Modal -->
             <div class="modal fade" id="platModi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -112,19 +114,21 @@
                 </div>
             </div>
         </div>
+    </div>
+
 
 
 
     <script>
-        
+
         let account = '${account}';
         // 나중에 꼭 account 수정해주기
-        const url = "http://localhost:8383/platform/c1/" + account;
+        const url = "http://localhost:8383/platform/c1";
         // 수정 삭제용 url
         const modiURL = "http://localhost:8383/platform/c1/" + account;
 
 
-        
+
 
     </script>
 

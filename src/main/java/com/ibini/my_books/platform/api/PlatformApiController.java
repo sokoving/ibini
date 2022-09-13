@@ -2,11 +2,13 @@ package com.ibini.my_books.platform.api;
 
 import com.ibini.my_books.platform.domain.PlatformDomain;
 import com.ibini.my_books.platform.service.PlatformService;
+import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -28,8 +30,12 @@ public class PlatformApiController {
                 const genreURL = "http://localhost:8383/genre/c1?account=" + account;
      */
 
-    @GetMapping("/{account}")
-    public List<PlatformDomain> list(@PathVariable String account, Model model){
+    @GetMapping("")
+    public List<PlatformDomain> list(HttpSession session, Model model){
+        // 로그인 정보 가져오기
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
+        log.info("HashTag Controller account - {}", account);
+
         log.info("PlatformController - GET! account -{}", account);
         List<PlatformDomain> domainList = platformService.findAllPlatform(account);
         log.info("domainList - {}", domainList);

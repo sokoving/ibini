@@ -25,7 +25,7 @@
                     </c:if>
 
                     <c:if test="${loginUser != null}">
-                        <span class="logIn" onclick="location.href='/member/my-page'">MyPage</span>
+                        <span class="logIn" onclick="location.href='/myPage'">MyPage</span>
                         <span class="myPage" onclick="location.href='/member/sign-out'">Log-out</span>
                     </c:if>
             </c:if>

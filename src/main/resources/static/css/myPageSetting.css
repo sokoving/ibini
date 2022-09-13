@@ -1,32 +1,56 @@
-.sidenav {
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
-  
-  .sidenav a {
-    padding: 6px 6px 6px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-  }
-  
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-  
-  .myPage-wrap {
-    margin-left: 200px; /* Same as the width of the sidenav */
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
+#wrap {
+  /* background: rgb(78, 135, 182); */
+  display: flex;
+  width: 1000px;
+  margin: 50px auto;
+  font-family: 'NanumSquareRound';
+  /*padding: 50px 0;*/
+  background: #fffaee;
+}
+/* side Bar CSS */
+#wrap #sideBar{
+  width: 20%;
+  background-color: #000;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  margin-right: 20px;
+  border-radius: 10px;
+  padding: 20px;
+
+}
+#wrap #sideBar h2{
+  color: #fffaee;
+  font-size: 30px;
+  font-weight: 600;
+
+  padding: 10px 0;
+  border-bottom: 2px solid #eeedeb;
+  margin-bottom: 30px;
+}
+#wrap #sideBar h3{
+  color: #fffaee;
+  font-size: 30px;
+  font-weight: 600;
+
+  padding: 10px 0;
+  border-bottom: 2px solid #eeedeb;
+  margin: 30px 0;
+}
+#wrap #sideBar a{
+  display: inline-block;
+  width: 100%;
+  font-size: 25px;
+  font-weight: 700;
+  padding: 5px 5px;
+  text-decoration: none;
+  color: #fffaee;
+}
+#wrap #sideBar a:hover{
+  color: #ffca3d;
+}
+#wrap #user-Info{
+  background-color: #eeedeb;
+  width: 80%;
+  padding: 30px;
+  border-radius: 10px;
+}
