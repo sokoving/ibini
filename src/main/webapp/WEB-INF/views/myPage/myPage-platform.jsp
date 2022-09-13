@@ -123,7 +123,7 @@
 
         let account = '${account}';
         // 나중에 꼭 account 수정해주기
-        const url = "http://localhost:8383/platform/c1" + account;
+        const url = "http://localhost:8383/platform/c1/" + account;
         // 수정 삭제용 url
         const modiURL = "http://localhost:8383/platform/c1/" + account;
 
