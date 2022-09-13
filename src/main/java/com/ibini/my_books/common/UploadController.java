@@ -32,7 +32,8 @@ import java.util.List;
 public class UploadController {
 
     // 업로드 파일 저장 경로
-    private static final String UPLOAD_PATH = "E:\\ibiniImg\\upload";
+//    private static final String UPLOAD_PATH = "E:\\ibiniImg\\upload";
+    private static final String UPLOAD_PATH = "C:\\ibiniImg\\upload";
     private final PostImgMapper postImgMapper;
     private final PostImgService postImgService;
 
