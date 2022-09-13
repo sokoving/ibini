@@ -81,7 +81,7 @@
         border-radius: 5px;
     }
     .tagInfo:hover{
-        transition: 1s;
+        transition: 0.6s;
         background-color: #fff0c6 ;
     }
 

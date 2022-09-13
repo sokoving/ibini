@@ -24,12 +24,25 @@
 <!--            (#{account}, #{genreName})-->
 <!--    </insert>-->
 
+<!--    <select id="findAllGenre" resultMap="genreMap">-->
+<!--        SELECT-->
+<!--            genre_id, account, genre_name-->
+<!--        FROM prj_genre-->
+<!--        WHERE account = #{account}-->
+<!--        ORDER BY genre_id-->
+<!--    </select>-->
+
     <select id="findAllGenre" resultMap="genreMap">
         SELECT
-            genre_id, account, genre_name
-        FROM prj_genre
-        WHERE account = #{account}
-        ORDER BY genre_id
+            @ROWNUM:=@ROWNUM+1 AS ROWNUM
+	, account
+	, genre_id
+	, genre_name
+        FROM
+            prj_genre
+        WHERE
+            (SELECT @ROWNUM:=0)=0 and
+            account = #{account}
     </select>
 
     <select id="fineOneGenreByGenreId" resultMap="genreMap">
