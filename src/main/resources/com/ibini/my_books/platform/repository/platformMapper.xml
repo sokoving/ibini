@@ -78,8 +78,9 @@
         FROM
             prj_platform
         WHERE
-            (SELECT @ROWNUM:=0)=0 and
-            account = #{account}
+            (SELECT @ROWNUM:=0)=0
+          and account in ('admin', #{account})
+        ORDER BY platform_id
     </select>
 
 <!--    <select id="findAllPlatform" resultMap="platformMap">-->
