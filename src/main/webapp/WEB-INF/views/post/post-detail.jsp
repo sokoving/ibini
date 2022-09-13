@@ -17,17 +17,14 @@
 
 <body>
     <!-- header -->
+    <a name="go-top"></a>
     <%@ include file="../include/change-header.jsp" %>
 
     <div id="wrap">
-        <a name="go-top"></a>
-        <%@ include file="../include/header.jsp" %>
-
 
         <div id="content-wrap">
             <section>
                 <div class="inner-section">
-
 
                     <!-- 이미지, 포스트 정보 영역 -->
                     <div id="img-post-wrap">
