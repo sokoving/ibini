@@ -34,8 +34,8 @@
                 <h3>Setting</h3>
                 <a href="/myPage/platform">Platform</a>
                 <a href="/myPage/genre">Genre</a>
-                <a href="">BookMark</a>
-                <a href="">BookMemo</a>
+                <a href="/myPage/marklist">BookMark</a>
+                <a href="/myPage/memolist">BookMemo</a>
             </div>
             <div class="myPage-wrap">
                 <h1>MyPage</h1>

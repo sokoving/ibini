@@ -105,12 +105,14 @@ hr {
 }
 
 section {
-    width: 90%;
+    width: 80%;
     /* border: 1px solid #adb5bd; */
     /* border-radius: 0.25rem; */
-    margin: 50px auto 0;
+    margin: 0 auto;
     /* padding: 24px; */
     box-sizing: border-box;
+    background: #fffaee;
+    border-radius: 10px;
 }
 
 /*================================================
@@ -126,6 +128,7 @@ section {
     /* border-radius: 0.4rem; */
     /* padding: 1.5rem; */
     margin-left: 25px;
+    margin-top: 30px;
 
     font-size: 17px;       
 }
@@ -153,6 +156,7 @@ section {
     margin-right: 0.5rem;
     padding: 0.35rem 0.7rem;
 
+    background: #fff;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .search-wrapper input[name="keyword"]:hover,
@@ -184,7 +188,7 @@ section {
     /* border: 1px solid #ced4da; */
     border-top-left-radius: 0.4rem;
     border-top-right-radius: 0.4rem;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     padding: 8px 0px;
 
     text-align: center;
@@ -193,6 +197,8 @@ section {
 
     cursor: default;
     background-color: #ffca3d;
+    width: 97%;
+    margin: 50px auto 0;
 }
 
 /*================================================
@@ -208,6 +214,8 @@ section {
     overflow-x: hidden;
 
     background: #faf9f6;
+    width: 97%;
+    margin: 0 auto;
 }
 
 /* 스크롤바 디자인 */
