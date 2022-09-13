@@ -88,24 +88,30 @@ function clickeventHandler(e){
 
     console.log('장르 수정 - genreId: ', genreId);
     // console.log(event);
-    
-    // 1. 장르 아이디 가져오기 (그대로 들어옴)
-    // 장르 아이디로 거슬러 올라가기? -> 장르 id에 장르 번호 붙여서 잡아오는걸로 수정
-    const genID = document.getElementById('genreId' + genreId).parentElement;
-    // 버튼 변경
-    console.log(genID);
-     
-    // console.log('genrehtmlBackUp :', genrehtmlBackUp);
-    const genreName = genID.firstElementChild.nextElementSibling;
-    console.log('clickeventHandler genreName : ', genreName);
-    // 2. 장르 이름 백업 -> 수정 취소시 넘겨주기
-    genreNameBackUp = genreName.firstElementChild.innerText; 
-    console.log('genreNameBackUp H :', genreNameBackUp);  
-    
-    const genreBtn = genID.lastElementChild;
 
-    console.log('genreId : ', genreId);
-        
+    // genreId === +1일때 수정/삭제 막기
+    if (+genreId === +1){
+        alert('수정/삭제 할 수 없는 장르입니다.')
+    } else {
+        console.log('else');
+
+        // 1. 장르 아이디 가져오기 (그대로 들어옴)
+        // 장르 아이디로 거슬러 올라가기? -> 장르 id에 장르 번호 붙여서 잡아오는걸로 수정
+        const genID = document.getElementById('genreId' + genreId).parentElement;
+        // 버튼 변경
+        console.log(genID);
+
+        // console.log('genrehtmlBackUp :', genrehtmlBackUp);
+        const genreName = genID.firstElementChild.nextElementSibling;
+        console.log('clickeventHandler genreName : ', genreName);
+        // 2. 장르 이름 백업 -> 수정 취소시 넘겨주기
+        genreNameBackUp = genreName.firstElementChild.innerText;
+        console.log('genreNameBackUp H :', genreNameBackUp);
+
+        const genreBtn = genID.lastElementChild;
+
+        console.log('genreId : ', genreId);
+
         if(e.target.matches('#genModi')){
             // alert('genModi');
             genreModify(e, genreName, genreNameBackUp, genreBtn);
@@ -119,10 +125,13 @@ function clickeventHandler(e){
             console.log('ModifyAndRemoveEvent  modiSaveBtn : ', genreId);
             genreModifySave(genreId);
             // 비동기 요청 전송! -> 비동기 요청 담을거
-        
+
         } else if(e.target.matches('#modiResetBtn')){
             genreModiCancelBtn(genreName, genreBtn, genreNameBackUp);
-        }   
+        }
+
+    }
+
 
 }
 
