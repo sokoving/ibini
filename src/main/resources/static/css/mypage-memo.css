@@ -221,6 +221,7 @@ section {
 /* 스크롤바 디자인 */
 .scroll-bar::-webkit-scrollbar {
     width: 15px;  /* 스크롤바의 너비 */
+    display: none !important; 
 }
 .scroll-bar::-webkit-scrollbar-thumb {
     height: 20%; /* 스크롤바의 길이 */
