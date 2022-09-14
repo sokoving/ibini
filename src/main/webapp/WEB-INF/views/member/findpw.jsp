@@ -22,11 +22,11 @@
 
 <body>
 
-  <img class="wave" src="/img/signin-1.png">
+  <!-- <img class="wave" src="/img/signin-1.png"> -->
   <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png -->
   <div class="container">
     <div class="img">
-      <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg">
+      <a href="/"><img src="/img/ibiniLogo.png"></a>
     </div>
     <div class="login-content">
 

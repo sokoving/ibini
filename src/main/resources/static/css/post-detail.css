@@ -92,11 +92,6 @@ section #img-post-wrap {
     overflow: hidden;
 }
 
-/* 첨부 - 썸네일 */
-.img-box.post-thumb {
-    border: 2px solid #fd7e14;
-    background-color: #fd7e14;
-}
 
 /* 첨부 - 일반 */
 .img-box {
@@ -124,64 +119,93 @@ section #img-post-wrap {
 
     display: flex;
     flex-flow: column;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 /* #post-top : 별점, 제목, 작가, 장르 */
-#post-box #post-top {
+#post-top {
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    padding: 0 30px;
+    box-sizing: border-box;
 }
 
+/* 별점 */
+.star-rate{
+    font-size: 1.3em;
+}
 /* 책 제목 */
-#post-top #post-title {
+#post-title {
     font-weight: 700;
     margin-top: 0.5rem;
+    color: #555;
+}
+/* 작가 */
+#post-writer {
+    color: #787878;
+    font-weight: 700;
 }
 
 
 /* #post-middle : 장르, 플랫폼, 연재 상태, 연재 일시, 페이지 정보*/
 #post-box #post-middle {
+    margin-top: 1.5em;
+    padding: 0 50px;
     color: #787878;
     text-align: center;
 
     display: flex;
     flex-direction: column;
+
 }
 
-/* 연재 상태, 페이지 정보 테이블 */
-#post-middle .middle-table {
+/* 플랫폼, 연재 정보 */
+.m-tr{
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    justify-content: center;
 }
-
-#post-middle .middle-table td {
-    width: 500px;
-    padding: 0 10px;
+.m-tr.tr-down{
+    margin-bottom: 0.5em;
 }
-
-#post-middle .middle-table .first-td {
-    border-right: 1px solid #adb5bd;
+.l-td{
+    flex: 1 1 0;
     text-align: right;
+    padding-right: 0.5em;
+    border-right: 2px solid #787878;
 }
-
-#post-middle .middle-table .last-td {
+.r-td{
+    flex: 1 1 0;
     text-align: left;
+    padding-left: 0.5em;
+}
+.m-tr.colspan-2{
+    flex: 1 0 0;
 }
 
-#post-middle .middle-table .empty-tr td {
-    color: #fff;
-    line-height: 10px;
+.l-td.plat-span{
+    border-right: none;
+    padding-right: 1px;
+}
+.r-td.genre-span{
+    padding-left: 1px;
+}
+.plat-span span{
+    background: pink;
+    border-radius: 50em 5em 5em 50em;
+    font-weight: 700;
+    padding: 0.3em 0.5em 0.2em 1em;
+}
+.genre-span span{
+    background-color: #e9ecef;
+    border-radius: 5em 50em 50em 5em;
+    font-weight: 700;
+    padding: 0.3em 1em 0.2em 0.5em;
 }
 
-/* 토글 */
-#post-middle .toggle-box {
-    margin-top: 25px;
-}
 
 /* #post-bottom : 날짜, 버튼*/
 #post-bottom {
@@ -212,6 +236,7 @@ section #img-post-wrap {
 /* ---------- 리모컨, 기타 영역 ----------  */
 section #remote-etc-wrap {
     display: flex;
+    color: rgbrgb(95, 155, 209));
 }
 
 /* ----- 리모컨 영역 ----- */
@@ -224,6 +249,8 @@ section #remote-etc-wrap {
     position: fixed;
     right: 70px;
     bottom: 70px;
+
+    width: 150px;
 }
 
 #remote-controller #inner-remote {
@@ -236,6 +263,7 @@ section #remote-etc-wrap {
     border: 1.5px solid #adb5bd;
     border-radius: 0.3rem;
     text-align: center;
+    background: #f8f9fa;
 }
 
 /* 리모컨 타이틀 */
@@ -243,12 +271,14 @@ section #remote-etc-wrap {
     margin-top: 5px;
     border-bottom: 1.5px solid #adb5bd;
     font-weight: 600;
+    cursor: move;
 }
 
 #go-to-controller {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: #fff;
 }
 
 /* 리모컨 옵션박스 */
@@ -296,7 +326,7 @@ section #remote-etc-wrap {
 }
 
 /* h3 */
-#remote-etc-wrap .h3-wrap {
+.h3-wrap {
     color: #787878;
     margin-top: 70px;
     padding-bottom: 10px;
@@ -307,7 +337,7 @@ section #remote-etc-wrap {
     align-items: center;
 }
 
-#remote-etc-wrap .h3-wrap h3 {
+.h3-wrap h3 {
     margin: 0;
     font-size: 1.3em;
 }
@@ -407,7 +437,7 @@ section #remote-etc-wrap {
     border-bottom: 1px dashed #787878;
 }
 .search-msg {
-    background-color: #fd7e14;
+    background-color: #f9b908c7;
     border-radius: 0.5rem;
     padding: 10px 0 5px;
     font-size: 1.1em;

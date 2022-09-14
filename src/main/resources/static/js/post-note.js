@@ -19,6 +19,8 @@ function btnTitle_onclick($eventTag) {
 
     const fireEvent = !$eventTag.classList.contains('selected');
     if(fireEvent) toggleSelected($eventTag);
+
+    resize_textarea();
 }
 
 // 등록 버튼 onclick Event
@@ -406,7 +408,7 @@ function appendMemoButtonArea(data) {
 
 // 메모 내용 입력
 function appendMemoContent(data) {
-    return '<textarea class="content" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
+    return '<textarea class="content" readonly spellcheck="false" onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
         + data.content
         + '</textarea>'
     ;
@@ -423,6 +425,7 @@ async function toggleMemoMode($memoContent) {
     $cancleMemo.classList.toggle('button-hidden');
 
     $memoContent.toggleAttribute('readonly');
+    $memoContent.classList.toggle('cursor');
 }
 
 // ==================== 마크 영역 ==================== //
@@ -507,7 +510,7 @@ function classifyMarkIconType(epId) {
 
 // 북마크 내용 입력
 function appendMarkContent(data) {
-    return '<textarea class="content" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
+    return '<textarea class="content" readonly spellcheck="false" onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
         + data.content
         + '</textarea>'
     ;
@@ -524,6 +527,7 @@ async function toggleMarkMode($markContent) {
     $cancleMark.classList.toggle('button-hidden');
 
     $markContent.toggleAttribute('readonly');
+    $markContent.classList.toggle('cursor');
 }
 
 // textarea 높이 자동조절

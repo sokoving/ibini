@@ -174,14 +174,14 @@ function makePlatformDom(domainList) {
         let platformFontColor = domainList[key].platformFontColor;
         let rowNum = domainList[key].rowNum;
         console.log('rowNum : ', rowNum);
-
+        let loop = +key + 1;
         // option 생성할 필요가 없다 -> select 아래에 넣어주니까!!
         // var option = document.createElement("option");
         // tag 더해주기
         tag += `<div id="selList">
                     <div class="platformNo">
                         <input type="hidden" value="`+ platformId+`">
-                        `+ rowNum + `
+                        `+ loop + `
                     </div>
                     <div class="platformName">
                         <span>` + platformName + `</span>
@@ -334,7 +334,7 @@ function platformModAndDelHandler(e) {
     // console.log('noo', noo);
     console.log('플랫폼 수정/삭제 핸들러');
     let b = +no === +1;
-    console.log('1', 21);
+    console.log('1', 1);
     console.log('b: ', b)
     if (+no === +1){
         e.preventDefault();

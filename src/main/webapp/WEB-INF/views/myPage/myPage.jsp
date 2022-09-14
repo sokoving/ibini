@@ -166,7 +166,7 @@
         <div id="sideBar">
             <h2>MyPage</h2>
             <a href="/myPage">User-Info</a>
-            <a href="">Help</a>
+            <a href="/member/inquiry?userId=${loginUser.userId}">Help</a>
             <h3>Setting</h3>
             <a href="/myPage/platform">Platform</a>
             <a href="/myPage/genre">Genre</a>
@@ -219,7 +219,9 @@
             <div id="info-Btn">
                 <button type="button" id="modify-btn">비밀번호 수정</button>
                 <button type="button" id="main-btn">메인</button>
+                <c:if test="${loginMethod != 'KAKAO'}">
                 <button type="button" id="joinOut-btn">회원탈퇴</button>
+                </c:if>
             </div>
             <div class="thanksTo">
                 <span>IBINI BOOKS를 이용해주셔서 감사합니다.</span>
@@ -241,8 +243,15 @@
         const $modifyBtn = document.getElementById('modify-btn');
         console.log($modifyBtn);
 
+
+
+        if('${loginMethod}' != 'KAKAO'){ 
         const $joinOutBtn = document.getElementById('joinOut-btn');
         console.log($joinOutBtn);
+        $joinOutBtn.onclick = e => {
+        location.href = '/member/join-out';
+         }
+       }
 
         const $mainBtn = document.getElementById('main-btn');
         console.log($mainBtn);
@@ -255,9 +264,6 @@
             location.href = '/member/modifyPw-check';
         }
 
-        $joinOutBtn.onclick = e => {
-            location.href = '/member/join-out';
-        }
 
         $mainBtn.onclick = e => {
             location.href = '/';

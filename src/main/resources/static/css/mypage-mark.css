@@ -260,7 +260,7 @@ section {
     border-radius: 0.1rem;
 }
 .book-wrapper div.book-image {
-    border-radius: 20px;
+    border-radius: 5px;
     text-align: center;
     min-height: 250px;
     margin-right: 2rem;
@@ -270,8 +270,9 @@ section {
 }
 .book-wrapper img.book-image {
     width: 100%;
-    /* object-fit: cover; */
-    /* height: 250px; */
+    object-fit: cover;
+    height: 250px;
+    border-radius: 5px;
 }
 
 /* 책 부가정보 영역 */

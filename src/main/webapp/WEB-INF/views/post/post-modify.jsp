@@ -372,7 +372,7 @@
                     return checkKeydown(e);
                 },
                 keyup: function (e) {
-                    checkKeyup(e);
+                    checkKeyup(e, postNo);
                 }
             });
 

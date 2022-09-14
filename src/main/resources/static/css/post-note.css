@@ -86,6 +86,10 @@ textarea {
     flex: 3;
 }
 
+.cursor {
+    cursor: text;
+}
+
 .button-area {
     text-align: right;
     display: inline-block;
@@ -221,6 +225,7 @@ textarea {
     box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 
     resize: both;
+    cursor: text;
 }
 /* #postnote .submit-wrapper .text-area textarea:hover {
     outline: 1px solid #495057;;

@@ -110,12 +110,15 @@
     }
 
     .c-red {
-      color: red;
+      color: rgb(209 69 69);
+    font-weight: 700;
     }
 
     .c-blue {
-      color: blue;
+      color: #3ad338;
+      font-weight: 700;
     }
+
 
     #user_name {
       border: 2px solid;
@@ -134,18 +137,18 @@
 </head>
 
 <body>
+  <!-- header -->
   <%@ include file="../include/change-header.jsp" %>
-
   <div id="wrap">
 
 
     <section id="main-section">
-      <img class="wave" src="/img/signin-1.png">
+      <!-- <img class="wave" src="/img/signin-1.png"> -->
       <h2 class="title">닉네임 수정</h2>
 
       <section id="content-box">
         <div class="img">
-          <img src="/img/ibini_logo_5.png">
+         <a href="/"><img src="/img/ibiniLogo.png"></a>
           <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg -->
         </div>
 
@@ -201,11 +204,11 @@
         //이름값 유효성검사
         else if (!getName.test($("#user_name").val())) {
           $('#user_name').css('border-color', 'red');
-          $('#nameChk').html('<b class="c-red">[이름은 한글로 ~]</b>');
+          $('#nameChk').html('<b class="c-red">[닉네임은 한글로 작성해주세요.]</b>');
           checkArr[0] = false;
         } else {
           $('#user_name').css('border-color', 'skyblue');
-          $('#nameChk').html('<b class="c-blue">[참 잘했어요]</b>');
+          $('#nameChk').html('<b class="c-blue">[올바르게 작성 하셨습니다.]</b>');
           checkArr[0] = true;
         }
 

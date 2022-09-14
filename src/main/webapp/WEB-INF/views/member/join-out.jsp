@@ -15,16 +15,18 @@
 </head>
 
 <body>
-<%@ include file="../include/change-header.jsp" %>
+ <!-- header -->
+ <%@ include file="../include/change-header.jsp" %>
   <div id="wrap">
 
+
     <section id="main-section">
-      <img class="wave" src="/img/signin-1.png">
+      <!-- <img class="wave" src="/img/signin-1.png"> -->
       <h2 class="title">회원탈퇴</h2>
 
       <section id="content-box">
           <div class="img">
-              <img src="/img/ibini_logo_5.png">
+              <a href="/"><img src="/img/ibiniLogo.png"></a>
               <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg -->
           </div>
 

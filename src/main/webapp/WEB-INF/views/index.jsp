@@ -9,21 +9,58 @@
   <%@ include file="./include/static-head.jsp" %>
 </head>
 
+<style>
+  #carouselExampleControlsNoTouching {
+    padding-top: 50px;
+  }
+  #content-wrap {
+    margin: 50px auto;
+    width: 80%;
+    display: flex;
+  }
+  #content-wrap img {
+    max-width: 200px;
+  }
+  hr{
+    margin: 50px 0;
+  }
+</style>
 
 <body>
   <!-- header -->
     <%@ include file="./include/change-header.jsp" %>
     <div id="wrap">
-          <div id="header-wrap">
 
+      <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/img/003.png" class="d-block w-100" alt="슬라이드1">
           </div>
-        <div id="content-wrap">
-            <h1> Welcome~ This is ibini's index page!! </h1>
+          <div class="carousel-item">
+            <img src="/img/004.png" class="d-block w-100" alt="슬라이드2">
+          </div>
+          <div class="carousel-item">
+            <img src="/img/005.png" class="d-block w-100" alt="슬라이드3">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
-            <a href="/list">포스트 전체 목록</a> <br>
-            <a href="/post/write/${account}">새 포스트 쓰기</a> <br>
-            <a href="/upload-form">파일 업로드 테스트</a> <br>
-            <a href="/api/findtitle">검색및 기능등록 테스트</a>
+      <hr>
+
+        <div id="content-wrap">
+          <img src="/img/i003.png" onclick="location.href='/list'" alt="목록조회">
+          <img src="/img/i002.png" onclick="location.href='/post/write/${account}'" alt="포스트등록">
+          <img src="/img/i005.png" onclick="location.href='/api/findtitle'" alt="검색해서 등록하기">
+          <img src="/img/i004.png" onclick="location.href='/myPage'" alt="마이페이지">
+
         </div>
     </div>
 

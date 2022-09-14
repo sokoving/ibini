@@ -20,22 +20,23 @@ function makeGenreDom(genreList){
     // 장르 리스트 분해해서 값 넣어주기
 
     let tag = '';
+    let rowNum = 0;
     for (let key in genreList) {
         
         let genreId = genreList[key].genreId;
         let genreName = genreList[key].genreName;
-        let rowNum = genreList[key].rowNum;
+//        let rowNum = genreList[key].rowNum;
 
         console.log(genreId);
         console.log(genreName);
         console.log('rowNum : ', rowNum);
-        
+        let loop = +key + 1;
         // 태그생성
 
         tag += `<div id="genList">
                     <div class="genreId" id="genreId` + genreId +`">
                         <input type="hidden" value="` + genreId+ `">
-                        <span>` + rowNum + `</span>
+                        <span>` + loop + `</span>
                     </div>
                     <div class="genreName" id="genreName">
                         <span>` + genreName + `</span>

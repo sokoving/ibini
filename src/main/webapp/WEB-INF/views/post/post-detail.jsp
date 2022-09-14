@@ -13,6 +13,7 @@
     <!-- post-note CSS -->
     <link rel="stylesheet" href="/css/post-note.css">
 
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -33,9 +34,14 @@
 
                             <!-- 썸네일 이미지 -->
                             <div id="thumb-img">
-                                <c:if test="${p.thumbImg != null}">
-                                    <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
-                                </c:if>
+                                <c:choose>
+                                    <c:when test="${p.thumbImg != null}">
+                                        <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="post-img" src="/img/ppp111.png" alt="썸네일 이미지">
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
 
 
@@ -43,20 +49,12 @@
                             <div class="img-box-wrap">
                                 <c:if test="${imgList != null}">
                                     <c:forEach var="img" items="${imgList}">
-                                        <c:choose>
-                                            <c:when test="${img.thumbnail}">
-                                                <div class="img-box post-thumb">
-                                                    <img class="post-img" src="/loadFile?fileName=${img.fileName}"
-                                                        alt="표지 이미지" title="${img.originalFileName}">
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="img-box">
-                                                    <img class="post-img" src="/loadFile?fileName=${img.fileName}"
-                                                        alt="첨부 이미지" title="${img.originalFileName}">
-                                                </div>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <c:if test="${img.thumbnail eq false}">
+                                            <div class="img-box">
+                                                <img class="post-img" src="/loadFile?fileName=${img.fileName}"
+                                                    alt="첨부 이미지" title="${img.originalFileName}">
+                                            </div>
+                                        </c:if>
                                     </c:forEach>
                                 </c:if>
                             </div>
@@ -65,209 +63,173 @@
                         <!-- 포스트 정보 영역 -->
                         <div id="post-box">
 
-                            <!-- top : 별점, 제목, 작가, 장르-->
+                            <!-- top : 별점, 제목, 작가-->
                             <div id="post-top">
-                                <span class="top-span star-span"></span>
+                                <span class="star-rate" data-key="${p.starRate}" title="별 ${p.starRate}개"></span>
                                 <!-- 책 제목 -->
                                 <div id="post-title">
                                     <h2 class="title-span">${p.postTitle}</h2>
                                 </div>
                                 <!-- 작가 이름 | 장르 이름 -->
                                 <div id="post-writer">
-                                    <span class="writer-span">${p.postWriter} | ${p.genreName}</span>
+                                    <span class="writer-span">${p.postWriter}</span>
                                 </div>
                             </div> <!-- // end post-top -->
 
                             <!-- middle : 장르, 플랫폼, 연재 상태, 연재 일시, 페이지 정보 -->
                             <div id="post-middle">
 
-
-
-
-
-
-                                <div id="publish-status">
-                                    <table class="middle-table">
-
-                                        <!-- 연재 상태 -->
-                                        <tr>
-                                            <td class="first-td">${p.platformName}</td>
-                                            <c:choose>
-                                                <c:when test="${p.publishStatus <= 1}">
-                                                    <c:choose>
-                                                        <c:when test="${empty p.publishCycle}">
-                                                            <td class="last-td">${p.publishStatusName}</td>
-                                                        </c:when>
-
-                                                        <c:otherwise>
-                                                            <td class="last-td">${p.publishCycle}</td>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:when>
-
-                                                <c:otherwise>
-                                                    <td class="last-td">${p.publishStatusName}</td>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </tr>
-                                        <tr class="empty-tr">
-                                            <td colspan="2">-</td>
-                                        </tr>
-                                        <!-- 현재, 전체 페이지 -->
-                                        <c:choose>
-                                            <c:when test="${p.epId == 3}">
-                                                <tr>
-                                                    <td class="first-td cur-ep">진행도</td>
-                                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
-                                                        integerOnly="true" />
-                                                    <td class="last-td tot-ep">${percent}%</td>
-                                                </tr>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <tr>
-                                                    <td class="first-td cur-ep">현재 ${p.epName}</td>
-                                                    <td class="last-td tot-ep">전체 ${p.epName}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first-td cur-ep">${p.curEp}${p.epName2}</td>
-                                                    <td class="last-td tot-ep">${p.totalEp}${p.epName2}</td>
-                                                </tr>
-                                            </c:otherwise>
-                                        </c:choose>
-
-                                        <!-- 수정 버튼 -->
-                                        <tr>
-                                            <td colspan="2">
-                                                <div class="toggle-box">
-                                                    <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
-                                                    <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
-                                                    <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
-                                                    <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-
+                                <div class="m-tr tr-down">
+                                    <!-- 플랫폼 -->
+                                    <div class="l-td plat-span">
+                                        <span
+                                            style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}">${p.platformName}</span>
+                                    </div>
+                                    <!-- 장르 -->
+                                    <div class="r-td genre-span"><span>${p.genreName}</span></div>
                                 </div>
-                            </div> <!-- // end post-middle -->
-                        </div> <!-- // end post-box -->
-                    </div><!-- // end img-post-wrap -->
-                    <!-- bottom : 날짜, 수정삭제목록 버튼-->
-                    <div id="post-bottom">
-                        <div class="date-wrap">
-                            <span>등록일 ${p.shortDate.postRegDate}</span>
-                            |
-                            <span>수정일 ${p.shortDate.postUpdateDate}</span>
-                        </div>
-                        <div class="post-btn-wrap">
-                            <button class="post-btn post-modi-btn" title="수정하기">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
-                            <button class="post-btn post-list-btn" title="목록으로">
-                                <i class="far fa-list-alt"></i>
-                            </button>
-                            <button class="post-btn post-del-btn" title="삭제하기">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div> <!-- // end post-bottom -->
+
+                                <!-- 연재 상태 / 연재 일시 -->
+                                <div class="m-tr tr-down colspan-2">
+                                    <c:choose>
+                                        <c:when test="${empty p.publishCycle}">${p.publishStatusName}
+                                        </c:when>
+                                        <c:otherwise>${p.shortCycle}</c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <!-- 현재, 전체 페이지 -->
+                                <div class="m-tr">
+                                    <div class="l-td">현재 ${p.epName}</div>
+                                    <div class="r-td">전체 ${p.epName}</div>
+                                </div>
+                                <div class="m-tr tr-down">
+                                    <div class="l-td">${p.curEp}${p.epName2}</div>
+                                    <div class="r-td">${p.totalEp}${p.epName2}</div>
+                                </div>
+
+                            </div>
+                        </div> <!-- // end post-middle -->
+                    </div> <!-- // end post-box -->
+                </div><!-- // end img-post-wrap -->
+                <!-- bottom : 날짜, 수정삭제목록 버튼-->
+                <div id="post-bottom">
+                    <div class="date-wrap">
+                        <span>등록일 ${p.shortDate.postRegDate}</span>
+                        |
+                        <span>수정일 ${p.shortDate.postUpdateDate}</span>
+                    </div>
+                    <div class="post-btn-wrap">
+                        <button class="post-btn post-modi-btn" title="수정하기">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="post-btn post-list-btn" title="목록으로">
+                            <i class="far fa-list-alt"></i>
+                        </button>
+                        <button class="post-btn post-del-btn" title="삭제하기">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div> <!-- // end post-bottom -->
 
 
-                    <!-- 리모컨, 해시태그, 관련 링크 영역-->
-                    <div id="remote-etc-wrap">
-                        <!-- 사이드 리모컨 영역 -->
-                        <div id="remote-controller">
-                            <div id="inner-remote">
-                                <div class="remote-title">리모컨</div>
-                                <div id="go-to-controller">
-                                    <select id="select-remote-option">
-                                        <option value="#hash-tag">해시태그</option>
-                                        <option value="#link-post">연관 포스트</option>
-                                        <option value="#post-note">포스트 노트</option>
-                                    </select>
-                                    <button id="move-scroll-btn">이동</button>
-                                </div>
-                                <div id="go-down-list">
-                                    <a href="#go-top" class="go-top"><i class="fas fa-arrow-up"></i>위로</a>
-                                    <a href="#go-down" class="go-down"><i class="fas fa-arrow-down"></i>아래로</a>
-                                    <a href="/list" class="go-list"><i class="fas fa-list"></i>목록</a>
-                                </div>
-                                <!-- <div id="search-controller">
+                <!-- 리모컨, 해시태그, 관련 링크 영역-->
+                <div id="remote-etc-wrap">
+                    <!-- 사이드 리모컨 영역 -->
+                    <div id="remote-controller">
+                        <div id="inner-remote">
+                            <div class="remote-title">리모컨</div>
+                            <div id="go-to-controller">
+                                <select id="select-remote-option">
+                                    <option value="#hash-tag">해시태그</option>
+                                    <option value="#link-post">연관 포스트</option>
+                                    <option value="#post-note">포스트 노트</option>
+                                </select>
+                                <button id="move-scroll-btn">이동</button>
+                            </div>
+                            <div id="go-down-list">
+                                <a href="#go-top" class="go-top"><i class="fas fa-arrow-up"></i>위로</a>
+                                <a href="#go-down" class="go-down"><i class="fas fa-arrow-down"></i>아래로</a>
+                                <a href="/list" class="go-list"><i class="fas fa-list"></i>목록</a>
+                            </div>
+                            <!-- <div id="search-controller">
                                     <input type="text" name="" id="">
                                     <button>검색</button>
                                 </div> -->
-                            </div> <!-- // end inner-remote -->
-                        </div> <!-- // end remote-conroller -->
+                        </div> <!-- // end inner-remote -->
+                    </div> <!-- // end remote-conroller -->
 
-                        <div id="etc-wrap">
+                    <div id="etc-wrap">
 
-                            <!-- 해시태그 영역 -->
-                            <a name="hash-tag"></a>
-                            <div id="hash-wrap">
+                        <!-- 해시태그 영역 -->
+                        <a name="hash-tag"></a>
+                        <div id="hash-wrap">
 
-                                <div class="h3-wrap">
-                                    <h3>해시태그</h3>
-                                    <div class="toggle-box">
-                                        <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
-                                        <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
-                                        <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
-                                        <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
-                                    </div>
+                            <div class="h3-wrap">
+                                <h3>해시태그</h3>
+                                <div class="toggle-box">
+                                    <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
+                                    <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
+                                    <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
+                                    <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
                                 </div>
-                                <div class="inputHashtag hide">
-                                    <div class="label">
-                                        <label id="InfoText">해시태그를 추가로 글에 추가할 수 있습니다.</label>
-                                        <label id="InfoText">예시) #태그 #해시태그 </label>
-                                    </div>
-                                    <div id="tagInputAndBtn">
-                                        <input type="text" id="hashtagInput">
-                                        <button type="button" id="hashtagInputBtn">저장</button>
-                                    </div>
-
+                            </div>
+                            <div class="inputHashtag hide">
+                                <div class="label">
+                                    <label id="InfoText">해시태그를 추가로 글에 추가할 수 있습니다.</label>
+                                    <label id="InfoText">예시) #태그 #해시태그 </label>
+                                </div>
+                                <div id="tagInputAndBtn">
+                                    <input type="text" id="hashtagInput">
+                                    <button type="button" id="hashtagInputBtn">저장</button>
                                 </div>
 
-                                <div id="tag-container">
-                                    <c:forEach var="t" items="${tagList}">
-                                        <span class="hash-span" data-tag-no="${t.tagNo}">${t.tagName}</span>
-                                    </c:forEach>
-                                    <!-- onclick="location.href='/hashtag/${t.tagName}'" -->
+                            </div>
 
-                                    <span class="hash-span tag-plus hide"><i class="far fa-plus-square"></i></span>
+                            <div id="tag-container">
+                                <c:forEach var="t" items="${tagList}">
+                                    <span class="hash-span" data-tag-no="${t.tagNo}">${t.tagName}</span>
+                                </c:forEach>
+                                <!-- onclick="location.href='/hashtag/${t.tagName}'" -->
+
+                                <span class="hash-span tag-plus hide"><i class="far fa-plus-square"></i></span>
+                            </div>
+                        </div> <!-- // end hash-wrap -->
+
+                        <!-- 연관 포스트 영역 -->
+                        <a name="link-post"></a>
+                        <div id="link-post-wrap">
+                            <div class="h3-wrap">
+                                <h3>연관 포스트</h3>
+                                <div class="toggle-box">
+                                    <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
+                                    <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
+                                    <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
+                                    <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
                                 </div>
-                            </div> <!-- // end hash-wrap -->
+                            </div>
 
-                            <!-- 연관 포스트 영역 -->
-                            <a name="link-post"></a>
-                            <div id="link-post-wrap">
-                                <div class="h3-wrap">
-                                    <h3>연관 포스트</h3>
-                                    <div class="toggle-box">
-                                        <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
-                                        <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
-                                        <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
-                                        <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
-                                    </div>
-                                </div>
+                            <div>
+                                <!-- 연관 포스트 목록 영역 -->
+                                <ul id="link-container"></ul>
+                            </div>
+                        </div> <!-- // end post-link-wrap -->
 
-                                <div>
-                                    <!-- 연관 포스트 목록 영역 -->
-                                    <ul id="link-container"></ul>
-                                </div>
+                        <!-- 포스트 노트 영역 -->
+                        <a name="post-note"></a>
+                        <div class="h3-wrap">
+                            <h3>포스트 노트</h3>
+                        </div>
+                        <%@ include file="../postnote/post-detail-note.jsp" %>
+
+                    </div><!-- // end etc-wrap -->
+                </div> <!-- // end remote-etc-wrap -->
 
 
-                            </div> <!-- // end post-link-wrap -->
-                        </div><!-- // end etc-wrap -->
-
-
-                    </div> <!-- // end remote-etc-wrap -->
-
-                    <!-- 포스트 노트 영역 -->
-                    <%@ include file="../postnote/post-detail-note.jsp" %>
-
-                </div> <!-- // end inner-section -->
-            </section> <!-- // end section -->
-        </div>
-        <a name="go-down"></a>
+        </div> <!-- // end inner-section -->
+        </section> <!-- // end section -->
+    </div>
+    <a name="go-down"></a>
     </div> <!-- end wrap -->
 
     <script src="/js/post-detail.js"></script>
@@ -275,7 +237,7 @@
 
     <script>
         // post-note.js
-        const account = '${p.account}';        
+        const account = '${p.account}';
         const postNo = '${p.postNo}';
     </script>
 
@@ -334,7 +296,7 @@
 
                     console.log('장르 삭제 - genreId : ', dataset);
 
-                    if (!confirm('선택하신 장르를 삭제하시겠습니까?')) return;
+                    if (!confirm('선택하신 해시태그를 삭제하시겠습니까?')) return;
 
                     fetch(tagUrl + '/' + dataset, {
                             method: 'DELETE'
@@ -388,7 +350,7 @@
                             if (msg === "insert-success") {
                                 alert('새로운 해시태그가 등록되었습니다.');
                                 // 비워주기
-                                addTag = '';
+                                hashtagInput.value = '';
                                 showHashtagDom();
 
                             } else {
@@ -401,14 +363,14 @@
                 }
 
                 function showHashtagDom() {
-                console.log(tagUrl);
+                    console.log(tagUrl);
 
-                fetch(tagUrl)
-                    .then(res => res.json())
-                    .then(hashtagList => {
-                        console.log(hashtagList);
-                        makeHashtagDom(hashtagList);
-                    });
+                    fetch(tagUrl)
+                        .then(res => res.json())
+                        .then(hashtagList => {
+                            console.log(hashtagList);
+                            makeHashtagDom(hashtagList);
+                        });
 
 
                 }
@@ -453,7 +415,7 @@
             }
 
             // DOM 생성!!!!!
-            function makeHashtagDom(hashtagList){
+            function makeHashtagDom(hashtagList) {
 
                 console.log('makeHashtagDom');
 
@@ -536,29 +498,46 @@
                 }
             });
 
+            // 연관 포스트 토글 온오프 관련 랜더링
+            function setLinkEditMod() {
+                console.log("토글 클릭, setLinkEditMod start");
+                switchToggle($postToggles); // 아이콘 바꾸기
+                // 잠금모드가 풀릴 때 > 검색창 생성, 삭제 버튼 생성
+                if (isToggleOn()) {
+                    makeSearchLi();
+                    toggleDelBtn();
+                    $('#postSearchList').focus();
+                }
+                // 잠금모드가 잠길 때
+                else {
+                    // 연관 목록이 있다면 잠금 모드 삭제, 삭제 버튼 숨기기
+                    if ($linkUl.children.length > 1 && isSearchLi()) {
+                        $linkUl.children[0].remove();
+                        toggleDelBtn();
+                    }
+                }
+            }
             /* ------------------ // end 연관 포스트 -------------------------- */
 
             const star = '${p.starRate}'
-            drawStarsAtDetail(star);
+            drawStarsAtList();
 
-            // 별 찍기
-            function drawStarsAtDetail(star) {
-                // console.log("starRate 함수 시작!");
-                // console.log(star);
+            // 별 특수문자 채우기
+            function drawStarsAtList() {
+                const $stars = document.querySelectorAll('.star-rate');
+                //    console.log($stars);
 
-                const $star = $('.star-span');
-                let text = '';
-
-                // 별점이 0일 경우
-                if (star <= 0 || star === null) {
-                    $star.removeClass('top-span')
-                    return;
-                } else {
-                    // 별점이 1보다 큰 경우
-                    for (let i = 0; i < star; i++) {
-                        text += '⭐';
+                for (let i = 0; i < $stars.length; i++) {
+                    const num = $stars[i].dataset.key;
+                    // console.log(num);
+                    let msg = '⭐';
+                    if (num === '0') {
+                        msg = '😎😎😎'
                     }
-                    $star.text(text);
+                    for (let j = 1; j < num; j++) {
+                        msg += '⭐';
+                    }
+                    $stars[i].textContent = msg;
                 }
             }
 
@@ -570,11 +549,19 @@
 
 
             // 리모컨 이벤트
-            $('#move-scroll-btn').click(function() {
+            $('#move-scroll-btn').click(function () {
                 // 현재 선택된 select box
                 let selectOption = $("#select-remote-option option:selected").val();
                 location.href = selectOption;
             })
+
+            $(function () {
+                $('#remote-controller').draggable({
+                    'cancel': '#go-to-controller, #go-down-list',
+                    containment: 'body',
+                    scroll: false
+                });
+            });
         });
         // end jQuery
     </script>

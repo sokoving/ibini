@@ -6,10 +6,15 @@ import com.ibini.my_books.post.dto.PostWithName;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface PostMapper {
 
+    // 중복체크 기능
+    // 체크타입: 계정 or 이메일
+    // 체크값: 중복검사대상 값
+    int isDuplicate(Map<String, Object> checkMap);
 
     // 게시글 쓰기 기능
     boolean save(Post post);
@@ -36,5 +41,9 @@ public interface PostMapper {
     int getTotalCount(String account);
     int getTotalCountWithSearch(SearchPost searchPost);
 
+    // 특정 장르 아이디를 가진 포스트의 post_no 모두 조회
+    List<Post> getPostByGenreId(int genreId);
 
+    // 특정 플랫폼 아이디를 가진 포스트의 post_no 모두 조회
+    List<Post> getPostByPlateId(int platformId);
 }

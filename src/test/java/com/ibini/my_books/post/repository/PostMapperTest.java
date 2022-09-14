@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -158,4 +160,56 @@ class PostMapperTest {
         assertEquals(sList.size(), tc);
     }
 
+    @Test
+    @DisplayName("특정 장르 아이디를 가진 모든 포스트 번호를 조회한다")
+    void getPostByGenreIdTest() {
+        int genreId = 9;
+        List<Post> pl = mapper.getPostByGenreId(genreId);
+        for (Post p : pl) {
+            System.out.println(p.getPostNo());
+        }
+    }
+
+
+    @Test
+    @DisplayName("특정 플랫폼 아이디를 가진 모든 포스트 번호를 조회한다")
+    void getPostByPlateIdTest() {
+        int c = 10;
+        List<Post> pl = mapper.getPostByPlateId(c);
+        for (Post p : pl) {
+            System.out.println(p.getPlatformId());
+        }
+    }
+
+    @Test
+    @DisplayName("제목이 중복되면 1 이상을 리턴한다")
+    void isDuplicate(){
+        //given
+        Map<String, Object> checkMap = new HashMap<>();
+        checkMap.put("type", "title");
+        checkMap.put("value", "ssssss");
+
+        //when
+        int flagNumber = mapper.isDuplicate(checkMap);
+
+        //then
+        assertEquals(0, flagNumber);
+    }
+
+    @Test
+    @DisplayName("post_no가 전달되면 해당 포스트는 빼고 중복 테스트를 한다")
+    void isDuplicateModiVer(){
+        //given
+        Map<String, Object> checkMap = new HashMap<>();
+        checkMap.put("type", "title");
+        checkMap.put("value", "수정 테스트");
+        checkMap.put("postNo", 10L);
+        checkMap.put("account", "ibini");
+
+        //when
+        int flagNumber = mapper.isDuplicate(checkMap);
+
+        //then
+        assertEquals(0, flagNumber);
+    }
 }

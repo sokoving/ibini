@@ -175,7 +175,7 @@
     <div id="sideBar">
         <h2>MyPage</h2>
         <a href="">User-Info</a>
-        <a href="">Help</a>
+        <a href="/member/inquiry?userId=${loginUser.userId}">Help</a>
         <h3>Setting</h3>
         <a href="/platform/c1">Platform</a>
         <a href="http://localhost:8383/myPage/${account}/genre">Genre</a>
@@ -238,7 +238,9 @@
 
 <script>
 
-<%--    Button script Event 추가하기 --%>
+    console.log("${loginUser}");
+
+// <%--    Button script Event 추가하기 --%>
     const date = '${loginUser.prettierDate}';
     console.log(date);
 

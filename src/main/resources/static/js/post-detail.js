@@ -134,25 +134,6 @@ function makeLinkLi(linkList, linkSize) {
 } // end makeLinkLi
 
 
-// 연관 포스트 토글 온오프 관련 랜더링
-function setLinkEditMod() {
-    switchToggle($postToggles); // 아이콘 바꾸기
-    // 잠금모드가 풀릴 때 > 검색창 생성, 삭제 버튼 생성
-    if (isToggleOn()) {
-        makeSearchLi();
-        toggleDelBtn();
-        $('#postSearchList').focus();
-    }
-    // 잠금모드가 잠길 때
-    else {
-        // 연관 목록이 있다면 잠금 모드 삭제, 삭제 버튼 숨기기
-        if ($linkUl.children.length > 1 && isSearchLi()) {
-            $linkUl.children[0].remove();
-            toggleDelBtn();
-        }
-    }
-}
-
 // 토글 아이콘, 자물쇠 아이콘 스위치하는 함수
 function switchToggle($toggleIcons) {
     $toggleIcons[0].classList.toggle('fff');
@@ -324,15 +305,16 @@ function sendLinkDelete(e, postNo) {
 //검색창이 존재하는지 확인하는 함수
 function isSearchLi() {
     // 검색창이 존재하면 true, 없으면 false
-    const flag = $linkUl.children.length > 0 && $linkUl.firstElementChild.classList.contains(
-        'link-zero-box');
-    // console.log(flag + "(true - 검색창 있음, false - 검색창 없음)");
+    const flag = $linkUl.children.length > 0 && $linkUl.firstElementChild.classList.contains('link-zero-box');
+    console.log(flag + "(searchLi flag : true - 검색창 있음, false - 검색창 없음)");
     return flag;
 }
 
 // 잠금모드면 false, 편집모드면 true
 function isToggleOn() {
-    return $postToggles[1].classList.contains('hide');
+     const flag = $postToggles[1].classList.contains('hide');
+     console.log(flag + "(toggle flag : true -편집모드 열려 있음, false - 잠금모드 열려 있음");
+     return flag;
 }
 
 // -------------------------- 수정, 삭제, 목록 버튼 ------------------------------------------ //
