@@ -26,10 +26,10 @@ public class DataBaseConfig {
 //        config.setDriverClassName("org.mariadb.jdbc.Driver");
 
 //
-//        config.setUsername("root");
-//        config.setPassword("mariadb");
-//        config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini");
-//        config.setDriverClassName("org.mariadb.jdbc.Driver");
+        config.setUsername("root");
+        config.setPassword("mariadb");
+        config.setJdbcUrl("jdbc:mariadb://localhost:3306/ibini");
+        config.setDriverClassName("org.mariadb.jdbc.Driver");
 
         return new HikariDataSource(config);
     }
