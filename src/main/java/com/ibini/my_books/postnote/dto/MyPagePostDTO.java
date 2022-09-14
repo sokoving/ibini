@@ -16,4 +16,7 @@ public class MyPagePostDTO {
 
     // prj_post_img
     private String thumbImg;     // 썸네일 이미지 경로
+
+    // 커스텀 필드
+    private String shortPostTitle;
 }

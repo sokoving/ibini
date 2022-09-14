@@ -103,7 +103,7 @@
                                 <div class="book-info w70">
                                     <%-- 책 제목 --%>
                                     <div class="book-title">
-                                        <a href="/post/detail/${p.postNo}" title="상세보기">${p.postTitle}</a>
+                                        <a href="/post/detail/${p.postNo}" title="${p.postTitle}">${p.shortPostTitle}</a>
                                     </div>
                                     <div class="mark-wrapper">
                                         <%-- MARK 내용 --%>
