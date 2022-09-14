@@ -15,7 +15,7 @@
   }
   #content-wrap {
     margin: 50px auto;
-    width: 60%;
+    width: 80%;
     display: flex;
   }
   #content-wrap img {
@@ -58,6 +58,7 @@
         <div id="content-wrap">
           <img src="/img/i003.png" onclick="location.href='/list'" alt="목록조회">
           <img src="/img/i002.png" onclick="location.href='/post/write/${account}'" alt="포스트등록">
+          <img src="/img/i005.png" onclick="location.href='/api/findtitle'" alt="검색해서 등록하기">
           <img src="/img/i004.png" onclick="location.href='/myPage'" alt="마이페이지">
 
         </div>
