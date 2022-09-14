@@ -21,7 +21,7 @@ class GenreServiceTest {
     @Test
     @DisplayName("기본 장르를 세팅한다")
     void setGenreForNewMemberTest(){
-        String account = "newMem";
+        String account = "2209080001";
         boolean flag = genreService.setGenreForNewMember(account);
         assertTrue(flag);
     }

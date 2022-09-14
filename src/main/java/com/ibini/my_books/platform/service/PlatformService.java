@@ -82,8 +82,8 @@ public class PlatformService {
         bgMap.put("카카오페이지", new String[]{"rgb(249, 224, 0)", "rgb(51, 51, 51)"});
         bgMap.put("네이버시리즈", new String[]{"rgb(3, 199, 90)", "rgb(0, 0, 0)"});
         bgMap.put("리디북스", new String[]{"rgb(30, 158, 255)", "rgb(255, 255, 255)"});
-        bgMap.put("카카오웹툰", new String[]{"rgb(0, 0, 0)", "rgb(255, 255, 255)"});
-        bgMap.put("네이버웹툰", new String[]{"rgb(3, 199, 90)", "rgb(255, 255, 255)"});
+        bgMap.put("문피아", new String[]{"rgb(90, 162, 221)", "rgb(51, 51, 51)"});
+        bgMap.put("조아라", new String[]{"rgb(0, 76, 153)", "rgb(165, 247, 44)"});
 
         for (String s : bgMap.keySet()) {
             PlatformDomain p = new PlatformDomain();

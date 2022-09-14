@@ -18,7 +18,7 @@
 <%--            이름 --%>
 
                 <c:if test="${loginUser.auth == 'COMMON'}">
-                    <span class="userName">${loginUser.userName} 님</span>
+                    <span class="userName" onclick="location.href='/list'">${loginUser.userName} 님</span>
                 </c:if>
                 <c:if test="${loginUser.auth == 'ADMIN'}">
                     <span class="userName">[${loginUser.userName}] 님</span>
