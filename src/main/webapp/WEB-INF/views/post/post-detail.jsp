@@ -26,6 +26,11 @@
         <div id="content-wrap">
             <section>
                 <div class="inner-section">
+                    <!-- 이미지 모달 -->
+                    <div id="imgModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="modalImgNode">
+                    </div>
 
                     <!-- 이미지, 포스트 정보 영역 -->
                     <div id="img-post-wrap">
@@ -562,6 +567,28 @@
                     scroll: false
                 });
             });
+
+            // -------------------------- 이미지 모달 관련 함수 --------------------------- //
+            // 이미지 박스 노드
+            const $imgWrap = document.getElementById('img-wrap');
+            // 모달 노드
+            const $modal = document.getElementById("imgModal");
+            const $modalImg = document.getElementById("modalImgNode");
+
+            $imgWrap.onclick = function (e) {
+                if (!e.target.matches('.post-img')) {return;}
+
+                // 클릭한 이미지의 src를 모달 img src에 넣기
+                $modal.style.display = "block";
+                $modalImg.src = e.target.getAttribute('src');
+            }
+
+            // 모달 지우기
+            const $close = document.querySelector(".close");
+            $close.onclick = function () {
+                $modal.style.display = "none";
+            }
+
         });
         // end jQuery
     </script>

@@ -306,15 +306,15 @@ function sendLinkDelete(e, postNo) {
 function isSearchLi() {
     // 검색창이 존재하면 true, 없으면 false
     const flag = $linkUl.children.length > 0 && $linkUl.firstElementChild.classList.contains('link-zero-box');
-    console.log(flag + "(searchLi flag : true - 검색창 있음, false - 검색창 없음)");
+    // console.log(flag + "(searchLi flag : true - 검색창 있음, false - 검색창 없음)");
     return flag;
 }
 
 // 잠금모드면 false, 편집모드면 true
 function isToggleOn() {
-     const flag = $postToggles[1].classList.contains('hide');
-     console.log(flag + "(toggle flag : true -편집모드 열려 있음, false - 잠금모드 열려 있음");
-     return flag;
+    const flag = $postToggles[1].classList.contains('hide');
+    // console.log(flag + "(toggle flag : true -편집모드 열려 있음, false - 잠금모드 열려 있음");
+    return flag;
 }
 
 // -------------------------- 수정, 삭제, 목록 버튼 ------------------------------------------ //

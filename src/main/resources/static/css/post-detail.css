@@ -46,6 +46,58 @@ section #img-post-wrap {
 }
 
 
+/* 이미지 모달 */
+/* 모달 배경 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+
+/* 모달 이미지 */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    animation: zoom 0.6s;
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(0)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+/* 모달 닫기 버튼 */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /* ----- 이미지 영역 ----- */
 #img-post-wrap #img-wrap {
@@ -98,7 +150,7 @@ section #img-post-wrap {
     width: 60px;
     height: 69px;
     overflow: hidden;
-    
+
     background-color: #ffca3d;
     border: 2px solid #ffca3d;
     border-radius: 0.5em;
@@ -134,15 +186,17 @@ section #img-post-wrap {
 }
 
 /* 별점 */
-.star-rate{
+.star-rate {
     font-size: 1.3em;
 }
+
 /* 책 제목 */
 #post-title {
     font-weight: 700;
     margin-top: 0.5rem;
     color: #555;
 }
+
 /* 작가 */
 #post-writer {
     color: #787878;
@@ -163,43 +217,50 @@ section #img-post-wrap {
 }
 
 /* 플랫폼, 연재 정보 */
-.m-tr{
+.m-tr {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.m-tr.tr-down{
+
+.m-tr.tr-down {
     margin-bottom: 0.5em;
 }
-.l-td{
+
+.l-td {
     flex: 1 1 0;
     text-align: right;
     padding-right: 0.5em;
     border-right: 2px solid #787878;
 }
-.r-td{
+
+.r-td {
     flex: 1 1 0;
     text-align: left;
     padding-left: 0.5em;
 }
-.m-tr.colspan-2{
+
+.m-tr.colspan-2 {
     flex: 1 0 0;
 }
 
-.l-td.plat-span{
+.l-td.plat-span {
     border-right: none;
     padding-right: 1px;
 }
-.r-td.genre-span{
+
+.r-td.genre-span {
     padding-left: 1px;
 }
-.plat-span span{
+
+.plat-span span {
     background: pink;
     border-radius: 50em 5em 5em 50em;
     font-weight: 700;
     padding: 0.3em 0.5em 0.2em 1em;
 }
-.genre-span span{
+
+.genre-span span {
     background-color: #e9ecef;
     border-radius: 5em 50em 50em 5em;
     font-weight: 700;
@@ -236,7 +297,6 @@ section #img-post-wrap {
 /* ---------- 리모컨, 기타 영역 ----------  */
 section #remote-etc-wrap {
     display: flex;
-    color: rgbrgb(95, 155, 209));
 }
 
 /* ----- 리모컨 영역 ----- */
@@ -294,6 +354,7 @@ section #remote-etc-wrap {
     background: #ffca3d;
     border-radius: 0.25rem;
 }
+
 #move-scroll-btn:hover {
     background: #f9b708;
 }
@@ -306,15 +367,18 @@ section #remote-etc-wrap {
     font-size: 0.8em;
     padding: 5px 0;
 }
+
 #go-down-list a {
     display: flex;
     flex-direction: column;
     /* text-align: center; */
     margin-right: 12px;
 }
+
 #go-down-list a.go-top {
     margin-left: 12px;
 }
+
 #go-down-list i {
     font-size: 1.7em;
 }
@@ -436,6 +500,7 @@ section #remote-etc-wrap {
     padding: 0 50px 30px;
     border-bottom: 1px dashed #787878;
 }
+
 .search-msg {
     background-color: #f9b908c7;
     border-radius: 0.5rem;
@@ -452,13 +517,16 @@ section #remote-etc-wrap {
 
     padding: 10px 0;
 }
-.search-wrap .form-select{
+
+.search-wrap .form-select {
     width: 20%;
 }
-.search-wrap #postSearchList{
+
+.search-wrap #postSearchList {
     flex-flow: 1;
 }
-.search-wrap .link-reg-btn{
+
+.search-wrap .link-reg-btn {
     width: 13%;
     margin-left: 10px;
 }
