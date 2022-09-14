@@ -19,6 +19,8 @@ function btnTitle_onclick($eventTag) {
 
     const fireEvent = !$eventTag.classList.contains('selected');
     if(fireEvent) toggleSelected($eventTag);
+
+    resize_textarea();
 }
 
 // 등록 버튼 onclick Event
