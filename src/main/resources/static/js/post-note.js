@@ -425,6 +425,7 @@ async function toggleMemoMode($memoContent) {
     $cancleMemo.classList.toggle('button-hidden');
 
     $memoContent.toggleAttribute('readonly');
+    $memoContent.classList.toggle('cursor');
 }
 
 // ==================== 마크 영역 ==================== //
@@ -526,6 +527,7 @@ async function toggleMarkMode($markContent) {
     $cancleMark.classList.toggle('button-hidden');
 
     $markContent.toggleAttribute('readonly');
+    $markContent.classList.toggle('cursor');
 }
 
 // textarea 높이 자동조절
