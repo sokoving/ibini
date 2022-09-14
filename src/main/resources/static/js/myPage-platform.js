@@ -146,15 +146,15 @@ function showdomainList() {
     
     fetch(url)
     .then(res => res.json())
-    .then(domainList => {
-        console.log(domainList);
-        makePlatformDom(domainList);
+    .then(dtoList => {
+        console.log(dtoList);
+        makePlatformDom(dtoList);
     });
 
 }
 
 // 플랫폼 돔 생성
-function makePlatformDom(domainList) {
+function makePlatformDom(dtoList) {
 
     // 1. 추가할 위치 가져오기
     const selectSetting = document.querySelector('#selectSetting');
@@ -163,16 +163,18 @@ function makePlatformDom(domainList) {
 
     let tag = '';
 
-    for (let key in domainList) {
+    for (let key in dtoList) {
 
-        console.log(domainList[key].platformName);
-        console.log(domainList[key].platformId);
+        console.log(dtoList[key].platformName);
+        console.log(dtoList[key].platformId);
 
-        let platformName = domainList[key].platformName;
-        let platformId = domainList[key].platformId;
-        let platformBgColor  = domainList[key].platformBgColor;
-        let platformFontColor = domainList[key].platformFontColor;
-        let rowNum = domainList[key].rowNum;
+        let platformName = dtoList[key].platformName;
+        let platformId = dtoList[key].platformId;
+        let platformBgColor  = dtoList[key].platformBgColor;
+        let platformFontColor = dtoList[key].platformFontColor;
+        let rowNum = dtoList[key].rowNum;
+        let totalPlatform = dtoList[key].total;
+
         console.log('rowNum : ', rowNum);
         let loop = +key + 1;
         // option 생성할 필요가 없다 -> select 아래에 넣어주니까!!
@@ -185,6 +187,9 @@ function makePlatformDom(domainList) {
                     </div>
                     <div class="platformName">
                         <span>` + platformName + `</span>
+                    </div>
+                    <div class="totalNum">
+                        <span>( `+ totalPlatform +` )</span>
                     </div>
                     <div class="bgColor">
                         <div class="bgColorBox" style="background-color: ` + platformBgColor + `;"></div><span>배경색상</span>
@@ -249,7 +254,7 @@ function processModifyShow(e, no) {
 
     const platformName = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.innerText;
     console.log('platformName : ', platformName);
-    const platfomrBgColor = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.style.backgroundColor;
+    const platfomrBgColor = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild.style.backgroundColor;
     console.log('platfomrBgColor: ', platfomrBgColor);
     const platformFontColor = e.target.parentElement.parentElement.lastElementChild.previousElementSibling.firstElementChild.style.backgroundColor;
     console.log('platformFontColor : ', platformFontColor)

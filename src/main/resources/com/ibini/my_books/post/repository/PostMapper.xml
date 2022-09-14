@@ -211,6 +211,18 @@
     <select id="getPostByGenreId" resultMap="postMap">
         select * from tbl_post where genre_id = #{genreId}
     </select>
+<!--    genre count -->
+    <select id="getPostByGenreIdTotal" resultType="int">
+        select COUNT(*) from tbl_post
+        where genre_id = #{genreId}
+        and account = #{account}
+    </select>
+<!--    platform count-->
+    <select id="getPostByPlateIdUseplat" resultType="int">
+        select COUNT(*) from tbl_post
+                 where platform_id = #{platformId}
+        and account = #{account}
+    </select>
 
     <!--    // 특정 장르 아이디를 가진 포스트의 post_no 모두 조회-->
     <!--    List<Post> getPostByPlateId(int platformId); -->

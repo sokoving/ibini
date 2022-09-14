@@ -9,8 +9,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -98,6 +96,13 @@ public class GenreService {
 
         return genreMapper.getTotalCount(account) == 0;
 
+    }
+
+    // total num 조회 추가
+    public int findGenreTotalNum(int genreId, String account){
+        log.info("Genre Service : findGenreTotalNum call genreId - {} account - {}", genreId, account);
+        int genreIdTotal = postService.getPostByGenreIdTotal(genreId, account);
+        return genreIdTotal;
     }
 
 }

@@ -4,15 +4,15 @@ function showGenreList() {
 
     fetch(url)
     .then(res => res.json())
-    .then(genreList => {
-        console.log(genreList);
-        makeGenreDom(genreList);
+    .then(genreDtoList => {
+        console.log(genreDtoList);
+        makeGenreDom(genreDtoList);
     });
 
 }
 
 // 장르 돔 생성
-function makeGenreDom(genreList){
+function makeGenreDom(genreDtoList){
 
     // 추가할 위치 가져오기
     const genreSetting = document.querySelector('#genreSetting');
@@ -21,10 +21,11 @@ function makeGenreDom(genreList){
 
     let tag = '';
     let rowNum = 0;
-    for (let key in genreList) {
-        
-        let genreId = genreList[key].genreId;
-        let genreName = genreList[key].genreName;
+    for (let key in genreDtoList) {
+
+        let genreId = genreDtoList[key].genreId;
+        let genreName = genreDtoList[key].genreName;
+        let totalGenre = genreDtoList[key].genreTotal;
 //        let rowNum = genreList[key].rowNum;
 
         console.log(genreId);
@@ -40,6 +41,9 @@ function makeGenreDom(genreList){
                     </div>
                     <div class="genreName" id="genreName">
                         <span>` + genreName + `</span>
+                    </div>
+                    <div class="genreTotal">
+                        <span> ( ` + totalGenre + ` ) </span>
                     </div>
                     <div class="modiNdel" id="modiNdel">
                         <button type="button" id="genModi" class="btn btn-primary">수정</button>
