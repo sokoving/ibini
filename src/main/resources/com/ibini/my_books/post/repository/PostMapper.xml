@@ -219,4 +219,14 @@
     </select>
 
 
+    <!-- 중복체크 기능 (아이디, 이메일)   -->
+    <select id="isDuplicate" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_post
+        <if test="type=='title'">
+            where post_title = #{value}
+        </if>
+    </select>
+
+
 </mapper>

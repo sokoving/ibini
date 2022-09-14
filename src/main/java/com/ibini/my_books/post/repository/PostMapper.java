@@ -6,10 +6,15 @@ import com.ibini.my_books.post.dto.PostWithName;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface PostMapper {
 
+    // 중복체크 기능
+    // 체크타입: 계정 or 이메일
+    // 체크값: 중복검사대상 값
+    int isDuplicate(Map<String, Object> checkMap);
 
     // 게시글 쓰기 기능
     boolean save(Post post);

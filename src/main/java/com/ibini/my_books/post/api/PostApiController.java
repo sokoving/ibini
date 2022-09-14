@@ -25,11 +25,21 @@ public class PostApiController {
 
     private final PostService postService;
 
- /*
-        - 검색이 적용된 포스트 조회 요청 : /post/api/searchPost - GET
-  */
+    /*
+           - 검색이 적용된 포스트 조회 요청 : /post/api/searchPost - GET
+           - 제목 중복 확인 비동기 처리 : /post/api/check - get
+     */
+    @GetMapping("/check")
+    public ResponseEntity<Boolean> check(String type, String value) {
+        log.info("PostApiController  /post/api/check?type={}&value={} GET!! ASYNC", type, value);
+        boolean flag = postService.checkSignUpValue(type, value);
+
+        return new ResponseEntity<>(flag, HttpStatus.OK);
+    }
+
+
     @GetMapping("/searchPost")
-    public ResponseEntity<Map<String, Object>> searchPost(SearchPost searchPost, HttpSession session){
+    public ResponseEntity<Map<String, Object>> searchPost(SearchPost searchPost, HttpSession session) {
         // 사용자 계정 세팅
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         searchPost.setAccount(account);
@@ -49,8 +59,6 @@ public class PostApiController {
         // "pl" - List<PostWithName> / "tc" - 총 게시물 수 / "pm" - 페이지 정보
         return new ResponseEntity<>(postMap, HttpStatus.OK);
     }
-
-
 
 
 }

@@ -9,6 +9,11 @@ const $curEp = $('input[name=curEp]');
 const $totalEp = $('input[name=totalEp]');
 const $tag = $('input[name=tagName]')
 
+// 입력값 검증 배열
+// 1: 제목
+// 아래 값이 모두 true로 바뀌면 회원가입 폼을 submit
+let checkTitle = false;
+
 // --------- 함수 정의부 ---------- //
 
 // 키다운 이벤트 처리 함수
@@ -24,8 +29,8 @@ function checkKeydown(e) {
     // 공백으로 시작, 공백 반복 입력 막기
     let fullValue = target.value;
     let lastValue = fullValue.charAt(fullValue.length - 1);
-//    console.log("f : " + fullValue);
-//    console.log("l : " + lastValue);
+    //    console.log("f : " + fullValue);
+    //    console.log("l : " + lastValue);
     if (fullValue === '' || lastValue === ' ') {
         if (keyCode === 32) {
             return false;
@@ -65,6 +70,27 @@ function checkKeyup(e) {
             $tag.val('#' + fullValue);
         }
     }
+    // 제목이 중복이면 메세지 띄워주기
+    else if (e.target.name === 'postTitle') {
+        console.log("제목 검증중");
+        const checkTitleUrl = '/post/api/check?type=title&value=' + $title.val();
+        console.log(checkTitleUrl);
+        fetch(checkTitleUrl)
+            .then(res => res.text())
+            .then(flag => {
+                console.log('flag:', flag);
+                if (flag === 'true') {
+                    //  제목이 중복인 경우
+                    $('.title-msg').text('[ 포스트 제목은 중복을 피해주세요 ]');
+                    $('.title-msg').css('color', '#f44659');
+                    checkTitle = false;
+                } else {
+                    // 정상적으로 입력하고 중복이 아닌 경우
+                    checkTitle = true;
+                }
+            });
+    }
+
 }
 
 
@@ -101,7 +127,13 @@ function validateFormValue() {
         $('.title-msg').css('color', '#f44659');
         $title.focus();
         flag = false;
+    }
+    // 제목값이 있는데 중복인 경우
+    else if (!checkTitle) {
+        $title.focus();
+        flag = false;
     } else {
+        // 정상일 때는 msg 비워주기
         $('.title-msg').text('');
     }
 
@@ -177,12 +209,6 @@ function validateFormValue() {
     console.log('flag:', flag);
     return flag;
 }
-// 큰 이미지 사이징하기
-
-// 썸네일 이미지 중복 업로드 막기(upload.js에서)
-
-// 업로드 이미지 삭제하기
-
 
 
 // 연재 상태 버튼 체크 함수

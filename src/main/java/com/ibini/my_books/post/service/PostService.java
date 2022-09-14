@@ -127,5 +127,20 @@ public class PostService {
         return postMapper.getPostByPlateId(platformId);
     }
 
+    /**
+     * 계정과 이메일의 중복을 확인하는 메서드
+     *
+     * @param type  - 확인할 정보 (ex: title)
+     * @param value - 확인할 값
+     * @return 중복이라면 true, 중복이 아니라면 false
+     */
+    public boolean checkSignUpValue(String type, String value) {
+        Map<String, Object> checkMap = new HashMap<>();
+        checkMap.put("type", type);
+        checkMap.put("value", value);
+
+        return postMapper.isDuplicate(checkMap) == 1;
+    }
+
 
 }

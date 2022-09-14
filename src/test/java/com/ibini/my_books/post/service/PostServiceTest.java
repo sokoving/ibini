@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
-
+import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class PostServiceTest {
 
@@ -73,6 +73,20 @@ class PostServiceTest {
         PostWithName p = postService.fineOnePostWithName(10L);
     }
 
+    @Test
+    @DisplayName("중복된 제목을 전달하면 true가 나와야 한다.")
+    void checkAccountServiceTest() {
+
+        //given
+        String title = "ㅇㅇ";
+
+        //when
+        boolean flag = postService.checkSignUpValue("title", title);
+
+        //then
+        assertTrue(flag);
+
+    }
 
 
 }
