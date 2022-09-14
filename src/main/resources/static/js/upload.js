@@ -102,7 +102,6 @@ function setUploadCount() {
 function delUploadImg(e) {
     // console.log("삭제 이벤트 호출");
     // 안내 메세지 돌려놓기
-    $('.files-msg').text('[ 첨부 이미지는 5개까지 등록 가능합니다. ]');
     $('.files-msg').css('color', '#555');
     $target = e.target;
 
@@ -178,11 +177,9 @@ function uploadAndRendeFiles(e) {
 
     if(total > 5){
         alert('첨부 이미지는 5개까지 등록 가능합니다.');
-        $('.files-msg').text('[ 첨부 이미지는 5개까지 등록 가능합니다. ]');
         $('.files-msg').css('color', '#f44659');
         return;
     } else {
-        $('.files-msg').text('[ 첨부 이미지는 5개까지 등록 가능합니다. ]');
         $('.files-msg').css('color', '#555');
     }
 

@@ -247,7 +247,7 @@
                     <div id="reg-6">
                         <div class="span-wrap">
                             <span class="reg-span">이미지 첨부하기</span>
-                            <span class="explain-span files-msg">[ 첨부 이미지는 ` 등록 가능합니다. ]</span>
+                            <span class="explain-span files-msg">[ 첨부 이미지는 5개까지 등록 가능합니다. ]</span>
                         </div>
                         <label class="file-box">
                             <div class="file-box-left">
