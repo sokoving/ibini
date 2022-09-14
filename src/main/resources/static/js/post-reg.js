@@ -9,10 +9,8 @@ const $curEp = $('input[name=curEp]');
 const $totalEp = $('input[name=totalEp]');
 const $tag = $('input[name=tagName]')
 
-// 입력값 검증 배열
-// 1: 제목
-// 아래 값이 모두 true로 바뀌면 회원가입 폼을 submit
-let checkTitle = false;
+// 제목 중복 체크용 플래그(키업 이벤트로 중복이면 false로 변경)
+let checkTitle = true;
 
 // --------- 함수 정의부 ---------- //
 
@@ -59,7 +57,7 @@ function checkKeydown(e) {
     }
 }
 
-function checkKeyup(e) {
+function checkKeyup(e, postNo=0) {
     // 해시태그가 #으로 시작하지 않으면 # 넣어주기
     if (e.target.name === 'tagName') {
         let fullValue = e.target.value;
@@ -73,7 +71,7 @@ function checkKeyup(e) {
     // 제목이 중복이면 메세지 띄워주기
     else if (e.target.name === 'postTitle') {
         console.log("제목 검증중");
-        const checkTitleUrl = '/post/api/check?type=title&value=' + $title.val();
+        const checkTitleUrl = '/post/api/check?type=title&value=' + $title.val() + '&postNo=' + postNo;
         console.log(checkTitleUrl);
         fetch(checkTitleUrl)
             .then(res => res.text())

@@ -81,7 +81,7 @@ class PostServiceTest {
         String title = "ㅇㅇ";
 
         //when
-        boolean flag = postService.checkSignUpValue("title", title);
+        boolean flag = postService.checkSignUpValue("title", title, 22L, "ibini");
 
         //then
         assertTrue(flag);
