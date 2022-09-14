@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/findTitle.css">
 
     <%@ include file="../include/static-head.jsp" %>
-
+    <script type ="text/javascript" src="/js/apikey.js"></script>
 </head>
 
 <body>
@@ -58,6 +58,7 @@
         let pageNo = 1;
 
         const loadObject = {};
+        const APP_KEY = config.apikey;
 
         function loadSearchData(url) {
             // 비동기 GET 요청 Header
@@ -72,7 +73,7 @@
         $word.onkeyup = ({
             target
         }) => {
-            const keyCode = "4d558d393158f70a939dc6c9f6fd608fa97e902d5f35e1f2c937bd025387bdc5";
+            const keyCode = APP_KEY;
             var word = target.value;
             // var encodeWord = encodeURI(word);
             console.log(word);
@@ -189,11 +190,27 @@
                     title = title.split('[연재]').join("");
                 }
 
+                // 제목 [] 교체하기
+                if (title.includes('[')){
+                    title = title.replace('(')
+                }
+                if (title.includes(']')){
+                    title = title.replace(')')
+                }
+
                 // 제목 자르기
                 if (title.length >= 25) {
                     titleSplit = title.substr(0, 25).concat("..");
                 } else {
                     titleSplit = title;
+                }
+
+                // 작가 [] 기호 자르기
+                if (author.includes('[')){
+                    author = author.replace('(')
+                }
+                if (title.includes(']')){
+                    author = author.replace(')')
                 }
 
 
@@ -221,6 +238,13 @@
                     authorSplitLength = authorSplit;
                 }
 
+                // 출판사
+                if (publisher.includes('[')){
+                    publisher = publisher.replace('(')
+                }
+                if (title.includes(']')){
+                    publisher = publisher.replace(')')
+                }
 
                 // 출판사 이름 자르기 
                 if (publisher.length >= 10) {
