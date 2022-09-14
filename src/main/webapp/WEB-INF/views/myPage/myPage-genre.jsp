@@ -30,7 +30,7 @@
             <div id="sideBar">
                 <h2>MyPage</h2>
                 <a href="/myPage">User-Info</a>
-                <a href="">Help</a>
+                <a href="/member/inquiry?userId=${loginUser.userId}">Help</a>
                 <h3>Setting</h3>
                 <a href="/myPage/platform">Platform</a>
                 <a href="/myPage/genre">Genre</a>

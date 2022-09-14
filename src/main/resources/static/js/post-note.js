@@ -408,7 +408,7 @@ function appendMemoButtonArea(data) {
 
 // 메모 내용 입력
 function appendMemoContent(data) {
-    return '<textarea class="content" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
+    return '<textarea class="content" readonly spellcheck="false" onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
         + data.content
         + '</textarea>'
     ;
@@ -509,7 +509,7 @@ function classifyMarkIconType(epId) {
 
 // 북마크 내용 입력
 function appendMarkContent(data) {
-    return '<textarea class="content" readonly onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
+    return '<textarea class="content" readonly spellcheck="false" onkeydown="resize_textarea(this)" onkeyup="resize_textarea(this)" data-initvalue="' + data.content + '">'
         + data.content
         + '</textarea>'
     ;
