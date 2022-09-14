@@ -195,4 +195,21 @@ class PostMapperTest {
         //then
         assertEquals(0, flagNumber);
     }
+
+    @Test
+    @DisplayName("post_no가 전달되면 해당 포스트는 빼고 중복 테스트를 한다")
+    void isDuplicateModiVer(){
+        //given
+        Map<String, Object> checkMap = new HashMap<>();
+        checkMap.put("type", "title");
+        checkMap.put("value", "수정 테스트");
+        checkMap.put("postNo", 10L);
+        checkMap.put("account", "ibini");
+
+        //when
+        int flagNumber = mapper.isDuplicate(checkMap);
+
+        //then
+        assertEquals(0, flagNumber);
+    }
 }

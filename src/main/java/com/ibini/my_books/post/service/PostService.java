@@ -8,12 +8,10 @@ import com.ibini.my_books.post.repository.PostMapper;
 import com.ibini.my_books.postImg.service.PostImgService;
 import com.ibini.my_books.postnote.service.PostMarkService;
 import com.ibini.my_books.postnote.service.PostMemoService;
-import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,13 +114,13 @@ public class PostService {
     }
 
     // 특정 장르 아이디를 가진 포스트의 post_no 모두 조회
-    public List<Post> getPostByGenreId(int genreId){
+    public List<Post> getPostByGenreId(int genreId) {
         log.info("PostService getPostByGenreId Call - {}", genreId);
         return postMapper.getPostByGenreId(genreId);
     }
 
     // 특정 플랫폼 아이디를 가진 포스트의 post_no 모두 조회
-    public List<Post> getPostByPlateId(int platformId){
+    public List<Post> getPostByPlateId(int platformId) {
         log.info("PostService getPostByPlateId Call - {}", platformId);
         return postMapper.getPostByPlateId(platformId);
     }
@@ -132,12 +130,15 @@ public class PostService {
      *
      * @param type  - 확인할 정보 (ex: title)
      * @param value - 확인할 값
+     * @param postNo - 등록 페이지에서는 0, 수정 페이지에서는 포스트 번호가 넘어와 중복 검사에서 제외시킨다
      * @return 중복이라면 true, 중복이 아니라면 false
      */
-    public boolean checkSignUpValue(String type, String value) {
+    public boolean checkSignUpValue(String type, String value, Long postNo, String account) {
         Map<String, Object> checkMap = new HashMap<>();
         checkMap.put("type", type);
         checkMap.put("value", value);
+        checkMap.put("postNo", postNo);
+        checkMap.put("account", account);
 
         return postMapper.isDuplicate(checkMap) == 1;
     }

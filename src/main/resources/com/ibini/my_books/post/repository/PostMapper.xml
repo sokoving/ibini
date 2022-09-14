@@ -223,9 +223,11 @@
     <select id="isDuplicate" resultType="int">
         SELECT COUNT(*)
         FROM tbl_post
+        where account= #{account}
         <if test="type=='title'">
-            where post_title = #{value}
+            and post_title = #{value}
         </if>
+            and post_no != #{postNo}
     </select>
 
 
