@@ -101,9 +101,14 @@
                                 <%-- left : 표지, 즐겨찾기 --%>
                                 <div class="item-left">
                                     <div class="thumb-box">
-                                        <c:if test="${p.thumbImg != null}">
-                                            <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="포스트 썸네일">
-                                        </c:if>
+                                        <c:choose>
+                                            <c:when test="${p.thumbImg != null}">
+                                                <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="post-img" src="/img/ppp111.png" alt="썸네일 이미지">
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
                                 </div> <%-- // end item-left --%>

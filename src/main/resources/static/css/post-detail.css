@@ -136,7 +136,6 @@ section #img-post-wrap {
 /* 별점 */
 .star-rate{
     font-size: 1.3em;
-    text-shadow: 2px 2px 2px #555;
 }
 /* 책 제목 */
 #post-title {
@@ -438,7 +437,7 @@ section #remote-etc-wrap {
     border-bottom: 1px dashed #787878;
 }
 .search-msg {
-    background-color: #f9b908a5;
+    background-color: #f9b908c7;
     border-radius: 0.5rem;
     padding: 10px 0 5px;
     font-size: 1.1em;

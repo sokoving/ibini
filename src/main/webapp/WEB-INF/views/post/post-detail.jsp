@@ -34,9 +34,14 @@
 
                             <!-- 썸네일 이미지 -->
                             <div id="thumb-img">
-                                <c:if test="${p.thumbImg != null}">
-                                    <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
-                                </c:if>
+                                <c:choose>
+                                    <c:when test="${p.thumbImg != null}">
+                                        <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="post-img" src="/img/ppp111.png" alt="썸네일 이미지">
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
 
 
@@ -94,26 +99,14 @@
                                 </div>
 
                                 <!-- 현재, 전체 페이지 -->
-                                <c:choose>
-                                    <c:when test="${p.epId == 3}">
-                                        <div class="m-tr">
-                                            <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
-                                                integerOnly="true" />
-                                            <div class="l-td">진행도</div>
-                                            <div class="r-td">${percent}%</div>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="m-tr">
-                                            <div class="l-td">현재 ${p.epName}</div>
-                                            <div class="r-td">전체 ${p.epName}</div>
-                                        </div>
-                                        <div class="m-tr tr-down">
-                                            <div class="l-td">${p.curEp}${p.epName2}</div>
-                                            <div class="r-td">${p.totalEp}${p.epName2}</div>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
+                                <div class="m-tr">
+                                    <div class="l-td">현재 ${p.epName}</div>
+                                    <div class="r-td">전체 ${p.epName}</div>
+                                </div>
+                                <div class="m-tr tr-down">
+                                    <div class="l-td">${p.curEp}${p.epName2}</div>
+                                    <div class="r-td">${p.totalEp}${p.epName2}</div>
+                                </div>
 
                             </div>
                         </div> <!-- // end post-middle -->
