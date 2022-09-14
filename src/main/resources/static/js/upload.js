@@ -45,9 +45,7 @@ function showThumbImg(fileName, fileOriginName) {
 
 // 첨부파일 선택 후 랜더링, 히든인풋 만드는 함수
 function showImgs(fileNames) {
-    console.log('showImgs 함수 호출 : ', fileNames);
-    // const $boxMsg = $('#reg-6 .file-box-right');
-    // console.log($boxMsg.data(imgsNum));
+    // console.log('showImgs 함수 호출 : ', fileNames);
 
     for (const fileName of fileNames) {
 
@@ -59,9 +57,6 @@ function showImgs(fileNames) {
         const $img = document.createElement('img');
         $img.classList.add('upload-img');
         $img.setAttribute('src', '/loadFile?fileName=' + fileName);
-        // let originFileName = fileName.substring(fileName.indexOf("_") + 1);
-        // console.log(originFileName);
-        // $img.setAttribute('alt', fileOriginName);
 
         // 삭제 버튼
         const $delBtn = document.createElement('span');
@@ -105,7 +100,10 @@ function setUploadCount() {
 
 // 첨부 이미지 삭제하는 함수
 function delUploadImg(e) {
-    console.log("삭제 이벤트 호출");
+    // console.log("삭제 이벤트 호출");
+    // 안내 메세지 돌려놓기
+    $('.files-msg').text('[ 첨부 이미지는 5개까지 등록 가능합니다. ]');
+    $('.files-msg').css('color', '#555');
     $target = e.target;
 
     if (!$target.classList.contains('upload-cancel-btn')) {
@@ -121,15 +119,15 @@ function delUploadImg(e) {
 // 썸네일 인풋에 파일 올렸을 때(파일 하나)
 // 서버에 업로드하고 다시 렌더링해오는 비동기 이벤트
 function uploadAndRendeThumbnail(e) {
-    console.log('체인지 이벤트 작동!');
+    // console.log('체인지 이벤트 작동!');
     // 선택된 파일 정보를 서버로 전송
     // 1. 드롭된 파일 데이터 읽기
     const files = e.originalEvent.target.files;
-    console.log('input file data: ', files);
+    // console.log('input file data: ', files);
 
     // 파일 오리지널 이름
     const fileOriginName = files[0].name;
-    console.log('fileOriginName : ', fileOriginName);
+    // console.log('fileOriginName : ', fileOriginName);
 
     // 파일이 이미지가 아니라면 이벤트 종료
     if (!isImageFile(fileOriginName)) {
@@ -140,7 +138,7 @@ function uploadAndRendeThumbnail(e) {
     // 2. 읽은 파일 데이터를 input[type=file]태그에 저장
     const $fileInput = $('#ajax-file');
     $fileInput.prop('files', files); // 첫번째 파라미터는 input의 name 속성과 맞추기
-    console.log($fileInput[0].files);
+    // console.log($fileInput[0].files);
 
     // 3. 파일 데이터를 비동기 전송하기 위해서는 FormData객체가 필요
     const formData = new FormData();
@@ -156,11 +154,11 @@ function uploadAndRendeThumbnail(e) {
     };
     fetch('/ajax-upload', reqInfo)
         .then(res => {
-            console.log(res.status);
+            // console.log(res.status);
             return res.json();
         })
         .then(fileNames => {
-            console.log(fileNames);
+            // console.log(fileNames);
             showThumbImg(fileNames, fileOriginName);
         });
 }
@@ -170,16 +168,27 @@ function uploadAndRendeThumbnail(e) {
 // 서버에 업로드하고 렌더링하는 비동기 이벤트
 function uploadAndRendeFiles(e) {
     // 첨부 파일 정보를 서버로 전송
-    // 1. 선택된 파일 데이터 읽기
+    // 1-1. 선택된 파일 데이터 읽기
     const files = e.originalEvent.target.files;
-    console.log('input file data: ', files);
-    console.log("올린 파일 수 : " + files.length);
-    const uploadedImgs = $('')
-    console.log("이미 올린 파일 수 : " + );
+    
+    // 1-2.첨부 이미지 총 합이 5 이상이면 리턴
+    const uploadFilesNum = files.length;    // 새로 업로드할 파일 수
+    const uploadedFileNum = $('.uploaded-list')[0].children.length; // 기존에 업로드되어 있는 파일 수
+    const total = uploadFilesNum + uploadedFileNum;
+
+    if(total > 5){
+        alert('첨부 이미지는 5개까지 등록 가능합니다.');
+        $('.files-msg').text('[ 첨부 이미지는 5개까지 등록 가능합니다. ]');
+        $('.files-msg').css('color', '#f44659');
+        return;
+    } else {
+        $('.files-msg').text('[ 첨부 이미지는 5개까지 등록 가능합니다. ]');
+        $('.files-msg').css('color', '#555');
+    }
 
     // 원본 이름 배열
     const originNames = [];
-    // 이미지 파일이 아니면 리턴
+    // 1-3. 이미지 파일이 아니면 리턴
     for (const f of files) {
         if (!isImageFile(f.name)) {
             alert('이미지 파일만 업로드 가능합니다.');
@@ -187,11 +196,11 @@ function uploadAndRendeFiles(e) {
         }
         originNames.push(f.name);
     }
-    console.log(originNames);
+    // console.log(originNames);
 
     // 2. 읽은 파일 데이터를 input[type=file]태그에 저장
     const $fileInput = $('#ajax-file-multi');
-    console.log($fileInput[0].files);
+    // console.log($fileInput[0].files);
 
     // 3. 파일 데이터를 비동기 전송하기 위해서는 FormData객체가 필요
     const formData = new FormData();
@@ -200,7 +209,7 @@ function uploadAndRendeFiles(e) {
     for (let file of $fileInput[0].files) {
         formData.append('files', file);
     }
-    console.log(formData);
+    // console.log(formData);
 
     // 5. 비동기 요청 전송
     const reqInfo = {
@@ -209,11 +218,11 @@ function uploadAndRendeFiles(e) {
     };
     fetch('/ajax-upload', reqInfo)
         .then(res => {
-            console.log(res.status);
+            // console.log(res.status);
             return res.json();
         })
         .then(fileNames => {
-            console.log(fileNames);
+            // console.log(fileNames);
             showImgs(fileNames);
         });
 }

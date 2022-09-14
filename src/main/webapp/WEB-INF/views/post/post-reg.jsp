@@ -80,8 +80,6 @@
                         <div class="img-wrap">
                             <div class="img-box">
                                 <span class="box-msg">썸네일을 등록해 보세요</span>
-                                <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
-                                <!-- <img class="post-img thumb-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
                             </div>
                             <label class="file-box">
                                 <div class="file-box-left">
@@ -249,7 +247,7 @@
                     <div id="reg-6">
                         <div class="span-wrap">
                             <span class="reg-span">이미지 첨부하기</span>
-                            <span class="explain-span">[ 첨부 이미지는 5개까지 업로드 가능합니다. ]</span>
+                            <span class="explain-span files-msg">[ 첨부 이미지는 ` 등록 가능합니다. ]</span>
                         </div>
                         <label class="file-box">
                             <div class="file-box-left">
@@ -312,6 +310,7 @@
                 if (!validateFormValue()) {
                     return;
                 }
+                beforeSubmit();
                 $('#write-form').submit();
             })
 
@@ -344,11 +343,11 @@
             $('#platformselect').change(function () {
 
                 // alert($(this).val());
-                console.log("선택한 플랫폼id : " + $(this).val());
+                // console.log("선택한 플랫폼id : " + $(this).val());
                 $("#platformselect").val($(this).val()).prop("selected", true);
                 // $('#platformselect option:eq($(this).val())').prop('selected', true);
                 // $('#platformselect').val($(this).val()).prop("selected", true);
-                console.log("selected : " + $("#platformselect option:selected").val());
+                // console.log("selected : " + $("#platformselect option:selected").val());
                 // alert($("#platformselect option:selected").val());
 
             });
@@ -356,10 +355,10 @@
             $('#genreSelect').change(function () {
 
                 // alert($(this).val());
-                console.log("genreSelect: " + $(this).val());
+                // console.log("genreSelect: " + $(this).val());
                 // $('#genreSelect').val($(this).val()).attr("selected", "selected");
                 $('#genreSelect').val($(this).val()).prop("selected", true);
-                console.log("genreSelect selecded : " + $("#genreSelect option:selected").val());
+                // console.log("genreSelect selecded : " + $("#genreSelect option:selected").val());
                 // alert($( "#genreSelect option:selected" ).val());
 
             });
@@ -385,8 +384,8 @@
         const account = '${account}';
         const gAccount = '${account}';
 
-        console.log(account);
-        console.log(gAccount);
+        // console.log(account);
+        // console.log(gAccount);
 
         // 나중에 꼭 수정해주기
         // const url = "http://localhost:8383/platform/c1?account=" + account;
