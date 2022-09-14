@@ -17,7 +17,7 @@
                 <div class="episode-no">
                     <label for="episode-no">회차
                         <!-- <input type="number" id="episode-no" name="episodeNo" min="1" max="9999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> -->
-                        <input type="text" id="episode-no" name="episodeNo" maxlength="9" autocomplete="off" placeholder="회차를 입력하세요 " oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+                        <input type="text" id="episode-no" name="episodeNo" maxlength="5" autocomplete="off" placeholder="회차를 입력하세요 " oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                     </label>
                 </div>
                 <div class="text-area">
