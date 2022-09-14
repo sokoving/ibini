@@ -143,12 +143,12 @@
 
 
     <section id="main-section">
-      <img class="wave" src="/img/signin-1.png">
+      <!-- <img class="wave" src="/img/signin-1.png"> -->
       <h2 class="title">비밀번호 수정</h2>
 
       <section id="content-box">
         <div class="img">
-          <img src="/img/ibini_logo_5.png">
+          <img src="/img/ibiniLogo.png">
           <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg -->
         </div>
 
