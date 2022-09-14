@@ -24,16 +24,16 @@
 
 <body>
 
-  <img class="wave" src="/img/signin-1.png">
+  <!-- <img class="wave" src="/img/signin-1.png"> -->
   <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png -->
   <div class="container">
     <div class="img">
-      <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg">
+     <a href="/" ><img src="/img/ibiniLogo.png"></a>
     </div>
     <div class="login-content">
       <form action="/member/sign-up" name="sign-in" method="post" id="signUpForm">
 
-        <img src="/img/ibini_logo_4.png">
+        <!-- <img src="/img/ibini_logo_4.png"> -->
         <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg -->
         <h2 class="title">회원가입</h2>
 
@@ -69,7 +69,7 @@
             <!-- <i class="fas fa-lock"></i> -->
           </div>
           <div class="div">
-            <h5>Password cehck</h5>
+            <h5>Password check</h5>
             <input type="password" class="input" size="17" maxlength="20" id="password_check" name="pw_check"
               required="required" aria-required="true">
           </div>
