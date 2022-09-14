@@ -30,9 +30,10 @@ public class PostApiController {
            - 제목 중복 확인 비동기 처리 : /post/api/check - get
      */
     @GetMapping("/check")
-    public ResponseEntity<Boolean> check(String type, String value) {
+    public ResponseEntity<Boolean> check(String type, String value, Long postNo, HttpSession session) {
         log.info("PostApiController  /post/api/check?type={}&value={} GET!! ASYNC", type, value);
-        boolean flag = postService.checkSignUpValue(type, value);
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
+        boolean flag = postService.checkSignUpValue(type, value, postNo, account);
 
         return new ResponseEntity<>(flag, HttpStatus.OK);
     }
