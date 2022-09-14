@@ -173,6 +173,9 @@ function uploadAndRendeFiles(e) {
     // 1. 선택된 파일 데이터 읽기
     const files = e.originalEvent.target.files;
     console.log('input file data: ', files);
+    console.log("올린 파일 수 : " + files.length);
+    const uploadedImgs = $('')
+    console.log("이미 올린 파일 수 : " + );
 
     // 원본 이름 배열
     const originNames = [];

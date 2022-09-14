@@ -57,8 +57,8 @@
 
 <body>
 
-<!-- header -->
-<%@ include file="../include/change-header.jsp" %>
+    <!-- header -->
+    <%@ include file="../include/change-header.jsp" %>
 
     <div id="wrap">
 
@@ -106,8 +106,7 @@
                                 <span class="reg-span">* 작가</span>
                                 <span class="explain-span writer-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postWriter"
-                                value="${bookInfo.author}">
+                            <input class="white-box" type="text" name="postWriter" value="${bookInfo.author}">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
@@ -248,7 +247,10 @@
                     </div>
 
                     <div id="reg-6">
-                        <span class="reg-span">이미지 첨부하기</span>
+                        <div class="span-wrap">
+                            <span class="reg-span">이미지 첨부하기</span>
+                            <span class="explain-span">[ 첨부 이미지는 5개까지 업로드 가능합니다. ]</span>
+                        </div>
                         <label class="file-box">
                             <div class="file-box-left">
                                 파일 선택
@@ -258,17 +260,7 @@
                             </div>
                             <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
                         </label>
-                        <div class="uploaded-list">
-                            <!--
-                                파일 올릴 때마다 생성될 것
-                            <div class="upload-img-box">
-                                <img class="upload-img"
-                                    src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
-                                <i class="fas fa-times-circle upload-cancel-btn"></i>
-                                <input type="hidden" name="filNames"
-                                value="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large">
-                            </div> -->
-                        </div>
+                        <div class="uploaded-list"> </div>
 
                     </div>
 
