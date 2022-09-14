@@ -281,3 +281,7 @@ margin-left: 80px;
   cursor: pointer;
   transition: .5s;
 }
+
+a.back-main-img {
+  margin-right: 50px;
+}

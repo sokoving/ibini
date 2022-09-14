@@ -19,11 +19,12 @@
 
     <body>
 
-      <img class="wave" src="/img/signin-1.png">
+      <!-- <img class="wave" src="/img/signin-1.png"> -->
       <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png -->
       <div class="container">
         <div class="img">
-          <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg">
+          <a class="back-main-img" href="/"><img src="/img/ibiniLogo.png"></a>
+          <!-- "https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg" -->
         </div>
         <div class="login-content">
 
@@ -31,7 +32,7 @@
           <c:if test="${kakaoMsg != 'exist-userId-emailVerification-false'}">
           <form action="/member/sign-in" name="sign-in" method="post" id="signInFrom">
 
-            <img src="/img/ibini_logo_4.png">
+            <!-- <img src="/img/ibini_logo_4.png"> -->
             <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg -->
             <h2 class="title">Welcome</h2>
 
