@@ -92,7 +92,7 @@
 
                             <!-- 첨부 이미지 목록 -->
                             <div class="img-box-wrap">
-                                <div class="img-box post-thumb">
+                                <div class="img-box">
                                     <img class="post-img"
                                         src="https://pbs.twimg.com/media/Fb8vCzEaQAAZHt9?format=jpg&name=medium" alt="">
                                 </div>
@@ -119,50 +119,39 @@
                         <!-- 포스트 정보 영역 -->
                         <div id="post-box">
 
-                            <!-- top : 별점, 제목, 작가, 장르-->
+                            <!-- top : 별점, 제목, 작가-->
                             <div id="post-top">
-                                <span class="top-span star-span">⭐⭐⭐</span>
+                                <span class="star-span">⭐⭐⭐</span>
                                 <!-- 책 제목 -->
                                 <div id="post-title">
-                                    <h2 class="title-span">신기방기 뿡뿡방기</h2>
+                                    <h2 class="title-span">어두운 바다의 등불이 되어</h2>
                                 </div>
-                                <!-- 작가 이름 | 장르 이름-->
+                                <!-- 작가 이름-->
                                 <div id="post-writer">
-                                    <span class="writer-span">윤정한 | 아이돌</span>
+                                    <span class="writer-span">연산호</span>
                                 </div>
                             </div> <!-- // end post-top -->
 
                             <!-- middle : 장르, 플랫폼, 연재 상태, 연재 일시, 페이지 정보 -->
                             <div id="post-middle">
-                                <div id="publish-status">
-                                    <table class="middle-table">
-                                        <tr>
-                                            <td class="first-td">카카오페이지</td>
-                                            <td class="last-td">월, 금 10시</td>
-                                        </tr>
-                                        <tr class="empty-tr">
-                                            <td colspan="2">-</td>
-                                        </tr>
-                                        <!-- 현재, 전체 페이지 -->
-                                        <tr>
-                                            <td class="first-td cur-ep">현재 페이지</td>
-                                            <td class="last-td tot-ep">전체 페이지</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="first-td cur-ep">300p</td>
-                                            <td class="last-td tot-ep">500p</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div class="toggle-box">
-                                                    <i class="fas fa-lock i-lock-close" title="편집모드 잠김"></i>
-                                                    <i class="fas fa-toggle-off i-toggle-off" title="편집모드 열기"></i>
-                                                    <i class="fas fa-toggle-on i-toggle-on hide" title="편집모드 닫기"></i>
-                                                    <i class="fas fa-lock-open i-lock-close fff" title="편집모드 열림"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <!-- 연재 상태 / 연재 일시 -->
+                                <div class="m-tr tr-down colspan-2">매월 10일</div>
+
+                                <div class="m-tr tr-down">
+                                    <!-- 플랫폼 -->
+                                    <div class="l-td plat-span"><span>네이버시리즈</span></div>
+                                    <!-- 장르 -->
+                                    <div class="r-td genre-span"><span>SF스릴러</span></div>
+                                </div>
+
+                                <div class="m-tr">
+                                    <div class="l-td">현재 페이지</div>
+                                    <div class="r-td">전체 페이지</div>
+                                </div>
+
+                                <div class="m-tr tr-down">
+                                    <div class="l-td">300p</div>
+                                    <div class="r-td">500p</div>
                                 </div>
                             </div> <!-- // end post-middle -->
                         </div> <!-- // end post-box -->
