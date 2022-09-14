@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/findTitle.css">
 
     <%@ include file="../include/static-head.jsp" %>
-
+    <script type ="text/javascript" src="/js/apikey.js"></script>
 </head>
 
 <body>
@@ -58,6 +58,7 @@
         let pageNo = 1;
 
         const loadObject = {};
+        const APP_KEY = config.apikey;
 
         function loadSearchData(url) {
             // 비동기 GET 요청 Header
@@ -72,7 +73,7 @@
         $word.onkeyup = ({
             target
         }) => {
-            const keyCode = "4d558d393158f70a939dc6c9f6fd608fa97e902d5f35e1f2c937bd025387bdc5";
+            const keyCode = APP_KEY;
             var word = target.value;
             // var encodeWord = encodeURI(word);
             console.log(word);
