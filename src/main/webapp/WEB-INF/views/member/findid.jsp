@@ -26,7 +26,7 @@
   <!-- https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png -->
   <div class="container">
     <div class="img">
-      <img src="/img/ibiniLogo.png">
+      <a href="/"><img src="/img/ibiniLogo.png"></a>
     </div>
     <div class="login-content">
 
