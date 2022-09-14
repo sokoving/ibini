@@ -189,11 +189,27 @@
                     title = title.split('[연재]').join("");
                 }
 
+                // 제목 [] 교체하기
+                if (title.includes('[')){
+                    title = title.replace('(')
+                }
+                if (title.includes(']')){
+                    title = title.replace(')')
+                }
+
                 // 제목 자르기
                 if (title.length >= 25) {
                     titleSplit = title.substr(0, 25).concat("..");
                 } else {
                     titleSplit = title;
+                }
+
+                // 작가 [] 기호 자르기
+                if (author.includes('[')){
+                    author = author.replace('(')
+                }
+                if (title.includes(']')){
+                    author = author.replace(')')
                 }
 
 
@@ -221,6 +237,13 @@
                     authorSplitLength = authorSplit;
                 }
 
+                // 출판사
+                if (publisher.includes('[')){
+                    publisher = publisher.replace('(')
+                }
+                if (title.includes(']')){
+                    publisher = publisher.replace(')')
+                }
 
                 // 출판사 이름 자르기 
                 if (publisher.length >= 10) {
