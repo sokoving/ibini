@@ -278,7 +278,7 @@ section#list-sec{
 /* 별점 */
 .star-rate{
     font-size: 1.15em;
-    text-shadow: 2px 2px 2px #555;
+    /* text-shadow: -1px 0 #555, 0 1px #555, 2px 0 #555, 0 -1px #555; */
     display:inline-block;
 }
 .star-rate:hover{

@@ -48,155 +48,157 @@
 </head>
 
 <body>
-<div class="include-Header">
-    <!-- header -->
-    <%@ include file="../include/change-header.jsp" %>
+    <div class="include-Header">
+        <!-- header -->
+        <%@ include file="../include/change-header.jsp" %>
 
-    <div id="wrap">
-
-
-        <div id="content-wrap">
-            <!-- 새 포스트 등록 섹션 -->
-            <section id="reg-sec">
-                <div class="inner-section">
-                    <h2>새 글 등록하기</h2>
-                    <div class="post-write-Btn">
-
-                        <!-- 새 글 등록 버튼 -->
-                        <a href="/post/write">
-                            <div class="new-post">
-                                <div class="reg-btn">
-                                    <span class="fas fa-plus"></span>
-                                    <h2>직접 입력해서 등록하기</h2>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="/api/findtitle">
-                            <div class="new-post">
-                                <div class="reg-btn">
-                                    <span class="fas fa-plus"></span>
-                                    <h2>검색해서 등록하기</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- // end reg-sec -->
-            </section> <!-- // end section -->
+        <div id="wrap">
 
 
-            <!-- 포스트 리스트 섹션 -->
-            <section id="list-sec">
-                <div class="inner-section">
-                    <!-- 포스트 목록 제목 -->
-                    <a name="list-title"></a>
-                    <div class="section-h2">
-                        <h2>전체 포스트(총 ${pm.totalCount}건)</h2>
-                    </div>
-                    <!-- 포스트 리스트 영역 -->
-                    <div class="post-list-box">
-                        <c:forEach var="p" items="${pl}">
-                            <%-- 포스트 개별 영역 --%>
-                            <div class="item-wrap hover" data-post-no="${p.postNo}">
-                                <%-- left : 표지, 즐겨찾기 --%>
-                                <div class="item-left">
-                                    <div class="thumb-box">
-                                        <c:choose>
-                                            <c:when test="${p.thumbImg != null}">
-                                                <img class="post-img" src="/loadFile?fileName=${p.thumbImg}" alt="썸네일 이미지">
-                                            </c:when>
-                                            <c:otherwise>
-                                                <img class="post-img" src="/img/ppp111.png" alt="썸네일 이미지">
-                                            </c:otherwise>
-                                        </c:choose>
+            <div id="content-wrap">
+                <!-- 새 포스트 등록 섹션 -->
+                <section id="reg-sec">
+                    <div class="inner-section">
+                        <h2>새 글 등록하기</h2>
+                        <div class="post-write-Btn">
+
+                            <!-- 새 글 등록 버튼 -->
+                            <a href="/post/write">
+                                <div class="new-post">
+                                    <div class="reg-btn">
+                                        <span class="fas fa-plus"></span>
+                                        <h2>직접 입력해서 등록하기</h2>
                                     </div>
-                                    <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
-                                </div> <%-- // end item-left --%>
+                                </div>
+                            </a>
 
-                                <%-- right : 상세정보 --%>
-                                <div class="item-right">
+                            <a href="/api/findtitle">
+                                <div class="new-post">
+                                    <div class="reg-btn">
+                                        <span class="fas fa-plus"></span>
+                                        <h2>검색해서 등록하기</h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div> <!-- // end reg-sec -->
+                </section> <!-- // end section -->
 
-                                    <%-- right-1 : 장르, 플랫폼, 연재 정보 --%>
-                                    <div class="right-1">
-                                        <%-- 장르 --%>
-                                        <div class="genre-name" data-type="sGenre" data-key="${p.genreId}"
-                                            title="${p.genreName}">
-                                            ${p.shortGenre}
-                                        </div>
 
-                                        <div class="pl-pu-wrap">
-                                            <%-- 플랫폼 --%>
-                                            <span class="plat-name" data-type="sPlatform" data-key="${p.platformId}"
-                                                style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}"
-                                                title="${p.platformName}">
-                                                ${p.shortPlatform}
-                                            </span>
-                                            <%-- 연재주기 or 연재상태 --%>
-                                            <span class="pu-cycle" data-type="sPublishStatus"
-                                                data-key="${p.publishStatus}" title="${p.publishStatusName}">
-                                                <c:choose>
-                                                    <c:when test="${empty p.publishCycle}">${p.publishStatusName}
-                                                    </c:when>
-                                                    <c:otherwise>${p.shortCycle}</c:otherwise>
-                                                </c:choose>
-                                            </span>
-                                        </div> <%-- // end pl-pu-wrap --%>
-                                    </div> <%-- // end right-1 --%>
-
-                                    <%-- right-2-1 : 제목, 작가, 별점 / right 2-2 : 진행도 --%>
-                                    <div class="right-2">
-                                        <div class="right2-1">
-                                            <%-- 제목 --%>
-                                            <div class="post-title">
-                                                <h3 data-key="${p.postNo}" title="${p.postTitle}">${p.shortTitle}</h3>
-                                            </div>
-                                            <%-- 작가 --%>
-                                            <div class="post-writer" data-type="sWriter" data-key="${p.postWriter}"
-                                                title="${p.postWriter}">
-                                                ${p.shortWriter}</div> <br>
-                                            <%-- 별점 --%>
-                                            <div class="star-rate" data-type="sStarRate" data-key="${p.starRate}"
-                                                title="별 ${p.starRate}개"></div>
-                                        </div>
-
-                                        <div class="right2-2">
-                                            <%-- 진행도 --%>
-                                            <div class="read-percent" data-cur="${p.curEp}" data-total="${p.totalEp}"
-                                                data-name="${p.epName2}">
-                                                <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
-                                                    integerOnly="true" />
-                                                ${percent}%
-                                            </div>
-                                        </div>
-                                    </div> <%-- // end right-2 --%>
-
-                                    <%-- 해시태그 --%>
-                                    <div class="right-3">
-                                        <div class="tag-one-line" title="${p.oneLineTag}">
+                <!-- 포스트 리스트 섹션 -->
+                <section id="list-sec">
+                    <div class="inner-section">
+                        <!-- 포스트 목록 제목 -->
+                        <a name="list-title"></a>
+                        <div class="section-h2">
+                            <h2>전체 포스트(총 ${pm.totalCount}건)</h2>
+                        </div>
+                        <!-- 포스트 리스트 영역 -->
+                        <div class="post-list-box">
+                            <c:forEach var="p" items="${pl}">
+                                <%-- 포스트 개별 영역 --%>
+                                <div class="item-wrap hover" data-post-no="${p.postNo}">
+                                    <%-- left : 표지, 즐겨찾기 --%>
+                                    <div class="item-left">
+                                        <div class="thumb-box">
                                             <c:choose>
-                                                <c:when test="${empty p.oneLineTag}">#등록된 해시태그가 없습니다.
+                                                <c:when test="${p.thumbImg != null}">
+                                                    <img class="post-img" src="/loadFile?fileName=${p.thumbImg}"
+                                                        alt="썸네일 이미지">
                                                 </c:when>
-                                                <c:otherwise>${p.oneLineTag}</c:otherwise>
+                                                <c:otherwise>
+                                                    <img class="post-img" src="/img/ppp111.png" alt="썸네일 이미지">
+                                                </c:otherwise>
                                             </c:choose>
                                         </div>
-                                    </div> <%-- // end right-3 --%>
-                                </div> <%-- // end item-right --%>
-                            </div> <%-- // end item-wrap --%>
-                        </c:forEach>
-                    </div> <!-- // end post-list-box -->
+                                        <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
+                                    </div> <%-- // end item-left --%>
 
-                    <!-- 포스트 목록 하단부(페이징) -->
-                    <div class="list-bottom">
-                        <div class="show-more" data-page-num="1">더보기</div>
-                        <div class="list-end"></div>
-                    </div>
+                                    <%-- right : 상세정보 --%>
+                                    <div class="item-right">
 
-                </div> <!-- // end  inner-section-->
-            </section> <!-- // end section -->
-        </div>
+                                        <%-- right-1 : 장르, 플랫폼, 연재 정보 --%>
+                                        <div class="right-1">
+                                            <%-- 장르 --%>
+                                            <div class="genre-name" data-type="sGenre" data-key="${p.genreId}"
+                                                title="${p.genreName}">
+                                                ${p.shortGenre}
+                                            </div>
 
-    </div> <!-- end wrap -->
-</div>
+                                            <div class="pl-pu-wrap">
+                                                <%-- 플랫폼 --%>
+                                                <span class="plat-name" data-type="sPlatform" data-key="${p.platformId}"
+                                                    style="background-color: ${p.platformBgColor}; color:${p.platformFontColor}"
+                                                    title="${p.platformName}">
+                                                    ${p.shortPlatform}
+                                                </span>
+                                                <%-- 연재주기 or 연재상태 --%>
+                                                <span class="pu-cycle" data-type="sPublishStatus"
+                                                    data-key="${p.publishStatus}" title="${p.publishStatusName}">
+                                                    <c:choose>
+                                                        <c:when test="${empty p.publishCycle}">${p.publishStatusName}
+                                                        </c:when>
+                                                        <c:otherwise>${p.shortCycle}</c:otherwise>
+                                                    </c:choose>
+                                                </span>
+                                            </div> <%-- // end pl-pu-wrap --%>
+                                        </div> <%-- // end right-1 --%>
+
+                                        <%-- right-2-1 : 제목, 작가, 별점 / right 2-2 : 진행도 --%>
+                                        <div class="right-2">
+                                            <div class="right2-1">
+                                                <%-- 제목 --%>
+                                                <div class="post-title">
+                                                    <h3 data-key="${p.postNo}" title="${p.postTitle}">${p.shortTitle}
+                                                    </h3>
+                                                </div>
+                                                <%-- 작가 --%>
+                                                <div class="post-writer" data-type="sWriter" data-key="${p.postWriter}"
+                                                    title="${p.postWriter}">
+                                                    ${p.shortWriter}</div> <br>
+                                                <%-- 별점 --%>
+                                                <div class="star-rate" data-type="sStarRate" data-key="${p.starRate}"
+                                                    title="별 ${p.starRate}개"></div>
+                                            </div>
+
+                                            <div class="right2-2">
+                                                <%-- 진행도 --%>
+                                                <div class="read-percent" data-cur="${p.curEp}"
+                                                    data-total="${p.totalEp}" data-name="${p.epName2}">
+                                                    <fmt:parseNumber var="percent" value="${p.curEp/p.totalEp*100}"
+                                                        integerOnly="true" />
+                                                    ${percent}%
+                                                </div>
+                                            </div>
+                                        </div> <%-- // end right-2 --%>
+
+                                        <%-- 해시태그 --%>
+                                        <div class="right-3">
+                                            <div class="tag-one-line" title="${p.oneLineTag}">
+                                                <c:choose>
+                                                    <c:when test="${empty p.oneLineTag}">#등록된 해시태그가 없습니다.
+                                                    </c:when>
+                                                    <c:otherwise>${p.oneLineTag}</c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </div> <%-- // end right-3 --%>
+                                    </div> <%-- // end item-right --%>
+                                </div> <%-- // end item-wrap --%>
+                            </c:forEach>
+                        </div> <!-- // end post-list-box -->
+
+                        <!-- 포스트 목록 하단부(페이징) -->
+                        <div class="list-bottom">
+                            <div class="show-more" data-page-num="1">더보기</div>
+                            <div class="list-end"></div>
+                        </div>
+
+                    </div> <!-- // end  inner-section-->
+                </section> <!-- // end section -->
+            </div>
+
+        </div> <!-- end wrap -->
+    </div>
 
 
     <script>
@@ -432,7 +434,7 @@
                 for (let l of list.pl) {
                     // 썸네일 
                     const thumb = l.thumbImg === null || l.thumbImg === '' ?
-                        '' :
+                        "<img class='post-img' src='/img/ppp111.png' alt='썸네일 이미지'>" :
                         "<img class='post-img' src='/loadFile?fileName=" + l.thumbImg + "' alt='포스트 썸네일'>";
 
                     // 연재 주기
