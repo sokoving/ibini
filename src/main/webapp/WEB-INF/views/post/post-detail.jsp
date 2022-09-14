@@ -335,7 +335,7 @@
 
                     console.log('장르 삭제 - genreId : ', dataset);
 
-                    if (!confirm('선택하신 장르를 삭제하시겠습니까?')) return;
+                    if (!confirm('선택하신 해시태그를 삭제하시겠습니까?')) return;
 
                     fetch(tagUrl + '/' + dataset, {
                             method: 'DELETE'
