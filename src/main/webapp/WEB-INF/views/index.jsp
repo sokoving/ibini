@@ -13,6 +13,17 @@
   #carouselExampleControlsNoTouching {
     padding-top: 50px;
   }
+  #content-wrap {
+    margin: 50px auto;
+    width: 60%;
+    display: flex;
+  }
+  #content-wrap img {
+    max-width: 200px;
+  }
+  hr{
+    margin: 50px 0;
+  }
 </style>
 
 <body>
@@ -42,11 +53,13 @@
         </button>
       </div>
 
+      <hr>
 
         <div id="content-wrap">
-            <a href="/list">포스트 전체 목록</a> <br>
-            <a href="/post/write/${account}">새 포스트 쓰기</a> <br>
-            <a href="/myPage/myPage">마이페이지</a> <br>
+          <img src="/img/i003.png" onclick="location.href='/list'" alt="목록조회">
+          <img src="/img/i002.png" onclick="location.href='/post/write/${account}'" alt="포스트등록">
+          <img src="/img/i004.png" onclick="location.href='/myPage'" alt="마이페이지">
+
         </div>
     </div>
 
