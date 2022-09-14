@@ -342,3 +342,39 @@ function clickPostBtn(target, postNo) {
         location.href = '/list';
     }
 }
+
+
+// ----------------- 해시태그 입력 관련 함수 -----------------//
+// 해시태그가 #으로 시작하지 않으면 # 넣어주기
+function checkKeyup(e) {
+    let fullValue = e.target.value;
+    let lastValue = fullValue.charAt(fullValue.length - 1);
+    // console.log("f : " + fullValue);
+    // console.log("l : " + lastValue);
+    if (fullValue.length > 0 && fullValue.charAt(0) !== '#') {
+        $('#hashtagInput').val('#' + fullValue);
+    }
+}
+
+
+// 해시태그 공백으로 시작, 공백 반복 입력 막기
+function checkKeydown(e) {
+    const keyCode = e.keyCode;
+    const target = e.target;
+    // console.log(keyCode);
+    // 엔터로 서브밋되는 거 막기
+    if (e.keyCode === 13) {
+        e.preventDefault();
+    }
+
+    // 공백으로 시작, 공백 반복 입력 막기
+    let fullValue = target.value;
+    let lastValue = fullValue.charAt(fullValue.length - 1);
+    //    console.log("f : " + fullValue);
+    //    console.log("l : " + lastValue);
+    if (fullValue === '' || lastValue === ' ') {
+        if (keyCode === 32) {
+            return false;
+        }
+    }
+}

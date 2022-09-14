@@ -36,7 +36,6 @@
     <!-- custom css -->
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/post-reg.css">
-    <!-- css -->
     <link rel="stylesheet" href="/css/platform.css" />
 
 
@@ -52,6 +51,7 @@
     <script src="/js/post-reg.js" defer></script>
     <script src="/js/post-platformAndGenre.js" defer></script>
     <script src="/js/upload.js" defer></script>
+
 
 </head>
 
@@ -124,7 +124,8 @@
 
                                 <div class="platformSelText">
                                     <span class="reg-span">플랫폼</span>
-                                    <span class="platformInputShowEvent">플랫폼 추가를 원하시면 여기를 클릭해주세요</span>
+                                    <span class="platformInputShowEvent">새 플랫폼 추가하려면 여기 클릭<i
+                                            class="far fa-hand-point-left ms-2"></i></span>
                                 </div>
 
                                 <div class="select">
@@ -146,7 +147,8 @@
                                 <div class="genreSelectBox">
                                     <div id="genreClick">
                                         <span class="reg-span">장르</span>
-                                        <span class="GenreInputShowEvent">장르 추가를 원하시면 여기를 클릭해주세요</span>
+                                        <span class="GenreInputShowEvent">새 장르 추가하려면 여기 클릭<i
+                                                class="far fa-hand-point-left ms-2"></i></span>
                                     </div>
 
                                     <div class="genreSelAndInput">
