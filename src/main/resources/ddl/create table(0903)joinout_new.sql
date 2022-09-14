@@ -193,3 +193,6 @@ CREATE TABLE tbl_manage_break_away
     CREATE SEQUENCE seq_tbl_reason_break_away;
     DROP SEQUENCE seq_tbl_reason_break_away;
 
+-- 미분류 insert
+insert into prj_genre (account, genre_name, genre_id) VALUES ('admin', '미분류', 1);
+insert into prj_platform (account, platform_name, genre_id) VALUES ('admin', '미분류', 1);
