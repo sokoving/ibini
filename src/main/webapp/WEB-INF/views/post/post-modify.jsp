@@ -461,12 +461,10 @@
         // console.log(gAccount);
 
         // 나중에 꼭 수정해주기
-        // const url = "http://localhost:8383/platform/c1?account=" + account;
-        const url = "http://localhost:8383/platform/c1/" + account;
 
-        // const genreURL = "http://localhost:8383/genre/c1?account=" + account;
+        const url = "/platform/c1/" + account;
 
-        const genreURL = "http://localhost:8383/genre/c1/" + gAccount;
+        const genreURL = "/genre/c1/" + gAccount;
     </script>
 
 </body>
