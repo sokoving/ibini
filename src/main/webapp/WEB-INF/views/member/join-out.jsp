@@ -66,16 +66,13 @@
                   <!-- main-back-btn -->
               </div>
           </div>
-
-
+      </section>
+    </section>
 </div>
 
 <!-- <div class="thank-msg">ibinibooks를 이용해 주셔서 감사합니다.</div> -->
 
-</div>
-</section>
-</section>
-</div>
+
 
 <script>
   $(function () {

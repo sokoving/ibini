@@ -288,8 +288,8 @@
             if (searchTotal == 0) {
                 moreInfo.innerHTML = '';
                 btntag = `
-                    <div class="noResult">
-                        <span>검색 결과가 없습니다</span>
+                    <div class="noResult" onclick="location.href='/post/write'">
+                        <span>검색 결과가 없습니다 여기를 클릭해서 새로운 포스트를 등록해보세요!</span>
                     </div>`
 
             } else if (searchTotal >= 30) {
