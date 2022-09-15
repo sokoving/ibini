@@ -43,7 +43,12 @@ public interface PostMapper {
 
     // 특정 장르 아이디를 가진 포스트의 post_no 모두 조회
     List<Post> getPostByGenreId(int genreId);
+    // 장르 카운트
+    int getPostByGenreIdTotal(int genreId, String account);
 
     // 특정 플랫폼 아이디를 가진 포스트의 post_no 모두 조회
     List<Post> getPostByPlateId(int platformId);
+    // 플랫폼 카운트
+    int getPostByPlateIdUseplat(int platformId, String account);
+
 }

@@ -1,12 +1,14 @@
 package com.ibini.my_books.genre.api;
 
 import com.ibini.my_books.genre.domain.Genre;
+import com.ibini.my_books.genre.domain.GenreDto;
 import com.ibini.my_books.genre.service.GenreService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,14 +22,28 @@ public class GenreApiController {
     private final GenreService genreService;
 
     @GetMapping("/{account}")
-    public List<Genre> showGenre(@PathVariable String account, Model model){
+    public List<GenreDto> showGenre(@PathVariable String account, Model model){
         log.info("GenreApiController genre account - {}", account);
         List<Genre> genreList = genreService.findAllService(account);
-        log.info("GenreApiController genreList - {}", genreList);
+        List<GenreDto> genreDtoList = new ArrayList<GenreDto>();
+        for (Genre gen : genreList) {
+            int totalNum = genreService.findGenreTotalNum(gen.getGenreId(), account);
+
+            GenreDto dto = new GenreDto();
+            dto.setGenreTotal(totalNum);
+            dto.setGenreName(gen.getGenreName());
+            dto.setGenreId(gen.getGenreId());
+            dto.setRowNum(gen.getRowNum());
+            dto.setAccount(account);
+
+            genreDtoList.add(dto);
+        }
+//        log.info("GenreApiController genreList - {}", genreList);
+        log.info("GenreApiController genreList - {}", genreDtoList);
 
         model.addAttribute("account", account);
 
-        return genreList;
+        return genreDtoList;
     }
 
     @PostMapping("/{account}")

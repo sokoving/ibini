@@ -118,11 +118,21 @@ public class PostService {
         log.info("PostService getPostByGenreId Call - {}", genreId);
         return postMapper.getPostByGenreId(genreId);
     }
+    public int getPostByGenreIdTotal(int genreId, String account){
+        log.info("PostService getPostByGenreIdTotal - {} -{}", genreId, account);
+        return postMapper.getPostByGenreIdTotal(genreId, account);
+    }
 
     // 특정 플랫폼 아이디를 가진 포스트의 post_no 모두 조회
     public List<Post> getPostByPlateId(int platformId) {
         log.info("PostService getPostByPlateId Call - {}", platformId);
         return postMapper.getPostByPlateId(platformId);
+    }
+
+    // platform 숫자조회
+    public int getPostByPlateIdUseplat(int platformId, String account){
+        log.info("PostService getPostByPlateIdUseplat Call - {} -{}" , platformId, account);
+        return postMapper.getPostByPlateIdUseplat(platformId, account);
     }
 
     /**

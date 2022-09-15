@@ -1,6 +1,7 @@
 package com.ibini.my_books.platform.api;
 
 import com.ibini.my_books.platform.domain.PlatformDomain;
+import com.ibini.my_books.platform.domain.PlatformDto;
 import com.ibini.my_books.platform.service.PlatformService;
 import com.ibini.my_books.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,17 +33,39 @@ public class PlatformApiController {
      */
 
     @GetMapping("/{account}")
-    public List<PlatformDomain> list(HttpSession session, Model model){
+    public List<PlatformDto> list(HttpSession session, Model model){
         // 로그인 정보 가져오기
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         log.info("HashTag Controller account - {}", account);
 
         log.info("PlatformController - GET! account -{}", account);
         List<PlatformDomain> domainList = platformService.findAllPlatform(account);
+        List<PlatformDto> dtoList = new ArrayList<PlatformDto>();
+
+        for (PlatformDomain domain : domainList) {
+            int totalPlatformNum = platformService.findplatfomrTotalNum(domain.getPlatformId(), account);
+            PlatformDto dto = new PlatformDto();
+
+
+            dto.setTotal(totalPlatformNum);
+            dto.setRowNum(domain.getRowNum());
+            dto.setPlatformId(domain.getPlatformId());
+            dto.setPlatformName(domain.getPlatformName());
+            dto.setAccount(domain.getAccount());
+            dto.setPlatformBgColor(domain.getPlatformBgColor());
+            dto.setPlatformFontColor(domain.getPlatformFontColor());
+
+            dtoList.add(dto);
+            log.info("platformService - {}", dto);
+
+        }
         log.info("domainList - {}", domainList);
+        log.info("dtoList - {}", dtoList);
+
+        model.addAttribute("dtoList", dtoList);
 
         model.addAttribute("account", account);
-        return domainList;
+        return dtoList;
     }
 
     // 등록 - 비동기?
