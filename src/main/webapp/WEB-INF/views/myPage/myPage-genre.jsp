@@ -67,8 +67,8 @@
     <script>
         
         const account = '${account}';
-        const url = "http://localhost:8383/genre/c1/" + account;
-        const delModiURL = "http://localhost:8383/genre/c1/" + account;
+        const url = "/genre/c1/" + account;
+        const delModiURL = "/genre/c1/" + account;
         
         
 
