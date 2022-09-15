@@ -1,13 +1,22 @@
+#content-wrap{
+    margin-top: 50px;
+}
+
 /* 새 글 등록 영역 */
+#reg-sec{
+    width: 70%;
+    border: none;
+    margin: 0px auto;
+}
 #reg-sec .inner-section {
-    /*display: flex;*/
     justify-content: center;
     align-items: center;
 }
-
+#reg-sec .section-h2{
+    margin-bottom: 2em;
+}
 #reg-sec .inner-section h2{
     font-weight: 600;
-    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -18,9 +27,9 @@
 
 .new-post .reg-btn{
     border: 1px dotted #555;
-    border-radius: 0 1rem 0 1rem ;
-    /*padding: 50px 30px;*/
+    border-radius: 1rem 4em 1rem 4rem ;
     padding: 30px;
+    width: 250px;
     background-color: #e9ecef;
     color: #555;
     cursor: pointer;
@@ -108,7 +117,10 @@ section#list-sec{
     
 }
 
-
+/* 포스트 필터링 영역 */
+.post-search-box{
+    
+}
 
 /* ------------------------------------- */
 /* ---------개별 포스트 박스 영역 ---------*/
@@ -319,6 +331,7 @@ section#list-sec{
 .show-more:hover{
     box-shadow: none;
     transition: 0.2s;
+    background-color: #ffca3d;
 }
 .list-end{
     border: 1px solid #adb5bd;
