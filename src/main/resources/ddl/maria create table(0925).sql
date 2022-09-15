@@ -138,6 +138,7 @@ insert into
    (account, user_id, password, user_name, email, auth)
             values
             ('admin','admin', '12345678', '관리자', 'yanbam@naver.com', 'ADMIN');
+commit;
 
 
 -- =========== tbl_manage_member
