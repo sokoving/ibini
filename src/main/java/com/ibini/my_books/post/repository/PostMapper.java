@@ -51,4 +51,11 @@ public interface PostMapper {
     // 플랫폼 카운트
     int getPostByPlateIdUseplat(int platformId, String account);
 
+    // 즐겨찾기 등록
+    boolean regFavorite(Long postNo, String account);
+
+    //즐겨찾기 삭제
+    boolean resetFavorite(Long PostNo);
+
+
 }

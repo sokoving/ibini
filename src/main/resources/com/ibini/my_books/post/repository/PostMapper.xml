@@ -243,4 +243,26 @@
     </select>
 
 
+<!--    즐겨찾기 등록-->
+<!--    boolean regFavorite(Long postNo);-->
+    <update id="regFavorite">
+        update tbl_post
+        set favorite=(
+                        select max(favorite)+1
+                        from tbl_post
+                        where account= 'admin' or #{account}
+                      )
+        WHERE post_no = #{postNo}
+    </update>
+
+
+<!--    즐겨찾기 삭제-->
+<!--    boolean resetFavorite(Long PostNo);-->
+    <update id="resetFavorite">
+        update tbl_post
+        set favorite=0
+        WHERE post_no = #{postNo}
+    </update>
+
+
 </mapper>

@@ -29,6 +29,8 @@ CREATE TABLE tbl_post
     favorite          INT(9)           NULL,      		    -- 즐겨찾기
      PRIMARY KEY (post_no)
 );
+-- 즐겨찾기 초기값 세팅(아니면 favorite 제약조건을 DEFAULT 0 으로 바꿀 것)
+insert into tbl_post (account, post_title, post_writer, favorite) values ('admin', "좋아요", "좋아요", 0);
 
 CREATE TABLE prj_post_img
 (

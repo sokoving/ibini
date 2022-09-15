@@ -153,5 +153,15 @@ public class PostService {
         return postMapper.isDuplicate(checkMap) == 1;
     }
 
+    public boolean regFavoriteService(Long postNo, String account){
+        log.info("regFavoriteService call - {} / {}", postNo, account);
+        return postMapper.regFavorite(postNo, account);
+    }
+
+    public boolean removeFavoriteService(Long postNo){
+        log.info("removeFavoriteService call - {}", postNo);
+        return postMapper.resetFavorite(postNo);
+    }
+
 
 }

@@ -9,9 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -28,6 +26,8 @@ public class PostApiController {
     /*
            - 검색이 적용된 포스트 조회 요청 : /post/api/searchPost - GET
            - 제목 중복 확인 비동기 처리 : /post/api/check - get
+           - 즐겨찾기 등록 : /post/api/regFavorites  - patch
+           - 즐겨찾기 삭제 : /post/api/removeFavorites - patch
      */
     @GetMapping("/check")
     public ResponseEntity<Boolean> check(String type, String value, Long postNo, HttpSession session) {
@@ -61,5 +61,12 @@ public class PostApiController {
         return new ResponseEntity<>(postMap, HttpStatus.OK);
     }
 
+
+//    - 즐겨찾기 등록 : /post/api/regFavorites  - Patch
+//    @PatchMapping("/regFavorites")
+//    public void regFavorite(Long postNo, HttpSession session){
+//
+//    }
+//   - 즐겨찾기 삭제 : /post/api/removeFavorites - Patch
 
 }
