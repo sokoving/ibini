@@ -373,7 +373,9 @@
 
             var url = "/post/write?title=" + titleDiv + "&author=" + authorDiv;
             console.log(url);
-            window.open(url, '', 'top=100, left=100');
+            // 이동
+            location.href=url;
+            // window.open(url, '', 'top=100, left=100');
 
         }
     </script>
