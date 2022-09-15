@@ -10,6 +10,8 @@
     <%@ include file="../include/static-head.jsp" %>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 
+    <!-- detail CSS -->
+    <link rel="stylesheet" href="/css/post-detail.css">
     <!-- post-note CSS -->
     <link rel="stylesheet" href="/css/post-note.css">
 
