@@ -385,6 +385,7 @@
                 if (!validateFormValue()) {
                     return;
                 }
+                beforeSubmit();
                 $('#modi-form').submit();
             })
 
