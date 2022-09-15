@@ -22,6 +22,9 @@ public class MyPageMark {
 
     private List<Mark> markList;
 
+    // 커스텀 필드
+    private String shortPostTitle;
+
     @Setter @Getter
     @ToString
     @NoArgsConstructor

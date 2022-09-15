@@ -91,7 +91,22 @@ public class PostMarkService {
     // 마이페이지 post, img 조회
     public List<MyPagePostDTO> findAllPostWithImg(String account, Search search) {
         List<MyPagePostDTO> postWithImgList = postMarkMapper.findAllPostWithImg(account, search);
+        substringTitle(postWithImgList);
 
         return postWithImgList;
+    }
+
+    // 포스트 제목 subString
+    private void substringTitle(List<MyPagePostDTO> postWithImgList) {
+        for (MyPagePostDTO post : postWithImgList) {
+            String title = post.getPostTitle();
+
+            if (title.length() > 22) {
+                String substring = title.substring(0, 22);
+                post.setShortPostTitle(substring + "...");
+            } else {
+                post.setShortPostTitle(title);
+            }
+        }
     }
 }

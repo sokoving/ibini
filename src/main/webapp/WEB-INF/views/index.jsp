@@ -20,6 +20,10 @@
   }
   #content-wrap img {
     max-width: 200px;
+    cursor: pointer;
+  }
+  #content-wrap img:hover{
+    background-color: #eeedeb;
   }
   hr{
     margin: 50px 0;

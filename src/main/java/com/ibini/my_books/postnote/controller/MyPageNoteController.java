@@ -58,6 +58,7 @@ public class MyPageNoteController {
             myPageMark.setPostNo(postNo);
             myPageMark.setAccount(account);
             myPageMark.setPostTitle(post.getPostTitle());
+            myPageMark.setShortPostTitle(post.getShortPostTitle());
             myPageMark.setEpId(post.getEpId());
             myPageMark.setThumbImg(post.getThumbImg());
             myPageMark.setMarkList(markDataList);
@@ -100,6 +101,7 @@ public class MyPageNoteController {
                 myPageMemo.setPostNo(postNo);
                 myPageMemo.setAccount(account);
                 myPageMemo.setPostTitle(post.getPostTitle());
+                myPageMemo.setShortPostTitle(post.getShortPostTitle());
                 myPageMemo.setThumbImg(post.getThumbImg());
                 myPageMemo.setMemoList(memoDataList);
 

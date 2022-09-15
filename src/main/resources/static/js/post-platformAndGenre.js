@@ -1,4 +1,4 @@
-console.log('post-platformAndGenre start');
+// console.log('post-platformAndGenre start');
 
 // 1. 저장하기!
 // 1. 버튼 클릭시 핸들러 작동
@@ -49,7 +49,7 @@ function showdomainList(selectFlag = 'first') {
     fetch(url)
         .then(res => res.json())
         .then(domainList => {
-            console.log(domainList);
+            // console.log(domainList);
             makePlatformDom(domainList);
 
             // 플랫폼 이름 찾아서 select 해주기
@@ -143,7 +143,7 @@ function showGenreList(selectFlag = 'first') {
     fetch(genreURL)
         .then(res => res.json())
         .then(genreList => {
-            console.log(genreList);
+            // console.log(genreList);
             makeGenreDom(genreList);
 
             // 장르 이름 찾아서 select 해주기
