@@ -1,7 +1,5 @@
 package com.ibini.my_books.platform.service;
 
-import com.ibini.my_books.genre.domain.Genre;
-import com.ibini.my_books.hashtag.repository.HashtagMapper;
 import com.ibini.my_books.platform.domain.PlatformDomain;
 import com.ibini.my_books.platform.repository.PlatformMapper;
 import com.ibini.my_books.post.domain.Post;
@@ -109,6 +107,12 @@ public class PlatformService {
         }
 
         return platformMapper.getTotalCount(account) == 0;
+    }
+
+    // 플랫폼 숫자조회
+    public int findplatfomrTotalNum(int platformId, String account){
+        int useplat = postService.getPostByPlateIdUseplat(platformId, account);
+        return useplat;
     }
 
 

@@ -64,14 +64,18 @@
 /* 플랫폼 이름 */
 .myPage-wrap .platform-wrap #selectSetting #selList .platformName{
     background: #fff;
-    width: 30%;
-    padding: 0 20px;
+    width: 26%;
+    padding: 0 10px;
 }
 
 .myPage-wrap .platform-wrap #selectSetting #selList .platformName span{
     color: #000000;
 }
 
+.myPage-wrap .platform-wrap #selectSetting #selList .totalNum{
+    width: 4%;
+    text-align: center;
+}
 
 
 /* 플랫폼 배경 색상 */

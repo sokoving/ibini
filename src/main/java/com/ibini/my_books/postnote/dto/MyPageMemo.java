@@ -21,6 +21,9 @@ public class MyPageMemo {
 
     private List<Memo> memoList;
 
+    // 커스텀 필드
+    private String shortPostTitle;
+
     @Setter
     @Getter
     @ToString

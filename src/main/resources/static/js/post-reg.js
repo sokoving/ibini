@@ -70,9 +70,9 @@ function checkKeyup(e, postNo=0) {
     }
     // 제목이 중복이면 메세지 띄워주기
     else if (e.target.name === 'postTitle') {
-        console.log("제목 검증중");
+        // console.log("제목 검증중");
         const checkTitleUrl = '/post/api/check?type=title&value=' + $title.val() + '&postNo=' + postNo;
-        console.log(checkTitleUrl);
+        // console.log(checkTitleUrl);
         fetch(checkTitleUrl)
             .then(res => res.text())
             .then(flag => {
@@ -100,12 +100,12 @@ function validateFormValue() {
     // console.log('star: ', $star.val());
     // console.log('platform: ', $('select[name=platformId]').val());
     // console.log('genre: ', $('select[name=genreId]').val());
-    console.log('publishStatus: ', $('input[name=publishStatus]').val());
+    // console.log('publishStatus: ', $('input[name=publishStatus]').val());
     // console.log('publishCycle: ', $('input[name=publishCycle]').val());
-    console.log('epId: ', $epId.val());
-    console.log('curEp: ', $curEp.val());
-    console.log('totalEp: ', $totalEp.val());
-    console.log('tag: ', $('input[name=tagName]').val());
+    // console.log('epId: ', $epId.val());
+    // console.log('curEp: ', $curEp.val());
+    // console.log('totalEp: ', $totalEp.val());
+    // console.log('tag: ', $('input[name=tagName]').val());
 
     let flag = true; // 입력 제대로 안 하면 false로 변경
 
@@ -140,7 +140,6 @@ function validateFormValue() {
         $star.val(0);
         $('.star-msg').text('[ 기본값으로 세팅됐습니다. ]');
         $('.star-msg').css('color', '#005666');
-        flag = false;
     } else if ($star.val() < 0 || $star.val() > 9) {
         $('.star-msg').text('[ 1~9 사이의 숫자를 입력해 주세요 ]');
         $('.star-msg').css('color', '#005666');
@@ -258,6 +257,17 @@ document.querySelector('.ep-btn-group').onclick = function () {
     }
 }
 
+// 썸네일만 없는 경우 제출 직전에 첫번째 첨부 이미지를 썸네일로 넘김
+function beforeSubmit(){
+    const notExistThumb = ($('.thumbFileName-hidden-input').length < 1) && ($(
+        '.upload-img-box').length >= 1);
+
+    if (notExistThumb) {
+        let firstImg = $('.uploaded-list').children()[0].children[2];
+        firstImg.setAttribute('name', 'thumbFileName');
+        // console.log(firstImg);
+    }
+}
 
 //-------------------modi---------------//
 

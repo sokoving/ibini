@@ -26,6 +26,11 @@
         <div id="content-wrap">
             <section>
                 <div class="inner-section">
+                    <!-- 이미지 모달 -->
+                    <div id="imgModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="modalImgNode">
+                    </div>
 
                     <!-- 이미지, 포스트 정보 영역 -->
                     <div id="img-post-wrap">
@@ -176,11 +181,11 @@
                             </div>
                             <div class="inputHashtag hide">
                                 <div class="label">
-                                    <label id="InfoText">해시태그를 추가로 글에 추가할 수 있습니다.</label>
-                                    <label id="InfoText">예시) #태그 #해시태그 </label>
+                                    <label id="InfoText">이 페이지에서 해시태그를 바로 추가해 보세요.</label>
+                                    <label id="InfoText">해시태그는 #으로 구분되어 저장됩니다. </label>
                                 </div>
                                 <div id="tagInputAndBtn">
-                                    <input type="text" id="hashtagInput">
+                                    <input type="text" id="hashtagInput" placeholder="#태그 #해시태그">
                                     <button type="button" id="hashtagInputBtn">저장</button>
                                 </div>
 
@@ -562,7 +567,44 @@
                     scroll: false
                 });
             });
+
+            // -------------------------- 이미지 모달 관련 함수 --------------------------- //
+            // 이미지 박스 노드
+            const $imgWrap = document.getElementById('img-wrap');
+            // 모달 노드
+            const $modal = document.getElementById("imgModal");
+            const $modalImg = document.getElementById("modalImgNode");
+
+            $imgWrap.onclick = function (e) {
+                if (!e.target.matches('.post-img')) {
+                    return;
+                }
+
+                // 클릭한 이미지의 src를 모달 img src에 넣기
+                $modal.style.display = "block";
+                $modalImg.src = e.target.getAttribute('src');
+            }
+
+            // 모달 지우기
+            const $close = document.querySelector(".close");
+            $close.onclick = function () {
+                $modal.style.display = "none";
+            }
+
         });
+
+        // ----------------- 해시태그 추가시 #으로 시작하지 않으면 넣어주기 ----------------- //
+
+        $('#hashtagInput').on({
+            keydown: function (e) {
+                return checkKeydown(e);
+            },
+            keyup: function (e) {
+                checkKeyup(e);
+            }
+        });
+
+
         // end jQuery
     </script>
 

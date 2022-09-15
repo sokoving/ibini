@@ -261,8 +261,8 @@
                 // 마지막 포스트까지 보여줬다면 더보기 감추기
                 const $showBtn = $('.show-more')[0];
                 console.log($showBtn);
-                console.log("하단부 갱신");
-                console.log(pageNum + " / " + endPage);
+                // console.log("하단부 갱신");
+                // console.log(pageNum + " / " + endPage);
                 if (pageNum >= endPage) {
                     if (!$showBtn.classList.contains('hide')) {
                         $showBtn.classList.add('hide');

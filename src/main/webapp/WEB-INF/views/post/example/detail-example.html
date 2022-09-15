@@ -79,6 +79,12 @@
             <section>
                 <div class="inner-section">
 
+                    <!-- 이미지 모달 -->
+                    <div id="imgModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="modalImgNode">
+                    </div>
+
                     <!-- 이미지, 포스트 정보 영역 -->
                     <div id="img-post-wrap">
                         <!-- 이미지 영역 -->
@@ -325,10 +331,6 @@
             // jQueryTagTest("태그 잡기 테스트", $('h1'));
             const postNo = 5;
 
-            // 별 찍기
-            const star = 5;
-            drawStarsAtDetail(star);
-
             // 포스트 수정, 삭제, 목록 버튼 이벤트
             $('.post-btn-wrap').click(function (e) {
                 clickPostBtn(e.target, postNo)
@@ -336,7 +338,14 @@
 
             /* ------------------ 연관 포스트 -------------------------- */
 
-
+            function setLinkEditMod() {
+                switchToggle($postToggles); // 아이콘 바꾸기
+                $('.search-wrap').toggleClass('hide') // 검색창 표시
+                const $removeBtnList = $('.link-remove-btn');
+                for (let $btn of $removeBtnList) {
+                    $btn.classList.toggle('hide')
+                }
+            }
 
             // 연관 포스트 편집모드 열기(등록, 삭제)
             const $postToggles = $('#link-post-wrap .toggle-box').children();
@@ -381,8 +390,27 @@
 
             /* ------------------ // end 연관 포스트 -------------------------- */
 
+            // -------------------------- 이미지 모달 관련 함수 --------------------------- //
+            // 이미지 박스 노드
+            const $imgWrap = document.getElementById('img-wrap');
+            // 모달 노드
+            const $modal = document.getElementById("imgModal");
+            const $modalImg = document.getElementById("modalImgNode");
 
+            $imgWrap.onclick = function (e) {
+                if (!e.target.matches('.post-img')) {
+                    return;
+                }
+                // 클릭한 이미지의 src를 모달 img src에 넣기
+                $modal.style.display = "block";
+                $modalImg.src = e.target.getAttribute('src');
+            }
 
+            // 모달 지우기
+            const $close = document.querySelector(".close");
+            $close.onclick = function () {
+                $modal.style.display = "none";
+            }
 
 
         });

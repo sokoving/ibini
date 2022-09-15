@@ -306,15 +306,15 @@ function sendLinkDelete(e, postNo) {
 function isSearchLi() {
     // 검색창이 존재하면 true, 없으면 false
     const flag = $linkUl.children.length > 0 && $linkUl.firstElementChild.classList.contains('link-zero-box');
-    console.log(flag + "(searchLi flag : true - 검색창 있음, false - 검색창 없음)");
+    // console.log(flag + "(searchLi flag : true - 검색창 있음, false - 검색창 없음)");
     return flag;
 }
 
 // 잠금모드면 false, 편집모드면 true
 function isToggleOn() {
-     const flag = $postToggles[1].classList.contains('hide');
-     console.log(flag + "(toggle flag : true -편집모드 열려 있음, false - 잠금모드 열려 있음");
-     return flag;
+    const flag = $postToggles[1].classList.contains('hide');
+    // console.log(flag + "(toggle flag : true -편집모드 열려 있음, false - 잠금모드 열려 있음");
+    return flag;
 }
 
 // -------------------------- 수정, 삭제, 목록 버튼 ------------------------------------------ //
@@ -340,5 +340,41 @@ function clickPostBtn(target, postNo) {
     } else if (target.matches('.fa-list-alt') || target.matches('.post-list-btn')) {
         //        console.log("목록으로");
         location.href = '/list';
+    }
+}
+
+
+// ----------------- 해시태그 입력 관련 함수 -----------------//
+// 해시태그가 #으로 시작하지 않으면 # 넣어주기
+function checkKeyup(e) {
+    let fullValue = e.target.value;
+    let lastValue = fullValue.charAt(fullValue.length - 1);
+    // console.log("f : " + fullValue);
+    // console.log("l : " + lastValue);
+    if (fullValue.length > 0 && fullValue.charAt(0) !== '#') {
+        $('#hashtagInput').val('#' + fullValue);
+    }
+}
+
+
+// 해시태그 공백으로 시작, 공백 반복 입력 막기
+function checkKeydown(e) {
+    const keyCode = e.keyCode;
+    const target = e.target;
+    // console.log(keyCode);
+    // 엔터로 서브밋되는 거 막기
+    if (e.keyCode === 13) {
+        e.preventDefault();
+    }
+
+    // 공백으로 시작, 공백 반복 입력 막기
+    let fullValue = target.value;
+    let lastValue = fullValue.charAt(fullValue.length - 1);
+    //    console.log("f : " + fullValue);
+    //    console.log("l : " + lastValue);
+    if (fullValue === '' || lastValue === ' ') {
+        if (keyCode === 32) {
+            return false;
+        }
     }
 }

@@ -36,7 +36,6 @@
     <!-- custom css -->
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/post-reg.css">
-    <!-- css -->
     <link rel="stylesheet" href="/css/platform.css" />
 
 
@@ -53,12 +52,13 @@
     <script src="/js/post-platformAndGenre.js" defer></script>
     <script src="/js/upload.js" defer></script>
 
+
 </head>
 
 <body>
 
-<!-- header -->
-<%@ include file="../include/change-header.jsp" %>
+    <!-- header -->
+    <%@ include file="../include/change-header.jsp" %>
 
     <div id="wrap">
 
@@ -80,8 +80,6 @@
                         <div class="img-wrap">
                             <div class="img-box">
                                 <span class="box-msg">썸네일을 등록해 보세요</span>
-                                <!-- <span class="box-msg hide">썸네일을 등록해 보세요</span> -->
-                                <!-- <img class="post-img thumb-img" src="https://pbs.twimg.com/media/FagFBNhUsAUzvho?format=jpg&name=4096x4096" alt=""> -->
                             </div>
                             <label class="file-box">
                                 <div class="file-box-left">
@@ -106,8 +104,7 @@
                                 <span class="reg-span">* 작가</span>
                                 <span class="explain-span writer-msg"></span>
                             </div>
-                            <input class="white-box" type="text" name="postWriter"
-                                value="${bookInfo.author}">
+                            <input class="white-box" type="text" name="postWriter" value="${bookInfo.author}">
 
                             <div class="span-wrap">
                                 <span class="reg-span">별점</span>
@@ -127,7 +124,8 @@
 
                                 <div class="platformSelText">
                                     <span class="reg-span">플랫폼</span>
-                                    <span class="platformInputShowEvent">플랫폼 추가를 원하시면 여기를 클릭해주세요</span>
+                                    <span class="platformInputShowEvent">새 플랫폼 추가하려면 여기 클릭<i
+                                            class="far fa-hand-point-left ms-2"></i></span>
                                 </div>
 
                                 <div class="select">
@@ -149,7 +147,8 @@
                                 <div class="genreSelectBox">
                                     <div id="genreClick">
                                         <span class="reg-span">장르</span>
-                                        <span class="GenreInputShowEvent">장르 추가를 원하시면 여기를 클릭해주세요</span>
+                                        <span class="GenreInputShowEvent">새 장르 추가하려면 여기 클릭<i
+                                                class="far fa-hand-point-left ms-2"></i></span>
                                     </div>
 
                                     <div class="genreSelAndInput">
@@ -248,7 +247,10 @@
                     </div>
 
                     <div id="reg-6">
-                        <span class="reg-span">이미지 첨부하기</span>
+                        <div class="span-wrap">
+                            <span class="reg-span">이미지 첨부하기</span>
+                            <span class="explain-span files-msg">[ 첨부 이미지는 5개까지 등록 가능합니다. ]</span>
+                        </div>
                         <label class="file-box">
                             <div class="file-box-left">
                                 파일 선택
@@ -258,17 +260,7 @@
                             </div>
                             <input type="file" name="files" id="ajax-file-multi" class="file-input imgs-input" multiple>
                         </label>
-                        <div class="uploaded-list">
-                            <!--
-                                파일 올릴 때마다 생성될 것
-                            <div class="upload-img-box">
-                                <img class="upload-img"
-                                    src="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large" alt="">
-                                <i class="fas fa-times-circle upload-cancel-btn"></i>
-                                <input type="hidden" name="filNames"
-                                value="https://pbs.twimg.com/media/FbQJPxYUcAI11FU?format=jpg&name=large">
-                            </div> -->
-                        </div>
+                        <div class="uploaded-list"> </div>
 
                     </div>
 
@@ -320,6 +312,7 @@
                 if (!validateFormValue()) {
                     return;
                 }
+                beforeSubmit();
                 $('#write-form').submit();
             })
 
@@ -352,11 +345,11 @@
             $('#platformselect').change(function () {
 
                 // alert($(this).val());
-                console.log("선택한 플랫폼id : " + $(this).val());
+                // console.log("선택한 플랫폼id : " + $(this).val());
                 $("#platformselect").val($(this).val()).prop("selected", true);
                 // $('#platformselect option:eq($(this).val())').prop('selected', true);
                 // $('#platformselect').val($(this).val()).prop("selected", true);
-                console.log("selected : " + $("#platformselect option:selected").val());
+                // console.log("selected : " + $("#platformselect option:selected").val());
                 // alert($("#platformselect option:selected").val());
 
             });
@@ -364,10 +357,10 @@
             $('#genreSelect').change(function () {
 
                 // alert($(this).val());
-                console.log("genreSelect: " + $(this).val());
+                // console.log("genreSelect: " + $(this).val());
                 // $('#genreSelect').val($(this).val()).attr("selected", "selected");
                 $('#genreSelect').val($(this).val()).prop("selected", true);
-                console.log("genreSelect selecded : " + $("#genreSelect option:selected").val());
+                // console.log("genreSelect selecded : " + $("#genreSelect option:selected").val());
                 // alert($( "#genreSelect option:selected" ).val());
 
             });
@@ -393,8 +386,8 @@
         const account = '${account}';
         const gAccount = '${account}';
 
-        console.log(account);
-        console.log(gAccount);
+        // console.log(account);
+        // console.log(gAccount);
 
         // 나중에 꼭 수정해주기
         // const url = "http://localhost:8383/platform/c1?account=" + account;
