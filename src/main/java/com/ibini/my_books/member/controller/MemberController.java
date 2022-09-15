@@ -237,7 +237,7 @@ public class MemberController {
             if (modifyFlag) {
                 log.info("기존 비밀번호 일치, 비밀번호 변경 성공!");
                 ra.addFlashAttribute("msg", "modify-success");
-                return "redirect:/member/my-info";
+                return "redirect:/myPage";
 
                 //실패하면 수정창으로 보내고, 실패 메시지 전송
             } else ra.addFlashAttribute("msg", "modify-fail");
