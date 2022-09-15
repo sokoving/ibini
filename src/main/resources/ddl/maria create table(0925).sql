@@ -91,7 +91,6 @@ CREATE TABLE prj_genre
     PRIMARY KEY (genre_id)
 );
 insert into prj_genre (account, genre_name) VALUES ('admin', '미분류'); -- 관리용 항목(테이블 만들 때 넣어주세요)
-commit;
 select * FROM prj_genre;
 
 CREATE TABLE prj_platform
@@ -104,7 +103,6 @@ CREATE TABLE prj_platform
     PRIMARY KEY (platform_id)
 );
 insert into prj_platform (account, platform_name) VALUES ('admin', '미분류');  -- 관리용 항목(테이블 만들 때 넣어주세요)
-commit;
 select * FROM prj_platform;
 
 
@@ -222,3 +220,5 @@ CREATE TABLE login_list(
 );
 DROP SEQUENCE seq_login_list;
 CREATE SEQUENCE seq_login_list;
+
+commit;
