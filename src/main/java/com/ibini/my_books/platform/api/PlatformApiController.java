@@ -23,13 +23,13 @@ public class PlatformApiController {
 
     /*
                 POST write url
-                http://localhost:8383/post/write/ibini
+                /post/write/ibini
                 GET POST URL
                 const account = '${account}';
                 // 나중에 꼭 수정해주기
-                const url = "http://localhost:8383/platform/c1?account=" + account;
+                const url = "/platform/c1?account=" + account;
 
-                const genreURL = "http://localhost:8383/genre/c1?account=" + account;
+                const genreURL = "/genre/c1?account=" + account;
      */
 
     @GetMapping("/{account}")

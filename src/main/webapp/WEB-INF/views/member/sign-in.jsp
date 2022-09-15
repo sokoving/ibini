@@ -82,7 +82,7 @@
 
               <!-- 카카오계정 로그인 링크 -->
               <a id="custom-login-btn"
-                href="https://kauth.kakao.com/oauth/authorize?client_id=${kakaoAppKey}&redirect_uri=http://localhost:8383${kakaoRedirect}&response_type=code">
+                href="https://kauth.kakao.com/oauth/authorize?client_id=${kakaoAppKey}&redirect_uri=${kakaoRedirect}&response_type=code">
                 <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="350" />
               </a>
           </form>

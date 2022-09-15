@@ -224,7 +224,7 @@
                             const $modal = document.querySelector('.modal');
                             // console.log('modal?:', $modal);
 
-                            fetch('http://localhost:8383/member/inquiry-register/', reqInfo)
+                            fetch('/member/inquiry-register/', reqInfo)
                                 .then(res => res.text())
                                 .then(msg => {
                                     if (msg === 'inquiry-register-success') {
@@ -427,7 +427,7 @@
                     // console.log('글번호 :', serialNumber);
 
                     //비동기로 문의글 상세정보 가지고 오기              
-                    fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
+                    fetch('/member/findone-inquiry/' + serialNumber)
                         .then(res => res.json())
                         .then(oneInquiry => {
                             // console.log(e.target.parentElement.parentElement.parentElement.lastElementChild);
@@ -442,7 +442,7 @@
                             // 답변 상세보기
                             if (oneInquiry.answer != null) {
                                 let $ul = e.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
-                                fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
+                                fetch('/member/findone-inquiry/' + serialNumber)
                                     .then(res => res.json())
                                     .then(oneInquiry => {
                                         // console.log('if문 가동전 비교 타겟:',e.target.parentElement.lastElementChild);
