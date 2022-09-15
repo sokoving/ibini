@@ -173,10 +173,10 @@ public class MemberController {
     }
 
     //My Page
-    @GetMapping("/my-Page")
-    public void myPage() {
-        log.info("/member/my-page GET!! forwarding to my-page.jsp");
-    }
+//    @GetMapping("/my--Page")
+//    public void myPage() {
+//        log.info("/member/my-page GET!! forwarding to my--page.jsp");
+//    }
 
     //내 정보
     @GetMapping("/my-info")

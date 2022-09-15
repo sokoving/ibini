@@ -16,7 +16,7 @@ CREATE TABLE tbl_post
     genre_id          INT(9)          DEFAULT 0,  			-- 장르 아이디 : (기본값+유저 추가) 0:미분류, 1:판타지, 2:로맨스, 3:무협, 4:아포칼립스
     ca_id             INT(9)          DEFAULT 0,  			-- 카테고리 아이디 : (CategoryUtil 고정)0:미분류, 1:웹소설, 2:웹툰, 3:e-book, 4:도서 5:만화책
     platform_id       INT(9)          DEFAULT 0,  			-- 연재플랫폼아이디 : (기본값+유저 추가)0:미분류, 1.카카오페이지, 2:네이버시리즈, 3:리디북스, 4:카카오웹툰, 5:네이버웹툰
-    post_title        VARCHAR(100)    NOT NULL UNIQUE,    	-- 책제목
+    post_title        VARCHAR(100)    NOT NULL,         	-- 책제목
     post_writer       VARCHAR(100)    NOT NULL,  			-- 작가
     publish_status    INT(5)          DEFAULT 0,  			-- 연재상태 : (PublishStatusUtil 고정)0:미분류 1:연재 , 2: 휴재,  3: 완결
     publish_cycle     VARCHAR(100)    NULL,        			-- 연재주기 : (사용자 입력 ex) 월,수,금
@@ -132,6 +132,14 @@ CREATE TABLE tbl_member
 DROP SEQUENCE seq_tbl_member;
 CREATE SEQUENCE seq_tbl_member START WITH 1 INCREMENT BY 1;
 
+-- 마리아 DB member 테이블 관리자 계정 추가
+insert into
+ tbl_member
+   (account, user_id, password, user_name, email, auth)
+            values
+            ('admin','admin', '12345678', '관리자', 'yanbam@naver.com', 'ADMIN');
+commit;
+
 
 -- =========== tbl_manage_member
 -- TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(seq_tbl_member.nextval, 4, '0')
@@ -144,6 +152,10 @@ DROP TABLE tbl_manage_member;
     	    user_condition       VARCHAR(150)    DEFAULT 'true',    -- 회원의 가입 상태
     	     PRIMARY KEY (user_id)
     	);
+
+-- 마리아 DB manage_member 테이블 관리자 계정추가
+insert into tbl_manage_member (user_id, email)
+            values('admin','yanbam@naver.com');
 
 -- =========== tbl_manage_break_away
 -- 마리아 회원 탈퇴 사유 관리 테이블
@@ -186,6 +198,16 @@ DROP TABLE tbl_reason_break_away;
 
 DROP SEQUENCE seq_tbl_reason_break_away;
 CREATE SEQUENCE seq_tbl_reason_break_away START WITH 1 INCREMENT BY 1;
+
+    -- tbl_reason_break_away 시퀀스 생성후 꼭 기본 탈퇴사유 3개 넣어야 함. 안그러면 시퀀스 때문에 오류 발생.
+     	INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away), '서비스 이용 불편');
+
+        INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away),'관리 및 피드백이 잘 안됨');
+
+        INSERT INTO tbl_reason_break_away
+        VALUES (NEXTVAL(seq_tbl_reason_break_away),'에러가 많음');
 
 
 -- =========== login_list

@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/myPage")
 public class MyPageController {
 
-    // http://localhost:8383/myPage/platform
+    // /myPage/platform
     // account 정보 추가하기!!!
-    // http://localhost:8383/myPage/{account}/platform
+    // /myPage/{account}/platform
 
     @GetMapping("")
     public String showMyPage(HttpSession session, Model model){

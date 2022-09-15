@@ -81,7 +81,7 @@ public class KakaoService implements OauthService, OauthValue {
             queryParam
                     .append("grant_type=authorization_code")
                     .append("&client_id=" + KAKAO_APP_KEY)
-                    .append("&redirect_uri=http://localhost:8383" + KAKAO_REDIRECT_URI)
+                    .append("&redirect_uri=" + KAKAO_REDIRECT_URI)
                     .append("&code=" + authCode);
 
             // 출력 스트림을 이용해서 파라미터 전송

@@ -286,7 +286,7 @@
                 console.log(account);
                 console.log(postNo);
 
-                let tagUrl = 'http://localhost:8383/hashtag/api/v1/' + account + '/' + postNo;
+                let tagUrl = '/hashtag/api/v1/' + account + '/' + postNo;
                 console.log(tagUrl);
 
 
