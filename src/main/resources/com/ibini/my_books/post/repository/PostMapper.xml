@@ -54,14 +54,14 @@
         account, genre_id, ca_id, platform_id,
         post_title, post_writer, publish_status,
         publish_cycle, ep_id, cur_ep, total_ep,
-        star_rate
+        star_rate, favorite
         )
         VALUES
         (
         #{account}, #{genreId}, #{caId}, #{platformId},
         #{postTitle}, #{postWriter}, #{publishStatus},
         #{publishCycle}, #{epId}, #{curEp}, #{totalEp},
-        #{starRate}
+        #{starRate}, #{favorite}
         )
     </insert>
 
@@ -69,7 +69,7 @@
         SELECT
         post_no, account, genre_id, ca_id, platform_id,
         post_title, post_writer, publish_status, publish_cycle,
-        ep_id, cur_ep, total_ep, reg_date, update_date, star_rate
+        ep_id, cur_ep, total_ep, reg_date, update_date, star_rate, favorite
         FROM tbl_post
         WHERE account = #{account}
         ORDER BY post_no desc
@@ -81,7 +81,7 @@
         p.ca_id, p.platform_id, pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
         p.post_title, p.post_writer, p.publish_status, p.publish_cycle,
         p.ep_id, p.cur_ep, p.total_ep, p.reg_date, p.update_date, p.star_rate
-        ,pi.file_name ,pi.ORIGINAL_FILE_NAME
+        ,pi.file_name ,pi.ORIGINAL_FILE_NAME, p.favorite
 
         FROM (select * from tbl_post WHERE account = #{account})p
 
@@ -103,7 +103,7 @@
         SELECT
         post_no, account, genre_id, ca_id, platform_id,
         post_title, post_writer, publish_status, publish_cycle,
-        ep_id, cur_ep, total_ep, reg_date, update_date, star_rate
+        ep_id, cur_ep, total_ep, reg_date, update_date, star_rate, favorite
         FROM tbl_post
         WHERE post_no = #{postNo}
     </select>
@@ -114,7 +114,7 @@
         p.ca_id, p.platform_id, pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
         p.post_title, p.post_writer, p.publish_status, p.publish_cycle,
         p.ep_id, p.cur_ep, p.total_ep, p.reg_date, p.update_date, p.star_rate
-        ,pi.file_name, pi.ORIGINAL_FILE_NAME
+        ,pi.file_name, pi.ORIGINAL_FILE_NAME, p.favorite
         FROM (
         SELECT *
         FROM tbl_post
@@ -170,6 +170,7 @@
         <if test="sPlatform != null">and p.platform_id = #{sPlatform}</if>
         <if test="sPublishStatus != null">and p.publish_status = #{sPublishStatus}</if>
         <if test="sStarRate != null">and p.star_rate = #{sStarRate}</if>
+        <if test="sFavorite != null"> and favorite > 0 </if>
     </sql>
 
     <select id="searchAllPostWithName" resultMap="postWithNameMap">
@@ -178,9 +179,14 @@
         p.ca_id, p.platform_id, pf.platform_name, pf.platform_bg_color, pf.platform_font_color,
         p.post_title, p.post_writer, p.publish_status, p.publish_cycle,
         p.ep_id, p.cur_ep, p.total_ep, p.reg_date, p.update_date, p.star_rate
-        ,pi.file_name ,pi.ORIGINAL_FILE_NAME
+        ,pi.file_name ,pi.ORIGINAL_FILE_NAME, p.favorite
 
-        FROM  (select * from tbl_post WHERE account = #{account})p
+        FROM  (
+                select
+                    *
+                from tbl_post
+                WHERE account = #{account}
+              )p
 
         LEFT OUTER JOIN ibini.prj_genre g
         on p.genre_id = g.genre_id
@@ -194,7 +200,7 @@
         where (pi.thumbnail = 'true' or pi.thumbnail is null)
         <include refid="search"/>
 
-        order by post_no desc
+        order by <if test="sFavorite != null"> p.favorite desc, </if> p.post_no desc
         limit #{start}, #{amount}
     </select>
 
@@ -250,8 +256,8 @@
         set favorite=(
                         select max(favorite)+1
                         from tbl_post
-                        where account= 'admin' or #{account}
-                      )
+                        where account= #{account}
+                    )
         WHERE post_no = #{postNo}
     </update>
 
