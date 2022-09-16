@@ -312,11 +312,11 @@
                         .then(res => res.text())
                         .then(msg => {
                             if (msg === 'del-success') {
-                                alert('삭제 성공!');
+                                alert('태그가 삭제되었습니다.');
                                 showHashtagDom();
                                 console.log('delete - hashtag');
                             } else {
-                                alert('삭제 실패!!');
+                                alert('태그 삭제에 실패했습니다.');
                             }
                         });
 
@@ -413,14 +413,14 @@
 
             }
 
-            function setLinkEditMod() {
-                switchToggle($postToggles); // 아이콘 바꾸기
-                $('.search-wrap').toggleClass('hide') // 검색창 표시
-                const $removeBtnList = $('.link-remove-btn');
-                for (let $btn of $removeBtnList) {
-                    $btn.classList.toggle('hide')
-                }
-            }
+            // function setLinkEditMod() {
+            //     switchToggle($postToggles); // 아이콘 바꾸기
+            //     $('.search-wrap').toggleClass('hide') // 검색창 표시
+            //     const $removeBtnList = $('.link-remove-btn');
+            //     for (let $btn of $removeBtnList) {
+            //         $btn.classList.toggle('hide')
+            //     }
+            // }
 
             // DOM 생성!!!!!
             function makeHashtagDom(hashtagList) {

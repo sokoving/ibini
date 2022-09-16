@@ -77,7 +77,7 @@ function makeSearchLi() {
         "</select>" +
         "<input class='form-control' list='datalistOptions' id='postSearchList' placeholder='포스트를 검색해 링크를 추가해 보세요'>" +
         "<datalist id='datalistOptions'>" +
-        "<option data-link-post-no='0' value='스페이스바를 누르면 등록된 포스트를 제외한 모든 포스트가 검색됩니다.'>" +
+        "<option data-link-post-no='0' value='스페이스바를 누르면 등록된 포스트를 제외한 대부분의 포스트가 검색됩니다.'>" +
         "</datalist>" +
         "<button type='button' class='link-reg-btn btn btn-secondary'>저장</button>";
 
@@ -268,6 +268,15 @@ function connectPost(rootPostNo, linkPostNo) {
                 alert('연관 포스트 등록에 실패했습니다.');
             }
         })
+}
+
+function setLinkEditMod() {
+    switchToggle($postToggles); // 아이콘 바꾸기
+    $('.search-wrap').toggleClass('hide') // 검색창 표시
+    const $removeBtnList = $('.link-remove-btn');
+    for (let $btn of $removeBtnList) {
+        $btn.classList.toggle('hide')
+    }
 }
 
 function sendLinkDelete(e, postNo) {
