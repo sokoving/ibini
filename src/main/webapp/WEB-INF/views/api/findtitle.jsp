@@ -90,7 +90,7 @@
             loadObject.saveFrontUrl = "https://www.nl.go.kr/seoji/SearchApi.do?" +
                 "cert_key=" + keyCode +
                 "&result_style=json&page_no="
-            loadObject.saveEndUrl = "&page_size=30&title=" + word;
+            loadObject.saveEndUrl = "&page_size=20&title=" + word;
             console.log(pageNo);
             console.log('loadObj:', loadObject);
             // console.log('url : ', url);
@@ -101,57 +101,6 @@
 
         };
 
-        // function search(target) {
-
-        //     const keyCode = "4d558d393158f70a939dc6c9f6fd608fa97e902d5f35e1f2c937bd025387bdc5";
-        //     var word = target.value;
-        //     // var encodeWord = encodeURI(word);
-        //     console.log(word);
-        //     // console.log(encodeWord);
-
-
-        //     let pageNo = 1;
-
-        //     // 비동기 GET
-        //     let url = "https://www.nl.go.kr/seoji/SearchApi.do?" +
-        //         "cert_key=" + keyCode + 
-        //         "&result_style=json&page_no="+ pageNo +"&page_size=30" +
-        //         "&title=" + word;
-
-        //     let saveFrontUrl = "https://www.nl.go.kr/seoji/SearchApi.do?" +
-        //         "cert_key=" + keyCode + 
-        //         "&result_style=json&page_no="
-        //     let saveEndUrl = "&page_size=30&title=" + word;
-        //     console.log(pageNo);
-        //     // console.log('url : ', url);
-
-        //     // 비동기 GET 요청 Header
-        //     fetch(url)
-        //         .then((response) => response.json())
-        //         .then((data) =>{ 
-        //             makeSearchDom(data);
-
-        //             $(document).ready(function(){
-        //                 $('#moreBtn').click(function() {
-        //                     let savePageNo = pageNo;
-        //                     let changepageNo = pageNo + 1;
-        //                     // console.log('pageNo : ', pageNo);
-        //                     let moreUrl = saveFrontUrl + changepageNo + saveEndUrl;
-        //                     // console.log('saveFrontUrl + pageNo + saveEndUrl : ', saveFrontUrl + pageNo + saveEndUrl);
-        //                         fetch(moreUrl)
-        //                             .then((response) => response.json())
-        //                             .then((data) =>{ 
-        //                                 makeSearchDom(data);
-        //                         });
-
-        //                 });
-
-        //             });
-
-        //     }); //fetch end
-
-        // }
-
         // dom 생성하는 함수
         function makeSearchDom(data) {
 
@@ -160,7 +109,7 @@
             let searchTotal = data.TOTAL_COUNT;
             let pageNo = data.PAGE_NO;
             console.log('searchTotal:', searchTotal);
-            console.log('pageNo: ', pageNo);
+            // console.log('pageNo: ', pageNo);
             // console.log('docs : ', docs);
 
 
@@ -184,10 +133,14 @@
                 let titleSplit = '';
                 let authorSplitLength = '';
 
+
                 // 이상한 기호 [] 자르기
                 if (title.includes('[연재]')) {
                     // 이상하게 넘어가는거 잘라주기
                     title = title.split('[연재]').join("");
+                }
+                if (title.includes('[') || title.includes(']')){
+                    title = title.replace(/[[]]/g ,' ');
                 }
 
                 // 제목 [] 교체하기
@@ -197,6 +150,8 @@
                 if (title.includes(']')){
                     title = title.replace(')')
                 }
+
+
 
                 // 제목 자르기
                 if (title.length >= 25) {
@@ -292,10 +247,14 @@
                         <span>검색 결과가 없습니다 여기를 클릭해서 새로운 포스트를 등록해보세요!</span>
                     </div>`
 
-            } else if (searchTotal >= 30) {
+            } else if (searchTotal >= 21) {
                 moreInfo.innerHTML = '';
                 btntag = `
-                    <button type="button" id="moreBtn">더보기</button>
+                    <div id="PageBox">
+                        <button type="button" id="beforeBtn">이전</button>
+                        <button type="button" id="moreBtn">더보기</button>
+                    </div>
+
                 `;
                 
             }
@@ -303,21 +262,58 @@
             moreInfo.innerHTML = btntag;
 
             // 생성 후에 이벤트 -> 기존에 dom 아래에 넣어주기
-            const $more = document.querySelector('#moreBtn');
-            if ($more !== null) {
-                $more.addEventListener('click', function () {
-                    console.log('더보기 클릭');
-                    const {
-                        saveFrontUrl,
-                        saveEndUrl
-                    } = loadObject;
-                    let savePageNo = pageNo;
-                    let changepageNo = +pageNo + 1;
-                    let moreUrl = saveFrontUrl + changepageNo + saveEndUrl;
-                    console.log('pageNo : ', pageNo);
-                    // console.log('saveFrontUrl + pageNo + saveEndUrl : ', saveFrontUrl + pageNo + saveEndUrl);
-                    loadSearchData(moreUrl);
-                });
+            const $PageBox = document.querySelector('#PageBox');
+            // const $more = document.querySelector('#moreBtn');
+            // const $beforeBtn = document.querySelector('#beforeBtn');
+            if ($PageBox !== null) {
+                console.log('더보기 클릭');
+                const {
+                    saveFrontUrl,
+                    saveEndUrl
+                } = loadObject;
+
+                // console.log('pageNo', +pageNo);
+
+                // let Page = +PageNo;
+                // console.log('Page', Page);
+                let end = Math.ceil(+searchTotal / 20);
+                console.log('end', end);
+
+                $PageBox.addEventListener('click', function (e){
+                    console.log(e.target);
+                    let where = e.target;
+                    if (where.matches('#moreBtn')){
+                        if (+pageNo >= end) {
+                            e.preventDefault();
+                            alert('마지막 페이지 입니다.')
+                        } else if (+pageNo <= end){
+                            let changepageNo = +pageNo + 1;
+                            let moreUrl = saveFrontUrl + changepageNo + saveEndUrl;
+                            console.log('changepageNo : ', changepageNo);
+                            // console.log('saveFrontUrl + pageNo + saveEndUrl : ', saveFrontUrl + pageNo + saveEndUrl);
+                            loadSearchData(moreUrl);
+                        }
+
+
+                    } else if (where.matches('#beforeBtn')){
+                        if (+pageNo <= 1) {
+                            e.preventDefault();
+                            alert('이전페이지로 이동할 수 없습니다.');
+
+                        } else if (+pageNo >= 1) {
+
+                            let savePageNo = +pageNo - 1;
+                            let before = saveFrontUrl + savePageNo + saveEndUrl;
+                            console.log('before')
+                            loadSearchData(before);
+
+
+                        }
+                    }
+                })
+
+
+
             }
 
         }
@@ -343,7 +339,7 @@
                     // 맞으면 /Post/write 전송 보내기
                     // /post/write/title/author -> /post/write
                     // 1. moda에 location href로 보내려고 했는데 모달이 작동 안함?
-                    console.log(titleDiv, authorDiv);
+                    // console.log(titleDiv, authorDiv);
 
                     popup(titleDiv, authorDiv);
 
@@ -355,8 +351,8 @@
                 let spanTitle = target.previousElementSibling.value;
                 let spanAuthor = target.parentElement.parentElement.firstChild.nextElementSibling.nextElementSibling
                     .firstElementChild.value;
-                console.log('spanTitle : ', spanTitle);
-                console.log('spanAuthor : ', spanAuthor);
+                // console.log('spanTitle : ', spanTitle);
+                // console.log('spanAuthor : ', spanAuthor);
 
                 if (confirm(' [ ' + spanAuthor + ' ] 작가의 [ ' + spanTitle + ' ] 작품을 선택하셨나요?')) {
                     // 맞으면 /Post/write 전송 보내기
