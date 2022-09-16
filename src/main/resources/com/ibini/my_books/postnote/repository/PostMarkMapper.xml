@@ -95,27 +95,20 @@
 
     <!-- 마크 전체 조회 기능 With Search Except 2 Rows -->
     <select id="findAllWithSearchExcept2Rows" resultMap="markMap">
-        SELECT *
+        SELECT
+            pm.post_no, p.ep_id, pm.mark_no, pm.episode_no, pm.content, pm.account, pm.reg_datetime, pm.mod_datetime
         FROM (
-        SELECT PM.*, @rownum := @rownum + 1 AS RNUM
-        FROM
-        (
-            SELECT
-                pm.post_no, p.ep_id, pm.mark_no, pm.episode_no, pm.content, pm.account, pm.reg_datetime, pm.mod_datetime
-            FROM (
                 select * from
                 prj_post_mark
                 WHERE 1=1
                 <if test="search.type == 'content'">AND content LIKE CONCAT('%', #{search.keyword}, '%')</if>
                 <if test="search.type == 'episodeNo'">AND episode_no = #{search.keyword}</if>
-            ) pm
-            LEFT OUTER JOIN tbl_post p
-                ON pm.post_no = p.post_no
-            WHERE pm.post_no = #{postNo}
-            ORDER BY pm.episode_no LIMIT 9999999999
-        ) AS PM, (select @rownum := 0) AS R
-        ) AS PPM
-        WHERE RNUM > 2
+        ) pm
+        LEFT OUTER JOIN tbl_post p
+            ON pm.post_no = p.post_no
+        WHERE pm.post_no = #{postNo}
+        ORDER BY pm.episode_no
+        LIMIT 2, 99999999
     </select>
 
     <!-- 마이페이지 포스트, 썸네일 조회 -->
