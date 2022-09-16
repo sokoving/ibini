@@ -59,15 +59,17 @@
                 <!-- 새 포스트 등록 섹션 -->
                 <section id="reg-sec">
                     <div class="inner-section">
-                        <h2>새 글 등록하기</h2>
-                        <div class="post-write-Btn">
+                        <div class="section-h2">
+                            <h2>새 글 등록하기</h2>
+                        </div>
 
+                        <div class="post-write-Btn">
                             <!-- 새 글 등록 버튼 -->
                             <a href="/post/write">
                                 <div class="new-post">
                                     <div class="reg-btn">
                                         <span class="fas fa-plus"></span>
-                                        <h2>직접 입력해서 등록하기</h2>
+                                        <h2>직접 입력해서 <br> 등록하기</h2>
                                     </div>
                                 </div>
                             </a>
@@ -76,7 +78,7 @@
                                 <div class="new-post">
                                     <div class="reg-btn">
                                         <span class="fas fa-plus"></span>
-                                        <h2>검색해서 등록하기</h2>
+                                        <h2>검색해서 <br> 등록하기</h2>
                                     </div>
                                 </div>
                             </a>
@@ -88,6 +90,9 @@
                 <!-- 포스트 리스트 섹션 -->
                 <section id="list-sec">
                     <div class="inner-section">
+                        <div class="setion-h2-top">
+                            <span class="go-to-favorite"><i class="fas fa-star">즐겨찾기</i></span>
+                        </div>
                         <!-- 포스트 목록 제목 -->
                         <a name="list-title"></a>
                         <div class="section-h2">
@@ -97,7 +102,7 @@
                         <div class="post-list-box">
                             <c:forEach var="p" items="${pl}">
                                 <%-- 포스트 개별 영역 --%>
-                                <div class="item-wrap hover" data-post-no="${p.postNo}">
+                                <div class="item-wrap hover" data-post-no="${p.postNo}" data-favorite="${p.favorite}">
                                     <%-- left : 표지, 즐겨찾기 --%>
                                     <div class="item-left">
                                         <div class="thumb-box">
@@ -111,7 +116,16 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
-                                        <div class="favorite-btn">즐겨찾기 <span class="fas fa-plus"></span> </div>
+                                        <c:choose>
+                                            <c:when test="${p.favorite > 0}">
+                                                <div class="favorite-btn favorite-checked">즐겨찾기 - </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="favorite-btn">즐겨찾기 + </div>
+                                            </c:otherwise>
+                                        </c:choose>
+
+
                                     </div> <%-- // end item-left --%>
 
                                     <%-- right : 상세정보 --%>
@@ -203,11 +217,13 @@
 
     <script>
         // 전역변수
-        const $h2 = $('.section-h2');
+
+        const $h2 = $('#list-sec .section-h2');
         const apiURL = "/post/api/searchPost?"
         let searchURL = "";
         let pageNum = "${pm.beginPage}";
         let endPage = "${pm.endPage}";
+
 
         let oneLineTag;
 
@@ -260,7 +276,6 @@
             function makeListBottom() {
                 // 마지막 포스트까지 보여줬다면 더보기 감추기
                 const $showBtn = $('.show-more')[0];
-                console.log($showBtn);
                 // console.log("하단부 갱신");
                 // console.log(pageNum + " / " + endPage);
                 if (pageNum >= endPage) {
@@ -283,11 +298,12 @@
             // 목록 상단부 갱신하기
             // 검색 : text(size건)
             function makeSectionH2(text, size) {
+                // console.log("makeSectionH2 호출 text : " + text + "/ size : " + size);
                 let tag =
                     "<h2 class='h2-search'>검색 : " + text + "(" + size + "건)</h2>" +
                     "<span class='h2-icon list-reset'>" +
                     "<i class='fas fa-undo-alt' title='검색 초기화'></i>" +
-                    "</span>"
+                    "</span>";
                 $h2[0].innerHTML = tag;
             }
 
@@ -342,7 +358,11 @@
             })
 
 
-            // 항목 클릭으로 검색 / 상세 페이지 이동
+
+
+            // 1. 항목 클릭으로 검색
+            // 2. 즐겨찾기 추가 / 삭제
+            // 3. 상세 페이지 이동
             $('.post-list-box').off().click(function (e) {
                 e.preventDefault();
                 // console.log(e.target.classList.contains('item-wrap'));
@@ -350,27 +370,54 @@
                 // 포스트 목록 내부 클릭으로 검색
                 const type = e.target.dataset.type;
                 const key = e.target.dataset.key;
-                let text;
-                switch (type) {
-                    case 'sPublishStatus':
-                        if (key === '1') text = "연재";
-                        break;
-                    case 'sStarRate':
-                        text = e.target.getAttribute('title');
-                        break;
-                    default:
-                        text = e.target.textContent.trim();
-                        break;
-                }
 
                 // 선택한 노드에 data-type과 data-key 값이 모두 있다면 검색해서 재정렬
                 if (type != undefined && key != undefined) {
-                    console.log("변경전 searchURl : " + searchURL);
+
+                    // 검색 url 만들기
+                    // console.log("변경전 searchURl : " + searchURL);
                     searchURL = type + '=' + key;
                     let url = apiURL + searchURL;
                     console.log("포스트 클릭 검색 url : " + url);
-                    console.log("변경된 searchURl : " + searchURL);
-                    searchAndMakeList(url, makeSearchedList, text);
+
+                    // alet과 h2에 띄워줄 text 만들기
+                    let text;
+                    switch (type) {
+                        case 'sPublishStatus':
+                            if (key === '1') {
+                                text = "연재";
+                            } else if (key === '2') {
+                                text = "휴재";
+                            } else {
+                                text = "완결";
+                            }
+                            break;
+                        case 'sStarRate':
+                            text = e.target.getAttribute('title').trim();
+                            break;
+                        default:
+                            text = e.target.textContent.trim();
+                            break;
+                    }
+                    console.log("보내줄 text : " + text);
+
+                    // 검색, 돔 생성 함수 호출
+                    searchAndMakeList(url, text);
+
+                }
+                // 즐겨찾기 등록 / 삭제
+                else if (e.target.matches('.favorite-btn')) {
+                    const tPostNo = e.target.parentElement.parentElement.dataset.postNo;
+                    const tFavorite = e.target.parentElement.parentElement.dataset.favorite;
+                    console.log("tPostNo : " + tPostNo);
+                    console.log("tFavorite : " + tFavorite);
+                    console.log(e.target);
+                    if (tFavorite > 0) {
+                        regFavorite(tPostNo, false, e.target);
+                    } else {
+                        regFavorite(tPostNo, true, e.target);
+                    }
+
                 }
 
                 // 검색 영역이 아니라면 해당 상세 페이지로 이동
@@ -378,6 +425,51 @@
                     extractPostNoAndGo(e.target);
                 }
             });
+
+            // 즐겨찾기 등록 요청
+            function regFavorite(postNo, flag, target) {
+                console.log("regFavorite 호출 : " + postNo);
+                let url;
+                if (flag) {
+                    console.log("즐겨찾기 등록");
+                    url = '/post/api/regFavorites/' + postNo
+                } else {
+                    console.log("즐겨찾기 삭제");
+                    url = '/post/api/removeFavorites/' + postNo
+                }
+
+                fetch(url, {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            "postNo": postNo
+                        })
+                    })
+                    .then(response => response.text())
+                    .then(message => {
+                        if (message === 'reg-success') {
+                            alert('즐겨찾기가 등록되었습니다.');
+                            target.classList.add('favorite-checked');
+                            target.innerHTML = "즐겨찾기 + "
+                            target.parentElement.parentElement.dataset.favorite = 1;
+
+                        } else if (message === 'reg-fail') {
+                            alert('즐겨찾기 등록에 실패했습니다.');
+
+                        } else if (message == 'remove-success') {
+                            alert('즐겨찾기 등록을 해제했습니다.');
+                            target.classList.remove('favorite-checked');
+                            target.innerHTML = "즐겨찾기 - "
+                            target.parentElement.parentElement.dataset.favorite = 0;
+
+                        } else {
+                            alert('즐겨찾기 해제에 실패했습니다.');
+                        }
+                    })
+            }
+
 
 
             // data-post-no를 탐색해서 상세 페이지로 이동하는 함수
@@ -391,20 +483,28 @@
                 }
             }
 
+            // 즐겨찾기 목록 불러오기
+            $('.go-to-favorite').off().click(function (e){
+                searchURL = 'sFavorite=true'
+                let url = apiURL + searchURL
+                console.log("즐겨찾기 url " + url );
+                searchAndMakeList(url, "즐겨찾기")
+            });
 
 
             // 검색 요청 보낸 후 돔 만드는 함수 호출
-            function searchAndMakeList(url, makeFuntion, text) {
+            // url : 요청 url 풀경로
+            // text : 화면에 띄울 검색어
+            function searchAndMakeList(url, text) {
                 fetch(url)
                     .then(res => res.json())
                     .then(resList => {
                         console.log("---------- 검색 요청 ------------");
-
                         // 상단부 세팅
-                        makeFuntion(resList);
+                        makeSectionH2(text, resList.tc);
 
                         // 포스트 목록 부분 세팅
-                        makeSectionH2(text, resList.tc);
+                        makeSearchedList(resList);
 
                         // 하단부 세팅
                         pageNum = "1";
@@ -415,7 +515,6 @@
                         if (text != undefined) {
                             alert("키워드 " + text + "로 " + resList.tc + "건이 검색되었습니다.");
                         }
-
                     })
             }
 
@@ -438,8 +537,7 @@
                         "<img class='post-img' src='/loadFile?fileName=" + l.thumbImg + "' alt='포스트 썸네일'>";
 
                     // 연재 주기
-                    const cycle = l.publishCycle === null || l.publishCycle === '' ? l.publishStatusName : l
-                        .shortCycle;
+                    const cycle = l.publishCycle === null || l.publishCycle === '' ?l.publishStatusName : l.shortCycle;
 
                     // 진행도
                     const epPercent = Math.round(l.curEp / l.totalEp * 100)
@@ -448,10 +546,17 @@
                     const hashtag = l.oneLineTag == null || l.oneLineTag == '' ? "#등록된 해시태그가 없습니다." : l
                         .oneLineTag;
 
-                    tag += "<div class='item-wrap hover' data-post-no='" + l.postNo + "'>" +
+                    // 즐겨찾기
+                    const favorite = l.favorite > 0 ?
+                        "<div class='favorite-btn favorite-checked'>즐겨찾기 - </div>" :
+                        "<div class='favorite-btn'>즐겨찾기 + </div>";
+
+                    // 태그 만들기
+                    tag += "<div class='item-wrap hover' data-post-no='" + l.postNo + "' data-favorite='" +
+                        l.favorite + "''>" +
                         "<div class='item-left'>" +
                         "<div class='thumb-box'>" + thumb + "</div>" +
-                        "<div class='favorite-btn'>즐겨찾기 <span class='fas fa-plus'></span> </div>" +
+                        favorite +
                         "</div>" +
                         "<div class='item-right'>" +
                         "<div class='right-1'>" +

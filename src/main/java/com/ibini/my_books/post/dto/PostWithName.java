@@ -34,6 +34,7 @@ public class PostWithName {
     private Date regDate;          // 등록일자(KST 표준시)  DATE  DEFAULT SYSDATE,
     private Date updateDate;       // 수정일자(KST 표준시)    DATE               DEFAULT SYSDATE ,
     private int starRate;          // 별점   NUMBER(1)          NULL,
+    private int favorite;           // 즐겨찾기 번호
 
     private String caName;      // 카테고리 이름
     private String publishStatusName;    // 연재상태명

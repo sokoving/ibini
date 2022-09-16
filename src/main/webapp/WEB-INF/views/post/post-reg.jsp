@@ -73,6 +73,8 @@
                     <input type="hidden" name="account" id="" value="${account}">
                     <!-- 히든 : 카테고리 아이디(웹소설 일단 고정)-->
                     <input type="hidden" name="caId" value="1">
+                    <!-- 히든 : favorite (등록할 때는 0)-->
+                    <input type="hidden" name="favorite" value="0">
 
                     <!-- 이미지, 제목, 작가, 별점-->
                     <div id="reg-1">

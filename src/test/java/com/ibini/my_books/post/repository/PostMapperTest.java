@@ -212,4 +212,24 @@ class PostMapperTest {
         //then
         assertEquals(0, flagNumber);
     }
+
+    @Test
+    @DisplayName("특정 포스트의 favorite 컬럼이 최댓값보다 1 올라간다")
+    void regFavoriteTest(){
+        Long postNo = 1L;
+        String account = "2209080001";
+
+        boolean flag = mapper.regFavorite(postNo, account);
+        assertTrue(flag);
+    }
+
+    @Test
+    @DisplayName("특정 포스트의 favorite 컬럼이 0이 된다")
+    void removeFavoriteTest(){
+        Long postNo = 1L;
+        String account = "2209080001";
+
+        boolean flag = mapper.resetFavorite(postNo);
+        assertTrue(flag);
+    }
 }

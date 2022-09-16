@@ -9,9 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -28,10 +26,12 @@ public class PostApiController {
     /*
            - 검색이 적용된 포스트 조회 요청 : /post/api/searchPost - GET
            - 제목 중복 확인 비동기 처리 : /post/api/check - get
+           - 즐겨찾기 등록 : /post/api/regFavorites  - patch
+           - 즐겨찾기 삭제 : /post/api/removeFavorites - patch
      */
     @GetMapping("/check")
     public ResponseEntity<Boolean> check(String type, String value, Long postNo, HttpSession session) {
-        log.info("PostApiController  /post/api/check?type={}&value={} GET!! ASYNC", type, value);
+        log.info("/post/api/check?type={}&value={} GET!! ASYNC", type, value);
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         boolean flag = postService.checkSignUpValue(type, value, postNo, account);
 
@@ -44,7 +44,7 @@ public class PostApiController {
         // 사용자 계정 세팅
         String account = LoginUtil.getCurrentMemberAccountForDB(session);
         searchPost.setAccount(account);
-        log.info("PostApiController : /post/api/searchPost GET! - {}", searchPost);
+        log.info("/post/api/searchPost GET! - {}", searchPost);
 
         Map<String, Object> postMap = postService.searchAllPostWithNameService(searchPost);
         log.info("postMap - {}", postMap);
@@ -61,5 +61,24 @@ public class PostApiController {
         return new ResponseEntity<>(postMap, HttpStatus.OK);
     }
 
+
+    //    - 즐겨찾기 등록 : /post/api/regFavorites  - Patch
+    @PatchMapping("/regFavorites/{postNo}")
+    public ResponseEntity<String> regFavorite(@PathVariable Long postNo, HttpSession session) {
+        log.info("/post/api/regFavorites Patch - {}", postNo);
+        String account = LoginUtil.getCurrentMemberAccountForDB(session);
+        boolean flag = postService.regFavoriteService(postNo, account);
+        return flag ? new ResponseEntity<>("reg-success", HttpStatus.OK)
+                : new ResponseEntity<>("reg-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    //   - 즐겨찾기 삭제 : /post/api/removeFavorites - Patch
+    @PatchMapping("/removeFavorites/{postNo}")
+    public ResponseEntity<String> removeFavorite(@PathVariable Long postNo, HttpSession session) {
+        log.info("/post/api/removeFavorites Patch - {}", postNo);
+        boolean flag = postService.removeFavoriteService(postNo);
+        return flag ? new ResponseEntity<>("remove-success", HttpStatus.OK)
+                : new ResponseEntity<>("remove-fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }
