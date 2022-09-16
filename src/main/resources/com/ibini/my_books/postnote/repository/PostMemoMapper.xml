@@ -77,20 +77,13 @@
 
     <!-- 메모 전체 조회 기능 With Search -->
     <select id="findAllWithSearchExcept2Rows" resultMap="memoMap">
-        SELECT *
-        FROM (
-            SELECT PM.*, @rownum := @rownum + 1 AS RNUM
-            FROM
-            (
-                SELECT
-                    post_no, memo_no, content, account, reg_datetime, mod_datetime
-                FROM prj_post_memo
-                WHERE 1=1
-                AND post_no = #{postNo}
-                <if test="search.type == 'content'">AND content LIKE CONCAT('%', #{search.keyword}, '%')</if>
-                ORDER BY mod_datetime DESC LIMIT 9999999999
-            ) AS PM, (select @rownum := 0) AS R
-        ) AS PPM
-        WHERE RNUM > 2
+        SELECT
+            post_no, memo_no, content, account, reg_datetime, mod_datetime
+        FROM prj_post_memo
+        WHERE 1=1
+            AND post_no = #{postNo}
+            <if test="search.type == 'content'">AND content LIKE CONCAT('%', #{search.keyword}, '%')</if>
+        ORDER BY mod_datetime DESC
+        LIMIT 2, 99999999
     </select>
 </mapper>
