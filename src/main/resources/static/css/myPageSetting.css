@@ -45,6 +45,11 @@
   text-decoration: none;
   color: #fffaee !important; 
 }
-#wrap #sideBar a:hover{
-  color: #ffca3d;
+#wrap #sideBar a.mypage-section-checked{
+  color: #ffca3d !important;
 }
+#wrap #sideBar a:hover{
+  color: #ffca3d !important;
+}
+
+

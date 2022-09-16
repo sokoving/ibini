@@ -15,7 +15,7 @@ public class Page {
 
     public Page() {
         this.pageNum = 1;
-        this.amount = 10;
+        this.amount = 5;
     }
 
     public void setPageNum(int pageNum) {

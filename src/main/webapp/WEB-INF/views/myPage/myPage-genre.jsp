@@ -33,7 +33,7 @@
                 <a href="/member/inquiry?userId=${loginUser.userId}">Help</a>
                 <h3>Setting</h3>
                 <a href="/myPage/platform">Platform</a>
-                <a href="/myPage/genre">Genre</a>
+                <a href="/myPage/genre" class="mypage-section-checked">Genre</a>
                 <a href="/myPage/marklist">BookMark</a>
                 <a href="/myPage/memolist">BookMemo</a>
             </div>
