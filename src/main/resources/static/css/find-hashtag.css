@@ -1,0 +1,81 @@
+#content-wrap {
+    border-radius: 10px;
+    background-color: #f7f7f6;
+    padding: 30px 30px 10px;
+}
+
+#infoHeader {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#infoHeader hr {
+    border: 1px solid #333;
+}
+
+#infoHeader .title {
+    /* background: rgb(219, 151, 233); */
+    display: flex;
+}
+
+#infoHeader .title .titleSpan {
+    font-size: 45px;
+    font-weight: 600;
+    /* font-family: 'NanumSquareRoundBold'; */
+}
+
+#infoHeader .number {
+    /* background: rgb(117, 117, 205); */
+    display: flex;
+
+}
+
+#infoHeader .number h4 {
+    /* background: rgb(117, 117, 205); */
+    display: flex;
+    /* font-family: 'NanumSquareRoundBold'; */
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.hashtagList {
+    background: #ffc699;
+    width: 80%;
+    border-radius: 10px;
+    border : solid 7px #ffc699;
+    overflow: hidden;
+    /* padding: 10px; */
+
+    margin: 0 auto 30px;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+}
+
+.hashtagList .tagNamediv {
+    background: rgb(179, 202, 242);
+    font-size: 25px;
+    /*font-family: 600;*/
+    padding: 6px;
+    padding-left: 10px;
+}
+
+.tagInfo {
+    background: #FFF9F4;
+    padding: 3px 20px;
+    border-radius: 5px;
+}
+.tagInfo:hover{
+    transition: 0.6s;
+    background-color: #fff0c6 ;
+}
+
+.tagInfo .titleAndNo {
+    font-size: 25px;
+    /*font-family: 600;*/
+}
+
+/* .tagInfo .titleAndNo .postTitle {
+
+} */

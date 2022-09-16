@@ -102,11 +102,28 @@
 .noResult span {
     font-size: 20px;
 }
-#moreBtn {
+#PageBox {
+    display: flex;
+}
+#beforeBtn{
+    width: 50%;
     background: #f9f8f6;
     padding: 20px;
     text-align: center;
     margin: 20px 0;
     border-radius: 10px;
-    width: 100%;
+ }
+#beforeBtn:hover{
+    background: #c7c6c4;
+}
+#moreBtn {
+    width: 50%;
+    background: #f9f8f6;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+#moreBtn:hover {
+    background: #c7c6c4;
 }
