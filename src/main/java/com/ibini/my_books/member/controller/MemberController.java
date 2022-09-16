@@ -173,10 +173,10 @@ public class MemberController {
     }
 
     //My Page
-    @GetMapping("/my-Page")
-    public void myPage() {
-        log.info("/member/my-page GET!! forwarding to my-page.jsp");
-    }
+//    @GetMapping("/my--Page")
+//    public void myPage() {
+//        log.info("/member/my-page GET!! forwarding to my--page.jsp");
+//    }
 
     //내 정보
     @GetMapping("/my-info")
@@ -237,7 +237,7 @@ public class MemberController {
             if (modifyFlag) {
                 log.info("기존 비밀번호 일치, 비밀번호 변경 성공!");
                 ra.addFlashAttribute("msg", "modify-success");
-                return "redirect:/myPage";
+                return "redirect:/member/my-info";
 
                 //실패하면 수정창으로 보내고, 실패 메시지 전송
             } else ra.addFlashAttribute("msg", "modify-fail");

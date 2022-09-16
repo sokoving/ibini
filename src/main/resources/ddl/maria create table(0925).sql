@@ -16,7 +16,7 @@ CREATE TABLE tbl_post
     genre_id          INT(9)          DEFAULT 0,  			-- 장르 아이디 : (기본값+유저 추가) 0:미분류, 1:판타지, 2:로맨스, 3:무협, 4:아포칼립스
     ca_id             INT(9)          DEFAULT 0,  			-- 카테고리 아이디 : (CategoryUtil 고정)0:미분류, 1:웹소설, 2:웹툰, 3:e-book, 4:도서 5:만화책
     platform_id       INT(9)          DEFAULT 0,  			-- 연재플랫폼아이디 : (기본값+유저 추가)0:미분류, 1.카카오페이지, 2:네이버시리즈, 3:리디북스, 4:카카오웹툰, 5:네이버웹툰
-    post_title        VARCHAR(100)    NOT NULL UNIQUE,    	-- 책제목
+    post_title        VARCHAR(100)    NOT NULL,         	-- 책제목
     post_writer       VARCHAR(100)    NOT NULL,  			-- 작가
     publish_status    INT(5)          DEFAULT 0,  			-- 연재상태 : (PublishStatusUtil 고정)0:미분류 1:연재 , 2: 휴재,  3: 완결
     publish_cycle     VARCHAR(100)    NULL,        			-- 연재주기 : (사용자 입력 ex) 월,수,금
@@ -136,6 +136,7 @@ insert into
    (account, user_id, password, user_name, email, auth)
             values
             ('admin','admin', '12345678', '관리자', 'yanbam@naver.com', 'ADMIN');
+commit;
 
 
 -- =========== tbl_manage_member

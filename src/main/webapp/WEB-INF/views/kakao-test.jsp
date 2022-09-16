@@ -32,7 +32,7 @@
         
         <c:if test="${loginUser == null}">
             <a
-                href="https://kauth.kakao.com/oauth/authorize?client_id=${appKey}&redirect_uri=http://localhost:8383${redirectUri}&response_type=code">
+                href="https://kauth.kakao.com/oauth/authorize?client_id=${appKey}&redirect_uri=${redirectUri}&response_type=code">
                 <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" alt="카카오 로그인">
             </a>
         </c:if>

@@ -31,9 +31,6 @@
 
 <body>
 
-
-    <!-- const account = "ibini"
-    const sideBarURL = http://localhost:8383/myPage/account/platform -->
         <!-- sideBar account 정보 수정-->
 
     <%@ include file="../include/change-header.jsp" %>

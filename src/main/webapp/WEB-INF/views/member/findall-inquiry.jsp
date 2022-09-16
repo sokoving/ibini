@@ -236,7 +236,7 @@
                             // -----------------------------------------------------------------
 
                             //비동기로 문의글 상세정보 가지고 오기              
-                            fetch('http://localhost:8383/member/findone-inquiry/' + recipient)
+                            fetch('/member/findone-inquiry/' + recipient)
                                 .then(res => res.json())
                                 .then(oneInquiry => {
                                     const $p = document.createElement('p');
@@ -291,7 +291,7 @@
                             const $modal = document.querySelector('.modal');
                             // console.log('modal?:', $modal);
 
-                            fetch('http://localhost:8383/member/admin/answer-register/', reqInfo)
+                            fetch('/member/admin/answer-register/', reqInfo)
                                 .then(res => res.text())
                                 .then(msg => {
                                     if (msg === 'answer-register-success') {
@@ -434,7 +434,7 @@
                     // console.log('글번호 :', serialNumber);
 
                     //비동기로 문의글 상세정보 가지고 오기              
-                    fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
+                    fetch('/member/findone-inquiry/' + serialNumber)
                         .then(res => res.json())
                         .then(oneInquiry => {
                             if (e.target.parentElement.parentElement.lastElementChild.dataset.serialNumber == oneInquiry.serialNumber) {
@@ -449,7 +449,7 @@
                             // 답변 상세보기
                             if (oneInquiry.answer != null) {
                                 let $ul = e.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
-                                fetch('http://localhost:8383/member/findone-inquiry/' + serialNumber)
+                                fetch('/member/findone-inquiry/' + serialNumber)
                                     .then(res => res.json())
                                     .then(oneInquiry => {
                                         // console.log('if문 가동전 비교 타겟:',e.target.parentElement.lastElementChild);
