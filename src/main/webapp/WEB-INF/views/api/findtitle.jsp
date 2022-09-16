@@ -110,7 +110,7 @@
             let pageNo = data.PAGE_NO;
             console.log('searchTotal:', searchTotal);
             // console.log('pageNo: ', pageNo);
-            console.log('docs : ', docs);
+            // console.log('docs : ', docs);
 
 
             const infoListMakeDom = document.querySelector('#infoListMakeDom');
@@ -133,11 +133,11 @@
                 let titleSplit = '';
                 let authorSplitLength = '';
 
-                console.log(title)
+                // console.log(title)
 
                 // 이상한 기호 [] 자르기
                 if (title.includes('[연재]')) {
-                    console.log('연재')
+                    // console.log('연재')
                     // 이상하게 넘어가는거 잘라주기
                     title = title.split('[연재]').join("");
                 }
@@ -145,11 +145,11 @@
                 // 제목 [] 교체하기
                 if (title.includes('[')){
                     title = title.replace('[','(')
-                    console.log('교체')
+                    // console.log('교체')
                 }
                 if (title.includes(']')){
                     title = title.replace(']',')')
-                    console.log('교체2')
+                    // console.log('교체2')
                 }
 
                 // [] 교체하기
@@ -279,7 +279,7 @@
             // const $more = document.querySelector('#moreBtn');
             // const $beforeBtn = document.querySelector('#beforeBtn');
             if ($PageBox !== null) {
-                console.log('더보기 클릭');
+                // console.log('더보기 클릭');
                 const {
                     saveFrontUrl,
                     saveEndUrl
@@ -291,7 +291,7 @@
                 console.log('end', end);
 
                 $PageBox.addEventListener('click', function (e){
-                    console.log(e.target);
+                    // console.log(e.target);
                     let where = e.target;
                     if (where.matches('#moreBtn')){
                         if (+pageNo >= end) {
@@ -300,7 +300,7 @@
                         } else if (+pageNo <= end){
                             let changepageNo = +pageNo + 1;
                             let moreUrl = saveFrontUrl + changepageNo + saveEndUrl;
-                            console.log('changepageNo : ', changepageNo);
+                            // console.log('changepageNo : ', changepageNo);
                             // console.log('saveFrontUrl + pageNo + saveEndUrl : ', saveFrontUrl + pageNo + saveEndUrl);
                             loadSearchData(moreUrl);
                             window.scrollTo(0,0);
@@ -316,7 +316,7 @@
 
                             let savePageNo = +pageNo - 1;
                             let before = saveFrontUrl + savePageNo + saveEndUrl;
-                            console.log('before')
+                            // console.log('before')
                             loadSearchData(before);
                             window.scrollTo(0,0);
 
