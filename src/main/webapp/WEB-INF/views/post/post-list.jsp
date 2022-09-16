@@ -513,7 +513,7 @@
 
                         // 알람
                         if (text != undefined) {
-                            alert("키워드 " + text + "로 " + resList.tc + "건이 검색되었습니다.");
+                            alert("키워드 " + text + " " + resList.tc + "건이 검색되었습니다.");
                         }
                     })
             }
