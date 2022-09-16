@@ -76,7 +76,7 @@
             const keyCode = APP_KEY;
             var word = target.value;
             // var encodeWord = encodeURI(word);
-            console.log(word);
+            // console.log(word);
             // console.log(encodeWord);
 
 
@@ -84,15 +84,15 @@
             // 비동기 GET
             loadObject.url = "https://www.nl.go.kr/seoji/SearchApi.do?" +
                 "cert_key=" + keyCode +
-                "&result_style=json&page_no=" + pageNo + "&page_size=30" +
+                "&result_style=json&page_no=" + pageNo + "&page_size=20" +
                 "&title=" + word;
 
             loadObject.saveFrontUrl = "https://www.nl.go.kr/seoji/SearchApi.do?" +
                 "cert_key=" + keyCode +
                 "&result_style=json&page_no="
             loadObject.saveEndUrl = "&page_size=20&title=" + word;
-            console.log(pageNo);
-            console.log('loadObj:', loadObject);
+            // console.log(pageNo);
+            // console.log('loadObj:', loadObject);
             // console.log('url : ', url);
 
             loadSearchData(loadObject.url);
@@ -110,7 +110,7 @@
             let pageNo = data.PAGE_NO;
             console.log('searchTotal:', searchTotal);
             // console.log('pageNo: ', pageNo);
-            // console.log('docs : ', docs);
+            console.log('docs : ', docs);
 
 
             const infoListMakeDom = document.querySelector('#infoListMakeDom');
@@ -133,24 +133,29 @@
                 let titleSplit = '';
                 let authorSplitLength = '';
 
+                console.log(title)
 
                 // 이상한 기호 [] 자르기
                 if (title.includes('[연재]')) {
+                    console.log('연재')
                     // 이상하게 넘어가는거 잘라주기
                     title = title.split('[연재]').join("");
-                }
-                if (title.includes('[') || title.includes(']')){
-                    title = title.replace(/[[]]/g ,' ');
                 }
 
                 // 제목 [] 교체하기
                 if (title.includes('[')){
-                    title = title.replace('(')
+                    title = title.replace('[','(')
+                    console.log('교체')
                 }
                 if (title.includes(']')){
-                    title = title.replace(')')
+                    title = title.replace(']',')')
+                    console.log('교체2')
                 }
 
+                // [] 교체하기
+                if (title.includes('[') || title.includes(']')){
+                    title = title.replace(/[[]]/g ,'');
+                }
 
 
                 // 제목 자르기
@@ -162,10 +167,10 @@
 
                 // 작가 [] 기호 자르기
                 if (author.includes('[')){
-                    author = author.replace('(')
+                    author = author.replace('[','(')
                 }
                 if (title.includes(']')){
-                    author = author.replace(')')
+                    author = author.replace('[',')')
                 }
 
 
@@ -195,10 +200,10 @@
 
                 // 출판사
                 if (publisher.includes('[')){
-                    publisher = publisher.replace('(')
+                    publisher = publisher.replace('[','(')
                 }
                 if (title.includes(']')){
-                    publisher = publisher.replace(')')
+                    publisher = publisher.replace(']',')')
                 }
 
                 // 출판사 이름 자르기 
@@ -257,6 +262,14 @@
 
                 `;
                 
+            } else if (+searchTotal === 20){
+                moreInfo.innerHTML = ``;
+                btntag = `
+                    <div class="noResult">
+                        <span>마지막 검색결과 입니다.</span>
+                    </div>
+                `;
+
             }
 
             moreInfo.innerHTML = btntag;
@@ -272,10 +285,8 @@
                     saveEndUrl
                 } = loadObject;
 
-                // console.log('pageNo', +pageNo);
+                console.log('pageNo :', pageNo);
 
-                // let Page = +PageNo;
-                // console.log('Page', Page);
                 let end = Math.ceil(+searchTotal / 20);
                 console.log('end', end);
 
@@ -285,20 +296,21 @@
                     if (where.matches('#moreBtn')){
                         if (+pageNo >= end) {
                             e.preventDefault();
-                            alert('마지막 페이지 입니다.')
+                            alert('마지막 페이지입니다.')
                         } else if (+pageNo <= end){
                             let changepageNo = +pageNo + 1;
                             let moreUrl = saveFrontUrl + changepageNo + saveEndUrl;
                             console.log('changepageNo : ', changepageNo);
                             // console.log('saveFrontUrl + pageNo + saveEndUrl : ', saveFrontUrl + pageNo + saveEndUrl);
                             loadSearchData(moreUrl);
+                            window.scrollTo(0,0);
                         }
 
 
                     } else if (where.matches('#beforeBtn')){
                         if (+pageNo <= 1) {
                             e.preventDefault();
-                            alert('이전페이지로 이동할 수 없습니다.');
+                            alert('첫 페이지입니다.');
 
                         } else if (+pageNo >= 1) {
 
@@ -306,6 +318,7 @@
                             let before = saveFrontUrl + savePageNo + saveEndUrl;
                             console.log('before')
                             loadSearchData(before);
+                            window.scrollTo(0,0);
 
 
                         }
